@@ -13,10 +13,9 @@ import { RequestOptionsService } from './services/request-options.service';
 import { ResponseErrorService } from './services/response-error.service';
 
 // Custom Modules
-import { LoginModule } from './login/login.module';
-
-// Routes
 import { AppRoutingModule } from './app-routing.module';
+import { JobModule } from './job/job.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,9 @@ import { AppRoutingModule } from './app-routing.module';
     CommonModule,
 
     // Custom Modules
-    LoginModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JobModule,
+    LoginModule
   ],
   providers: [
     AuthService,
