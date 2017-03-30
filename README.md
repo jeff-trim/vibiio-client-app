@@ -35,13 +35,13 @@ file under `environments`.
 
 ### Running unit tests
 
-`ng test` - to run the unit tests via [Karma](https://karma-runner.github.io).
+* `ng test` - to run the unit tests via [Karma](https://karma-runner.github.io).
 
 
 ### Running end-to-end tests
 Before running the tests make sure you are serving the app via `ng serve`.
 
-`ng e2e` - to run the end-to-end tests via [Protractor](http://www.protractortest.org/).
+* `ng e2e` - to run the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ### Deployment
 * Deployments to staging are automaticly made from the master branch.
