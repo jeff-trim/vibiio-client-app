@@ -6,14 +6,6 @@ import { LoginComponent } from './login/containers/login.component';
 import { JobComponent } from './job/containers/job.component';
 
 const appRoutes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'job',
-    component: JobComponent
-  }
 ];
 
 @NgModule({
