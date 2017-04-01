@@ -8,6 +8,7 @@ import { JobComponent } from './containers/job.component';
 // Services
 import { JobResolver } from './services/job.resolver.service';
 import { JobService } from './services/job.service';
+import { VideoChatTokenService } from './services/video-chat-token.service';
 
 // Routes
 const jobRoutes: Routes = [
@@ -31,7 +32,8 @@ const jobRoutes: Routes = [
   ],
   providers: [
     JobResolver,
-    JobService
+    JobService,
+    VideoChatTokenService
   ]
 })
 
