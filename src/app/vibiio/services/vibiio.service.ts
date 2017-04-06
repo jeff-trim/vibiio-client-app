@@ -7,15 +7,15 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 // Models
-import { Job } from '../models/job.interface';
+import { Vibiio } from '../models/vibiio.interface';
 
 @Injectable()
-export class JobService {
+export class VibiioService {
 
   constructor(private http: Http) {}
 
-  getJob(): Observable<Job> {
-    const url = `${API_URL}/jobs/1`;
+  getVibiio(): Observable<any> {
+    const url = `${API_URL}/vibiios/1`;
 
     return this.http
                .get(url)

@@ -13,12 +13,12 @@ import { VideoChatToken } from '../models/video-chat-token.interface';
 export class VideoChatTokenService {
   constructor(private http: Http) {}
 
-  getToken(): Observable<VideoChatToken> {
+  getToken(): Observable<any> {
     const url = `${API_URL}/video_chat/auth_tokens`;
 
     const payload = {
-      video_session_token: {
-        job_id: 1
+      video_chat_auth_token: {
+        vibiio_id: 1
       }
     };
 

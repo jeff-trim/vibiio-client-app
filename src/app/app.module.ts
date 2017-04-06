@@ -14,7 +14,7 @@ import { ResponseErrorService } from './services/response-error.service';
 
 // Custom Modules
 import { AppRoutingModule } from './app-routing.module';
-import { JobModule } from './job/job.module';
+import { VibiioModule } from './vibiio/vibiio.module';
 import { LoginModule } from './login/login.module';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { LoginModule } from './login/login.module';
 
     // Custom Modules
     AppRoutingModule,
-    JobModule,
+    VibiioModule,
     LoginModule
   ],
   providers: [

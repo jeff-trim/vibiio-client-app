@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 // Models
-import { Job } from '../models/job.interface';
+import { Vibiio } from '../models/vibiio.interface';
 import { VideoChatToken } from '../models/video-chat-token.interface';
 import { OPENTOK_API_KEY } from '../../../environments/environment';
 
@@ -13,23 +13,23 @@ import { VideoChatTokenService } from '../services/video-chat-token.service';
 declare var OT: any;
 
 @Component({
-  selector: 'app-job',
+  selector: 'app-vibiio',
   template: `
   <div class="video-container">
     <p>Video Session ID:</p>
-    <p>{{ job.video_session_id }}</p>
+    <p>{{ vibiio.video_session_id }}</p>
     <button (click)="connectToSession()">Connect to video session</button>
     <div id="publisher-stream"></div>
     <div id="subscriber-stream"></div>
   </div>
   `,
-  styleUrls: ['./job.component.scss']
+  styleUrls: ['./vibiio.component.scss']
 })
 
-export class JobComponent implements OnInit {
+export class VibiioComponent implements OnInit {
   ot: any;
   session: any;
-  job: Job;
+  vibiio: Vibiio;
   token: VideoChatToken;
 
   constructor(
@@ -39,17 +39,17 @@ export class JobComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe( (data: { job: Job }) => {
+    this.activatedRoute.data.subscribe( (data) => {
       this.ot = OT;
-      this.job = data.job;
-      this.session = OT.initSession(OPENTOK_API_KEY, this.job.video_session_id);
+      this.vibiio = data.vibiio.vibiio;
+      this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
     });
   }
 
   connectToSession() {
     this.tokenService.getToken().subscribe( (data) => {
-      this.token = data;
-      this.session.connect(this.token.token, (error) => {
+      this.token = data.video_chat_auth_token.token;
+      this.session.connect(this.token, (error) => {
         // Video options
         const options = {
           insertMode: 'append',

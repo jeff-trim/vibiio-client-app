@@ -4,17 +4,17 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 
 // Services
-import { JobService } from './job.service';
+import { VibiioService } from './vibiio.service';
 
 // Models
-import { Job } from '../models/job.interface';
+import { Vibiio } from '../models/vibiio.interface';
 
 @Injectable()
-export class JobResolver implements Resolve<any> {
-    constructor(private job: JobService, private router: Router) {}
+export class VibiioResolver implements Resolve<any> {
+    constructor(private vibiio: VibiioService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
-      return this.job.getJob();
+      return this.vibiio.getVibiio();
     }
 }
