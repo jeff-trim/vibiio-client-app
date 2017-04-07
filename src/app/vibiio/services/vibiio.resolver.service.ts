@@ -6,15 +6,12 @@ import { Observable } from 'rxjs/Observable';
 // Services
 import { VibiioService } from './vibiio.service';
 
-// Models
-import { Vibiio } from '../models/vibiio.interface';
-
 @Injectable()
 export class VibiioResolver implements Resolve<any> {
-    constructor(private vibiio: VibiioService, private router: Router) {}
+    constructor(private service: VibiioService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
-      return this.vibiio.getVibiio();
+      return this.service.getVibiio();
     }
 }

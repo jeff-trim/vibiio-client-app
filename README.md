@@ -5,7 +5,6 @@ Documentation can be found in [*Asansa*](https://app.asana.com/0/293243103762528
 ## Development
 
 ### Prerequisites
-
 You must have Node 6.9.0 or higher AND NPM v3.0 or higher; Yarn, angular CLI 
 installed:
 
@@ -20,13 +19,11 @@ package management.
 * `yarn install` - install dependencies.
 
 ### Development server
-
 * `ng serve` - To run servier Navigate to [http://localhost:4200](http://localhost:4200)
 * `ng serve --port NUMBER` -  to change the port number of development server
 * `ng serve --environment [ENVIRONMENT NAME]` to run server for specific environments 
 
 ### Build
-
 * `ng build` - to build the project. The build artifacts will be stored in 
 the `dist/` directory. Use the `-prod` flag for a production build. 
 For other environments use `ng build --environment [ENVIRONMENT NAME]`. 
@@ -34,9 +31,7 @@ Note: additional environments must be registered in the .angular-cli.json
 file under `environments`.
 
 ### Running unit tests
-
 * `ng test` - to run the unit tests via [Karma](https://karma-runner.github.io).
-
 
 ### Running end-to-end tests
 Before running the tests make sure you are serving the app via `ng serve`.
@@ -47,4 +42,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 * Deployments to staging are automaticly made from the master branch.
 
 ### Changelog
-* TBD
+* [CHANGELOG](https://github.com/TrimAgency/vibiio-client-app/blob/master/CHANGELOG.md)
+
+### API Repo
+* [Vibiio Rails API](https://github.com/TrimAgency/vibiio-api)
