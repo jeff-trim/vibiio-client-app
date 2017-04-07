@@ -6,9 +6,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-// Models
-import { Vibiio } from '../models/vibiio.interface';
-
 @Injectable()
 export class VibiioService {
 
@@ -19,7 +16,7 @@ export class VibiioService {
 
     return this.http
                .get(url)
-               .map( (response: Response) =>  response.json() )
+               .map( (response: Response) =>  response.json().vibiio )
                .catch( (error: any) => Observable.throw(error));
   }
 }
