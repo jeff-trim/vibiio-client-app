@@ -27,7 +27,6 @@ declare var OT: any;
 })
 
 export class VibiioComponent implements OnInit {
-  ot: any;
   session: any;
   vibiio: Vibiio;
   token: VideoChatToken;
@@ -40,8 +39,7 @@ export class VibiioComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe( (data) => {
-      this.ot = OT;
-      this.vibiio = data.vibiio.vibiio;
+      this.vibiio = data.vibiio;
       this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
     });
   }
@@ -58,7 +56,7 @@ export class VibiioComponent implements OnInit {
         };
 
         // Initialize a publisher and publish the video stream to the session
-        const publisher = this.ot.initPublisher('publisher-stream', options);
+        const publisher = OT.initPublisher('publisher-stream', options);
         this.session.publish(publisher);
 
         // Subscribe to stream created events
