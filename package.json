@@ -8,7 +8,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-prebuild": "export BUILD_ENV=staging",
     "postinstall": "ng build --aot --environment $BUILD_ENV",
     "start": "node server.js"
   },
