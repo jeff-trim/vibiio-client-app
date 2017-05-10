@@ -21,8 +21,8 @@ export class LoginService {
     };
 
     return this.http
-               .post(`${API_URL}/user_token`, data)
-               .map((response: Response) => response.json() )
-               .catch((error: any) => Observable.throw(error));
+      .post(`${API_URL}/user_token`, data)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error));
   }
 }

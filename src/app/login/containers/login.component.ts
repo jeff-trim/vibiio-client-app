@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Services
 import { LoginService } from '../services/login.service';
@@ -21,18 +22,18 @@ import { Jwt } from '../models/jwt.interface';
 
 export class LoginComponent {
   constructor(private loginService: LoginService,
-              private authService: AuthService ) {};
+              private authService: AuthService,
+              private router: Router) {};
 
   submitLogin(event) {
+    console.log(event);
     this.loginService
-        .login(event.email, event.password)
-        .subscribe( (data: Jwt) => {
-          console.log(data.jwt);
-          this.authService.setToken(data.jwt);
+      .login(event.email, event.password)
+      .subscribe(
+        (data: Jwt) => {
+          this.authService.setToken(data.jwt)
+          this.router.navigate(['/vibiios'])
         },
-        (error: any) => {
-          // handle login error here
-          console.log('error', error);
-        });
+        (error: any) => console.log('error', error))
     }
 }

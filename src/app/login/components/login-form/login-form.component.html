@@ -31,7 +31,10 @@
       <div class="remember-me col-xs-6">
         <div class="row">
           <div class="col-xs-1">
-            <input type="radio">
+            <input type="checkbox"
+                   name="remember"
+                   [ngModel]="credentials?.remember"
+                   #remember="ngModel">
           </div>
           <div id="remember-me" class="col-xs-offset-1 col-xs-10">
             Remember Me
@@ -42,7 +45,7 @@
         <div class="row">
           <div class="col-xs-offset-2 col-xs-1">
             <object data="assets/images/help.svg"
-                    type="img/svg+xml">
+                    type="image/svg+xml">
             </object>
           </div>
           <div id="forgot-password" class="col-xs-9">
@@ -56,6 +59,7 @@
               class="button button-primary"
               (click)="login(form.value, form.valid)"
               [disabled]="form.invalid"
+              [class.disabled]="form.invalid"
       >sign in</button>
     </div>
   </form>

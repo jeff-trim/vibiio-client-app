@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/containers/login.component';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/vibiios', pathMatch: 'full' },
+  { path: 'sign_in', component: LoginComponent }
 ];
 
 @NgModule({
