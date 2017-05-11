@@ -8,7 +8,7 @@ import { LoginComponent } from './login/containers/login.component';
 import { LoggedOutGuardService } from './services/guards/logged-out-guard.service';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/vibiios', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'sign_in', component: LoginComponent, canActivate: [LoggedOutGuardService]}
 ];
 
