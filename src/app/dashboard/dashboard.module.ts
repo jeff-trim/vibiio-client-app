@@ -3,38 +3,38 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 // Containers
-import { VibiioComponent } from './containers/vibiio.component';
+import { DashboardComponent } from './containers/dashboard.component';
 
 // Services
-import { VibiioResolver } from './services/vibiio.resolver.service';
-import { VibiioService } from './services/vibiio.service';
+import { DashboardResolver } from './services/dashboard.resolver.service';
+import { DashboardService } from './services/dashboard.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 
 // Routes
 const vibiioRoutes: Routes = [
   {
-    path: 'vibiios',
-    component: VibiioComponent,
-    resolve: { vibiio: VibiioResolver }
+    path: 'dashboard',
+    component: DashboardComponent,
+    resolve: { vibiio: DashboardResolver }
   }
 ];
 
 @NgModule({
   declarations: [
-    VibiioComponent
+    DashboardComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(vibiioRoutes)
   ],
   exports: [
-    VibiioComponent
+    DashboardComponent
   ],
   providers: [
-    VibiioResolver,
-    VibiioService,
+    DashboardResolver,
+    DashboardService,
     VideoChatTokenService
   ]
 })
 
-export class VibiioModule { };
+export class DashboardModule { };

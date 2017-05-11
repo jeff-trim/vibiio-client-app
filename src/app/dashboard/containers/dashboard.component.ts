@@ -15,18 +15,25 @@ declare var OT: any;
 @Component({
   selector: 'app-vibiio',
   template: `
-  <div class="video-container">
+<div class="row center-xs video-container">
+  <div class="col-xs-12">
     <p>Video Session ID:</p>
     <p>{{ vibiio.video_session_id }}</p>
-    <button (click)="connectToSession()">Connect to video session</button>
+  </div>
+  <div class="col-xs-12">
+    <button (click)="connectToSession()"
+            class="button button-primary">
+      Connect to video session
+    </button>
+  </div>
     <div id="publisher-stream"></div>
     <div id="subscriber-stream"></div>
   </div>
   `,
-  styleUrls: ['./vibiio.component.scss']
+  styleUrls: ['./dashboard.component.scss']
 })
 
-export class VibiioComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   session: any;
   vibiio: Vibiio;
   token: VideoChatToken;

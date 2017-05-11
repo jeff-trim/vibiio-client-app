@@ -6,12 +6,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import { AuthService } from '../../services/auth.service';
-
 @Injectable()
-export class VibiioService {
+export class DashboardService {
 
-  constructor(private http: Http, private authService: AuthService) {}
+  constructor(private http: Http) {}
 
   getVibiio(): Observable<any> {
     const url = `${API_URL}/vibiios/1`;

@@ -32,7 +32,7 @@ export class LoginComponent {
       .subscribe(
         (data: Jwt) => {
           this.authService.setToken(data.jwt)
-          this.router.navigate(['/vibiios'])
+          this.router.navigate(['/dashboard'])
         },
         (error: any) => console.log('error', error))
     }

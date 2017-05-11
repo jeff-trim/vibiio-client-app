@@ -4,11 +4,11 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 
 // Services
-import { VibiioService } from './vibiio.service';
+import { DashboardService } from './dashboard.service';
 
 @Injectable()
-export class VibiioResolver implements Resolve<any> {
-    constructor(private service: VibiioService, private router: Router) {}
+export class DashboardResolver implements Resolve<any> {
+    constructor(private service: DashboardService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
