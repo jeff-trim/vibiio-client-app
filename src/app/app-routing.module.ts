@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/containers/login.component';
 
 // Guards
-import { LoggedOutGuardService } from './guards/logged-out-guard.service';
+import { LoggedOutGuardService } from './services/guards/logged-out-guard.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/vibiios', pathMatch: 'full' },
@@ -19,6 +19,8 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: []
+  providers: [
+    LoggedOutGuardService
+  ]
 })
 export class AppRoutingModule { }

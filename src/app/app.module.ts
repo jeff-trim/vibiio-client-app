@@ -12,9 +12,6 @@ import { AuthService } from './services/auth.service';
 import { RequestOptionsService } from './services/request-options.service';
 import { ResponseErrorService } from './services/response-error.service';
 
-// Guards
-import { LoggedOutGuardService } from './guards/logged-out-guard.service';
-
 // Custom Modules
 import { AppRoutingModule } from './app-routing.module';
 import { VibiioModule } from './vibiio/vibiio.module';
@@ -36,7 +33,6 @@ import { LoginModule } from './login/login.module';
   ],
   providers: [
     AuthService,
-    LoggedOutGuardService,
     { provide: RequestOptions, useClass: RequestOptionsService },
     { provide: Http, useClass: ResponseErrorService }
   ],
