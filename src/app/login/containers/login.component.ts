@@ -26,7 +26,6 @@ export class LoginComponent {
               private router: Router) {};
 
   submitLogin(event) {
-    console.log(event);
     this.loginService
       .login(event.email, event.password)
       .subscribe(

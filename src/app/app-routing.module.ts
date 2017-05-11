@@ -4,9 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 // Components
 import { LoginComponent } from './login/containers/login.component';
 
+// Guards
+import { LoggedOutGuardService } from './guards/logged-out-guard.service';
+
 const appRoutes: Routes = [
   { path: '', redirectTo: '/vibiios', pathMatch: 'full' },
-  { path: 'sign_in', component: LoginComponent }
+  { path: 'sign_in', component: LoginComponent, canActivate: [LoggedOutGuardService]}
 ];
 
 @NgModule({
