@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 
 // Interfaces
 import { Jwt } from '../models/jwt.interface';
+import { Credentials } from '../models/credentials.interface';
 
 @Component({
     selector: 'app-login',
@@ -25,9 +26,9 @@ export class LoginComponent {
               private authService: AuthService,
               private router: Router) {};
 
-  submitLogin(event) {
+  submitLogin(event: Credentials) {
     this.loginService
-      .login(event.email, event.password)
+      .login(event)
       .subscribe(
         (data: Jwt) => {
           this.authService.setToken(data.jwt)

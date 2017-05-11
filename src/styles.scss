@@ -15,6 +15,10 @@ p {
 h1 {
   color: $blue;
 }
+a {
+  color: $pink;
+  text-decoration: none;
+}
 .button {
   height: 75px;
   width: 400px;
@@ -33,12 +37,6 @@ h1 {
 .button-danger {
   background-color: $pink;
   border-width: 0;
-}
-.info {
-  width: 24px;
-  height: 26px;
-  display: inline-block;
-  background: url(./assets/images/help.svg) no-repeat;
 }
 .disabled {
   opacity: 0.4;
