@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 24 26" cursor="pointer">
+    <defs>        
+        <style type="text/css">
+          @import url('https://fonts.googleapis.com/css?family=Montserrat:700');
+        </style>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="#EC008C" stroke-width="3" d="M1.5 13c0-5.902 4.785-10.688 10.688-10.688 5.902 0 10.687 4.786 10.687 10.688 0 5.902-4.785 10.688-10.688 10.688C6.285 23.688 1.5 18.901 1.5 13z"/>
+        <text fill="#EC008C" font-family="Montserrat-Bold, Montserrat" font-size="18" font-weight="bold">
+            <tspan x="8" y="20">?</tspan>
+        </text>
+    </g>
+</svg>

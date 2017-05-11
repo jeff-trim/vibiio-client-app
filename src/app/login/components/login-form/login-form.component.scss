@@ -1,0 +1,35 @@
+@import '../../../../assets/css/variables';
+
+form {
+  text-align: center;
+  .form-input-group {
+    div:nth-child(2) {
+      margin-bottom: 56px;
+    }
+  }
+  .input-group {
+    margin-bottom: 15px;
+    input {
+      width: 400px;
+      height: 30px;
+    }
+  }
+  .login-options {
+    width: 400px;
+    margin: 0 auto;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: $pink;
+    #forgot-password {
+      line-height: 24px;
+      text-align: right;
+    }
+    #remember-me {
+      line-height: 24px;
+      text-align: left;
+    }
+  }
+  .form-submit {
+    margin-top: 67px;
+  }
+}

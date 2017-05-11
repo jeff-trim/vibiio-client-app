@@ -1,33 +1,39 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+// Services
 import { LoginService } from '../services/login.service';
 import { AuthService } from '../../services/auth.service';
+
+// Interfaces
+import { Jwt } from '../models/jwt.interface';
+import { Credentials } from '../models/credentials.interface';
 
 @Component({
     selector: 'app-login',
     template: `
       <div>
-
-        <app-login-form 
-        (submitLogin)="submitLogin($event)"
-        ></app-login-form>
-
+        <app-login-greeting></app-login-greeting>
+        <app-login-form
+          (submitLogin)="submitLogin($event)"
+          ></app-login-form>
       </div>
     `
 })
 
 export class LoginComponent {
-    constructor(private loginService: LoginService,
-                private authService: AuthService ) {};
-    submitLogin(event) {
-        this.loginService
-        .login(event.email, event.password)
-        .subscribe( (data) => {
-          console.log(data.jwt);
-          this.authService.setToken(data.jwt);
+  constructor(private loginService: LoginService,
+              private authService: AuthService,
+              private router: Router) {};
+
+  submitLogin(event: Credentials) {
+    this.loginService
+      .login(event)
+      .subscribe(
+        (data: Jwt) => {
+          this.authService.setToken(data.jwt)
+          this.router.navigate(['/vibiios'])
         },
-        (error: any) => {
-          // handle login error here
-          console.log('error', error);
-        } );
+        (error: any) => console.log('error', error))
     }
 }

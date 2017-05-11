@@ -7,15 +7,12 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  logo: string;
   title: string;
 
-  constructor( public titleService: Title) {
-    this.logo = 'assets/images/logo.svg';
-  }
+  constructor( public titleService: Title) {}
 
   ngOnInit () {
-    this.title = 'Vibiio Client App';
+    this.title = 'Vibiio';
     this.titleService.setTitle(this.title);
   }
 }
