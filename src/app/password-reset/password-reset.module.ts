@@ -7,6 +7,10 @@ import { Routes, RouterModule } from '@angular/router';
 // Containers
 import { PasswordResetComponent } from './containers/password-reset.component';
 
+// Components
+import { PasswordResetInstructionsComponent } from './components/password-reset-instructions/password-reset-instructions.component';
+import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
+
 // Routes
 const passwordResetRoutes: Routes = [
   {
@@ -17,7 +21,9 @@ const passwordResetRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    PasswordResetComponent
+    PasswordResetComponent,
+    PasswordResetInstructionsComponent,
+    PasswordResetFormComponent
   ],
   imports: [
     CommonModule,
