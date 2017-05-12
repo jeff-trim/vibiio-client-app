@@ -24,16 +24,23 @@ import { Credentials } from '../models/credentials.interface';
 export class LoginComponent {
   constructor(private loginService: LoginService,
               private authService: AuthService,
-              private router: Router) {};
+              private router: Router) {}
 
   submitLogin(event: Credentials) {
     this.loginService
       .login(event)
       .subscribe(
         (data: Jwt) => {
-          this.authService.setToken(data.jwt)
-          this.router.navigate(['/dashboard'])
+          if (data.role === 'vibiiographer') {
+            this.authService.setToken(data.jwt);
+            this.router.navigate(['/dashboard']);
+          } else {
+            // TODO: provide feedback on form for this event
+            console.log('not authorized');
+          }
         },
-        (error: any) => console.log('error', error))
-    }
+        // TODO: provide feedback on form for this event
+        (error: any) => console.log('error', error)
+      );
+  }
 }
