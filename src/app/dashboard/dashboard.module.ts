@@ -11,7 +11,7 @@ import { DashboardService } from './services/dashboard.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 
 // Routes
-const vibiioRoutes: Routes = [
+const dashboardRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -25,7 +25,7 @@ const vibiioRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(vibiioRoutes)
+    RouterModule.forChild(dashboardRoutes)
   ],
   exports: [
     DashboardComponent

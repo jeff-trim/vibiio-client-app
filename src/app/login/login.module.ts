@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 // Containers
 import { LoginComponent } from './containers/login.component';
@@ -23,7 +24,8 @@ import { AuthService } from '../services/auth.service';
   imports: [
     CommonModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     LoginComponent
@@ -34,4 +36,4 @@ import { AuthService } from '../services/auth.service';
   ]
 })
 
-export class LoginModule {};
+export class LoginModule {}

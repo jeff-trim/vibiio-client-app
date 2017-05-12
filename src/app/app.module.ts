@@ -16,6 +16,7 @@ import { ResponseErrorService } from './services/response-error.service';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
+import { PasswordResetModule } from './password-reset/password-reset.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoginModule } from './login/login.module';
     // Custom Modules
     AppRoutingModule,
     DashboardModule,
-    LoginModule
+    LoginModule,
+    PasswordResetModule
   ],
   providers: [
     AuthService,

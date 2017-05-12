@@ -8,7 +8,7 @@ export class LoggedOutGuardService implements CanActivate {
 
   canActivate() {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/vibiios']);
+      this.router.navigate(['/dashboard']);
       return false;
     } else {
       return true;
