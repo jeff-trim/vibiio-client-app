@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseRequestOptions, RequestOptions } from '@angular/http';
+import { BaseRequestOptions, RequestOptions, RequestOptionsArgs } from '@angular/http';
 
 @Injectable()
 export class RequestOptionsService extends BaseRequestOptions {
@@ -7,7 +7,7 @@ export class RequestOptionsService extends BaseRequestOptions {
     super();
     this.headers.set('X-Requested-By', 'vibiiographer-web-app');
   }
-  merge(options?: RequestOptions): RequestOptions {
+  merge(options?: RequestOptionsArgs): RequestOptions {
     const newOptions = super.merge(options);
     newOptions.headers.set('Authorization',
                            `Beaer ${localStorage.getItem('app-token')}`);
