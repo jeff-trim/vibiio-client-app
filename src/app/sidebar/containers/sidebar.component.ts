@@ -8,6 +8,8 @@ import { SidebarProfileComponent } from '../components/sidebar-profile/sidebar-p
 
 
 // Interfaces
+import { CustomerCategory } from '../models/customer-category.interface';
+import { ScheduledCustomer} from '../models/scheduled-customer.interface';
 
 @Component({
     selector: 'app-sidebar',
