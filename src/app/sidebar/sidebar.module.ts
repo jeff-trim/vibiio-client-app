@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http'
 
 // Containers
@@ -13,14 +12,8 @@ import { SidebarProfileComponent } from './components/sidebar-profile/sidebar-pr
 
 //Service
 import { MyAppointmentsService } from './services/my-appointments.service';
-
-// Routes
-const sidebarRoutes: Routes = [
-  {
-    path: 'sidebar',
-    component: SidebarComponent   //do we need a route for this? no?
-  }
-];
+import { CustomerStatusService } from './services/customer-status.service';
+import { MyProfileService } from './services/my-profile.service';
 
 @NgModule({
   declarations: [
@@ -30,14 +23,15 @@ const sidebarRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(sidebarRoutes),
     HttpModule
   ],
   exports: [
     SidebarComponent
   ],
   providers: [
-    MyAppointmentsService
+    MyAppointmentsService,
+    CustomerStatusService,
+    MyProfileService
   ]
 })
 

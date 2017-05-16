@@ -9,13 +9,17 @@ import { DashboardComponent } from './containers/dashboard.component';
 import { DashboardResolver } from './services/dashboard.resolver.service';
 import { DashboardService } from './services/dashboard.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
+import { SidebarScheduleResolver } from './services/sidebar-schedule.resolver.service';
+import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service';
 
 // Routes
 const dashboardRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    resolve: { vibiio: DashboardResolver }
+    resolve: { vibiio: DashboardResolver,
+               sidebarSchedule: SidebarScheduleResolver,
+               sidebarCustomerStatuses: SidebarCustomerResolver }
   }
 ];
 
@@ -33,7 +37,9 @@ const dashboardRoutes: Routes = [
   providers: [
     DashboardResolver,
     DashboardService,
-    VideoChatTokenService
+    VideoChatTokenService,
+    SidebarScheduleResolver,
+    SidebarCustomerResolver
   ]
 })
 

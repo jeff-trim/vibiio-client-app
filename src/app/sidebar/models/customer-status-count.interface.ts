@@ -1,4 +1,4 @@
 export interface CustomerStatusCount {
-    category: string,
+    status: string,
     count: number
 }
