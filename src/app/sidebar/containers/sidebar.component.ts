@@ -5,11 +5,13 @@ import { SidebarCustomerComponent } from '../components/sidebar-customer/sidebar
 import { SidebarProfileComponent } from '../components/sidebar-profile/sidebar-profile.component';
 
 // Services
-
+import { MyAppointmentsService } from '../services/my-appointments.service';
+import { CustomerStatusService } from '../services/customer-status.service';
 
 // Interfaces
-import { CustomerCategory } from '../models/customer-category.interface';
-import { ScheduledCustomer} from '../models/scheduled-customer.interface';
+import { CustomerStatusCount } from '../models/customer-status-count.interface';
+import { Appointment} from '../models/appointment.interface';
+import { ProfileUrl } from '../models/profile-url.interface';
 
 @Component({
     selector: 'app-sidebar',

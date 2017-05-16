@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { Routes, RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http'
 
 // Containers
 import { SidebarComponent } from './containers/sidebar.component';
@@ -10,6 +10,9 @@ import { SidebarComponent } from './containers/sidebar.component';
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
 import { SidebarProfileComponent } from './components/sidebar-profile/sidebar-profile.component';
+
+//Service
+import { MyAppointmentsService } from './services/my-appointments.service';
 
 // Routes
 const sidebarRoutes: Routes = [
@@ -27,12 +30,15 @@ const sidebarRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(sidebarRoutes)
+    RouterModule.forChild(sidebarRoutes),
+    HttpModule
   ],
   exports: [
     SidebarComponent
   ],
-  providers: []
+  providers: [
+    MyAppointmentsService
+  ]
 })
 
 export class SidebarModule {}

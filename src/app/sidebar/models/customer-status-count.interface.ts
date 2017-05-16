@@ -1,4 +1,4 @@
-export interface CustomerCategory {
+export interface CustomerStatusCount {
     category: string,
     count: number
 }
