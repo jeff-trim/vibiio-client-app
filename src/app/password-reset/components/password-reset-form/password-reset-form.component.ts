@@ -8,6 +8,12 @@ import { Credentials } from '../../models/credentials.interface';
 <div>
   <form #form="ngForm"
         novalidate>
+    <div *ngIf="email.errors?.pattern && email.touched">
+      Email address is invalid
+    </div>
+    <div *ngIf="email.errors?.require && email.touched">
+      Email address is required
+    </div>
     <input type="email"
            name="email"
            [ngModel]="credentials?.email"
@@ -15,15 +21,17 @@ import { Credentials } from '../../models/credentials.interface';
            placeholder="Enter Email"
            pattern="^[a-zA-Z0–9\\_\\.\\+\\-]+\\@[a-zA-Z0–9\\-]+\\.[a-zA-Z0–9\\-\\.]+$"
            required>
-    <div *ngIf="email.errors?.pattern && email.touched">
-      Email address is invalid
+    
+    <div class="row center-xs">
+      <button type="submit"
+              (click)="reset(form.value, form.valid)"
+              [disabled]="!email.valid"
+              class="button button-primary">Reset Password</button>
     </div>
-    <div *ngIf="email.errors?.require && email.touched">
-      Email address is required
+    <div class="row center-xs">
+      <button class="button button-primary"
+              id="cancel">Cancel</button>
     </div>
-    <button type="submit"
-            (click)="reset(form.value, form.valid)"
-            [disabled]="!email.valid">Submit</button>
   </form>
 </div>
 `
