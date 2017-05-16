@@ -4,7 +4,7 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 
 // Services
-import { CustomerStatusService } from '../../sidebar/services/customer-status.service';
+import { CustomerStatusService } from './customer-status.service';
 
 @Injectable()
 export class SidebarCustomerResolver implements Resolve<any> {

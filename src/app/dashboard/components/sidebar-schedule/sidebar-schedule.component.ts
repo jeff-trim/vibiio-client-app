@@ -3,9 +3,9 @@ import { Appointment } from '../../models/appointment.interface';
 import { MyAppointmentsService } from '../../services/my-appointments.service';
 
 @Component({
-  selector: 'app-sidebar-customer',
-  styleUrls: ['sidebar-customer.component.scss'],
-  template: `<div>sidebar customer </div>`
+  selector: 'app-sidebar-schedule',
+  styleUrls: ['sidebar-schedule.component.scss'],
+  template: `<div> {{ appointments | json }} </div>`
 })
 
 export class SidebarScheduleComponent {

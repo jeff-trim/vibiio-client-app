@@ -4,7 +4,7 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 
 // Services
-import { MyAppointmentsService } from '../../sidebar/services/my-appointments.service';
+import { MyAppointmentsService } from './my-appointments.service';
 
 @Injectable()
 export class SidebarScheduleResolver implements Resolve<any> {

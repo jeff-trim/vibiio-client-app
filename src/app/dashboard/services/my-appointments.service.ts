@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { API_URL } from '../../../environments/environment';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { Appointment } from '../models/appointment.interface';
 
-const MY_APPOINTMENTS_API: string = '${API_URL}/XXXX';
+const MY_APPOINTMENTS_API: string = `${API_URL}/me`;
 
 @Injectable()
 export class MyAppointmentsService {

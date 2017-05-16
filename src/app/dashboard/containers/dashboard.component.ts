@@ -2,6 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+
+// Components
+import { SidebarComponent } from './sidebar.component';
 // Models
 import { Vibiio } from '../models/vibiio.interface';
 import { VideoChatToken } from '../models/video-chat-token.interface';
@@ -27,6 +30,7 @@ declare var OT: any;
     </button>
   </div>
     <div id="publisher-stream"></div>
+    <app-sidebar></app-sidebar>
     <div id="subscriber-stream"></div>
   </div>
   `,

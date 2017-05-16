@@ -17,7 +17,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
-import { SidebarModule } from './sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { SidebarModule } from './sidebar/sidebar.module';
     AppRoutingModule,
     DashboardModule,
     LoginModule,
-    PasswordResetModule,
-    SidebarModule
+    PasswordResetModule
   ],
   providers: [
     AuthService,

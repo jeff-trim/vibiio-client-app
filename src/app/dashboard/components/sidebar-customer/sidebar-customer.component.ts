@@ -3,8 +3,8 @@ import { CustomerStatusCount } from '../../models/customer-status-count.interfac
 import { CustomerStatusService } from '../../services/customer-status.service';
 
 @Component({
-  selector: 'app-sidebar-schedule',
-  styleUrls: ['sidebar-schedule.component.scss'],
+  selector: 'app-sidebar-customer',
+  styleUrls: ['sidebar-customer.component.scss'],
   template: `<div>sidebar scheduler</div>`
 })
 

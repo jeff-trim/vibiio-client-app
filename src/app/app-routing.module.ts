@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Components
 import { LoginComponent } from './login/containers/login.component';
-
+import { SidebarComponent } from './dashboard/containers/sidebar.component';
 // Guards
 import { LoggedOutGuardService } from './services/guards/logged-out-guard.service';
 
