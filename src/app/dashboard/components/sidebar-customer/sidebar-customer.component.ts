@@ -5,7 +5,7 @@ import { CustomerStatusService } from '../../services/customer-status.service';
 @Component({
   selector: 'app-sidebar-customer',
   styleUrls: ['sidebar-customer.component.scss'],
-  template: `<div>sidebar scheduler</div>`
+  template: `<div>{{ customersByStatus | json }}</div>`
 })
 
 export class SidebarCustomerComponent {
