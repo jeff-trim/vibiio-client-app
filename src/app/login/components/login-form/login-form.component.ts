@@ -28,5 +28,4 @@ export class LoginFormComponent implements OnInit {
       this.submitLogin.emit(value);
     }
   }
-
 }
