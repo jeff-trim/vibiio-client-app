@@ -1,19 +1,25 @@
-import { Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CustomerStatusCount } from '../../models/customer-status-count.interface';
-import { CustomerStatusService } from '../../services/customer-status.service';
 
 @Component({
   selector: 'app-sidebar-customer',
   styleUrls: ['sidebar-customer.component.scss'],
-  template: `<div>{{ customersByStatus | json }}</div>`
+  template: `
+            <div class="sidebar-customer">
+              <div class="categories-container">
+                <div class="category-row">
+                  <div class="status">
+                    {{ category.status }}
+                  </div>
+                  <div class="count">
+                    {{ category.count }}
+                  </div>
+                </div>
+              </div>
+            </div>`
 })
 
 export class SidebarCustomerComponent {
-  customersByStatus: CustomerStatusCount[];
-  constructor(private statusService: CustomerStatusService ) {}
-  ngOnInit() {
-    this.statusService
-      .getCustomerStatus()
-      .subscribe((data: CustomerStatusCount[]) => this.customersByStatus = data);
-  }
+  @Input()
+  category: CustomerStatusCount;
 }

@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Appointment } from '../../models/appointment.interface';
-import { MyAppointmentsService } from '../../services/my-appointments.service';
 
 @Component({
   selector: 'app-sidebar-schedule',
   styleUrls: ['sidebar-schedule.component.scss'],
-  template: `<div> {{ appointments | json }} </div>`
+  template: `<div class="sidebar-schedule">
+              <div class="appointments-container">
+                <div class="appointment-row">
+                  <div class="time">{{ appointment.scheduled_time }}</div>
+                  <div class="name"> Frank Smith</div>
+                </div>
+              </div>
+            </div>`
 })
 
 export class SidebarScheduleComponent {
-  appointments: Appointment[];
-  constructor(private appointmentsService: MyAppointmentsService ) {}
-  ngOnInit() {
-    this.appointmentsService
-      .getMyAppointments()
-      .subscribe((data: Appointment[]) => this.appointments = data);
-  }
+  @Input()
+  appointment: Appointment;
 }

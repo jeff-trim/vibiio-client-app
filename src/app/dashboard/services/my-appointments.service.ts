@@ -16,6 +16,6 @@ export class MyAppointmentsService {
   getMyAppointments(): Observable<Appointment[]> {
     return this.http
         .get(MY_APPOINTMENTS_API)
-        .map((response: Response) => response.json());
+        .map((response: Response) => response.json().user.profile.appointments);
   }
 }

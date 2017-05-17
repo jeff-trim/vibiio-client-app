@@ -15,11 +15,43 @@ import { Appointment} from '../models/appointment.interface';
     styleUrls: ['sidebar.component.scss'],
     template: `
       <div class='sidebar'>
-        <app-sidebar-schedule></app-sidebar-schedule>
-        <app-sidebar-customer></app-sidebar-customer>
-        <p>profile.url</p>
+      <div class="logo-container">
+      <div>
+        <div class="title">
+          My Scheduled Vibbiios
+        </div>
+        <app-sidebar-schedule
+          *ngFor="let appointment of appointments;"
+          [appointment] = appointment>
+        </app-sidebar-schedule>
+        <div class="title">
+          All Customers
+        </div>
+        <app-sidebar-customer
+          *ngFor="let customersCategory of customersCategories;"
+          [category] = customersCategory>
+        </app-sidebar-customer>
+        <div class="title">
+          My Profile
+        </div>
       </div>
     `
 })
 
-export class SidebarComponent {}
+export class SidebarComponent {
+  appointments: Appointment[];
+  customersCategories: CustomerStatusCount[];
+
+  constructor(private appointmentsService: MyAppointmentsService,
+              private statusService: CustomerStatusService) {}
+
+  ngOnInit() {
+    this.appointmentsService
+      .getMyAppointments()
+      .subscribe((data: Appointment[]) => this.appointments = data);
+
+    this.statusService
+      .getCustomerStatus()
+      .subscribe((data: CustomerStatusCount[]) => this.customersCategories = data);
+  }
+}
