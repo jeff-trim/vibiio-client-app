@@ -20,7 +20,7 @@ export class PasswordResetService {
 
         return this.http
             .post(`${API_URL}/password_reset`, body)
-            .map((response: Response) => response.status)
+            .map((response: Response) => response)
             .catch((error: any) => Observable.throw(error));
     }
 }

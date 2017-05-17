@@ -17,21 +17,26 @@ import { Credentials } from '../models/credentials.interface';
 <div>
   <app-password-reset-instructions></app-password-reset-instructions>
   <app-password-reset-form
-    (submitPasswordReset)="submitPasswordReset($event)">
+    (submitPasswordReset)="submitPasswordReset($event)"
+    [resetResponse]="passwordResetResponse">
   </app-password-reset-form>
 </div>
 `
 })
 
 export class PasswordResetComponent {
-    constructor(private passwordResetService: PasswordResetService){}
+    passwordResetResponse: any
+
+    constructor(private passwordResetService: PasswordResetService){
+        this.passwordResetResponse
+    }
 
     submitPasswordReset(event: Credentials){
         this.passwordResetService
             .resetPassword(event)
             .subscribe(
                 (response: Response) => {
-                    console.log(response);
+                    this.passwordResetResponse = response;
                 }
             )
     }

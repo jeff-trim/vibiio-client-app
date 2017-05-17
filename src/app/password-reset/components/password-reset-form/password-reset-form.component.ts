@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 import { Validator } from '@angular/forms';
 import { Credentials } from '../../models/credentials.interface';
 @Component({
@@ -18,11 +18,12 @@ import { Credentials } from '../../models/credentials.interface';
            required>
     <div class="row" id="validation-container">
       <div [style.display]="(!emailValid && email.touched) ? 'block' : 'none'">
-        🤔 Email address is invalid
+          🤔 Email address is invalid
       </div>
       <div [style.display]="(!emailPresence && email.touched) ? 'block' : 'none'">
           🤔 Email address is required
       </div>
+      <div [style.display]="!resetResponse ? 'none' : 'block'">Password reset has been sent!</div>
     </div>
     <div id="button-container" class="row">
       <div class="box">
@@ -52,10 +53,15 @@ export class PasswordResetFormComponent {
     emailValid: Boolean = false
     emailPresence: Boolean = false
 
+    @Input()
+    resetResponse: any
+
     @Output()
     submitPasswordReset: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor() {}
+    constructor() {
+        this.resetResponse = false
+    }
 
     onBlur(event, email){
         if (email.errors === null) {
