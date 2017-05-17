@@ -27,8 +27,8 @@ const dashboardRoutes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     resolve: { vibiio: DashboardResolver,
-               sidebarSchedule: SidebarScheduleResolver }
-              //  sidebarCustomerStatuses: SidebarCustomerResolver }
+               sidebarSchedule: SidebarScheduleResolver,
+               sidebarCustomerStatuses: SidebarCustomerResolver }
   }
 ];
 

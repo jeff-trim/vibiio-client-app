@@ -1,3 +1,5 @@
+@import '../../../../assets/css/variables';
+
 .sidebar-schedule {
   display: flex;
   flex-direction: column;
@@ -10,12 +12,11 @@
       justify-content: space-between;
       padding: 6px 0;
       margin: 5px 0;
-      height: 30px;
       align-items: center;
       .time {
         width: 102px;
         height: 18px;
-        font-family: 'Open Sans';
+        font-family: $copy-font;
         font-size: 13px;
         font-weight: 800;
         letter-spacing: 1px;
@@ -24,7 +25,7 @@
       }
       .name {
         opacity: 0.75;
-      	font-family: 'Open Sans';
+      	font-family: $copy-font;
       	font-size: 13px;
       	font-weight: 800;
       	letter-spacing: 1px;

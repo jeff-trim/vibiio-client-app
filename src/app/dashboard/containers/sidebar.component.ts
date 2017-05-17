@@ -16,23 +16,39 @@ import { Appointment} from '../models/appointment.interface';
     template: `
       <div class='sidebar'>
       <div class="logo-container">
-      <div>
-        <div class="title">
-          My Scheduled Vibbiios
+      </div>
+        <div class="title-row">
+          <div class="title">
+            My Scheduled vibiios
+          </div>
+          <div class="left-arrow"
+               (click)='toggleScheduledVibiios($event)'>
+          </div>
         </div>
         <app-sidebar-schedule
           *ngFor="let appointment of appointments;"
-          [appointment] = appointment>
+          [appointment] = appointment
+          [hidden]='!scheduledVibiiosVisibility'>
         </app-sidebar-schedule>
-        <div class="title">
-          All Customers
+        <div class="title-row">
+          <div class="title">
+            All Customers
+          </div>
+          <div class="left-arrow"
+          (click)='toggleCustomerCategoryVisibility($event)'>
+          </div>
         </div>
         <app-sidebar-customer
           *ngFor="let customersCategory of customersCategories;"
-          [category] = customersCategory>
+          [category] = customersCategory
+          [hidden] ='customerCategoryVisibility'>
         </app-sidebar-customer>
-        <div class="title">
-          My Profile
+        <div class="title-row">
+          <div class="title">
+            My Profile
+          </div>
+          <div class="left-arrow">
+          </div>
         </div>
       </div>
     `
@@ -41,6 +57,8 @@ import { Appointment} from '../models/appointment.interface';
 export class SidebarComponent {
   appointments: Appointment[];
   customersCategories: CustomerStatusCount[];
+  scheduledVibiiosVisibility: boolean;
+  customerCategoryVisibility: boolean;
 
   constructor(private appointmentsService: MyAppointmentsService,
               private statusService: CustomerStatusService) {}
@@ -53,5 +71,22 @@ export class SidebarComponent {
     this.statusService
       .getCustomerStatus()
       .subscribe((data: CustomerStatusCount[]) => this.customersCategories = data);
+
+      this.scheduledVibiiosVisibility = true;
+      this.customerCategoryVisibility = true;
+  }
+
+  toggleScheduledVibiios(event){
+    this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
+    if(!this.customerCategoryVisibility){
+      this.customerCategoryVisibility = !this.customerCategoryVisibility
+    }
+  }
+
+  toggleCustomerCategoryVisibility(event){
+    this.customerCategoryVisibility = !this.customerCategoryVisibility
+    if(this.scheduledVibiiosVisibility){
+      this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
+    }
   }
 }
