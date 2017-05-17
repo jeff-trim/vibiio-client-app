@@ -17,25 +17,29 @@ import { Appointment} from '../models/appointment.interface';
       <div class='sidebar'>
       <div class="logo-container">
       </div>
-        <div class="title-row">
+        <div class="title-row"
+            (click)='toggleScheduledVibiios($event)'>
           <div class="title">
             My Scheduled vibiios
           </div>
-          <div class="left-arrow"
-               (click)='toggleScheduledVibiios($event)'>
+          <div class="arrow"
+              [class.left-arrow]='scheduledVibiiosVisibility'
+              [class.active-arrow]='!scheduledVibiiosVisibility'>
           </div>
         </div>
         <app-sidebar-schedule
           *ngFor="let appointment of appointments;"
           [appointment] = appointment
-          [hidden]='!scheduledVibiiosVisibility'>
+          [hidden]='scheduledVibiiosVisibility'>
         </app-sidebar-schedule>
-        <div class="title-row">
+        <div class="title-row"
+             (click)='toggleCustomerCategoryVisibility($event)'>
           <div class="title">
             All Customers
           </div>
-          <div class="left-arrow"
-          (click)='toggleCustomerCategoryVisibility($event)'>
+          <div class="arrow"
+              [class.left-arrow]='customerCategoryVisibility'
+              [class.active-arrow]='!customerCategoryVisibility'>
           </div>
         </div>
         <app-sidebar-customer
@@ -43,11 +47,14 @@ import { Appointment} from '../models/appointment.interface';
           [category] = customersCategory
           [hidden] ='customerCategoryVisibility'>
         </app-sidebar-customer>
-        <div class="title-row">
+        <div class="title-row"
+             (click)='toggleProfileVisibility($event)'>
           <div class="title">
             My Profile
           </div>
-          <div class="left-arrow">
+          <div class='arrow'
+               [class.left-arrow]='profileVisibility'
+               [class.active-arrow]='!profileVisibility'>
           </div>
         </div>
       </div>
@@ -59,6 +66,7 @@ export class SidebarComponent {
   customersCategories: CustomerStatusCount[];
   scheduledVibiiosVisibility: boolean;
   customerCategoryVisibility: boolean;
+  profileVisibility: boolean;
 
   constructor(private appointmentsService: MyAppointmentsService,
               private statusService: CustomerStatusService) {}
@@ -72,8 +80,9 @@ export class SidebarComponent {
       .getCustomerStatus()
       .subscribe((data: CustomerStatusCount[]) => this.customersCategories = data);
 
-      this.scheduledVibiiosVisibility = true;
+      this.scheduledVibiiosVisibility = false;
       this.customerCategoryVisibility = true;
+      this.profileVisibility =true;
   }
 
   toggleScheduledVibiios(event){
@@ -81,12 +90,28 @@ export class SidebarComponent {
     if(!this.customerCategoryVisibility){
       this.customerCategoryVisibility = !this.customerCategoryVisibility
     }
+    if(!this.profileVisibility){
+      this.profileVisibility = !this.profileVisibility
+    }
   }
 
   toggleCustomerCategoryVisibility(event){
     this.customerCategoryVisibility = !this.customerCategoryVisibility
-    if(this.scheduledVibiiosVisibility){
+    if(!this.scheduledVibiiosVisibility){
       this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
+    }
+    if(!this.profileVisibility){
+      this.profileVisibility = !this.profileVisibility
+    }
+  }
+
+  toggleProfileVisibility(event){
+    this.profileVisibility = !this.profileVisibility
+    if(!this.scheduledVibiiosVisibility){
+      this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
+    }
+    if(!this.customerCategoryVisibility){
+      this.customerCategoryVisibility = !this.customerCategoryVisibility
     }
   }
 }
