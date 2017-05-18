@@ -12,16 +12,16 @@ import { Appointment} from '../models/appointment.interface';
 
 @Component({
     selector: 'app-sidebar',
-    template: 'sidebar.component.html',
+    templateUrl: 'sidebar.component.html',
     styleUrls: ['sidebar.component.scss']
 })
 
 export class SidebarComponent {
   appointments: Appointment[];
   customersCategories: CustomerStatusCount[];
-  scheduledVibiiosVisibility: boolean;
-  customerCategoryVisibility: boolean;
-  profileVisibility: boolean;
+  scheduledVibiiosVisibility: boolean = false;
+  customerCategoryVisibility: boolean = true;
+  profileVisibility: boolean = true;
 
   constructor(private appointmentsService: MyAppointmentsService,
               private statusService: CustomerStatusService) {}
@@ -34,39 +34,29 @@ export class SidebarComponent {
     this.statusService
       .getCustomerStatus()
       .subscribe((data: CustomerStatusCount[]) => this.customersCategories = data);
-
-      this.scheduledVibiiosVisibility = false;
-      this.customerCategoryVisibility = true;
-      this.profileVisibility =true;
   }
 
   toggleScheduledVibiios(event){
     this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
-    if(!this.customerCategoryVisibility){
-      this.customerCategoryVisibility = !this.customerCategoryVisibility
-    }
-    if(!this.profileVisibility){
-      this.profileVisibility = !this.profileVisibility
+    if(!this.scheduledVibiiosVisibility){
+      this.customerCategoryVisibility = true
+      this.profileVisibility = true
     }
   }
 
   toggleCustomerCategoryVisibility(event){
     this.customerCategoryVisibility = !this.customerCategoryVisibility
-    if(!this.scheduledVibiiosVisibility){
-      this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
-    }
-    if(!this.profileVisibility){
-      this.profileVisibility = !this.profileVisibility
+    if(!this.customerCategoryVisibility){
+      this.scheduledVibiiosVisibility = true
+      this.profileVisibility = true
     }
   }
 
   toggleProfileVisibility(event){
     this.profileVisibility = !this.profileVisibility
-    if(!this.scheduledVibiiosVisibility){
-      this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
-    }
-    if(!this.customerCategoryVisibility){
-      this.customerCategoryVisibility = !this.customerCategoryVisibility
+    if(!this.profileVisibility){
+      this.scheduledVibiiosVisibility = true
+      this.customerCategoryVisibility = true
     }
   }
 }
