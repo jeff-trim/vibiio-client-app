@@ -1,0 +1,47 @@
+<div class='sidebar'>
+  <div class="logo-container">
+  </div>
+
+  <div class="title-row"
+      (click)='toggleScheduledVibiios($event)'>
+    <div class="title">
+      My Scheduled vibiios
+    </div>
+    <div class="arrow"
+        [class.left-arrow]='scheduledVibiiosVisibility'
+        [class.active-arrow]='!scheduledVibiiosVisibility'>
+    </div>
+  </div>
+  <app-sidebar-schedule
+    *ngFor="let appointment of appointments;"
+    [appointment] = appointment
+    [hidden]='scheduledVibiiosVisibility'>
+  </app-sidebar-schedule>
+
+  <div class="title-row"
+       (click)='toggleCustomerCategoryVisibility($event)'>
+    <div class="title">
+      All Customers
+    </div>
+    <div class="arrow"
+        [class.left-arrow]='customerCategoryVisibility'
+        [class.active-arrow]='!customerCategoryVisibility'>
+    </div>
+  </div>
+  <app-sidebar-customer
+    *ngFor="let customersCategory of customersCategories;"
+    [category] = customersCategory
+    [hidden] ='customerCategoryVisibility'>
+  </app-sidebar-customer>
+
+  <div class="title-row"
+       (click)='toggleProfileVisibility($event)'>
+    <div class="title">
+      My Profile
+    </div>
+    <div class='arrow'
+         [class.left-arrow]='profileVisibility'
+         [class.active-arrow]='!profileVisibility'>
+    </div>
+  </div>
+</div>
