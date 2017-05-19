@@ -1,11 +1,10 @@
-
 {
   "name": "vibiio-client-app",
   "description": "",
   "keywords": [],
   "website": "",
-  "repository": "https://github.com/jane-doe/small-sharp-tool",
-  "success_url": "/",
+  "repository": "",
+  "success_url": "",
   "scripts": {
     "postdeploy": ""
   },
