@@ -9,7 +9,19 @@
   "scripts": {
     "postdeploy": ""
   },
-  "env": {},
+  "env": {
+    "BUILD_ENV": {
+      "required": true
+    },
+    "NODE_ENV": {
+      "required": true
+    },
+    {
+      "NODE_MODULES_CACHE": {
+        "required": true
+      }
+    }
+  },
   "formation": {},
   "image": "heroku/nodejs",
   "addons": [],
