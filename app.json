@@ -1,0 +1,27 @@
+{
+  "name": "vibiio-client-app",
+  "description": "",
+  "scripts": {
+  },
+  "env": {
+    "BUILD_ENV": {
+      "required": true
+    },
+    "NODE_ENV": {
+      "required": true
+    },
+    "NODE_MODULES_CACHE": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
