@@ -1,4 +1,3 @@
-
 {
   "name": "vibiio-client-app",
   "description": "",
@@ -28,4 +27,3 @@
   "buildpacks": [],
   "environments": {}
 }
-
