@@ -15,7 +15,9 @@ import { Credentials } from '../models/credentials.interface';
     providers: [PasswordResetService],
   template: `
 <div>
-  <app-password-reset-instructions></app-password-reset-instructions>
+  <app-password-reset-instructions
+    [resetResponse]="passwordResetResponse">
+  </app-password-reset-instructions>
   <app-password-reset-form
     (submitPasswordReset)="submitPasswordReset($event)"
     [resetResponse]="passwordResetResponse">
@@ -36,7 +38,7 @@ export class PasswordResetComponent {
             .resetPassword(event)
             .subscribe(
                 (response: Response) => {
-                    this.passwordResetResponse = response;
+                    this.passwordResetResponse = response.status
                 }
             )
     }

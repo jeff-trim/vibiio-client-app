@@ -10,7 +10,7 @@ export class RequestOptionsService extends BaseRequestOptions {
   merge(options?: RequestOptionsArgs): RequestOptions {
     const newOptions = super.merge(options);
     newOptions.headers.set('Authorization',
-                           `Beaer ${localStorage.getItem('app-token')}`);
+                           `Bearer ${localStorage.getItem('app-token')}`);
     return newOptions;
   }
 }
