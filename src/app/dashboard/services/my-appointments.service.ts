@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 import { Appointment } from '../models/appointment.interface';
 
-const MY_APPOINTMENTS_API: string = `${API_URL}/me`;
+const MY_APPOINTMENTS_API: string = `${API_URL}/appointment_counts`;
 
 @Injectable()
 export class MyAppointmentsService {
@@ -16,6 +16,6 @@ export class MyAppointmentsService {
   getMyAppointments(): Observable<Appointment[]> {
     return this.http
         .get(MY_APPOINTMENTS_API)
-        .map((response: Response) => response.json().user.profile.appointments);
+        .map((response: Response) => response.json());
   }
 }

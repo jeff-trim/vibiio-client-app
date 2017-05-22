@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 import { CustomerStatusCount } from '../models/customer-status-count.interface';
 
-const CUSTOMER_STATUES_API: string = `${API_URL}/status`;
+const CUSTOMER_STATUES_API: string = `${API_URL}/status_counts`;
 
 @Injectable()
 export class CustomerStatusService {
