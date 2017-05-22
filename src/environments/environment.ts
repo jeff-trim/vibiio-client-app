@@ -9,4 +9,3 @@ export const environment = {
 
 export const API_URL = 'http://localhost:3000';
 export const OPENTOK_API_KEY = '45807082';
-

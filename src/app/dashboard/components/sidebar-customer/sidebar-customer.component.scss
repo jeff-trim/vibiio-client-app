@@ -1,0 +1,41 @@
+@import '../../../../assets/css/variables';
+
+.sidebar-customer {
+  display: flex;
+  flex-direction: column;
+
+  .categories-container{
+    display: flex;
+    flex-direction: column;
+
+    .category-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 6px 0;
+      margin: 5px 0;
+      align-items: center;
+
+      .status {
+        max-width: 200px;
+        height: 18px;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: #ffffff;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      .count {
+        opacity: 0.75;
+      	font-family: $copy-font;
+      	font-size: 13px;
+      	font-weight: 800;
+      	letter-spacing: 1px;
+      	text-align: right;
+      	color: #ffffff;
+      }
+    }
+  }
+}

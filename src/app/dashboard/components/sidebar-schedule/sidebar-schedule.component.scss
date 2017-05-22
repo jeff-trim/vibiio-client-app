@@ -1,0 +1,41 @@
+@import '../../../../assets/css/variables';
+
+.sidebar-schedule {
+  display: flex;
+  flex-direction: column;
+  .appointments-container{
+    display: flex;
+    flex-direction: column;
+    .appointment-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 6px 0;
+      margin: 5px 0;
+      align-items: center;
+      .time {
+        height: 18px;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: #ffffff;
+        text-align: left;
+        border-bottom: solid 3px rgba(0,0,0,0);
+        &:hover{
+          border-bottom: solid 3px #ffffff;
+        }
+      }
+      .name {
+        opacity: 0.75;
+      	font-family: $copy-font;
+      	font-size: 13px;
+      	font-weight: 800;
+      	letter-spacing: 1px;
+      	text-align: right;
+      	color: #ffffff;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
