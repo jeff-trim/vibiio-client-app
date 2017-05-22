@@ -43,6 +43,5 @@ export class PasswordResetInstructionsComponent {
 
     ngOnChanges(changes: SimpleChanges){
       this.resetResponse
-      console.log(this.resetResponse)
     }
 }
