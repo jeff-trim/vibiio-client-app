@@ -3,9 +3,11 @@
 .sidebar-customer {
   display: flex;
   flex-direction: column;
+
   .categories-container{
     display: flex;
     flex-direction: column;
+
     .category-row {
       display: flex;
       flex-direction: row;
@@ -13,8 +15,9 @@
       padding: 6px 0;
       margin: 5px 0;
       align-items: center;
+
       .status {
-        width: 102px;
+        max-width: 200px;
         height: 18px;
         font-family: $copy-font;
         font-size: 13px;
