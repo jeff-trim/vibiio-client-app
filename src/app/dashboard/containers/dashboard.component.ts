@@ -23,11 +23,11 @@ declare var OT: any;
     styleUrls: ['./dashboard.component.scss'],
   template: `
 <div class="row">
-  <app-sidebar
-    class="col-xs-12
-    col-md-3"></app-sidebar>
+  <app-sidebar class="col-xs-12
+                      col-md-3">
+  </app-sidebar>
   <div class="col-xs-12
-col-md-9">
+              col-md-9">
     <router-outlet></router-outlet>
   </div>
 </div>
