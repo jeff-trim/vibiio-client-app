@@ -6,11 +6,13 @@ import { HttpModule } from '@angular/http'
 // Containers
 import { DashboardComponent } from './containers/dashboard.component';
 import { SidebarComponent } from './containers/sidebar.component';
-
+import { MyProfileComponent } from './containers/my-profile.component';
 
 // Components
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
+import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
+import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 
 // Services
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -28,7 +30,13 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
     resolve: { vibiio: DashboardResolver,
                sidebarSchedule: SidebarScheduleResolver,
-               sidebarCustomerStatuses: SidebarCustomerResolver }
+               sidebarCustomerStatuses: SidebarCustomerResolver },
+      children: [
+          {
+              path: 'my_profile',
+              component: MyProfileComponent
+          }
+      ]
   }
 ];
 
@@ -37,7 +45,10 @@ const dashboardRoutes: Routes = [
     DashboardComponent,
     SidebarComponent,
     SidebarScheduleComponent,
-    SidebarCustomerComponent
+    SidebarCustomerComponent,
+    MyProfileComponent,
+    ProfileInformationComponent,
+    ProfileLicensureComponent
   ],
   imports: [
     CommonModule,

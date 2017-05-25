@@ -5,3 +5,32 @@ $base-font: 'Montserrat', sans-serif;
 $copy-font: 'Open Sans', sans-serif;
 
 
+$azure: #00aded;
+$hot-pink: #e80989;
+$sunny-yellow: #fbed1f;
+$greyish-brown: #585858;
+
+/* Text styles */
+
+@mixin h1-cyan {
+	  font-family: Montserrat;
+	  font-size: 38px;
+	  font-weight: bold;
+	  font-style: normal;
+	  font-stretch: normal;
+	  line-height: 1.16;
+	  letter-spacing: normal;
+	  text-align: center;
+	  color: $azure;
+}
+h3 {
+	  font-family: Montserrat;
+	  font-size: 18px;
+	  font-weight: bold;
+	  font-style: normal;
+	  font-stretch: normal;
+	  line-height: 1.67;
+	  letter-spacing: normal;
+	  text-align: center;
+	  color: $greyish-brown;
+}

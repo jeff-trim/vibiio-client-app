@@ -1,16 +1,12 @@
 @import '../../../assets/css/variables';
 
 .sidebar {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
   top: 0;
   left: 0;
-  width: 322px;
-  min-height: 100vh;
-  background-color: $blue;
+   min-height: 100vh;
+   background-color: $blue;
   padding: 32px 27px;
+
   .logo-container {
     width: 88px;
     height: 43px;

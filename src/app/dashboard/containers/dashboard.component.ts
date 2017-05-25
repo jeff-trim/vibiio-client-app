@@ -1,10 +1,12 @@
 import { Component, OnInit} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 
-// Components
+// Containers
 import { SidebarComponent } from './sidebar.component';
+import { MyProfileComponent } from './my-profile.component';
+
 // Models
 import { Vibiio } from '../models/vibiio.interface';
 import { VideoChatToken } from '../models/video-chat-token.interface';
@@ -15,27 +17,25 @@ import { VideoChatTokenService } from '../services/video-chat-token.service';
 
 declare var OT: any;
 
+
 @Component({
-  selector: 'app-vibiio',
+    selector: 'app-vibiio',
+    styleUrls: ['./dashboard.component.scss'],
   template: `
-<div class="row center-xs video-container">
-  <div class="col-xs-12">
-    <p>Video Session ID:</p>
-    <p>{{ vibiio.video_session_id }}</p>
+<div class="row">
+  <app-sidebar
+    class="col-xs-12
+    col-md-3"></app-sidebar>
+  <div class="col-xs-12
+col-md-9">
+    <router-outlet></router-outlet>
   </div>
-  <div class="col-xs-12">
-    <button (click)="connectToSession()"
-            class="button button-primary">
-      Connect to video session
-    </button>
-  </div>
-    <div id="publisher-stream"></div>
-    <app-sidebar></app-sidebar>
-    <div id="subscriber-stream"></div>
-  </div>
+</div>
   `,
-  styleUrls: ['./dashboard.component.scss']
 })
+
+
+
 
 export class DashboardComponent implements OnInit {
   session: any;

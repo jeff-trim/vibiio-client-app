@@ -1,4 +1,4 @@
-<div class='sidebar'>
+<div class='sidebar '>
   <div class="logo-container">
   </div>
 
@@ -36,8 +36,10 @@
 
   <div class="title-row"
        (click)='toggleProfileVisibility($event)'>
-    <div class="title">
-      My Profile
+      <div class="title">
+          <a routerLink="my_profile" routerLinkActive="active">
+              My Profile
+          </a>
     </div>
     <div class='arrow'
          [class.left-arrow]='profileVisibility'
