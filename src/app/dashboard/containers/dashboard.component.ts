@@ -14,6 +14,7 @@ import { OPENTOK_API_KEY } from '../../../environments/environment';
 
 // Services
 import { VideoChatTokenService } from '../services/video-chat-token.service';
+import { MyProfileResolver } from '../services/my-profile.resolver.service';
 
 declare var OT: any;
 
@@ -24,7 +25,8 @@ declare var OT: any;
   template: `
 <div class="row">
   <app-sidebar class="col-xs-12
-                      col-md-3">
+                      col-md-3
+                      side-bar-component">
   </app-sidebar>
   <div class="col-xs-12
               col-md-9">

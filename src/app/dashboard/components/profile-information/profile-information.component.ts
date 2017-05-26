@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'profile-information',
@@ -6,4 +6,11 @@ import { Component } from '@angular/core';
     templateUrl: 'profile-information.component.html'
 })
 
-export class ProfileInformationComponent {}
+export class ProfileInformationComponent implements OnInit {
+    @Input()
+    profileData
+
+    ngOnInit(){
+        console.log(this.profileData)
+    }
+}

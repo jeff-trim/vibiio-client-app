@@ -11,9 +11,13 @@
 
 .profile-licensure {
     @media only screen and(min-width: $small) {
+        padding-right: 32px;
     }
 }
 
+.center {
+    margin: 0 auto;
+}
 
 /deep/ h2 {
     width: 327px;

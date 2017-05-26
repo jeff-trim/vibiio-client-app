@@ -22,6 +22,8 @@ import { MyAppointmentsService } from './services/my-appointments.service';
 import { CustomerStatusService } from './services/customer-status.service';
 import { SidebarScheduleResolver } from './services/sidebar-schedule.resolver.service';
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service';
+import { MyProfileResolver } from './services/my-profile.resolver.service'
+import { MyProfileService } from './services/my-profile.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -30,11 +32,14 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
     resolve: { vibiio: DashboardResolver,
                sidebarSchedule: SidebarScheduleResolver,
-               sidebarCustomerStatuses: SidebarCustomerResolver },
+               sidebarCustomerStatuses: SidebarCustomerResolver
+             },
       children: [
-          {
-              path: 'my_profile',
-              component: MyProfileComponent
+          { path: 'my_profile',
+            component: MyProfileComponent,
+            resolve: {
+               myProfile: MyProfileResolver
+            }
           }
       ]
   }
@@ -66,7 +71,9 @@ const dashboardRoutes: Routes = [
     MyAppointmentsService,
     CustomerStatusService,
     SidebarScheduleResolver,
-    SidebarCustomerResolver
+    SidebarCustomerResolver,
+      MyProfileResolver,
+      MyProfileService
   ]
 })
 
