@@ -33,6 +33,10 @@ const dashboardRoutes: Routes = [
     resolve: { vibiio: DashboardResolver,
                sidebarSchedule: SidebarScheduleResolver,
                sidebarCustomerStatuses: SidebarCustomerResolver }
+  },
+  {
+    path: 'my-vibiios',
+    component: MyVibiiosComponent
   }
 ];
 
@@ -42,7 +46,8 @@ const dashboardRoutes: Routes = [
     SidebarComponent,
     SidebarScheduleComponent,
     SidebarCustomerComponent,
-    CustomerProfileComponent
+    CustomerProfileComponent,
+    MyVibiiosComponent
   ],
   imports: [
     CommonModule,

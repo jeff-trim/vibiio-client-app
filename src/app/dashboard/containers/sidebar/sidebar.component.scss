@@ -1,46 +1,46 @@
-@import '../../../assets/css/variables';
+@import '../../../../assets/css/variables';
 
 .sidebar {
-  position: absolute;
+  align-content: flex-start;
+  background-color: $blue;
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
-  top: 0;
   left: 0;
-  width: 322px;
   min-height: 100vh;
-  background-color: $blue;
   padding: 32px 27px;
+  position: absolute;
+  top: 0;
+  width: 322px;
   .logo-container {
-    width: 88px;
-    height: 43px;
-    background: url(../../../assets/images/alt.svg) no-repeat;
+    background: url(../../../../assets/images/alt.svg) no-repeat;
     background-size: cover;
+    height: 43px;
     margin: 0 0 105px;
+    width: 88px;
   }
   .title-row{
     display: flex;
     justify-content: space-between;
     margin: 30px 0 10px;
     .title {
-      font-size: 16px;
-      line-height: 1.88;
-      color: #ffffff;
+      color: $white;
       font-family: $base-font;
+      font-size: 16px;
       font-weight: bold;
+      line-height: 1.88;
       text-align: left;
     }
     .arrow {
-      width: 30px;
-      height: 30px;
       background-size: cover;
+      height: 30px;
+      width: 30px;
     }
     .left-arrow {
-      background-image: url(../../../assets/images/left.svg);
+      background-image: url(../../../../assets/images/left.svg);
       transform: rotate(180deg);
     }
     .active-arrow {
-      background-image: url(../../../assets/images/active-arrow.svg);
+      background-image: url(../../../../assets/images/active-arrow.svg);
     }
   }
 }
