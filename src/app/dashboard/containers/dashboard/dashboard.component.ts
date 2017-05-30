@@ -4,14 +4,14 @@ import { Observable } from 'rxjs/Observable';
 
 
 // Components
-import { SidebarComponent } from './sidebar.component';
+import { SidebarComponent } from './../sidebar/sidebar.component';
 // Models
-import { Vibiio } from '../models/vibiio.interface';
-import { VideoChatToken } from '../models/video-chat-token.interface';
-import { OPENTOK_API_KEY } from '../../../environments/environment';
+import { Vibiio } from '../../models/vibiio.interface';
+import { VideoChatToken } from '../../models/video-chat-token.interface';
+import { OPENTOK_API_KEY } from '../../../../environments/environment';
 
 // Services
-import { VideoChatTokenService } from '../services/video-chat-token.service';
+import { VideoChatTokenService } from '../../services/video-chat-token.service';
 
 declare var OT: any;
 

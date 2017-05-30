@@ -4,13 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http'
 
 // Containers
-import { DashboardComponent } from './containers/dashboard.component';
-import { SidebarComponent } from './containers/sidebar.component';
-
+import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { SidebarComponent } from './containers/sidebar/sidebar.component';
+import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
 
 // Components
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
+import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
+
 
 // Services
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -20,6 +22,8 @@ import { MyAppointmentsService } from './services/my-appointments.service';
 import { CustomerStatusService } from './services/customer-status.service';
 import { SidebarScheduleResolver } from './services/sidebar-schedule.resolver.service';
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service';
+import { CustomerProfileService } from './services/customer-profile.service';
+import { TodaysVibiiosService } from './services/todays-vibiios.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -37,7 +41,8 @@ const dashboardRoutes: Routes = [
     DashboardComponent,
     SidebarComponent,
     SidebarScheduleComponent,
-    SidebarCustomerComponent
+    SidebarCustomerComponent,
+    CustomerProfileComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +51,8 @@ const dashboardRoutes: Routes = [
   ],
   exports: [
     DashboardComponent,
-    SidebarComponent
+    SidebarComponent,
+    MyVibiiosComponent
   ],
   providers: [
     DashboardResolver,
@@ -55,7 +61,9 @@ const dashboardRoutes: Routes = [
     MyAppointmentsService,
     CustomerStatusService,
     SidebarScheduleResolver,
-    SidebarCustomerResolver
+    SidebarCustomerResolver,
+    CustomerProfileService,
+    TodaysVibiiosService
   ]
 })
 
