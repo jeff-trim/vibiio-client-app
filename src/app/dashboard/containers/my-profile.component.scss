@@ -1,9 +1,9 @@
 @import '../../../assets/css/_variables.scss';
 .flex {
     display: flex;
-    flex-direction: row;
-    @media(max-width: $xsmall){
-        flex-direction: column;
+    flex-direction: column;
+    @media(min-width: $small){
+        flex-direction: row;
     }
 }
 
@@ -24,6 +24,9 @@
     line-height: 1;
     letter-spacing: -2px;
     margin-bottom: 0;
+    @media (min-width: $small){
+        padding-left: 25px;
+    }
 }
 
 /deep/ .profile-information h2,
@@ -37,9 +40,16 @@
 }
 
 /deep/ .profile-information {
-   @media (min-width: $small) {
+    @media (min-width: $small) {
+       padding-left: 25px;
        padding-right: 60px;
    }
+}
+
+/deep/ .profile-licensure {
+    @media(min-width: $small){
+        padding-right: 25px;
+    }
 }
 
 /deep/ h2 {
