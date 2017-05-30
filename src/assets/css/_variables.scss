@@ -1,6 +1,45 @@
 $blue: #00aded;
 $pink: #ec008c;
 $grey: #585858;
+$light-grey: #f2f2f2;
 $white: #fff;
 $base-font: 'Montserrat', sans-serif;
 $copy-font: 'Open Sans', sans-serif;
+
+
+$small:  48em;
+$medium: 64em;
+$large: 75em;
+
+
+
+$azure: #00aded;
+$hot-pink: #e80989;
+$sunny-yellow: #fbed1f;
+$greyish-brown: #585858;
+
+/* Text styles */
+
+@mixin h1-cyan {
+  color: $azure;
+  font-family: Montserrat;
+  font-size: 38px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: 1.16;
+  text-align: center;
+}
+
+h3 {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
+  color: $greyish-brown;
+}
