@@ -1,39 +1,81 @@
-<div class="box" >
-  <div class="row" >
-    <div class="col-xs-12
-                col-sm-10
-                col-sm-offset-1
-                col-md-12
-                col-md-offset-0">
-<h2>information</h2>
-
-<div>
-  <div class="info-element
-              row
-              between-xs
-              bottom-xs" >
-      <span class="label">Name</span>
-      <span class="value end-xs">Freddy Fore Fingers</span>
-      <span class="pink-underline" ></span>
-  </div>
-  </div>
-  <div class="info-element" >
-    <span class="label">Company</span>
-    <span class="value end-md">Fred's Finger Fry</span>
-  </div>
-  <div class="info-element" >
-    <span class="label">Phone Number</span>
-    <span class="value end-md">555-555-5555</span>
-  </div>
-  <div class="info-element" >
-    <span class="label">Address</span>
-    <span class="value end-md">555 Yeehaw Rd.</span>
-  </div>
-  <div class="info-element" >
-    <span class="label">Zip</span>
-    <span class="value end-md">55555</span>
-  </div>
-  <div class="download">Download Signed Agreement</div>
-    </div>
-  </div>
+<div class="info-element">
+  <h2>information</h2>
+  <div class="long-pink-underline" ></div>
 </div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs" >
+    <span class="label">Name</span>
+    <span class="value end-xs">{{ myProfile.first_name }} {{myProfile.last_name}}</span>
+    <span class="pink-underline" ></span>
+</div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs" >
+  <span class="label">Company</span>
+  <span class="value end-md">{{ myProfile.company }}</span>
+  <span class="pink-underline" ></span>
+</div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs" >
+  <span class="label">Phone Number</span>
+  <span class="value end-md">{{ myProfile.phone }}</span>
+  <div class="pink-underline" ></div>
+</div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs" >
+  <span class="label">Address</span>
+  <span class="value end-md">{{myProfile.address.address_one }}</span>
+  <div class="pink-underline" ></div>
+</div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs"
+     *ngIf="myProfile.address.adress_two">
+  <span class="label">Address Two</span>
+  <span class="value end-md">{{myProfile.address.address_two }}</span>
+  <div class="pink-underline" ></div>
+</div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs" >
+  <span class="label">City</span>
+  <span class="value end-md">{{myProfile.address.city }}</span>
+  <div class="pink-underline" ></div>
+</div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs" >
+  <span class="label">State</span>
+  <span class="value end-md">{{myProfile.address.state }}</span>
+  <div class="pink-underline" ></div>
+</div>
+
+<div class="info-element
+            row
+            between-xs
+            bottom-xs" >
+  <span class="label">Zip</span>
+  <span class="value end-md">{{ myProfile.address.zip}}</span>
+  <div class="pink-underline" ></div>
+</div>
+
+<div class="download
+            pink">Download Signed Agreement <img src="../../../../assets/images/download.svg"
+                                            class="arrow"></div>

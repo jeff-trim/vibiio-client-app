@@ -29,7 +29,8 @@ declare var OT: any;
                       side-bar-component">
   </app-sidebar>
   <div class="col-xs-12
-              col-md-9">
+              col-md-9
+              dashboard-outlet">
     <router-outlet></router-outlet>
   </div>
 </div>

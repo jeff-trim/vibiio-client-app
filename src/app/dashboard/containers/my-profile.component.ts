@@ -11,15 +11,15 @@ import { MyProfileService } from '../services/my-profile.service';
   templateUrl: 'my-profile.component.html'})
 
 export class MyProfileComponent {
-    profileData: any;
+    myProfile: any;
 
     constructor(private myProfileService: MyProfileService,
                 private activatedRoute: ActivatedRoute){}
 
     ngOnInit(){
         this.activatedRoute.data.subscribe((data) => {
-            this.profileData = data.myProfile
-            console.log("data", data)
+            this.myProfile = data.myProfile.user
+            console.log(this.myProfile.user);
         })
     }
 }

@@ -18,6 +18,5 @@ export class MyProfileResolver implements Resolve<any> {
                 console.log("resolver", this.service.getMyProfile())
                 return this.service.getMyProfile();
             }
-
-
 }
+

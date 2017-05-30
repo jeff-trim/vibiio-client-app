@@ -1,26 +1,20 @@
-
-<div class="box">
-  <div class="row between-sm" >
-    <div class="col-xs-12
-                col-sm-12
-                col-md-10
-                col-md-offset-1
-                center" >
-      <div class="row between-md" >
-        <div class="col-xs-12
-                    col-sm-6
-                    col-md-6
-                    profile-information">
-          <profile-information
-          [profileData]="profileData"></profile-information>
-        </div>
-        <div class="col-xs-12
-                    col-sm-6
-                    col-md-6
-                    profile-licensure">
-          <profile-licensure></profile-licensure>
-        </div>
-      </div>
-    </div>
+<h1 class="col-xs
+           col-md-offset-1
+           profile-title
+           pink">My profile</h1>
+<div class="flex" >
+  <div class="col-xs-12
+              col-sm-6
+              col-md-5
+              col-md-offset-1
+              profile-information" >
+    <profile-information
+      [myProfile]="myProfile" ></profile-information>
+  </div>
+  <div class="col-xs-12
+              col-sm-6
+              col-md-5
+              profile-licensure">
+    <profile-licensure></profile-licensure>
   </div>
 </div>
