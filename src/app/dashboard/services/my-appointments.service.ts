@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 import { Appointment } from '../models/appointment.interface';
 
-const MY_APPOINTMENTS_API: string = `${API_URL}/appointment_counts`;
+const MY_APPOINTMENTS_API: string = `${API_URL}/schedule/range`;
 
 @Injectable()
 export class MyAppointmentsService {

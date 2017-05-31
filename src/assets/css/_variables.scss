@@ -6,12 +6,14 @@ $white: #fff;
 $base-font: 'Montserrat', sans-serif;
 $copy-font: 'Open Sans', sans-serif;
 
-
+$xsmall: 32em;
 $small:  48em;
 $medium: 64em;
 $large: 75em;
 
-
+$small:  48em;
+$medium: 64em;
+$large: 75em;
 
 $azure: #00aded;
 $hot-pink: #e80989;
@@ -21,7 +23,7 @@ $greyish-brown: #585858;
 /* Text styles */
 
 @mixin h1-cyan {
-  color: $azure;
+  color: $blue;
   font-family: Montserrat;
   font-size: 38px;
   font-stretch: normal;
