@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'customer-profile',
@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['customer-profile.component.scss']
 })
 
-export class CustomerProfileComponent {}
+export class CustomerProfileComponent {
+    @Input()
+    appointment 
+}

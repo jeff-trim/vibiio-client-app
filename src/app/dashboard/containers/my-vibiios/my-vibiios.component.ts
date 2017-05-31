@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component';
+import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // Services
 import { CustomerProfileService } from '../../services/customer-profile.service';
@@ -16,9 +17,14 @@ import { TodaysVibiios } from '../../models/todays-vibiios.interface';
 })
 
 export class MyVibiiosComponent {
+    appointments: any
 
-  constructor() {}
+    constructor(private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {}
+    ngOnInit() {
+        this.activatedRoute.data.subscribe((data) => {
+            this.appointments = data.appointments.appointments
+        })
+    }
 
 }

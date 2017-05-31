@@ -4,7 +4,7 @@
               info-element
               between-xs
               bottom-xs">
-    <h2>Mark Mueller</h2>
+    <h2>{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h2>
     <img src="../../../../assets/images/inactive.svg">
     <span class="pink-underline"></span>
   </div>
@@ -20,7 +20,7 @@
                   between-xs
                   bottom-xs" >
         <span class="label">Email</span>
-        <span class="value end-xs">mark.mueller@gmail.com</span>
+        <span class="value end-xs">{{ appointment.user.email }}</span>
         <span class="pink-underline"></span>
       </div>
 
@@ -29,7 +29,7 @@
                 between-xs
                 bottom-xs" >
       <span class="label">Phone Number</span>
-      <span class="value end-xs">(123) 456-7890</span>
+      <span class="value end-xs">{{ appointment.user.phone }}</span>
       <span class="pink-underline"></span>
     </div>
 
@@ -38,7 +38,7 @@
                 between-xs
                 bottom-xs" >
       <span class="label">Address</span>
-      <span class="value end-md">525 NW 1st Ave</span>
+      <span class="value end-md">{{ appointment.address.address_one}}</span>
       <span class="pink-underline"></span>
     </div>
 
@@ -47,7 +47,7 @@
                 between-xs
                 bottom-xs" >
       <span class="label">Zip Code</span>
-      <span class="value end-md">33301</span>
+      <span class="value end-md">{{ appointment.address.zip }}</span>
       <span class="pink-underline"></span>
     </div>
 
@@ -56,7 +56,7 @@
                 between-xs
                 bottom-xs" >
       <span class="label">Provider</span>
-      <span class="value end-md">Sawgrass Mutual</span>
+      <span class="value end-md">{{ appointment.insurance_policy.carrier }}</span>
       <span class="pink-underline"></span>
     </div>
 
@@ -65,7 +65,7 @@
                 between-xs
                 bottom-xs" >
       <span class="label">Policy Number</span>
-      <span class="value end-md">1234567890</span>
+      <span class="value end-md">{{ appointment.insurance_policy.policy_number }}</span>
       <span class="pink-underline"></span>
     </div>
   </div>
@@ -88,7 +88,7 @@
               between-xs
               bottom-xs" >
     <span class="label">Vibiio Start Time</span>
-    <span class="value end-md">9 AM</span>
+    <span class="value end-md">{{ appointment.scheduled_datetime | date: 'shortTime' }}</span>
     <span class="pink-underline"></span>
   </div>
 
@@ -104,8 +104,7 @@
               row
               between-xs
               bottom-xs">
-    <p>A tree fell on my house during a storm, damging
-      the roof and the contents of my living/dining room
+    <p>{{ appointment.vibiio.description }}
     </p>
   </div>
 </div>

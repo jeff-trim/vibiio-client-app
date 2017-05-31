@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 import { CustomerProfile } from '../models/customer-profile.interface';
 
-const CUSTOMER_PROFILE_API: string = `${API_URL}/TBD`;
+const CUSTOMER_PROFILE_API: string = `${API_URL}/schedule/range`;
 
 @Injectable()
 export class CustomerProfileService {

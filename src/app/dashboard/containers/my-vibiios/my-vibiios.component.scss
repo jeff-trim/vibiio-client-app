@@ -6,7 +6,4 @@
 /deep/ .flex {
     display: flex;
     flex-direction: column;
-    @media(min-width: $small){
-        flex-direction: row;
-    }
 }
