@@ -1,8 +1,19 @@
 @import '../../../../assets/css/_variables.scss';
 
+.flex {
+    display: flex;
+    flex-direction: column;
+    @media(min-width: $small){
+        flex-direction: row;
+    }
+}
+
 .customer-profile-container {
   margin-right: 1.1rem;
   margin-left: 1.1rem;
+}
+
+.profile-column {
 }
 
 h2 {

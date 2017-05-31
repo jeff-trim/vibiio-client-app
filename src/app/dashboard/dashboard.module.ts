@@ -36,17 +36,20 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
     resolve: { vibiio: DashboardResolver,
                sidebarSchedule: SidebarScheduleResolver,
-               sidebarCustomerStatuses: SidebarCustomerResolver }
-  },
-  {
-    path: 'my-vibiios',
-      component: MyVibiiosComponent,
-      resolve: { sidebarCustomerStatuses: SidebarCustomerResolver },
+               sidebarCustomerStatuses: SidebarCustomerResolver
+             },
       children: [
           { path: 'my_profile',
             component: MyProfileComponent,
             resolve: {
                myProfile: MyProfileResolver
+            }
+          },
+          {
+            path: 'my-vibiios',
+            component: MyVibiiosComponent,
+            resolve: {
+                sidebarCustomerStatuses: SidebarCustomerResolver
             }
           }
       ]
