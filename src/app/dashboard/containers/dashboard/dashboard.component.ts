@@ -3,9 +3,9 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 
-// Components
-import { SidebarComponent } from './../sidebar/sidebar.component';
+// Containers
 import { MyProfileComponent } from '../my-profile/my-profile.component';
+import { SidebarComponent } from './../sidebar/sidebar.component';
 
 // Models
 import { Vibiio } from '../../models/vibiio.interface';

@@ -3,79 +3,37 @@
   <div class="long-pink-underline" ></div>
 </div>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs" >
-    <span class="label">Name</span>
-    <span class="value end-xs">{{ myProfile.first_name }} {{myProfile.last_name}}</span>
-    <span class="pink-underline" ></span>
-</div>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs" >
-  <span class="label">Company</span>
-  <span class="value end-md">{{ myProfile.company }}</span>
-  <span class="pink-underline" ></span>
-</div>
+<key-value [key]="'First Name'"
+           [value]="myProfile.first_name"></key-value>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs" >
-  <span class="label">Phone Number</span>
-  <span class="value end-md">{{ myProfile.phone }}</span>
-  <div class="pink-underline" ></div>
-</div>
+<key-value [key]="'Last Name'"
+           [value]="myProfile.last_name" ></key-value>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs" >
-  <span class="label">Address</span>
-  <span class="value end-md">{{myProfile.address.address_one }}</span>
-  <div class="pink-underline" ></div>
-</div>
+<key-value [key]="'Company'"
+           [value]="myProfile.company"></key-value>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs"
-     *ngIf="myProfile.address.adress_two">
-  <span class="label">Address Two</span>
-  <span class="value end-md">{{myProfile.address.address_two }}</span>
-  <div class="pink-underline" ></div>
-</div>
+<key-value [key]="'Phone Number'"
+           [value]="myProfile.phone_number"></key-value>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs" >
-  <span class="label">City</span>
-  <span class="value end-md">{{myProfile.address.city }}</span>
-  <div class="pink-underline" ></div>
-</div>
+<key-value [key]="'Address'"
+           [value]="myProfile.address.address_one"></key-value>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs" >
-  <span class="label">State</span>
-  <span class="value end-md">{{myProfile.address.state }}</span>
-  <div class="pink-underline" ></div>
-</div>
+<key-value *ngIf="myProfile.address.address_two"
+           [key]="'Address Two'"
+           [value]="myProfile.address.address_one"></key-value>
 
-<div class="info-element
-            row
-            between-xs
-            bottom-xs" >
-  <span class="label">Zip</span>
-  <span class="value end-md">{{ myProfile.address.zip}}</span>
-  <div class="pink-underline" ></div>
-</div>
+<key-value [key]="'City'"
+           [value]="myProfile.address.city"></key-value>
+
+<key-value [key]="'State'"
+           [value]="myProfile.address.state"></key-value>
+
+<key-value [key]="'Zip'"
+           [value]="myProfile.address.zip"></key-value>
 
 <div class="download
-            pink">Download Signed Agreement <img src="../../../../assets/images/download.svg"
-                                            class="arrow"></div>
+            pink">Download Signed Agreement
+  <img src="../../../../assets/images/download.svg"
+       class="arrow">
+</div>

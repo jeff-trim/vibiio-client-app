@@ -12,6 +12,7 @@ import { SidebarComponent } from './containers/sidebar/sidebar.component';
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
 import { InsurancePolicyComponent } from './components/insurance-policy/insurance-policy.component';
+import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
@@ -61,6 +62,7 @@ const dashboardRoutes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
+    KeyValueComponent,
     SidebarComponent,
     SidebarScheduleComponent,
     SidebarCustomerComponent,
@@ -68,8 +70,8 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-      ProfileLicensureComponent,
-      InsurancePolicyComponent
+    ProfileLicensureComponent,
+    InsurancePolicyComponent
   ],
   imports: [
     CommonModule,
@@ -79,8 +81,8 @@ const dashboardRoutes: Routes = [
   exports: [
     DashboardComponent,
     SidebarComponent,
-      MyVibiiosComponent,
-      MyProfileComponent
+    MyVibiiosComponent,
+    MyProfileComponent
   ],
   providers: [
     DashboardResolver,

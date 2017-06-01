@@ -9,72 +9,58 @@
     <span class="pink-underline"></span>
   </div>
 </div>
+
+
 <div class="flex" >
   <div class="col-xs-12
               col-sm-6
               col-md-5
               col-md-offset-1
               profile-information">
-      <div class="info-element
-                  row
-                  between-xs
-                  bottom-xs" >
-        <span class="label">Email</span>
-        <span class="value end-xs">{{ appointment.user.email }}</span>
-        <span class="pink-underline"></span>
-      </div>
 
-    <div class="info-element
-                row
-                between-xs
-                bottom-xs" >
-      <span class="label">Phone Number</span>
-      <span class="value end-xs">{{ appointment.user.phone }}</span>
-      <span class="pink-underline"></span>
-    </div>
+    <key-value [key]="'Email'"
+               [value]="appointment.user.email"></key-value>
 
-    <div class="info-element
-                row
-                between-xs
-                bottom-xs" >
-      <span class="label">Address</span>
-      <span class="value end-md">{{ appointment.address.address_one}}</span>
-      <span class="pink-underline"></span>
-    </div>
+    <key-value [key]="'Phone Number'"
+               [value]="appointment.user.phone"></key-value>
 
-    <div class="info-element
-                row
-                between-xs
-                bottom-xs" >
-      <span class="label">Zip Code</span>
-      <span class="value end-md">{{ appointment.address.zip }}</span>
-      <span class="pink-underline"></span>
-    </div>
-    <insurance-policy *ngFor="let policy of appointment.insurance_policy"
-                      [policy]="policy"></insurance-policy>
+    <key-value [key]="'Address'"
+               [value]="appointment.address.address_one"></key-value>
+
+    <key-value *ngIf="appointment.address.address_two"
+               [key]="'Address Two'"
+               [value]="appointment.address.address_two"></key-value>
+
+    <key-value [key]="'City'"
+               [value]="appointment.address.city"></key-value>
+
+    <key-value [key]="'State'"
+               [value]="appointment.address.state"></key-value>
+
+    <key-value [key]="'Zip'"
+               [value]="appointment.address.zip"></key-value>
+
+    <span *ngFor="let policy of appointment.insurance_policy">
+
+      <key-value [key]="'Carrier'"
+                 [value]="policy.carrier"></key-value>
+
+      <key-value [key]="'Policy Number'"
+                 [value]="policy.policy_number"></key-value>
+    </span>
+
   </div>
   <div class="col-xs-12
               col-sm-6
               col-md-5
               col-md-offset-1
               profile-information">
-  <div class="info-element
-              row
-              between-xs
-              bottom-xs" >
-    <span class="label">Claim ID</span>
-    <span class="value end-md">#454787</span>
-    <span class="pink-underline"></span>
-  </div>
+    <key-value [key]="'Claim ID'"
+               [value]="'12345'"></key-value>
 
-  <div class="info-element
-              row
-              between-xs
-              bottom-xs" >
-    <span class="label">Vibiio Start Time</span>
-    <span class="value end-md">{{ appointment.scheduled_datetime | date: 'shortTime' }}</span>
-    <span class="pink-underline"></span>
-  </div>
+    <key-value [key]="'Vibiio Start Time'"
+               [value]="appointment.scheduled_datetime | date: 'shortTime'"></key-value>
+
 
   <div class="info-element
               last-info-element
@@ -88,7 +74,6 @@
               row
               between-xs
               bottom-xs">
-    <p>{{ appointment.vibiio.description }}
-    </p>
+    <p>{{ appointment.vibiio.description }}</p>
   </div>
 </div>
