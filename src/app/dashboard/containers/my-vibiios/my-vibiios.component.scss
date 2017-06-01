@@ -7,3 +7,8 @@
     display: flex;
     flex-direction: column;
 }
+
+/deep/ .jcf-range {
+    width: 90%;
+    margin: 0 auto;
+}

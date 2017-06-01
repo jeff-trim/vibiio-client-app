@@ -20,12 +20,17 @@ import { TodaysVibiios } from '../../models/todays-vibiios.interface';
 
 export class MyVibiiosComponent {
     appointments: any
+    rangeMin: any
+    rangeMax: any
 
     constructor(private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.appointments = data.appointments.appointments
+            this.rangeMin = this.appointments[0].scheduled_datetime
+            console.log(this.rangeMin)
+            this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
         })
     }
 
