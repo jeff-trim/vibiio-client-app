@@ -16,6 +16,7 @@ import { ResponseErrorService } from './services/response-error.service';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
+import { NouisliderModule } from 'ng2-nouislider';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 
@@ -29,11 +30,12 @@ import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/j
     CommonModule,
 
     // Custom Modules
-    AppRoutingModule,
-    DashboardModule,
-    LoginModule,
+      AppRoutingModule,
+      DashboardModule,
+      LoginModule,
       PasswordResetModule,
-      JcfModule
+      JcfModule,
+      NouisliderModule
   ],
   providers: [
     AuthService,

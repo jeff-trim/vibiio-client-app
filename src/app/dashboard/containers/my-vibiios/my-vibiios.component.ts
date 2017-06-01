@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // components
@@ -20,17 +20,22 @@ import { TodaysVibiios } from '../../models/todays-vibiios.interface';
 
 export class MyVibiiosComponent {
     appointments: any
-    rangeMin: any
-    rangeMax: any
+    rangeMin: any = 0
+    rangeMax: any = 23
+    range = [0,24]
 
     constructor(private activatedRoute: ActivatedRoute) {}
+
+    onChange(value){
+        console.log(value)
+        this.range = value
+    }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.appointments = data.appointments.appointments
-            this.rangeMin = this.appointments[0].scheduled_datetime
-            console.log(this.rangeMin)
-            this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
+            // this.rangeMin = this.appointments[0].scheduled_datetime
+            // this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
         })
     }
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http'
 import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
-
+import { NouisliderModule } from 'ng2-nouislider';
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -71,13 +71,14 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-    ProfileLicensureComponent
+      ProfileLicensureComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
       HttpModule,
-      JcfModule
+      JcfModule,
+      NouisliderModule
   ],
   exports: [
     DashboardComponent,

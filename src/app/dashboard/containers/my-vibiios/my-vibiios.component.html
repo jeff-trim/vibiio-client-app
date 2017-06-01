@@ -12,11 +12,12 @@
     <div class="range-slider
                 col-xs-12
                 col-md-offset-1" >
-      <input type="range"
-             value='rangeMin, rangeMax'
-             data-jcf='{ "range": "all" }'
-             jcf
-             multiple />
+      <nouislider [connect]="true"
+                  [min]="0"
+                  [max]="23"
+                  [step]=".25"
+                  [(ngModel)]="range"
+                  (change)="onChange($event)"></nouislider>
     </div>
     <div class="profile-information">
        <customer-profile *ngFor="let appointment of appointments"
@@ -24,4 +25,3 @@
     </div>
   </div>
 </div>
-
