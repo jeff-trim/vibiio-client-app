@@ -9,6 +9,13 @@
     💁 You have 1 vibiio scheduled Today–fill up your schedule by choosing vibiios below.
   </p>
   <div class="flex" >
+    <div class="range-slider" >
+      <input type="range"
+             value='30, 80'
+             data-jcf='{ "range": "all" }'
+             jcf
+             multiple />
+    </div>
     <div class="profile-information">
        <customer-profile *ngFor="let appointment of appointments"
        [appointment]="appointment"></customer-profile>

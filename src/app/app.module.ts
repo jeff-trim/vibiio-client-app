@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
 import { PasswordResetModule } from './password-reset/password-reset.module';
+import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PasswordResetModule } from './password-reset/password-reset.module';
     AppRoutingModule,
     DashboardModule,
     LoginModule,
-    PasswordResetModule
+      PasswordResetModule,
+      JcfModule
   ],
   providers: [
     AuthService,

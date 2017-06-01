@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http'
+import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
+
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -74,7 +76,8 @@ const dashboardRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
-    HttpModule
+      HttpModule,
+      JcfModule
   ],
   exports: [
     DashboardComponent,

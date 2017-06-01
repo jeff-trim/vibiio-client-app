@@ -208,6 +208,13 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular2-jcf-directive@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/angular2-jcf-directive/-/angular2-jcf-directive-0.1.1.tgz#1ec35bad741ea8beae3e8e56daba55cbb3d816b0"
+  dependencies:
+    jcf "^1.2.3"
+    jquery "^3.2.1"
+
 ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -2435,11 +2442,19 @@ jasminewd2@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.0.0.tgz#10aacd2c588c1ceb6a0b849f1a7f3f959f777c91"
 
+jcf@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/jcf/-/jcf-1.2.3.tgz#9d64dc3c3d0b628e634a96ae28dfe1056ed670dc"
+
 jodid25519@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/jodid25519/-/jodid25519-1.0.2.tgz#06d4912255093419477d425633606e0e90782967"
   dependencies:
     jsbn "~0.1.0"
+
+jquery@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
 js-base64@^2.1.5, js-base64@^2.1.9:
   version "2.1.9"

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { InsurancePolicyComponent } from '../insurance-policy/insurance-policy.component';
 
 @Component({
     selector: 'profile-information',
