@@ -71,33 +71,7 @@
     letter-spacing: normal;
 }
 
-/deep/ .info-element {
-    margin: 0px 0 20px 0;
-    position: relative;
-    padding-bottom: 10px;
-
-    .label {
-        font-family: $base-font;
-        font-size: 1.65rem;
-        font-weight: 700;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
-        color: $greyish-brown;
-    }
-
-    .value {
-        font-family: $copy-font;
-        font-size: 1.45rem;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
-        color: $greyish-brown;
-    }
-}
-
-/deep/ .pink-underline {
+.pink-underline {
     width: 7%;
     position: absolute;
     bottom: 0;

@@ -11,7 +11,6 @@ import { SidebarComponent } from './containers/sidebar/sidebar.component';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
-import { InsurancePolicyComponent } from './components/insurance-policy/insurance-policy.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
@@ -70,8 +69,7 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-    ProfileLicensureComponent,
-    InsurancePolicyComponent
+    ProfileLicensureComponent
   ],
   imports: [
     CommonModule,

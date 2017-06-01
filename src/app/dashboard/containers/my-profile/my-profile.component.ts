@@ -3,7 +3,6 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 //components
 import { KeyValueComponent } from '../../components/key-value/key-value.component';
-import { InsurancePolicyComponent } from  '../../components/insurance-policy/insurance-policy.component';
 import { ProfileInformationComponent } from '../../components/profile-information/profile-information.component';
 import { ProfileLicensureComponent } from '../../components/profile-licensure/profile-licensure.component';
 
