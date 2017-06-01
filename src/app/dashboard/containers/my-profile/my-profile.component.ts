@@ -5,6 +5,7 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { KeyValueComponent } from '../../components/key-value/key-value.component';
 import { ProfileInformationComponent } from '../../components/profile-information/profile-information.component';
 import { ProfileLicensureComponent } from '../../components/profile-licensure/profile-licensure.component';
+import { MomentModule } from 'angular2-moment';
 
 // services
 import { MyProfileService } from '../../services/my-profile.service';

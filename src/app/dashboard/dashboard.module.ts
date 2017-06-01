@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http'
 import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
+import { MomentModule } from 'angular2-moment';
 import { NouisliderModule } from 'ng2-nouislider';
 
 // Containers
@@ -78,7 +79,8 @@ const dashboardRoutes: Routes = [
     RouterModule.forChild(dashboardRoutes),
       HttpModule,
       JcfModule,
-      NouisliderModule
+      NouisliderModule,
+      MomentModule
   ],
   exports: [
     DashboardComponent,

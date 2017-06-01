@@ -27,15 +27,14 @@ export class MyVibiiosComponent {
     constructor(private activatedRoute: ActivatedRoute) {}
 
     onChange(value){
-        console.log(value)
         this.range = value
     }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.appointments = data.appointments.appointments
-            // this.rangeMin = this.appointments[0].scheduled_datetime
-            // this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
+            this.rangeMin = this.appointments[0].scheduled_datetime
+            this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
         })
     }
 
