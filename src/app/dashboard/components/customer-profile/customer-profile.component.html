@@ -60,7 +60,7 @@
                [value]="'12345'"></key-value>
 
     <key-value [key]="'Vibiio Start Time'"
-               [value]="appointment.scheduled_datetime | amDateFormat:'hh:mmA'"></key-value>
+               [value]="(appointment.scheduled_datetime | amFromUnix) | amDateFormat:'hh:mmA'"></key-value>
 
 
   <div class="info-element
