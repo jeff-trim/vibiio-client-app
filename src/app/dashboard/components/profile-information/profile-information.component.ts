@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { InsurancePolicyComponent } from '../insurance-policy/insurance-policy.component';
 
 @Component({
     selector: 'profile-information',
@@ -9,7 +10,4 @@ import { Component, Input } from '@angular/core';
 export class ProfileInformationComponent  {
     @Input()
     myProfile
-
-
-
 }

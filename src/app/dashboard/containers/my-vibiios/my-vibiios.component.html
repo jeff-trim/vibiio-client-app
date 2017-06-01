@@ -5,12 +5,13 @@
   <h1 class="col-xs
             col-md-offset-1
             pink">Welcome Jane!</h1>
-  <p class="col-md-offset-1">💁 You have 1 vibiio scheduled Today–fill up your schedule by choosing vibiios below. </p>
+  <p class="col-md-offset-1">
+    💁 You have 1 vibiio scheduled Today–fill up your schedule by choosing vibiios below.
+  </p>
   <div class="flex" >
     <div class="profile-information">
-      <customer-profile
-        *ngFor="let appointment of appointments"
-        [appointment]="appointment"></customer-profile>
+       <customer-profile *ngFor="let appointment of appointments"
+       [appointment]="appointment"></customer-profile>
     </div>
   </div>
 </div>

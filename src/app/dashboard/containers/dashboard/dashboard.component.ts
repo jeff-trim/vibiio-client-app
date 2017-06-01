@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 // Components
 import { SidebarComponent } from './../sidebar/sidebar.component';
-import { MyProfileComponent } from '../my-profile.component';
+import { MyProfileComponent } from '../my-profile/my-profile.component';
 
 // Models
 import { Vibiio } from '../../models/vibiio.interface';

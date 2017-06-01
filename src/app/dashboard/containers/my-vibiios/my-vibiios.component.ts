@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+
+// components
+import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component';
 
 // Services
 import { CustomerProfileService } from '../../services/customer-profile.service';

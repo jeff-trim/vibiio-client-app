@@ -50,24 +50,8 @@
       <span class="value end-md">{{ appointment.address.zip }}</span>
       <span class="pink-underline"></span>
     </div>
-
-    <div class="info-element
-                row
-                between-xs
-                bottom-xs" >
-      <span class="label">Provider</span>
-      <span class="value end-md">{{ appointment.insurance_policy.carrier }}</span>
-      <span class="pink-underline"></span>
-    </div>
-
-    <div class="info-element
-                row
-                between-xs
-                bottom-xs" >
-      <span class="label">Policy Number</span>
-      <span class="value end-md">{{ appointment.insurance_policy.policy_number }}</span>
-      <span class="pink-underline"></span>
-    </div>
+    <insurance-policy *ngFor="let policy of appointment.insurance_policy"
+                      [policy]="policy"></insurance-policy>
   </div>
   <div class="col-xs-12
               col-sm-6
