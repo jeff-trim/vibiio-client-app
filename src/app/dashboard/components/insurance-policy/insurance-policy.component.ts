@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'insurance-policy',
-  template: `
+    selector: 'insurance-policy',
+    styleUrls: ['insurance-policy.component.scss'],
+    template: `
 <div class="info-element
             row
             between-xs
@@ -16,7 +17,7 @@ import { Component, Input } from '@angular/core';
             row
             between-xs
             bottom-xs" >
-  <span class="label">Provider</span>
+  <span class="label">Policy Number</span>
   <span class="value end-md">{{ policy.policy_number }}</span>
   <span class="pink-underline"></span>
 </div>
