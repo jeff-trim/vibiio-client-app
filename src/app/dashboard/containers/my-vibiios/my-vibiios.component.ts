@@ -1,5 +1,6 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { MomentModule } from 'angular2-moment';
 
 // components
 import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component';
@@ -20,14 +21,18 @@ import { TodaysVibiios } from '../../models/todays-vibiios.interface';
 
 export class MyVibiiosComponent {
     appointments: any
-    rangeMin: any = 0
-    rangeMax: any = 23
-    range = [0,24]
+    range
+    rangeMin: number
+    rangeMax: number
+
+    @Output()
+    rangeChange: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(private activatedRoute: ActivatedRoute) {}
 
     onChange(value){
         this.range = value
+        this.rangeChange.emit(this.range)
     }
 
     ngOnInit() {
@@ -35,6 +40,7 @@ export class MyVibiiosComponent {
             this.appointments = data.appointments.appointments
             this.rangeMin = this.appointments[0].scheduled_datetime
             this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
+            this.range = [this.rangeMin, this.rangeMax]
         })
     }
 

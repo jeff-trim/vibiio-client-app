@@ -12,16 +12,22 @@
     <div class="range-slider
                 col-xs-12
                 col-md-offset-1" >
+      Range: {{ (range[0] | amFromUnix) | amDateFormat:'hh:mmA'  }}
+      {{ (range[1] | amFromUnix) | amDateFormat:'hh:mmA'  }}
+
       <nouislider [connect]="true"
-                  [min]="0"
-                  [max]="23"
-                  [step]=".25"
+                  [min]="rangeMin"
+                  [max]="rangeMax"
+                  [step]="900"
                   [(ngModel)]="range"
                   (change)="onChange($event)"></nouislider>
     </div>
     <div class="profile-information">
-       <customer-profile *ngFor="let appointment of appointments"
-       [appointment]="appointment"></customer-profile>
+      <ng-container *ngFor="let appointment of appointments" >
+        <customer-profile *ngIf="appointment.scheduled_datetime >= range[0] &&
+                                 appointment.scheduled_datetime <= range[1]"
+                          [appointment]="appointment"></customer-profile>
+      </ng-container>
     </div>
   </div>
 </div>
