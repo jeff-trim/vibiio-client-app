@@ -34,11 +34,11 @@ export class MyVibiiosComponent {
         this.range = value
     }
 
-    removeAppointment(appointment: Appointment){
+    updateAppointment(appointment: Appointment){
+        console.log("component level", appointment)
         this.myDayService.updateMyDay(appointment.id, appointment.current_user)
             .subscribe(response => console.log(response))
     }
-
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.appointments = data.appointments.appointments

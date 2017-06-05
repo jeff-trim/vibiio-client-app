@@ -8,7 +8,7 @@
     <img (click)="claimAppointment(appointment)"
          src="../../../../assets/images/inactive.svg"
          *ngIf="appointment.vibiiographer_id === null" >
-    <img (click)="claimAppointment(appointment)"
+    <img (click)="releaseAppointment(appointment)"
          src="../../../../assets/images/selected.svg"
          *ngIf="appointment.vibiiographer_id !== null" >
     <span class="pink-underline"></span>

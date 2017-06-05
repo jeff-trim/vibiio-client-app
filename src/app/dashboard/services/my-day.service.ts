@@ -14,9 +14,6 @@ export class MyDayService {
     constructor(private http: Http){}
 
     updateMyDay(appointmentId: number, currentUser: number): Observable<any>{
-        if(currentUser !== null){
-            currentUser = null
-        }
         return this.http
             .patch(`${MY_DAY_API}/${appointmentId}`, { vibiiographer_id: currentUser})
             .map((response: Response) => response.status)

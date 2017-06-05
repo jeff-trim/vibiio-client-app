@@ -15,9 +15,19 @@ export class CustomerProfileComponent {
     appointment: Appointment
 
     @Output()
-    removeAppointment: EventEmitter<Appointment> = new EventEmitter<Appointment>()
+    updateAppointment: EventEmitter<Appointment> = new EventEmitter<Appointment>()
+
+    releaseAppointment(appointment: Appointment){
+        // sets current user to null so when the record
+        // is updated in the api we reset the value to nil
+        // this in essence acts as deleting the vibiiographer
+        // from the current appointment
+        appointment.current_user = null
+        console.log(appointment)
+        this.updateAppointment.emit(appointment)
+    }
 
     claimAppointment(appointment: Appointment){
-        this.removeAppointment.emit(appointment)
+        this.updateAppointment.emit(appointment)
     }
 }
