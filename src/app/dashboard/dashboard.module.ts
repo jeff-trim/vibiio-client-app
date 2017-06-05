@@ -32,6 +32,7 @@ import { MyProfileService } from './services/my-profile.service';
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service';
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
+import { MyDayService } from './services/my-day.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -93,13 +94,14 @@ const dashboardRoutes: Routes = [
     DashboardService,
     VideoChatTokenService,
     MyAppointmentsService,
-      MyAppointmentsResolver,
+    MyAppointmentsResolver,
     CustomerStatusService,
     SidebarCustomerResolver,
     CustomerProfileService,
     TodaysVibiiosService,
     MyProfileResolver,
-    MyProfileService
+    MyProfileService,
+    MyDayService
   ]
 })
 

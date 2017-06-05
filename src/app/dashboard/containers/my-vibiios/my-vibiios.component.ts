@@ -8,6 +8,7 @@ import { CustomerProfileComponent } from '../../components/customer-profile/cust
 // Services
 import { CustomerProfileService } from '../../services/customer-profile.service';
 import { TodaysVibiiosService } from '../../services/todays-vibiios.service';
+import { MyDayService } from '../../services/my-day.service'
 
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
@@ -26,10 +27,16 @@ export class MyVibiiosComponent {
     rangeMin: number
     rangeMax: number
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+    constructor(private activatedRoute: ActivatedRoute,
+                private myDayService: MyDayService) {}
 
     onChange(value){
         this.range = value
+    }
+
+    removeAppointment(appointment: Appointment){
+        this.myDayService.updateMyDay(appointment)
+            .subscribe(response => console.log(response))
     }
 
     ngOnInit() {

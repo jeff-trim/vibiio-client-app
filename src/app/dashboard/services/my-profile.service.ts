@@ -14,11 +14,8 @@ export class MyProfileService {
   constructor(private http: Http) {}
 
     getMyProfile(): Observable<any> {
-        console.log("profile service pre api");
-        console.log( "api response", this.http
-                .get(MY_PROFILE_API)
-                     .map((response: Response) => response.json()));
-    return this.http
+
+        return this.http
            .get(MY_PROFILE_API)
            .map((response: Response) => response.json())
   }

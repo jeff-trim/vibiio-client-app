@@ -20,5 +20,5 @@ export class KeyValueComponent {
     key: string
 
     @Input()
-    value: string
+    value: any
 }

@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+// interfaces
+import { Appointment } from '../../models/appointment.interface';
+
 
 @Component({
     selector: 'customer-profile',
@@ -8,5 +12,12 @@ import { Component, Input } from '@angular/core';
 
 export class CustomerProfileComponent {
     @Input()
-    appointment: any
+    appointment: Appointment
+
+    @Output()
+    removeAppointment: EventEmitter<Appointment> = new EventEmitter<Appointment>()
+
+    claimAppointment(appointment: Appointment){
+        this.removeAppointment.emit(appointment)
+    }
 }

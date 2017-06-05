@@ -24,9 +24,11 @@
     </div>
     <div class="profile-information">
       <ng-container *ngFor="let appointment of appointments" >
-        <customer-profile *ngIf="appointment.scheduled_datetime >= range[0] &&
-                                 appointment.scheduled_datetime <= range[1]"
-                          [appointment]="appointment"></customer-profile>
+        <customer-profile [appointment]="appointment"
+                          (appointmentId)="appointmentId"
+                          (removeAppointment)="removeAppointment($event)"
+                          *ngIf="appointment.scheduled_datetime >= range[0] &&
+                          appointment.scheduled_datetime <= range[1]"></customer-profile>
       </ng-container>
     </div>
   </div>
