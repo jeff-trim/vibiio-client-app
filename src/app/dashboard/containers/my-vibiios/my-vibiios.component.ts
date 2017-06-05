@@ -35,7 +35,7 @@ export class MyVibiiosComponent {
     }
 
     removeAppointment(appointment: Appointment){
-        this.myDayService.updateMyDay(appointment)
+        this.myDayService.updateMyDay(appointment.id, appointment.current_user)
             .subscribe(response => console.log(response))
     }
 

@@ -13,12 +13,12 @@ export class MyDayService {
     apt_params
     constructor(private http: Http){}
 
-    updateMyDay(appointment: Appointment): Observable<any>{
-        const apt_params = { vibiiographer_id: appointment.current_user}
-        console.log("click", `${MY_DAY_API}${appointment.id}`)
-        console.log("vibiiographer_id", `${appointment.current_user}`)
+    updateMyDay(appointmentId: number, currentUser: number): Observable<any>{
+        if(currentUser !== null){
+            currentUser = null
+        }
         return this.http
-            .patch(`${MY_DAY_API}/${appointment.id}`, apt_params)
+            .patch(`${MY_DAY_API}/${appointmentId}`, { vibiiographer_id: currentUser})
             .map((response: Response) => response.status)
             .catch( (error: any) => Observable.throw(error) );
     }
