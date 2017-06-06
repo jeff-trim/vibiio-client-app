@@ -29,6 +29,7 @@ export class MyVibiiosComponent {
     rangeMax: number
     myVibiioCount: number
     vibiiographerName: string
+    sliderVisibility: boolean = true
 
     @Output()
     updateSidebar: EventEmitter<any> = new EventEmitter<any>()
@@ -69,11 +70,11 @@ export class MyVibiiosComponent {
             })
     }
 
-    // passes value to sidebarMyVibiioSharedService which will be
-    // watched by the sidebar and update the sidebar schedule
-    sendToSidebar(response){
+    // toggles visibility of range slider
+    toggleSliderVisibility(){
+        this.sliderVisibility = !this.sliderVisibility
+        console.log(this.sliderVisibility)
     }
-
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {

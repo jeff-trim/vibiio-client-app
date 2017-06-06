@@ -9,13 +9,17 @@
     💁 You have {{ myVibiioCount }} vibiio scheduled Today–fill up your schedule by choosing vibiios below.
   </p>
   <div class="flex" >
+    <span class="sliderToggle
+                 col-xs-12
+                 col-md-offset-1
+                 pink-underline"
+          (click)="toggleSliderVisibility()">Filter Requested Vibiios</span>
+
     <div class="range-slider
                 col-xs-12
-                col-md-offset-1" >
-      Range: {{ (range[0] | amFromUnix) | amDateFormat:'hh:mmA'  }}
-      {{ (range[1] | amFromUnix) | amDateFormat:'hh:mmA'  }}
-
-      <nouislider [connect]="true"
+                col-md-offset-1"
+        *ngIf="sliderVisibility">
+            <nouislider [connect]="true"
                   [min]="rangeMin"
                   [max]="rangeMax"
                   [step]="900"
