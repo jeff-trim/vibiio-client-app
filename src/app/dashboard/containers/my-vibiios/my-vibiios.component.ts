@@ -35,7 +35,11 @@ export class MyVibiiosComponent {
                 private customerProfileService: CustomerProfileService,
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {}
 
+    // monitors changes in the slider, when changed
+    // it updates the range which in turn removes or
+    // adds appointments to the view
     onChange(value){
+        console.log("onchange", value)
         this.range = value
     }
 
@@ -44,25 +48,27 @@ export class MyVibiiosComponent {
     // the updated data once it returns
     updateAppointment(apt_obj){
         this.myDayService.updateMyDay(
-            apt_obj.appointment.id,
-            apt_obj.appointment.current_user
-        )
+                apt_obj.appointment.id,
+                apt_obj.appointment.current_user)
             .subscribe(response => {
+                this.updateMySchedule()
                 Object.assign(this.appointments[apt_obj.index], response.my_day)
-
-                            })
+            })
     }
 
+    // subscribes to response from myDayService and
+    // passes response to sendToSidebar
     updateMySchedule(){
         this.myDayService.getMyDay()
             .subscribe((response) => {
-                console.log(response)
-                response
+                console.log("udpateMySchedule")
+                this.sidebarMyVibiioSharedService.emitChange(response)
             })
-        // triggers shared service which in turn triggers and update
-        // at the sidebar container level
-        this.sidebarMyVibiioSharedService.updateSidebar()
+    }
 
+    // passes value to sidebarMyVibiioSharedService which will be
+    // watched by the sidebar and update the sidebar schedule
+    sendToSidebar(response){
     }
 
 

@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
-import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
-import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';
+import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component'
+import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component'
 
 // Services
-import { MyAppointmentsService } from '../../services/my-appointments.service';
-import { CustomerStatusService } from '../../services/customer-status.service';
+import { MyAppointmentsService } from '../../services/my-appointments.service'
+import { CustomerStatusService } from '../../services/customer-status.service'
+import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
 
 // Interfaces
-import { CustomerStatusCount } from '../../models/customer-status-count.interface';
-import { Appointment} from '../../models/appointment.interface';
+import { CustomerStatusCount } from '../../models/customer-status-count.interface'
+import { Appointment} from '../../models/appointment.interface'
 
 @Component({
     selector: 'app-sidebar',
@@ -24,13 +25,20 @@ export class SidebarComponent {
   customerCategoryVisibility: boolean = true;
   profileVisibility: boolean = true;
 
-  constructor(private appointmentsService: MyAppointmentsService,
-              private statusService: CustomerStatusService,
-              private activatedRoute: ActivatedRoute) {}
+    constructor(private appointmentsService: MyAppointmentsService,
+                private statusService: CustomerStatusService,
+                private activatedRoute: ActivatedRoute,
+                private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {
+        sidebarMyVibiioSharedService.changeEmitted$.subscribe(
+            text => {
+                console.log(text)
+                this.myScheduledVibiios = text.my_day
+            }
+        )
+    }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) =>{
-            console.log(data)
             this.myScheduledVibiios = data.sidebarMyDay.my_day
         })
 

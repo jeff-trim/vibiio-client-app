@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 import { RequestOptionsService } from './services/request-options.service';
 import { ResponseErrorService } from './services/response-error.service';
+import { SidebarMyVibiioSharedService } from './dashboard/services/sidebar-my-vibiio-shared.service'
 
 // Custom Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -40,7 +41,8 @@ import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/j
       NouisliderModule
   ],
   providers: [
-    AuthService,
+      AuthService,
+      SidebarMyVibiioSharedService,
     { provide: RequestOptions, useClass: RequestOptionsService },
     { provide: Http, useClass: ResponseErrorService }
   ],

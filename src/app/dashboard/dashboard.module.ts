@@ -27,6 +27,7 @@ import { DashboardService } from './services/dashboard.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
 import { MyProfileService } from './services/my-profile.service';
 import { MyDayService } from './services/my-day.service'
+import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service'
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 
@@ -105,7 +106,8 @@ const dashboardRoutes: Routes = [
     MyProfileResolver,
     MyProfileService,
     MyDayService,
-    MyDayResolver
+      MyDayResolver,
+      SidebarMyVibiioSharedService
   ]
 })
 

@@ -10,7 +10,6 @@ const MY_DAY_API: string = `${API_URL}/schedule/my_day/`
 
 @Injectable()
 export class MyDayService {
-    apt_params
     constructor(private http: Http){}
 
     updateMyDay(appointmentId: number, currentUser: number): Observable<any>{

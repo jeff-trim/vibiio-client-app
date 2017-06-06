@@ -17,5 +17,4 @@ import { Appointment } from '../../models/appointment.interface';
 export class SidebarScheduleComponent {
   @Input()
   vibiio: any;
-
 }
