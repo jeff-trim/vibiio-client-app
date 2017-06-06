@@ -5,10 +5,10 @@
               between-xs
               bottom-xs">
     <h2>{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h2>
-    <img (click)="claimAppointment(appointment)"
+    <img (click)="toggleAppointment(appointment)"
          src="../../../../assets/images/inactive.svg"
          *ngIf="appointment.vibiiographer_id === null" >
-    <img (click)="releaseAppointment(appointment)"
+    <img (click)="toggleAppointment(appointment)"
          src="../../../../assets/images/selected.svg"
          *ngIf="appointment.vibiiographer_id !== null" >
     <span class="pink-underline"></span>

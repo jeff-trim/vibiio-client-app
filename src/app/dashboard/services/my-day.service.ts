@@ -16,7 +16,7 @@ export class MyDayService {
     updateMyDay(appointmentId: number, currentUser: number): Observable<any>{
         return this.http
             .patch(`${MY_DAY_API}/${appointmentId}`, { vibiiographer_id: currentUser})
-            .map((response: Response) => response.status)
+            .map((response: Response) => response.json())
             .catch( (error: any) => Observable.throw(error) );
     }
 }

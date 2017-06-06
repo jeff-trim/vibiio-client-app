@@ -14,20 +14,22 @@ export class CustomerProfileComponent {
     @Input()
     appointment: Appointment
 
+    @Input()
+    index: number
+
     @Output()
-    updateAppointment: EventEmitter<Appointment> = new EventEmitter<Appointment>()
+    updateAppointment: EventEmitter<any> = new EventEmitter<any>()
 
-    releaseAppointment(appointment: Appointment){
-        // sets current user to null so when the record
-        // is updated in the api we reset the value to nil
-        // this in essence acts as deleting the vibiiographer
-        // from the current appointment
-        appointment.current_user = null
-        console.log(appointment)
-        this.updateAppointment.emit(appointment)
-    }
-
-    claimAppointment(appointment: Appointment){
-        this.updateAppointment.emit(appointment)
+    toggleAppointment(appointment: Appointment){
+        if(appointment.vibiiographer_id === null){
+            this.updateAppointment.emit({appointment: appointment, index: this.index })
+        } else {
+            // sets current user to null so when the record
+            // is updated in the api we reset the value to nil
+            // this in essence acts as deleting the vibiiographer
+            // from the current appointment
+            appointment.current_user = null
+            this.updateAppointment.emit({appointment: appointment, index: this.index })
+        }
     }
 }

@@ -23,8 +23,9 @@
                   (change)="onChange($event)"></nouislider>
     </div>
     <div class="profile-information">
-      <ng-container *ngFor="let appointment of appointments" >
+      <ng-container *ngFor="let appointment of appointments; let i = index" >
         <customer-profile [appointment]="appointment"
+                          [index]="i"
                           (appointmentId)="appointmentId"
                           (updateAppointment)="updateAppointment($event)"
                           *ngIf="appointment.scheduled_datetime >= range[0] &&

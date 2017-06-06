@@ -28,17 +28,32 @@ export class MyVibiiosComponent {
     rangeMax: number
 
     constructor(private activatedRoute: ActivatedRoute,
-                private myDayService: MyDayService) {}
+                private myDayService: MyDayService,
+                private customerProfileService: CustomerProfileService) {}
 
     onChange(value){
         this.range = value
     }
 
-    updateAppointment(appointment: Appointment){
-        console.log("component level", appointment)
-        this.myDayService.updateMyDay(appointment.id, appointment.current_user)
-            .subscribe(response => console.log(response))
+    // apt_obj will have 2 key-vals appointment with appointment data
+    // and index to know where in the appointments array we need to send
+    // the updated data once it returns
+    updateAppointment(apt_obj){
+        this.myDayService.updateMyDay(apt_obj.appointment.id, apt_obj.appointment.current_user)
+            .subscribe(response => {
+                Object.assign(this.appointments[apt_obj.index], response.my_day)
+            })
     }
+
+
+    updateMyDay(){
+        this.customerProfileService.getCustomerProfiles()
+                    .subscribe(response =>  {
+                        console.log(response)
+                        this.appointments = response
+                    })
+    }
+
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.appointments = data.appointments.appointments
