@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';
 
@@ -17,19 +18,21 @@ import { Appointment} from '../../models/appointment.interface';
 })
 
 export class SidebarComponent {
-  appointments: Appointment[];
+  myScheduledVibiios: any
   customersCategories: CustomerStatusCount[];
   scheduledVibiiosVisibility: boolean = false;
   customerCategoryVisibility: boolean = true;
   profileVisibility: boolean = true;
 
   constructor(private appointmentsService: MyAppointmentsService,
-              private statusService: CustomerStatusService) {}
+              private statusService: CustomerStatusService,
+              private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.appointmentsService
-      .getMyAppointments()
-      .subscribe((data: Appointment[]) => this.appointments = data);
+    ngOnInit() {
+        this.activatedRoute.data.subscribe((data) =>{
+            console.log(data)
+            this.myScheduledVibiios = data.sidebarMyDay.my_day
+        })
 
     this.statusService
       .getCustomerStatus()

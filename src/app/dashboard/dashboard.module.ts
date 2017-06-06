@@ -23,16 +23,19 @@ import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
 import { CustomerStatusService } from './services/customer-status.service';
-import { DashboardResolver } from './services/dashboard.resolver.service';
 import { DashboardService } from './services/dashboard.service';
-import { MyAppointmentsResolver } from './services/my-appointments.resolver.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
-import { MyProfileResolver } from './services/my-profile.resolver.service'
 import { MyProfileService } from './services/my-profile.service';
-import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service';
+import { MyDayService } from './services/my-day.service'
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
-import { MyDayService } from './services/my-day.service';
+
+// resolvers
+import { DashboardResolver } from './services/dashboard.resolver.service'
+import { MyAppointmentsResolver } from './services/my-appointments.resolver.service'
+import { MyDayResolver } from './services/my-day.resolver.service'
+import { MyProfileResolver } from './services/my-profile.resolver.service'
+import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -40,8 +43,8 @@ const dashboardRoutes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     resolve: { vibiio: DashboardResolver,
-               // sidebarSchedule: MyAppointmentsResolver,
-               sidebarCustomerStatuses: SidebarCustomerResolver
+               sidebarCustomerStatuses: SidebarCustomerResolver,
+               sidebarMyDay: MyDayResolver
              },
       children: [
           { path: 'my_profile',
@@ -101,7 +104,8 @@ const dashboardRoutes: Routes = [
     TodaysVibiiosService,
     MyProfileResolver,
     MyProfileService,
-    MyDayService
+    MyDayService,
+    MyDayResolver
   ]
 })
 

@@ -1,6 +1,5 @@
 <div class='sidebar '>
-  <div class="logo-container">
-  </div>
+  <div class="logo-container"></div>
 
   <div class="title-row"
       (click)='toggleScheduledVibiios($event)'>
@@ -13,6 +12,9 @@
         [class.active-arrow]='!scheduledVibiiosVisibility'>
     </div>
   </div>
+  <app-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
+                        [vibiio]="vibiio"
+                        [hidden]="scheduledVibiiosVisibility"></app-sidebar-schedule>
   <div class="title-row"
        (click)='toggleCustomerCategoryVisibility($event)'>
     <div class="title">
@@ -23,6 +25,7 @@
         [class.active-arrow]='!customerCategoryVisibility'>
     </div>
   </div>
+
   <app-sidebar-customer
     *ngFor="let customersCategory of customersCategories;"
     [category] = customersCategory

@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { MomentModule } from 'angular2-moment';
+import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
+import { MomentModule } from 'angular2-moment'
 
 // components
-import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component';
+import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component'
 
 // Services
-import { CustomerProfileService } from '../../services/customer-profile.service';
-import { TodaysVibiiosService } from '../../services/todays-vibiios.service';
+import { CustomerProfileService } from '../../services/customer-profile.service'
+import { TodaysVibiiosService } from '../../services/todays-vibiios.service'
 import { MyDayService } from '../../services/my-day.service'
-
+import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
 import { CustomerProfile } from '../../models/customer-profile.interface';
@@ -27,9 +27,13 @@ export class MyVibiiosComponent {
     rangeMin: number
     rangeMax: number
 
+    @Output()
+    updateSidebar: EventEmitter<any> = new EventEmitter<any>()
+
     constructor(private activatedRoute: ActivatedRoute,
                 private myDayService: MyDayService,
-                private customerProfileService: CustomerProfileService) {}
+                private customerProfileService: CustomerProfileService,
+                private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {}
 
     onChange(value){
         this.range = value
@@ -39,20 +43,28 @@ export class MyVibiiosComponent {
     // and index to know where in the appointments array we need to send
     // the updated data once it returns
     updateAppointment(apt_obj){
-        this.myDayService.updateMyDay(apt_obj.appointment.id, apt_obj.appointment.current_user)
+        this.myDayService.updateMyDay(
+            apt_obj.appointment.id,
+            apt_obj.appointment.current_user
+        )
             .subscribe(response => {
                 Object.assign(this.appointments[apt_obj.index], response.my_day)
+
+                            })
+    }
+
+    updateMySchedule(){
+        this.myDayService.getMyDay()
+            .subscribe((response) => {
+                console.log(response)
+                response
             })
+        // triggers shared service which in turn triggers and update
+        // at the sidebar container level
+        this.sidebarMyVibiioSharedService.updateSidebar()
+
     }
 
-
-    updateMyDay(){
-        this.customerProfileService.getCustomerProfiles()
-                    .subscribe(response =>  {
-                        console.log(response)
-                        this.appointments = response
-                    })
-    }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
