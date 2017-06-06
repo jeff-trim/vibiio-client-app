@@ -60,7 +60,8 @@ const dashboardRoutes: Routes = [
               resolve: {
                   appointments: MyAppointmentsResolver,
                   sidebarCustomerStatuses: SidebarCustomerResolver,
-                  sidebarMyDay: MyDayResolver
+                  sidebarMyDay: MyDayResolver,
+                  myProfile: MyProfileResolver
             }
           }
       ]

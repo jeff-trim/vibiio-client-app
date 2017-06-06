@@ -10,6 +10,7 @@ import { CustomerProfileService } from '../../services/customer-profile.service'
 import { TodaysVibiiosService } from '../../services/todays-vibiios.service'
 import { MyDayService } from '../../services/my-day.service'
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
+
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
 import { CustomerProfile } from '../../models/customer-profile.interface';
@@ -27,6 +28,7 @@ export class MyVibiiosComponent {
     rangeMin: number
     rangeMax: number
     myVibiioCount: number
+    vibiiographerName: string
 
     @Output()
     updateSidebar: EventEmitter<any> = new EventEmitter<any>()
@@ -81,6 +83,7 @@ export class MyVibiiosComponent {
             this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
             this.range = [this.rangeMin, this.rangeMax]
             this.myVibiioCount = data.sidebarMyDay.my_day.length
+            this.vibiiographerName = data.myProfile.user.first_name
         })
     }
 
