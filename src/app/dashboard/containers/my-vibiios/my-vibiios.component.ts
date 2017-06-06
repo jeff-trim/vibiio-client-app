@@ -26,6 +26,7 @@ export class MyVibiiosComponent {
     range
     rangeMin: number
     rangeMax: number
+    myVibiioCount: number
 
     @Output()
     updateSidebar: EventEmitter<any> = new EventEmitter<any>()
@@ -61,7 +62,7 @@ export class MyVibiiosComponent {
     updateMySchedule(){
         this.myDayService.getMyDay()
             .subscribe((response) => {
-                console.log("udpateMySchedule")
+                this.myVibiioCount = response.my_day.length
                 this.sidebarMyVibiioSharedService.emitChange(response)
             })
     }
@@ -74,10 +75,12 @@ export class MyVibiiosComponent {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
+            console.log(data)
             this.appointments = data.appointments.appointments
             this.rangeMin = this.appointments[0].scheduled_datetime
             this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
             this.range = [this.rangeMin, this.rangeMax]
+            this.myVibiioCount = data.sidebarMyDay.my_day.length
         })
     }
 

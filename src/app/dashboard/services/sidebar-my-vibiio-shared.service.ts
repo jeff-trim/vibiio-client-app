@@ -11,6 +11,5 @@ export class SidebarMyVibiioSharedService{
 
     emitChange(response: Response){
         this.emitChangeSource.next(response)
-        console.log(response)
     }
 }

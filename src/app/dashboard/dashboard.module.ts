@@ -59,7 +59,8 @@ const dashboardRoutes: Routes = [
             component: MyVibiiosComponent,
               resolve: {
                   appointments: MyAppointmentsResolver,
-                  sidebarCustomerStatuses: SidebarCustomerResolver
+                  sidebarCustomerStatuses: SidebarCustomerResolver,
+                  sidebarMyDay: MyDayResolver
             }
           }
       ]

@@ -8,7 +8,7 @@ import { Appointment } from '../../models/appointment.interface';
               <div class="appointments-container">
                 <div class="appointment-row">
                   <div class="time">{{ (vibiio.scheduled_datetime | amFromUnix) | amDateFormat: 'hh:mmA'}}</div>
-                  <div class="name">{{ vibiio.user.first_name }} {{ vibiio.user.last_name }} </div>
+                  <div class="name">{{ vibiio.first_name }} {{ vibiio.last_name }} </div>
                 </div>
               </div>
             </div>`

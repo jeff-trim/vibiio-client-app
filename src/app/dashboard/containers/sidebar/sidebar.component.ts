@@ -29,11 +29,11 @@ export class SidebarComponent {
                 private statusService: CustomerStatusService,
                 private activatedRoute: ActivatedRoute,
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {
+
+        // subscribes to shared service and listens for changes passed from the
+        // my vibiio container
         sidebarMyVibiioSharedService.changeEmitted$.subscribe(
-            text => {
-                console.log(text)
-                this.myScheduledVibiios = text.my_day
-            }
+            response => this.myScheduledVibiios = response.my_day
         )
     }
 

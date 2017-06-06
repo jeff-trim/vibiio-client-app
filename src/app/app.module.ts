@@ -42,7 +42,6 @@ import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/j
   ],
   providers: [
       AuthService,
-      SidebarMyVibiioSharedService,
     { provide: RequestOptions, useClass: RequestOptionsService },
     { provide: Http, useClass: ResponseErrorService }
   ],
