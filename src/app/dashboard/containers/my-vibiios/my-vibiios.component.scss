@@ -44,39 +44,42 @@ h1 {
 
 /deep/ .noUi-horizontal{
     height: 10px;
+
+    & .noUi-handle {
+        width: 23px;
+        height: 23px;
+        border: solid 0.5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05),
+        0 2px 2px 0 rgba(0, 0, 0, 0.1),
+        0 3px 1px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    & .noUi-tooltip {
+        bottom: -150%;
+    }
 }
 
 /deep/ .noUi-connect{
     background: $pink;
 }
 
-/deep/ .noUi-horizontal .noUi-handle{
-    width: 23px;
-    height: 23px;
-    border: solid 0.5px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05),
-                0 2px 2px 0 rgba(0, 0, 0, 0.1),
-                0 3px 1px 0 rgba(0, 0, 0, 0.05);
-
-}
-/deep/ .noUi-tooltip{
-    border: none;
-    color: $pink;
-    background: none;
-}
-/deep/ .noUi-horizontal .noUi-tooltip {
-    bottom: -150%;
-}
-
 /deep/ .noUi-tooltip {
     font-size: 1.2rem;
     font-weight: 700;
+    border: none;
+    color: $pink;
+    background: none;
+
 }
 
-/deep/ .noUi-handle:after, /deep/ .noUi-handle:before{
-    content: none;
-}
 /deep/ .noUi-handle{
     border-radius: 50%;
+
+    &:after {
+        content: none;
+    }
+    &:before {
+        content: none;
+    }
 }
 
