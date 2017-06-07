@@ -24,6 +24,7 @@ export class SidebarComponent {
   scheduledVibiiosVisibility: boolean = false;
   customerCategoryVisibility: boolean = true;
   profileVisibility: boolean = true;
+  sidebarVisibility: boolean
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusService,
@@ -46,6 +47,10 @@ export class SidebarComponent {
       .getCustomerStatus()
       .subscribe((data: CustomerStatusCount[]) => this.customersCategories = data);
   }
+
+    toggleSidebar(){
+        this.sidebarVisibility = !this.sidebarVisibility
+    }
 
   toggleScheduledVibiios(event){
     this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility

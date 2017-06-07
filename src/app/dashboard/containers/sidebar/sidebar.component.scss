@@ -1,20 +1,25 @@
 @import '../../../../assets/css/variables';
 
+.hidden{
+    display: none;
+    @media(min-width: $small){
+        display: block;
+    }
+}
+
 .sidebar {
     top: 0;
     left: 0;
-    min-height: 100vh;
-    height: 100%;
     background-color: $blue;
-    padding: 32px 27px;
-
+    padding: 15px 27px 15px;
+    height: 100%;
+    box-sizing: border-box;
 
     .logo-container {
         width: 88px;
         height: 43px;
         background: url(../../../../assets/images/alt.svg) no-repeat;
         background-size: cover;
-        margin: 0 0 105px;
     }
     .title-row{
         display: flex;
@@ -39,6 +44,38 @@
         }
         .active-arrow {
             background-image: url(../../../../assets/images/active-arrow.svg);
+        }
+    }
+}
+
+.hamburger {
+    width: 45px;
+    height: 40px;
+    margin-top: 10px;
+    position: relative;
+
+    @media(min-width: $small){
+        display: none;
+    }
+
+    span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: #fff;
+        border-radius: 3px;
+        opacity: 1;
+        left: 0;
+        &:nth-child(1){
+            top: 0px;
+        }
+
+        &:nth-child(2){
+            top: 13px;
+        }
+        &:nth-child(3){
+            top: 26px;
         }
     }
 }
