@@ -35,13 +35,26 @@ h1 {
 .range-slider {
     padding-bottom: 35px;
 }
+
+/deep/ .noUi-target{
+    border-radius: 10px;
+    border: none;
+    background: rgba(236, 0, 140, 0.25);
+}
+
+/deep/ .noUi-horizontal{
+    height: 10px;
+}
+
 /deep/ .noUi-connect{
     background: $pink;
 }
 
 /deep/ .noUi-horizontal .noUi-handle{
-    width: 28px;
-    height: 28px;
+    width: 23px;
+    height: 23px;
+    box-shadow: none;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 1px 0 rgba(0, 0, 0, 0.05);
 
 }
 /deep/ .noUi-tooltip{
@@ -52,6 +65,12 @@ h1 {
 /deep/ .noUi-horizontal .noUi-tooltip {
     bottom: -150%;
 }
+
+/deep/ .noUi-tooltip {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
 /deep/ .noUi-handle:after, /deep/ .noUi-handle:before{
     content: none;
 }

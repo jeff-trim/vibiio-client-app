@@ -1,15 +1,17 @@
 <div class='sidebar '>
   <div class="logo-container"></div>
 
-  <div class="title-row"
-      (click)='toggleScheduledVibiios($event)'>
-    <div class="title">
-      <a routerLink="my-vibiios"
-         routerLinkActive="active" >My Scheduled vibiios</a>
-    </div>
+  <div class="title-row">
+    <a routerLink="my-vibiios"
+            routerLinkActive="active" >
+        <div class="title">
+          My Scheduled vibiios
+        </div>
+    </a>
     <div class="arrow"
-        [class.left-arrow]='scheduledVibiiosVisibility'
-        [class.active-arrow]='!scheduledVibiiosVisibility'>
+         [class.left-arrow]='scheduledVibiiosVisibility'
+         [class.active-arrow]='!scheduledVibiiosVisibility'
+         (click)='toggleScheduledVibiios($event)'>
     </div>
   </div>
   <app-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"

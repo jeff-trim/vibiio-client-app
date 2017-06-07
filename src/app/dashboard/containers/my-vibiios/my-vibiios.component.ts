@@ -17,14 +17,8 @@ import { CustomerProfile } from '../../models/customer-profile.interface';
 import { TodaysVibiios } from '../../models/todays-vibiios.interface';
 import { SliderConfig } from '../../models/slider-config.interface'
 
-export class TimeFormatter {
-    to(value: number): string {
-        return moment.unix(value).format('h:mm A');
-    }
-
-    from(value: number): string {
-        return moment.unix(value).format('h:mm A');
-    }}
+// classes
+import {TimeFormatter } from '../../classes/time-formatter.class'
 
 @Component({
     selector: 'my-vibiios',
