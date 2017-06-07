@@ -3,29 +3,31 @@
             col-md-9
             centered">
   <h1 class="col-xs
-            col-md-offset-1
-            pink">Welcome, {{ vibiiographerName }}!</h1>
-  <p class="col-md-offset-1">
-    💁 You have {{ myVibiioCount }} vibiio scheduled Today–fill up your schedule by choosing vibiios below.
+             col-md-offset-1
+             pink">Welcome, {{ vibiiographerName }}!</h1>
+  <p class="col-md-offset-1
+            welcomeText">
+    💁 You have {{ myVibiioCount }} vibiio scheduled Today fill up your schedule by choosing vibiios below.
   </p>
+
   <div class="flex" >
     <span class="sliderToggle
                  col-xs-12
-                 col-md-offset-1
-                 pink-underline"
-          (click)="toggleSliderVisibility()">Filter Requested Vibiios</span>
+                 col-md-offset-1"
+          (click)="toggleSliderVisibility()">
+      <p class="toggleText">Filter Requested Vibiios</p>
+    </span>
 
-    <div class="range-slider
+    <div *ngIf="sliderVisibility"
+         class="range-slider
                 col-xs-12
-                col-md-offset-1"
-        *ngIf="sliderVisibility">
-            <nouislider [connect]="true"
-                  [min]="rangeMin"
-                  [max]="rangeMax"
-                  [step]="900"
+                col-md-offset-1">
+
+      <nouislider [config]="sliderConfig"
                   [(ngModel)]="range"
                   (change)="onChange($event)"></nouislider>
     </div>
+
     <div class="profile-information">
       <ng-container *ngFor="let appointment of appointments; let i = index" >
         <customer-profile [appointment]="appointment"

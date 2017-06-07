@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
-import { MomentModule } from 'angular2-moment'
+import * as moment from 'moment'
 
 // components
 import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component'
@@ -15,12 +15,25 @@ import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-s
 import { Appointment } from '../../models/appointment.interface';
 import { CustomerProfile } from '../../models/customer-profile.interface';
 import { TodaysVibiios } from '../../models/todays-vibiios.interface';
+import { SliderConfig } from '../../models/slider-config.interface'
+
+export class TimeFormatter {
+    to(value: number): string {
+        return moment.unix(value).format('h:mm A');
+    }
+
+    from(value: number): string {
+        return moment.unix(value).format('h:mm A');
+    }}
 
 @Component({
     selector: 'my-vibiios',
     templateUrl: 'my-vibiios.component.html',
     styleUrls: ['my-vibiios.component.scss']
 })
+
+
+
 
 export class MyVibiiosComponent {
     appointments: Appointment[]
@@ -30,21 +43,49 @@ export class MyVibiiosComponent {
     myVibiioCount: number
     vibiiographerName: string
     sliderVisibility: boolean = true
-
-    @Output()
-    updateSidebar: EventEmitter<any> = new EventEmitter<any>()
+    sliderConfig: SliderConfig
 
     constructor(private activatedRoute: ActivatedRoute,
                 private myDayService: MyDayService,
                 private customerProfileService: CustomerProfileService,
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {}
 
+    ngOnInit() {
+        this.activatedRoute.data.subscribe((data) => {
+            this.appointments = data.appointments.appointments
+            this.myVibiioCount = data.sidebarMyDay.my_day.length
+            this.vibiiographerName = data.myProfile.user.first_name
+
+            // setup config object for slider in onInit because otherwise the values aren't
+            // available on instantiation
+            this.sliderConfig = {
+                start: this.appointments[0].scheduled_datetime,
+                range: {
+                    min: this.appointments[0].scheduled_datetime,
+                    max: this.appointments[this.appointments.length - 1].scheduled_datetime
+                },
+                step: 900,
+                tooltips: [new TimeFormatter(), new TimeFormatter()],
+                connect: true
+            }
+            this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max]
+        })
+    }
+
+    test(value){
+        console.log(value)
+        return 'foo'
+    }
+
     // monitors changes in the slider, when changed
     // it updates the range which in turn removes or
     // adds appointments to the view
     onChange(value){
-        console.log("onchange", value)
         this.range = value
+    }
+
+    formatTime(){
+
     }
 
     // apt_obj will have 2 key-vals appointment with appointment data
@@ -75,17 +116,4 @@ export class MyVibiiosComponent {
         this.sliderVisibility = !this.sliderVisibility
         console.log(this.sliderVisibility)
     }
-
-    ngOnInit() {
-        this.activatedRoute.data.subscribe((data) => {
-            console.log(data)
-            this.appointments = data.appointments.appointments
-            this.rangeMin = this.appointments[0].scheduled_datetime
-            this.rangeMax = this.appointments[this.appointments.length - 1].scheduled_datetime
-            this.range = [this.rangeMin, this.rangeMax]
-            this.myVibiioCount = data.sidebarMyDay.my_day.length
-            this.vibiiographerName = data.myProfile.user.first_name
-        })
-    }
-
 }
