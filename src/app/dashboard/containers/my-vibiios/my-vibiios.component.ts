@@ -66,20 +66,11 @@ export class MyVibiiosComponent {
         })
     }
 
-    test(value){
-        console.log(value)
-        return 'foo'
-    }
-
     // monitors changes in the slider, when changed
     // it updates the range which in turn removes or
     // adds appointments to the view
     onChange(value){
         this.range = value
-    }
-
-    formatTime(){
-
     }
 
     // apt_obj will have 2 key-vals appointment with appointment data
