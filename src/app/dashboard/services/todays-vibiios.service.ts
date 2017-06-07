@@ -5,17 +5,17 @@ import { API_URL } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Appointment } from '../models/appointment.interface';
+import { TodaysVibiios } from '../models/todays-vibiios.interface';
 
-const MY_APPOINTMENTS_API: string = `${API_URL}/schedule/range`;
+const TODAYS_VIBIIOS_API: string = `${API_URL}/TBD`;
 
 @Injectable()
-export class MyAppointmentsService {
+export class TodaysVibiiosService {
   constructor(private http: Http) {}
 
-  getMyAppointments(): Observable<Appointment[]> {
+  getTodaysVibiios(): Observable<TodaysVibiios[]> {
     return this.http
-        .get(MY_APPOINTMENTS_API)
+        .get(TODAYS_VIBIIOS_API)
         .map((response: Response) => response.json());
   }
 }

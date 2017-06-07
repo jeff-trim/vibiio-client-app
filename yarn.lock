@@ -208,6 +208,19 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular2-jcf-directive@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/angular2-jcf-directive/-/angular2-jcf-directive-0.1.1.tgz#1ec35bad741ea8beae3e8e56daba55cbb3d816b0"
+  dependencies:
+    jcf "^1.2.3"
+    jquery "^3.2.1"
+
+angular2-moment@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/angular2-moment/-/angular2-moment-1.3.3.tgz#569c433bbfa2448d5424f0e10dce6f8c8c9533eb"
+  dependencies:
+    moment "^2.16.0"
+
 ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -2435,11 +2448,19 @@ jasminewd2@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.0.0.tgz#10aacd2c588c1ceb6a0b849f1a7f3f959f777c91"
 
+jcf@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/jcf/-/jcf-1.2.3.tgz#9d64dc3c3d0b628e634a96ae28dfe1056ed670dc"
+
 jodid25519@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/jodid25519/-/jodid25519-1.0.2.tgz#06d4912255093419477d425633606e0e90782967"
   dependencies:
     jsbn "~0.1.0"
+
+jquery@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
 js-base64@^2.1.5, js-base64@^2.1.9:
   version "2.1.9"
@@ -2905,6 +2926,10 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
+moment@^2.16.0, moment@^2.18.1:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -2930,6 +2955,10 @@ ncname@1.0.x:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+
+ng2-nouislider@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/ng2-nouislider/-/ng2-nouislider-1.6.1.tgz#0c2f6e97ce15e8ed26bcdb365b91a32b9fd0799c"
 
 no-case@^2.2.0:
   version "2.3.1"
@@ -3062,6 +3091,10 @@ normalize-url@^1.4.0:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
+
+nouislider@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-10.0.0.tgz#166145168bc05701ef5168c17d171f79154c174e"
 
 "npmlog@0 || 1 || 2 || 3 || 4", npmlog@^4.0.0, npmlog@^4.0.1:
   version "4.0.2"

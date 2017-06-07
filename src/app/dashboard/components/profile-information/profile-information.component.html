@@ -1,0 +1,39 @@
+<div class="info-element">
+  <h2>information</h2>
+  <div class="long-pink-underline" ></div>
+</div>
+
+
+<key-value [key]="'First Name'"
+           [value]="myProfile.first_name"></key-value>
+
+<key-value [key]="'Last Name'"
+           [value]="myProfile.last_name" ></key-value>
+
+<key-value [key]="'Company'"
+           [value]="myProfile.company"></key-value>
+
+<key-value [key]="'Cell Phone'"
+           [value]="myProfile.phone"></key-value>
+
+<key-value [key]="'Address'"
+           [value]="myProfile.address.address_one"></key-value>
+
+<key-value *ngIf="myProfile.address.address_two"
+           [key]="'Address Two'"
+           [value]="myProfile.address.address_one"></key-value>
+
+<key-value [key]="'City'"
+           [value]="myProfile.address.city"></key-value>
+
+<key-value [key]="'State'"
+           [value]="myProfile.address.state"></key-value>
+
+<key-value [key]="'Zip'"
+           [value]="myProfile.address.zip"></key-value>
+
+<div class="download
+            pink">Download Signed Agreement
+  <img src="../../../../assets/images/download.svg"
+       class="arrow">
+</div>

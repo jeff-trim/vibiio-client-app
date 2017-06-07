@@ -1,0 +1,85 @@
+@import '../../../../assets/css/_variables.scss';
+
+.centered {
+    margin: 0 auto;
+}
+/deep/ .flex {
+    display: flex;
+    flex-direction: column;
+}
+
+
+h1 {
+    font-weight: 400;
+    font-size: 3.2rem;
+}
+
+.sliderToggle{
+    font-size: 1.75rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.toggleText{
+    color: $greyish-brown;
+    text-weight: 700;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 3px solid $pink;
+    display: inline-block;
+    cursor: pointer;
+}
+.welcomeText{
+    font-size: 1.2rem;
+}
+.range-slider {
+    padding-bottom: 35px;
+}
+
+/deep/ .noUi-target{
+    border-radius: 10px;
+    border: none;
+    background: rgba(236, 0, 140, 0.25);
+}
+
+/deep/ .noUi-horizontal{
+    height: 10px;
+
+    & .noUi-handle {
+        width: 23px;
+        height: 23px;
+        border: solid 0.5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05),
+        0 2px 2px 0 rgba(0, 0, 0, 0.1),
+        0 3px 1px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    & .noUi-tooltip {
+        bottom: -150%;
+    }
+}
+
+/deep/ .noUi-connect{
+    background: $pink;
+}
+
+/deep/ .noUi-tooltip {
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+    color: $pink;
+    background: none;
+
+}
+
+/deep/ .noUi-handle{
+    border-radius: 50%;
+
+    &:after {
+        content: none;
+    }
+    &:before {
+        content: none;
+    }
+}
+

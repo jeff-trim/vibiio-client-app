@@ -7,15 +7,16 @@ import 'rxjs/add/operator/map';
 
 import { Appointment } from '../models/appointment.interface';
 
-const MY_APPOINTMENTS_API: string = `${API_URL}/schedule/range`;
+const MY_PROFILE_API: string = `${API_URL}/me`;
 
 @Injectable()
-export class MyAppointmentsService {
+export class MyProfileService {
   constructor(private http: Http) {}
 
-  getMyAppointments(): Observable<Appointment[]> {
-    return this.http
-        .get(MY_APPOINTMENTS_API)
-        .map((response: Response) => response.json());
+    getMyProfile(): Observable<any> {
+
+        return this.http
+           .get(MY_PROFILE_API)
+           .map((response: Response) => response.json())
   }
 }

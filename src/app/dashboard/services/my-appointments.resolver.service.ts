@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { MyAppointmentsService } from './my-appointments.service';
 
 @Injectable()
-export class SidebarScheduleResolver implements Resolve<any> {
+export class MyAppointmentsResolver implements Resolve<any> {
     constructor(private service: MyAppointmentsService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {

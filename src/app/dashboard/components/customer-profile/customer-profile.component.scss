@@ -1,0 +1,92 @@
+@import '../../../../assets/css/_variables.scss';
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    @media(min-width: $small){
+        flex-direction: row;
+    }
+}
+
+.customer-profile-container {
+  margin-right: 1.1rem;
+  margin-left: 1.1rem;
+}
+
+.profile-column {
+}
+
+h2 {
+  color: $blue;
+  font-family: $base-font;
+  font-size: 2.375rem;
+  font-weight: bold;
+  height: 2.375rem;
+  line-height: 1.16;
+  margin: 0;
+  text-transform: capitalize;
+  // width: 327px;
+  display: inline;
+}
+
+.customer-profile-header {
+  position: relative;
+  margin-bottom: 30px;
+  padding-bottom: 13px;
+  .pink-underline {
+    width: 80px;
+  }
+}
+
+/deep/ .info-element {
+  padding-bottom: 11px;
+  position: relative;
+  margin: 6.5px 0 18px 0;
+
+  &.last-info-element {
+    margin: 6.5px 0 13px 0;
+  }
+
+  .label {
+    color: $greyish-brown;
+    font-family: $base-font;
+    font-size: 1.8rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .value {
+    color: $greyish-brown;
+    font-family: $copy-font;
+    font-size: 1.3rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+  }
+}
+
+/deep/ .pink-underline {
+  width: 9%;
+  border-bottom: 3px solid $pink;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.notes-element {
+  background-color: $light-grey;
+
+  p {
+    color: $greyish-brown;
+    font-family: $base-font;
+    font-size: 1.8rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: normal;
+    margin: 10px;
+  }
+}

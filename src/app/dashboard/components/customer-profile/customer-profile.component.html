@@ -1,0 +1,85 @@
+<div class="col-xs
+            col-md-offset-1">
+  <div class="row
+              info-element
+              between-xs
+              bottom-xs">
+    <h2>{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h2>
+    <img (click)="toggleAppointment(appointment)"
+         src="../../../../assets/images/inactive.svg"
+         *ngIf="appointment.vibiiographer_id === null" >
+    <img (click)="toggleAppointment(appointment)"
+         src="../../../../assets/images/selected.svg"
+         *ngIf="appointment.vibiiographer_id !== null" >
+    <span class="pink-underline"></span>
+  </div>
+</div>
+
+
+<div class="flex" >
+  <div class="col-xs-12
+              col-sm-6
+              col-md-5
+              col-md-offset-1
+              profile-information">
+
+    <key-value [key]="'Email'"
+               [value]="appointment.user.email"></key-value>
+
+    <key-value [key]="'Phone Number'"
+               [value]="appointment.user.phone"></key-value>
+
+    <key-value [key]="'Address'"
+               [value]="appointment.address.address_one"></key-value>
+
+    <key-value *ngIf="appointment.address.address_two"
+               [key]="'Address Two'"
+               [value]="appointment.address.address_two"></key-value>
+
+    <key-value [key]="'City'"
+               [value]="appointment.address.city"></key-value>
+
+    <key-value [key]="'State'"
+               [value]="appointment.address.state"></key-value>
+
+    <key-value [key]="'Zip'"
+               [value]="appointment.address.zip"></key-value>
+
+    <span *ngFor="let policy of appointment.insurance_policy">
+
+      <key-value [key]="'Carrier'"
+                 [value]="policy.carrier"></key-value>
+
+      <key-value [key]="'Policy Number'"
+                 [value]="policy.policy_number"></key-value>
+    </span>
+
+  </div>
+  <div class="col-xs-12
+              col-sm-6
+              col-md-5
+              col-md-offset-1
+              profile-information">
+
+    <key-value [key]="'Claim ID'"
+               [value]="'12345'"></key-value>
+
+    <key-value [key]="'Vibiio Start Time'"
+               [value]="(appointment.scheduled_datetime | amFromUnix) | amDateFormat:'hh:mmA'"></key-value>
+
+
+  <div class="info-element
+              last-info-element
+              row
+              between-xs
+              bottom-xs" >
+    <span class="label">Customer Notes</span>
+    <span class="pink-underline"></span>
+  </div>
+  <div class="notes-element
+              row
+              between-xs
+              bottom-xs">
+    <p>{{ appointment.vibiio.description }}</p>
+  </div>
+</div>

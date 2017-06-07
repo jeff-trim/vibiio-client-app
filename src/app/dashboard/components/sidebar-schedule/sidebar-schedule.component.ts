@@ -7,8 +7,8 @@ import { Appointment } from '../../models/appointment.interface';
   template: `<div class="sidebar-schedule">
               <div class="appointments-container">
                 <div class="appointment-row">
-                  <div class="time">{{ parse_apt(appointment[0]) }}</div>
-                  <div class="name">{{appointment[1]}} </div>
+                  <div class="time">{{ (vibiio.scheduled_datetime | amFromUnix) | amDateFormat: 'hh:mmA'}}</div>
+                  <div class="name">{{ vibiio.first_name }} {{ vibiio.last_name }} </div>
                 </div>
               </div>
             </div>`
@@ -16,12 +16,5 @@ import { Appointment } from '../../models/appointment.interface';
 
 export class SidebarScheduleComponent {
   @Input()
-  appointment: Appointment;
-
-    parse_apt(apt_time) {
-        let timeOfDay: string
-        let parsedNum: number = (apt_time % 12) || 12
-        apt_time <= 11 ?  timeOfDay = 'AM' : timeOfDay = 'PM'
-        return `${parsedNum} ${timeOfDay}`
-    }
+  vibiio: any;
 }

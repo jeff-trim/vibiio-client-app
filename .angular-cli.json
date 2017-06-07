@@ -20,9 +20,13 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
-        "assets/css/flexboxgrid.min.css"
+        "assets/css/flexboxgrid.min.css",
+        "../node_modules/jcf/dist/css/theme-minimal/jcf.css"
+
       ],
-      "scripts": [
+        "scripts": [
+            "../node_modules/jquery/dist/jquery.slim.min.js",
+            "../node_modules/jcf/js/jcf.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

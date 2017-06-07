@@ -1,23 +1,22 @@
-<div class='sidebar'>
-  <div class="logo-container">
-  </div>
+<div class='sidebar '>
+  <div class="logo-container"></div>
 
-  <div class="title-row"
-      (click)='toggleScheduledVibiios($event)'>
-    <div class="title">
-      My Scheduled vibiios
-    </div>
+  <div class="title-row">
+    <a routerLink="my-vibiios"
+            routerLinkActive="active">
+        <div class="title">
+          My Scheduled vibiios
+        </div>
+    </a>
     <div class="arrow"
-        [class.left-arrow]='scheduledVibiiosVisibility'
-        [class.active-arrow]='!scheduledVibiiosVisibility'>
+         [class.left-arrow]='scheduledVibiiosVisibility'
+         [class.active-arrow]='!scheduledVibiiosVisibility'
+         (click)='toggleScheduledVibiios($event)'>
     </div>
   </div>
-  <app-sidebar-schedule
-    *ngFor="let appointment of appointments;"
-    [appointment] = appointment
-    [hidden]='scheduledVibiiosVisibility'>
-  </app-sidebar-schedule>
-
+  <app-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
+                        [vibiio]="vibiio"
+                        [hidden]="scheduledVibiiosVisibility"></app-sidebar-schedule>
   <div class="title-row"
        (click)='toggleCustomerCategoryVisibility($event)'>
     <div class="title">
@@ -28,6 +27,7 @@
         [class.active-arrow]='!customerCategoryVisibility'>
     </div>
   </div>
+
   <app-sidebar-customer
     *ngFor="let customersCategory of customersCategories;"
     [category] = customersCategory
@@ -36,8 +36,10 @@
 
   <div class="title-row"
        (click)='toggleProfileVisibility($event)'>
-    <div class="title">
-      My Profile
+      <div class="title">
+          <a routerLink="my_profile" routerLinkActive="active">
+              My Profile
+          </a>
     </div>
     <div class='arrow'
          [class.left-arrow]='profileVisibility'
