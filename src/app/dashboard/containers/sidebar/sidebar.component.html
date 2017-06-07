@@ -1,7 +1,17 @@
-<div class='sidebar '>
-  <div class="logo-container"></div>
+<div class='sidebar'>
+  <div class="row
+              between-xs">
+    <div class="logo-container"></div>
+    <div class="hamburger"
+         (click)="toggleSidebar()">
 
-  <div class="title-row">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <span *ngIf="sidebarVisibility">
+    <div class="title-row">
     <a routerLink="my-vibiios"
             routerLinkActive="active">
         <div class="title">
@@ -46,4 +56,5 @@
          [class.active-arrow]='!profileVisibility'>
     </div>
   </div>
+  </span>
 </div>

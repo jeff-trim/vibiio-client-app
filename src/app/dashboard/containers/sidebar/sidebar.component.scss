@@ -1,20 +1,22 @@
 @import '../../../../assets/css/variables';
 
+.hidden{
+    height: 0;
+}
+
 .sidebar {
     top: 0;
     left: 0;
-    min-height: 100vh;
-    height: 100%;
     background-color: $blue;
-    padding: 32px 27px;
-
+    padding: 25px 27px 15px;
+    height: 100%;
+    box-sizing: border-box;
 
     .logo-container {
         width: 88px;
         height: 43px;
         background: url(../../../../assets/images/alt.svg) no-repeat;
         background-size: cover;
-        margin: 0 0 105px;
     }
     .title-row{
         display: flex;
@@ -39,6 +41,33 @@
         }
         .active-arrow {
             background-image: url(../../../../assets/images/active-arrow.svg);
+        }
+    }
+}
+
+.hamburger {
+    width: 60px;
+    height: 50px;
+    position: relative;
+
+    span {
+        display: block;
+        position: absolute;
+        height: 5px;
+        width: 100%;
+        background: #fff;
+        border-radius: 5px;
+        opacity: 1;
+        left: 0;
+        &:nth-child(1){
+            top: 0px;
+        }
+
+        &:nth-child(2){
+            top: 15px;
+        }
+        &:nth-child(3){
+            top: 30px;
         }
     }
 }
