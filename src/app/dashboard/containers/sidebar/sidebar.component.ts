@@ -24,7 +24,7 @@ export class SidebarComponent {
   scheduledVibiiosVisibility: boolean = false
   customerCategoryVisibility: boolean = true
   profileVisibility: boolean = true
-    sidebarVisibility: boolean = false
+  sidebarVisibility: boolean
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusService,
