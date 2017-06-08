@@ -10,7 +10,7 @@ export interface Appointment {
     current_user: number;
     user: User;
     vibiio: Vibiio;
-    address: Address[];
+    address: Address;
     insurance_policies: InsurancePolicy[];
     consumer_id: number;
     vibbio_id: number;

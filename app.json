@@ -7,14 +7,12 @@
     "NODE_ENV": {
       "required": true
     },
-    {
       "NODE_MODULES_CACHE": {
         "required": true
       }
-    }
   },
   "buildpacks": [
-    "heroku/nodejs"
+      {"url": "heroku/nodejs" }
   ],
   "environments": {}
 }
