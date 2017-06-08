@@ -24,6 +24,7 @@ export class CustomerProfileComponent {
         if(appointment.vibiiographer_id === null){
             this.updateAppointment.emit({appointment: appointment, index: this.index })
         } else {
+
             // sets current user to null so when the record
             // is updated in the api we reset the value to nil
             // this in essence acts as deleting the vibiiographer

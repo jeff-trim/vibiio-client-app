@@ -28,7 +28,8 @@
 
       <nouislider [config]="sliderConfig"
                   [(ngModel)]="range"
-                  (change)="onChange($event)"></nouislider>
+                  (change)="onChange($event)"
+                  (end)="updateAppointments()"></nouislider>
     </div>
 
     <div class="profile-information">

@@ -7,6 +7,7 @@ export interface Appointment {
     id: number;
     scheduled_datetime: number;
     vibiiographer_id: number;
+    vibiiographer_timezone: string;
     current_user: number;
     user: User;
     vibiio: Vibiio;

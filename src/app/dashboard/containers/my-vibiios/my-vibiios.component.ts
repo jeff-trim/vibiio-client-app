@@ -9,6 +9,7 @@ import { CustomerProfileComponent } from '../../components/customer-profile/cust
 import { CustomerProfileService } from '../../services/customer-profile.service'
 import { TodaysVibiiosService } from '../../services/todays-vibiios.service'
 import { MyDayService } from '../../services/my-day.service'
+import { MyAppointmentsService } from '../../services/my-appointments.service'
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
 
 // Interfaces
@@ -26,9 +27,6 @@ import {TimeFormatter } from '../../classes/time-formatter.class'
     styleUrls: ['my-vibiios.component.scss']
 })
 
-
-
-
 export class MyVibiiosComponent {
     appointments: Appointment[]
     range
@@ -42,7 +40,8 @@ export class MyVibiiosComponent {
     constructor(private activatedRoute: ActivatedRoute,
                 private myDayService: MyDayService,
                 private customerProfileService: CustomerProfileService,
-                private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {}
+                private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
+                private myAppointmentsService: MyAppointmentsService) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
@@ -59,7 +58,8 @@ export class MyVibiiosComponent {
                     max: this.appointments[this.appointments.length - 1].scheduled_datetime
                 },
                 step: 900,
-                tooltips: [new TimeFormatter(), new TimeFormatter()],
+                tooltips: [new TimeFormatter(this.appointments[0].vibiiographer_timezone),
+                           new TimeFormatter(this.appointments[0].vibiiographer_timezone)],
                 connect: true
             }
             this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max]
@@ -71,6 +71,13 @@ export class MyVibiiosComponent {
     // adds appointments to the view
     onChange(value){
         this.range = value
+    }
+
+    updateAppointments(event){
+        this.myAppointmentsService.getMyAppointments()
+            .subscribe((response: Appointment[]) => {
+                console.log(response)
+            })
     }
 
     // apt_obj will have 2 key-vals appointment with appointment data
