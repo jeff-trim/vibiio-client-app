@@ -20,11 +20,11 @@ import { Appointment} from '../../models/appointment.interface'
 
 export class SidebarComponent {
   myScheduledVibiios: any
-  customersCategories: CustomerStatusCount[];
-  scheduledVibiiosVisibility: boolean = false;
-  customerCategoryVisibility: boolean = true;
-  profileVisibility: boolean = true;
-  sidebarVisibility: boolean
+  customersCategories: CustomerStatusCount[]
+  scheduledVibiiosVisibility: boolean = false
+  customerCategoryVisibility: boolean = true
+  profileVisibility: boolean = true
+    sidebarVisibility: boolean = false
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusService,
