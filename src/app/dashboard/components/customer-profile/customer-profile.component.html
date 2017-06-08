@@ -45,7 +45,7 @@
     <key-value [key]="'Zip'"
                [value]="appointment.address.zip"></key-value>
 
-    <span *ngFor="let policy of appointment.insurance_policy">
+    <span *ngFor="let policy of appointment.insurance_policies">
 
       <key-value [key]="'Carrier'"
                  [value]="policy.carrier"></key-value>
