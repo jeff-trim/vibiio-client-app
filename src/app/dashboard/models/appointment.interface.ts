@@ -4,16 +4,10 @@ import { User } from './user.interface';
 import { Vibiio } from './vibiio.interface';
 
 export interface Appointment {
-    id: number;
-    scheduled_datetime: number;
-    vibiiographer_id: number;
-    vibiiographer_timezone: string;
-    current_user: number;
-    user: User;
-    vibiio: Vibiio;
-    address: Address;
-    insurance_policies: InsurancePolicy[];
-    consumer_id: number;
-    vibbio_id: number;
+    local_beginning_of_day: number,
+    local_end_of_day: number,
+    user_time_zone: string,
+    vibiiographer_id: number,
+    appointments: Appointment[]
 }
 
