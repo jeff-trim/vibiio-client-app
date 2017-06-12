@@ -37,6 +37,7 @@ import { MyAppointmentsResolver } from './services/my-appointments.resolver.serv
 import { MyDayResolver } from './services/my-day.resolver.service'
 import { MyProfileResolver } from './services/my-profile.resolver.service'
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
+import { CustomerProfileResolver } from './services/customer-profile.resolver.service'
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -62,6 +63,13 @@ const dashboardRoutes: Routes = [
                   sidebarCustomerStatuses: SidebarCustomerResolver,
                   sidebarMyDay: MyDayResolver,
                   myProfile: MyProfileResolver
+            }
+          },
+          {
+            path: 'customer-profile',
+            component: CustomerProfileComponent,
+            resolve: {
+                customerProfile: CustomerProfileResolver
             }
           }
       ]
@@ -102,6 +110,7 @@ const dashboardRoutes: Routes = [
     MyAppointmentsService,
     MyAppointmentsResolver,
     CustomerStatusService,
+    CustomerProfileResolver,
     SidebarCustomerResolver,
     CustomerProfileService,
     TodaysVibiiosService,
