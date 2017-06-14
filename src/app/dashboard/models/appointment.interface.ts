@@ -6,6 +6,8 @@ import { Consumer } from './consumer.interface'
 
 export interface Appointment {
     scheduled_datetime: number;
+    vibiiograpehr_id: number;
+    id: number;
     user: User;
     vibiio: Vibiio;
     consumer: Consumer;

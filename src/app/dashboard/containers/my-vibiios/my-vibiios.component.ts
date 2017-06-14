@@ -49,7 +49,7 @@ export class MyVibiiosComponent {
         this.activatedRoute.data.subscribe((data) => {
             this.appointments = data.appointments.appointments.appointments
             this.todaysVibiios = data.appointments.appointments
-            this.vibiiographerId = data.vibiiographer_id
+            this.vibiiographerId = this.todaysVibiios.vibiiographer_id
             this.myVibiioCount = data.sidebarMyDay.my_day.length
             this.vibiiographerName = data.myProfile.user.first_name
 
@@ -80,7 +80,7 @@ export class MyVibiiosComponent {
     updateAppointments(event){
         this.myAppointmentsService.getMyAppointments()
             .subscribe((response: Appointment[]) => {
-                console.log(response)
+                // console.log(response)
             })
     }
 
@@ -88,9 +88,10 @@ export class MyVibiiosComponent {
     // and index to know where in the appointments array we need to send
     // the updated data once it returns
     updateAppointment(apt_obj){
+        console.log(apt_obj)
         this.myDayService.updateMyDay(
                 apt_obj.appointment.id,
-                apt_obj.appointment.current_user)
+                apt_obj.appointment.vibiiographer_id)
             .subscribe(response => {
                 this.updateMySchedule()
                 Object.assign(this.appointments[apt_obj.index], response.my_day)

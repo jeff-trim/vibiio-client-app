@@ -24,8 +24,9 @@ export class CustomerProfileComponent {
     updateAppointment: EventEmitter<any> = new EventEmitter<any>()
 
     toggleAppointment(appointment: Appointment){
-        if(this.vibiiographerId === null){
-            this.updateAppointment.emit({appointment: appointment, index: this.index })
+        if(this.appointment.vibiiographer_id === null){
+            this.appointment.vibiiographer_id = this.vibiiographerId
+            this.updateAppointment.emit({appointment: this.appointment, index: this.index })
         } else {
 
             // sets current user to null so when the record
@@ -33,6 +34,7 @@ export class CustomerProfileComponent {
             // this in essence acts as deleting the vibiiographer
             // from the current appointment
             appointment.vibiiographer_id = null
+            console.log("vibiiographer id", appointment.vibiiographer_id)
             this.updateAppointment.emit({appointment: appointment, index: this.index })
         }
     }
