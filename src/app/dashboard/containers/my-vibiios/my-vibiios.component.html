@@ -36,6 +36,7 @@
       <ng-container *ngFor="let appointment of appointments; let i = index" >
         <customer-profile [appointment]="appointment"
                           [index]="i"
+                          [vibiiographerId]="vibiiographerId"
                           (appointmentId)="appointmentId"
                           (updateAppointment)="updateAppointment($event)"
                           *ngIf="appointment.scheduled_datetime >= range[0] &&

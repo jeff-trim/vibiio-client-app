@@ -30,20 +30,20 @@
                [value]="appointment.user.phone"></key-value>
 
     <key-value [key]="'Address'"
-               [value]="appointment.address.address_one"></key-value>
+               [value]="appointment.user.address.address_one"></key-value>
 
-    <key-value *ngIf="appointment.address.address_two"
+    <key-value *ngIf="appointment.user.address.address_two"
                [key]="'Address Two'"
-               [value]="appointment.address.address_two"></key-value>
+               [value]="appointment.user.address.address_two"></key-value>
 
     <key-value [key]="'City'"
-               [value]="appointment.address.city"></key-value>
+               [value]="appointment.user.address.city"></key-value>
 
     <key-value [key]="'State'"
-               [value]="appointment.address.state"></key-value>
+               [value]="appointment.user.address.state"></key-value>
 
     <key-value [key]="'Zip'"
-               [value]="appointment.address.zip"></key-value>
+               [value]="appointment.user.address.zip"></key-value>
 
     <span *ngFor="let policy of appointment.insurance_policies">
 

@@ -28,11 +28,13 @@ import {TimeFormatter } from '../../classes/time-formatter.class'
 })
 
 export class MyVibiiosComponent {
+    todaysVibiios: TodaysVibiios
     appointments: Appointment[]
     range
     rangeMin: number
     rangeMax: number
     myVibiioCount: number
+    vibiiographerId: number
     vibiiographerName: string
     sliderVisibility: boolean = true
     sliderConfig: SliderConfig
@@ -45,7 +47,9 @@ export class MyVibiiosComponent {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            this.appointments = data.appointments.appointments
+            this.appointments = data.appointments.appointments.appointments
+            this.todaysVibiios = data.appointments.appointments
+            this.vibiiographerId = data.vibiiographer_id
             this.myVibiioCount = data.sidebarMyDay.my_day.length
             this.vibiiographerName = data.myProfile.user.first_name
 
@@ -54,12 +58,12 @@ export class MyVibiiosComponent {
             this.sliderConfig = {
                 start: this.appointments[0].scheduled_datetime,
                 range: {
-                    min: this.appointments[0].scheduled_datetime,
-                    max: this.appointments[this.appointments.length - 1].scheduled_datetime
+                    min: this.todaysVibiios.user_begin_of_day,
+                    max: this.todaysVibiios.user_end_of_day
                 },
                 step: 900,
-                tooltips: [new TimeFormatter(this.appointments[0].vibiiographer_timezone),
-                           new TimeFormatter(this.appointments[0].vibiiographer_timezone)],
+                tooltips: [new TimeFormatter(this.todaysVibiios.user_time_zone),
+                           new TimeFormatter(this.todaysVibiios.user_time_zone)],
                 connect: true
             }
             this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max]
@@ -106,6 +110,5 @@ export class MyVibiiosComponent {
     // toggles visibility of range slider
     toggleSliderVisibility(){
         this.sliderVisibility = !this.sliderVisibility
-        console.log(this.sliderVisibility)
     }
 }
