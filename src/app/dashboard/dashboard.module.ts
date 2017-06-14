@@ -11,9 +11,11 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { MyProfileComponent } from './containers/my-profile/my-profile.component';
 import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
+import { ConsumerProfileComponent } from './containers/consumer-profile/consumer-profile.component';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
+import { ConsumerProfileDetailsComponent } from './components/consumer-profile-details/consumer-profile-details.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
@@ -22,6 +24,7 @@ import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
+import { ConsumerProfileService } from './services/consumer-profile.service';
 import { CustomerStatusService } from './services/customer-status.service';
 import { DashboardService } from './services/dashboard.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
@@ -71,6 +74,10 @@ const dashboardRoutes: Routes = [
             resolve: {
                 customerProfile: CustomerProfileResolver
             }
+          },
+          {
+            path: 'consumer-profile/:id',
+            component: ConsumerProfileComponent
           }
       ]
   }
@@ -81,9 +88,11 @@ const dashboardRoutes: Routes = [
     DashboardComponent,
     KeyValueComponent,
     SidebarComponent,
+    ConsumerProfileDetailsComponent,
     SidebarScheduleComponent,
     SidebarCustomerComponent,
     CustomerProfileComponent,
+    ConsumerProfileComponent,
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
@@ -101,7 +110,8 @@ const dashboardRoutes: Routes = [
     DashboardComponent,
     SidebarComponent,
     MyVibiiosComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ConsumerProfileComponent
   ],
   providers: [
     DashboardResolver,
@@ -111,6 +121,7 @@ const dashboardRoutes: Routes = [
     MyAppointmentsResolver,
     CustomerStatusService,
     CustomerProfileResolver,
+    ConsumerProfileService,
     SidebarCustomerResolver,
     CustomerProfileService,
     TodaysVibiiosService,
