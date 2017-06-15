@@ -88,7 +88,6 @@ export class MyVibiiosComponent {
     // and index to know where in the appointments array we need to send
     // the updated data once it returns
     updateAppointment(apt_obj){
-        console.log(apt_obj)
         this.myDayService.updateMyDay(
                 apt_obj.appointment.id,
                 apt_obj.appointment.vibiiographer_id)

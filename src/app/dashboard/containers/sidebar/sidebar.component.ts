@@ -40,6 +40,7 @@ export class SidebarComponent {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) =>{
+            console.log("my_day", data)
             this.myScheduledVibiios = data.sidebarMyDay.my_day
         })
 

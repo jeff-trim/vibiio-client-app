@@ -1,6 +1,9 @@
+import { Appointment } from './appointment.interface'
+
 export interface Appointment {
-    import { Address } from './address.interface';
-    import { InsurancePolicy } from './insurance-policy.interface';
-    import { User } from './user.interface';
-    import { Vibiio } from './vibiio.interface';
+    use_time_zone: number;
+    user_begin_of_day: number;
+    user_end_of_day: number;
+    vibiiographer_id: number;
+    appointments: Appointment[];
 }
