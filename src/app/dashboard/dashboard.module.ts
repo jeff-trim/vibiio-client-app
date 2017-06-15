@@ -80,7 +80,7 @@ const dashboardRoutes: Routes = [
             path: 'appointments',
             component: AppointmentComponent,
             resolve: {
-               appointment: AppointmentResolver
+               appt: AppointmentResolver
             }
           }
       ]

@@ -1,5 +1,4 @@
 @import '../../../../assets/css/_variables.scss';
-
 .flex {
     display: flex;
     flex-direction: column;
@@ -8,177 +7,117 @@
     }
 }
 
-.customer-profile-container {
-  margin-right: 1.1rem;
-  margin-left: 1.1rem;
+/deep/ .pink {
+   color: $pink;
 }
 
-.profile-column {
+.center {
+    margin: 0 auto;
 }
 
-h2 {
-  color: $blue;
-  font-family: $base-font;
-  font-size: 2.375rem;
-  font-weight: bold;
-  height: 2.375rem;
-  line-height: 1.16;
-  margin: 0;
-  text-transform: capitalize;
-  // width: 327px;
-  display: inline;
-}
-
-.customer-profile-header {
-  position: relative;
-  margin-bottom: 30px;
-  padding-bottom: 13px;
-  .pink-underline {
-    width: 80px;
-  }
-}
-
-/deep/ .info-element {
-  padding-bottom: 11px;
-  position: relative;
-  margin: 6.5px 0 18px 0;
-
-  &.last-info-element {
-    margin: 6.5px 0 13px 0;
-  }
-
-  .label {
-    color: $greyish-brown;
+.profile-title {
     font-family: $base-font;
-    font-size: 1.8rem;
-    font-stretch: normal;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-
-  .value {
-    color: $greyish-brown;
-    font-family: $copy-font;
-    font-size: 1.3rem;
-    font-stretch: normal;
-    font-style: normal;
+    font-size: 5.025rem;
     font-weight: normal;
-    letter-spacing: normal;
-  }
-}
-
-/deep/ .pink-underline {
-  width: 9%;
-  border-bottom: 3px solid $pink;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-}
-
-.notes-element {
-  background-color: $light-grey;
-
-  p {
-    color: $greyish-brown;
-    font-family: $base-font;
-    font-size: 1.8rem;
-    font-stretch: normal;
     font-style: normal;
-    font-weight: 700;
-    letter-spacing: normal;
-    margin: 10px;
-  }
-}
-@import '../../../../assets/css/_variables.scss';
-
-.flex {
-    display: flex;
-    flex-direction: column;
-    @media(min-width: $small){
-        flex-direction: row;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 0;
+    @media (min-width: $small){
+        padding-left: 25px;
     }
 }
 
-.customer-profile-container {
-  margin-right: 1.1rem;
-  margin-left: 1.1rem;
+h1.profile-title {
+  margin-left: 0;
+  margin-top: 15px;
 }
 
-.profile-column {
-}
-
-h2 {
-  color: $blue;
-  font-family: $base-font;
-  font-size: 2.375rem;
-  font-weight: bold;
-  height: 2.375rem;
-  line-height: 1.16;
-  margin: 0;
-  text-transform: capitalize;
-  // width: 327px;
-  display: inline;
-}
-
-.customer-profile-header {
-  position: relative;
-  margin-bottom: 30px;
-  padding-bottom: 13px;
-  .pink-underline {
-    width: 80px;
+.info-element {
+  &.sub-heading {
+    margin-bottom: 25px;
   }
 }
 
-/deep/ .info-element {
-  padding-bottom: 11px;
-  position: relative;
-  margin: 6.5px 0 18px 0;
+.start-vibiio {
+  align-self: center;
+	height: 18px;
+	font-size: 13px;
+	font-weight: 800;
+	letter-spacing: 1px;
+	text-align: right;
+  text-transform: uppercase;
+	color: $pink;
+}
 
-  &.last-info-element {
-    margin: 6.5px 0 13px 0;
-  }
 
-  .label {
-    color: $greyish-brown;
+/deep/ .profile-information h2,
+/deep/ .profile-licensure h2 {
+	  font-family: Montserrat;
+	  font-size: 3.75rem;
+	  font-weight: 700;
+	  letter-spacing: normal;
+	  color: $azure;
+    line-height: 1.55;
+}
+
+/deep/ .profile-information {
+    @media (min-width: $small) {
+       padding-left: 25px;
+       padding-right: 60px;
+   }
+}
+
+/deep/ .profile-licensure {
+    @media(min-width: $small){
+        padding-right: 25px;
+    }
+}
+
+/deep/ h2 {
+    height: 3.375rem;
     font-family: $base-font;
-    font-size: 1.8rem;
-    font-stretch: normal;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-
-  .value {
-    color: $greyish-brown;
-    font-family: $copy-font;
-    font-size: 1.3rem;
-    font-stretch: normal;
-    font-style: normal;
-    font-weight: normal;
-    letter-spacing: normal;
-  }
+    font-size: 2rem;
+    font-weight: 700; color: $blue;
+    line-height: 1.3;
 }
 
-/deep/ .pink-underline {
-  width: 9%;
-  border-bottom: 3px solid $pink;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-}
-
-.notes-element {
-  background-color: $light-grey;
-
-  p {
-    color: $greyish-brown;
+/deep/ h3 {
+    text-align: left;
+    opacity: 0.75;
     font-family: $base-font;
-    font-size: 1.8rem;
-    font-stretch: normal;
+    font-size: 1.375px;
+    font-weight: 600;
     font-style: normal;
-    font-weight: 700;
+    font-stretch: normal;
     letter-spacing: normal;
-    margin: 10px;
-  }
+}
+
+.pink-underline {
+    width: 7%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid $pink;
+}
+
+/deep/ .long-pink-underline {
+    width: 22%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid $pink;
+}
+
+/deep/ .download {
+    font-family: $base-font;
+    font-size: 1.7rem;
+    font-weight: 700;
+
+    .arrow {
+        width: 3rem;
+        height: 3rem;
+        line-height: 2;
+        float: right;
+    }
 }

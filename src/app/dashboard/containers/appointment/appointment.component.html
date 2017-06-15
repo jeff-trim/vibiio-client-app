@@ -1,1 +1,25 @@
-<appointment-details [appointment]="appointment"></appointment-details>
+
+<h1 class="col-xs
+           col-md-offset-1
+           profile-title
+           pink">{{ appointment.user.name }}</h1>
+
+<appointment-details [appointment]="appointment"
+                     [user]="user"></appointment-details>
+
+<!--<div class="flex" >
+  <div class="col-xs-12
+              col-sm-6
+              col-md-5
+              col-md-offset-1
+              profile-information" >
+    <profile-information
+      [myProfile]="myProfile" ></profile-information>
+  </div>
+  <div class="col-xs-12
+              col-sm-6
+              col-md-5
+              profile-licensure">
+    <profile-licensure></profile-licensure>
+  </div>
+</div>-->

@@ -6,6 +6,7 @@ import { AppointmentDetailsComponent } from '../../components/appointment-detail
 
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
+import { User } from '../../models/user.interface';
 
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
@@ -18,6 +19,7 @@ import { AppointmentResolver } from '../../services/appointment.resolver.service
 export class AppointmentComponent implements OnInit {
     index: number;
     appointment: Appointment;
+    user: User;
 
     constructor(private activatedRoute: ActivatedRoute ){}
 
@@ -27,8 +29,8 @@ export class AppointmentComponent implements OnInit {
          });      
 
         this.activatedRoute.data.subscribe( (data) => {
-            this.appointment = data.appointment;
-            console.log(this.appointment)            
+            this.appointment = data.appt.appointment;
+            this.user = data.appt.appointment.user;
             }, (error) => {
                 console.log(error);
             }
