@@ -11,11 +11,11 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { MyProfileComponent } from './containers/my-profile/my-profile.component';
 import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
-import { ConsumerProfileComponent } from './containers/consumer-profile/consumer-profile.component';
+import { AppointmentComponent } from './containers/appointment/appointment.component';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
-import { ConsumerProfileDetailsComponent } from './components/consumer-profile-details/consumer-profile-details.component';
+import { AppointmentDetailsComponent } from './components/appointment-details/appointment-details.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
@@ -24,7 +24,7 @@ import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
-import { ConsumerProfileService } from './services/consumer-profile.service';
+import { AppointmentService } from './services/appointment.service';
 import { CustomerStatusService } from './services/customer-status.service';
 import { DashboardService } from './services/dashboard.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
@@ -41,6 +41,7 @@ import { MyDayResolver } from './services/my-day.resolver.service'
 import { MyProfileResolver } from './services/my-profile.resolver.service'
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
 import { CustomerProfileResolver } from './services/customer-profile.resolver.service'
+import { AppointmentResolver } from './services/appointment.resolver.service'
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -76,8 +77,11 @@ const dashboardRoutes: Routes = [
             }
           },
           {
-            path: 'consumer-profile/:id',
-            component: ConsumerProfileComponent
+            path: 'appointments',
+            component: AppointmentComponent,
+            resolve: {
+               appointment: AppointmentResolver
+            }
           }
       ]
   }
@@ -88,11 +92,11 @@ const dashboardRoutes: Routes = [
     DashboardComponent,
     KeyValueComponent,
     SidebarComponent,
-    ConsumerProfileDetailsComponent,
+    AppointmentDetailsComponent,
     SidebarScheduleComponent,
     SidebarCustomerComponent,
     CustomerProfileComponent,
-    ConsumerProfileComponent,
+    AppointmentComponent,
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
@@ -111,7 +115,7 @@ const dashboardRoutes: Routes = [
     SidebarComponent,
     MyVibiiosComponent,
     MyProfileComponent,
-    ConsumerProfileComponent
+    AppointmentComponent
   ],
   providers: [
     DashboardResolver,
@@ -121,7 +125,8 @@ const dashboardRoutes: Routes = [
     MyAppointmentsResolver,
     CustomerStatusService,
     CustomerProfileResolver,
-    ConsumerProfileService,
+    AppointmentService,
+    AppointmentResolver,
     SidebarCustomerResolver,
     CustomerProfileService,
     TodaysVibiiosService,

@@ -5,18 +5,18 @@ import { API_URL } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { ConsumerProfileDetails } from '../models/consumer-profile-details.interface';
+import { Appointment } from '../models/appointment.interface';
 
-const CONSUMER_PROFILE_API: string = `${API_URL}/users/`;
+const APPOINTMENT_DETAILS_API: string = `${API_URL}/schedule/appointments/?id=`;
 
 @Injectable()
-export class ConsumerProfileService {
+export class AppointmentService {
 
-  constructor(private http: Http, ) {}
+  constructor(private http: Http) {}
 
-  getConsumerProfileDetails(user_id: number) {
+  getAppointmentDetails(appointment_id: number) {
     return this.http
-        .get('${CONSUMER_PROFILE_API} + user_id')
+        .get(APPOINTMENT_DETAILS_API + appointment_id)
         .map((response: Response) => response.json());
   }
 }
