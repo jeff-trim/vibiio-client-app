@@ -32,7 +32,11 @@
                   (end)="updateAppointments()"></nouislider>
     </div>
 
-    <div class="profile-information">
+    <div class="profile-information"
+         infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="300"
+         (scrolled)="scroll()">
       <ng-container *ngFor="let appointment of appointments; let i = index" >
         <customer-profile [appointment]="appointment"
                           [index]="i"

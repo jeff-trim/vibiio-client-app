@@ -13,8 +13,6 @@ export class MyDayService {
     constructor(private http: Http){}
 
     updateMyDay(appointmentId: number, currentUser: number): Observable<any>{
-        console.log("apt id", appointmentId)
-        console.log("current user", currentUser)
         return this.http
             .patch(`${MY_DAY_API}${appointmentId}`, { vibiiographer_id: currentUser})
             .map((response: Response) => response.json())

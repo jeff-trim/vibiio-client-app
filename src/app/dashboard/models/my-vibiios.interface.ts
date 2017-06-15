@@ -6,4 +6,9 @@ export interface Appointment {
     user_end_of_day: number;
     vibiiographer_id: number;
     appointments: Appointment[];
+    meta: {
+        page_count: number;
+        next_page: number;
+        appointment_count: number;
+    }
 }

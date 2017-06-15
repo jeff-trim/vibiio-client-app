@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { API_URL } from '../../../environments/environment';
 
 import { Observable } from 'rxjs/Observable';
@@ -13,9 +13,12 @@ const MY_APPOINTMENTS_API: string = `${API_URL}/schedule/range`;
 export class MyAppointmentsService {
   constructor(private http: Http) {}
 
-  getMyAppointments(): Observable<Appointment[]> {
-    return this.http
-        .get(MY_APPOINTMENTS_API)
-        .map((response: Response) => response.json());
+    getMyAppointments(page?: number): Observable<Appointment[]> {
+        let params = new URLSearchParams()
+        params.set('page', String(page))
+        let options = new RequestOptions({params: params})
+        return this.http
+            .get(MY_APPOINTMENTS_API, options)
+            .map((response: Response) => response.json());
   }
 }

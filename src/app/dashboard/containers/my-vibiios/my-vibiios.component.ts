@@ -12,10 +12,12 @@ import { MyDayService } from '../../services/my-day.service'
 import { MyAppointmentsService } from '../../services/my-appointments.service'
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
 
+// libraries
+
 // Interfaces
-import { Appointment } from '../../models/appointment.interface';
-import { CustomerProfile } from '../../models/customer-profile.interface';
-import { TodaysVibiios } from '../../models/todays-vibiios.interface';
+import { Appointment } from '../../models/appointment.interface'
+import { CustomerProfile } from '../../models/customer-profile.interface'
+import { TodaysVibiios } from '../../models/todays-vibiios.interface'
 import { SliderConfig } from '../../models/slider-config.interface'
 
 // classes
@@ -34,6 +36,7 @@ export class MyVibiiosComponent {
     rangeMin: number
     rangeMax: number
     myVibiioCount: number
+    currentPage: number = 0
     vibiiographerId: number
     vibiiographerName: string
     sliderVisibility: boolean = true
@@ -70,6 +73,23 @@ export class MyVibiiosComponent {
         })
     }
 
+
+    // facilitates infinite scroll, waits for call
+    // makes API request and appends new appointments
+    // to the main display
+    scroll(){
+        console.log(this.currentPage)
+        if(this.currentPage !== null) {
+            this.myAppointmentsService.getMyAppointments(this.currentPage)
+                .subscribe((response: any) => {
+                    this.currentPage = response.meta.next_page
+                    response.appointments.appointments.map((appointment: Appointment) => {
+                        this.appointments.push(appointment)
+                    })
+                })
+        }
+    }
+
     // monitors changes in the slider, when changed
     // it updates the range which in turn removes or
     // adds appointments to the view
@@ -80,7 +100,7 @@ export class MyVibiiosComponent {
     updateAppointments(event){
         this.myAppointmentsService.getMyAppointments()
             .subscribe((response: Appointment[]) => {
-                // console.log(response)
+                console.log("test", response)
             })
     }
 

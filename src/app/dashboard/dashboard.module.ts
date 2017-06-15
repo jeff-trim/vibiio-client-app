@@ -12,6 +12,9 @@ import { MyProfileComponent } from './containers/my-profile/my-profile.component
 import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 
+// libraries
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
+
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
@@ -79,15 +82,15 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-      ProfileLicensureComponent,
-  ],
+      ProfileLicensureComponent  ],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
       HttpModule,
       JcfModule,
       NouisliderModule,
-      MomentModule
+      MomentModule,
+      InfiniteScrollModule
   ],
   exports: [
     DashboardComponent,
