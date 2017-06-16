@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, RouterLink } from '@angular/router';
 import { HttpModule } from '@angular/http'
 import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 import { MomentModule } from 'angular2-moment';

@@ -4,10 +4,6 @@ import { ActivatedRoute } from '@angular/router'
 // services
 import { AppointmentService } from '../../services/appointment.service'
 
-
-// Components
-import { KeyValueComponent } from '../key-value/key-value.component'
-
 // Interfaces
 import { Appointment } from '../../models/appointment.interface'
 import { User } from '../../models/user.interface'

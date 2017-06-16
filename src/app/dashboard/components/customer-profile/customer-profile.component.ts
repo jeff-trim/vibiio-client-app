@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { RouterLink } from '@angular/router'
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import * as moment_tz from 'moment-timezone'
 
 // interfaces

@@ -149,4 +149,11 @@ export class MyVibiiosComponent {
     toggleSliderVisibility(){
         this.sliderVisibility = !this.sliderVisibility
     }
+
+    // used to filter out appointments based on slider information
+    // referenced in the component ngIf
+    appointmentRange(appointment){
+        appointment.scheduled_datetime >= this.range[0] &&
+        appointment.scheduled_datetime <= this.range[1]
+    }
 }
