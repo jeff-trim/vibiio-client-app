@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component,  Input } from '@angular/core';
 import { Appointment } from '../../models/appointment.interface';
+import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-sidebar-schedule',
@@ -7,14 +8,17 @@ import { Appointment } from '../../models/appointment.interface';
   template: `<div class="sidebar-schedule">
               <div class="appointments-container">
                 <div class="appointment-row">
-                  <div class="time">{{ (vibiio.scheduled_datetime | amFromUnix) | amDateFormat: 'hh:mmA'}}</div>
-                  <div class="name">{{ vibiio.first_name }} {{ vibiio.last_name }} </div>
+                  <div class="time">{{ vibiio.scheduled_datetime }}</div>
+                  <a class="name">
+                    {{ vibiio.first_name }} {{ vibiio.last_name }} </a>
                 </div>
               </div>
             </div>`
 })
 
-export class SidebarScheduleComponent {
+
+export class SidebarScheduleComponent {  
   @Input()
   vibiio: any;
 }
+
