@@ -1,18 +1,16 @@
-import { Address } from './address.interface';
-import { InsurancePolicy } from './insurance-policy.interface';
-import { User } from './user.interface';
-import { Vibiio } from './vibiio.interface';
+import { Address } from './address.interface'
+import { InsurancePolicy } from './insurance-policy.interface'
+import { User } from './user.interface'
+import { Vibiio } from './vibiio.interface'
+import { Consumer } from './consumer.interface'
 
 export interface Appointment {
-    id: number;
     scheduled_datetime: number;
-    vibiiographer_id: number;
-    current_user: number;
+    vibiiograpehr_id: number;
+    id: number;
     user: User;
     vibiio: Vibiio;
-    address: Address;
-    insurance_policies: InsurancePolicy[];
-    consumer_id: number;
-    vibbio_id: number;
+    consumer: Consumer;
+    vibiiographer_id: number;
 }
 

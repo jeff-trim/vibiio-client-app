@@ -1,6 +1,7 @@
 import { Component,  Input } from '@angular/core';
 import { Appointment } from '../../models/appointment.interface';
 import { RouterLink } from '@angular/router'
+import * as moment_tz from 'moment-timezone'
 
 @Component({
   selector: 'app-sidebar-schedule',
@@ -8,17 +9,26 @@ import { RouterLink } from '@angular/router'
   template: `<div class="sidebar-schedule">
               <div class="appointments-container">
                 <div class="appointment-row">
-                  <div class="time">{{ vibiio.scheduled_datetime }}</div>
-                  <a class="name">
-                    {{ vibiio.first_name }} {{ vibiio.last_name }} </a>
+                  <div class="time">{{ parseTime(vibiio.scheduled_datetime) }}</div>
+                  <div class="name">
+                    <a [routerLink]="['./appointment', vibiio.id]">
+                        {{ vibiio.first_name }} {{ vibiio.last_name }}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>`
 })
 
+export class SidebarScheduleComponent {
+    @Input()
+    vibiio: any;
 
-export class SidebarScheduleComponent {  
-  @Input()
-  vibiio: any;
+    @Input()
+    timeZone: number
+
+    parseTime(time: number): string{
+        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A')
+    }
 }
 

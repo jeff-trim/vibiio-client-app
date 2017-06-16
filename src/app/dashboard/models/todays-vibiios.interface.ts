@@ -1,8 +1,9 @@
+import { Appointment } from './appointment.interface'
+
 export interface TodaysVibiios {
-  id: number,
-  scheduled_datetime: string,
-  consumer_id: number,
-  vibiiographer_id: number,
-  vibiio_id: number,
-  scheduled_time: number
+    user_time_zone: string;
+    user_begin_of_day: number;
+    user_end_of_day: number;
+    vibiiographer_id: number;
+    appointments: Appointment[]
 }

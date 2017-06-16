@@ -1,7 +1,9 @@
 <div class='sidebar'>
   <div class="row
               between-xs">
-    <div class="logo-container"></div>
+    <a [routerLink]="['/dashboard/my-vibiios']">
+      <div class="logo-container"></div>
+    </a>
     <div class="hamburger"
          (click)="toggleSidebar()">
 
@@ -25,6 +27,7 @@
     </div>
   </div>
   <app-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
+                        [timeZone]="userTimeZone"
                         [vibiio]="vibiio"
                         [hidden]="scheduledVibiiosVisibility"></app-sidebar-schedule>
   <div class="title-row"

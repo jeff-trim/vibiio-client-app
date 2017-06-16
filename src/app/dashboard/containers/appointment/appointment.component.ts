@@ -26,7 +26,7 @@ export class AppointmentComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
            this.index = params['id'];
-         });      
+         });
 
         this.activatedRoute.data.subscribe( (data) => {
             this.appointment = data.appt.appointment;

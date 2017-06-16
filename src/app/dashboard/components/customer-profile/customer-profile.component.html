@@ -4,7 +4,12 @@
               info-element
               between-xs
               bottom-xs">
-    <h2>{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h2>
+    <h2>
+      <a [routerLink]="['../appointment', appointment.id]">
+        {{ appointment.user.first_name}} {{ appointment.user.last_name}}
+      </a>
+    </h2>
+
     <img (click)="toggleAppointment(appointment)"
          src="../../../../assets/images/inactive.svg"
          *ngIf="appointment.vibiiographer_id === null" >
@@ -30,20 +35,20 @@
                [value]="appointment.user.phone"></key-value>
 
     <key-value [key]="'Address'"
-               [value]="appointment.address.address_one"></key-value>
+               [value]="appointment.user.address.address_one"></key-value>
 
-    <key-value *ngIf="appointment.address.address_two"
+    <key-value *ngIf="appointment.user.address.address_two"
                [key]="'Address Two'"
-               [value]="appointment.address.address_two"></key-value>
+               [value]="appointment.user.address.address_two"></key-value>
 
     <key-value [key]="'City'"
-               [value]="appointment.address.city"></key-value>
+               [value]="appointment.user.address.city"></key-value>
 
     <key-value [key]="'State'"
-               [value]="appointment.address.state"></key-value>
+               [value]="appointment.user.address.state"></key-value>
 
     <key-value [key]="'Zip'"
-               [value]="appointment.address.zip"></key-value>
+               [value]="appointment.user.address.zip"></key-value>
 
     <span *ngFor="let policy of appointment.insurance_policies">
 
@@ -65,7 +70,7 @@
                [value]="'12345'"></key-value>
 
     <key-value [key]="'Vibiio Start Time'"
-               [value]="(appointment.scheduled_datetime | amFromUnix) | amDateFormat:'hh:mmA'"></key-value>
+               [value]="parseUnixTime(appointment.scheduled_datetime)"></key-value>
 
 
   <div class="info-element

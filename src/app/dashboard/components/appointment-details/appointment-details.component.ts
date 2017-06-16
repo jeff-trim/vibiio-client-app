@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 
-// Components 
-import { KeyValueComponent } from '../key-value/key-value.component';
+// services
+import { AppointmentService } from '../../services/appointment.service'
 
 // Interfaces
-import { Appointment } from '../../models/appointment.interface';
-import { User } from '../../models/user.interface';
+import { Appointment } from '../../models/appointment.interface'
+import { User } from '../../models/user.interface'
 
 @Component({
     selector: 'appointment-details',
@@ -13,7 +14,7 @@ import { User } from '../../models/user.interface';
     styleUrls: ['appointment-details.component.scss']
 })
 
-export class AppointmentDetailsComponent implements OnInit {
+export class AppointmentDetailsComponent  {
     @Input()
     appointment: Appointment;
 
@@ -23,5 +24,4 @@ export class AppointmentDetailsComponent implements OnInit {
     @Output()
     updateAppointment: EventEmitter<any> = new EventEmitter<any>()
 
-    ngOnInit(){}
 }

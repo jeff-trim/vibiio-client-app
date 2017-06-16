@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, RouterLink } from '@angular/router';
 import { HttpModule } from '@angular/http'
 import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 import { MomentModule } from 'angular2-moment';
@@ -12,6 +12,9 @@ import { MyProfileComponent } from './containers/my-profile/my-profile.component
 import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
+
+// libraries
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
@@ -50,7 +53,8 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
     resolve: { vibiio: DashboardResolver,
                sidebarCustomerStatuses: SidebarCustomerResolver,
-               sidebarMyDay: MyDayResolver
+               sidebarMyDay: MyDayResolver,
+               appointments: MyAppointmentsResolver
              },
       children: [
           { path: 'my_profile',
@@ -77,7 +81,7 @@ const dashboardRoutes: Routes = [
             }
           },
           {
-            path: 'appointments',
+            path: 'appointment/:id',
             component: AppointmentComponent,
             resolve: {
                appt: AppointmentResolver
@@ -100,15 +104,15 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-      ProfileLicensureComponent,
-  ],
+      ProfileLicensureComponent  ],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
       HttpModule,
       JcfModule,
       NouisliderModule,
-      MomentModule
+      MomentModule,
+      InfiniteScrollModule
   ],
   exports: [
     DashboardComponent,

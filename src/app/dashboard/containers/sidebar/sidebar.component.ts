@@ -24,7 +24,8 @@ export class SidebarComponent {
   scheduledVibiiosVisibility: boolean = false
   customerCategoryVisibility: boolean = true
   profileVisibility: boolean = true
-  sidebarVisibility: boolean
+    sidebarVisibility: boolean
+    userTimeZone: string
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusService,
@@ -40,6 +41,7 @@ export class SidebarComponent {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) =>{
+            this.userTimeZone = data.appointments.appointments.user_time_zone
             this.myScheduledVibiios = data.sidebarMyDay.my_day
         })
 
