@@ -5,7 +5,7 @@
               between-xs
               bottom-xs">
     <h2>
-      <a ui-sref="appointment">
+      <a [routerLink]="['../appointment', appointment.id]">
         {{ appointment.user.first_name}} {{ appointment.user.last_name}}
       </a>
     </h2>
