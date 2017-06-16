@@ -29,7 +29,7 @@
       <nouislider [config]="sliderConfig"
                   [(ngModel)]="range"
                   (change)="onChange($event)"
-                  (end)="updateAppointments()"></nouislider>
+                  (set)="updateAppointments($event)"></nouislider>
     </div>
 
     <div class="profile-information"
@@ -40,6 +40,7 @@
       <ng-container *ngFor="let appointment of appointments; let i = index" >
         <customer-profile [appointment]="appointment"
                           [index]="i"
+                          [timeZone]="todaysVibiios.user_time_zone"
                           [vibiiographerId]="vibiiographerId"
                           (appointmentId)="appointmentId"
                           (updateAppointment)="updateAppointment($event)"

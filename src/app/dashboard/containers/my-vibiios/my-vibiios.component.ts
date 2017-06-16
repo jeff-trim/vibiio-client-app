@@ -12,21 +12,19 @@ import { MyDayService } from '../../services/my-day.service'
 import { MyAppointmentsService } from '../../services/my-appointments.service'
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
 
-// libraries
-
 // Interfaces
 import { Appointment } from '../../models/appointment.interface'
 import { CustomerProfile } from '../../models/customer-profile.interface'
 import { TodaysVibiios } from '../../models/todays-vibiios.interface'
 import { SliderConfig } from '../../models/slider-config.interface'
+import { MyVibiios } from '../../models/my-vibiios.interface'
 
 // classes
 import {TimeFormatter } from '../../classes/time-formatter.class'
 
 @Component({
     selector: 'my-vibiios',
-    templateUrl: 'my-vibiios.component.html',
-    styleUrls: ['my-vibiios.component.scss']
+    templateUrl: 'my-vibiios.component.html', styleUrls: ['my-vibiios.component.scss']
 })
 
 export class MyVibiiosComponent {
@@ -36,7 +34,7 @@ export class MyVibiiosComponent {
     rangeMin: number
     rangeMax: number
     myVibiioCount: number
-    currentPage: number = 0
+    currentPage: number = 1
     vibiiographerId: number
     vibiiographerName: string
     sliderVisibility: boolean = true
@@ -78,14 +76,11 @@ export class MyVibiiosComponent {
     // makes API request and appends new appointments
     // to the main display
     scroll(){
-        console.log(this.currentPage)
         if(this.currentPage !== null) {
             this.myAppointmentsService.getMyAppointments(this.currentPage)
                 .subscribe((response: any) => {
                     this.currentPage = response.meta.next_page
-                    response.appointments.appointments.map((appointment: Appointment) => {
-                        this.appointments.push(appointment)
-                    })
+                    this.addToAppointments(response.appointments.appointments)
                 })
         }
     }
@@ -97,11 +92,34 @@ export class MyVibiiosComponent {
         this.range = value
     }
 
+    // monitors slider for changes and refreshes the list of appointments
+    // this keeps the user from being shown a blank screen if they create
+    // a range in the slider that has no results currently in the view
     updateAppointments(event){
-        this.myAppointmentsService.getMyAppointments()
-            .subscribe((response: Appointment[]) => {
-                console.log("test", response)
+
+        // clear appointments so we don't have appointments
+        // out of order
+        this.appointments = []
+
+        // event[0] = value of left range slider handle
+        // event[1] = value of right range slider handle
+        this.getAppointments(1, event[0], event[1])
+    }
+
+
+    // triggers getting of appointments and sends them to addToAppointments()
+    getAppointments(pageNum: number, start_time?: number, end_time?: number){
+        this.myAppointmentsService.getMyAppointments(pageNum, start_time, end_time)
+            .subscribe((response: MyVibiios) => {
+                this.currentPage = response.meta.next_page
+                this.addToAppointments(response.appointments.appointments)
             })
+    }
+
+    // maps over an array of appointments and adds them to the public appointment
+    // array
+    addToAppointments(incoming_apts){
+        incoming_apts.map((appointment: Appointment) => this.appointments.push(appointment))
     }
 
     // apt_obj will have 2 key-vals appointment with appointment data

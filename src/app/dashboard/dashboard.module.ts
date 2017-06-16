@@ -48,7 +48,8 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
     resolve: { vibiio: DashboardResolver,
                sidebarCustomerStatuses: SidebarCustomerResolver,
-               sidebarMyDay: MyDayResolver
+               sidebarMyDay: MyDayResolver,
+               appointments: MyAppointmentsResolver
              },
       children: [
           { path: 'my_profile',

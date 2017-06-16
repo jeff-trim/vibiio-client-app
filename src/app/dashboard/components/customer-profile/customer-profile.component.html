@@ -4,7 +4,12 @@
               info-element
               between-xs
               bottom-xs">
-    <h2>{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h2>
+    <h2>
+      <a ui-sref="appointment">
+        {{ appointment.user.first_name}} {{ appointment.user.last_name}}
+      </a>
+    </h2>
+
     <img (click)="toggleAppointment(appointment)"
          src="../../../../assets/images/inactive.svg"
          *ngIf="appointment.vibiiographer_id === null" >
@@ -65,7 +70,7 @@
                [value]="'12345'"></key-value>
 
     <key-value [key]="'Vibiio Start Time'"
-               [value]="(appointment.scheduled_datetime | amFromUnix) | amDateFormat:'hh:mmA'"></key-value>
+               [value]="parseUnixTime(appointment.scheduled_datetime)"></key-value>
 
 
   <div class="info-element

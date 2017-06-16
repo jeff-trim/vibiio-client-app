@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import * as moment_tz from 'moment-timezone'
 
 // interfaces
 import { Appointment } from '../../models/appointment.interface';
@@ -20,8 +21,16 @@ export class CustomerProfileComponent {
     @Input()
     vibiiographerId: number
 
+    @Input()
+    timeZone: number
+
     @Output()
     updateAppointment: EventEmitter<any> = new EventEmitter<any>()
+
+    // parses unix time and displays time in relation to timezone
+    parseUnixTime(time){
+        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A')
+    }
 
     toggleAppointment(appointment: Appointment){
         if(this.appointment.vibiiographer_id === null){
