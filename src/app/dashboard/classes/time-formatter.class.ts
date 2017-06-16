@@ -2,8 +2,7 @@ import * as moment_tz from 'moment-timezone'
 
 export class TimeFormatter {
 
-    private user_timezone: string
-    constructor(){}
+    constructor(private user_timezone: string){}
 
     to(value: number): string {
         return moment_tz.unix(value)
