@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 // Components 
 import { KeyValueComponent } from '../key-value/key-value.component';
@@ -13,7 +13,7 @@ import { User } from '../../models/user.interface';
     styleUrls: ['appointment-details.component.scss']
 })
 
-export class AppointmentDetailsComponent implements OnInit, OnChanges {
+export class AppointmentDetailsComponent implements OnInit {
     @Input()
     appointment: Appointment;
 
@@ -23,13 +23,5 @@ export class AppointmentDetailsComponent implements OnInit, OnChanges {
     @Output()
     updateAppointment: EventEmitter<any> = new EventEmitter<any>()
 
-    ngOnInit(){
-        console.log(this.appointment)
-        console.log(this.user)
-    }
-
-    ngOnChanges(){
-        console.log('changes', this.appointment)        
-        console.log('changes', this.user)        
-    }
+    ngOnInit(){}
 }

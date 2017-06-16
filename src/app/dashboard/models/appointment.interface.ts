@@ -6,7 +6,6 @@ import { Vibiio } from './vibiio.interface';
 export interface Appointment {
     id: number;
     scheduled_datetime: number;
-    // claim_id: number;
     vibiiographer_id: number;
     current_user: number;
     user: User;
