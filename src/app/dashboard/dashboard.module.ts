@@ -36,6 +36,8 @@ import { MyDayService } from './services/my-day.service'
 import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service'
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
+import { MyAvailabilityService } from './services/my-availability.service';
+
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service'
@@ -45,6 +47,7 @@ import { MyProfileResolver } from './services/my-profile.resolver.service'
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
 import { CustomerProfileResolver } from './services/customer-profile.resolver.service'
 import { AppointmentResolver } from './services/appointment.resolver.service'
+import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -54,7 +57,8 @@ const dashboardRoutes: Routes = [
     resolve: { vibiio: DashboardResolver,
                sidebarCustomerStatuses: SidebarCustomerResolver,
                sidebarMyDay: MyDayResolver,
-               appointments: MyAppointmentsResolver
+               appointments: MyAppointmentsResolver,
+               availability: MyAvailabilityResolver
              },
       children: [
           { path: 'my_profile',
@@ -136,6 +140,8 @@ const dashboardRoutes: Routes = [
     TodaysVibiiosService,
     MyProfileResolver,
     MyProfileService,
+    MyAvailabilityService,
+    MyAvailabilityResolver,
     MyDayService,
       MyDayResolver,
       SidebarMyVibiioSharedService
