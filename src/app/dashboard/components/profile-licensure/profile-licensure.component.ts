@@ -13,6 +13,5 @@ export class ProfileLicensureComponent {
 
     ngOnInit(){
         this.licenses = this.myProfile.profile.licenses
-        console.log(this.licenses)
     }
 }
