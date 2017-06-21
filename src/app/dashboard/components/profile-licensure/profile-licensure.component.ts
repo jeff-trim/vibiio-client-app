@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'profile-licensure',
@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
     templateUrl: 'profile-licensure.component.html'
 })
 
-export class ProfileLicensureComponent {}
+export class ProfileLicensureComponent {
+    @Input()
+    myProfile
+    licenses
+
+    ngOnInit(){
+        this.licenses = this.myProfile.profile.licenses
+        console.log(this.licenses)
+    }
+}

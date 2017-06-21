@@ -3,14 +3,9 @@
   <div class="long-pink-underline" ></div>
 </div>
 
-<key-value [key]="'Type'"
-           [value]="'Public'"></key-value>
-
-<key-value [key]="'Class'"
-           [value]="'0620-Adjuster-All Lines'"></key-value>
-
-<key-value [key]="'Issue Date'"
-           [value]="'05/19/2017'"></key-value>
-
-<key-value [key]="'License Number'"
-           [value]="'AV123456'"></key-value>
+<div *ngFor="let license of licenses">
+    <key-value [key]="'State'"
+               [value]="license.state"></key-value>
+    <key-value [key]="'License Number'"
+               [value]="license.license_number"></key-value>
+</div>
