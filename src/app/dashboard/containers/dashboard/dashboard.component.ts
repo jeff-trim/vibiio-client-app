@@ -53,6 +53,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe( (data) => {
+      console.log(data);
       this.vibiio = data.vibiio;
       this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
     });

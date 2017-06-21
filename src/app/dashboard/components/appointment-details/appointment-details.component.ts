@@ -7,6 +7,7 @@ import { AppointmentService } from '../../services/appointment.service'
 // Interfaces
 import { Appointment } from '../../models/appointment.interface'
 import { User } from '../../models/user.interface'
+import { Vibiio } from '../../models/vibiio.interface'
 
 @Component({
     selector: 'appointment-details',
@@ -20,6 +21,9 @@ export class AppointmentDetailsComponent  {
 
     @Input()
     user: User;
+
+    @Input()
+    vibiio: Vibiio;
 
     @Output()
     updateAppointment: EventEmitter<any> = new EventEmitter<any>()

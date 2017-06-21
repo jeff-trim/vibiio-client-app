@@ -81,6 +81,21 @@
     <div class="info-element sub-heading">
       <h2>vibiio</h2>
       <div class="long-pink-underline" ></div>
+
+      <div class="row center-xs video-container">
+        <div class="col-xs-12">
+          <p>Video Session ID:</p>
+          <p>{{ vibiio.video_session_id }}</p>
+        </div>
+        <div class="col-xs-12">
+          <button (click)="connectToSession()"
+                  class="button button-primary">
+            Connect to video session
+          </button>
+        </div>
+          <div id="publisher-stream"></div>
+          <div id="subscriber-stream"></div>
+        </div>
     </div>
     
     <div class="first-vibiio-message">
