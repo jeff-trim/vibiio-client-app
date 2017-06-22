@@ -60,8 +60,8 @@ export class AppointmentComponent implements OnInit {
                 // Video options
                 const options = {
                 insertMode: 'append',
-                width: 280,
-                height: 280
+                width: 312,
+                height: 461.1
                 };
 
                 // Initialize a publisher and publish the video stream to the session
