@@ -30,6 +30,7 @@ export class AppointmentComponent implements OnInit {
     session: any;
     vibiio: Vibiio;
     token: VideoChatToken;
+    publisher: any;
     
 
     constructor(private activatedRoute: ActivatedRoute,
@@ -42,7 +43,6 @@ export class AppointmentComponent implements OnInit {
         
         this.activatedRoute.data.subscribe( (data) => {
             //vibiio data
-            console.log(data);
             this.vibiio = data.vibiio;
             this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             //appointment data
@@ -53,7 +53,7 @@ export class AppointmentComponent implements OnInit {
         });
     }
 
-      connectToSession() {
+      connectToSession(event) {
         this.tokenService.getToken().subscribe( (data) => {
             this.token = data.video_chat_auth_token.token;
             this.session.connect(this.token, (error) => {
@@ -65,8 +65,8 @@ export class AppointmentComponent implements OnInit {
                 };
 
                 // Initialize a publisher and publish the video stream to the session
-                const publisher = OT.initPublisher('publisher-stream', options);
-                this.session.publish(publisher);
+                this.publisher = OT.initPublisher('publisher-stream', options);
+                this.session.publish(this.publisher);
 
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (event) => {
@@ -74,5 +74,9 @@ export class AppointmentComponent implements OnInit {
                 });
             });
         });
+    }
+
+    endSession(event) {
+        this.session.unpublish(this.publisher);
     }
 }
