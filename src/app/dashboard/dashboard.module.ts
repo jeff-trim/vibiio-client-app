@@ -92,7 +92,7 @@ const dashboardRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
+    declarations: [
     DashboardComponent,
     KeyValueComponent,
     SidebarComponent,
@@ -104,10 +104,11 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-      ProfileLicensureComponent  ],
+    ProfileLicensureComponent
+  ],
   imports: [
-    CommonModule,
-    RouterModule.forChild(dashboardRoutes),
+      CommonModule,
+      RouterModule.forChild(dashboardRoutes),
       HttpModule,
       JcfModule,
       NouisliderModule,
@@ -137,7 +138,7 @@ const dashboardRoutes: Routes = [
     MyProfileResolver,
     MyProfileService,
     MyDayService,
-      MyDayResolver,
+    MyDayResolver,
       SidebarMyVibiioSharedService
   ]
 })

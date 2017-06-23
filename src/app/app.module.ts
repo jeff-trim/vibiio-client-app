@@ -16,7 +16,6 @@ import { SidebarMyVibiioSharedService } from './dashboard/services/sidebar-my-vi
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
-
 // Custom Modules
 import { AppRoutingModule } from './app-routing.module'
 import { DashboardModule } from './dashboard/dashboard.module'
@@ -34,16 +33,15 @@ import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/j
     // Angular Modules
     BrowserModule,
       CommonModule,
-      InfiniteScrollModule,
-
     // Custom Modules
       AppRoutingModule,
       DashboardModule,
+      InfiniteScrollModule,
+      JcfModule,
       LoginModule,
       MomentModule,
-      PasswordResetModule,
-      JcfModule,
-      NouisliderModule
+      NouisliderModule,
+      PasswordResetModule
   ],
   providers: [
       AuthService,
