@@ -10,19 +10,37 @@
               appointment-title
               pink" >{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h1>
 
-      <div class="col-xs
-                col-xs-offset-1
-                col-md-2
-                start-vibiio">
-                start vibiio
+      <div *ngIf="(!onVibiio)"
+           class="col-xs
+           col-xs-offset-1
+           col-md-2
+           start-vibiio
+           link"
+           (click)="connect($event)">
+           start vibiio
+      </div>
+
+      <div *ngIf="(onVibiio)"
+          class="col-xs
+          col-xs-offset-1
+          col-md-2
+          start-vibiio
+          link"
+          (click)="disconnect($event)">
+          end vibiio
       </div>
  
-      <div class="col-xs">
-      <img  src="../../../../assets/images/call-controls.svg">
-          <!--*ngIf="appointment.vibiiographer_id !== null" >-->
+      <div class="col-xs link">
+        <img  *ngIf="(!onVibiio)"
+              src="../../../../assets/images/call-controls.svg"
+              (click)="connect($event)">
+        <img  *ngIf="(onVibiio)"
+          src="../../../../assets/images/call-controls.svg"
+          class="end-call"
+          (click)="disconnect($event)">
       </div>
+      
   </div>
-
 </div>
 
 <div class="flex" >
@@ -81,13 +99,19 @@
     <div class="info-element sub-heading">
       <h2>vibiio</h2>
       <div class="long-pink-underline" ></div>
+
+      <div class="row center-xs video-container">
+          <div id="subscriber-stream"></div>
+        </div>
     </div>
     
-    <div class="first-vibiio-message">
+    <div *ngIf="(!onVibiio)" 
+         class="first-vibiio-message">
       <p class="first-vibiio">🤙</p>
       <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio</p>
       <p class="first-vibiio-text">Ready to introduce yourself?</p>
-      <p class="first-vibiio-text pink">Call {{ appointment.user.first_name }} now</p>
+      <p class="first-vibiio-text pink link"
+         (click)="connect($event)">Call {{ appointment.user.first_name }} now</p>
     </div>
   
   </div>

@@ -7,8 +7,18 @@
     }
 }
 
+.video-container {
+    margin-top: 25px;
+    margin-left: 0;
+    float: left;
+}
+
 /deep/ .pink {
    color: $pink;
+}
+
+.link {
+    cursor: pointer;
 }
 
 .center {
@@ -56,6 +66,10 @@ h1.appointment-title {
     text-transform: uppercase;
 	color: $pink;
     margin-top: 33px;
+}
+
+.end-call {
+    transform: rotate(180deg);
 }
 
 /deep/ .appointment-information h2 {

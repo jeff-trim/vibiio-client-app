@@ -88,7 +88,8 @@ const dashboardRoutes: Routes = [
             path: 'appointment/:id',
             component: AppointmentComponent,
             resolve: {
-               appt: AppointmentResolver
+               appt: AppointmentResolver,
+               vibiio: DashboardResolver
             }
           }
       ]
