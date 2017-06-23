@@ -45,6 +45,7 @@ export class AppointmentComponent implements OnInit {
             //vibiio data
             this.vibiio = data.vibiio;
             this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
+            console.log(this.vibiio.video_session_id)
             //appointment data
             this.appointment = data.appt.appointment;
             this.user = data.appt.appointment.user;
@@ -56,6 +57,8 @@ export class AppointmentComponent implements OnInit {
       connectToSession(event) {
         this.tokenService.getToken().subscribe( (data) => {
             this.token = data.video_chat_auth_token.token;
+            console.log(this.token)
+          
             this.session.connect(this.token, (error) => {
                 // Video options
                 const options = {
