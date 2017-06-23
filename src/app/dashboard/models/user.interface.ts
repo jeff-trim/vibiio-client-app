@@ -8,5 +8,6 @@ export interface User {
     time_zone: string;
     profile: {
         uuid: string;
+        available?: boolean;
     }
 }

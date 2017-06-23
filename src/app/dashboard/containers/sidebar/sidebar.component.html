@@ -12,6 +12,28 @@
       <span></span>
     </div>
   </div>
+  
+  <div class="row 
+              betweeen-xs"
+              (click)=toggleAvailability()>
+
+    <div class="availability-container"
+         *ngIf=(available)>
+      <div class="availability-icon-on"></div>
+      <div class="availability-message">
+        <span class="icon">👋</span> I’m available!
+      </div>
+    </div>
+
+    <div class="availability-container"
+         *ngIf=(!available)>
+      <div class="availability-icon-off"></div>
+      <div class="availability-message">
+        <span class="icon">️️️✌️</span> I’m outta here
+      </div>
+    </div>  
+  </div>
+
   <span [ngClass]="{'hidden':!sidebarVisibility}">
     <div class="title-row">
     <a routerLink="my-vibiios"

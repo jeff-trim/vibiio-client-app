@@ -7,6 +7,7 @@ import { SidebarCustomerComponent } from '../../components/sidebar-customer/side
 import { MyAppointmentsService } from '../../services/my-appointments.service'
 import { CustomerStatusService } from '../../services/customer-status.service'
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
+import { MyAvailabilityService } from '../../services/my-availability.service';
 
 // Interfaces
 import { CustomerStatusCount } from '../../models/customer-status-count.interface'
@@ -24,12 +25,14 @@ export class SidebarComponent {
   scheduledVibiiosVisibility: boolean = false
   customerCategoryVisibility: boolean = true
   profileVisibility: boolean = true
-    sidebarVisibility: boolean
-    userTimeZone: string
+  sidebarVisibility: boolean
+  userTimeZone: string
+  available: boolean = false;
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusService,
                 private activatedRoute: ActivatedRoute,
+                private availabilityService: MyAvailabilityService,                
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {
 
         // subscribes to shared service and listens for changes passed from the
@@ -48,6 +51,18 @@ export class SidebarComponent {
     this.statusService
       .getCustomerStatus()
       .subscribe((data: CustomerStatusCount[]) => this.customersCategories = data);
+  }
+
+    toggleAvailability() {
+      this.available = !this.available;
+    
+      this.availabilityService.toggleAvailability(this.available)
+      .subscribe( (data) => {
+            this.available = data.user.profile.available;
+            }, (error) => {
+                console.log(error);
+            }
+        )
   }
 
     toggleSidebar(){
