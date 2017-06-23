@@ -64,6 +64,10 @@ h1.appointment-title {
     margin-top: 33px;
 }
 
+.end-call {
+    transform: rotate(180deg);
+}
+
 /deep/ .appointment-information h2 {
 	  font-family: Montserrat;
 	  font-size: 3.75rem;
