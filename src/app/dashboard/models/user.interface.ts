@@ -1,3 +1,5 @@
+import { Address } from './address.interface';
+
 export interface User {
     id: number;
     email: string;
@@ -6,6 +8,7 @@ export interface User {
     company: string;
     phone: string;
     time_zone: string;
+    address: Address;
     profile: {
         uuid: string;
         available?: boolean;
