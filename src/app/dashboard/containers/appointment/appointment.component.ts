@@ -14,7 +14,7 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment';
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
-import { DashboardService } from '../../services/dashboard.service';
+import { VideoChatService } from '../../services/video-chat.service';
 
 declare var OT: any;
 
@@ -31,19 +31,22 @@ export class AppointmentComponent implements OnInit {
     vibiio: Vibiio;
     token: VideoChatToken;
     publisher: any;
-    
+
 
     constructor(private activatedRoute: ActivatedRoute,
-                private tokenService: VideoChatTokenService){}
+                private tokenService: VideoChatTokenService,
+                private videoService: VideoChatService
+            ){}
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
            this.index = params['id'];
         });
-        
+
         this.activatedRoute.data.subscribe( (data) => {
+            console.log(data)
             //vibiio data
-            this.vibiio = data.vibiio;
+            this.vibiio = data.appt.appointment.vibiio;
             this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             //appointment data
             this.appointment = data.appt.appointment;
@@ -56,7 +59,7 @@ export class AppointmentComponent implements OnInit {
       connectToSession(event) {
         this.tokenService.getToken().subscribe( (data) => {
             this.token = data.video_chat_auth_token.token;
-          
+
             this.session.connect(this.token, (error) => {
                 // Video options
                 const options = {
