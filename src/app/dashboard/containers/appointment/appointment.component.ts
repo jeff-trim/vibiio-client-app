@@ -57,7 +57,7 @@ export class AppointmentComponent implements OnInit {
     }
 
       connectToSession(event) {
-        this.tokenService.getToken().subscribe( (data) => {
+        this.tokenService.getToken(this.vibiio.id).subscribe( (data) => {
             this.token = data.video_chat_auth_token.token;
 
             this.session.connect(this.token, (error) => {
@@ -81,6 +81,6 @@ export class AppointmentComponent implements OnInit {
     }
 
     endSession(event) {
-        this.session.unpublish(this.publisher);
+        this.session.disconnect();
     }
 }
