@@ -41,43 +41,8 @@ declare var OT: any;
 
 
 export class DashboardComponent implements OnInit {
-  session: any;
-  vibiio: Vibiio;
-  token: VideoChatToken;
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private tokenService: VideoChatTokenService
-  ) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.activatedRoute.data.subscribe( (data) => {
-      this.vibiio = data.vibiio;
-      this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
-    });
-  }
-
-  connectToSession() {
-    this.tokenService.getToken().subscribe( (data) => {
-      this.token = data.video_chat_auth_token.token;
-      this.session.connect(this.token, (error) => {
-        // Video options
-        const options = {
-          insertMode: 'append',
-          width: 280,
-          height: 280
-        };
-
-        // Initialize a publisher and publish the video stream to the session
-        const publisher = OT.initPublisher('publisher-stream', options);
-        this.session.publish(publisher);
-
-        // Subscribe to stream created events
-        this.session.on('streamCreated', (event) => {
-          this.session.subscribe(event.stream, 'subscriber-stream', options);
-        });
-      });
-    });
-  }
+  ngOnInit() {}
 }
