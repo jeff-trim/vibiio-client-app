@@ -36,6 +36,7 @@ import { MyDayService } from './services/my-day.service'
 import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service'
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
+import { VideoChatService } from './services/video-chat.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 
 
@@ -130,6 +131,7 @@ const dashboardRoutes: Routes = [
     DashboardResolver,
     DashboardService,
     VideoChatTokenService,
+    VideoChatService,
     MyAppointmentsService,
     MyAppointmentsResolver,
     CustomerStatusService,
@@ -144,8 +146,8 @@ const dashboardRoutes: Routes = [
     MyAvailabilityService,
     MyAvailabilityResolver,
     MyDayService,
-      MyDayResolver,
-      SidebarMyVibiioSharedService
+    MyDayResolver,
+    SidebarMyVibiioSharedService
   ]
 })
 
