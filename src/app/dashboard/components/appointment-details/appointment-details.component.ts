@@ -17,7 +17,7 @@ import { Vibiio } from '../../models/vibiio.interface'
 
 export class AppointmentDetailsComponent  {
     onVibiio: boolean = false;
-    
+
     @Input()
     appointment: Appointment;
 
@@ -35,11 +35,11 @@ export class AppointmentDetailsComponent  {
 
     connect() {
     this.startVibiio.emit(event);
-    this.onVibiio = true;    
+    this.onVibiio = true;
   }
 
     disconnect() {
     this.endVibiio.emit(event);
-    this.onVibiio = false;    
+    this.onVibiio = false;
   }
 }

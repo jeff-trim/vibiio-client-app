@@ -54,8 +54,7 @@ const dashboardRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    resolve: { vibiio: DashboardResolver,
-               sidebarCustomerStatuses: SidebarCustomerResolver,
+    resolve: { sidebarCustomerStatuses: SidebarCustomerResolver,
                sidebarMyDay: MyDayResolver,
                appointments: MyAppointmentsResolver,
                availability: MyAvailabilityResolver
@@ -88,8 +87,7 @@ const dashboardRoutes: Routes = [
             path: 'appointment/:id',
             component: AppointmentComponent,
             resolve: {
-               appt: AppointmentResolver,
-               vibiio: DashboardResolver
+               appt: AppointmentResolver
             }
           }
       ]
@@ -144,8 +142,8 @@ const dashboardRoutes: Routes = [
     MyAvailabilityService,
     MyAvailabilityResolver,
     MyDayService,
-      MyDayResolver,
-      SidebarMyVibiioSharedService
+    MyDayResolver,
+    SidebarMyVibiioSharedService
   ]
 })
 
