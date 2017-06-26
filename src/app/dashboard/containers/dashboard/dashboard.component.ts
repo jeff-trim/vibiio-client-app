@@ -25,6 +25,7 @@ declare var OT: any;
     selector: 'app-vibiio',
     styleUrls: ['./dashboard.component.scss'],
   template: `
+<span (click)="sendMessage()">CLICK ME</span>
 <div class="row">
   <app-sidebar class="col-xs-12
                       col-md-3
@@ -44,19 +45,26 @@ export class DashboardComponent implements OnInit {
     vibiio: Vibiio;
     token: VideoChatToken;
     cable = ActionCable.createConsumer('ws://localhost:3000/cable')
+    subscription
 
     constructor(
       private router: Router,
       private activatedRoute: ActivatedRoute,
       private tokenService: VideoChatTokenService
     ){
-        this.cable.debugging = true
-        this.cable.subscriptions.create('AvailabilityChannel', {
-            received: function(data){
+        this.subscription = this.cable.subscriptions.create('AvailabilityChannel', {
+            received(data){
                 console.log(data)
-                console.log("received")
+            },
+            claim(message){
+                return this.perform('claim', {message})
             }
+
         })
+    }
+
+    sendMessage(){
+        this.subscription.claim({message: "test"})
     }
 
     ngOnInit() {
