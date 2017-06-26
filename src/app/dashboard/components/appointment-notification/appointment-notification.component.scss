@@ -19,10 +19,12 @@
   .claim-button {
     height: 50px;
     margin: 15px 15px 15px 5px;
+    cursor: pointer;
   }
   .button-label {
     text-transform: uppercase;
     font-size: 1.1rem;
+    cursor: pointer;
   }
 }
 .message {

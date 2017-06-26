@@ -1,10 +1,9 @@
-import { Component, OnInit} from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
 // libaries
 import * as ActionCable from 'actioncable'
-
 
 // Models
 import { Vibiio } from '../../models/vibiio.interface'
@@ -19,8 +18,7 @@ declare var OT: any;
 
 
 @Component({
-    selector: 'app-vibiio',
-    styleUrls: ['./dashboard.component.scss'],
+    selector: 'app-vibiio', styleUrls: ['./dashboard.component.scss'],
   template: `
 <div class="row">
   <app-sidebar class="col-xs-12
@@ -31,7 +29,8 @@ declare var OT: any;
               col-md-9
               dashboard-outlet">
     <appointment-notification
-      [name]="userName()"></appointment-notification>
+      [notificationData]="waitingConsumers[0]"
+      *ngIf="notificationShow"></appointment-notification>
     <router-outlet></router-outlet>
   </div>
 </div>
@@ -42,39 +41,54 @@ export class DashboardComponent implements OnInit {
     session: any;
     vibiio: Vibiio;
     token: VideoChatToken;
-    cable = ActionCable.createConsumer('ws://localhost:3000/cable')
     subscription
-    myProfile
+    notificationShow: boolean = false
+    vibiiographerProfile
+    waitingConsumers = []
+    notificationData = {
+        consumerName: null,
+        vibiiographerId: null
+    }
 
     constructor(
-      private router: Router,
-      private activatedRoute: ActivatedRoute,
-      private tokenService: VideoChatTokenService
-    ){
-        this.subscription = this.cable.subscriptions.create('AvailabilityChannel', {
-            startVibiio(message){
-                return this.perform('start_vibiio', message)
-            }
-
-        })
-    }
-
-    userName(){
-        return `${this.myProfile.user.first_name} ${this.myProfile.user.last_name}`
-    }
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private tokenService: VideoChatTokenService
+    ){}
 
     sendMessage(consumer_id){
         this.subscription.startVibiio({
-            vibiiographer_id: this.myProfile.profile.id,
-            consumer_id: consumer_id
+            // vibiiographer_id: this.myProfile.profile.id,
+            // consumer_id: consumerId
         })
     }
 
+    receiveNotificationData(data){
+        this.waitingConsumers.unshift({
+            consumerName: data.consumer_name,
+            consumerId: data.consumer_id
+        })
+        this.notificationShow = true
+    }
+
     ngOnInit() {
-    this.activatedRoute.data.subscribe((data) => {
-        this.vibiio = data.vibiio
-        this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id)
-        this.myProfile = data.myProfile
-    });
+        this.activatedRoute.data.subscribe((data) => {
+            this.vibiio = data.vibiio
+            this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id)
+            this.vibiiographerProfile = data.myProfile
+
+        });
+        let cable = ActionCable.createConsumer('ws://localhost:3000/cable')
+        let comp = this
+        this.subscription = cable.subscriptions.create('AvailabilityChannel', {
+            received(data){
+                comp.receiveNotificationData(data)
+            },
+            startVibiio(message){
+                return this.perform('start_vibiio', message)
+            }
+        })
+
+
   };
 }
