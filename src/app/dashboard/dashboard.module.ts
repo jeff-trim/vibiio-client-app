@@ -24,6 +24,7 @@ import { ProfileLicensureComponent } from './components/profile-licensure/profil
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
+import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -54,7 +55,8 @@ const dashboardRoutes: Routes = [
     resolve: { vibiio: DashboardResolver,
                sidebarCustomerStatuses: SidebarCustomerResolver,
                sidebarMyDay: MyDayResolver,
-               appointments: MyAppointmentsResolver
+               appointments: MyAppointmentsResolver,
+               myProfile: MyProfileResolver
              },
       children: [
           { path: 'my_profile',
@@ -104,7 +106,8 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-    ProfileLicensureComponent
+        ProfileLicensureComponent,
+        AppointmentNotificationComponent
   ],
   imports: [
       CommonModule,
@@ -120,7 +123,7 @@ const dashboardRoutes: Routes = [
     SidebarComponent,
     MyVibiiosComponent,
     MyProfileComponent,
-    AppointmentComponent
+      AppointmentComponent
   ],
   providers: [
     DashboardResolver,

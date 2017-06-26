@@ -5,9 +5,6 @@ import { Observable } from 'rxjs/Observable'
 // libaries
 import * as ActionCable from 'actioncable'
 
-// Containers
-import { MyProfileComponent } from '../my-profile/my-profile.component'
-import { SidebarComponent } from './../sidebar/sidebar.component'
 
 // Models
 import { Vibiio } from '../../models/vibiio.interface'
@@ -25,7 +22,6 @@ declare var OT: any;
     selector: 'app-vibiio',
     styleUrls: ['./dashboard.component.scss'],
   template: `
-<span (click)="sendMessage()">CLICK ME</span>
 <div class="row">
   <app-sidebar class="col-xs-12
                       col-md-3
@@ -34,6 +30,8 @@ declare var OT: any;
   <div class="col-xs-12
               col-md-9
               dashboard-outlet">
+    <appointment-notification
+      [name]="userName()"></appointment-notification>
     <router-outlet></router-outlet>
   </div>
 </div>
@@ -46,6 +44,7 @@ export class DashboardComponent implements OnInit {
     token: VideoChatToken;
     cable = ActionCable.createConsumer('ws://localhost:3000/cable')
     subscription
+    myProfile
 
     constructor(
       private router: Router,
@@ -53,24 +52,29 @@ export class DashboardComponent implements OnInit {
       private tokenService: VideoChatTokenService
     ){
         this.subscription = this.cable.subscriptions.create('AvailabilityChannel', {
-            received(data){
-                console.log(data)
-            },
-            claim(message){
-                return this.perform('claim', {message})
+            startVibiio(message){
+                return this.perform('start_vibiio', message)
             }
 
         })
     }
 
-    sendMessage(){
-        this.subscription.claim({message: "test"})
+    userName(){
+        return `${this.myProfile.user.first_name} ${this.myProfile.user.last_name}`
+    }
+
+    sendMessage(consumer_id){
+        this.subscription.startVibiio({
+            vibiiographer_id: this.myProfile.profile.id,
+            consumer_id: consumer_id
+        })
     }
 
     ngOnInit() {
-    this.activatedRoute.data.subscribe( (data) => {
-      this.vibiio = data.vibiio;
-      this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
+    this.activatedRoute.data.subscribe((data) => {
+        this.vibiio = data.vibiio
+        this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id)
+        this.myProfile = data.myProfile
     });
   };
 }
