@@ -9,7 +9,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
   <div class="button-wrap">
     <span class="button-label">Start Vibiio</span>
     <img class="claim-button"
-         (click)="claimAppointment()"
+         (click)="emitAppointment()"
          src="assets/images/start_white.svg" />
   </div>
 </div>
@@ -21,14 +21,11 @@ export class AppointmentNotificationComponent {
     notificationData
 
     @Output()
-    emitAppointment: EventEmitter<any> = new EventEmitter<any>()
+    claimAppointment: EventEmitter<any> = new EventEmitter<any>()
 
     constructor(){}
 
-    claimAppointment(){
-        this.emitAppointment.emit({
-            // vibiiographerId: this.vibiiographerProfile.user.profile.id,
-            // consumerId: this.vibiiographerProfile.
-        })
+    emitAppointment(){
+        this.claimAppointment.emit(this.notificationData)
     }
 }

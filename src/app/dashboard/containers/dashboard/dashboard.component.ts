@@ -30,6 +30,7 @@ declare var OT: any;
               dashboard-outlet">
     <appointment-notification
       [notificationData]="waitingConsumers[0]"
+      (claimAppointment)="claimAppointment($event)"
       *ngIf="notificationShow"></appointment-notification>
     <router-outlet></router-outlet>
   </div>
@@ -45,10 +46,6 @@ export class DashboardComponent implements OnInit {
     notificationShow: boolean = false
     vibiiographerProfile
     waitingConsumers = []
-    notificationData = {
-        consumerName: null,
-        vibiiographerId: null
-    }
 
     constructor(
         private router: Router,
@@ -56,19 +53,21 @@ export class DashboardComponent implements OnInit {
         private tokenService: VideoChatTokenService
     ){}
 
-    sendMessage(consumer_id){
-        this.subscription.startVibiio({
-            // vibiiographer_id: this.myProfile.profile.id,
-            // consumer_id: consumerId
-        })
-    }
-
     receiveNotificationData(data){
         this.waitingConsumers.unshift({
             consumerName: data.consumer_name,
-            consumerId: data.consumer_id
+            consumerId: data.consumer_id,
+            vibiioId: data.vibiio_id
         })
         this.notificationShow = true
+    }
+
+    claimAppointment(event){
+        this.subscription.claimAppointment({
+            vibiiographer_id: this.vibiiographerProfile.user.profile.id,
+            vibiio_id: event.vibiioId,
+            consumer_id: event.consumerId
+        })
     }
 
     ngOnInit() {
@@ -82,10 +81,11 @@ export class DashboardComponent implements OnInit {
         let comp = this
         this.subscription = cable.subscriptions.create('AvailabilityChannel', {
             received(data){
+                console.log(data)
                 comp.receiveNotificationData(data)
             },
-            startVibiio(message){
-                return this.perform('start_vibiio', message)
+            claimAppointment(message){
+                return this.perform('claim_vibiio', message)
             }
         })
 
