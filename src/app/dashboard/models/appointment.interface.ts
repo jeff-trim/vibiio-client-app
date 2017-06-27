@@ -12,5 +12,8 @@ export interface Appointment {
     vibiio: Vibiio;
     consumer: Consumer;
     vibiiographer_id: number;
+    insurance_policies: InsurancePolicy;
+    address: Address;
+    claim_id: number;
 }
 
