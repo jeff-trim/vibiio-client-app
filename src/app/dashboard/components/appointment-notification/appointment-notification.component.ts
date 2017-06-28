@@ -5,7 +5,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     styleUrls: ['./appointment-notification.component.scss'],
     template: `
 <div class="notification-bar">
-  <div class="message">{{ notificationData.consumerName }}is requesting a live vibiio!</div>
+  <div class="message">{{ notificationData.content.message_body }}</div>
   <div class="button-wrap">
     <span class="button-label">Start Vibiio</span>
     <img class="claim-button"
@@ -22,8 +22,11 @@ export class AppointmentNotificationComponent {
 
     @Output()
     claimAppointment: EventEmitter<any> = new EventEmitter<any>()
+    messageBody: string
 
     constructor(){}
+
+    ngOnInit(){}
 
     emitAppointment(){
         this.claimAppointment.emit(this.notificationData)

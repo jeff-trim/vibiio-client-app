@@ -3,8 +3,8 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
 // libaries
-import * as ActionCable from 'actioncable'
-
+// import * as ActionCable from 'actioncable'
+import * as ActionCable from 'action-cable-react-jwt'
 // Models
 import { Vibiio } from '../../models/vibiio.interface'
 import { VideoChatToken } from '../../models/video-chat-token.interface'
@@ -29,7 +29,7 @@ declare var OT: any;
               col-md-9
               dashboard-outlet">
     <appointment-notification
-      [notificationData]="waitingConsumers[0]"
+      [notificationData]="currentNotificationData"
       (claimAppointment)="claimAppointment($event)"
       *ngIf="notificationShow"></appointment-notification>
     <router-outlet></router-outlet>
@@ -46,6 +46,8 @@ export class DashboardComponent implements OnInit {
     notificationShow: boolean = false
     vibiiographerProfile
     waitingConsumers = []
+    currentNotificationData = {}
+    readonly jwt: string = localStorage.getItem('app-token')
 
     constructor(
         private router: Router,
@@ -54,19 +56,30 @@ export class DashboardComponent implements OnInit {
     ){}
 
     receiveNotificationData(data){
-        this.waitingConsumers.unshift({
-            consumerName: data.consumer_name,
-            consumerId: data.consumer_id,
-            vibiioId: data.vibiio_id
-        })
-        this.notificationShow = true
+        console.log(data)
+        if (data.notification_type === "notification") {
+            this.waitingConsumers.unshift({
+                consumerName: data.content.consumer_name,
+                consumerId: data.content.consumer_id,
+                vibiioId: data.content.vibiio_id
+            })
+            this.currentNotificationData = data
+            this.notificationShow = true
+        } else if (data.notification_type === "error") {
+            this.notificationShow = false
+            this.currentNotificationData = data
+            this.notificationShow = true
+            console.log("💥")
+            console.log(this.currentNotificationData)
+        }
     }
 
     claimAppointment(event){
+        console.log(event)
         this.subscription.claimAppointment({
             vibiiographer_id: this.vibiiographerProfile.user.profile.id,
-            vibiio_id: event.vibiioId,
-            consumer_id: event.consumerId
+            vibiio_id: event.content.vibiio_id,
+            consumer_id: event.content.consumer_id
         })
     }
 
@@ -77,11 +90,13 @@ export class DashboardComponent implements OnInit {
             this.vibiiographerProfile = data.myProfile
 
         });
-        let cable = ActionCable.createConsumer('ws://localhost:3000/cable')
+        let cable = ActionCable.createConsumer(
+            'ws://localhost:3000/cable',
+            this.jwt
+        )
         let comp = this
-        this.subscription = cable.subscriptions.create('AvailabilityChannel', {
+        this.subscription = cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
             received(data){
-                console.log(data)
                 comp.receiveNotificationData(data)
             },
             claimAppointment(message){
