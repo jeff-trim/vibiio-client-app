@@ -1,0 +1,23 @@
+<div class="col-xs-12
+            col-sm-12
+            col-md-9
+            centered
+            my-vibiio-container">
+  <h1 class="col-xs
+             col-md-offset-1
+             pink">Welcome!</h1>
+
+  <div class="flex" >
+
+    <div class="profile-information"
+         infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="300"
+         (scrolled)="scroll()">
+      <ng-container *ngFor="let appointment of appointments; let i = index" >
+        <customer-profile [appointment]="appointment"
+                          [index]="i"></customer-profile>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ import { SidebarCustomerComponent } from '../../components/sidebar-customer/side
 
 // Services
 import { MyAppointmentsService } from '../../services/my-appointments.service'
-import { CustomerStatusService } from '../../services/customer-status.service'
+import { CustomerStatusCountService } from '../../services/customer-status-count.service'
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
 import { MyAvailabilityService } from '../../services/my-availability.service';
 
@@ -30,7 +30,7 @@ export class SidebarComponent {
   available: boolean = false;
 
     constructor(private appointmentsService: MyAppointmentsService,
-                private statusService: CustomerStatusService,
+                private statusService: CustomerStatusCountService,
                 private activatedRoute: ActivatedRoute,
                 private availabilityService: MyAvailabilityService,                
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {

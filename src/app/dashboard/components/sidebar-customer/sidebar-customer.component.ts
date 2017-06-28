@@ -7,7 +7,8 @@ import { CustomerStatusCount } from '../../models/customer-status-count.interfac
   template: `
             <div class="sidebar-customer">
               <div class="categories-container">
-                <div class="category-row">
+                <div class="category-row">      
+                  <a [routerLink]="['./customer-status', category.status]"></a>
                   <div class="status">
                     {{ category.status }}
                   </div>

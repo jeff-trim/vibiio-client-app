@@ -12,6 +12,7 @@ import { MyProfileComponent } from './containers/my-profile/my-profile.component
 import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
+import { CustomerStatusComponent } from './containers/customer-status/customer-status.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
@@ -28,6 +29,7 @@ import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
 import { AppointmentService } from './services/appointment.service';
+import { CustomerStatusCountService } from './services/customer-status-count.service';
 import { CustomerStatusService } from './services/customer-status.service';
 import { DashboardService } from './services/dashboard.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
@@ -46,6 +48,7 @@ import { MyDayResolver } from './services/my-day.resolver.service'
 import { MyProfileResolver } from './services/my-profile.resolver.service'
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
 import { CustomerProfileResolver } from './services/customer-profile.resolver.service'
+import { CustomerStatusResolver } from './services/customer-status.resolver.service'
 import { AppointmentResolver } from './services/appointment.resolver.service'
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 
@@ -89,6 +92,15 @@ const dashboardRoutes: Routes = [
             resolve: {
                appt: AppointmentResolver
             }
+          },
+          {
+            path: 'customer-status/:status',
+            component: CustomerStatusComponent,
+            resolve: {
+               cust: CustomerStatusResolver,
+               appointments: MyAppointmentsResolver,
+               customerProfile: CustomerProfileResolver               
+            }
           }
       ]
   }
@@ -103,6 +115,7 @@ const dashboardRoutes: Routes = [
     SidebarScheduleComponent,
     SidebarCustomerComponent,
     CustomerProfileComponent,
+    CustomerStatusComponent,
     AppointmentComponent,
     MyVibiiosComponent,
     MyProfileComponent,
@@ -130,7 +143,9 @@ const dashboardRoutes: Routes = [
     VideoChatTokenService,
     MyAppointmentsService,
     MyAppointmentsResolver,
+    CustomerStatusCountService,
     CustomerStatusService,
+    CustomerStatusResolver,
     CustomerProfileResolver,
     AppointmentService,
     AppointmentResolver,

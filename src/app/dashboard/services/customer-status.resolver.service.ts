@@ -4,14 +4,14 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 
 // Services
-import { CustomerStatusCountService } from './customer-status-count.service';
+import { CustomerStatusService } from './customer-status.service';
 
 @Injectable()
-export class SidebarCustomerResolver implements Resolve<any> {
-    constructor(private service: CustomerStatusCountService, private router: Router) {}
+export class CustomerStatusResolver implements Resolve<any> {
+    constructor(private service: CustomerStatusService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
-      return this.service.getCustomerStatus();
+      return this.service.getByStatus(route.params.status);
     }
 }
