@@ -56,6 +56,7 @@ export class MyVibiiosComponent {
 
             // setup config object for slider in onInit because otherwise the values aren't
             // available on instantiation
+
             this.sliderConfig = {
                 start: this.appointments[0].scheduled_datetime,
                 range: {

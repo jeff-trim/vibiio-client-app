@@ -14,9 +14,9 @@
          [infiniteScrollDistance]="2"
          [infiniteScrollThrottle]="300"
          (scrolled)="scroll()">
-      <ng-container *ngFor="let appointment of appointments; let i = index" >
-        <customer-profile [appointment]="appointment"
-                          [index]="i"></customer-profile>
+      <ng-container *ngFor="let consumer_profile of consumer_profiles; let i = index" >
+        <consumer-profile [profile]="consumer_profile"
+                          [index]="i"></consumer-profile>
       </ng-container>
     </div>
   </div>

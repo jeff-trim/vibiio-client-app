@@ -29,6 +29,7 @@ export class CustomerProfileComponent {
 
     // parses unix time and displays time in relation to timezone
     parseUnixTime(time){
+        console.log(time)
         return moment_tz.unix(time).tz(this.timeZone).format('h:mm A')
     }
 

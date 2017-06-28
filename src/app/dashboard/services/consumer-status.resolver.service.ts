@@ -4,11 +4,11 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 
 // Services
-import { CustomerStatusService } from './customer-status.service';
+import { ConsumerStatusService } from './consumer-status.service';
 
 @Injectable()
-export class CustomerStatusResolver implements Resolve<any> {
-    constructor(private service: CustomerStatusService, private router: Router) {}
+export class ConsumerStatusResolver implements Resolve<any> {
+    constructor(private service: ConsumerStatusService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
