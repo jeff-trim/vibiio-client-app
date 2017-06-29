@@ -29,7 +29,6 @@ export class CustomerProfileComponent {
 
     // parses unix time and displays time in relation to timezone
     parseUnixTime(time){
-        console.log(time)
         return moment_tz.unix(time).tz(this.timeZone).format('h:mm A')
     }
 
@@ -44,7 +43,6 @@ export class CustomerProfileComponent {
             // this in essence acts as deleting the vibiiographer
             // from the current appointment
             appointment.vibiiographer_id = null
-            console.log("vibiiographer id", appointment.vibiiographer_id)
             this.updateAppointment.emit({appointment: appointment, index: this.index })
         }
     }
