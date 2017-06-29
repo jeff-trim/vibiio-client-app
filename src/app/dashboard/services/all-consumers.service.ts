@@ -5,15 +5,15 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
-const   CUSTOMER_STATUS_API: string = `${API_URL}/consumer_status/?status=`
+const   ALL_CONSUMERS_API: string = `${API_URL}/all_consumers/`
 
 @Injectable()
-export class ConsumerStatusService {
+export class AllConsumersService {
     constructor(private http: Http){}
 
-    getByStatus(status: string): Observable<any>{
+     getAll(): Observable<any>{
         return this.http
-            .get(`${CUSTOMER_STATUS_API}${status}`)
+            .get(`${ALL_CONSUMERS_API}`)
             .map((response: Response) => response.json())
             .catch( (error: any) => Observable.throw(error.json()) );
     }

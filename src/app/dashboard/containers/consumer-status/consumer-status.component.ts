@@ -6,6 +6,7 @@ import { ConsumerProfileComponent } from '../../components/consumer-profile/cons
 
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';
+import { AllConsumersService } from '../../services/all-consumers.service';
 
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';

@@ -32,6 +32,7 @@ import { CustomerProfileService } from './services/customer-profile.service';
 import { AppointmentService } from './services/appointment.service';
 import { CustomerStatusCountService } from './services/customer-status-count.service';
 import { ConsumerStatusService } from './services/consumer-status.service';
+import { AllConsumersService } from './services/all-consumers.service';
 import { DashboardService } from './services/dashboard.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
 import { MyProfileService } from './services/my-profile.service';
@@ -50,6 +51,7 @@ import { MyProfileResolver } from './services/my-profile.resolver.service'
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
 import { CustomerProfileResolver } from './services/customer-profile.resolver.service'
 import { ConsumerStatusResolver } from './services/consumer-status.resolver.service'
+import { AllConsumersResolver } from './services/all-consumers.resolver.service'
 import { AppointmentResolver } from './services/appointment.resolver.service'
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 
@@ -100,6 +102,13 @@ const dashboardRoutes: Routes = [
             resolve: {
                cons: ConsumerStatusResolver,              
             }
+          },
+           {
+            path: 'all-consumers',
+            component: ConsumerStatusComponent,
+            resolve: {
+               cons: AllConsumersResolver,              
+            }
           }
       ]
   }
@@ -146,6 +155,8 @@ const dashboardRoutes: Routes = [
     CustomerStatusCountService,
     ConsumerStatusService,
     ConsumerStatusResolver,
+    AllConsumersService,
+    AllConsumersResolver,
     CustomerProfileResolver,
     AppointmentService,
     AppointmentResolver,
