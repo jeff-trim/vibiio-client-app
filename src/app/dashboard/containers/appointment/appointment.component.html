@@ -1,4 +1,7 @@
 
 <appointment-details [appointment]="appointment"
-                     [user]="user"></appointment-details>
-
+                     [user]="user"
+                     [vibiio]="vibiio"
+                     (startVibiio)="connectToSession($event)"
+                     (endVibiio)="endSession($event)">
+</appointment-details>

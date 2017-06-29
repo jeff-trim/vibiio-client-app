@@ -7,6 +7,7 @@ import { AppointmentService } from '../../services/appointment.service'
 // Interfaces
 import { Appointment } from '../../models/appointment.interface'
 import { User } from '../../models/user.interface'
+import { Vibiio } from '../../models/vibiio.interface'
 
 @Component({
     selector: 'appointment-details',
@@ -15,13 +16,30 @@ import { User } from '../../models/user.interface'
 })
 
 export class AppointmentDetailsComponent  {
+    onVibiio: boolean = false;
+
     @Input()
     appointment: Appointment;
 
     @Input()
     user: User;
 
-    @Output()
-    updateAppointment: EventEmitter<any> = new EventEmitter<any>()
+    @Input()
+    vibiio: Vibiio;
 
+    @Output()
+    startVibiio: EventEmitter<any> = new EventEmitter<any>()
+
+    @Output()
+    endVibiio: EventEmitter<any> = new EventEmitter<any>()
+
+    connect() {
+    this.startVibiio.emit(event);
+    this.onVibiio = true;
+  }
+
+    disconnect() {
+    this.endVibiio.emit(event);
+    this.onVibiio = false;
+  }
 }
