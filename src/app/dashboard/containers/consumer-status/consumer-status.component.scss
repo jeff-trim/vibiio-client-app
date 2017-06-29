@@ -1,8 +1,5 @@
 @import '../../../../assets/css/_variables.scss';
 
-.centered {
-    margin: 0 auto;
-}
 .my-vibiio-container {
     top: 100px;
 }
@@ -11,10 +8,12 @@
     flex-direction: column;
 }
 
-
 h1 {
     font-weight: 400;
-    font-size: 3.2rem;
+    font-size: 4.2rem;
+	line-height: 1.22;
+	letter-spacing: -2px;
+    text-transform: none;
 }
 
 .sliderToggle{

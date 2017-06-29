@@ -5,7 +5,8 @@
               between-xs
               bottom-xs">
     <h2>
-        {{ profile.first_name}} {{ profile.last_name}}
+        {{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}
+        <div class="pink-underline" ></div>
     </h2>
 </div>
 
@@ -13,31 +14,26 @@
 <div class="flex" >
   <div class="col-xs-12
               col-sm-6
-              col-md-5
-              col-md-offset-1
+              col-md-6
               profile-information">
-    <div class="info-element">
-        <h2>profile</h2>
-        <div class="pink-underline" ></div>
-    </div>
 
     <key-value [key]="'Email'"
-               [value]="profile.email"></key-value>
+               [value]="consumerProfile.user_info.email"></key-value>
 
     <key-value [key]="'Phone Number'"
-               [value]="profile.phone"></key-value>
+               [value]="consumerProfile.user_info.phone_number"></key-value>
 
     <key-value [key]="'Address'"
-               [value]="profile.address_one"></key-value>
+               [value]="consumerProfile.user_info.address_one"></key-value>
 
     <key-value [key]="'Zip'"
-               [value]="profile.zip"></key-value>
+               [value]="consumerProfile.user_info.zipcode"></key-value>
 
       <key-value [key]="'Provider'"
-                 [value]="profile.provider"></key-value>
+                 [value]="consumerProfile.user_info.provider"></key-value>
 
       <key-value [key]="'Policy Number'"
-                 [value]="profile.policy_number"></key-value>
+                 [value]="consumerProfile.user_info.policy_number"></key-value>
 
   </div>
   

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
-const   CUSTOMER_STATUS_API: string = `${API_URL}/customer_status/?status=`
+const   CUSTOMER_STATUS_API: string = `${API_URL}/all_customers/?status=`
 
 @Injectable()
 export class ConsumerStatusService {

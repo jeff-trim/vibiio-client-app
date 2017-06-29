@@ -114,6 +114,7 @@ const dashboardRoutes: Routes = [
     SidebarScheduleComponent,
     SidebarCustomerComponent,
     CustomerProfileComponent,
+    ConsumerProfileComponent,
     ConsumerStatusComponent,
     AppointmentComponent,
     MyVibiiosComponent,

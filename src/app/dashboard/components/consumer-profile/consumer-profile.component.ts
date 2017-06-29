@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 // Models
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
@@ -9,7 +9,11 @@ import { ConsumerProfile } from '../../models/consumer-profile.interface';
     styleUrls: ['consumer-profile.component.scss']
 })
 
-export class ConsumerProfileComponent {
+export class ConsumerProfileComponent implements OnInit {
     @Input()
-    profile: ConsumerProfile; 
+    consumerProfile: ConsumerProfile; 
+
+    ngOnInit(){
+        console.log(this.consumerProfile);
+    }
 }

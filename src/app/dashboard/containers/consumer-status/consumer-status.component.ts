@@ -17,15 +17,14 @@ import { ConsumerProfile } from '../../models/consumer-profile.interface';
 })
 
 export class ConsumerStatusComponent implements OnInit {
-    consumer_profile: ConsumerProfile[];
+    consumerProfiles: ConsumerProfile[];
 
     constructor(private activatedRoute: ActivatedRoute,
                 private consumerStatusService: ConsumerStatusService) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            console.log(data);
-            this.consumer_profile = data.cons.consumers
+            this.consumerProfiles = data.cons.vibiios
         })
     }
 }
