@@ -66,11 +66,9 @@ export class DashboardComponent implements OnInit {
             this.currentNotificationData = data
             this.notificationShow = true
         } else if (data.notification_type === "error") {
-            this.notificationShow = false
             this.currentNotificationData = data
-            this.notificationShow = true
-            console.log("💥")
-            console.log(this.currentNotificationData)
+        } else if (data.notification_type === "success"){
+            this.router.navigateByUrl("/dashboard/appointment/" + data.content.appointment_id)
         }
     }
 
@@ -97,6 +95,7 @@ export class DashboardComponent implements OnInit {
         let comp = this
         this.subscription = cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
             received(data){
+                console.log(data)
                 comp.receiveNotificationData(data)
             },
             claimAppointment(message){

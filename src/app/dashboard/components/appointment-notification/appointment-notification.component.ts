@@ -6,7 +6,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     template: `
 <div class="notification-bar">
   <div class="message">{{ notificationData.content.message_body }}</div>
-  <div class="button-wrap">
+  <div class="button-wrap"
+       *ngIf="displayConnectIcon()">
     <span class="button-label">Start Vibiio</span>
     <img class="claim-button"
          (click)="emitAppointment()"
@@ -26,7 +27,13 @@ export class AppointmentNotificationComponent {
 
     constructor(){}
 
-    ngOnInit(){}
+    displayConnectIcon(){
+        if(this.notificationData.notification_type === "error") {
+            return false
+        } else {
+            return true
+        }
+    }
 
     emitAppointment(){
         this.claimAppointment.emit(this.notificationData)
