@@ -21,7 +21,8 @@ declare var OT: any;
     selector: 'app-vibiio', styleUrls: ['./dashboard.component.scss'],
   template: `
 <div class="row">
-  <app-sidebar class="col-xs-12
+  <app-sidebar (emitAvailability)="toggleActionCable($event)"
+               class="col-xs-12
                       col-md-3
                       side-bar-component">
   </app-sidebar>
@@ -47,6 +48,8 @@ export class DashboardComponent implements OnInit {
     vibiiographerProfile
     waitingConsumers = []
     currentNotificationData = {}
+    userAvailability: boolean
+    cable: any
     readonly jwt: string = localStorage.getItem('app-token')
 
     constructor(
@@ -73,6 +76,27 @@ export class DashboardComponent implements OnInit {
         }
     }
 
+    toggleActionCable(event){
+        this.userAvailability = event
+        let comp = this
+        if(this.userAvailability == true) {
+            this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
+                subscribed(data){
+                    console.log("subscribed")
+                },
+                received(data){
+                    comp.receiveNotificationData(data)
+                },
+                claimAppointment(message){
+                    return this.perform('claim_vibiio', message)
+                }
+            })
+        } else {
+            this.notificationShow = false
+            this.subscription.unsubscribe()
+        }
+    }
+
     claimAppointment(event){
         console.log(event)
         this.subscription.claimAppointment({
@@ -89,24 +113,6 @@ export class DashboardComponent implements OnInit {
             this.vibiiographerProfile = data.myProfile
 
         });
-        let cable = ActionCable.createConsumer(
-            'ws://localhost:3000/cable',
-            this.jwt
-        )
-        let comp = this
-        this.subscription = cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
-            subscribed(data){
-                console.log("subscribed")
-            },
-            received(data){
-                console.log("💥")
-                console.log(data)
-                console.log("💥")
-                comp.receiveNotificationData(data)
-            },
-            claimAppointment(message){
-                return this.perform('claim_vibiio', message)
-            }
-        })
+        this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', this.jwt)
   };
 }

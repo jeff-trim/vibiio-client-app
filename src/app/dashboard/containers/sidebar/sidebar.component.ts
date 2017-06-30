@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Output, EventEmitter } from '@angular/core'
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component'
 import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component'
@@ -27,12 +27,15 @@ export class SidebarComponent {
   profileVisibility: boolean = true
   sidebarVisibility: boolean
   userTimeZone: string
-  available: boolean = false;
+
+  @Output()
+  emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>()
+  available: boolean = false
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusService,
                 private activatedRoute: ActivatedRoute,
-                private availabilityService: MyAvailabilityService,                
+                private availabilityService: MyAvailabilityService,
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {
 
         // subscribes to shared service and listens for changes passed from the
@@ -54,15 +57,8 @@ export class SidebarComponent {
   }
 
     toggleAvailability() {
-      this.available = !this.available;
-    
-      this.availabilityService.toggleAvailability(this.available)
-      .subscribe( (data) => {
-            this.available = data.user.profile.available;
-            }, (error) => {
-                console.log(error);
-            }
-        )
+        this.available = !this.available;
+        this.emitAvailability.emit(this.available)
   }
 
     toggleSidebar(){
