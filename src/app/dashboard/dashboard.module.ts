@@ -58,7 +58,7 @@ const dashboardRoutes: Routes = [
     resolve: { sidebarCustomerStatuses: SidebarCustomerResolver,
                sidebarMyDay: MyDayResolver,
                appointments: MyAppointmentsResolver,
-               myProfile: MyProfileResolver
+               myProfile: MyProfileResolver,
                availability: MyAvailabilityResolver
              },
       children: [
@@ -147,8 +147,7 @@ const dashboardRoutes: Routes = [
     MyAvailabilityResolver,
     MyDayService,
     MyDayResolver,
-    SidebarMyVibiioSharedService
-    SidebarMyVibiioSharedService
+      SidebarMyVibiioSharedService
   ]
 })
 

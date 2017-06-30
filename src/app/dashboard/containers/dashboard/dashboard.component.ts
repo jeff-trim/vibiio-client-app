@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
             this.currentNotificationData = data
         } else if (data.notification_type === "success"){
             this.router.navigateByUrl("/dashboard/appointment/" + data.content.appointment_id)
+            this.notificationShow = false
         }
     }
 
@@ -84,7 +85,7 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.vibiio = data.vibiio
-            this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id)
+            // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id)
             this.vibiiographerProfile = data.myProfile
 
         });
@@ -94,15 +95,18 @@ export class DashboardComponent implements OnInit {
         )
         let comp = this
         this.subscription = cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
+            subscribed(data){
+                console.log("subscribed")
+            },
             received(data){
+                console.log("💥")
                 console.log(data)
+                console.log("💥")
                 comp.receiveNotificationData(data)
             },
             claimAppointment(message){
                 return this.perform('claim_vibiio', message)
             }
         })
-
-
   };
-
+}
