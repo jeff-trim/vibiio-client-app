@@ -14,6 +14,9 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment'
 import { VideoChatTokenService } from '../../services/video-chat-token.service'
 import { MyProfileResolver } from '../../services/my-profile.resolver.service'
 
+// environment
+import { ACTION_CABLE_URL } from '../../../../environments/environment';
+
 declare var OT: any;
 
 
@@ -113,6 +116,6 @@ export class DashboardComponent implements OnInit {
             this.vibiiographerProfile = data.myProfile
 
         });
-        this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', this.jwt)
+        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt)
   };
 }
