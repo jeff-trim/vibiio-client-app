@@ -13,6 +13,7 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment'
 // Services
 import { VideoChatTokenService } from '../../services/video-chat-token.service'
 import { MyProfileResolver } from '../../services/my-profile.resolver.service'
+import { AuthService } from '../../../services/auth.service'
 
 // environment
 import { ACTION_CABLE_URL } from '../../../../environments/environment';
@@ -53,12 +54,13 @@ export class DashboardComponent implements OnInit {
     currentNotificationData = {}
     userAvailability: boolean
     cable: any
-    readonly jwt: string = localStorage.getItem('app-token')
+    readonly jwt: string = this.authService.getToken()
 
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private tokenService: VideoChatTokenService
+        private tokenService: VideoChatTokenService,
+        private authService: AuthService
     ){}
 
     receiveNotificationData(data){
