@@ -62,7 +62,6 @@ export class DashboardComponent implements OnInit {
     ){}
 
     receiveNotificationData(data){
-        console.log(data)
         if (data.notification_type === "notification") {
             this.waitingConsumers.unshift({
                 consumerName: data.content.consumer_name,
