@@ -10,12 +10,19 @@
       </a>
     </h2>
 
-    <img (click)="toggleAppointment(appointment)"
-         src="../../../../assets/images/inactive.svg"
-         *ngIf="appointment.vibiiographer_id === null" >
-    <img (click)="toggleAppointment(appointment)"
-         src="../../../../assets/images/selected.svg"
-         *ngIf="appointment.vibiiographer_id !== null" >
+    <span *ngIf="appointment.vibiiographer_id === null"
+          class="appointment-toggle-wrapper pink"
+          (click)="toggleAppointment(appointment)">
+      Claim Vibiio!
+      <img src="../../../../assets/images/inactive.svg">
+    </span>
+    <span  *ngIf="appointment.vibiiographer_id !== null"
+           class="appointment-toggle-wrapper pink"
+           (click)="toggleAppointment(appointment)">
+      Remove
+      <img src="../../../../assets/images/selected.svg"
+           *ngIf="appointment.vibiiographer_id !== null" >
+    </span>
     <span class="pink-underline"></span>
   </div>
 </div>

@@ -29,6 +29,21 @@ h2 {
   display: inline;
 }
 
+.appointment-toggle-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $copy-font;
+  font-weight: 800;
+  font-size: 1.3rem;
+  cursor: pointer;
+
+  img {
+    padding: 0 10px;
+  }
+}
+
 .customer-profile-header {
   position: relative;
   margin-bottom: 30px;
