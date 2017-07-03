@@ -24,7 +24,6 @@ export class MyProfileComponent {
     ngOnInit(){
         this.activatedRoute.data.subscribe((data) => {
             this.myProfile = data.myProfile.user
-            console.log(this.myProfile.user);
         })
     }
 }
