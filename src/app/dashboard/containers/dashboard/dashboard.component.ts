@@ -83,9 +83,7 @@ export class DashboardComponent implements OnInit {
         let comp = this
         if(this.userAvailability == true) {
             this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
-                subscribed(data){
-                    console.log("subscribed")
-                },
+                subscribed(data){},
                 received(data){
                     comp.receiveNotificationData(data)
                 },
@@ -100,7 +98,6 @@ export class DashboardComponent implements OnInit {
     }
 
     claimAppointment(event){
-        console.log(event)
         this.subscription.claimAppointment({
             vibiiographer_id: this.vibiiographerProfile.user.profile.id,
             vibiio_id: event.content.vibiio_id,
