@@ -1,0 +1,40 @@
+@import '../../../../assets/css/_variables.scss';
+
+.notification-bar{
+  background: $pink;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.button-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  min-width: 200px;
+  align-items: center;
+
+  .claim-button {
+    height: 50px;
+    margin: 15px 15px 15px 5px;
+    cursor: pointer;
+  }
+  .button-label {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+}
+.message {
+  margin: 0 0 0 30px;
+}
+
+.message, .button-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+

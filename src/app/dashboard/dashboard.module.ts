@@ -26,6 +26,7 @@ import { ProfileLicensureComponent } from './components/profile-licensure/profil
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
+import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -63,6 +64,7 @@ const dashboardRoutes: Routes = [
     resolve: { sidebarCustomerStatuses: SidebarCustomerResolver,
                sidebarMyDay: MyDayResolver,
                appointments: MyAppointmentsResolver,
+               myProfile: MyProfileResolver,
                availability: MyAvailabilityResolver
              },
       children: [
@@ -115,7 +117,7 @@ const dashboardRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
+    declarations: [
     DashboardComponent,
     KeyValueComponent,
     SidebarComponent,
@@ -129,10 +131,12 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-      ProfileLicensureComponent  ],
+        ProfileLicensureComponent,
+        AppointmentNotificationComponent
+  ],
   imports: [
-    CommonModule,
-    RouterModule.forChild(dashboardRoutes),
+      CommonModule,
+      RouterModule.forChild(dashboardRoutes),
       HttpModule,
       JcfModule,
       NouisliderModule,
@@ -144,7 +148,7 @@ const dashboardRoutes: Routes = [
     SidebarComponent,
     MyVibiiosComponent,
     MyProfileComponent,
-    AppointmentComponent
+      AppointmentComponent
   ],
   providers: [
     DashboardResolver,
@@ -169,7 +173,7 @@ const dashboardRoutes: Routes = [
     MyAvailabilityResolver,
     MyDayService,
     MyDayResolver,
-    SidebarMyVibiioSharedService
+      SidebarMyVibiioSharedService
   ]
 })
 
