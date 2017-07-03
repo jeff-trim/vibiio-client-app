@@ -43,7 +43,6 @@ export class CustomerProfileComponent {
             // this in essence acts as deleting the vibiiographer
             // from the current appointment
             appointment.vibiiographer_id = null
-            console.log("vibiiographer id", appointment.vibiiographer_id)
             this.updateAppointment.emit({appointment: appointment, index: this.index })
         }
     }

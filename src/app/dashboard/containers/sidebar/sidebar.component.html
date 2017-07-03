@@ -53,7 +53,8 @@
                         [vibiio]="vibiio"
                         [hidden]="scheduledVibiiosVisibility"></app-sidebar-schedule>
   <div class="title-row"
-       (click)='toggleCustomerCategoryVisibility($event)'>
+       (click)='toggleCustomerCategoryVisibility($event)'
+       [routerLink]="['./all-consumers']">
     <div class="title">
       All Customers
     </div>

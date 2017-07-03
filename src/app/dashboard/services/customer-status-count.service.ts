@@ -10,7 +10,7 @@ import { CustomerStatusCount } from '../models/customer-status-count.interface';
 const CUSTOMER_STATUES_API: string = `${API_URL}/status_counts`;
 
 @Injectable()
-export class CustomerStatusService {
+export class CustomerStatusCountService {
   constructor(private http: Http) {}
 
   getCustomerStatus(): Observable<CustomerStatusCount[]> {

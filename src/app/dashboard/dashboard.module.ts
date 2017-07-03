@@ -12,12 +12,14 @@ import { MyProfileComponent } from './containers/my-profile/my-profile.component
 import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
+import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
+import { ConsumerProfileComponent } from './components/consumer-profile/consumer-profile.component';
 import { AppointmentDetailsComponent } from './components/appointment-details/appointment-details.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
@@ -28,7 +30,9 @@ import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
 import { AppointmentService } from './services/appointment.service';
-import { CustomerStatusService } from './services/customer-status.service';
+import { CustomerStatusCountService } from './services/customer-status-count.service';
+import { ConsumerStatusService } from './services/consumer-status.service';
+import { AllConsumersService } from './services/all-consumers.service';
 import { DashboardService } from './services/dashboard.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
 import { MyProfileService } from './services/my-profile.service';
@@ -46,6 +50,8 @@ import { MyDayResolver } from './services/my-day.resolver.service'
 import { MyProfileResolver } from './services/my-profile.resolver.service'
 import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
 import { CustomerProfileResolver } from './services/customer-profile.resolver.service'
+import { ConsumerStatusResolver } from './services/consumer-status.resolver.service'
+import { AllConsumersResolver } from './services/all-consumers.resolver.service'
 import { AppointmentResolver } from './services/appointment.resolver.service'
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 
@@ -89,6 +95,20 @@ const dashboardRoutes: Routes = [
             resolve: {
                appt: AppointmentResolver
             }
+          },
+          {
+            path: 'consumer-status/:status',
+            component: ConsumerStatusComponent,
+            resolve: {
+               cons: ConsumerStatusResolver,              
+            }
+          },
+           {
+            path: 'all-consumers',
+            component: ConsumerStatusComponent,
+            resolve: {
+               cons: AllConsumersResolver,              
+            }
           }
       ]
   }
@@ -103,6 +123,8 @@ const dashboardRoutes: Routes = [
     SidebarScheduleComponent,
     SidebarCustomerComponent,
     CustomerProfileComponent,
+    ConsumerProfileComponent,
+    ConsumerStatusComponent,
     AppointmentComponent,
     MyVibiiosComponent,
     MyProfileComponent,
@@ -130,7 +152,11 @@ const dashboardRoutes: Routes = [
     VideoChatTokenService,
     MyAppointmentsService,
     MyAppointmentsResolver,
-    CustomerStatusService,
+    CustomerStatusCountService,
+    ConsumerStatusService,
+    ConsumerStatusResolver,
+    AllConsumersService,
+    AllConsumersResolver,
     CustomerProfileResolver,
     AppointmentService,
     AppointmentResolver,

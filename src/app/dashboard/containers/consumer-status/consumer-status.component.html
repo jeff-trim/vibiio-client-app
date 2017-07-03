@@ -1,0 +1,17 @@
+<div class="col-xs-12
+            col-sm-12
+            col-md-9
+            my-vibiio-container">
+  <h1 class="col-xs
+             col-md-offset-1
+             pink">All customers</h1>
+
+  <div class="flex">
+
+    <!--<div class="profile-information">-->
+      <ng-container *ngFor="let consumerProfile of consumerProfiles" >
+        <consumer-profile [consumerProfile]="consumerProfile"></consumer-profile>
+      </ng-container>
+    <!--</div>-->
+  </div>
+</div>

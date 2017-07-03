@@ -10,7 +10,6 @@ export class SidebarMyVibiioSharedService{
     changeEmitted$ = this.emitChangeSource.asObservable()
 
     emitChange(response: Response){
-        console.log(response)
         this.emitChangeSource.next(response)
     }
 }
