@@ -1,6 +1,17 @@
+@import '../../../../assets/css/variables';
+
 .dashboard-outlet {
   padding-left: 0;
+  @media(min-width: $medium){
+    height: 100vh;
+    overflow-y: scroll;
+  }
 }
+
 .side-bar-component {
   padding-right: 0 !important;
+  @media(min-width: $medium){
+    height: 100%;
+  }
 }
+

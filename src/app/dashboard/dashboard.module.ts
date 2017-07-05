@@ -25,8 +25,8 @@ import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
-import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
-import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
+import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component'; import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
+import { NotesComponent } from './components/notes/notes.component'
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -102,14 +102,14 @@ const dashboardRoutes: Routes = [
             path: 'consumer-status/:status',
             component: ConsumerStatusComponent,
             resolve: {
-               cons: ConsumerStatusResolver,              
+               cons: ConsumerStatusResolver,
             }
           },
            {
             path: 'all-consumers',
             component: ConsumerStatusComponent,
             resolve: {
-               cons: AllConsumersResolver,              
+               cons: AllConsumersResolver,
             }
           }
       ]
@@ -131,8 +131,9 @@ const dashboardRoutes: Routes = [
     MyVibiiosComponent,
     MyProfileComponent,
     ProfileInformationComponent,
-        ProfileLicensureComponent,
-        AppointmentNotificationComponent
+    ProfileLicensureComponent,
+    AppointmentNotificationComponent,
+    NotesComponent
   ],
   imports: [
       CommonModule,
@@ -148,7 +149,7 @@ const dashboardRoutes: Routes = [
     SidebarComponent,
     MyVibiiosComponent,
     MyProfileComponent,
-      AppointmentComponent
+    AppointmentComponent
   ],
   providers: [
     DashboardResolver,
@@ -173,7 +174,7 @@ const dashboardRoutes: Routes = [
     MyAvailabilityResolver,
     MyDayService,
     MyDayResolver,
-      SidebarMyVibiioSharedService
+    SidebarMyVibiioSharedService
   ]
 })
 

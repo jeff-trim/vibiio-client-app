@@ -31,10 +31,10 @@
       <div class="remember-me col-xs-6">
         <div class="row">
           <div class="col-xs-1">
-            <input type="checkbox"
-                   name="remember"
-                   [ngModel]="credentials?.remember"
-                   #remember="ngModel">
+            <div class="remember-me-input"
+                 (click)="toggleRememberMe()"
+                 [ngClass]="{'checked': credentials.remember,
+                            'unchecked': !credentials.remember}"></div>
           </div>
           <div id="remember-me" class="col-xs-offset-1 col-xs-10">
             Remember Me

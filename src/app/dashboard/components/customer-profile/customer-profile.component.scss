@@ -13,8 +13,7 @@
   margin-left: 1.1rem;
 }
 
-.profile-column {
-}
+
 
 h2 {
   color: $blue;
@@ -27,6 +26,22 @@ h2 {
   text-transform: capitalize;
   // width: 327px;
   display: inline;
+  margin-top: 25px;
+}
+
+.appointment-toggle-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $copy-font;
+  font-weight: 800;
+  font-size: 1.3rem;
+  cursor: pointer;
+
+  img {
+    padding: 0 10px;
+  }
 }
 
 .customer-profile-header {
@@ -81,7 +96,7 @@ h2 {
 
   p {
     color: $greyish-brown;
-    font-family: $base-font;
+    font-family: $copy-font;
     font-size: 1.8rem;
     font-stretch: normal;
     font-style: normal;
