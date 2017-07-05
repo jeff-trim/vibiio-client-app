@@ -25,7 +25,6 @@ export class LoginFormComponent implements OnInit {
 
     toggleRememberMe(){
         this.credentials.remember = !this.credentials.remember
-        console.log(this.credentials.remember)
     }
 
   login(value: Credentials, isValid: boolean) {
