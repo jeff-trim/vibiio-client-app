@@ -11,5 +11,5 @@ import { ConsumerProfile } from '../../models/consumer-profile.interface';
 
 export class ConsumerProfileComponent {
     @Input()
-    consumerProfile: ConsumerProfile; 
+    consumerProfile: ConsumerProfile;
 }

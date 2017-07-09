@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // components
 import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
@@ -10,6 +10,8 @@ import { AllConsumersService } from '../../services/all-consumers.service';
 
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
+import { VideoSnapshot } from '../../models/video-snapshot.interface';
+
 
 @Component({
     selector: 'consumer-status',
@@ -25,7 +27,7 @@ export class ConsumerStatusComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            this.consumerProfiles = data.cons.vibiios
-        })
+            this.consumerProfiles = data.cons.vibiios;
+        });
     }
 }

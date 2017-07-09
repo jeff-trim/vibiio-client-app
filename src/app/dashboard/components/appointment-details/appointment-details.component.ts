@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
 
 // services
-import { AppointmentService } from '../../services/appointment.service'
+import { AppointmentService } from '../../services/appointment.service';
 
 // Interfaces
-import { Appointment } from '../../models/appointment.interface'
-import { User } from '../../models/user.interface'
-import { Vibiio } from '../../models/vibiio.interface'
+import { Appointment } from '../../models/appointment.interface';
+import { User } from '../../models/user.interface';
+import { Vibiio } from '../../models/vibiio.interface';
 
 @Component({
     selector: 'appointment-details',
@@ -16,7 +16,7 @@ import { Vibiio } from '../../models/vibiio.interface'
 })
 
 export class AppointmentDetailsComponent  {
-    onVibiio: boolean = false;
+    onVibiio = false;
 
     @Input()
     appointment: Appointment;
@@ -28,10 +28,10 @@ export class AppointmentDetailsComponent  {
     vibiio: Vibiio;
 
     @Output()
-    startVibiio: EventEmitter<any> = new EventEmitter<any>()
+    startVibiio: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
-    endVibiio: EventEmitter<any> = new EventEmitter<any>()
+    endVibiio: EventEmitter<any> = new EventEmitter<any>();
 
     connect() {
     this.startVibiio.emit(event);

@@ -6,12 +6,12 @@
              col-md-offset-1
              pink">All customers</h1>
 
-  <div class="flex">
 
-    <!--<div class="profile-information">-->
       <ng-container *ngFor="let consumerProfile of consumerProfiles" >
+  <div class="consumer-profile-container">
+    
         <consumer-profile [consumerProfile]="consumerProfile"></consumer-profile>
-      </ng-container>
-    <!--</div>-->
+        <video-archive [snapshot]="consumerProfile.snapshots"></video-archive>
   </div>
+      </ng-container>
 </div>
