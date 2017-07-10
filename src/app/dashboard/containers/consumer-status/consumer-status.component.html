@@ -1,17 +1,16 @@
-<div class="col-xs-12
-            col-sm-12
-            col-md-9
-            my-vibiio-container">
+<div class="col-md-9
+            my-vibiio-container
+            col-md-offset-1">
   <h1 class="col-xs
-             col-md-offset-1
              pink">All customers</h1>
 
-
+  <div class="flex">
       <ng-container *ngFor="let consumerProfile of consumerProfiles" >
-  <div class="consumer-profile-container">
-    
-        <consumer-profile [consumerProfile]="consumerProfile"></consumer-profile>
-        <video-archive [snapshot]="consumerProfile.snapshots"></video-archive>
-  </div>
+          <consumer-profile-title [consumerProfile]="consumerProfile"></consumer-profile-title>
+        <div class="consumer-profile-container">
+          <consumer-profile [consumerProfile]="consumerProfile"></consumer-profile>
+          <video-archive [snapshot]="consumerProfile.snapshots"></video-archive>
+        </div>
       </ng-container>
+  </div>
 </div>

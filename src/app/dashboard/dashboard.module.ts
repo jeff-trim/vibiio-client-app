@@ -20,6 +20,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
 import { ConsumerProfileComponent } from './components/consumer-profile/consumer-profile.component';
+import { ConsumerProfileTitleComponent } from './components/consumer-profile-title/consumer-profile-title.component';
 import { AppointmentDetailsComponent } from './components/appointment-details/appointment-details.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
@@ -128,6 +129,7 @@ const dashboardRoutes: Routes = [
     SidebarCustomerComponent,
     CustomerProfileComponent,
     ConsumerProfileComponent,
+    ConsumerProfileTitleComponent,
     ConsumerStatusComponent,
     AppointmentComponent,
     MyVibiiosComponent,

@@ -1,14 +1,15 @@
 @import '../../../../assets/css/_variables.scss';
 
-.flex {
-    display: flex;
-    flex-direction: column;
-    @media(min-width: $small){
-        flex-direction: row;
-    }
+// .flex {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+.profile-information-container {
+  max-width: none;
 }
 
-.profile-information{
+.profile-information {
     padding-left: 0;
     margin-bottom: 40px;
 }
@@ -62,4 +63,3 @@ h2 {
   left: 0;
   position: absolute;
 }
-

@@ -13,6 +13,7 @@ import { VideoSnapshot } from '../../models/video-snapshot.interface';
 export class VideoArchiveComponent implements OnInit {
     image_url: string;
     image_label: string;
+    session_id: string;
 
     @Input()
     snapshot: VideoSnapshot;
@@ -23,5 +24,7 @@ export class VideoArchiveComponent implements OnInit {
     ngOnInit() {
         this.image_url = this.snapshot[0].image_url;
         this.image_label = this.snapshot[0].consumer_id;
+        console.log(this.snapshot);
+        this.session_id = this.snapshot[0].session_id;
     }
 }
