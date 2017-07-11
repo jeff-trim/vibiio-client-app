@@ -45,6 +45,7 @@ import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
+import { VideoArchiveService } from './services/video-archive.service';
 
 
 // resolvers
@@ -58,6 +59,7 @@ import { ConsumerStatusResolver } from './services/consumer-status.resolver.serv
 import { AllConsumersResolver } from './services/all-consumers.resolver.service';
 import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
+import { VideoArchiveResolver } from './services/video-archive.resolver.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -114,7 +116,14 @@ const dashboardRoutes: Routes = [
             resolve: {
                cons: AllConsumersResolver
             }
-          }
+          },
+          // {
+          //   path: 'vibiio-profile/:id',
+          //   component: VibiioProfileComponent,
+          //   resolve: {
+
+          //   }
+          // }
       ]
   }
 ];
@@ -160,6 +169,8 @@ const dashboardRoutes: Routes = [
     DashboardService,
     VideoSnapshotService,
     VideoChatTokenService,
+    VideoArchiveService,
+    VideoArchiveResolver,
     MyAppointmentsService,
     MyAppointmentsResolver,
     CustomerStatusCountService,

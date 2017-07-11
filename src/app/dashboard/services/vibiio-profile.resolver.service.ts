@@ -4,13 +4,13 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 
 // Services
-import { VideoArchiveService } from './video-archive.service';
+import { VibiioProfileService } from './vibiio-profile.service';
 
 @Injectable()
-export class VideoArchiveResolver implements Resolve<any> {
-    constructor(private service: VideoArchiveService, private router: Router) {}
+export class VibiioProfileResolver implements Resolve<any> {
+    constructor(private service: VibiioProfileService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-      return this.service.getArchive(route.params.session_id);
+      return this.service.getVibiio(route.params.id);
     }
 }

@@ -3,12 +3,24 @@
             col-lg-offset-9">
     <div class="vibiio-snapshot-container">
 
-        <img [src]="image_url"
-             class="vibiio-snapshot">
+        <img *ngIf="showArchive"
+             [src]="image_url"
+             class="vibiio-snapshot"
+             (click)="playArchive(session_id)">
+
+    <video *ngIf="(showVideo)"
+           preload="auto"
+           height="461"
+           width="312"
+           controls>
+        <source [src]="video_url" 
+                type="video/mp4">
+    </video>
+
     </div>
     <div class="snapshot-label-container">
-        <p class="snapshot-label"># {{ image_label }}</p>
+        <p class="snapshot-label"
+           (click)="playArchive(session_id)"># {{ archive_number }}</p>
     </div>
-
 </div>
   

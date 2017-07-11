@@ -41,7 +41,7 @@ import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/j
       LoginModule,
       MomentModule,
       NouisliderModule,
-      PasswordResetModule
+      PasswordResetModule,
   ],
   providers: [
       AuthService,

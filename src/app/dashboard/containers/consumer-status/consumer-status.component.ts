@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // components
-import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
+// import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
 
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';

@@ -21,7 +21,8 @@
       "styles": [
         "styles.scss",
         "assets/css/flexboxgrid.min.css",
-        "../node_modules/jcf/dist/css/theme-minimal/jcf.css"
+        "../node_modules/jcf/dist/css/theme-minimal/jcf.css",
+        "../node_modules/videogular2/fonts/videogular.css"
 
       ],
         "scripts": [
