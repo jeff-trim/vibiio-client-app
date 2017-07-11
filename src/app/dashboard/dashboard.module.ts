@@ -13,6 +13,7 @@ import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
 import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
+import { VibiioProfileComponent } from './containers/vibiio-profile/vibiio-profile.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -46,7 +47,7 @@ import { VideoChatTokenService } from './services/video-chat-token.service';
 import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 import { VideoArchiveService } from './services/video-archive.service';
-
+import { VibiioProfileService } from './services/vibiio-profile.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -60,6 +61,7 @@ import { AllConsumersResolver } from './services/all-consumers.resolver.service'
 import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 import { VideoArchiveResolver } from './services/video-archive.resolver.service';
+import { VibiioProfileResolver } from './services/vibiio-profile.resolver.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -140,13 +142,14 @@ const dashboardRoutes: Routes = [
     ConsumerProfileComponent,
     ConsumerProfileTitleComponent,
     ConsumerStatusComponent,
+    VibiioProfileComponent,
     AppointmentComponent,
     MyVibiiosComponent,
     MyProfileComponent,
     VideoArchiveComponent,
     ProfileInformationComponent,
-        ProfileLicensureComponent,
-        AppointmentNotificationComponent
+    ProfileLicensureComponent,
+    AppointmentNotificationComponent
   ],
   imports: [
       CommonModule,
@@ -190,8 +193,10 @@ const dashboardRoutes: Routes = [
     MyAvailabilityResolver,
     MyDayService,
     MyDayResolver,
-      SidebarMyVibiioSharedService
+    VibiioProfileService,
+    VibiioProfileResolver,
+    SidebarMyVibiioSharedService
   ]
 })
 
-export class DashboardModule { };
+export class DashboardModule { }

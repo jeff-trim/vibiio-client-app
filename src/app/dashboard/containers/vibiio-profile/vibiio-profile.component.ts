@@ -10,7 +10,7 @@ import { VideoSnapshot } from '../../models/video-snapshot.interface';
     templateUrl: 'vibiio-profile.component.html'
 })
 
-export class VibiioProfile implements OnInit {
+export class VibiioProfileComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
