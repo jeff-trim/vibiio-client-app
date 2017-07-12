@@ -19,6 +19,6 @@ export class ConsumerProfileTitleComponent implements OnInit {
     ngOnInit() {
     }
     viewDetails(id: number) {
-        this.router.navigateByUrl('/dashboard/vibiio-profile/'+ id);
+        this.router.navigateByUrl('/dashboard/vibiio-profile/' + id);
     }
 }

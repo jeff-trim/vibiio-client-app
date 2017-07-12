@@ -37,9 +37,9 @@ export class VideoArchiveComponent implements OnInit {
 
     playArchive(session: number) {
         this.toggleVideo();
-        this.archiveService.getArchive(session).subscribe( (data) => {
-            this.video_url = 'http://static.videogular.com/assets/videos/videogular.mp4';
-        });
+        // this.archiveService.getArchive(session).subscribe( (data) => {
+            this.video_url = 'https://media.w3.org/2010/05/sintel/trailer.mp4';
+        // });
     }
 
     toggleVideo() {

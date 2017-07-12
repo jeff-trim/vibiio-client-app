@@ -5,18 +5,28 @@
     padding: 0;
 }
 .vibiio-snapshot-container {
-    background-image: url('../../../../assets/images/play.svg');
-    background-position: center;
-    background-repeat: no-repeat;
     height: 222px;
     width: 150px;
 }
 
 .vibiio-snapshot {
+    position: relative;
     img {
-    max-height: 222px;
-    max-width: 150px;
+        max-height: 222px;
+        max-width: 150px;
     }
+        &:after {
+            background-image: url('../../../../assets/images/play.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            content: " ";
+            height: 35px;
+            width: 35px;
+            z-index: 1;
+            position: absolute;
+            left: 40%;
+            top: 45%;
+        }
 }
 
 .snapshot-label {
