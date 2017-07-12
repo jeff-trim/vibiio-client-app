@@ -57,7 +57,6 @@ export class AppointmentComponent implements OnInit {
 
       connectToSession(event) {
         this.tokenService.getToken(this.vibiio.id).subscribe( (data) => {
-            console.log(data);
             this.token = data.video_chat_auth_token.token;
 
             this.session.connect(this.token, (error) => {
@@ -79,7 +78,6 @@ export class AppointmentComponent implements OnInit {
                 // save snapshot
                 this.imgData = this.subscriber.getImgData();
                 this.snapshotService.saveSnapshot(this.session.id, this.imgData);
-                console.log(this.session.id);
             });
         });
     }
