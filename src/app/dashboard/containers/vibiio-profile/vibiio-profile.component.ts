@@ -11,7 +11,8 @@ import { VideoSnapshot } from '../../models/video-snapshot.interface';
 
 @Component({
     selector: 'vibiio-profile',
-    templateUrl: 'vibiio-profile.component.html'
+    templateUrl: 'vibiio-profile.component.html',
+    styleUrls: ['vibiio-profile.component.scss']
 })
 
 export class VibiioProfileComponent implements OnInit {

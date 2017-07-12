@@ -4,13 +4,15 @@
   <h1 class="col-xs
              pink">All customers</h1>
 
-  <div class="flex">
+  <!--<div class="flex">-->
       <ng-container *ngFor="let consumerProfile of consumerProfiles" >
+        <div class="col-md-9">
           <consumer-profile-title [consumerProfile]="consumerProfile"></consumer-profile-title>
         <div class="consumer-profile-container">
           <consumer-profile [consumerProfile]="consumerProfile"></consumer-profile>
           <video-archive [snapshot]="consumerProfile.snapshots"></video-archive>
         </div>
+        </div>
       </ng-container>
-  </div>
+  <!--</div>-->
 </div>
