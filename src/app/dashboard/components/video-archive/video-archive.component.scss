@@ -1,22 +1,22 @@
 @import '../../../../assets/css/_variables.scss';
 
 .vibiio-archive-container {
-    max-width: none;
+    width: 461.1px;
     padding: 0;
 }
 .vibiio-snapshot-container {
-    max-height: 222px;
-    max-width: 150px;
     background-image: url('../../../../assets/images/play.svg');
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 1;
+    height: 222px;
+    width: 150px;
 }
 
 .vibiio-snapshot {
+    img {
     max-height: 222px;
     max-width: 150px;
-    z-index: 0;
+    }
 }
 
 .snapshot-label {

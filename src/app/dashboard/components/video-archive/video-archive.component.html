@@ -1,22 +1,22 @@
 <div class="col-md-3
             vibiio-archive-container">
-    <div class="vibiio-snapshot-container">
-
-        <img *ngIf="showArchive"
-             [src]="image_url"
-             class="vibiio-snapshot"
-             (click)="playArchive(session_id)">
-
-    <video *ngIf="(showVideo)"
-           preload="auto"
-           height="461"
-           width="312"
-           controls>
-        <source [src]="video_url" 
-                type="video/mp4">
-    </video>
-
+    <div *ngIf="showArchive"
+         class="vibiio-snapshot-container">
+        <div class="vibiio-snapshot">
+            <img [src]="image_url"
+                (click)="playArchive(session_id)">
+        </div>
     </div>
+  
+        <video *ngIf="(showVideo)"
+             preload="auto"
+             height="461"
+             width="312"
+             controls>
+            <source [src]="video_url" 
+                    type="video/mp4">
+        </video>
+
     <div class="snapshot-label-container">
         <p class="snapshot-label"
            (click)="playArchive(session_id)"># {{ archive_number }}</p>

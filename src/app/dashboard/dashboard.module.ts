@@ -30,6 +30,7 @@ import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
 import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
+import { ConsumerNotesComponent } from './components/consumer-notes/consumer-notes.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -149,7 +150,8 @@ const dashboardRoutes: Routes = [
     VideoArchiveComponent,
     ProfileInformationComponent,
     ProfileLicensureComponent,
-    AppointmentNotificationComponent
+    AppointmentNotificationComponent,
+    ConsumerNotesComponent
   ],
   imports: [
       CommonModule,

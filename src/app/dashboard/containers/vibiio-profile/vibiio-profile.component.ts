@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // Services
@@ -23,9 +23,7 @@ export class VibiioProfileComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe( (data) => {
-        console.log(data);
-        this.consumerProfile = data.profile.vibiio;
-        console.log(this.consumerProfile);
- });
+            this.consumerProfile = data.profile.vibiio;
+        });
     }
 }
