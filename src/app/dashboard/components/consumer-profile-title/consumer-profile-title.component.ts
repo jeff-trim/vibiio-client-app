@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Models
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
@@ -9,7 +10,15 @@ import { ConsumerProfile } from '../../models/consumer-profile.interface';
     styleUrls: ['consumer-profile-title.component.scss']
 })
 
-export class ConsumerProfileTitleComponent {
+export class ConsumerProfileTitleComponent implements OnInit {
     @Input()
     consumerProfile: ConsumerProfile;
+
+    constructor(private router: Router) { }
+
+    ngOnInit() {
+    }
+    viewDetails(id: number) {
+        this.router.navigateByUrl('/dashboard/vibiio-profile/');
+    }
 }

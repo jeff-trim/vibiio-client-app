@@ -36,10 +36,8 @@ export class VideoArchiveComponent implements OnInit {
     }
 
     playArchive(session: number) {
-        console.log(this.session_id);
         this.toggleVideo();
         this.archiveService.getArchive(session).subscribe( (data) => {
-            console.log(data);
             this.video_url = 'http://static.videogular.com/assets/videos/videogular.mp4';
         });
     }

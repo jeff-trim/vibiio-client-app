@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 //components
@@ -15,16 +15,16 @@ import { MyProfileService } from '../../services/my-profile.service';
   styleUrls: ['my-profile.component.scss'],
   templateUrl: 'my-profile.component.html'})
 
-export class MyProfileComponent {
+export class MyProfileComponent implements OnInit {
     myProfile: any;
 
     constructor(private myProfileService: MyProfileService,
-                private activatedRoute: ActivatedRoute){}
+                private activatedRoute: ActivatedRoute) { }
 
-    ngOnInit(){
+    ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            this.myProfile = data.myProfile.user
+            this.myProfile = data.myProfile.user;
             console.log(this.myProfile.user);
-        })
+        });
     }
 }

@@ -119,13 +119,13 @@ const dashboardRoutes: Routes = [
                cons: AllConsumersResolver
             }
           },
-          // {
-          //   path: 'vibiio-profile/:id',
-          //   component: VibiioProfileComponent,
-          //   resolve: {
-
-          //   }
-          // }
+          {
+            path: 'vibiio-profile/:id',
+            component: VibiioProfileComponent,
+            resolve: {
+              profile: VibiioProfileResolver
+            }
+          }
       ]
   }
 ];

@@ -5,7 +5,7 @@ import { API_URL } from '../../../environments/environment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-const VIBIIO_PROFILE_API = `${API_URL}/consumer-status/?id=`;
+const VIBIIO_PROFILE_API = `${API_URL}/consumer_status/`;
 
 @Injectable()
 export class VibiioProfileService {
@@ -14,7 +14,7 @@ export class VibiioProfileService {
     getVibiio(id: number): Observable<any> {
 
         return this.http
-            .get(`${VIBIIO_PROFILE_API}${id}`)
+            .get(VIBIIO_PROFILE_API + id)
             .map((response: Response) => response.json());
     }
 }
