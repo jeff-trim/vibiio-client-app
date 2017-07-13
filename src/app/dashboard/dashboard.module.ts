@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule, RouterLink } from '@angular/router';
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
 import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 import { MomentModule } from 'angular2-moment';
 import { NouisliderModule } from 'ng2-nouislider';
+import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -15,7 +16,7 @@ import { AppointmentComponent } from './containers/appointment/appointment.compo
 import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
 
 // libraries
-import { InfiniteScrollModule } from 'ngx-infinite-scroll'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
@@ -25,8 +26,9 @@ import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
-import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component'; import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
-import { NotesComponent } from './components/notes/notes.component'
+import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
+import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component';
+import { NotesComponent } from './components/notes/notes.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -37,23 +39,23 @@ import { AllConsumersService } from './services/all-consumers.service';
 import { DashboardService } from './services/dashboard.service';
 import { MyAppointmentsService } from './services/my-appointments.service';
 import { MyProfileService } from './services/my-profile.service';
-import { MyDayService } from './services/my-day.service'
-import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service'
+import { MyDayService } from './services/my-day.service';
+import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service';
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 import { MyAvailabilityService } from './services/my-availability.service';
-
+import { FormConfigService } from './services/form-config.service';
 
 // resolvers
-import { DashboardResolver } from './services/dashboard.resolver.service'
-import { MyAppointmentsResolver } from './services/my-appointments.resolver.service'
-import { MyDayResolver } from './services/my-day.resolver.service'
-import { MyProfileResolver } from './services/my-profile.resolver.service'
-import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service'
-import { CustomerProfileResolver } from './services/customer-profile.resolver.service'
-import { ConsumerStatusResolver } from './services/consumer-status.resolver.service'
-import { AllConsumersResolver } from './services/all-consumers.resolver.service'
-import { AppointmentResolver } from './services/appointment.resolver.service'
+import { DashboardResolver } from './services/dashboard.resolver.service';
+import { MyAppointmentsResolver } from './services/my-appointments.resolver.service';
+import { MyDayResolver } from './services/my-day.resolver.service';
+import { MyProfileResolver } from './services/my-profile.resolver.service';
+import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service';
+import { CustomerProfileResolver } from './services/customer-profile.resolver.service';
+import { ConsumerStatusResolver } from './services/consumer-status.resolver.service';
+import { AllConsumersResolver } from './services/all-consumers.resolver.service';
+import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 
 // Routes
@@ -142,7 +144,8 @@ const dashboardRoutes: Routes = [
       JcfModule,
       NouisliderModule,
       MomentModule,
-      InfiniteScrollModule
+      InfiniteScrollModule,
+      DynamicFormModule
   ],
   exports: [
     DashboardComponent,
@@ -178,4 +181,4 @@ const dashboardRoutes: Routes = [
   ]
 })
 
-export class DashboardModule { };
+export class DashboardModule { }
