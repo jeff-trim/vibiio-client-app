@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Config } from '../../models/config.interface';
 
 @Component({
-    selector: 'dynamic-form',
+    selector: 'vib-dynamic-form',
     template: `
       <form
         class="dynamic-form"
