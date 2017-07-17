@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import * as moment_tz from 'moment-timezone'
+import * as moment_tz from 'moment-timezone';
 
 // interfaces
 import { Appointment } from '../../models/appointment.interface';
-import { NotesComponent } from '../notes/notes.component'
+import { NoteComponent } from '../note/note.component';
+
 
 @Component({
     selector: 'customer-profile',
@@ -13,37 +14,37 @@ import { NotesComponent } from '../notes/notes.component'
 
 export class CustomerProfileComponent {
     @Input()
-    appointment: Appointment
+    appointment: Appointment;
 
     @Input()
-    index: number
+    index: number;
 
     @Input()
-    vibiiographerId: number
+    vibiiographerId: number;
 
     @Input()
-    timeZone: number
+    timeZone: number;
 
     @Output()
-    updateAppointment: EventEmitter<any> = new EventEmitter<any>()
+    updateAppointment: EventEmitter<any> = new EventEmitter<any>();
 
     // parses unix time and displays time in relation to timezone
-    parseUnixTime(time){
-        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A')
+    parseUnixTime(time) {
+        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
     }
 
     toggleAppointment(appointment: Appointment){
-        if(this.appointment.vibiiographer_id === null){
-            this.appointment.vibiiographer_id = this.vibiiographerId
-            this.updateAppointment.emit({appointment: this.appointment, index: this.index })
+        if (this.appointment.vibiiographer_id === null) {
+            this.appointment.vibiiographer_id = this.vibiiographerId;
+            this.updateAppointment.emit({appointment: this.appointment, index: this.index });
         } else {
 
             // sets current user to null so when the record
             // is updated in the api we reset the value to nil
             // this in essence acts as deleting the vibiiographer
             // from the current appointment
-            appointment.vibiiographer_id = null
-            this.updateAppointment.emit({appointment: appointment, index: this.index })
+            appointment.vibiiographer_id = null;
+            this.updateAppointment.emit({appointment: appointment, index: this.index });
         }
     }
 }

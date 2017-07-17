@@ -14,6 +14,7 @@ import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
 import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
+import { NotesComponent } from './containers/notes/notes.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -28,7 +29,7 @@ import { ProfileInformationComponent } from './components/profile-information/pr
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
 import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component';
-import { NotesComponent } from './components/notes/notes.component';
+import { NoteComponent } from './components/note/note.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -135,7 +136,8 @@ const dashboardRoutes: Routes = [
     ProfileInformationComponent,
     ProfileLicensureComponent,
     AppointmentNotificationComponent,
-    NotesComponent
+    NotesComponent,
+    NoteComponent
   ],
   imports: [
       CommonModule,
