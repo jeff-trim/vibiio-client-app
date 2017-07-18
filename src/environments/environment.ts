@@ -6,7 +6,6 @@
 export const environment = {
   production: false,
 };
-
-export const API_URL = 'http://localhost:3000';
+export const API_URL = 'https://vibiio-api-staging.herokuapp.com';
 export const OPENTOK_API_KEY = '45807082';
 export const ACTION_CABLE_URL = 'ws://localhost:3000/cable'
