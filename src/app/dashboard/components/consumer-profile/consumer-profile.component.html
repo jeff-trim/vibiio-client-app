@@ -1,21 +1,8 @@
-<div class="col-xs
-            col-md-offset-1">
-  <div class="row
-              info-element
-              between-xs
-              bottom-xs">
-    <h2>
-        {{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}
-        <div class="pink-underline" ></div>
-    </h2>
-</div>
+<div class="col-md-6
+            col-xs
+            profile-information-container">
 
-
-<div class="flex" >
-  <div class="col-xs-12
-              col-sm-6
-              col-md-6
-              profile-information">
+<div class="profile-information">
 
     <key-value [key]="'Email'"
                [value]="consumerProfile.user_info.email"></key-value>
@@ -29,10 +16,11 @@
     <key-value [key]="'Zip'"
                [value]="consumerProfile.user_info.zipcode"></key-value>
 
-      <key-value [key]="'Provider'"
+    <key-value [key]="'Provider'"
                  [value]="consumerProfile.user_info.provider"></key-value>
 
-      <key-value [key]="'Policy Number'"
+    <key-value [key]="'Policy Number'"
                  [value]="consumerProfile.user_info.policy_number"></key-value>
   </div>
 </div>
+  

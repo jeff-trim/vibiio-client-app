@@ -1,4 +1,7 @@
+import { VideoSnapshot } from './video-snapshot.interface';
+
 export interface ConsumerProfile {
+    id: number;
     user_info: {
     id: number
     first_name: string;
@@ -9,5 +12,6 @@ export interface ConsumerProfile {
     zipcode: number;
     provider?: string;
     policy_number?: number;
-    }
+    };
+    snapshots?: VideoSnapshot[];
 }

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 import { Appointment } from '../models/appointment.interface';
 
-const MY_PROFILE_API: string = `${API_URL}/me`;
+const MY_PROFILE_API = `${API_URL}/me`;
 
 @Injectable()
 export class MyProfileService {
@@ -17,6 +17,6 @@ export class MyProfileService {
 
         return this.http
            .get(MY_PROFILE_API)
-           .map((response: Response) => response.json())
+           .map((response: Response) => response.json());
   }
 }

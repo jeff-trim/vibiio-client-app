@@ -14,6 +14,7 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment';
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
+import { VideoSnapshotService } from '../../services/video-snapshot.service';
 
 declare var OT: any;
 
@@ -30,10 +31,12 @@ export class AppointmentComponent implements OnInit {
     vibiio: Vibiio;
     token: VideoChatToken;
     publisher: any;
-
+    imgData: any;
+    subscriber: any;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private tokenService: VideoChatTokenService) {}
+                private tokenService: VideoChatTokenService,
+                private snapshotService: VideoSnapshotService) {}
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -41,10 +44,10 @@ export class AppointmentComponent implements OnInit {
         });
 
         this.activatedRoute.data.subscribe( (data) => {
-            //vibiio data
+            // vibiio data
             this.vibiio = data.appt.appointment.vibiio;
             this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
-            //appointment data
+            // appointment data
             this.appointment = data.appt.appointment;
             this.user = data.appt.appointment.user;
             }, (error) => {
@@ -69,9 +72,12 @@ export class AppointmentComponent implements OnInit {
                 this.session.publish(this.publisher);
 
                 // Subscribe to stream created events
-                this.session.on('streamCreated', (event) => {
-                    this.session.subscribe(event.stream, 'subscriber-stream', options);
+                this.session.on('streamCreated', ($event) => {
+                  this.subscriber = this.session.subscribe(event.stream, 'subscriber-stream', options);
                 });
+                // save snapshot
+                this.imgData = this.subscriber.getImgData();
+                this.snapshotService.saveSnapshot(this.session.id, this.imgData);
             });
         });
     }

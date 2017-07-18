@@ -1,0 +1,45 @@
+<div class="col-md-9
+            my-vibiio-container
+            col-md-offset-1">
+  <h1 class="col-xs
+             pink">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
+
+  <div class="flex">
+<!--insert 'profile and vibiio titles-->
+    <div class="vibiio-profile-container">
+      <div class="col-md-6">
+        <div class="info-element sub-heading">
+          <h2>profile</h2>
+          <div class="long-pink-underline" ></div>
+        </div>
+        <consumer-profile [consumerProfile]="consumerProfile"></consumer-profile>
+      </div>
+    
+      <div class="col-md-offset-1
+                  col-md-2">
+        <div class="info-element sub-heading">
+          <h2>vibiio</h2>
+          <div class="long-pink-underline" ></div>
+        </div>
+        <video-archive [snapshot]="consumerProfile.snapshots"></video-archive>
+      </div>
+    </div>
+  </div>
+
+<div class="flex">
+  <div class="col-xs-9
+              vibiio-profile-information">
+  
+    <div class="row
+              info-element
+              between-xs
+              bottom-xs
+              notes-row">
+            <!--[class.on-playback]="" >-->
+
+      <consumer-notes></consumer-notes>
+    </div>
+  
+  </div>
+</div>
+</div>

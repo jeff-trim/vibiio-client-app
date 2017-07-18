@@ -1,14 +1,12 @@
 @import '../../../../assets/css/_variables.scss';
 
-.flex {
-    display: flex;
-    flex-direction: column;
-    @media(min-width: $small){
-        flex-direction: row;
-    }
+
+.profile-information-container {
+  max-width: none;
+  padding: 0;
 }
 
-.profile-information{
+.profile-information {
     padding-left: 0;
     margin-bottom: 40px;
 }
@@ -21,7 +19,6 @@ h2 {
   line-height: 1.16;
   margin: 0;
   text-transform: capitalize;
-  // width: 327px;
   display: inline;
 }
 
@@ -62,4 +59,3 @@ h2 {
   left: 0;
   position: absolute;
 }
-
