@@ -10,12 +10,19 @@
       </a>
     </h2>
 
-    <img (click)="toggleAppointment(appointment)"
-         src="../../../../assets/images/inactive.svg"
-         *ngIf="appointment.vibiiographer_id === null" >
-    <img (click)="toggleAppointment(appointment)"
-         src="../../../../assets/images/selected.svg"
-         *ngIf="appointment.vibiiographer_id !== null" >
+    <span *ngIf="appointment.vibiiographer_id === null"
+          class="appointment-toggle-wrapper pink"
+          (click)="toggleAppointment(appointment)">
+      Claim Vibiio!
+      <img src="../../../../assets/images/inactive.svg">
+    </span>
+    <span  *ngIf="appointment.vibiiographer_id !== null"
+           class="appointment-toggle-wrapper pink"
+           (click)="toggleAppointment(appointment)">
+      Remove
+      <img src="../../../../assets/images/selected.svg"
+           *ngIf="appointment.vibiiographer_id !== null" >
+    </span>
     <span class="pink-underline"></span>
   </div>
 </div>
@@ -72,19 +79,8 @@
     <key-value [key]="'Vibiio Start Time'"
                [value]="parseUnixTime(appointment.scheduled_datetime)"></key-value>
 
+    <notes [noteText]="appointment.vibiio.description">
+      <div class="label" >Customer Notes</div>
+    </notes>
 
-  <div class="info-element
-              last-info-element
-              row
-              between-xs
-              bottom-xs" >
-    <span class="label">Customer Notes</span>
-    <span class="pink-underline"></span>
   </div>
-  <div class="notes-element
-              row
-              between-xs
-              bottom-xs">
-    <p>{{ appointment.vibiio.description }}</p>
-  </div>
-</div>

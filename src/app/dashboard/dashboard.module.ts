@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 import { MomentModule } from 'angular2-moment';
 import { NouisliderModule } from 'ng2-nouislider';
+import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -30,7 +31,7 @@ import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
 import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
-import { ConsumerNotesComponent } from './components/consumer-notes/consumer-notes.component';
+import { NotesComponent } from './components/notes/notes.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -49,6 +50,7 @@ import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 import { VideoArchiveService } from './services/video-archive.service';
 import { VibiioProfileService } from './services/vibiio-profile.service';
+import { FormConfigService } from './services/form-config.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -124,7 +126,8 @@ const dashboardRoutes: Routes = [
             path: 'vibiio-profile/:id',
             component: VibiioProfileComponent,
             resolve: {
-              profile: VibiioProfileResolver
+              profile: VibiioProfileResolver,
+               cons: AllConsumersResolver
             }
           }
       ]
@@ -151,7 +154,7 @@ const dashboardRoutes: Routes = [
     ProfileInformationComponent,
     ProfileLicensureComponent,
     AppointmentNotificationComponent,
-    ConsumerNotesComponent
+    NotesComponent
   ],
   imports: [
       CommonModule,
@@ -160,14 +163,15 @@ const dashboardRoutes: Routes = [
       JcfModule,
       NouisliderModule,
       MomentModule,
-      InfiniteScrollModule
+      InfiniteScrollModule,
+      DynamicFormModule
   ],
   exports: [
     DashboardComponent,
     SidebarComponent,
     MyVibiiosComponent,
     MyProfileComponent,
-      AppointmentComponent
+    AppointmentComponent
   ],
   providers: [
     DashboardResolver,

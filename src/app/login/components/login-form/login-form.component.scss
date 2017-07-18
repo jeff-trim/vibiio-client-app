@@ -20,9 +20,23 @@ form {
     font-size: 1.4rem;
     font-weight: bold;
     color: $pink;
+
     #forgot-password {
       line-height: 24px;
       text-align: right;
+    }
+    .remember-me-input{
+      width: 25px;
+      height: 25px;
+
+      &.unchecked {
+        background: url('./../../../../assets/images/unchecked@3x.png');
+        background-size: contain;
+      }
+      &.checked {
+        background: url('./../../../../assets/images/checked@3x.png');
+        background-size: contain;
+      }
     }
     #remember-me {
       line-height: 24px;

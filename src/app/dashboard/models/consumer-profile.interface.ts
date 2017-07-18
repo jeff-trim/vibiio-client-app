@@ -9,7 +9,7 @@ export interface ConsumerProfile {
     email: string;
     phone_number: string;
     address_one: string;
-    zip_code: number;
+    zipcode: number;
     provider?: string;
     policy_number?: number;
     };

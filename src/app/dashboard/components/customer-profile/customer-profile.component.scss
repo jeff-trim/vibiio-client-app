@@ -13,8 +13,7 @@
   margin-left: 1.1rem;
 }
 
-.profile-column {
-}
+
 
 h2 {
   color: $blue;
@@ -26,6 +25,22 @@ h2 {
   margin: 0;
   text-transform: capitalize;
   display: inline;
+  margin-top: 25px;
+}
+
+.appointment-toggle-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $copy-font;
+  font-weight: 800;
+  font-size: 1.3rem;
+  cursor: pointer;
+
+  img {
+    padding: 0 10px;
+  }
 }
 
 .customer-profile-header {
@@ -75,17 +90,20 @@ h2 {
   position: absolute;
 }
 
-.notes-element {
+/deep/ .notes-element {
   background-color: $light-grey;
+  padding: 5px;
 
   p {
     color: $greyish-brown;
-    font-family: $base-font;
-    font-size: 1.8rem;
+    font-family: $copy-font;
+    font-size: 1.45rem;
     font-stretch: normal;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: normal;
     margin: 10px;
+    line-height: 1.86;
+    text-align: right;
   }
 }

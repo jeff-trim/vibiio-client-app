@@ -6,14 +6,13 @@
     </a>
     <div class="hamburger"
          (click)="toggleSidebar()">
-      
       <span></span>
       <span></span>
       <span></span>
     </div>
   </div>
-  
-  <div class="row 
+
+  <div class="row
               betweeen-xs"
               (click)=toggleAvailability()>
 
@@ -31,7 +30,7 @@
       <div class="availability-message">
         <span class="icon">️️️✌️</span> I’m outta here
       </div>
-    </div>  
+    </div>
   </div>
 
   <span [ngClass]="{'hidden':!sidebarVisibility}">
