@@ -10,7 +10,6 @@ import { Component, Input } from '@angular/core'
               between-xs
               bottom-xs">
   <ng-content class="title label"></ng-content>
-  <span class="pink-underline"></span>
   <div class="notes-element
               row
               between-xs
