@@ -14,6 +14,7 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment';
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
+import { ConsumerNoteService } from '../../services/consumer-note.service';
 
 declare var OT: any;
 
@@ -33,7 +34,7 @@ export class AppointmentComponent implements OnInit {
 
 
     constructor(private activatedRoute: ActivatedRoute,
-                private tokenService: VideoChatTokenService) {}
+                private tokenService: VideoChatTokenService) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {

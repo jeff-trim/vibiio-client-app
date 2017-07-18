@@ -29,7 +29,8 @@ import { ProfileInformationComponent } from './components/profile-information/pr
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
 import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component';
-import { NoteComponent } from './components/note/note.component';
+import { NewNoteComponent } from './components/note/new-note.component';
+import { ExistingNoteComponent } from './components/note/existing-note.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -46,6 +47,7 @@ import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 import { FormConfigService } from './services/form-config.service';
+import { ConsumerNoteService } from './services/consumer-note.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -137,7 +139,8 @@ const dashboardRoutes: Routes = [
     ProfileLicensureComponent,
     AppointmentNotificationComponent,
     NotesComponent,
-    NoteComponent
+    NewNoteComponent,
+    ExistingNoteComponent
   ],
   imports: [
       CommonModule,
@@ -179,7 +182,9 @@ const dashboardRoutes: Routes = [
     MyAvailabilityResolver,
     MyDayService,
     MyDayResolver,
-    SidebarMyVibiioSharedService
+    SidebarMyVibiioSharedService,
+    ConsumerNoteService,
+    FormConfigService
   ]
 })
 

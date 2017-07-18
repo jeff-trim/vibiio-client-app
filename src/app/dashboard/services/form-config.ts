@@ -1,5 +1,7 @@
 import { Config, FormSetup } from '../../dynamic-form/models/config.interface';
 import { Validators } from '@angular/forms';
+import { Note } from '../models/consumer-note.interface';
+import { Input } from '@angular/core';
 
 export const statusSelector: FormSetup = {
     title: 'Claim Status',
@@ -14,7 +16,7 @@ export const statusSelector: FormSetup = {
    ]
 };
 
-export const notesForm: FormSetup  = {
+export const newNotesForm: FormSetup  = {
     title: 'Notes',
     inputs: [
       {

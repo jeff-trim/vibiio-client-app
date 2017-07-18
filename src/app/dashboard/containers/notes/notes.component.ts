@@ -4,7 +4,8 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Note } from '../../models/consumer-note.interface';
 
 // Components
-import { NoteComponent } from '../../components/note/note.component';
+import { NewNoteComponent } from '../../components/note/new-note.component';
+import { ExistingNoteComponent } from '../../components/note/existing-note.component';
 
 @Component({
     selector: 'vib-consumer-notes',
@@ -19,8 +20,9 @@ import { NoteComponent } from '../../components/note/note.component';
                             row
                             between-xs
                             bottom-xs">
+                    <vib-new-consumer-note></vib-new-consumer-note>
                     <ng-container *ngFor='let note of notes'>
-                        <vib-consumer-note [note]='note'></vib-consumer-note>
+                        <vib-existing-consumer-note [note]='note'></vib-existing-consumer-note>
                     </ng-container>
                 </div>`,
     styleUrls: ['notes.component.scss']
@@ -28,7 +30,7 @@ import { NoteComponent } from '../../components/note/note.component';
 
 export class NotesComponent {
     @Input()
-    notes: Note[];
+    notes?: Note[];
 
     @Output()
     note: Note;

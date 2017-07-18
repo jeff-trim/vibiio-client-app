@@ -3,8 +3,6 @@ import * as moment_tz from 'moment-timezone';
 
 // interfaces
 import { Appointment } from '../../models/appointment.interface';
-import { NoteComponent } from '../note/note.component';
-
 
 @Component({
     selector: 'customer-profile',
