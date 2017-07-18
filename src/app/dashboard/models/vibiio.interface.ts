@@ -1,4 +1,4 @@
-import { Notes } from './consumer-notes.interface';
+import { Note } from './consumer-note.interface';
 
 export interface Vibiio {
     id: number;
@@ -6,5 +6,5 @@ export interface Vibiio {
     vibiio_type: string;
     video_session_id: string;
     description: string;
-    notes: Notes[];
+    notes: Note[];
 }

@@ -123,7 +123,9 @@
             col-md-offset-1
             appointment-information" >
 
-    <div class="row
+
+    <vib-consumer-notes [notes]='appointment.customer_notes'></vib-consumer-notes>
+            <!-- <div class="row
               info-element
               between-xs
               bottom-xs">
@@ -136,9 +138,9 @@
                   row
                   between-xs
                   bottom-xs">
-        <p>{{ appointment.vibiio.description }}</p>
+        <p>{{ appointment.vibiio.notes }}</p>
       </div>
-    </div>
+    </div> -->
   
   </div>
 </div>

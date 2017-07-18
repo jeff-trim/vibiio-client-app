@@ -1,0 +1,32 @@
+@import '../../../../assets/css/_variables.scss';
+
+.notes-element {
+    background-color: $light-grey;
+  	border-radius: 5px;
+    height: auto;
+    padding: 15px 18px 15px 24px;
+    margin-bottom: 39px;
+
+  &.pink-border {
+   border: 3px solid $pink;   
+  }
+
+  p {
+    margin: 0;
+    color: $greyish-brown;
+    font-family: $base-font;
+    font-size: 1.8rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: normal;
+    margin: 10px;
+  }
+}
+
+.pink-underline {
+    width: 80px;
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid $pink;
+}

@@ -1,3 +1,5 @@
+import { Note } from './consumer-note.interface';
+
 export interface CustomerProfile {
     name: string;
     email: string;
@@ -8,5 +10,5 @@ export interface CustomerProfile {
     poilcy_number: number;
     claim_id: number;
     vibiio_start_time: string;
-    customer_notes: string;
+    customer_notes: Note[];
 }

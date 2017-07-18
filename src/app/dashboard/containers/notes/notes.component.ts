@@ -13,7 +13,7 @@ import { NoteComponent } from '../../components/note/note.component';
                             row
                             between-xs
                             bottom-xs">
-                <ng-content class="title label"></ng-content>
+                <div class="title label">Notes</div>
                 <span class="pink-underline"></span>
                 <div class="notes-element
                             row
@@ -22,8 +22,9 @@ import { NoteComponent } from '../../components/note/note.component';
                     <ng-container *ngFor='let note of notes'>
                         <vib-consumer-note [note]='note'></vib-consumer-note>
                     </ng-container>
-                </div>`
-})
+                </div>`,
+    styleUrls: ['notes.component.scss']
+            })
 
 export class NotesComponent {
     @Input()
