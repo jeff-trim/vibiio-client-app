@@ -1,0 +1,27 @@
+@import '../../../../assets/css/_variables.scss';
+
+.input {
+    margin: 0;
+    color: $greyish-brown;
+    font-family: $base-font;
+    font-size: 1.8rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: normal;
+    margin: 10px;
+  }
+
+  .dynamic-field .form-input {
+    input {
+      margin: 0;
+      color: $greyish-brown;
+      font-family: $base-font;
+      font-size: 1.8rem;
+      font-stretch: normal;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: normal;
+      margin: 10px;
+    }
+  }

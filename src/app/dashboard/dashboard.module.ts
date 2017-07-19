@@ -48,7 +48,7 @@ import { VideoChatTokenService } from './services/video-chat-token.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 import { FormConfigService } from './services/form-config.service';
 import { ConsumerNoteService } from './services/consumer-note.service';
-
+import { VibiioUpdateService } from './services/vibiio-update.service';
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
 import { MyAppointmentsResolver } from './services/my-appointments.resolver.service';
@@ -184,7 +184,8 @@ const dashboardRoutes: Routes = [
     MyDayResolver,
     SidebarMyVibiioSharedService,
     ConsumerNoteService,
-    FormConfigService
+    FormConfigService,
+    VibiioUpdateService
   ]
 })
 

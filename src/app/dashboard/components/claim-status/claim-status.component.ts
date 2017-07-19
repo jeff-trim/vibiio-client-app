@@ -4,14 +4,14 @@ import { Validators } from '@angular/forms';
 
 // Services
 import { FormConfigService } from '../../services/form-config.service';
-import { ConsumerNoteService } from '../../services/consumer-note.service';
+// import { ConsumerNoteService } from '../../services/consumer-note.service';
 
 // Models
-import { Note } from '../../models/consumer-note.interface';
+// import { Note } from '../../models/consumer-note.interface';
 
 @Component({
-    selector: 'vib-new-consumer-note',
-    styleUrls: ['note.component.scss'],
+    selector: 'vib-claim-status',
+    styleUrls: ['claim-status.component.scss'],
     template: `<vib-dynamic-form [config]="form?.inputs"
                                  (submitted)="formSubmitted($event)"
                                  (keydown)="keyDownFunction($event)"
@@ -22,10 +22,10 @@ import { Note } from '../../models/consumer-note.interface';
 export class NewNoteComponent implements OnInit {
     form: FormSetup;
 
-    constructor( private formConfig: FormConfigService,
-                 private noteService: ConsumerNoteService ) { }
+    constructor( private formConfig: FormConfigService) {}
+                //  private claimStatusService: ConsumerNoteService ) { }
      ngOnInit() {
-         this.form = this.formConfig.newNotesForm();
+         this.form = this.formConfig.statusSelectForm();
         // console.log(this.note);
     }
 
