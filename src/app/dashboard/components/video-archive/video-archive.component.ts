@@ -15,7 +15,7 @@ import { VideoArchiveService } from '../../services/video-archive.service';
 
 export class VideoArchiveComponent implements OnInit {
     image_url: string;
-    archive_number: string;
+    archive_number: number;
     session_id: string;
     video_url: string;
     showVideo = false;
@@ -35,7 +35,7 @@ export class VideoArchiveComponent implements OnInit {
         this.session_id = this.snapshot[0].session_id;
     }
 
-    playArchive(session: number) {
+    playArchive(session: string) {
         this.toggleVideo();
         // this.archiveService.getArchive(session).subscribe( (data) => {
             this.video_url = 'https://media.w3.org/2010/05/sintel/trailer.mp4';
