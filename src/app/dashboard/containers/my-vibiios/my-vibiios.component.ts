@@ -60,8 +60,8 @@ export class MyVibiiosComponent {
             this.sliderConfig = {
                 start: this.appointments[0].scheduled_datetime,
                 range: {
-                    min: this.todaysVibiios.user_begin_of_day,
-                    max: this.todaysVibiios.user_end_of_day
+                    min: this.todaysVibiios.range_min,
+                    max: this.todaysVibiios.range_max
                 },
                 step: 900,
                 tooltips: [new TimeFormatter(this.todaysVibiios.user_time_zone),
