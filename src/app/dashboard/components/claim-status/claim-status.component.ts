@@ -4,7 +4,7 @@ import { Validators } from '@angular/forms';
 
 // Services
 import { FormConfigService } from '../../services/form-config.service';
-// import { ConsumerNoteService } from '../../services/consumer-note.service';
+import { VibiioUpdateService } from '../../services/vibiio-update.service';
 
 // Models
 // import { Note } from '../../models/consumer-note.interface';
@@ -14,12 +14,11 @@ import { FormConfigService } from '../../services/form-config.service';
     styleUrls: ['claim-status.component.scss'],
     template: `<vib-dynamic-form [config]="form?.inputs"
                                  (submitted)="formSubmitted($event)"
-                                 (keydown)="keyDownFunction($event)"
                                  class="note">
                                  </vib-dynamic-form>`
   })
 
-export class NewNoteComponent implements OnInit {
+export class ClaimStatusComponent implements OnInit {
     form: FormSetup;
 
     constructor( private formConfig: FormConfigService) {}
@@ -29,30 +28,7 @@ export class NewNoteComponent implements OnInit {
         // console.log(this.note);
     }
 
-    keyDownFunction(event) {
-        if (event.keyCode === 13) {
-           this.noteService
-          .createNote(event.value.body)
-          .subscribe( (data) => {
-              console.log(data);
-          },
-            (error: any) => {
-              console.log( 'error updating note' );
-            });
-       }
-    }
-
     formSubmitted(event) {
-        if (event.status) {
-          this.noteService
-          .createNote(event.value.body)
-          .subscribe( (data) => {
-              console.log(data);
-          },
-            (error: any) => {
-              console.log( 'error updating note' );
-        });
-      }
+       console.log(event);
     }
 }
-

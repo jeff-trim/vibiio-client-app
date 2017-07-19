@@ -78,7 +78,6 @@
                [value]="appointment.address?.zip"></key-value>
 
     <span *ngFor="let policy of appointment.insurance_policies">
-
       <key-value [key]="'Provider'"
                  [value]="policy.carrier"></key-value>
 
@@ -119,28 +118,28 @@
 </div>
 
 <div class="flex">
-  <div class="col-xs-10
+    <div class="col-xs-10
             col-md-offset-1
-            appointment-information" >
+            appointment-information" > 
 
-
-    <vib-consumer-notes [notes]='appointment.customer_notes'></vib-consumer-notes>
-            <!-- <div class="row
-              info-element
-              between-xs
-              bottom-xs">
-
-      <div class="info-element sub-heading no-margin-bottom">
-        <h2 class="customer-notes">notes</h2>
-      </div>
-      <div class="notes-element
-                  pink-border
-                  row
-                  between-xs
-                  bottom-xs">
-        <p>{{ appointment.vibiio.notes }}</p>
-      </div>
-    </div> -->
+    <div class="row 
+                 info-element 
+                 between-xs
+                 bottom-xs">
+ 
+    <div class="info-element sub-heading no-margin-bottom"> 
+      <h2 class="customer-notes">notes</h2>
+     </div> 
+    
+    <div class="notes-element
+                pink-border
+                row
+                between-xs
+                bottom-xs">
+      <!-- <p>{{ appointment.vibiio.notes }}</p> -->
+      <vib-consumer-notes [notes]='appointment.customer_notes'></vib-consumer-notes>
+    </div>
+     </div>  
   
-  </div>
+   </div> 
 </div>

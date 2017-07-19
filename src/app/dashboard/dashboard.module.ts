@@ -18,6 +18,7 @@ import { NotesComponent } from './containers/notes/notes.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
@@ -31,6 +32,8 @@ import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-
 import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component';
 import { NewNoteComponent } from './components/note/new-note.component';
 import { ExistingNoteComponent } from './components/note/existing-note.component';
+import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
+import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -49,6 +52,8 @@ import { MyAvailabilityService } from './services/my-availability.service';
 import { FormConfigService } from './services/form-config.service';
 import { ConsumerNoteService } from './services/consumer-note.service';
 import { VibiioUpdateService } from './services/vibiio-update.service';
+import { InsurancePolicyUpdateService } from './services/insurance-policy-update.service';
+
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
 import { MyAppointmentsResolver } from './services/my-appointments.resolver.service';
@@ -140,7 +145,10 @@ const dashboardRoutes: Routes = [
     AppointmentNotificationComponent,
     NotesComponent,
     NewNoteComponent,
-    ExistingNoteComponent
+    ExistingNoteComponent,
+    ClaimStatusComponent,
+    InsurancePolicyComponent,
+    PolicyDetailComponent
   ],
   imports: [
       CommonModule,

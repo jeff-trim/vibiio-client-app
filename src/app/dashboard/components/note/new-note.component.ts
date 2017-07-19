@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, HostListener } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Validators } from '@angular/forms';
 
@@ -14,7 +14,6 @@ import { Note } from '../../models/consumer-note.interface';
     styleUrls: ['note.component.scss'],
     template: `<vib-dynamic-form [config]="form?.inputs"
                                  (submitted)="formSubmitted($event)"
-                                 (keydown)="keyDownFunction($event)"
                                  class="note">
                                  </vib-dynamic-form>`
   })

@@ -6,16 +6,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-const VIBIIO_UPDATE_URL = `${API_URL}/vibiios/`;
+const POLICY_UPDATE_URL = `${API_URL}/insurance_policies/`;
 
 @Injectable()
-export class VibiioUpdateService {
+export class InsurancePolicyUpdateService {
     constructor(private http: Http) { }
 
-    updateVibiio(data: any, id: number): Observable <any> {
-        const url = '${VIBIIO_UPDATE_URL} + ${id}';
+    updatePolicy(data: any, id: number): Observable <any> {
+        const url = '${POLICY_UPDATE_URL} + ${id}';
         const payload = {
-            vibiio: {
+            insurance_policy: {
                 data
             }
         };
