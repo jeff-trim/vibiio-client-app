@@ -12,23 +12,26 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 @Component({
     selector: 'vib-claim-status',
     styleUrls: ['claim-status.component.scss'],
-    template: `<vib-dynamic-form [config]="form?.inputs"
-                                 (submitted)="formSubmitted($event)"
-                                 class="note">
-                                 </vib-dynamic-form>`
+    templateUrl: 'claim-status.component.html'
+    // templateUrls: `<vib-dynamic-form [config]="form?.inputs"
+    //                              (submitted)="formSubmitted($event)"
+    //                              class="note">
+    //                              </vib-dynamic-form>`
   })
 
 export class ClaimStatusComponent implements OnInit {
-    form: FormSetup;
+    // form: FormSetup;
+    @Input()
+    vibiioStatus: string;
 
-    constructor( private formConfig: FormConfigService) {}
+    // constructor( private formConfig: FormConfigService) {}
                 //  private claimStatusService: ConsumerNoteService ) { }
      ngOnInit() {
-         this.form = this.formConfig.statusSelectForm();
+        //  this.form = this.formConfig.statusSelectForm();
         // console.log(this.note);
     }
 
-    formSubmitted(event) {
-       console.log(event);
-    }
+    // formSubmitted(event) {
+    //    console.log(event);
+    // }
 }

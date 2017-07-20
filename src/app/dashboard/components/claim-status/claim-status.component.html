@@ -1,0 +1,18 @@
+<form (ngSubmit)="onSubmit"
+      #claimStatusForm="ngForm">
+
+    <div class="info-element
+                row
+                between-xs
+                bottom-xs">
+  
+        <div class="select-style">   
+            <select id="status">
+                <option class="label" value="" selected>Select a Claim Status</option>
+                <option value="0">Scheduled</option>
+                <option value="1">Claim in Progress</option>
+                <option value="2">Completed</option>
+            </select>
+        </div>
+    </div>
+</form>
