@@ -6,6 +6,7 @@ import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModul
 import { MomentModule } from 'angular2-moment';
 import { NouisliderModule } from 'ng2-nouislider';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
+import { FormsModule } from '@angular/forms';
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -158,7 +159,8 @@ const dashboardRoutes: Routes = [
       NouisliderModule,
       MomentModule,
       InfiniteScrollModule,
-      DynamicFormModule
+      DynamicFormModule,
+      FormsModule
   ],
   exports: [
     DashboardComponent,

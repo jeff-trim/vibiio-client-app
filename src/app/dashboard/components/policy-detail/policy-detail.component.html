@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmit()"
+      #policyDetailForm="ngForm">
+    <!-- <div class="form-group"> -->
+        <div class="info-element
+                    row
+                    between-xs
+                    bottom-xs">
+            <span class="label">Provider</span>
+            <input [(ngModel)]="policy.carrier"
+                   name="carrier" 
+                   type="text" 
+                   class="value end-md" 
+                   id="provider">
+            <span class="pink-underline"></span>
+        </div>
+
+        <div class="info-element
+                    row
+                    between-xs
+                    bottom-xs">
+            <span class="label">Policy Number</span>
+            <input [(ngModel)]="policy.policy_number"
+                    name="policy_number"
+                    type="text"
+                    class="value end-md"
+                    id="policy_number"
+                    #spy>
+            <span class="pink-underline"></span>
+        </div>
+
+        <div class="info-element
+                    row
+                    between-xs
+                    bottom-xs">
+            <span class="label">Claim ID</span>
+            <span class="value end-md">2342342342</span>
+            <span class="pink-underline"></span>
+        </div>
+    <!-- </div> -->
+</form>

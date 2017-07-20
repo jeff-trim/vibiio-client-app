@@ -1,3 +1,5 @@
+import { InsurancePolicy } from './insurance-policy.interface';
+
 export interface ConsumerProfile {
     user_info: {
     id: number
@@ -9,5 +11,6 @@ export interface ConsumerProfile {
     zipcode: number;
     provider?: string;
     policy_number?: number;
-    }
+    };
+    insurance_policy: InsurancePolicy;
 }
