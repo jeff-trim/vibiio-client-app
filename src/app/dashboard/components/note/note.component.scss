@@ -1,6 +1,14 @@
 @import '../../../../assets/css/_variables.scss';
 
-.input {
+form {
+  width: 100%;
+}
+
+input {
+    width: 100%;
+    -webkit-appearance: none;
+    border: none;
+    background-color: $light-grey;  
     margin: 0;
     color: $greyish-brown;
     font-family: $base-font;
@@ -9,19 +17,14 @@
     font-style: normal;
     font-weight: 700;
     letter-spacing: normal;
-    margin: 10px;
-  }
-
-  .dynamic-field .form-input {
-    input {
-      margin: 0;
+    &:-webkit-input-placeholder,
+      :-moz-placeholder,
+      :-ms-input-placeholder {
+      color: $placeholder-grey;
+    }
+    &.existing:-webkit-input-placeholder,
+      :-moz-placeholder,
+      :-ms-input-placeholder {
       color: $greyish-brown;
-      font-family: $base-font;
-      font-size: 1.8rem;
-      font-stretch: normal;
-      font-style: normal;
-      font-weight: 700;
-      letter-spacing: normal;
-      margin: 10px;
     }
   }

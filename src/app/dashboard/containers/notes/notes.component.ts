@@ -9,22 +9,10 @@ import { ExistingNoteComponent } from '../../components/note/existing-note.compo
 
 @Component({
     selector: 'vib-consumer-notes',
-    template: ` <div class="info-element
-                            last-info-element
-                            row
-                            between-xs
-                            bottom-xs">
-                <div class="title label">Notes</div>
-                <span class="pink-underline"></span>
-                <div class="notes-element
-                            row
-                            between-xs
-                            bottom-xs">
-                    <vib-new-consumer-note></vib-new-consumer-note>
-                    <ng-container *ngFor='let note of notes'>
-                        <vib-existing-consumer-note [note]='note'></vib-existing-consumer-note>
-                    </ng-container>
-                </div>`,
+    template: `<vib-new-consumer-note></vib-new-consumer-note>
+                 <ng-container *ngFor='let note of notes'>
+                   <vib-existing-consumer-note [note]='note'></vib-existing-consumer-note>
+                 </ng-container>`,
     styleUrls: ['notes.component.scss']
             })
 
