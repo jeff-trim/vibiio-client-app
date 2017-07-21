@@ -30,11 +30,11 @@ export class PasswordResetService {
                 token: jwt,
                 new_password: password.pw
             }
-        };
+        }
 
         return this.http
             .patch(`${API_URL}/passwords`, body)
-            .map((response: Response) => response)
+            .map((response: any) => response)
             .catch((error: any) => Observable.throw(error));
     }
 }

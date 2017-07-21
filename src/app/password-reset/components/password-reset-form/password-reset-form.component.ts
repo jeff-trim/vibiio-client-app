@@ -35,12 +35,9 @@ export class PasswordResetFormComponent {
 
     submitPw(isValid: boolean, value: string) {
         if(isValid){
-            this.submitNewPassword.emit(value); 
-        } else {
-            console.log("invalid");
-        }
-        console.log(value)
-    }
+            this.submitNewPassword.emit(value);
+        };
+    };
 
     reset(value: Credentials, isValid: boolean) {
         if (isValid) {
