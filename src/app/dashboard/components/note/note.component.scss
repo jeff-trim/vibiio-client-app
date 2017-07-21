@@ -2,6 +2,10 @@
 
 form {
   width: 100%;
+  padding-bottom: 10px;
+  &:focus {
+      outline: none;
+    }
 }
 
 input {
@@ -26,5 +30,8 @@ input {
       :-moz-placeholder,
       :-ms-input-placeholder {
       color: $greyish-brown;
+    }
+    &:focus {
+      outline: none;
     }
   }

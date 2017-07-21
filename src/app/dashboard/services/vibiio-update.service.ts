@@ -13,12 +13,8 @@ export class VibiioUpdateService {
     constructor(private http: Http) { }
 
     updateVibiio(data: any, id: number): Observable <any> {
-        const url = '${VIBIIO_UPDATE_URL} + ${id}';
-        const payload = {
-            vibiio: {
-                data
-            }
-        };
+        const url = `${VIBIIO_UPDATE_URL}${id}`;
+        const payload = { vibiio: data };
 
     return this.http
             .patch(url, payload)

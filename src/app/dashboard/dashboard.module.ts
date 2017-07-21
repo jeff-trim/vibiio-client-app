@@ -67,6 +67,10 @@ import { AllConsumersResolver } from './services/all-consumers.resolver.service'
 import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 
+// Pipes
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
+
 // Routes
 const dashboardRoutes: Routes = [
   {
@@ -149,7 +153,9 @@ const dashboardRoutes: Routes = [
     ExistingNoteComponent,
     ClaimStatusComponent,
     InsurancePolicyComponent,
-    PolicyDetailComponent
+    PolicyDetailComponent,
+    CapitalizePipe,
+    RemoveUnderscorePipe
   ],
   imports: [
       CommonModule,

@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit"
+<form (ngSubmit)="onSubmit(vibiio.status)"
       #claimStatusForm="ngForm">
 
     <div class="info-element
@@ -7,12 +7,17 @@
                 bottom-xs">
   
         <div class="select-style">   
-            <select id="status">
-                <option class="label" value="" selected>Select a Claim Status</option>
-                <option value="0">Scheduled</option>
-                <option value="1">Claim in Progress</option>
-                <option value="2">Completed</option>
+            <select 
+            [(ngModel)]="vibiio.status"
+             id="status"
+             name="status"
+             (change)=onSubmit(vibiio.status)>
+                <option class="label" [ngValue]="vibiio.status" selected>{{ vibiio.status | capitalize | removeUnderscore }}</option>  
+                <option value="scheduled">Scheduled</option>
+                <option value="claim_in_progress">Claim in Progress</option>
+                <option value="completed">Completed</option>
             </select>
+            <span class="pink-underline"></span>
         </div>
     </div>
 </form>
