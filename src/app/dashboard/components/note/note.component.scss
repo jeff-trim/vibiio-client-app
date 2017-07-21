@@ -2,13 +2,12 @@
 
 form {
   width: 100%;
-  padding-bottom: 10px;
   &:focus {
       outline: none;
     }
 }
 
-input {
+textarea {
     width: 100%;
     -webkit-appearance: none;
     border: none;

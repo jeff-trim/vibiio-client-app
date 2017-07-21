@@ -28,13 +28,13 @@ export class NewNoteComponent implements OnInit {
      ngOnInit() {
     }
 
-    onSubmit(newbody: string) {
+    onSubmit(newBody: string) {
         const options = {
-            body: newbody,
+            body: newBody,
             vibiio_id: this.vibiio_id
         };
 
-        if (newbody === undefined) {
+        if (newBody === undefined) {
             this.submitted = false;
         } else if (this.submitted === true) {
                 this.noteService

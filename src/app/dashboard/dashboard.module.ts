@@ -7,6 +7,7 @@ import { MomentModule } from 'angular2-moment';
 import { NouisliderModule } from 'ng2-nouislider';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 import { FormsModule } from '@angular/forms';
+import { AutosizeModule } from 'angular2-autosize';
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -166,7 +167,8 @@ const dashboardRoutes: Routes = [
       MomentModule,
       InfiniteScrollModule,
       DynamicFormModule,
-      FormsModule
+      FormsModule,
+      AutosizeModule
   ],
   exports: [
     DashboardComponent,

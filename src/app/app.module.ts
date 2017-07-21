@@ -32,7 +32,7 @@ import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
   ],
   imports: [
     // Angular Modules
-    BrowserModule,
+      BrowserModule,
       CommonModule,
     // Custom Modules
       AppRoutingModule,
