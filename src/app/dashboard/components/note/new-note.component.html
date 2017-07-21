@@ -1,9 +1,11 @@
 <form ng-submit="onSubmit(note?.body)"
       #newNoteForm>
+  <div class="notes-container">
     <textarea autosize [(ngModel)]="note.body"
            type="text"
            placeholder="Type your notes here"
            id="body"
            name="body"
            (keyup.enter)="onSubmit(note.body)"></textarea>
+  </div>
 </form>

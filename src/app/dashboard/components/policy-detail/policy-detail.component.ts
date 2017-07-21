@@ -24,7 +24,8 @@ export class PolicyDetailComponent implements OnInit {
     onSubmit(policy: InsurancePolicy) {
         const options = {
             carrier: policy.carrier,
-            policy_number: policy.policy_number
+            policy_number: policy.policy_number,
+            claim_id: policy.claim_id
         };
 
         this.updateService

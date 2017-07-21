@@ -7,12 +7,16 @@ form {
     }
 }
 
-textarea {
+.notes-container {
+  background-color: $light-grey; 
+  padding: 2px;
+  textarea {
     width: 100%;
     -webkit-appearance: none;
     border: none;
     background-color: $light-grey;  
     margin: 0;
+    padding: 0;
     color: $greyish-brown;
     font-family: $base-font;
     font-size: 1.8rem;
@@ -20,6 +24,8 @@ textarea {
     font-style: normal;
     font-weight: 700;
     letter-spacing: normal;
+    resize: none;
+    max-height: 150px;
     &:-webkit-input-placeholder,
       :-moz-placeholder,
       :-ms-input-placeholder {
@@ -34,3 +40,8 @@ textarea {
       outline: none;
     }
   }
+
+  .author {
+    color: $pink;
+  }
+}

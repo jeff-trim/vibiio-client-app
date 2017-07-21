@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // Services
 import { ConsumerNoteService } from '../../services/consumer-note.service';
@@ -16,13 +17,18 @@ import { Note } from '../../models/consumer-note.interface';
 
 export class ExistingNoteComponent implements OnInit {
     submitted = false;
+    location = '';
+
     @Input()
     note?: Note;
 
     @Input()
     vibiio_id: number;
 
-    constructor(private noteService: ConsumerNoteService ) { }
+    constructor(private noteService: ConsumerNoteService,
+                private router: Router ) {
+        this.location = router.url;
+    }
 
     ngOnInit() {}
 

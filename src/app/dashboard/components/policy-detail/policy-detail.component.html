@@ -33,7 +33,12 @@
                     between-xs
                     bottom-xs">
             <span class="label">Claim ID</span>
-            <span class="value end-md">2342342342</span>
+            <input [(ngModel)]="policy.claim_id"
+                    name="claim_id"
+                    type="text"
+                    class="value end-md"
+                    id="claim_id"
+                    (keyup.enter)="onSubmit(policy)">
             <span class="pink-underline"></span>
         </div>
 </form>

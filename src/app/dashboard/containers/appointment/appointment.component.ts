@@ -42,11 +42,13 @@ export class AppointmentComponent implements OnInit {
         });
 
         this.activatedRoute.data.subscribe( (data) => {
+            console.log(data)
             //appointment data
             this.appointment = data.appt.appointment;
             this.user = data.appt.appointment.user;
             //vibiio data
             this.vibiio = data.appt.appointment.vibiio;
+            console.log(this.vibiio);
             this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             }, (error) => {
                 console.log(error);

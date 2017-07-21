@@ -20,7 +20,6 @@ import { NotesComponent } from './containers/notes/notes.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
@@ -153,7 +152,6 @@ const dashboardRoutes: Routes = [
     NewNoteComponent,
     ExistingNoteComponent,
     ClaimStatusComponent,
-    InsurancePolicyComponent,
     PolicyDetailComponent,
     CapitalizePipe,
     RemoveUnderscorePipe
