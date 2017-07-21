@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Services
@@ -19,7 +19,7 @@ import { Note } from '../../models/consumer-note.interface';
     styleUrls: ['appointment-details.component.scss']
 })
 
-export class AppointmentDetailsComponent implements OnInit {
+export class AppointmentDetailsComponent {
     onVibiio: boolean = false;
 
     @Input()
@@ -37,9 +37,6 @@ export class AppointmentDetailsComponent implements OnInit {
     @Output()
     endVibiio: EventEmitter<any> = new EventEmitter<any>();
 
-    ngOnInit() {
-      console.log(this.appointment);
-    }
    connect() {
     this.startVibiio.emit(event);
     this.onVibiio = true;
