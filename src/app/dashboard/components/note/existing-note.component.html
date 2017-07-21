@@ -1,3 +1,11 @@
-<form>
-    <input class="existing" type="text" placeholder="note.body" [value]="note.body">
+<form ng-submit="onSubmit(note.body)"
+      #updateNoteForm>
+    <input [(ngModel)]="note.body"
+           class="existing"
+           type="text"
+           placeholder="note.body"
+           [value]="note.body"
+           id="updatedBody"
+           name="body"
+           (keyup.enter)="onSubmit(note.body)">
 </form>

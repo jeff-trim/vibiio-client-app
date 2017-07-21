@@ -29,22 +29,33 @@ export class NewNoteComponent implements OnInit {
     }
 
     onSubmit(newbody: string) {
-        console.log(newbody);
-        this.submitted = true;
-
         const options = {
             body: newbody,
             vibiio_id: this.vibiio_id
         };
 
-        this.noteService
-        .createNote(options)
-        .subscribe( (data) => {
-            console.log(data);
-        },
-            (error: any) => {
-                console.log( 'error updating note' );
-        });
+        if (newbody === undefined) {
+            this.submitted = false;
+        } else if (this.submitted === true) {
+                this.noteService
+                .updateNote(options, this.note.id)
+                .subscribe( (data) => {
+                    this.note = data.note;
+                    this.submitted = true;
+                },
+                    (error: any) => {
+                        console.log( 'error updating note' );
+                });
+        } else {
+            this.noteService
+            .createNote(options)
+            .subscribe( (data) => {
+                this.note = data.note;
+                this.submitted = true;
+            },
+                (error: any) => {
+                    console.log( 'error creating note' );
+            });
+        }
     }
 }
-

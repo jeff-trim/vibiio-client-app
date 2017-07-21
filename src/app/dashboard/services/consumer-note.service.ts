@@ -15,7 +15,7 @@ export class ConsumerNoteService {
 
             return this.http
                     .post(url, body)
-                    .map( (response: Response) => response)
+                    .map( (response: Response) => response.json())
                     .catch( (error: any) => Observable.throw(error.json()));
     }
 
@@ -25,7 +25,7 @@ export class ConsumerNoteService {
 
         return this.http
                    .patch(url, body)
-                   .map( (response: Response) => response)
+                   .map( (response: Response) => response.json())
                    .catch( (error: any) => Observable.throw(error.json()));
     }
 

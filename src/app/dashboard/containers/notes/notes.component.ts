@@ -12,7 +12,7 @@ import { ExistingNoteComponent } from '../../components/note/existing-note.compo
     selector: 'vib-consumer-notes',
     template: `<vib-new-consumer-note [vibiio_id]="vibiio.id"></vib-new-consumer-note>
                  <ng-container *ngFor='let note of notes'>
-                   <vib-existing-consumer-note [note]='note'></vib-existing-consumer-note>
+                   <vib-existing-consumer-note [vibiio_id]="vibiio.id" [note]='note'></vib-existing-consumer-note>
                  </ng-container>`,
     styleUrls: ['notes.component.scss']
             })
@@ -30,6 +30,6 @@ export class NotesComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        console.log(this.vibiio);
+        // console.log(this.vibiio);
     }
 }

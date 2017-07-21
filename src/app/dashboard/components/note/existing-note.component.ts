@@ -3,7 +3,6 @@ import { Config, FormSetup } from '../../../dynamic-form/models/config.interface
 import { Form, Validators } from '@angular/forms';
 
 // Services
-import { FormConfigService } from '../../services/form-config.service';
 import { ConsumerNoteService } from '../../services/consumer-note.service';
 
 // Models
@@ -16,25 +15,36 @@ import { Note } from '../../models/consumer-note.interface';
   })
 
 export class ExistingNoteComponent implements OnInit {
+    submitted = false;
     @Input()
     note?: Note;
 
-    constructor( private formConfig: FormConfigService,
-                 private noteService: ConsumerNoteService ) { }
-     ngOnInit() {
-    }
+    @Input()
+    vibiio_id: number;
 
-    formSubmitted(event) {
-        if (event.status) {
-          this.noteService
-          .updateNote(event.value.body, this.note.id)
-          .subscribe( (data) => {
-            console.log(data);
-        },
-      (error: any) => {
-        console.log( 'error updating note' );
-        });
-      }
+    constructor(private noteService: ConsumerNoteService ) { }
+
+    ngOnInit() {}
+
+    onSubmit(updatedBody: string) {
+        const options = {
+            body: updatedBody,
+            vibiio_id: this.vibiio_id,
+        };
+
+        if (updatedBody === undefined) {
+            this.submitted = false;
+        } else {
+            this.noteService
+            .updateNote(options, this.note.id)
+            .subscribe( (data) => {
+                this.note = data.note;
+                this.submitted = true;
+            },
+        (error: any) => {
+            console.log( 'error updating note' );
+            });
+        }
     }
 }
 
