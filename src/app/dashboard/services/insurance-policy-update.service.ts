@@ -13,12 +13,8 @@ export class InsurancePolicyUpdateService {
     constructor(private http: Http) { }
 
     updatePolicy(data: any, id: number): Observable <any> {
-        const url = '${POLICY_UPDATE_URL} + ${id}';
-        const payload = {
-            insurance_policy: {
-                data
-            }
-        };
+        const url = `${POLICY_UPDATE_URL}${id}`;
+        const payload = { insurance_policy: data };
 
     return this.http
             .patch(url, payload)

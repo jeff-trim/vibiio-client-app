@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Form } from '@angular/forms';
+
+// Services
+import { InsurancePolicyUpdateService } from '../../services/insurance-policy-update.service';
 
 // Models
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
@@ -10,21 +14,26 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
 })
 
 export class PolicyDetailComponent implements OnInit {
-   @Input()
-   policy: InsurancePolicy;
+    @Input()
+    policy: InsurancePolicy;
 
-   submitted = false;
+    constructor(private updateService: InsurancePolicyUpdateService ) { }
 
-   onSubmit() {
-       this.submitted = true;
-   }
+    ngOnInit() { }
 
-   // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.policy); }
+    onSubmit(policy: InsurancePolicy) {
+        const options = {
+            carrier: policy.carrier,
+            policy_number: policy.policy_number
+        };
 
-    constructor() { }
-
-    ngOnInit() {
-        console.log(this.policy.carrier);
-     }
+        this.updateService
+            .updatePolicy(options, policy.id)
+            .subscribe( (data) => {
+                this.policy = data.insurance_policy;
+            },
+            (error: any) => {
+                console.log( 'error updating note' );
+        });
+    }
 }

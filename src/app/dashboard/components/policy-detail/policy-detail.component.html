@@ -1,6 +1,5 @@
-<form (ngSubmit)="onSubmit()"
+<form (ngSubmit)="onSubmit(policy)"
       #policyDetailForm="ngForm">
-    <!-- <div class="form-group"> -->
         <div class="info-element
                     row
                     between-xs
@@ -10,7 +9,8 @@
                    name="carrier" 
                    type="text" 
                    class="value end-md" 
-                   id="provider">
+                   id="provider"
+                   (keyup.enter)="onSubmit(policy)">
             <span class="pink-underline"></span>
         </div>
 
@@ -23,7 +23,8 @@
                     name="policy_number"
                     type="text"
                     class="value end-md"
-                    id="policy_number">
+                    id="policy_number"
+                    (keyup.enter)="onSubmit(policy)">
             <span class="pink-underline"></span>
         </div>
 
@@ -35,5 +36,4 @@
             <span class="value end-md">2342342342</span>
             <span class="pink-underline"></span>
         </div>
-    <!-- </div> -->
 </form>

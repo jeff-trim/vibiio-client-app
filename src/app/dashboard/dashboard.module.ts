@@ -195,7 +195,8 @@ const dashboardRoutes: Routes = [
     SidebarMyVibiioSharedService,
     ConsumerNoteService,
     FormConfigService,
-    VibiioUpdateService
+    VibiioUpdateService,
+    InsurancePolicyUpdateService
   ]
 })
 
