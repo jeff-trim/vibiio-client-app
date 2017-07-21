@@ -3,7 +3,6 @@ import { Config, FormSetup } from '../../../dynamic-form/models/config.interface
 import { Form, Validators } from '@angular/forms';
 
 // Services
-import { FormConfigService } from '../../services/form-config.service';
 import { ConsumerNoteService } from '../../services/consumer-note.service';
 
 // Models
@@ -23,8 +22,7 @@ export class NewNoteComponent implements OnInit {
     @Input()
     vibiio_id: number;
 
-    constructor( private formConfig: FormConfigService,
-                 private noteService: ConsumerNoteService ) { }
+    constructor( private noteService: ConsumerNoteService ) { }
      ngOnInit() {
     }
 

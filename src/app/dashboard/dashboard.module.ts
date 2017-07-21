@@ -50,7 +50,6 @@ import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-share
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 import { MyAvailabilityService } from './services/my-availability.service';
-import { FormConfigService } from './services/form-config.service';
 import { ConsumerNoteService } from './services/consumer-note.service';
 import { VibiioUpdateService } from './services/vibiio-update.service';
 import { InsurancePolicyUpdateService } from './services/insurance-policy-update.service';
@@ -200,7 +199,6 @@ const dashboardRoutes: Routes = [
     MyDayResolver,
     SidebarMyVibiioSharedService,
     ConsumerNoteService,
-    FormConfigService,
     VibiioUpdateService,
     InsurancePolicyUpdateService
   ]
