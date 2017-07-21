@@ -3,21 +3,21 @@ import { Validator } from '@angular/forms';
 import { Credentials } from '../../models/credentials.interface';
 
 @Component({
-  selector: 'app-password-reset-form',
+    selector: 'app-password-reset-form',
     styleUrls: ['password-reset-form.component.scss'],
     templateUrl: 'password-reset-form.component.html'
 })
 
 export class PasswordResetFormComponent {
-    credentials: Credentials
-    emailValid: Boolean = false
-    emailPresence: Boolean = false
-
-    @Input()
-    resetResponse: any
-
-    @Output()
-    submitPasswordReset: EventEmitter<any> = new EventEmitter<any>();
+    credentials: Credentials;
+    password: string;
+    passwordConfirmation: string;
+    emailValid: Boolean = false;
+    emailPresence: Boolean = false;
+    @Input() resetResponse: any;
+    @Input() resetAction: string;
+    @Output() submitPasswordReset: EventEmitter<any> = new EventEmitter<any>();
+    @Output() submitNewPassword: EventEmitter<any> = new EventEmitter<any>();
 
     constructor() {}
 
@@ -25,7 +25,7 @@ export class PasswordResetFormComponent {
         this.resetResponse
     }
 
-    onBlur(event, email){
+    onBlur(event, email) {
         if (email.errors === null) {
             this.emailValid = true
         } else if (email.errors.pattern) {
@@ -33,8 +33,17 @@ export class PasswordResetFormComponent {
         }
     }
 
-    reset(value: Credentials, isValid: boolean){
+    submitPw(isValid: boolean, value: string) {
         if(isValid){
+            this.submitNewPassword.emit(value); 
+        } else {
+            console.log("invalid");
+        }
+        console.log(value)
+    }
+
+    reset(value: Credentials, isValid: boolean) {
+        if (isValid) {
             this.submitPasswordReset.emit(value);
         }
     }
