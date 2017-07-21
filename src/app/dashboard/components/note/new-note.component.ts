@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
 
@@ -15,7 +15,7 @@ import { Note } from '../../models/consumer-note.interface';
 })
 
 
-export class NewNoteComponent implements OnInit {
+export class NewNoteComponent {
     note = new Note;
     submitted = false;
 
@@ -23,8 +23,6 @@ export class NewNoteComponent implements OnInit {
     vibiio_id: number;
 
     constructor( private noteService: ConsumerNoteService ) { }
-     ngOnInit() {
-    }
 
     onSubmit(newBody: string) {
         const options = {
