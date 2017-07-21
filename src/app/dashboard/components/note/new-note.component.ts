@@ -14,46 +14,37 @@ import { Note } from '../../models/consumer-note.interface';
     styleUrls: ['note.component.scss'],
     templateUrl: 'new-note.component.html'
 })
-    // template: <vib-dynamic-form [config]="form?.inputs"
-    //                              (submitted)="formSubmitted($event)"
-    //                              class="note">
-    //                              </vib-dynamic-form>
-  //})
+
 
 export class NewNoteComponent implements OnInit {
-    // form: FormSetup;
+    note = new Note;
+    submitted = false;
+
+    @Input()
+    vibiio_id: number;
 
     constructor( private formConfig: FormConfigService,
                  private noteService: ConsumerNoteService ) { }
      ngOnInit() {
-        //  this.form = this.formConfig.newNotesForm();
-        // console.log(this.note);
     }
 
-    keyDownFunction(event) {
-        if (event.keyCode === 13) {
-           this.noteService
-          .createNote(event.value.body)
-          .subscribe( (data) => {
-              console.log(data);
-          },
-            (error: any) => {
-              console.log( 'error updating note' );
-            });
-       }
-    }
+    onSubmit(newbody: string) {
+        console.log(newbody);
+        this.submitted = true;
 
-    formSubmitted(event) {
-        if (event.status) {
-          this.noteService
-          .createNote(event.value.body)
-          .subscribe( (data) => {
-              console.log(data);
-          },
+        const options = {
+            body: newbody,
+            vibiio_id: this.vibiio_id
+        };
+
+        this.noteService
+        .createNote(options)
+        .subscribe( (data) => {
+            console.log(data);
+        },
             (error: any) => {
-              console.log( 'error updating note' );
+                console.log( 'error updating note' );
         });
-      }
     }
 }
 

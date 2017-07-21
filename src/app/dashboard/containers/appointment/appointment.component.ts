@@ -37,6 +37,7 @@ export class AppointmentComponent implements OnInit {
                 private tokenService: VideoChatTokenService) { }
 
     ngOnInit() {
+        console.log(this.vibiio);
         this.activatedRoute.params.subscribe((params: Params) => {
            this.index = params['id'];
         });
