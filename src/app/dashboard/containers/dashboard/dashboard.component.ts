@@ -33,6 +33,11 @@ declare var OT: any;
   <div class="col-xs-12
               col-md-9
               dashboard-outlet">
+<span *ngFor="let consumer of waitingConsumers">
+<appointment-notification
+    [notificationData]="consumer['consumerData']"
+    (claimAppointment)="claimAppointment($event)"></appointment-notification>
+</span>
     <appointment-notification
       [notificationData]="currentNotificationData"
       (claimAppointment)="claimAppointment($event)"
@@ -65,10 +70,9 @@ export class DashboardComponent implements OnInit {
 
     receiveNotificationData(data){
         if (data.notification_type === "notification") {
+            console.log(this.waitingConsumers)
             this.waitingConsumers.unshift({
-                consumerName: data.content.consumer_name,
-                consumerId: data.content.consumer_id,
-                vibiioId: data.content.vibiio_id
+                consumerData: data
             })
             this.currentNotificationData = data
             this.notificationShow = true
@@ -87,6 +91,7 @@ export class DashboardComponent implements OnInit {
             this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
                 subscribed(data){},
                 received(data){
+                    console.log(data)
                     comp.receiveNotificationData(data)
                 },
                 claimAppointment(message){
