@@ -17,6 +17,7 @@ import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
 import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
 import { NotesComponent } from './containers/notes/notes.component';
+import { VibiioProfileComponent } from './containers/vibiio-profile/vibiio-profile.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -24,6 +25,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
 import { ConsumerProfileComponent } from './components/consumer-profile/consumer-profile.component';
+import { ConsumerProfileTitleComponent } from './components/consumer-profile-title/consumer-profile-title.component';
 import { AppointmentDetailsComponent } from './components/appointment-details/appointment-details.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
@@ -35,6 +37,7 @@ import { NewNoteComponent } from './components/note/new-note.component';
 import { ExistingNoteComponent } from './components/note/existing-note.component';
 import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
 import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
+import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -49,10 +52,13 @@ import { MyDayService } from './services/my-day.service';
 import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service';
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
+import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 import { ConsumerNoteService } from './services/consumer-note.service';
 import { VibiioUpdateService } from './services/vibiio-update.service';
 import { InsurancePolicyUpdateService } from './services/insurance-policy-update.service';
+import { VideoArchiveService } from './services/video-archive.service';
+import { VibiioProfileService } from './services/vibiio-profile.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -65,6 +71,8 @@ import { ConsumerStatusResolver } from './services/consumer-status.resolver.serv
 import { AllConsumersResolver } from './services/all-consumers.resolver.service';
 import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
+import { VideoArchiveResolver } from './services/video-archive.resolver.service';
+import { VibiioProfileResolver } from './services/vibiio-profile.resolver.service';
 
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
@@ -116,14 +124,22 @@ const dashboardRoutes: Routes = [
             path: 'consumer-status/:status',
             component: ConsumerStatusComponent,
             resolve: {
-               cons: ConsumerStatusResolver,
+               cons: ConsumerStatusResolver
             }
           },
            {
             path: 'all-consumers',
             component: ConsumerStatusComponent,
             resolve: {
-               cons: AllConsumersResolver,
+               cons: AllConsumersResolver
+            }
+          },
+          {
+            path: 'vibiio-profile/:id',
+            component: VibiioProfileComponent,
+            resolve: {
+              profile: VibiioProfileResolver,
+               cons: AllConsumersResolver
             }
           }
       ]
@@ -140,10 +156,13 @@ const dashboardRoutes: Routes = [
     SidebarCustomerComponent,
     CustomerProfileComponent,
     ConsumerProfileComponent,
+    ConsumerProfileTitleComponent,
     ConsumerStatusComponent,
+    VibiioProfileComponent,
     AppointmentComponent,
     MyVibiiosComponent,
     MyProfileComponent,
+    VideoArchiveComponent,
     ProfileInformationComponent,
     ProfileLicensureComponent,
     AppointmentNotificationComponent,
@@ -177,7 +196,10 @@ const dashboardRoutes: Routes = [
   providers: [
     DashboardResolver,
     DashboardService,
+    VideoSnapshotService,
     VideoChatTokenService,
+    VideoArchiveService,
+    VideoArchiveResolver,
     MyAppointmentsService,
     MyAppointmentsResolver,
     CustomerStatusCountService,
@@ -200,7 +222,10 @@ const dashboardRoutes: Routes = [
     SidebarMyVibiioSharedService,
     ConsumerNoteService,
     VibiioUpdateService,
-    InsurancePolicyUpdateService
+    InsurancePolicyUpdateService,
+    VibiioProfileService,
+    VibiioProfileResolver,
+    SidebarMyVibiioSharedService
   ]
 })
 

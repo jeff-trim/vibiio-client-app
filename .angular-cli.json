@@ -22,7 +22,6 @@
         "styles.scss",
         "assets/css/flexboxgrid.min.css",
         "../node_modules/jcf/dist/css/theme-minimal/jcf.css"
-
       ],
         "scripts": [
             "../node_modules/jquery/dist/jquery.slim.min.js",

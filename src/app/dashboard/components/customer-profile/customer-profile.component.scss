@@ -24,7 +24,6 @@ h2 {
   line-height: 1.16;
   margin: 0;
   text-transform: capitalize;
-  // width: 327px;
   display: inline;
   margin-top: 25px;
 }
@@ -91,17 +90,20 @@ h2 {
   position: absolute;
 }
 
-.notes-element {
+/deep/ .notes-element {
   background-color: $light-grey;
+  padding: 5px;
 
   p {
     color: $greyish-brown;
     font-family: $copy-font;
-    font-size: 1.8rem;
+    font-size: 1.45rem;
     font-stretch: normal;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: normal;
     margin: 10px;
+    line-height: 1.86;
+    text-align: right;
   }
 }

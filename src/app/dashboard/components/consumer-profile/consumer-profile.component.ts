@@ -19,5 +19,4 @@ export class ConsumerProfileComponent implements OnInit {
     ngOnInit() {
         this.insurance_policy = this.consumerProfile.insurance_policy;
     }
-
 }

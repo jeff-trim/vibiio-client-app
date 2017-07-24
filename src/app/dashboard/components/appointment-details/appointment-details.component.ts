@@ -19,8 +19,8 @@ import { Note } from '../../models/consumer-note.interface';
     styleUrls: ['appointment-details.component.scss']
 })
 
-export class AppointmentDetailsComponent {
-    onVibiio: boolean = false;
+export class AppointmentDetailsComponent  {
+    onVibiio = false;
 
     @Input()
     appointment: Appointment;

@@ -1,0 +1,26 @@
+<div class="col-md-3
+            vibiio-archive-container">
+    <div *ngIf="showArchive"
+         class="vibiio-snapshot-container">
+        <div class="vibiio-snapshot"
+             (click)="playArchive(session_id)">
+            <img [src]="image_url">
+        </div>
+    </div>
+  
+        <video *ngIf="(showVideo)"
+             preload="auto"
+             height="461"
+             width="312"
+             autoplay
+             controls>
+            <source [src]="video_url" 
+                    type="video/ogg">
+        </video>
+
+    <div class="snapshot-label-container">
+        <p class="snapshot-label"
+           (click)="playArchive(session_id)"># {{ archive_number }}</p>
+    </div>
+</div>
+  
