@@ -78,9 +78,11 @@
 
     <key-value [key]="'Vibiio Start Time'"
                [value]="parseUnixTime(appointment.scheduled_datetime)"></key-value>
+    
+    <div class="info-element">
+      <span class="label">Customer Notes</span>
+      <span class="pink-underline"></span>
+    </div>
 
-    <notes [noteText]="appointment.vibiio.description">
-      <div class="label" >Customer Notes</div>
-    </notes>
-
+    <vib-consumer-notes [vibiio]="appointment.vibiio" [notes]="appointment.vibiio.notes"></vib-consumer-notes>
   </div>

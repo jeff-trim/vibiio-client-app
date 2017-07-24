@@ -14,6 +14,7 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment';
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
+import { ConsumerNoteService } from '../../services/consumer-note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 
 declare var OT: any;
@@ -44,12 +45,12 @@ export class AppointmentComponent implements OnInit {
         });
 
         this.activatedRoute.data.subscribe( (data) => {
-            // vibiio data
-            this.vibiio = data.appt.appointment.vibiio;
-            this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             // appointment data
             this.appointment = data.appt.appointment;
             this.user = data.appt.appointment.user;
+            // vibiio data
+            this.vibiio = data.appt.appointment.vibiio;
+            this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             }, (error) => {
                 console.log(error);
         });

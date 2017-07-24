@@ -78,16 +78,10 @@
                [value]="appointment.address?.zip"></key-value>
 
     <span *ngFor="let policy of appointment.insurance_policies">
-
-      <key-value [key]="'Provider'"
-                 [value]="policy.carrier"></key-value>
-
-      <key-value [key]="'Policy Number'"
-                 [value]="policy.policy_number"></key-value>
+      <vib-policy-detail-form [policy]='policy'></vib-policy-detail-form>
     </span>
-
-    <key-value [key]="'Claim ID'"
-               [value]="(appointment.claim_id)"></key-value>
+  
+    <vib-claim-status [vibiio]="vibiio"></vib-claim-status>
   </div>
 
   <div class="col-xs-12
@@ -120,25 +114,25 @@
 
 <div class="flex">
   <div class="col-xs-10
-            col-md-offset-1
-            appointment-information" >
+          col-md-offset-1
+          appointment-information" > 
 
-    <div class="row
-              info-element
-              between-xs
-              bottom-xs">
-
-      <div class="info-element sub-heading no-margin-bottom">
-        <h2 class="customer-notes">notes</h2>
-      </div>
-      <div class="notes-element
-                  pink-border
-                  row
-                  between-xs
-                  bottom-xs">
-        <p>{{ appointment.vibiio.description }}</p>
-      </div>
-    </div>
-  
+    <div class="info-element sub-heading no-margin-bottom"> 
+      <h2 class="customer-notes">notes</h2>
+    </div> 
+    
+    <div class="row 
+                info-element 
+                between-xs
+                bottom-xs">
+      
+       <div class="notes-element
+                   pink-border
+                   row
+                   between-xs
+                   bottom-xs">  
+        <vib-consumer-notes [vibiio]="vibiio" [notes]='appointment.customer_notes'></vib-consumer-notes>
+       </div>  
+    </div>    
   </div>
 </div>

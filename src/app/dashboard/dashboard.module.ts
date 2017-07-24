@@ -6,6 +6,8 @@ import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModul
 import { MomentModule } from 'angular2-moment';
 import { NouisliderModule } from 'ng2-nouislider';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
+import { FormsModule } from '@angular/forms';
+import { AutosizeModule } from 'angular2-autosize';
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -14,6 +16,7 @@ import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
 import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
+import { NotesComponent } from './containers/notes/notes.component';
 import { VibiioProfileComponent } from './containers/vibiio-profile/vibiio-profile.component';
 
 // libraries
@@ -29,9 +32,12 @@ import { ProfileLicensureComponent } from './components/profile-licensure/profil
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
-import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component'
+import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component';
+import { NewNoteComponent } from './components/note/new-note.component';
+import { ExistingNoteComponent } from './components/note/existing-note.component';
+import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
+import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
-import { NotesComponent } from './components/notes/notes.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -48,9 +54,11 @@ import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
+import { ConsumerNoteService } from './services/consumer-note.service';
+import { VibiioUpdateService } from './services/vibiio-update.service';
+import { InsurancePolicyUpdateService } from './services/insurance-policy-update.service';
 import { VideoArchiveService } from './services/video-archive.service';
 import { VibiioProfileService } from './services/vibiio-profile.service';
-import { FormConfigService } from './services/form-config.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -65,6 +73,10 @@ import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 import { VideoArchiveResolver } from './services/video-archive.resolver.service';
 import { VibiioProfileResolver } from './services/vibiio-profile.resolver.service';
+
+// Pipes
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -154,7 +166,13 @@ const dashboardRoutes: Routes = [
     ProfileInformationComponent,
     ProfileLicensureComponent,
     AppointmentNotificationComponent,
-    NotesComponent
+    NotesComponent,
+    NewNoteComponent,
+    ExistingNoteComponent,
+    ClaimStatusComponent,
+    PolicyDetailComponent,
+    CapitalizePipe,
+    RemoveUnderscorePipe
   ],
   imports: [
       CommonModule,
@@ -164,7 +182,9 @@ const dashboardRoutes: Routes = [
       NouisliderModule,
       MomentModule,
       InfiniteScrollModule,
-      DynamicFormModule
+      DynamicFormModule,
+      FormsModule,
+      AutosizeModule
   ],
   exports: [
     DashboardComponent,
@@ -199,6 +219,10 @@ const dashboardRoutes: Routes = [
     MyAvailabilityResolver,
     MyDayService,
     MyDayResolver,
+    SidebarMyVibiioSharedService,
+    ConsumerNoteService,
+    VibiioUpdateService,
+    InsurancePolicyUpdateService,
     VibiioProfileService,
     VibiioProfileResolver,
     SidebarMyVibiioSharedService

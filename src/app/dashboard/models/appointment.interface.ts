@@ -1,8 +1,9 @@
-import { Address } from './address.interface'
-import { InsurancePolicy } from './insurance-policy.interface'
-import { User } from './user.interface'
-import { Vibiio } from './vibiio.interface'
-import { Consumer } from './consumer.interface'
+import { Address } from './address.interface';
+import { InsurancePolicy } from './insurance-policy.interface';
+import { User } from './user.interface';
+import { Vibiio } from './vibiio.interface';
+import { Consumer } from './consumer.interface';
+import { Note } from './consumer-note.interface';
 
 export interface Appointment {
     scheduled_datetime: number;
@@ -15,5 +16,6 @@ export interface Appointment {
     insurance_policies: InsurancePolicy;
     address: Address;
     claim_id: number;
+    customer_notes: Note;
 }
 
