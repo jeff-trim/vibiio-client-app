@@ -112,6 +112,7 @@ export class DashboardComponent implements OnInit {
             })
         } else {
             this.notificationShow = false
+            this.waitingConsumers = []
             this.subscription.unsubscribe()
         }
     }
