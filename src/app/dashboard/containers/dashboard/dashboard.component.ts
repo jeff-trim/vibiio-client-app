@@ -26,6 +26,7 @@ declare var OT: any;
   template: `
 <div class="row">
   <app-sidebar (emitAvailability)="toggleActionCable($event)"
+               [available]="userAvailability"
                class="col-xs-12
                       col-md-3
                       side-bar-component">
@@ -55,7 +56,7 @@ export class DashboardComponent implements OnInit {
     vibiiographerProfile
     waitingConsumers = []
     currentNotificationData = {}
-    userAvailability: boolean
+    userAvailability: boolean = false
     cable: any
     readonly jwt: string = this.authService.getToken()
 
@@ -67,19 +68,29 @@ export class DashboardComponent implements OnInit {
     ){}
 
     receiveNotificationData(data){
-        if (data.notification_type === "notification") {
-            this.waitingConsumers.unshift({consumerData: data})
-            this.currentNotificationData = data
-            this.notificationShow = true
-        } else if (data.notification_type === "error") {
-            this.currentNotificationData = data
-        } else if (data.notification_type === "success"){
-            this.router.navigateByUrl("/dashboard/appointment/" + data.content.appointment_id)
-            this.notificationShow = false
+        switch(data.notification_type){
+        case "notification": {
+                this.waitingConsumers.unshift({consumerData: data})
+                this.currentNotificationData = data
+                this.notificationShow = true
+                break;
+            }
+            case "error": {
+                this.currentNotificationData = data
+                break;
+            }
+            case "success": {
+                this.toggleActionCable(false)
+                this.userAvailability = false
+                this.router.navigateByUrl("/dashboard/appointment/" +
+                                          data.content.appointment_id)
+                break;
+            }
         }
-    }
+     }
 
     receiveData(data){
+        console.log(data)
         switch (data.type){
             case 'waiting_list': {
                 for(let notification of data.content){
@@ -101,6 +112,7 @@ export class DashboardComponent implements OnInit {
                     this.getWaitingList()
                 },
                 received(data){
+                    console.log(data)
                     comp.receiveData(data)
                 },
                 getWaitingList(){
@@ -128,9 +140,7 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.vibiio = data.vibiio
-            // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id)
             this.vibiiographerProfile = data.myProfile
-
         });
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt)
   };
