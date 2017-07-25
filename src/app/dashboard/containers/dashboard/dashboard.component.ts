@@ -90,7 +90,6 @@ export class DashboardComponent implements OnInit {
      }
 
     receiveData(data){
-        console.log(data)
         switch (data.type){
             case 'waiting_list': {
                 for(let notification of data.content){
@@ -99,6 +98,13 @@ export class DashboardComponent implements OnInit {
             }
             case 'notification': {
                 this.receiveNotificationData(data.content)
+            }
+            case 'remove_waiting_consumer': {
+                for(let consumer in this.waitingConsumers){
+                    if(this.waitingConsumers[consumer].consumerData.content.vibiio_id == data.content.vibiio_id){
+                        this.waitingConsumers.splice(+consumer, 1)
+                    }
+                }
             }
         }
     }
@@ -112,7 +118,6 @@ export class DashboardComponent implements OnInit {
                     this.getWaitingList()
                 },
                 received(data){
-                    console.log(data)
                     comp.receiveData(data)
                 },
                 getWaitingList(){
