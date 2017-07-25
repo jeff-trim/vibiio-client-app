@@ -35,13 +35,11 @@ declare var OT: any;
               dashboard-outlet">
 <span *ngFor="let consumer of waitingConsumers">
 <appointment-notification
-    [notificationData]="consumer['consumerData']"
-    (claimAppointment)="claimAppointment($event)"></appointment-notification>
-</span>
-    <appointment-notification
-      [notificationData]="currentNotificationData"
+      [notificationData]="consumer['consumerData']"
       (claimAppointment)="claimAppointment($event)"
       *ngIf="notificationShow"></appointment-notification>
+</span>
+
     <router-outlet></router-outlet>
   </div>
 </div>
@@ -70,10 +68,7 @@ export class DashboardComponent implements OnInit {
 
     receiveNotificationData(data){
         if (data.notification_type === "notification") {
-            console.log(this.waitingConsumers)
-            this.waitingConsumers.unshift({
-                consumerData: data
-            })
+            this.waitingConsumers.unshift({consumerData: data})
             this.currentNotificationData = data
             this.notificationShow = true
         } else if (data.notification_type === "error") {
@@ -84,15 +79,32 @@ export class DashboardComponent implements OnInit {
         }
     }
 
+    receiveData(data){
+        switch (data.type){
+            case 'waiting_list': {
+                for(let notification of data.content){
+                    this.receiveNotificationData(notification)
+                }
+            }
+            case 'notification': {
+                this.receiveNotificationData(data.content)
+            }
+        }
+    }
+
     toggleActionCable(event){
         this.userAvailability = event
         let comp = this
         if(this.userAvailability == true) {
             this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
-                subscribed(data){},
+                connected(data){
+                    this.getWaitingList()
+                },
                 received(data){
-                    console.log(data)
-                    comp.receiveNotificationData(data)
+                    comp.receiveData(data)
+                },
+                getWaitingList(){
+                    return this.perform('get_waiting_list')
                 },
                 claimAppointment(message){
                     return this.perform('claim_vibiio', message)
