@@ -3,12 +3,13 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
 // libaries
-// import * as ActionCable from 'actioncable'
 import * as ActionCable from 'action-cable-react-jwt'
+import { OPENTOK_API_KEY } from '../../../../environments/environment'
+
 // Models
 import { Vibiio } from '../../models/vibiio.interface'
 import { VideoChatToken } from '../../models/video-chat-token.interface'
-import { OPENTOK_API_KEY } from '../../../../environments/environment'
+import { NotificationWrapper } from '../../models/notification-wrapper.interface'
 
 // Services
 import { VideoChatTokenService } from '../../services/video-chat-token.service'
@@ -89,27 +90,38 @@ export class DashboardComponent implements OnInit {
         }
      }
 
-    receiveData(data){
-        switch (data.type){
-            case 'waiting_list': {
-                for(let notification of data.content){
-                    this.receiveNotificationData(notification)
-                }
+    receiveData(data: NotificationWrapper){
+        switch (data.type_of){
+        case 'waiting_list': {
+                this.fillWaitingList(data)
             }
             case 'notification': {
                 this.receiveNotificationData(data.content)
             }
             case 'remove_waiting_consumer': {
-                for(let consumer in this.waitingConsumers){
-                    if(this.waitingConsumers[consumer].consumerData.content.vibiio_id == data.content.vibiio_id){
-                        this.waitingConsumers.splice(+consumer, 1)
-                    }
-                }
+                console.log("💥")
+                this.removeNotification(data)
             }
         }
     }
 
-    toggleActionCable(event){
+    fillWaitingList(data){
+        for(let notification of data.content){
+            this.receiveNotificationData(notification)
+        }
+    }
+
+    removeNotification(data){
+        console.log(data)
+        for(let consumer in this.waitingConsumers){
+            if(this.waitingConsumers[consumer].consumerData.content.vibiio_id == data.content.vibiio_id){
+                console.log("REMOVED")
+                this.waitingConsumers.splice(+consumer, 1)
+            }
+        }
+    }
+
+    toggleActionCable(event: boolean){
         this.userAvailability = event
         let comp = this
         if(this.userAvailability == true) {
@@ -118,6 +130,7 @@ export class DashboardComponent implements OnInit {
                     this.getWaitingList()
                 },
                 received(data){
+                    console.log(data)
                     comp.receiveData(data)
                 },
                 getWaitingList(){
