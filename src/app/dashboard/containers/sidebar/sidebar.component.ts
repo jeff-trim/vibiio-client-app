@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core'
+import { Component, Output, Input, EventEmitter } from '@angular/core'
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component'
 import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component'
@@ -28,9 +28,10 @@ export class SidebarComponent {
   sidebarVisibility: boolean
   userTimeZone: string
 
-  @Output()
-  emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>()
-  available: boolean = false
+    @Output()
+    emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>()
+    @Input()
+    available: boolean = false
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusCountService,
