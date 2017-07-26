@@ -36,13 +36,12 @@ declare var OT: any;
               col-md-9
               dashboard-outlet">
 <span *ngFor="let consumer of waitingConsumers">
-<appointment-notification
-      [notificationData]="consumer['consumerData']"
-      (claimAppointment)="claimAppointment($event)"
-      *ngIf="notificationShow"></appointment-notification>
+    <appointment-notification
+        [notificationData]="consumer['consumerData']"
+        (claimAppointment)="claimAppointment($event)"
+        *ngIf="notificationShow"></appointment-notification>
 </span>
-
-    <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
   </div>
 </div>
 `,
@@ -71,7 +70,7 @@ export class DashboardComponent implements OnInit {
     receiveNotificationData(data){
         switch(data.notification_type){
         case "notification": {
-                this.waitingConsumers.unshift({consumerData: data})
+                this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ]
                 this.currentNotificationData = data
                 this.notificationShow = true
                 break;
@@ -92,14 +91,13 @@ export class DashboardComponent implements OnInit {
 
     receiveData(data: NotificationWrapper){
         switch (data.type_of){
-        case 'waiting_list': {
+            case 'waiting_list': {
                 this.fillWaitingList(data)
             }
             case 'notification': {
                 this.receiveNotificationData(data.content)
             }
             case 'remove_waiting_consumer': {
-                console.log("💥")
                 this.removeNotification(data)
             }
         }
@@ -112,11 +110,13 @@ export class DashboardComponent implements OnInit {
     }
 
     removeNotification(data){
-        console.log(data)
         for(let consumer in this.waitingConsumers){
-            if(this.waitingConsumers[consumer].consumerData.content.vibiio_id == data.content.vibiio_id){
-                console.log("REMOVED")
-                this.waitingConsumers.splice(+consumer, 1)
+            if(this.waitingConsumers[+consumer].consumerData.content.vibiio_id == data.content.vibiio_id){
+                this.waitingConsumers = [
+                    ...this.waitingConsumers.slice(0, +consumer),
+                    ...this.waitingConsumers.slice(+consumer + 1)
+                ]
+                break
             }
         }
     }
@@ -130,7 +130,6 @@ export class DashboardComponent implements OnInit {
                     this.getWaitingList()
                 },
                 received(data){
-                    console.log(data)
                     comp.receiveData(data)
                 },
                 getWaitingList(){
