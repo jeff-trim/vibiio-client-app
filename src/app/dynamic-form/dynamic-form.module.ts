@@ -20,7 +20,7 @@ import { DynamicFieldDirective } from './directive/dynamic-field/dynamic-field.d
     DynamicFormComponent,
     FormInputComponent,
     FormButtonComponent,
-    FormSelectComponent, 
+    FormSelectComponent,
     DynamicFieldDirective
   ],
   exports: [

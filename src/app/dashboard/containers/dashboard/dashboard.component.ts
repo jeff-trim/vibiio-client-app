@@ -3,12 +3,13 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
 // libaries
-// import * as ActionCable from 'actioncable'
 import * as ActionCable from 'action-cable-react-jwt'
+import { OPENTOK_API_KEY } from '../../../../environments/environment'
+
 // Models
 import { Vibiio } from '../../models/vibiio.interface'
 import { VideoChatToken } from '../../models/video-chat-token.interface'
-import { OPENTOK_API_KEY } from '../../../../environments/environment'
+import { NotificationWrapper } from '../../models/notification-wrapper.interface'
 
 // Services
 import { VideoChatTokenService } from '../../services/video-chat-token.service'
@@ -26,6 +27,7 @@ declare var OT: any;
   template: `
 <div class="row">
   <app-sidebar (emitAvailability)="toggleActionCable($event)"
+               [available]="userAvailability"
                class="col-xs-12
                       col-md-3
                       side-bar-component">
@@ -33,11 +35,13 @@ declare var OT: any;
   <div class="col-xs-12
               col-md-9
               dashboard-outlet">
+<span *ngFor="let consumer of waitingConsumers">
     <appointment-notification
-      [notificationData]="currentNotificationData"
-      (claimAppointment)="claimAppointment($event)"
-      *ngIf="notificationShow"></appointment-notification>
-    <router-outlet></router-outlet>
+        [notificationData]="consumer['consumerData']"
+        (claimAppointment)="claimAppointment($event)"
+        *ngIf="notificationShow"></appointment-notification>
+</span>
+        <router-outlet></router-outlet>
   </div>
 </div>
 `,
@@ -52,7 +56,7 @@ export class DashboardComponent implements OnInit {
     vibiiographerProfile
     waitingConsumers = []
     currentNotificationData = {}
-    userAvailability: boolean
+    userAvailability: boolean = false
     cable: any
     readonly jwt: string = this.authService.getToken()
 
@@ -64,30 +68,72 @@ export class DashboardComponent implements OnInit {
     ){}
 
     receiveNotificationData(data){
-        if (data.notification_type === "notification") {
-            this.waitingConsumers.unshift({
-                consumerName: data.content.consumer_name,
-                consumerId: data.content.consumer_id,
-                vibiioId: data.content.vibiio_id
-            })
-            this.currentNotificationData = data
-            this.notificationShow = true
-        } else if (data.notification_type === "error") {
-            this.currentNotificationData = data
-        } else if (data.notification_type === "success"){
-            this.router.navigateByUrl("/dashboard/appointment/" + data.content.appointment_id)
-            this.notificationShow = false
+        switch(data.notification_type){
+        case "notification": {
+                this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ]
+                this.currentNotificationData = data
+                this.notificationShow = true
+                break;
+            }
+            case "error": {
+                this.currentNotificationData = data
+                break;
+            }
+            case "success": {
+                this.toggleActionCable(false)
+                this.userAvailability = false
+                this.router.navigateByUrl("/dashboard/appointment/" +
+                                          data.content.appointment_id)
+                break;
+            }
+        }
+     }
+
+    receiveData(data: NotificationWrapper){
+        switch (data.type_of){
+            case 'waiting_list': {
+                this.fillWaitingList(data)
+            }
+            case 'notification': {
+                this.receiveNotificationData(data.content)
+            }
+            case 'remove_waiting_consumer': {
+                this.removeNotification(data)
+            }
         }
     }
 
-    toggleActionCable(event){
+    fillWaitingList(data){
+        for(let notification of data.content){
+            this.receiveNotificationData(notification)
+        }
+    }
+
+    removeNotification(data){
+        for(let consumer in this.waitingConsumers){
+            if(this.waitingConsumers[+consumer].consumerData.content.vibiio_id == data.content.vibiio_id){
+                this.waitingConsumers = [
+                    ...this.waitingConsumers.slice(0, +consumer),
+                    ...this.waitingConsumers.slice(+consumer + 1)
+                ]
+                break
+            }
+        }
+    }
+
+    toggleActionCable(event: boolean){
         this.userAvailability = event
         let comp = this
         if(this.userAvailability == true) {
             this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
-                subscribed(data){},
+                connected(data){
+                    this.getWaitingList()
+                },
                 received(data){
-                    comp.receiveNotificationData(data)
+                    comp.receiveData(data)
+                },
+                getWaitingList(){
+                    return this.perform('get_waiting_list')
                 },
                 claimAppointment(message){
                     return this.perform('claim_vibiio', message)
@@ -95,6 +141,7 @@ export class DashboardComponent implements OnInit {
             })
         } else {
             this.notificationShow = false
+            this.waitingConsumers = []
             this.subscription.unsubscribe()
         }
     }
@@ -110,9 +157,7 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.vibiio = data.vibiio
-            // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id)
             this.vibiiographerProfile = data.myProfile
-
         });
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt)
   };

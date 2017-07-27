@@ -1,13 +1,17 @@
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-// services
+// Services
 import { AppointmentService } from '../../services/appointment.service';
+
+// Components
+import { NotesComponent } from '../../containers/notes/notes.component';
 
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
 import { User } from '../../models/user.interface';
 import { Vibiio } from '../../models/vibiio.interface';
+import { Note } from '../../models/consumer-note.interface';
 
 @Component({
     selector: 'appointment-details',
@@ -33,7 +37,7 @@ export class AppointmentDetailsComponent  {
     @Output()
     endVibiio: EventEmitter<any> = new EventEmitter<any>();
 
-    connect() {
+   connect() {
     this.startVibiio.emit(event);
     this.onVibiio = true;
   }

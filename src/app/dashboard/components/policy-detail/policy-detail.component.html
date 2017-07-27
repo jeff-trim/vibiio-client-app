@@ -1,0 +1,44 @@
+<form (ngSubmit)="onSubmit(policy)"
+      #policyDetailForm="ngForm">
+        <div class="info-element
+                    row
+                    between-xs
+                    bottom-xs">
+            <span class="label">Provider</span>
+            <input [(ngModel)]="policy.carrier"
+                   name="carrier" 
+                   type="text" 
+                   class="value end-md" 
+                   id="provider"
+                   (keyup.enter)="onSubmit(policy)">
+            <span class="pink-underline"></span>
+        </div>
+
+        <div class="info-element
+                    row
+                    between-xs
+                    bottom-xs">
+            <span class="label">Policy Number</span>
+            <input [(ngModel)]="policy.policy_number"
+                    name="policy_number"
+                    type="text"
+                    class="value end-md"
+                    id="policy_number"
+                    (keyup.enter)="onSubmit(policy)">
+            <span class="pink-underline"></span>
+        </div>
+
+        <div class="info-element
+                    row
+                    between-xs
+                    bottom-xs">
+            <span class="label">Claim ID</span>
+            <input [(ngModel)]="policy.claim_id"
+                    name="claim_id"
+                    type="text"
+                    class="value end-md"
+                    id="claim_id"
+                    (keyup.enter)="onSubmit(policy)">
+            <span class="pink-underline"></span>
+        </div>
+</form>

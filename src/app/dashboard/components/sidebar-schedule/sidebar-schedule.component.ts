@@ -25,10 +25,10 @@ export class SidebarScheduleComponent {
     vibiio: any;
 
     @Input()
-    timeZone: number
+    timeZone: number;
 
-    parseTime(time: number): string{
-        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A')
+    parseTime(time: number): string  {
+        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
     }
 }
 
