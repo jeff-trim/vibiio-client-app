@@ -48,13 +48,14 @@ export class MyVibiiosComponent {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            console.log(data.appointments.appointments.appointments.length)
             if(data.appointments.appointments.appointments.length > 0 ) {
                 this.appointments = data.appointments.appointments.appointments
             }
+            if(data.sidebarMyDay.my_day.length !== undefined) {
+                this.myVibiioCount = data.sidebarMyDay.my_day.length
+            }
             this.todaysVibiios = data.appointments.appointments
             this.vibiiographerId = this.todaysVibiios.vibiiographer_id
-            this.myVibiioCount = data.sidebarMyDay.my_day.length
             this.vibiiographerName = data.myProfile.user.first_name
 
             // setup config object for slider in onInit because otherwise the values aren't
