@@ -16,6 +16,7 @@ import { AppointmentResolver } from '../../services/appointment.resolver.service
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
 import { ConsumerNoteService } from '../../services/consumer-note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
+import { ActivityService } from '../../services/activity.service';
 
 declare var OT: any;
 
@@ -37,7 +38,8 @@ export class AppointmentComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
-                private snapshotService: VideoSnapshotService) {}
+                private snapshotService: VideoSnapshotService,
+                private activityService: ActivityService) {}
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -57,15 +59,16 @@ export class AppointmentComponent implements OnInit {
     }
 
       connectToSession(event) {
-        this.tokenService.getToken(this.vibiio.id).subscribe( (data) => {
+        this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
-
+            this.triggerActivity(this.vibiio.id,
+                                 'Vibiiographer manually started video',
+                                 'Video session started')
             this.session.connect(this.token, (error) => {
                 // Video options
-                const options = {
-                insertMode: 'append',
-                width: 312,
-                height: 461.1
+                const options = {insertMode: 'append',
+                    width: 312,
+                    height: 461.1
                 };
 
                 // Initialize a publisher and publish the video stream to the session
@@ -83,7 +86,20 @@ export class AppointmentComponent implements OnInit {
         });
     }
 
+    triggerActivity(vibiio_id: number, message: string, name: string){
+        this.activityService.postActivity(
+            vibiio_id,
+            message,
+            name
+            ).subscribe((data) => {})
+    }
+
     endSession(event) {
         this.session.disconnect();
+        this.triggerActivity(
+            this.vibiio.id,
+            'Vibiiographer manually ended video session',
+            'Video session ended'
+        )
     }
 }
