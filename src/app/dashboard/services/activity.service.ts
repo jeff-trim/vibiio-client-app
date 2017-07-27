@@ -18,7 +18,6 @@ export class ActivityService {
                 message: message
             }
         }
-        console.log(url)
         return this.http
                    .post(url, body)
                    .map((response: Response) => response.json())

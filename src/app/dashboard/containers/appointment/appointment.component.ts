@@ -91,7 +91,7 @@ export class AppointmentComponent implements OnInit {
             vibiio_id,
             message,
             name
-            ).subscribe((data) => {console.log(data)})
+            ).subscribe((data) => {})
     }
 
     endSession(event) {
