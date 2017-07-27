@@ -25,6 +25,9 @@
         <div *ngIf="password.errors?.required && !password.pristine">
           Password is required
         </div>
+        <div *ngIf="unauthorized === true">
+          Invalid email or password
+        </div>
       </div>
     </div>
     <div class="login-options row">
