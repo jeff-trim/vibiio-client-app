@@ -59,6 +59,7 @@ import { VibiioUpdateService } from './services/vibiio-update.service';
 import { InsurancePolicyUpdateService } from './services/insurance-policy-update.service';
 import { VideoArchiveService } from './services/video-archive.service';
 import { VibiioProfileService } from './services/vibiio-profile.service';
+import { ActivityService } from './services/activity.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -113,9 +114,7 @@ const dashboardRoutes: Routes = [
                 customerProfile: CustomerProfileResolver
             }
           },
-          {
-            path: 'appointment/:id',
-            component: AppointmentComponent,
+          {path: 'appointment/:id', component: AppointmentComponent,
             resolve: {
                appt: AppointmentResolver
             }
@@ -225,7 +224,8 @@ const dashboardRoutes: Routes = [
     InsurancePolicyUpdateService,
     VibiioProfileService,
     VibiioProfileResolver,
-    SidebarMyVibiioSharedService
+      SidebarMyVibiioSharedService,
+      ActivityService
   ]
 })
 
