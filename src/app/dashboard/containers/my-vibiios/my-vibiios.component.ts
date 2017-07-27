@@ -48,7 +48,10 @@ export class MyVibiiosComponent {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            this.appointments = data.appointments.appointments.appointments
+            console.log(data.appointments.appointments.appointments.length)
+            if(data.appointments.appointments.appointments.length > 0 ) {
+                this.appointments = data.appointments.appointments.appointments
+            }
             this.todaysVibiios = data.appointments.appointments
             this.vibiiographerId = this.todaysVibiios.vibiiographer_id
             this.myVibiioCount = data.sidebarMyDay.my_day.length
@@ -56,19 +59,20 @@ export class MyVibiiosComponent {
 
             // setup config object for slider in onInit because otherwise the values aren't
             // available on instantiation
-
-            this.sliderConfig = {
-                start: this.appointments[0].scheduled_datetime,
-                range: {
-                    min: this.todaysVibiios.range_min,
-                    max: this.todaysVibiios.range_max
-                },
-                step: 900,
-                tooltips: [new TimeFormatter(this.todaysVibiios.user_time_zone),
-                           new TimeFormatter(this.todaysVibiios.user_time_zone)],
-                connect: true
+            if(data.appointments.appointments.appointments > 0){
+                this.sliderConfig = {
+                    start: this.appointments[0].scheduled_datetime,
+                    range: {
+                        min: this.todaysVibiios.range_min,
+                        max: this.todaysVibiios.range_max
+                    },
+                    step: 900,
+                    tooltips: [new TimeFormatter(this.todaysVibiios.user_time_zone),
+                            new TimeFormatter(this.todaysVibiios.user_time_zone)],
+                    connect: true
+                }
+                this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max]
             }
-            this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max]
         })
     }
 
@@ -120,7 +124,11 @@ export class MyVibiiosComponent {
     // maps over an array of appointments and adds them to the public appointment
     // array
     addToAppointments(incoming_apts){
-        incoming_apts.map((appointment: Appointment) => this.appointments.push(appointment))
+        if (incoming_apts.length !== 0){
+            incoming_apts.map((appointment: Appointment) => this.appointments.push(appointment))
+        } else {
+            console.log("empty")
+        }
     }
 
     // apt_obj will have 2 key-vals appointment with appointment data
