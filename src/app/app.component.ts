@@ -16,10 +16,6 @@ export class AppComponent implements OnInit {
                  private router: Router,
                  private spinner: SpinnerService) {}
 
-    on(){
-        this.spinner.show()
-    }
-
   ngOnInit () {
     this.title = 'Vibiio';
     this.titleService.setTitle(this.title);
