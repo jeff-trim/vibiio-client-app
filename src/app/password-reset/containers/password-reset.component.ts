@@ -20,6 +20,21 @@ export class PasswordResetComponent {
     jwt: string = "request-reset"
     resetAction: string
 
+    welcomeHeader = 'Forgot Your Password?'
+    welcomeCopy = 'No problem! Just enter your password below and we’ll send you a link to reset it.'
+    successHeader = 'Thanks!'
+    successCopy ='Click below to resend it if needed, and don\'t forget to check those pesky SPAM folders!'
+    failureHeader = 'Error'
+    failureCopy = 'An error has occurred, please contact support.'
+    resetHeader = 'New Password Time!'
+    resetCopy = 'Enter a new password that\'s at least 8 characters long.'
+    resetSuccessHeader = 'All Good!'
+    resetSuccessCopy = 'Your new password is set, let\'s go login'
+    expiredHeader = 'Error'
+    expiredCopy = 'Looks like that link is expired, please request a new password reset link'
+    resetErrorHeader = 'Error'
+    resetErrorCopy = 'Looks like there was a problem, please contact support'
+
     constructor(private passwordResetService: PasswordResetService,
                 private activatedRoute: ActivatedRoute){
 
@@ -74,19 +89,4 @@ export class PasswordResetComponent {
         this.copy = copy
     }
 
-
-    welcomeHeader = 'Forgot Your Password?'
-    welcomeCopy = 'No problem! Just enter your password below and we’ll send you a link to reset it.'
-    successHeader = 'Thanks!'
-    successCopy ='Click below to resend it if needed, and don\'t forget to check those pesky SPAM folders!'
-    failureHeader = 'Error'
-    failureCopy = 'An error has occurred, please contact support.'
-    resetHeader = 'New Password Time!'
-    resetCopy = 'Enter a new password that\'s at least 8 characters long.'
-    resetSuccessHeader = 'All Good!'
-    resetSuccessCopy = 'Your new password is set, let\'s go login'
-    expiredHeader = 'Error'
-    expiredCopy = 'Looks like that link is expired, please request a new password reset link'
-    resetErrorHeader = 'Error'
-    resetErrorCopy = 'Looks like there was a problem, please contact support'
 }
