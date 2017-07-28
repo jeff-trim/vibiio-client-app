@@ -25,7 +25,7 @@
         <div *ngIf="password.errors?.required && !password.pristine">
           Password is required
         </div>
-        <div *ngIf="unauthorized === true">
+        <div *ngIf="unauthorized">
           Invalid email or password
         </div>
       </div>
