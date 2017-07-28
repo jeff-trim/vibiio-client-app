@@ -16,12 +16,15 @@ import { Credentials } from '../models/credentials.interface';
         <app-login-greeting></app-login-greeting>
         <app-login-form
           (submitLogin)="submitLogin($event)"
+          [unauthorized]="unauthorized"
           ></app-login-form>
       </div>
     `
 })
 
 export class LoginComponent {
+  unauthorized: boolean = false
+
   constructor(private loginService: LoginService,
               private authService: AuthService,
               private router: Router) {}
@@ -33,14 +36,20 @@ export class LoginComponent {
         (data: Jwt) => {
           if (data.role === 'vibiiographer') {
             this.authService.setToken(data.jwt);
-            this.router.navigate(['/dashboard']);
+              this.router.navigate(['/dashboard']);
+              this.unauthorized = false;
           } else {
+              this.unauthorized = true
             // TODO: provide feedback on form for this event
             console.log('not authorized');
           }
         },
-        // TODO: provide feedback on form for this event
-        (error: any) => console.log('error', error)
+          // TODO: provide feedback on form for this event
+          (error: any) =>{
+              if(error.status === 404) {
+                  this.unauthorized = true;
+              }
+          }
       );
   }
 }

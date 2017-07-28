@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit } from '@angular/core';
 import { Credentials } from '../../models/credentials.interface';
 
 @Component({
@@ -12,6 +12,9 @@ export class LoginFormComponent implements OnInit {
 
   @Output()
   submitLogin: EventEmitter<Credentials> = new EventEmitter<Credentials>();
+
+  @Input()
+  unauthorized: boolean
 
   ngOnInit() {
     this.credentials = {
