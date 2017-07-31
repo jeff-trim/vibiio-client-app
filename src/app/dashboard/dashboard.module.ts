@@ -77,6 +77,7 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
+import { AutosizeDirective } from './directives/autosize.directive';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -170,7 +171,8 @@ const dashboardRoutes: Routes = [
     ClaimStatusComponent,
     PolicyDetailComponent,
     CapitalizePipe,
-    RemoveUnderscorePipe
+    RemoveUnderscorePipe,
+    AutosizeDirective
   ],
   imports: [
       CommonModule,

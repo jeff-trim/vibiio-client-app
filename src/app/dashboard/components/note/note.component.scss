@@ -10,7 +10,7 @@ form {
 .notes-container {
   background-color: $light-grey; 
   padding: 2px;
-  textarea {
+  .note-body {
     width: 100%;
     -webkit-appearance: none;
     border: none;
