@@ -5,9 +5,9 @@
          [(ngModel)]="note.body"
          contenteditable="true" 
          type="text"
-         placeholder="Type your notes here"
+         placeholder="Type your notes here (shift + enter to submit)"
          id="body"
          name="body"
-         (keyup.enter)="onSubmit(note.body)"></textarea>
+         (keyup.shift.enter)="onSubmit(note.body)"></textarea>
   </div>
 </form>
