@@ -1,10 +1,10 @@
-<div class="col-md-3
-            vibiio-archive-container">
+<div *ngFor='let snapshot of snapshots' 
+     class="col-md-3 vibiio-archive-container">
     <div *ngIf="showArchive"
          class="vibiio-snapshot-container">
         <div class="vibiio-snapshot"
              (click)="playArchive(session_id)">
-            <img [src]="image_url">
+            <img [src]="snapshot.image_url">
         </div>
     </div>
   
@@ -20,7 +20,7 @@
 
     <div class="snapshot-label-container">
         <p class="snapshot-label"
-           (click)="playArchive(session_id)"># {{ archive_number }}</p>
+           (click)="playArchive(snapshot.session_id)"># {{ snapshot.consumer_id }}</p>
     </div>
 </div>
   

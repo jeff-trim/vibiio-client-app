@@ -15,7 +15,7 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 export class PolicyDetailComponent implements OnInit {
     @Input()
-    policy: InsurancePolicy;
+    policy?: InsurancePolicy;
 
     constructor(private updateService: InsurancePolicyUpdateService ) { }
 

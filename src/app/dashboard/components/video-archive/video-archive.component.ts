@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 // Models
 import { VideoArchive } from '../../models/video-archive.interface';
@@ -13,7 +13,7 @@ import { VideoArchiveService } from '../../services/video-archive.service';
     styleUrls: ['video-archive.component.scss']
 })
 
-export class VideoArchiveComponent implements OnInit {
+export class VideoArchiveComponent {
     image_url: string;
     archive_number: number;
     session_id: string;
@@ -21,19 +21,15 @@ export class VideoArchiveComponent implements OnInit {
     showVideo = false;
     showArchive = true;
 
+    snapshot?: VideoSnapshot;
+
     @Input()
-    snapshot: VideoSnapshot;
+    snapshots: VideoSnapshot[];
 
     @Input()
     archive: VideoArchive;
 
     constructor(private archiveService: VideoArchiveService) {}
-
-    ngOnInit() {
-        this.image_url = this.snapshot[0].image_url;
-        this.archive_number = this.snapshot[0].consumer_id;
-        this.session_id = this.snapshot[0].session_id;
-    }
 
     playArchive(session: string) {
         this.toggleVideo();
