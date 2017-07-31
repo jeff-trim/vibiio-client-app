@@ -7,7 +7,6 @@ import { MomentModule } from 'angular2-moment';
 import { NouisliderModule } from 'ng2-nouislider';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 import { FormsModule } from '@angular/forms';
-import { AutosizeModule } from 'angular2-autosize';
 
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -78,6 +77,7 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
+import { AutosizeDirective } from './directives/autosize.directive';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -171,7 +171,8 @@ const dashboardRoutes: Routes = [
     ClaimStatusComponent,
     PolicyDetailComponent,
     CapitalizePipe,
-    RemoveUnderscorePipe
+    RemoveUnderscorePipe,
+    AutosizeDirective
   ],
   imports: [
       CommonModule,
@@ -182,8 +183,7 @@ const dashboardRoutes: Routes = [
       MomentModule,
       InfiniteScrollModule,
       DynamicFormModule,
-      FormsModule,
-      AutosizeModule
+      FormsModule
   ],
   exports: [
     DashboardComponent,
@@ -224,8 +224,8 @@ const dashboardRoutes: Routes = [
     InsurancePolicyUpdateService,
     VibiioProfileService,
     VibiioProfileResolver,
-      SidebarMyVibiioSharedService,
-      ActivityService
+    SidebarMyVibiioSharedService,
+    ActivityService
   ]
 })
 

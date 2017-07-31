@@ -26,18 +26,15 @@
     </div>
   </div>
 
-<div class="flex">
-  <div class="col-xs-9
-              vibiio-profile-information">
+  <div class="flex">
+    <div class="vibiio-profile-information notes-row">
 
-    <div class="row
-              info-element
-              between-xs
-              bottom-xs
-              notes-row">
-      <!-- <notes></notes> -->
+      <div class="info-element">
+        <span class="label">Customer Notes</span>
+        <span class="pink-underline"></span>
+      </div>
+      <vib-consumer-notes [vibiio]="consumerProfile" [notes]="notes"></vib-consumer-notes>
+    
     </div>
-
   </div>
-</div>
 </div>
