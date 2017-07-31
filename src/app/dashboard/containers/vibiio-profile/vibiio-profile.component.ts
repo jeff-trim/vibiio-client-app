@@ -7,7 +7,7 @@ import { VibiioProfileService } from '../../services/vibiio-profile.service';
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { VideoSnapshot } from '../../models/video-snapshot.interface';
-
+import { Note } from '../../models/consumer-note.interface';
 
 @Component({
     selector: 'vibiio-profile',
@@ -17,6 +17,7 @@ import { VideoSnapshot } from '../../models/video-snapshot.interface';
 
 export class VibiioProfileComponent implements OnInit {
     consumerProfile: ConsumerProfile;
+    notes: Note[];
 
     constructor(private activatedRoute: ActivatedRoute,
                 private vibiioProfileService: VibiioProfileService) { }
@@ -24,6 +25,8 @@ export class VibiioProfileComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe( (data) => {
             this.consumerProfile = data.profile.vibiio;
+            this.notes = data.profile.vibiio.notes;
+        console.log(data);
         });
     }
 }
