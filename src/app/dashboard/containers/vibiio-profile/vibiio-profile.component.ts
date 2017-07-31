@@ -26,7 +26,6 @@ export class VibiioProfileComponent implements OnInit {
         this.activatedRoute.data.subscribe( (data) => {
             this.consumerProfile = data.profile.vibiio;
             this.notes = data.profile.vibiio.notes;
-        console.log(data);
         });
     }
 }
