@@ -140,7 +140,7 @@ const dashboardRoutes: Routes = [
               profile: VibiioProfileResolver,
                cons: AllConsumersResolver
             }
-          }
+          },
       ]
   },
   { path: '**', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' }
