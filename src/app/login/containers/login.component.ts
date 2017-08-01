@@ -36,10 +36,10 @@ export class LoginComponent {
         (data: Jwt) => {
           if (data.role === 'vibiiographer') {
             this.authService.setToken(data.jwt);
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/dashboard/my-vibiios']);
               this.unauthorized = false;
           } else {
-              this.unauthorized = true
+              this.unauthorized = true;
             // TODO: provide feedback on form for this event
             console.log('not authorized');
           }

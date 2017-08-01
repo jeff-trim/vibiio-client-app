@@ -1,20 +1,20 @@
-import { Component, OnInit, Inject } from '@angular/core'
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
-import { Observable } from 'rxjs/Observable'
+import { Component, OnInit, Inject } from '@angular/core';
+import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 // libaries
-import * as ActionCable from 'action-cable-react-jwt'
-import { OPENTOK_API_KEY } from '../../../../environments/environment'
+import * as ActionCable from 'action-cable-react-jwt';
+import { OPENTOK_API_KEY } from '../../../../environments/environment';
 
 // Models
-import { Vibiio } from '../../models/vibiio.interface'
-import { VideoChatToken } from '../../models/video-chat-token.interface'
-import { NotificationWrapper } from '../../models/notification-wrapper.interface'
+import { Vibiio } from '../../models/vibiio.interface';
+import { VideoChatToken } from '../../models/video-chat-token.interface';
+import { NotificationWrapper } from '../../models/notification-wrapper.interface';
 
 // Services
-import { VideoChatTokenService } from '../../services/video-chat-token.service'
-import { MyProfileResolver } from '../../services/my-profile.resolver.service'
-import { AuthService } from '../../../services/auth.service'
+import { VideoChatTokenService } from '../../services/video-chat-token.service';
+import { MyProfileResolver } from '../../services/my-profile.resolver.service';
+import { AuthService } from '../../../services/auth.service';
 
 // environment
 import { ACTION_CABLE_URL } from '../../../../environments/environment';
@@ -51,61 +51,64 @@ export class DashboardComponent implements OnInit {
     session: any;
     vibiio: Vibiio;
     token: VideoChatToken;
-    subscription
-    notificationShow: boolean = false
-    vibiiographerProfile
-    waitingConsumers = []
-    currentNotificationData = {}
-    userAvailability: boolean = false
-    cable: any
-    readonly jwt: string = this.authService.getToken()
+    subscription: any;
+    notificationShow = false;
+    vibiiographerProfile: any;
+    waitingConsumers = [];
+    currentNotificationData = {};
+    userAvailability= false;
+    cable: any;
+    readonly jwt: string = this.authService.getToken();
 
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private tokenService: VideoChatTokenService,
         private authService: AuthService
-    ){}
+    ) {}
 
-    receiveNotificationData(data){
-        switch(data.notification_type){
-        case "notification": {
-                this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ]
-                this.currentNotificationData = data
-                this.notificationShow = true
+    receiveNotificationData(data) {
+        switch (data.notification_type) {
+        case 'notification': {
+                this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
+                this.currentNotificationData = data;
+                this.notificationShow = true;
                 break;
             }
-            case "error": {
-                this.currentNotificationData = data
+            case 'error': {
+                this.currentNotificationData = data;
                 break;
             }
-            case "success": {
-                this.toggleActionCable(false)
-                this.userAvailability = false
+            case 'success': {
+                this.toggleActionCable(false);
+                this.userAvailability = false;
                 this.router.navigateByUrl("/dashboard/appointment/" +
-                                          data.content.appointment_id)
+                                          data.content.appointment_id);
                 break;
             }
         }
      }
 
-    receiveData(data: NotificationWrapper){
-        switch (data.type_of){
+    receiveData(data: NotificationWrapper) {
+        switch (data.type_of) {
             case 'waiting_list': {
-                this.fillWaitingList(data)
+                this.fillWaitingList(data);
+                break;
             }
             case 'notification': {
-                this.receiveNotificationData(data.content)
+                this.receiveNotificationData(data.content);
+                break;
             }
             case 'remove_waiting_consumer': {
-                this.removeNotification(data)
+                this.removeNotification(data);
+                break;
             }
         }
     }
 
-    fillWaitingList(data){
-        for(let notification of data.content){
-            this.receiveNotificationData(notification)
+    fillWaitingList(data) {
+        for (const notification of data.content){
+            this.receiveNotificationData(notification);
         }
     }
 
@@ -121,44 +124,45 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    toggleActionCable(event: boolean){
-        this.userAvailability = event
-        let comp = this
-        if(this.userAvailability == true) {
+    toggleActionCable(event: boolean) {
+        this.userAvailability = event;
+        const comp = this;
+        if (this.userAvailability == true) {
             this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
-                connected(data){
-                    this.getWaitingList()
+                connected(data) {
+                    this.getWaitingList();
                 },
-                received(data){
-                    comp.receiveData(data)
+                received(data) {
+                    comp.receiveData(data);
                 },
-                getWaitingList(){
-                    return this.perform('get_waiting_list')
+                getWaitingList() {
+                    return this.perform('get_waiting_list');
                 },
-                claimAppointment(message){
-                    return this.perform('claim_vibiio', message)
+                claimAppointment(message) {
+                    return this.perform('claim_vibiio', message);
                 }
-            })
+            });
         } else {
-            this.notificationShow = false
-            this.waitingConsumers = []
-            this.subscription.unsubscribe()
+            this.notificationShow = false;
+            this.waitingConsumers = [];
+            this.subscription.unsubscribe();
         }
     }
 
-    claimAppointment(event){
+    claimAppointment(event) {
         this.subscription.claimAppointment({
             vibiiographer_id: this.vibiiographerProfile.user.profile.id,
             vibiio_id: event.content.vibiio_id,
             consumer_id: event.content.consumer_id
-        })
+        });
     }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            this.vibiio = data.vibiio
-            this.vibiiographerProfile = data.myProfile
+            this.vibiio = data.vibiio;
+            this.vibiiographerProfile = data.myProfile;
         });
-        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt)
-  };
+        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+        this.router.navigate(['/dashboard/my-vibiios']);
+  }
 }
