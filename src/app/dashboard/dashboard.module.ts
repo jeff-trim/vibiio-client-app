@@ -142,7 +142,8 @@ const dashboardRoutes: Routes = [
             }
           }
       ]
-  }
+  },
+  { path: '**', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' }
 ];
 
 @NgModule({
