@@ -1,17 +1,18 @@
-<form (ngSubmit)="onSubmit(policy)"
+<form *ngIf='policy' 
+      (ngSubmit)="onSubmit(policy)"
       #policyDetailForm="ngForm">
         <div class="info-element
                     row
                     between-xs
                     bottom-xs">
             <span class="label">Provider</span>
-            <input [(ngModel)]="policy.carrier"
+              <input [(ngModel)]="policy.carrier"
                    name="carrier" 
                    type="text" 
                    class="value end-md" 
                    id="provider"
                    (keyup.enter)="onSubmit(policy)">
-            <span class="pink-underline"></span>
+            <span class="pink-underline"></span>  
         </div>
 
         <div class="info-element

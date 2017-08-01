@@ -3,7 +3,6 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';
-import { AllConsumersService } from '../../services/all-consumers.service';
 
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
