@@ -37,7 +37,6 @@ import { SpinnerModule } from './easy-spinner/spinner.module'
       CommonModule,
 
     // Custom Modules
-      AppRoutingModule,
       DashboardModule,
       InfiniteScrollModule,
       JcfModule,
@@ -46,7 +45,8 @@ import { SpinnerModule } from './easy-spinner/spinner.module'
       NouisliderModule,
       PasswordResetModule,
       DynamicFormModule,
-      SpinnerModule
+      SpinnerModule,
+      AppRoutingModule
   ],
   providers: [
       AuthService,

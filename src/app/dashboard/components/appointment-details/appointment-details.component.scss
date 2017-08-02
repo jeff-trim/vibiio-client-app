@@ -11,6 +11,9 @@
     margin-top: 25px;
     margin-left: 0;
     float: left;
+    #subscriber-stream {
+        margin: auto;
+    }
 }
 
 /deep/ .pink {
@@ -135,7 +138,7 @@ h1.appointment-title {
     }
 }
 
-.first-vibiio-message {
+.vibiio-message {
 
     .first-vibiio {
         width: 77px;

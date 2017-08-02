@@ -15,7 +15,6 @@ export class SpinnerService {
     }
 
     show() {
-        console.log(this.spinnerState)
         this.spinnerState.next(true);
     }
 

@@ -26,6 +26,8 @@ declare var OT: any;
 })
 
 export class AppointmentComponent implements OnInit {
+    onVibiio = false;
+    updateStatusReminder = false;
     index: number;
     appointment: Appointment;
     user: User;
@@ -78,20 +80,27 @@ export class AppointmentComponent implements OnInit {
                 // Subscribe to stream created events
                 this.session.on('streamCreated', ($event) => {
                   this.subscriber = this.session.subscribe(event.stream, 'subscriber-stream', options);
+                  // save snapshot
+                  this.imgData = this.subscriber.getImgData();
+                  this.snapshotService.saveSnapshot(this.session.id, this.imgData);
+                  this.onVibiio = true;
                 });
-                // save snapshot
-                this.imgData = this.subscriber.getImgData();
-                this.snapshotService.saveSnapshot(this.session.id, this.imgData);
+                // subscribe to stream destroyed events
+                this.session.on('streamDestroyed', ($event) => {
+                    this.onVibiio = false;
+                    this.updateStatusReminder = true;
+                    console.log('Stream ' + event.stream.name + ' ended. ' + event.reason);
+                }).connect(this.token);
             });
         });
     }
 
-    triggerActivity(vibiio_id: number, message: string, name: string){
+    triggerActivity(vibiio_id: number, message: string, name: string) {
         this.activityService.postActivity(
             vibiio_id,
             message,
             name
-            ).subscribe((data) => {})
+            ).subscribe((data) => {});
     }
 
     endSession(event) {
@@ -100,6 +109,6 @@ export class AppointmentComponent implements OnInit {
             this.vibiio.id,
             'Vibiiographer manually ended video session',
             'Video session ended'
-        )
+        );
     }
 }
