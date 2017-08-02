@@ -91,7 +91,7 @@ export class AppointmentComponent implements OnInit {
             vibiio_id,
             message,
             name
-            ).subscribe((data) => {})
+            ).subscribe((data) => {});
     }
 
     endSession(event) {
@@ -100,6 +100,6 @@ export class AppointmentComponent implements OnInit {
             this.vibiio.id,
             'Vibiiographer manually ended video session',
             'Video session ended'
-        )
+        );
     }
 }

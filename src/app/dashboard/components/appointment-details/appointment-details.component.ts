@@ -31,6 +31,9 @@ export class AppointmentDetailsComponent  {
     @Input()
     vibiio: Vibiio;
 
+    // @Input()
+    updateStatusReminder: boolean = false;
+
     @Output()
     startVibiio: EventEmitter<any> = new EventEmitter<any>();
 
@@ -40,10 +43,12 @@ export class AppointmentDetailsComponent  {
    connect() {
     this.startVibiio.emit(event);
     this.onVibiio = true;
+    this.updateStatusReminder = false;
   }
 
     disconnect() {
     this.endVibiio.emit(event);
     this.onVibiio = false;
+    this.updateStatusReminder = true;
   }
 }
