@@ -78,10 +78,10 @@ export class AppointmentComponent implements OnInit {
                 // Subscribe to stream created events
                 this.session.on('streamCreated', ($event) => {
                   this.subscriber = this.session.subscribe(event.stream, 'subscriber-stream', options);
+                  // save snapshot
+                  this.imgData = this.subscriber.getImgData();
+                  this.snapshotService.saveSnapshot(this.session.id, this.imgData);
                 });
-                // save snapshot
-                this.imgData = this.subscriber.getImgData();
-                this.snapshotService.saveSnapshot(this.session.id, this.imgData);
             });
         });
     }
