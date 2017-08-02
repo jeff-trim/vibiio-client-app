@@ -21,8 +21,11 @@ import { Note } from '../../models/consumer-note.interface';
 })
 
 export class AppointmentDetailsComponent  {
-    onVibiio = false;
-    updateStatusReminder= false;
+    @Input()
+    updateStatusReminder = false;
+
+    @Input()
+    onVibiio: boolean;
 
     @Input()
     appointment: Appointment;
@@ -63,5 +66,9 @@ export class AppointmentDetailsComponent  {
     this.endVibiio.emit(event);
     this.onVibiio = false;
     this.updateStatusReminder = true;
+  }
+
+  toggleUpdateStatusReminder() {
+    this.updateStatusReminder = !this.updateStatusReminder;
   }
 }

@@ -82,7 +82,6 @@
     </span>
   
     <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
-    <p *ngIf="updateStatusReminder">enter claim status!</p>
   </div>
 
   <div class="col-xs-12
@@ -100,15 +99,20 @@
         </div>
     </div>
 
-    <div *ngIf="(!onVibiio)" 
-         class="first-vibiio-message">
+    <div *ngIf="(!onVibiio && !updateStatusReminder)" 
+         class="vibiio-message">
       <p class="first-vibiio">🤙</p>
       <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio!</p>
       <p class="first-vibiio-text">Ready to introduce yourself?</p>
       <p class="first-vibiio-text pink link"
          (click)="connect($event)">Call {{ appointment.user.first_name }} now.</p>
     </div>
-
+        
+    <div *ngIf="(updateStatusReminder)" 
+         class="vibiio-message">
+      <p class="first-vibiio">🤙</p>
+      <p class="first-vibiio-text pink">Don't forget to update the claim status!</p>    
+      <p class="first-vibiio-text" (click)="toggleUpdateStatusReminder()">close</p>
   </div>
 
 </div>
