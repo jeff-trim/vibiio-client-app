@@ -81,7 +81,7 @@
       <vib-policy-detail-form [policy]='policy'></vib-policy-detail-form>
     </span>
   
-    <vib-claim-status [vibiio]="vibiio"></vib-claim-status>
+    <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
     <p *ngIf="updateStatusReminder">enter claim status!</p>
   </div>
 

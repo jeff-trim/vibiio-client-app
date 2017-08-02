@@ -1,9 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
-
-// Services
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
 
 // Pipes
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
@@ -25,17 +22,14 @@ export class ClaimStatusComponent {
     statuses = ['Scheduled', 'Claim in Progress', 'Completed'];
     currentStatus: string;
 
-    constructor(private StatusUpdateService: VibiioUpdateService) {}
+    @Output()
+    updatedStatus = new EventEmitter<any>();
 
     onSubmit(status: string) {
-        const options = { status: status };
-
-        this.StatusUpdateService
-        .updateVibiio(options, this.vibiio.id)
-        .subscribe( (data) => {
-            this.vibiio = data.vibiio;
-        }, (error: any) => {
-            console.log('error updating claim status');
-        });
+        const updateInfo = {
+            status: status,
+            vibiioId: this.vibiio.id
+        };
+        this.updatedStatus.emit(updateInfo);
     }
 }
