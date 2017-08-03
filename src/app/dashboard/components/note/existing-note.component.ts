@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { Note } from '../../models/consumer-note.interface';
     templateUrl: 'existing-note.component.html'
   })
 
-export class ExistingNoteComponent implements OnInit {
+export class ExistingNoteComponent {
     submitted = false;
     location = '';
 
@@ -29,8 +29,6 @@ export class ExistingNoteComponent implements OnInit {
                 private router: Router ) {
         this.location = router.url;
     }
-
-    ngOnInit() {}
 
     onSubmit(updatedBody: string) {
         const options = {

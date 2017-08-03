@@ -8,6 +8,7 @@
          placeholder="Type your notes here (shift + enter to submit)"
          id="body"
          name="body"
+         (keydown.shift.enter)="false"
          (keyup.shift.enter)="onSubmit(note.body)"></textarea>
   </div>
 </form>

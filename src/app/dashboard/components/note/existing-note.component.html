@@ -8,6 +8,7 @@
           [value]="note.body"
           id="updatedBody"
           name="body"
-          (keyup.shift.enter)="onSubmit(note.body)"></textarea>
+          (keydown.shift.enter)="false"
+          (keyup.shift.enter)="onSubmit(note.body);false"></textarea>
   </div>
 </form>
