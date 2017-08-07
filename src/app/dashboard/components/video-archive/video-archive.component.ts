@@ -33,9 +33,9 @@ export class VideoArchiveComponent {
 
     playArchive(session: string) {
         this.toggleVideo();
-        // this.archiveService.getArchive(session).subscribe( (data) => {
-            this.video_url = 'https://media.w3.org/2010/05/sintel/trailer.mp4';
-        // });
+        this.archiveService.getArchive(session).subscribe( (data) => {
+            this.video_url = data.url;
+        });
     }
 
     toggleVideo() {
