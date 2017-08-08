@@ -62,24 +62,29 @@ export class AppointmentComponent implements OnInit {
 
       connectToSession(event) {
         this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
+            console.log('data: ', data);
             this.token = data.video_chat_auth_token.token;
             this.triggerActivity(this.vibiio.id,
                                  'Vibiiographer manually started video',
                                  'Video session started')
             this.session.connect(this.token, (error) => {
+                console.log('session: ', this.session);
                 // Video options
-                const options = {insertMode: 'append',
+                const options = {
                     width: 312,
                     height: 461.1
                 };
 
                 // Initialize a publisher and publish the video stream to the session
                 this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
+                console.log('publisher: ', this.session);
                 this.session.publish(this.publisher);
 
                 // Subscribe to stream created events
                 this.session.on('streamCreated', ($event) => {
-                  this.subscriber = this.session.subscribe(event.stream, 'subscriber-stream', options);
+                    console.log('sessionOnCreated: ', this.session);
+                  console.log('eventOnCreated: ', event);
+                    this.subscriber = this.session.subscribe(event.stream, 'subscriber-stream', options);
                   // save snapshot
                   this.imgData = this.subscriber.getImgData();
                   this.snapshotService.saveSnapshot(this.session.id, this.imgData);
