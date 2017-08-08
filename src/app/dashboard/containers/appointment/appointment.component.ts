@@ -73,22 +73,18 @@ export class AppointmentComponent implements OnInit {
                     height: 461.1
                 };
 
-                // Initialize a publisher and publish the video stream to the session
-                this.publisher = OT.initPublisher('publisher-stream', options);
-                this.session.publish(this.publisher);
-
-                // Subscribe to stream created events
-                this.session.on('streamCreated', ($event) => {
-                  this.subscriber = this.session.subscribe(event.stream, 'subscriber-stream', options);
-                  // save snapshot
-                  this.imgData = this.subscriber.getImgData();
-                  this.snapshotService.saveSnapshot(this.session.id, this.imgData);
-                  this.onVibiio = true;
-                });
-                // subscribe to stream destroyed events
-                this.session.on('streamDestroyed', ($event) => {
-                    this.onVibiio = false;
-                    this.updateStatusReminder = true;
+            // Subscribe to stream created events
+            this.session.on('streamCreated', ($event) => {
+                this.subscriber = this.session.subscribe(event.stream, 'subscriber-stream', options);
+                // save snapshot
+                this.imgData = this.subscriber.getImgData();
+                this.snapshotService.saveSnapshot(this.session.id, this.imgData);
+                this.onVibiio = true;
+            });
+            // Subscribe to stream destroyed events
+            this.session.on('streamDestroyed', ($event) => {
+                this.onVibiio = false;
+                this.updateStatusReminder = true;
                     console.log('Stream ' + event.stream.name + ' ended. ' + event.reason);
                 }).connect(this.token);
             });
