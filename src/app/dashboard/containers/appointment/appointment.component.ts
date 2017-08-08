@@ -74,7 +74,7 @@ export class AppointmentComponent implements OnInit {
                 };
 
                 // Initialize a publisher and publish the video stream to the session
-                this.publisher = OT.initPublisher('subscriber-stream', options);
+                this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
                 this.session.publish(this.publisher);
 
                 // Subscribe to stream created events
