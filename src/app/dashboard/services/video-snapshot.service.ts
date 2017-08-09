@@ -26,7 +26,7 @@ export class VideoSnapshotService {
     console.log(payload, url);
 
     return this.http
-               .patch(url, payload)
+               .post(url, payload)
                .map( (response: Response) => response.json() )
                .catch( (error: any) => Observable.throw(error));
   }
