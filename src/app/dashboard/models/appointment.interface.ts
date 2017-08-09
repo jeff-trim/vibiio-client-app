@@ -7,12 +7,12 @@ import { Note } from './consumer-note.interface';
 
 export interface Appointment {
     scheduled_datetime: number;
-    vibiiograpehr_id: number;
+    vibiiographer_id: number;
     id: number;
     user: User;
     vibiio: Vibiio;
+    consumer_id: number;
     consumer: Consumer;
-    vibiiographer_id: number;
     insurance_policies: InsurancePolicy;
     address: Address;
     claim_id: number;

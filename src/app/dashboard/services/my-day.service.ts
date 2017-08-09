@@ -22,6 +22,6 @@ export class MyDayService {
     getMyDay(): Observable<any>{
         return this.http
             .get(MY_DAY_API)
-            .map((response: Response) => response.json())
+            .map((response: Response) => response.json() );
     }
 }
