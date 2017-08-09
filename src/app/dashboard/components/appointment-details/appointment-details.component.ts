@@ -14,7 +14,6 @@ import { User } from '../../models/user.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { Note } from '../../models/consumer-note.interface';
 import { ResponseErrorService } from '../../../services/response-error.service';
-import { VideoSnapshotService } from '../../services/video-snapshot.service';
 
 @Component({
     selector: 'appointment-details',
@@ -38,13 +37,7 @@ export class AppointmentDetailsComponent  {
     user: User;
 
     @Input()
-    subscriber: any;
-
-    @Input()
     vibiio: Vibiio;
-
-    @Input()
-    consumer: number;
 
     @Output()
     startVibiio: EventEmitter<any> = new EventEmitter<any>();
@@ -52,10 +45,7 @@ export class AppointmentDetailsComponent  {
     @Output()
     endVibiio: EventEmitter<any> = new EventEmitter<any>();
 
-    @Output()
-    checkSubscriptionStatus: EventEmitter<any> = new EventEmitter<any>();
-
-    constructor(private StatusUpdateService: VibiioUpdateService, private snapshotService: VideoSnapshotService) {}
+    constructor(private StatusUpdateService: VibiioUpdateService) {}
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -83,13 +73,5 @@ export class AppointmentDetailsComponent  {
 
   toggleUpdateStatusReminder() {
     this.updateStatusReminder = !this.updateStatusReminder;
-  }
-
-  checkIt() {
-    console.log(this.subscriber.isSubscribing());
-    this.checkSubscriptionStatus.emit(event);
-    this.imgData = this.subscriber.getImgData();
-    console.log(this.subscriber);
-    this.snapshotService.saveSnapshot(this.consumer, '1_MX40NTUwMDI5Mn5-MTUwMjI1MTQyOTYyMH5TU1JXLzFweTJ4dFJpckdLZHNsUWtoazV-fg', this.imgData);
   }
 }

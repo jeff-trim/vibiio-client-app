@@ -6,16 +6,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+// Models
+import { VideoSnapshot } from '../models/video-snapshot.interface';
+
+const url = `${API_URL}/video_chat/snapshots`;
 
 @Injectable()
 export class VideoSnapshotService {
   constructor(private http: Http) {}
 
   saveSnapshot(consumer_id: number, session_id: string, snapshot: any): Observable<any> {
-    const url = `${API_URL}/video_chat/snapshots`;
-    console.log('snapshot', snapshot);
-    console.log(url);
-
     const payload = {
       video_session: {
         consumer_id: consumer_id,
@@ -23,10 +23,11 @@ export class VideoSnapshotService {
         image: `data:image/png;base64,${snapshot}`
       }
     };
+    console.log(payload, url);
 
     return this.http
                .post(url, payload)
-               .map( (response: Response) => response.json(), console.log('post') )
+               .map( (response: Response) => response.json() )
                .catch( (error: any) => Observable.throw(error));
   }
 }
