@@ -34,7 +34,6 @@ export class AppointmentComponent implements OnInit {
     user: User;
     session: any;
     vibiio: Vibiio;
-    // token: VideoChatToken
     token: string;
     publisher: any;
     imgData: any;
@@ -57,24 +56,22 @@ export class AppointmentComponent implements OnInit {
             this.user = data.appt.appointment.user;
             // vibiio data
             this.vibiio = data.appt.appointment.vibiio;
-            this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjI1MTQyOTYyMH5TU1JXLzFweTJ4dFJpckdLZHNsUWtoazV-fg');
+            this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjI5NTkyMzQ3NH4wSlBsd29nSXZ5a3pqU1FpcmIxa3pFd3l-fg');
             // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             }, (error) => {
                 console.log(error);
         });
     }
 
-      connectToSession(event) {
+      async connectToSession(event) {
         this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
-            console.log('data: ', data);
             // this.token = data.video_chat_auth_token.token;
             // console.log(this.token);
-            this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9YmRkM2RlMWM1YzQ2NDg5NDZiMGU3MTIxYzk2ZjRlNDA3MThkZWM5NjpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNakkxTVRReU9UWXlNSDVUVTFKWEx6RndlVEo0ZEZKcGNrZExaSE5zVVd0b2F6Vi1mZyZjcmVhdGVfdGltZT0xNTAyMjUxNDI5JnJvbGU9bW9kZXJhdG9yJm5vbmNlPTE1MDIyNTE0MjkuNjQ2NjcwMjU0MTc2JmV4cGlyZV90aW1lPTE1MDQ4NDM0Mjk=";
+            this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9OWUyMDE2MzBlNTM0OTI3NTY3ODNlOGFlZjQ4MzkwZjJjZmI2ZmMxMTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNakk1TlRreU16UTNOSDR3U2xCc2QyOW5TWFo1YTNwcVUxRnBjbUl4YTNwRmQzbC1mZyZjcmVhdGVfdGltZT0xNTAyMjk1OTIzJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIyOTU5MjMuNTA0MTk2MTYzODk4JmV4cGlyZV90aW1lPTE1MDQ4ODc5MjM=";
             this.triggerActivity(this.vibiio.id,
                                  'Vibiiographer manually started video',
                                  'Video session started');
             this.session.connect(this.token, (error) => {
-                console.log('session: ', this.session);
                 // Video options
                 const options = {
                     width: 312,
@@ -89,27 +86,30 @@ export class AppointmentComponent implements OnInit {
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (data) => {
                     // console.log('sessionOnCreted: ', this.session);
-                    console.log('eventOnCreated: ', data);
-                    this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options);
-                    this.subscriber.on('connected', console.log(this.subscriber.isSubscribing()));
+                    this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options,
+                (stats) => {
+                    // wait till subscriber is set
+                    console.log('returned');
+                    console.log(this.subscriber.isSubscribing());
+                    this.captureSnapshot();
+                });
+                    // this.subscriber.on('connected', console.log(this.subscriber.isSubscribing()));
                     this.onVibiio = true;
                 });
-                console.log(this.subscriber.isSubscribing());
                 // subscribe to stream destroyed events
                 this.session.on('streamDestroyed', (data) => {
-                    console.log(this.subscriber.isSubscribing());
                     this.onVibiio = false;
                     this.updateStatusReminder = true;
-                    console.log('Stream ' + data.stream.name + ' ended. ' + data.reason);
                 });
             });
         });
     }
 
-    captureSnapshot() {
-        console.log('e');
-        // save snapshot
-        this.imgData = this.subscriber.getImgData();
+    // save snapshot
+    async captureSnapshot() {
+        console.log('capture snapshot');
+        // wait for image data
+        this.imgData = await this.subscriber.getImgData();
         this.snapshotService.saveSnapshot(this.consumer_id, this.session.id, this.imgData);
     }
 
