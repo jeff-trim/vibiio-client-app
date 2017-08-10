@@ -15,15 +15,15 @@ const url = `${API_URL}/video_chat/snapshots`;
 export class VideoSnapshotService {
   constructor(private http: Http) {}
 
-  saveSnapshot(consumer_id: number, session_id: string, snapshot: any): Observable<any> {
+  saveSnapshot(consumer_id: number, session_id: string, vibiio_id: number, snapshot: any): Observable<any> {
     const payload = {
       video_session: {
         consumer_id: consumer_id,
         session_id: session_id,
+        vibiio_id: vibiio_id,
         image: `data:image/png;base64,${snapshot}`
       }
     };
-    console.log(payload, url);
 
     return this.http
                .post(url, payload)

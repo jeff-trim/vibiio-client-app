@@ -56,8 +56,8 @@ export class AppointmentComponent implements OnInit {
             this.user = data.appt.appointment.user;
             // vibiio data
             this.vibiio = data.appt.appointment.vibiio;
-            this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjI5NTkyMzQ3NH4wSlBsd29nSXZ5a3pqU1FpcmIxa3pFd3l-fg');
-            // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
+            // this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjI5NTkyMzQ3NH4wSlBsd29nSXZ5a3pqU1FpcmIxa3pFd3l-fg');
+            this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             }, (error) => {
                 console.log(error);
         });
@@ -65,9 +65,8 @@ export class AppointmentComponent implements OnInit {
 
       async connectToSession(event) {
         this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
-            // this.token = data.video_chat_auth_token.token;
-            // console.log(this.token);
-            this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9OWUyMDE2MzBlNTM0OTI3NTY3ODNlOGFlZjQ4MzkwZjJjZmI2ZmMxMTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNakk1TlRreU16UTNOSDR3U2xCc2QyOW5TWFo1YTNwcVUxRnBjbUl4YTNwRmQzbC1mZyZjcmVhdGVfdGltZT0xNTAyMjk1OTIzJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIyOTU5MjMuNTA0MTk2MTYzODk4JmV4cGlyZV90aW1lPTE1MDQ4ODc5MjM=";
+            this.token = data.video_chat_auth_token.token;
+            // this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9OWUyMDE2MzBlNTM0OTI3NTY3ODNlOGFlZjQ4MzkwZjJjZmI2ZmMxMTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNakk1TlRreU16UTNOSDR3U2xCc2QyOW5TWFo1YTNwcVUxRnBjbUl4YTNwRmQzbC1mZyZjcmVhdGVfdGltZT0xNTAyMjk1OTIzJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIyOTU5MjMuNTA0MTk2MTYzODk4JmV4cGlyZV90aW1lPTE1MDQ4ODc5MjM=";
             this.triggerActivity(this.vibiio.id,
                                  'Vibiiographer manually started video',
                                  'Video session started');
@@ -80,12 +79,10 @@ export class AppointmentComponent implements OnInit {
 
                 // Initialize a publisher and publish the video stream to the session
                 this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
-                // console.log('publisher: ', this.session);
                 this.session.publish(this.publisher);
 
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (data) => {
-                    // console.log('sessionOnCreted: ', this.session);
                     this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options,
                 (stats) => {
                     // wait till subscriber is set
@@ -93,7 +90,6 @@ export class AppointmentComponent implements OnInit {
                     console.log(this.subscriber.isSubscribing());
                     this.captureSnapshot();
                 });
-                    // this.subscriber.on('connected', console.log(this.subscriber.isSubscribing()));
                     this.onVibiio = true;
                 });
                 // subscribe to stream destroyed events
@@ -107,10 +103,13 @@ export class AppointmentComponent implements OnInit {
 
     // save snapshot
     async captureSnapshot() {
-        console.log('capture snapshot');
         // wait for image data
         this.imgData = await this.subscriber.getImgData();
-        this.snapshotService.saveSnapshot(this.consumer_id, this.session.id, this.imgData);
+        this.snapshotService.saveSnapshot(this.consumer_id, this.session.id, this.vibiio.id, this.imgData)
+            .subscribe( (data) => { },
+                (error) => {
+                    console.log('error ', error);
+            });
     }
 
     triggerActivity(vibiio_id: number, message: string, name: string) {
