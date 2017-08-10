@@ -1,8 +1,10 @@
 @import '../../../../assets/css/_variables.scss';
 
 .vibiio-archive-container {
-    width: 461.1px;
+    width: 100%;
     padding: 0;
+    margin: 0 10px;
+    max-width: none;
 }
 .vibiio-snapshot-container {
     height: 222px;
