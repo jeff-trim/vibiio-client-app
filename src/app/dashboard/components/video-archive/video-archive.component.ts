@@ -24,10 +24,9 @@ export class VideoArchiveComponent {
     snapshot?: VideoSnapshot;
 
     @Input()
-    snapshots: VideoSnapshot[];
+    snapshots?: VideoSnapshot[];
 
-    @Input()
-    archive: VideoArchive;
+    archive?: VideoArchive;
 
     constructor(private archiveService: VideoArchiveService) {}
 
