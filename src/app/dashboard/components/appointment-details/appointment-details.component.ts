@@ -39,6 +39,9 @@ export class AppointmentDetailsComponent  {
     @Input()
     vibiio: Vibiio;
 
+    @Input()
+    neworkDisconnected: boolean;
+
     @Output()
     startVibiio: EventEmitter<any> = new EventEmitter<any>();
 
