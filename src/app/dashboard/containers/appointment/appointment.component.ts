@@ -57,8 +57,8 @@ export class AppointmentComponent implements OnInit {
             this.user = data.appt.appointment.user;
             // vibiio data
             this.vibiio = data.appt.appointment.vibiio;
-            this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjM5MTI3MjkzNn5wWmpzVzI4QlNlUE1TZ2toMC96QUhHWWl-fg');
-            // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
+            // this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjM5MTI3MjkzNn5wWmpzVzI4QlNlUE1TZ2toMC96QUhHWWl-fg');
+            this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
             }, (error) => {
                 console.log(error);
         });
@@ -66,8 +66,8 @@ export class AppointmentComponent implements OnInit {
 
     async connectToSession(event) {
         this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
-            // this.token = data.video_chat_auth_token.token;
-            this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9YWMzZWI4NzBlMDU4ZGNhMzNhY2MyMGRhODkxOTRhYzE1YjI2NGQ2ZTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNak01TVRJM01qa3pObjV3V21welZ6STRRbE5sVUUxVFoydG9NQzk2UVVoSFdXbC1mZyZjcmVhdGVfdGltZT0xNTAyMzkxMjcyJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIzOTEyNzIuOTY0MzE1OTg4MzgwOTcmZXhwaXJlX3RpbWU9MTUwNDk4MzI3Mg==";
+            this.token = data.video_chat_auth_token.token;
+            // this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9YWMzZWI4NzBlMDU4ZGNhMzNhY2MyMGRhODkxOTRhYzE1YjI2NGQ2ZTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNak01TVRJM01qa3pObjV3V21welZ6STRRbE5sVUUxVFoydG9NQzk2UVVoSFdXbC1mZyZjcmVhdGVfdGltZT0xNTAyMzkxMjcyJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIzOTEyNzIuOTY0MzE1OTg4MzgwOTcmZXhwaXJlX3RpbWU9MTUwNDk4MzI3Mg==";
             this.triggerActivity(this.vibiio.id,
                                  'Vibiiograher manually started video',
                                  'Video session started');
