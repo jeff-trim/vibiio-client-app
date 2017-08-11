@@ -1,17 +1,18 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core'
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'
-import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component'
-import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component'
+import { Component, Output, Input, EventEmitter, OnInit } from '@angular/core';
+import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
+import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';
 
 // Services
-import { MyAppointmentsService } from '../../services/my-appointments.service'
-import { CustomerStatusCountService } from '../../services/customer-status-count.service'
-import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service'
+import { MyAppointmentsService } from '../../services/my-appointments.service';
+import { CustomerStatusCountService } from '../../services/customer-status-count.service';
+import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service';
 import { MyAvailabilityService } from '../../services/my-availability.service';
+import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 
 // Interfaces
-import { CustomerStatusCount } from '../../models/customer-status-count.interface'
-import { Appointment} from '../../models/appointment.interface'
+import { CustomerStatusCount } from '../../models/customer-status-count.interface';
+import { Appointment} from '../../models/appointment.interface';
 
 @Component({
     selector: 'app-sidebar',
@@ -19,74 +20,87 @@ import { Appointment} from '../../models/appointment.interface'
     styleUrls: ['sidebar.component.scss']
 })
 
-export class SidebarComponent {
-  myScheduledVibiios: any
-  customersCategories: CustomerStatusCount[]
-  scheduledVibiiosVisibility: boolean = false
-  customerCategoryVisibility: boolean = true
-  profileVisibility: boolean = true
-  sidebarVisibility: boolean
-  userTimeZone: string
+export class SidebarComponent implements OnInit {
+  myScheduledVibiios: any;
+  customersCategories: CustomerStatusCount[];
+  scheduledVibiiosVisibility = false;
+  customerCategoryVisibility = true;
+  profileVisibility = true;
+  sidebarVisibility: boolean;
+  userTimeZone: string;
 
-    @Output()
-    emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>()
-    @Input()
-    available: boolean = false
+  @Output()
+  emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Input()
+  available = false;
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusCountService,
                 private activatedRoute: ActivatedRoute,
                 private availabilityService: MyAvailabilityService,
-                private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService) {
+                private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService) {
 
         // subscribes to shared service and listens for changes passed from the
         // my vibiio container
         sidebarMyVibiioSharedService.changeEmitted$.subscribe(
             response => this.myScheduledVibiios = response.my_day
-        )
+        );
+       // subscribes to shared service and listens for changes passed from the
+        // my vibiio container
+        this.sidebarCustomerStatusSharedService.changeEmitted$.subscribe(
+            response => {
+              this.getStatusUpdate();
+            }
+        );
     }
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe((data) =>{
-            this.userTimeZone = data.appointments.appointments.user_time_zone
-            this.myScheduledVibiios = data.sidebarMyDay.my_day
-        })
+        this.activatedRoute.data.subscribe((data) => {
+            this.userTimeZone = data.appointments.appointments.user_time_zone;
+            this.myScheduledVibiios = data.sidebarMyDay.my_day;
+        });
 
-    this.statusService
+        this.getStatusUpdate();
+  }
+
+    getStatusUpdate() {
+      this.statusService
       .getCustomerStatus()
       .subscribe((data: CustomerStatusCount[]) => this.customersCategories = data);
-  }
+    }
 
     toggleAvailability() {
         this.available = !this.available;
-        this.emitAvailability.emit(this.available)
+        this.emitAvailability.emit(this.available);
   }
 
-    toggleSidebar(){
-        this.sidebarVisibility = !this.sidebarVisibility
+    toggleSidebar() {
+        this.sidebarVisibility = !this.sidebarVisibility;
     }
 
-  toggleScheduledVibiios(event){
-    this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility
-    if(!this.scheduledVibiiosVisibility){
-      this.customerCategoryVisibility = true
-      this.profileVisibility = true
-    }
-  }
-
-  toggleCustomerCategoryVisibility(event){
-    this.customerCategoryVisibility = !this.customerCategoryVisibility
-    if(!this.customerCategoryVisibility){
-      this.scheduledVibiiosVisibility = true
-      this.profileVisibility = true
+  toggleScheduledVibiios(event) {
+    this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility;
+    if (!this.scheduledVibiiosVisibility) {
+      this.customerCategoryVisibility = true;
+      this.profileVisibility = true;
     }
   }
 
-  toggleProfileVisibility(event){
-    this.profileVisibility = !this.profileVisibility
-    if(!this.profileVisibility){
-      this.scheduledVibiiosVisibility = true
-      this.customerCategoryVisibility = true
+  toggleCustomerCategoryVisibility(event) {
+    this.customerCategoryVisibility = !this.customerCategoryVisibility;
+    if (!this.customerCategoryVisibility) {
+      this.scheduledVibiiosVisibility = true;
+      this.profileVisibility = true;
+    }
+  }
+
+  toggleProfileVisibility(event) {
+    this.profileVisibility = !this.profileVisibility;
+    if (!this.profileVisibility) {
+      this.scheduledVibiiosVisibility = true;
+      this.customerCategoryVisibility = true;
     }
   }
 }

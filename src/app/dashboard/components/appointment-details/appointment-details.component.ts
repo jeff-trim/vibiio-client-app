@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 // Services
 import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
+import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 
 // Components
 import { NotesComponent } from '../../containers/notes/notes.component';
@@ -48,7 +49,8 @@ export class AppointmentDetailsComponent  {
     @Output()
     endVibiio: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private StatusUpdateService: VibiioUpdateService) {}
+    constructor(private StatusUpdateService: VibiioUpdateService,
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService) {}
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -57,6 +59,7 @@ export class AppointmentDetailsComponent  {
         .subscribe( (data) => {
             this.vibiio = data.vibiio;
             this.updateStatusReminder = false;
+            this.sidebarCustomerStatusSharedService.emitChange(data);
         }, (error: any) => {
             console.log('error updating claim status');
         });
