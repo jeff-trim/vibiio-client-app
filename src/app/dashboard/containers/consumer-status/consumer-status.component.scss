@@ -19,8 +19,12 @@ h1 {
 .consumer-profile-container {
     display: flex;
     flex-direction: row;
+    video-archive {
+        display: flex;
+    }
 }
 
 .consumer-profile-detail {
     padding: 0;
 }
+

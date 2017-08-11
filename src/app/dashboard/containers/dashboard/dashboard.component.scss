@@ -5,6 +5,8 @@
   @media(min-width: $medium){
     height: 100vh;
     overflow-y: scroll;
+    overflow-x: hidden;
+
   }
 }
 

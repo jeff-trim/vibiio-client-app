@@ -1,26 +1,38 @@
-<div *ngFor='let snapshot of snapshots' 
-     class="col-md-3 vibiio-archive-container">
+ <div ng-if="snapshots">    
     <div *ngIf="showArchive"
-         class="vibiio-snapshot-container">
-        <div class="vibiio-snapshot"
-             (click)="playArchive(session_id)">
-            <img [src]="snapshot.image_url">
+        class="vibiio-archive-container">    
+        <div *ngFor='let snapshot of snapshots'
+            class="col-md-3 vibiio-snapshot-container">
+            <div class="vibiio-snapshot-container"> 
+                <div class="vibiio-snapshot"
+                    (click)="playArchive(snapshot.session_id)">
+                    <img [src]="snapshot.image_url">
+                </div>
+            </div> 
+            <div class="snapshot-label-container">
+                <p class="snapshot-label"
+                (click)="playArchive(snapshot.session_id)"># {{ snapshot.id }}</p>
+            </div>
         </div>
     </div>
-  
-        <video *ngIf="(showVideo)"
-             preload="auto"
-             height="461"
-             width="312"
-             autoplay
-             controls>
+    
+    <div *ngIf="(showVideo)"
+        class="col-md-3 vibiio-archive-container">
+        <video preload="auto"
+                height="461"
+                width="312"
+                autoplay
+                controls>
             <source [src]="video_url" 
                     type="video/ogg">
         </video>
-
-    <div class="snapshot-label-container">
-        <p class="snapshot-label"
-           (click)="playArchive(snapshot.session_id)"># {{ snapshot.consumer_id }}</p>
     </div>
+</div> 
+
+<div *ngIf="(snapshots == undefined)" 
+    class="col-xs-12
+              pink
+              centered
+              no-archives-text">
+    <p class="centered">No archived vibiios yet!</p>
 </div>
-  
