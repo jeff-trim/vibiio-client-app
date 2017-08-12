@@ -49,6 +49,9 @@ export class AppointmentDetailsComponent  {
     @Output()
     endVibiio: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output()
+    claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     constructor(private StatusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService) {}
 
@@ -69,6 +72,11 @@ export class AppointmentDetailsComponent  {
     this.startVibiio.emit(event);
     this.onVibiio = true;
     this.updateStatusReminder = false;
+    // check to see if appointment has been claimed and auto assign
+    console.log('hi0', this.appointment.vibiiographer_id);
+    if (this.appointment.vibiiographer_id == null) {
+      this.claimVibiio.emit(true);
+    }
   }
 
     disconnect() {
