@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { API_URL } from '../../../environments/environment';
 
-const VIDEO_ARCHIVE_API = `${API_URL}/video_chat/archives/?session_id=`;
+const VIDEO_ARCHIVE_API = `${API_URL}/video_chat/archives/`;
 
 @Injectable()
 export class VideoArchiveService {
@@ -14,7 +14,7 @@ export class VideoArchiveService {
 
       getArchive(session_id: string) {
          return this.http
-        .get(VIDEO_ARCHIVE_API + session_id)
-        .map((response: Response) => response.json());
+          .get(VIDEO_ARCHIVE_API + session_id)
+          .map((response: Response) => response.json());
   }
 }
