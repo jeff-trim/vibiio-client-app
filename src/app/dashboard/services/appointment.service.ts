@@ -18,4 +18,16 @@ export class AppointmentService {
         .get(APPOINTMENT_DETAILS_API + appointment_id)
         .map((response: Response) => response.json());
   }
+
+  updateVibiiographer(appointment: number) {
+
+   const payload = {
+      schedule_appointment: {
+        id: appointment
+      }
+    };
+    return this.http
+      .put(APPOINTMENT_DETAILS_API + appointment, payload)
+      .map((response: Response) => response.json());
+    }
 }

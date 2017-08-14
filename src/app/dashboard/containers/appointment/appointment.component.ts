@@ -17,6 +17,7 @@ import { VideoChatTokenService } from '../../services/video-chat-token.service';
 import { ConsumerNoteService } from '../../services/consumer-note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
+import { AppointmentService } from '../../services/appointment.service';
 
 declare var OT: any;
 
@@ -43,7 +44,8 @@ export class AppointmentComponent implements OnInit {
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
                 private snapshotService: VideoSnapshotService,
-                private activityService: ActivityService) {}
+                private activityService: ActivityService,
+                private updateAppointmentService: AppointmentService ) {}
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -105,6 +107,7 @@ export class AppointmentComponent implements OnInit {
                         }
                     }
                     this.updateStatusReminder = true;
+                    this.session.disconnect();
                 });
             });
         });
@@ -136,5 +139,15 @@ export class AppointmentComponent implements OnInit {
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
+    }
+
+    claimVibiio(event) {
+        this.updateAppointmentService.updateVibiiographer(this.appointment.id)
+            .subscribe((data) => {
+                console.log(data);
+            },
+        (error: any) => {
+            console.log('error ', error);
+        });
     }
 }
