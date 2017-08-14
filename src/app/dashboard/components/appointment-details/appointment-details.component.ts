@@ -73,7 +73,6 @@ export class AppointmentDetailsComponent  {
     this.onVibiio = true;
     this.updateStatusReminder = false;
     // check to see if appointment has been claimed and auto assign
-    console.log('hi0', this.appointment.vibiiographer_id);
     if (this.appointment.vibiiographer_id == null) {
       this.claimVibiio.emit(true);
     }
