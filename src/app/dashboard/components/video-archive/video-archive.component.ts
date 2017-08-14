@@ -30,10 +30,10 @@ export class VideoArchiveComponent {
 
     constructor(private archiveService: VideoArchiveService) {}
 
-    playArchive(session: string) {
-        this.toggleVideo();
-        this.archiveService.getArchive(session).subscribe( (data) => {
-            this.video_url = data.url;
+    async playArchive(session: string) {
+        await this.archiveService.getArchive(session).subscribe( (data) => {
+           this.video_url = data.video_chat_archive.url;
+            this.toggleVideo();
         });
     }
 
