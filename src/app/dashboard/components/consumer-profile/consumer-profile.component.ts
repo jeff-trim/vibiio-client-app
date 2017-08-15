@@ -14,7 +14,7 @@ export class ConsumerProfileComponent implements AfterContentChecked {
     @Input()
     consumerProfile: ConsumerProfile;
 
-    insurance_policy: InsurancePolicy;
+    insurance_policy?: InsurancePolicy;
 
     ngAfterContentChecked() {
         this.insurance_policy = this.consumerProfile.insurance_policy;

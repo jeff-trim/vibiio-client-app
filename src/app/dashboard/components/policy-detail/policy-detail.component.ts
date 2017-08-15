@@ -1,25 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Form } from '@angular/forms';
 
 // Services
-import { InsurancePolicyUpdateService } from '../../services/insurance-policy-update.service';
+import { InsurancePolicyService } from '../../services/insurance-policy.service';
 
 // Models
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 @Component({
-    selector: 'vib-policy-detail-form',
+    selector: 'vib-policy-detail-edit',
     templateUrl: 'policy-detail.component.html',
     styleUrls: ['policy-detail.component.scss']
 })
 
-export class PolicyDetailComponent implements OnInit {
+export class PolicyDetailComponent {
     @Input()
     policy?: InsurancePolicy;
 
-    constructor(private updateService: InsurancePolicyUpdateService ) { }
-
-    ngOnInit() { }
+    constructor(private updateService: InsurancePolicyService) { }
 
     onSubmit(policy: InsurancePolicy) {
         const options = {

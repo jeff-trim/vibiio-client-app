@@ -16,8 +16,15 @@
     <key-value [key]="'Zip'"
                [value]="consumerProfile.user_info.zipcode"></key-value>
 
-    <vib-policy-detail-form [policy]='insurance_policy'></vib-policy-detail-form>
+    <span *ngIf="insurance_policy != undefined"> 
+      <vib-policy-detail-edit [policy]='insurance_policy'></vib-policy-detail-edit>
+    </span> 
 
+    <span *ngIf="insurance_policy == undefined">
+      <vib-policy-detail-new [consumerId]="consumerProfile.consumer_id"
+                             [vibiioId]="consumerProfile.id">
+      </vib-policy-detail-new>
+    </span>
   </div>
 </div>
   

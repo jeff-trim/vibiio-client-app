@@ -55,7 +55,7 @@ import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 import { ConsumerNoteService } from './services/consumer-note.service';
 import { VibiioUpdateService } from './services/vibiio-update.service';
-import { InsurancePolicyUpdateService } from './services/insurance-policy-update.service';
+import { InsurancePolicyService } from './services/insurance-policy.service';
 import { VideoArchiveService } from './services/video-archive.service';
 import { VibiioProfileService } from './services/vibiio-profile.service';
 import { ActivityService } from './services/activity.service';
@@ -79,6 +79,7 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
+import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -173,7 +174,8 @@ const dashboardRoutes: Routes = [
     PolicyDetailComponent,
     CapitalizePipe,
     RemoveUnderscorePipe,
-    AutosizeDirective
+    AutosizeDirective,
+    PolicyDetailNewComponent
   ],
   imports: [
       CommonModule,
@@ -222,7 +224,7 @@ const dashboardRoutes: Routes = [
     SidebarMyVibiioSharedService,
     ConsumerNoteService,
     VibiioUpdateService,
-    InsurancePolicyUpdateService,
+    InsurancePolicyService,
     VibiioProfileService,
     VibiioProfileResolver,
     SidebarMyVibiioSharedService,
