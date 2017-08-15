@@ -77,9 +77,16 @@
                [value]="appointment.address?.zip"></key-value>
 
     <span *ngFor="let policy of appointment.insurance_policies">
-      <vib-policy-detail-form [policy]='policy'></vib-policy-detail-form>
+      <vib-policy-detail-edit [policy]='policy'></vib-policy-detail-edit>
     </span>
   
+    <span *ngIf="appointment.insurance_policies == undefined">
+      <vib-policy-detail-new [consumerId]="appointment.consumer_id"
+                             [vibiioId]="appointment.vibiio.id">
+      </vib-policy-detail-new>
+    </span>
+    
+
     <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>
 

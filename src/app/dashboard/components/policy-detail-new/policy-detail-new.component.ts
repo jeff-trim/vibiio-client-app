@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Form } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 // Services
-import { InsurancePolicyUpdateService } from '../../services/insurance-policy-update.service';
+import { InsurancePolicyService } from '../../services/insurance-policy.service';
 
 // Models
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
@@ -13,23 +13,28 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
   styleUrls: ['./policy-detail-new.component.scss']
 })
 
-export class PolicyDetailNewComponent implements OnInit {
-   @Input()
+export class PolicyDetailNewComponent {
     policy?: InsurancePolicy;
 
-    constructor(private updateService: InsurancePolicyUpdateService ) { }
+    @Input()
+    consumerId: number;
 
-    ngOnInit() {}
+    @Input()
+    vibiioId: number;
 
-    onSubmit(policy: InsurancePolicy) {
-        const options = {
-            carrier: policy.carrier,
-            policy_number: policy.policy_number,
-            claim_id: policy.claim_id
+    constructor(private policyService: InsurancePolicyService ) { }
+
+    onSubmit(form: FormGroup) {
+      const options = {
+            carrier: form.value.carrier,
+            policy_number: form.value.policy_number,
+            claim_id: form.value.claim_id,
+            consumer_id: this.consumerId,
+            vibiio_id: this.vibiioId
         };
 
-        this.updateService
-            .updatePolicy(options, policy.id)
+        this.policyService
+            .newPolicy(options)
             .subscribe( (data) => {
                 this.policy = data.insurance_policy;
             },
