@@ -8,13 +8,13 @@ import { InsurancePolicyUpdateService } from '../../services/insurance-policy-up
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 @Component({
-    selector: 'vib-policy-detail-form',
-    templateUrl: 'policy-detail.component.html',
-    styleUrls: ['policy-detail.component.scss']
+  selector: 'vib-policy-detail-new',
+  templateUrl: './policy-detail-new.component.html',
+  styleUrls: ['./policy-detail-new.component.scss']
 })
 
-export class PolicyDetailComponent implements OnInit {
-    @Input()
+export class PolicyDetailNewComponent implements OnInit {
+   @Input()
     policy?: InsurancePolicy;
 
     constructor(private updateService: InsurancePolicyUpdateService ) { }
