@@ -162,6 +162,7 @@ export class DashboardComponent implements OnInit {
             this.vibiio = data.vibiio;
             this.vibiiographerProfile = data.myProfile;
         });
+        console.log(ACTION_CABLE_URL);
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
         this.router.navigate(['/dashboard/my-vibiios']);
   }
