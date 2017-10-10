@@ -25,6 +25,7 @@
                              [vibiioId]="consumerProfile.id">
       </vib-policy-detail-new>
     </span>
+    <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>
 </div>
   
