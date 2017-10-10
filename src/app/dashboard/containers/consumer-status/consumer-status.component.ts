@@ -7,6 +7,7 @@ import { ConsumerStatusService } from '../../services/consumer-status.service';
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { VideoSnapshot } from '../../models/video-snapshot.interface';
+import { Vibiio } from '../../models/vibiio.interface';
 
 
 @Component({
