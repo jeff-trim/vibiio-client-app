@@ -3,6 +3,8 @@ import { VideoSnapshot } from './video-snapshot.interface';
 
 export interface ConsumerProfile {
     id: number;
+    appointment_date: number;
+    appointment_time: any;
     user_info: {
        id: number
        first_name: string;

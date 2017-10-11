@@ -1,5 +1,6 @@
 import { Component, Output, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import * as moment_tz from 'moment-timezone';
 
 // Components
 import { AppointmentDetailsComponent } from '../../components/appointment-details/appointment-details.component';
@@ -40,6 +41,7 @@ export class AppointmentComponent implements OnInit {
     imgData: any;
     subscriber: any;
     neworkDisconnected = false;
+    // timeZone: number;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -56,6 +58,8 @@ export class AppointmentComponent implements OnInit {
             // appointment data
             this.appointment = data.appt.appointment;
             this.consumer_id = this.appointment.consumer_id;
+            // TO DO
+            // this.appointment.scheduled_datetime = this.parseTime(this.appointment.scheduled_datetime);
             this.user = data.appt.appointment.user;
             // vibiio data
             this.vibiio = data.appt.appointment.vibiio;
@@ -150,4 +154,9 @@ export class AppointmentComponent implements OnInit {
             console.log('error ', error);
         });
     }
+
+    // TO DO
+    // parseTime(time: number): number  {
+    //     return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
+    // }
 }

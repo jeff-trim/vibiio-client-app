@@ -41,5 +41,5 @@ export class ConsumerProfileComponent implements AfterContentChecked {
           }, (error: any) => {
               console.log('error updating claim status');
           });
-      }
+    }
 }

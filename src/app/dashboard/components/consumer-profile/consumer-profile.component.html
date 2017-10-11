@@ -16,6 +16,12 @@
     <key-value [key]="'Zip'"
                [value]="consumerProfile.user_info.zipcode"></key-value>
 
+    <key-value [key]="'Appointment Date'"
+               [value]="consumerProfile.appointment_date"></key-value>
+    
+    <key-value [key]="'Appointment Time'"
+               [value]="consumerProfile.appointment_time"></key-value>
+
     <span *ngIf="insurance_policy != undefined"> 
       <vib-policy-detail-edit [policy]='insurance_policy'></vib-policy-detail-edit>
     </span> 
