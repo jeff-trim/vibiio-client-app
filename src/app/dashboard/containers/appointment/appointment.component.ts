@@ -80,8 +80,8 @@ export class AppointmentComponent implements OnInit {
                     height: 461.1
                 };
 
-                // Initialize a publisher and publish the video stream to the session
-                this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
+                // Initialize a publisher and publish the audio only stream to the session
+                this.publisher = OT.initPublisher({insertDefaultUI: false}, options).publishVideo(false);
                 this.session.publish(this.publisher);
 
                 // Subscribe to stream created events
