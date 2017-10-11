@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
   emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input()
-  available = false;
+  available: boolean;
 
     constructor(private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusCountService,
