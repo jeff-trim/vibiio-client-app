@@ -18,6 +18,8 @@ import { ConsumerNoteService } from '../../services/consumer-note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
 import { AppointmentService } from '../../services/appointment.service';
+import { VibiioUpdateService } from '../../services/vibiio-update.service';
+import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 
 declare var OT: any;
 
@@ -45,11 +47,13 @@ export class AppointmentComponent implements OnInit {
                 private tokenService: VideoChatTokenService,
                 private snapshotService: VideoSnapshotService,
                 private activityService: ActivityService,
-                private updateAppointmentService: AppointmentService ) {}
+                private updateAppointmentService: AppointmentService,
+                private vibiioUpdateService: VibiioUpdateService,
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService ) {}
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
-           this.index = params['id'];
+            this.index = params['id'];
         });
 
         this.activatedRoute.data.subscribe( (data) => {
@@ -61,8 +65,8 @@ export class AppointmentComponent implements OnInit {
             this.vibiio = data.appt.appointment.vibiio;
             // this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjM5MTI3MjkzNn5wWmpzVzI4QlNlUE1TZ2toMC96QUhHWWl-fg');
             this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
-            }, (error) => {
-                console.log(error);
+        }, (error) => {
+            console.log(error);
         });
     }
 
@@ -103,6 +107,7 @@ export class AppointmentComponent implements OnInit {
                         if (subscribers.length > 0) {
                             // Display error message inside the Subscriber
                             this.neworkDisconnected = true;
+                            this.updateVibiioStatus();
                             data.preventDefault();   // Prevent the Subscriber from being removed
                         }
                     }
@@ -132,6 +137,21 @@ export class AppointmentComponent implements OnInit {
             ).subscribe((data) => {});
     }
 
+    updateVibiioStatus() {
+        const options = {
+            status: 'claim_in_progress'
+        };
+
+        this.vibiioUpdateService
+            .updateVibiio(options, this.vibiio.id)
+            .subscribe( (data) => {
+                this.vibiio.status = data.vibiio.status;
+                this.sidebarCustomerStatusSharedService.emitChange(data);
+            }, (error: any) => {
+                console.log('error updating claim status');
+            });
+    }
+
     endSession(event) {
         this.session.disconnect();
         this.triggerActivity(
@@ -139,6 +159,7 @@ export class AppointmentComponent implements OnInit {
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
+        this.updateVibiioStatus();
     }
 
     claimVibiio(event) {
