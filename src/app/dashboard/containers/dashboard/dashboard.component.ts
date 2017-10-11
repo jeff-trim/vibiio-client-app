@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -47,7 +47,7 @@ declare var OT: any;
 `,
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
     session: any;
     vibiio: Vibiio;
     token: VideoChatToken;
@@ -56,7 +56,8 @@ export class DashboardComponent implements OnInit {
     vibiiographerProfile: any;
     waitingConsumers = [];
     currentNotificationData = {};
-    userAvailability= false;
+    availabilityParams: boolean;
+    userAvailability: boolean;
     cable: any;
     readonly jwt: string = this.authService.getToken();
 
@@ -82,7 +83,7 @@ export class DashboardComponent implements OnInit {
             case 'success': {
                 this.toggleActionCable(false);
                 this.userAvailability = false;
-                this.router.navigateByUrl("/dashboard/appointment/" +
+                this.router.navigateByUrl('/dashboard/appointment/' +
                                           data.content.appointment_id);
                 break;
             }
@@ -112,14 +113,14 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    removeNotification(data){
-        for(let consumer in this.waitingConsumers){
-            if(this.waitingConsumers[+consumer].consumerData.content.vibiio_id == data.content.vibiio_id){
+    removeNotification(data) {
+        for (const consumer in this.waitingConsumers){
+            if (this.waitingConsumers[+consumer].consumerData.content.vibiio_id === data.content.vibiio_id) {
                 this.waitingConsumers = [
                     ...this.waitingConsumers.slice(0, +consumer),
                     ...this.waitingConsumers.slice(+consumer + 1)
-                ]
-                break
+                ];
+                break;
             }
         }
     }
@@ -127,7 +128,8 @@ export class DashboardComponent implements OnInit {
     toggleActionCable(event: boolean) {
         this.userAvailability = event;
         const comp = this;
-        if (this.userAvailability == true) {
+
+        if (event) {
             this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
                 connected(data) {
                     this.getWaitingList();
@@ -162,8 +164,24 @@ export class DashboardComponent implements OnInit {
             this.vibiio = data.vibiio;
             this.vibiiographerProfile = data.myProfile;
         });
-        console.log(ACTION_CABLE_URL);
+
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+
+        // captures params after login
+        this.activatedRoute
+            .queryParams
+            .subscribe(params => {
+            // Defaults to false if no query param provided.
+                this.availabilityParams = params['available'] || false;
+        });
         this.router.navigate(['/dashboard/my-vibiios']);
-  }
+    }
+
+    ngAfterViewInit() {
+        // Vibiiographer is available after login + child component initialization
+        if (this.availabilityParams) {
+            this.toggleActionCable(this.availabilityParams);
+        }
+    }
+
 }
