@@ -17,7 +17,7 @@ import { Vibiio } from '../../models/vibiio.interface';
 
 export class ConsumerStatusComponent implements OnInit {
     consumerProfiles: ConsumerProfile[];
-    consumerStatus;
+    consumerStatus: string;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private consumerStatusService: ConsumerStatusService) {}
