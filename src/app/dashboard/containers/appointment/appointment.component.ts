@@ -20,6 +20,8 @@ import { ActivityService } from '../../services/activity.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
+import { AvailabilitySharedService } from '../../services/availability-shared.service';
+
 
 declare var OT: any;
 
@@ -50,6 +52,8 @@ export class AppointmentComponent implements OnInit {
                 private updateAppointmentService: AppointmentService,
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService ) {}
+                private availabilitySharedService: AvailabilitySharedService ) {}
+
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -110,6 +114,7 @@ export class AppointmentComponent implements OnInit {
                             this.updateVibiioStatus();
                             data.preventDefault();   // Prevent the Subscriber from being removed
                         }
+                        this.availabilitySharedService.emitChange(true);
                     }
                     this.updateStatusReminder = true;
                     this.session.disconnect();
