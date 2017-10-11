@@ -60,6 +60,7 @@ import { VideoArchiveService } from './services/video-archive.service';
 import { VibiioProfileService } from './services/vibiio-profile.service';
 import { ActivityService } from './services/activity.service';
 import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-status-shared.service';
+import { AvailabilitySharedService } from './services/availability-shared.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -229,7 +230,8 @@ const dashboardRoutes: Routes = [
     VibiioProfileResolver,
     SidebarMyVibiioSharedService,
     SidebarCustomerStatusSharedService,
-    ActivityService
+    ActivityService,
+    AvailabilitySharedService
   ]
 })
 
