@@ -18,6 +18,7 @@ import { ConsumerNoteService } from '../../services/consumer-note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
 import { AppointmentService } from '../../services/appointment.service';
+import { VideoSessionSharedService } from '../../services/video-session-shared.service';
 
 declare var OT: any;
 
@@ -45,7 +46,17 @@ export class AppointmentComponent implements OnInit {
                 private tokenService: VideoChatTokenService,
                 private snapshotService: VideoSnapshotService,
                 private activityService: ActivityService,
-                private updateAppointmentService: AppointmentService ) {}
+                private updateAppointmentService: AppointmentService,
+                private videoSessionSharedService: VideoSessionSharedService ) {
+
+        this.videoSessionSharedService.changeEmitted$.subscribe(
+            response => {
+                // TO BE REMOVED
+                console.log('Change was emitted from dashboard and received by appointment component');
+                this.connectToSession(event);
+            }
+        );
+    }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {

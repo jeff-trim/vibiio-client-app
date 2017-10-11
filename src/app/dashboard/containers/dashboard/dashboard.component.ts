@@ -157,6 +157,10 @@ export class DashboardComponent implements OnInit {
             vibiio_id: event.content.vibiio_id,
             consumer_id: event.content.consumer_id
         });
+        this.videoSessionSharedService.emitChange(event);
+        // TO BE REMOVED
+        console.log('Event emitted from dashboard component');
+        console.log(event);
     }
 
     ngOnInit() {
