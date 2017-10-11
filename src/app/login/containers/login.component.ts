@@ -36,7 +36,7 @@ export class LoginComponent {
         (data: Jwt) => {
           if (data.role === 'vibiiographer') {
             this.authService.setToken(data.jwt);
-              this.router.navigate(['/dashboard/my-vibiios']);
+              this.router.navigate(['/dashboard/my-vibiios'], { queryParams: { available: true } });
               this.unauthorized = false;
           } else {
               this.unauthorized = true;
@@ -45,8 +45,8 @@ export class LoginComponent {
           }
         },
           // TODO: provide feedback on form for this event
-          (error: any) =>{
-              if(error.status === 404) {
+          (error: any) => {
+              if (error.status === 404) {
                   this.unauthorized = true;
               }
           }
