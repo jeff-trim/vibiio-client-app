@@ -18,6 +18,7 @@ import { ConsumerNoteService } from '../../services/consumer-note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
 import { AppointmentService } from '../../services/appointment.service';
+import { AvailabilitySharedService } from '../../services/availability-shared.service';
 
 declare var OT: any;
 
@@ -45,7 +46,8 @@ export class AppointmentComponent implements OnInit {
                 private tokenService: VideoChatTokenService,
                 private snapshotService: VideoSnapshotService,
                 private activityService: ActivityService,
-                private updateAppointmentService: AppointmentService ) {}
+                private updateAppointmentService: AppointmentService,
+                private availabilitySharedService: AvailabilitySharedService ) {}
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -105,6 +107,7 @@ export class AppointmentComponent implements OnInit {
                             this.neworkDisconnected = true;
                             data.preventDefault();   // Prevent the Subscriber from being removed
                         }
+                        this.availabilitySharedService.emitChange(true);
                     }
                     this.updateStatusReminder = true;
                     this.session.disconnect();

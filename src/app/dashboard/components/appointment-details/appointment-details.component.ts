@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
+import { AvailabilitySharedService } from '../../services/availability-shared.service';
 
 // Components
 import { NotesComponent } from '../../containers/notes/notes.component';
@@ -53,7 +54,9 @@ export class AppointmentDetailsComponent  {
     claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(private StatusUpdateService: VibiioUpdateService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService) {}
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
+                private availabilitySharedService: AvailabilitySharedService) {
+                }
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -82,6 +85,7 @@ export class AppointmentDetailsComponent  {
     this.endVibiio.emit(event);
     this.onVibiio = false;
     this.updateStatusReminder = true;
+    this.availabilitySharedService.emitChange(true);
   }
 
   toggleUpdateStatusReminder() {
