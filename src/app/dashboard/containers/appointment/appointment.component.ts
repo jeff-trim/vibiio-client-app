@@ -51,7 +51,7 @@ export class AppointmentComponent implements OnInit {
                 private activityService: ActivityService,
                 private updateAppointmentService: AppointmentService,
                 private vibiioUpdateService: VibiioUpdateService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService ) {}
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService ) {}
 
 
