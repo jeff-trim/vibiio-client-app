@@ -8,7 +8,7 @@ export class AvailabilitySharedService {
 
     changeEmitted$ = this.emitChangeSource.asObservable();
 
-    emitChange(response: Response) {
-        this.emitChangeSource.next(response);
+    emitChange(data) {
+        this.emitChangeSource.next(data);
     }
 }
