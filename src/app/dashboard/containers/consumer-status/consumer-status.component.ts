@@ -18,9 +18,9 @@ import { Vibiio } from '../../models/vibiio.interface';
 
 export class ConsumerStatusComponent implements OnInit {
     consumerProfiles: ConsumerProfile[];
-    consumerProfile: ConsumerProfile;
+    // consumerProfile: ConsumerProfile;
     consumerStatus: string;
-    // timeZone: number;
+    timeZone: number;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private consumerStatusService: ConsumerStatusService) {}
@@ -28,6 +28,10 @@ export class ConsumerStatusComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.consumerProfiles = data.cons.vibiios;
+            // this.consumerProfiles.map(function(consumerProfile) {
+            //     this.parseTime(consumerProfile.appointment_time);
+            // });
+            
             // this.consumerProfile.appointment_time = this.parseTime(this.consumerProfile.appointment_time);
         });
         this.activatedRoute.params.subscribe((params) => {
@@ -40,8 +44,7 @@ export class ConsumerStatusComponent implements OnInit {
         });
     }
 
-    // TO DO
-    // parseTime(time: number): number  {
+    // parseTime(time: number): string  {
     //     return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
     // }
 }

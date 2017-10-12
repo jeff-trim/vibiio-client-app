@@ -36,6 +36,7 @@ export class AppointmentComponent implements OnInit {
     updateStatusReminder = false;
     index: number;
     appointment: Appointment;
+    appointment_time: string;
     consumer_id: number;
     user: User;
     session: any;
@@ -45,7 +46,7 @@ export class AppointmentComponent implements OnInit {
     imgData: any;
     subscriber: any;
     neworkDisconnected = false;
-    // timeZone: number;
+    timeZone: number;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -65,9 +66,8 @@ export class AppointmentComponent implements OnInit {
         this.activatedRoute.data.subscribe( (data) => {
             // appointment data
             this.appointment = data.appt.appointment;
+            // this.appointment_time = this.parseTime(this.appointment.scheduled_datetime);
             this.consumer_id = this.appointment.consumer_id;
-            // TO DO
-            // this.appointment.scheduled_datetime = this.parseTime(this.appointment.scheduled_datetime);
             this.user = data.appt.appointment.user;
             // vibiio data
             this.vibiio = data.appt.appointment.vibiio;
@@ -181,8 +181,7 @@ export class AppointmentComponent implements OnInit {
         });
     }
 
-    // TO DO
-    // parseTime(time: number): number  {
-    //     return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
-    // }
+    parseTime(time: number): string  {
+        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
+    }
 }
