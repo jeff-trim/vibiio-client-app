@@ -15,7 +15,6 @@ import { NotificationWrapper } from '../../models/notification-wrapper.interface
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
 import { MyProfileResolver } from '../../services/my-profile.resolver.service';
 import { AuthService } from '../../../services/auth.service';
-import { VideoSessionService } from '../../services/video-session.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
 
 // environment
@@ -68,7 +67,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         private activatedRoute: ActivatedRoute,
         private tokenService: VideoChatTokenService,
         private authService: AuthService,
-        private videoSessionService: VideoSessionService,
         private availabilitySharedService: AvailabilitySharedService
     ) {
         // subscribes to shared service and listens for changes passed from the
@@ -169,9 +167,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             vibiio_id: event.content.vibiio_id,
             consumer_id: event.content.consumer_id
         });
-        // this.videoSessionService.emitChange(event);
-        //  // TO BE REMOVED
-        //  console.log('event emitted: ' + event);
     }
 
     ngOnInit() {

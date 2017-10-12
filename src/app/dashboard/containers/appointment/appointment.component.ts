@@ -21,7 +21,6 @@ import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
-import { VideoSessionService } from '../../services/video-session.service';
 
 declare var OT: any;
 
@@ -53,19 +52,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private updateAppointmentService: AppointmentService,
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService,
-                private videoSessionService: VideoSessionService ) {
-
-        // subscribes to shared service and listens for changes passed from the
-        // dashboard container
-        // this.videoSessionService.changeEmitted$.subscribe(
-        //     event => {
-        //         // TO BE REMOVED
-        //        console.log('event received:' + event);
-        //         this.connectToSession(true);
-        //     }
-        // );
-    }
+                private availabilitySharedService: AvailabilitySharedService ) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -98,6 +85,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         if (this.startVibiioParams) {
             this.connectToSession(this.startVibiioParams);
             this.onVibiio = true;
+            this.updateStatusReminder = false;
         }
     }
 
