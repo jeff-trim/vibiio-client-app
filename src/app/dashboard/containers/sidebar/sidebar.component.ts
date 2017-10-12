@@ -9,6 +9,7 @@ import { CustomerStatusCountService } from '../../services/customer-status-count
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service';
 import { MyAvailabilityService } from '../../services/my-availability.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
+import { AuthService } from '../../../services/auth.service';
 
 // Interfaces
 import { CustomerStatusCount } from '../../models/customer-status-count.interface';
@@ -40,7 +41,9 @@ export class SidebarComponent implements OnInit {
                 private activatedRoute: ActivatedRoute,
                 private availabilityService: MyAvailabilityService,
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService) {
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
+                private authService: AuthService,
+                private router: Router) {
 
         // subscribes to shared service and listens for changes passed from the
         // my vibiio container
@@ -102,5 +105,10 @@ export class SidebarComponent implements OnInit {
       this.scheduledVibiiosVisibility = true;
       this.customerCategoryVisibility = true;
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/sign_in');
   }
 }
