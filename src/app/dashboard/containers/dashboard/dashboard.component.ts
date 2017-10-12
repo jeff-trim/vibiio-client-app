@@ -93,8 +93,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             case 'success': {
                 this.toggleActionCable(false);
                 this.userAvailability = false;
-                this.router.navigateByUrl('/dashboard/appointment/' +
-                                          data.content.appointment_id);
+                this.router.navigate(['/dashboard/appointment/',
+                                          data.content.appointment_id], { queryParams: { startVibiio: true } });
                 break;
             }
         }
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
 
     removeNotification(data) {
-        for (const consumer in this.waitingConsumers){
+        for (const consumer in this.waitingConsumers) {
             if (this.waitingConsumers[+consumer].consumerData.content.vibiio_id === data.content.vibiio_id) {
                 this.waitingConsumers = [
                     ...this.waitingConsumers.slice(0, +consumer),

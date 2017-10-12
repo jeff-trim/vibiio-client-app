@@ -1,4 +1,4 @@
-import { Component, Output, OnInit } from '@angular/core';
+import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import * as moment_tz from 'moment-timezone';
 
@@ -23,7 +23,6 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
 
-
 declare var OT: any;
 
 @Component({
@@ -31,7 +30,7 @@ declare var OT: any;
     templateUrl: 'appointment.component.html'
 })
 
-export class AppointmentComponent implements OnInit {
+export class AppointmentComponent implements OnInit, AfterViewInit {
     onVibiio = false;
     updateStatusReminder = false;
     index: number;
@@ -47,6 +46,7 @@ export class AppointmentComponent implements OnInit {
     subscriber: any;
     neworkDisconnected = false;
     timeZone: number;
+    startVibiioParams: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -55,8 +55,7 @@ export class AppointmentComponent implements OnInit {
                 private updateAppointmentService: AppointmentService,
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService ) {}
-
+                private availabilitySharedService: AvailabilitySharedService ) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -76,6 +75,22 @@ export class AppointmentComponent implements OnInit {
         }, (error) => {
             console.log(error);
         });
+
+        this.activatedRoute
+            .queryParams
+            .subscribe(params => {
+            // Defaults to false if no query param provided.
+                this.startVibiioParams = params['startVibiio'] || false;
+        });
+    }
+
+    ngAfterViewInit() {
+        // Video session starts if vibiio was started from dashboard
+        if (this.startVibiioParams) {
+            this.connectToSession(this.startVibiioParams);
+            this.onVibiio = true;
+            this.updateStatusReminder = false;
+        }
     }
 
     async connectToSession(event) {
@@ -92,9 +107,9 @@ export class AppointmentComponent implements OnInit {
                     height: 461.1
                 };
 
-                // Initialize a publisher and publish the video stream to the session
+                // Initialize a publisher and publish the audio only stream to the session
                 this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
-                this.session.publish(this.publisher);
+                this.session.publish(this.publisher).publishVideo(false);
 
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (data) => {
