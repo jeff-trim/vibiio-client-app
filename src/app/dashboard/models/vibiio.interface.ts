@@ -7,4 +7,5 @@ export interface Vibiio {
     video_session_id: string;
     description: string;
     notes: Note[];
+    vibiiographer_id: number;
 }
