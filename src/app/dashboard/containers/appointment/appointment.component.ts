@@ -12,6 +12,9 @@ import { Vibiio } from '../../models/vibiio.interface';
 import { VideoChatToken } from '../../models/video-chat-token.interface';
 import { OPENTOK_API_KEY } from '../../../../environments/environment';
 
+// Pipes
+import { DatePipe } from '@angular/common';
+
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
@@ -35,7 +38,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     updateStatusReminder = false;
     index: number;
     appointment: Appointment;
-    appointment_time: string;
     consumer_id: number;
     user: User;
     session: any;
@@ -65,8 +67,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.activatedRoute.data.subscribe( (data) => {
             // appointment data
             this.appointment = data.appt.appointment;
-            // this.appointment_time = this.parseTime(data.appt.appointment.scheduled_datetime);
-
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             // vibiio data

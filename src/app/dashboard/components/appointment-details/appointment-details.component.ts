@@ -10,6 +10,9 @@ import { AvailabilitySharedService } from '../../services/availability-shared.se
 // Components
 import { NotesComponent } from '../../containers/notes/notes.component';
 
+// Pipes
+import { DatePipe } from '@angular/common';
+
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
 import { User } from '../../models/user.interface';

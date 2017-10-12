@@ -20,7 +20,7 @@
                [value]="consumerProfile.appointment_date"></key-value>
     
     <key-value [key]="'Appointment Time'"
-               [value]="consumerProfile.appointment_time"></key-value>
+               [value]="consumerProfile.appointment_time">{{ consumerProfile.appointment_time }}</key-value>
 
     <span *ngIf="insurance_policy != undefined"> 
       <vib-policy-detail-edit [policy]='insurance_policy'></vib-policy-detail-edit>
