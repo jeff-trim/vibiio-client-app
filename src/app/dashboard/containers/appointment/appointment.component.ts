@@ -81,8 +81,8 @@ export class AppointmentComponent implements OnInit {
                 };
 
                 // Initialize a publisher and publish the audio only stream to the session
-                this.publisher = OT.initPublisher({insertDefaultUI: false}, options).publishVideo(false);
-                this.session.publish(this.publisher);
+                this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
+                this.session.publish(this.publisher).publishVideo(false);
 
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (data) => {
