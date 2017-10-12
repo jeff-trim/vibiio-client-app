@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class VideoSessionSharedService {
+export class VideoSessionService {
     private emitChangeSource = new Subject<any>();
 
     changeEmitted$ = this.emitChangeSource.asObservable();
 
-    emitChange(response: Response) {
-        this.emitChangeSource.next(response);
+    emitChange(data) {
+        this.emitChangeSource.next(data);
     }
 }

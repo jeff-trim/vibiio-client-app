@@ -1,4 +1,4 @@
-import { Component, Output, OnInit } from '@angular/core';
+import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 // Components
@@ -21,7 +21,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
-import { VideoSessionSharedService } from '../../services/video-session-shared.service';
+import { VideoSessionService } from '../../services/video-session.service';
 
 declare var OT: any;
 
@@ -30,7 +30,7 @@ declare var OT: any;
     templateUrl: 'appointment.component.html'
 })
 
-export class AppointmentComponent implements OnInit {
+export class AppointmentComponent implements OnInit, AfterViewInit {
     onVibiio = false;
     updateStatusReminder = false;
     index: number;
@@ -44,6 +44,7 @@ export class AppointmentComponent implements OnInit {
     imgData: any;
     subscriber: any;
     neworkDisconnected = false;
+    startVibiioParams: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -53,15 +54,17 @@ export class AppointmentComponent implements OnInit {
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
-                private videoSessionSharedService: VideoSessionSharedService ) {
+                private videoSessionService: VideoSessionService ) {
 
-        this.videoSessionSharedService.changeEmitted$.subscribe(
-            response => {
-                // TO BE REMOVED
-                console.log('Change was emitted from dashboard and received by appointment component');
-                this.connectToSession(event);
-            }
-        );
+        // subscribes to shared service and listens for changes passed from the
+        // dashboard container
+        // this.videoSessionService.changeEmitted$.subscribe(
+        //     event => {
+        //         // TO BE REMOVED
+        //        console.log('event received:' + event);
+        //         this.connectToSession(true);
+        //     }
+        // );
     }
 
     ngOnInit() {
@@ -81,6 +84,21 @@ export class AppointmentComponent implements OnInit {
         }, (error) => {
             console.log(error);
         });
+
+        this.activatedRoute
+            .queryParams
+            .subscribe(params => {
+            // Defaults to false if no query param provided.
+                this.startVibiioParams = params['startVibiio'] || false;
+        });
+    }
+
+    ngAfterViewInit() {
+        // Video session starts if vibiio was started from dashboard
+        if (this.startVibiioParams) {
+            this.connectToSession(this.startVibiioParams);
+            this.onVibiio = true;
+        }
     }
 
     async connectToSession(event) {
