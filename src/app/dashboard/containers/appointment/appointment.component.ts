@@ -110,9 +110,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (data) => {
                     this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options,
-                (stats) => {
-                    // wait till subscriber is set
-                    this.captureSnapshot();
+                    (stats) => {
+                        // wait till subscriber is set
+                        this.captureSnapshot();
+                        this.updateVibiioStatus();
                 });
                     this.neworkDisconnected = false;
                     this.onVibiio = true;
@@ -120,19 +121,19 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 // subscribe to stream destroyed events
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
+                    this.availabilitySharedService.emitChange(true);
+                    this.updateStatusReminder = true;
+                    this.session.disconnect();
+
                     if (data.reason === 'networkDisconnected') {
                         data.preventDefault();
                         const subscribers = this.session.getSubscribersForStream(data.stream);
                         if (subscribers.length > 0) {
                             // Display error message inside the Subscriber
                             this.neworkDisconnected = true;
-                            this.updateVibiioStatus();
                             data.preventDefault();   // Prevent the Subscriber from being removed
                         }
-                        this.availabilitySharedService.emitChange(true);
                     }
-                    this.updateStatusReminder = true;
-                    this.session.disconnect();
                 });
             });
         });
