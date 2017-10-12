@@ -65,7 +65,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.activatedRoute.data.subscribe( (data) => {
             // appointment data
             this.appointment = data.appt.appointment;
-            // this.appointment_time = this.parseTime(this.appointment.scheduled_datetime);
+            // this.appointment_time = this.parseTime(data.appt.appointment.scheduled_datetime);
+
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             // vibiio data
