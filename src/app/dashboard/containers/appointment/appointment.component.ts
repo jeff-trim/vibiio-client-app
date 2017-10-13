@@ -78,6 +78,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             // Defaults to false if no query param provided.
                 this.startVibiioParams = params['startVibiio'] || false;
         });
+
+        console.log(this.appointment);
     }
 
     ngAfterViewInit() {
@@ -186,6 +188,17 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     claimVibiio(event) {
         this.updateAppointmentService.updateVibiiographer(this.appointment.id)
             .subscribe((data) => {
+                console.log(data);
+            },
+        (error: any) => {
+            console.log('error ', error);
+        });
+    }
+
+    updateNotes(appointment_id) {
+        this.updateAppointmentService.getAppointmentDetails(appointment_id)
+            .subscribe((data) => {
+                this.appointment = data.appointment;
                 console.log(data);
             },
         (error: any) => {

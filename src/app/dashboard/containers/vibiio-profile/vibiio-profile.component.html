@@ -46,7 +46,9 @@
           <span class="label">Vibiio Notes</span>
           <span class="pink-underline"></span>
         </div>
-        <vib-consumer-notes [notes]="notes"></vib-consumer-notes>
+        <vib-consumer-notes [vibiio]="consumerProfile"
+                            [notes]="notes"
+                            (refreshNotes)="updateNotes(consumerProfile.id)"></vib-consumer-notes>
       </div>
         
     </div> 
