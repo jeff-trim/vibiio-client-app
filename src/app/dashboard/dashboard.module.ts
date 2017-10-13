@@ -81,7 +81,6 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
-import { DatePipe } from '@angular/common';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -232,8 +231,7 @@ const dashboardRoutes: Routes = [
     SidebarMyVibiioSharedService,
     SidebarCustomerStatusSharedService,
     ActivityService,
-    AvailabilitySharedService,
-    DatePipe
+    AvailabilitySharedService
   ]
 })
 

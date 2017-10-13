@@ -1,5 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as moment_tz from 'moment-timezone';
 
 // Services
 import { AppointmentService } from '../../services/appointment.service';
@@ -9,9 +10,6 @@ import { AvailabilitySharedService } from '../../services/availability-shared.se
 
 // Components
 import { NotesComponent } from '../../containers/notes/notes.component';
-
-// Pipes
-import { DatePipe } from '@angular/common';
 
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
@@ -46,6 +44,9 @@ export class AppointmentDetailsComponent  {
 
     @Input()
     neworkDisconnected: boolean;
+
+    @Input()
+    timeZone: string;
 
     @Output()
     startVibiio: EventEmitter<any> = new EventEmitter<any>();
@@ -93,5 +94,13 @@ export class AppointmentDetailsComponent  {
 
   toggleUpdateStatusReminder() {
     this.updateStatusReminder = !this.updateStatusReminder;
+  }
+
+  parseDate(time: number): string  {
+    return moment_tz.unix(time).tz(this.timeZone).format('MM-DD-YYYY');
+  }
+
+  parseTime(time: number): string  {
+    return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
   }
 }

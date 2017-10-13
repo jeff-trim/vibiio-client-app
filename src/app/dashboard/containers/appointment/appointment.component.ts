@@ -12,9 +12,6 @@ import { Vibiio } from '../../models/vibiio.interface';
 import { VideoChatToken } from '../../models/video-chat-token.interface';
 import { OPENTOK_API_KEY } from '../../../../environments/environment';
 
-// Pipes
-import { DatePipe } from '@angular/common';
-
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
@@ -47,7 +44,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     imgData: any;
     subscriber: any;
     neworkDisconnected = false;
-    timeZone: number;
+    userTimeZone: string;
     startVibiioParams: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
@@ -67,6 +64,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.activatedRoute.data.subscribe( (data) => {
             // appointment data
             this.appointment = data.appt.appointment;
+            this.userTimeZone = data.appt.appointment.user.time_zone;
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             // vibiio data
@@ -196,9 +194,5 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         (error: any) => {
             console.log('error ', error);
         });
-    }
-
-    parseTime(time: number): string  {
-        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
     }
 }

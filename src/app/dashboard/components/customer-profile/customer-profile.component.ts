@@ -31,6 +31,10 @@ export class CustomerProfileComponent {
         return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
     }
 
+    parseDate(time: number): string  {
+        return moment_tz.unix(time).tz(this.timeZone).format('MM-DD-YYYY');
+    }
+
     toggleAppointment(appointment: Appointment){
         if (this.appointment.vibiiographer_id === null) {
             this.appointment.vibiiographer_id = this.vibiiographerId;
