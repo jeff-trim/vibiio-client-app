@@ -26,6 +26,9 @@ h2 {
 }
 
 .info-element {
+    .label {
+        color: $blue;
+    }
     &.sub-heading {
         margin-bottom: 20px;
     }
@@ -53,8 +56,13 @@ h2 {
 .notes-row {
     margin-bottom: 103px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     &.on-playback { 
         margin-top: 0;
     }
+}
+
+.note-row {
+    display: flex;
+    flex-direction: column;
 }

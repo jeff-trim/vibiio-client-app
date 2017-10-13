@@ -37,6 +37,7 @@ import { ExistingNoteComponent } from './components/note/existing-note.component
 import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
 import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
+import { ConsumerNoteComponent } from './components/note/consumer-note.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -176,7 +177,8 @@ const dashboardRoutes: Routes = [
     CapitalizePipe,
     RemoveUnderscorePipe,
     AutosizeDirective,
-    PolicyDetailNewComponent
+    PolicyDetailNewComponent,
+    ConsumerNoteComponent
   ],
   imports: [
       CommonModule,

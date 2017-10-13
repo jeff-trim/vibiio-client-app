@@ -19,7 +19,7 @@ export class ConsumerNoteService {
                     .catch( (error: any) => Observable.throw(error.json()));
     }
 
-    updateNote(data: any, id:number): Observable <any> {
+    updateNote(data: any, id: number): Observable <any> {
         const url = `${API_URL}/notes/${id}`;
         const body = { note: data };
 

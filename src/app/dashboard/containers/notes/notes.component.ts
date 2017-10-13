@@ -11,9 +11,9 @@ import { ExistingNoteComponent } from '../../components/note/existing-note.compo
 
 @Component({
     selector: 'vib-consumer-notes',
-    template: `<vib-new-consumer-note *ngIf= "location != '/dashboard/my-vibiios'" [vibiio_id]="vibiio.id"></vib-new-consumer-note>
+    template: `<vib-new-consumer-note *ngIf= "location != '/dashboard/my-vibiios'" [vibiio_id]="note.vibiio_id"></vib-new-consumer-note>
                  <ng-container *ngFor='let note of notes'>
-                   <vib-existing-consumer-note [vibiio_id]="vibiio.id" [note]='note'></vib-existing-consumer-note>
+                   <vib-existing-consumer-note [vibiio_id]="note.vibiio_id" [note]='note'></vib-existing-consumer-note>
                  </ng-container>`,
     styleUrls: ['notes.component.scss']
             })
@@ -25,12 +25,7 @@ export class NotesComponent {
 
     @Output()
     note: Note;
-
-    @Input()
-    vibiio: Vibiio;
-
     constructor( private _router: Router ) {
         this.location = _router.url;
     }
-
 }
