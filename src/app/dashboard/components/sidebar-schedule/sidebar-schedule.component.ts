@@ -28,7 +28,7 @@ export class SidebarScheduleComponent {
     timeZone: number;
 
     parseTime(time: number): string  {
-        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
+      return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
     }
 }
 

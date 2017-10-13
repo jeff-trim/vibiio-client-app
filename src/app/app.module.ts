@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 // Components
 import { AppComponent } from './app.component';
+
 // Services
 import { AuthService } from './services/auth.service';
 import { RequestOptionsService } from './services/request-options.service';
@@ -24,7 +25,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
-import { SpinnerModule } from './easy-spinner/spinner.module'
+import { SpinnerModule } from './easy-spinner/spinner.module';
 
 @NgModule({
   declarations: [

@@ -16,6 +16,12 @@
     <key-value [key]="'Zip'"
                [value]="consumerProfile.user_info.zipcode"></key-value>
 
+    <key-value [key]="'Vibiio Date'"
+               [value]="parseDate(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
+    
+    <key-value [key]="'Vibiio Start Time'"
+               [value]="parseTime(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
+
     <span *ngIf="insurance_policy != undefined"> 
       <vib-policy-detail-edit [policy]='insurance_policy'></vib-policy-detail-edit>
     </span> 

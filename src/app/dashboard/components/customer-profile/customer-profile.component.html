@@ -78,6 +78,9 @@
     <key-value [key]="'Claim ID'"
                [value]="'12345'"></key-value>
 
+    <key-value [key]="'Vibiio Date'"
+               [value]="parseDate(appointment.scheduled_datetime)"></key-value>
+
     <key-value [key]="'Vibiio Start Time'"
                [value]="parseUnixTime(appointment.scheduled_datetime)"></key-value>
     
