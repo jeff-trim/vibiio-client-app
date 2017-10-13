@@ -29,4 +29,13 @@ export class ConsumerNoteService {
                    .catch( (error: any) => Observable.throw(error.json()));
     }
 
+    getNote(id: number) {
+        const url = `${API_URL}/notes/${id}`;
+
+        return this.http
+                   .get(url)
+                   .map( (response: Response) => response.json())
+                   .catch( (error: any) => Observable.throw(error.json()));
+    }
+
 }
