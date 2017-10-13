@@ -97,6 +97,8 @@ export class AppointmentDetailsComponent  {
   }
 
   parseDate(time: number): string  {
+    // return DateService.timeZone(time, this.timezone);
+    // timezone(time, timezone) { }
     return moment_tz.unix(time).tz(this.timeZone).format('MM-DD-YYYY');
   }
 

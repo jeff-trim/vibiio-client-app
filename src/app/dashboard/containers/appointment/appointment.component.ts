@@ -1,6 +1,5 @@
 import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import * as moment_tz from 'moment-timezone';
 
 // Components
 import { AppointmentDetailsComponent } from '../../components/appointment-details/appointment-details.component';
