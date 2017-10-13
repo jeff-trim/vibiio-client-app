@@ -37,11 +37,12 @@ h2 {
     }
 }
 
-.long-pink-underline {
-    width: 80px;
+.pink-underline {
+    width: 9%;
+    border-bottom: 3px solid $pink;
     bottom: 0;
     left: 0;
-    border-bottom: 3px solid $pink;
+    position: absolute;
 }
 
 .vibiio-profile-information h2 {

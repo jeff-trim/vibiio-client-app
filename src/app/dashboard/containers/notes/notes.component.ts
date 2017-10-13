@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Models
@@ -11,7 +11,11 @@ import { ExistingNoteComponent } from '../../components/note/existing-note.compo
 
 @Component({
     selector: 'vib-consumer-notes',
-    template: `<vib-new-consumer-note *ngIf= "location != '/dashboard/my-vibiios'" [vibiio_id]="note.vibiio_id"></vib-new-consumer-note>
+    template: `<vib-new-consumer-note
+                    *ngIf="location != '/dashboard/my-vibiios'"
+                    [vibiio_id]="vibiio.id"
+                    (refreshNotes)="refreshNotesEvent()">
+                </vib-new-consumer-note>
                  <ng-container *ngFor='let note of notes'>
                    <vib-existing-consumer-note [vibiio_id]="note.vibiio_id" [note]='note'></vib-existing-consumer-note>
                  </ng-container>`,
@@ -23,9 +27,20 @@ export class NotesComponent {
     @Input()
     notes?: Note[];
 
+    @Input()
+    vibiio: Vibiio;
+
     @Output()
     note: Note;
+
+    @Output()
+    refreshNotes: EventEmitter<any> = new EventEmitter<any>();
+
     constructor( private _router: Router ) {
         this.location = _router.url;
+    }
+
+    refreshNotesEvent() {
+        this.refreshNotes.emit(event);
     }
 }

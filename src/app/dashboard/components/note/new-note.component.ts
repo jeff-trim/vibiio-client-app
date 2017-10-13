@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
 
@@ -22,6 +22,9 @@ export class NewNoteComponent {
     @Input()
     vibiio_id: number;
 
+    @Output()
+    refreshNotes: EventEmitter<any> = new EventEmitter<any>();
+
     constructor( private noteService: ConsumerNoteService ) { }
 
     onSubmit(newBody: string) {
@@ -38,6 +41,8 @@ export class NewNoteComponent {
                 .subscribe( (data) => {
                     this.note = data.note;
                     this.submitted = true;
+                    this.refreshNotes.emit(event);
+                    this.clearnote();
                 },
                     (error: any) => {
                         console.log( 'error updating note' );
@@ -48,10 +53,16 @@ export class NewNoteComponent {
             .subscribe( (data) => {
                 this.note = data.note;
                 this.submitted = true;
+                this.refreshNotes.emit(event);
+                this.clearnote();
             },
                 (error: any) => {
                     console.log( 'error creating note' );
             });
         }
+    }
+
+    clearnote() {
+        this.note.body = '';
     }
 }
