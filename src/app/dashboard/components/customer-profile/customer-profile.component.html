@@ -82,7 +82,7 @@
                [value]="parseDate(appointment.scheduled_datetime)"></key-value>
 
     <key-value [key]="'Vibiio Start Time'"
-               [value]="parseUnixTime(appointment.scheduled_datetime)"></key-value>
+               [value]="parseTime(appointment.scheduled_datetime)"></key-value>
     
     <div class="info-element">
       <span class="label">Customer Notes</span>

@@ -12,6 +12,7 @@ import { AuthService } from './services/auth.service';
 import { RequestOptionsService } from './services/request-options.service';
 import { ResponseErrorService } from './services/response-error.service';
 import { SidebarMyVibiioSharedService } from './dashboard/services/sidebar-my-vibiio-shared.service';
+import { DateFormatService } from './services/date-format.service';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -51,6 +52,7 @@ import { SpinnerModule } from './easy-spinner/spinner.module';
   ],
   providers: [
       AuthService,
+      DateFormatService,
     { provide: RequestOptions, useClass: RequestOptionsService },
     { provide: Http, useClass: ResponseErrorService }
   ],

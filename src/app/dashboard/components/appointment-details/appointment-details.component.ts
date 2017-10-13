@@ -1,12 +1,12 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as moment_tz from 'moment-timezone';
 
 // Services
 import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
+import { DateFormatService } from '../../../services/date-format.service';
 
 // Components
 import { NotesComponent } from '../../containers/notes/notes.component';
@@ -59,7 +59,8 @@ export class AppointmentDetailsComponent  {
 
     constructor(private StatusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService) {
+                private availabilitySharedService: AvailabilitySharedService,
+                private dateFormatService: DateFormatService) {
                 }
 
     updateStatus(event) {
@@ -97,12 +98,10 @@ export class AppointmentDetailsComponent  {
   }
 
   parseDate(time: number): string  {
-    // return DateService.timeZone(time, this.timezone);
-    // timezone(time, timezone) { }
-    return moment_tz.unix(time).tz(this.timeZone).format('MM-DD-YYYY');
+    return this.dateFormatService.parseDate(time, this.timeZone);
   }
 
   parseTime(time: number): string  {
-    return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
+    return this.dateFormatService.parseTime(time, this.timeZone);
   }
 }
