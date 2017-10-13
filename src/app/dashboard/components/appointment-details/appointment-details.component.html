@@ -132,24 +132,33 @@
 <div class="row flex">
   <div class="col-xs-10
           col-md-offset-1
-          appointment-information" >  
-
-    <div class="info-element sub-heading no-margin-bottom"> 
-      <h2 class="customer-notes">notes</h2>
-    </div> 
-    
-    <div class="row 
-                info-element 
-                between-xs
-                bottom-xs">
+          appointment-information
+          appointment-notes">  
+  
+    <div class="notes-row">
       
-      <div class="notes-element
-                  pink-border
-                  row
-                  between-xs
-                  bottom-xs">   
-        <vib-consumer-notes [vibiio]="vibiio" [notes]='appointment.customer_notes'></vib-consumer-notes>
-      </div>  
-    </div>       
+      <div class="note-row col-md-6">
+        <div class="info-element">
+          <span class="label">Customer Notes</span>
+          <span class="pink-underline"></span>
+        </div>
+        
+        <vib-consumer-note [description]="appointment.vibiio.description"></vib-consumer-note>
+      </div>
+      
+      <div class="col-md-1">
+      </div>
+      
+      <div class="note-row col-md-6">
+        <div class="info-element">
+          <span class="label">Vibiio Notes</span>
+          <span class="pink-underline"></span>
+        </div>
+        <vib-consumer-notes 
+            [vibiio]="appointment.vibiio" 
+            [notes]="appointment.customer_notes"
+            (refreshNotes)="updateNotes()"></vib-consumer-notes>
+      </div>
+    </div>
   </div>
 </div>

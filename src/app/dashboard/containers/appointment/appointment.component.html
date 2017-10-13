@@ -7,5 +7,6 @@
                      [neworkDisconnected]="neworkDisconnected"
                      (startVibiio)="connectToSession($event)"
                      (endVibiio)="endSession($event)"
-                     (claimVibiio)="claimVibiio($event)">
+                     (claimVibiio)="claimVibiio($event)"
+                     (refreshNotes)="updateNotes(appointment.id)">
 </appointment-details>

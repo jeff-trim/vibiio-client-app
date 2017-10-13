@@ -53,6 +53,9 @@ export class AppointmentDetailsComponent  {
     @Output()
     claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    @Output()
+    refreshNotes: EventEmitter<any> = new EventEmitter<any>();
+
     constructor(private StatusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService) {
@@ -90,5 +93,9 @@ export class AppointmentDetailsComponent  {
 
   toggleUpdateStatusReminder() {
     this.updateStatusReminder = !this.updateStatusReminder;
+  }
+
+  updateNotes() {
+    this.refreshNotes.emit(event);
   }
 }
