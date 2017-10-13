@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class ConsumerNoteService {
+export class NoteService {
     constructor(private http: Http) { }
 
     createNote(data: any): Observable <any> {

@@ -4,7 +4,7 @@ import { Form, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 // Services
-import { ConsumerNoteService } from '../../services/consumer-note.service';
+import { NoteService } from '../../services/note.service';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';

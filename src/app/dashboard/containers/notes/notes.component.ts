@@ -8,6 +8,7 @@ import { Vibiio } from '../../models/vibiio.interface';
 // Components
 import { NewNoteComponent } from '../../components/note/new-note.component';
 import { ExistingNoteComponent } from '../../components/note/existing-note.component';
+import { NoteService } from '../../services/note.service';
 
 @Component({
     selector: 'vib-consumer-notes',
@@ -25,7 +26,8 @@ export class NotesComponent {
 
     @Output()
     note: Note;
-    constructor( private _router: Router ) {
+    constructor( private _router: Router,
+                 private noteService: NoteService ) {
         this.location = _router.url;
     }
 }

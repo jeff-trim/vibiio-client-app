@@ -3,7 +3,7 @@ import { Config, FormSetup } from '../../../dynamic-form/models/config.interface
 import { Form, Validators } from '@angular/forms';
 
 // Services
-import { ConsumerNoteService } from '../../services/consumer-note.service';
+import { NoteService } from '../../services/note.service';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';
@@ -22,7 +22,7 @@ export class NewNoteComponent {
     @Input()
     vibiio_id: number;
 
-    constructor( private noteService: ConsumerNoteService ) { }
+    constructor( private noteService: NoteService ) { }
 
     onSubmit(newBody: string) {
         const options = {

@@ -14,7 +14,7 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment';
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
-import { ConsumerNoteService } from '../../services/consumer-note.service';
+import { NoteService } from '../../services/note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
 import { AppointmentService } from '../../services/appointment.service';
