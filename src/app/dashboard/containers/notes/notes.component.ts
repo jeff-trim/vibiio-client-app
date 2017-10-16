@@ -1,9 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';
-import { Vibiio } from '../../models/vibiio.interface';
 
 // Components
 import { NewNoteComponent } from '../../components/note/new-note.component';
@@ -11,43 +10,57 @@ import { ExistingNoteComponent } from '../../components/note/existing-note.compo
 import { NoteService } from '../../services/note.service';
 
 @Component({
-    selector: 'vib-consumer-notes',
-    template: `<vib-new-consumer-note
+    selector: 'vib-vibiio-notes',
+    template: `<vib-new-vibiio-note
                     *ngIf="location != '/dashboard/my-vibiios'"
-                    [vibiio_id]="vibiio.id"
-                    (refreshNotes)="refreshNotesEvent()">
-                </vib-new-consumer-note>
+                    (createNote(noteBody))="createNote(noteBody)">
+                </vib-new-vibiio-note>
                  <ng-container *ngFor='let note of notes'>
-                   <vib-existing-consumer-note [vibiio_id]="note.vibiio_id" [note]='note'></vib-existing-consumer-note>
+                   <vib-existing-vibiio-note [note]='note'></vib-existing-vibiio-note>
                  </ng-container>`,
     styleUrls: ['notes.component.scss']
-            })
+})
 
 export class NotesComponent {
     location = '';
     @Input()
     notes?: Note[];
-    // noteId
 
     @Input()
-    vibiio: Vibiio;
-    //vibiioId
+    vibiioId;
 
     @Output()
     note: Note;
-    
-    constructor( private _router: Router,
-                 private noteService: NoteService ) {
+
+    constructor(private _router: Router, private noteService: NoteService) {
         this.location = _router.url;
     }
 
-    ngOnInit() {
+    createNote(noteBody) {
+        const options = {
+            body: noteBody,
+            vibiio_id: this.vibiioId
+        };
 
+        this.noteService
+        .createNote(options)
+        .subscribe( (data) => {
+            this.note = data.note;
+            this.getNotes(this.vibiioId);
+        },
+            (error: any) => {
+                console.log( 'error creating note' );
+        });
     }
 
-    ngOnDestroy() {
-
+    getNotes(vibiioId) {
+        this.noteService
+        .getAllNotes(vibiioId)
+        .subscribe( (data) => {
+            this.notes = data.notes;
+        },
+            (error: any) => {
+                console.log( 'error creating note' );
+        });
     }
-
-
 }

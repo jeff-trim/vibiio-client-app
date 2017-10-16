@@ -154,10 +154,10 @@
           <span class="label">Vibiio Notes</span>
           <span class="pink-underline"></span>
         </div>
-        <vib-consumer-notes 
-            [vibiio]="appointment.vibiio" 
-            [notes]="appointment.customer_notes"
-            (refreshNotes)="updateNotes()"></vib-consumer-notes>
+        <vib-vibiio-notes 
+            [vibiioId]="appointment.vibiio.id" 
+            [notes]="appointment.customer_notes">
+        </vib-vibiio-notes>
       </div>
     </div>
   </div>

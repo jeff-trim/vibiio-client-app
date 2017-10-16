@@ -38,4 +38,13 @@ export class NoteService {
                    .catch( (error: any) => Observable.throw(error.json()));
     }
 
+    getAllNotes(vibiioId: number) {
+        const url = `${API_URL}/vibiio_notes/${vibiioId}`;
+
+        return this.http
+                    .get(url)
+                    .map( (response: Response) => response.json())
+                    .catch( (error: any) => Observable.throw(error.json()));
+    }
+
 }
