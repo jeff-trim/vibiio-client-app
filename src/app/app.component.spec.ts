@@ -44,8 +44,6 @@ describe('AppComponent', () => {
   it(`should have as a title`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    console.log(app);
-    console.log(app.title);
     expect(app.title).toEqual('Vibiio');
   }));
 });
