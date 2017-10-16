@@ -1,5 +1,6 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';
@@ -13,7 +14,7 @@ import { NoteService } from '../../services/note.service';
     selector: 'vib-vibiio-notes',
     template: `<vib-new-vibiio-note
                     *ngIf="location != '/dashboard/my-vibiios'"
-                    (createNote(noteBody))="createNote(noteBody)">
+                    (createNote)="createNote($event)">
                 </vib-new-vibiio-note>
                  <ng-container *ngFor='let note of notes'>
                    <vib-existing-vibiio-note [note]='note'></vib-existing-vibiio-note>
@@ -32,6 +33,9 @@ export class NotesComponent {
     @Output()
     note: Note;
 
+    @ViewChild (NewNoteComponent)
+    private child: NewNoteComponent;
+
     constructor(private _router: Router, private noteService: NoteService) {
         this.location = _router.url;
     }
@@ -47,6 +51,7 @@ export class NotesComponent {
         .subscribe( (data) => {
             this.note = data.note;
             this.getNotes(this.vibiioId);
+            this.child.clearNoteBody();
         },
             (error: any) => {
                 console.log( 'error creating note' );

@@ -6,6 +6,7 @@ import { NoteService } from '../../services/note.service';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'vib-new-vibiio-note',
@@ -25,10 +26,9 @@ export class NewNoteComponent {
 
     onSubmit(noteBody: string) {
         this.createNote.emit(noteBody);
-        this.clearNote();
     }
 
-    clearNote() {
+    clearNoteBody() {
         this.note.body = '';
     }
 }

@@ -39,7 +39,7 @@ export class NoteService {
     }
 
     getAllNotes(vibiioId: number) {
-        const url = `${API_URL}/vibiio_notes/${vibiioId}`;
+        const url = `${API_URL}/vibiios_notes/${vibiioId}`;
 
         return this.http
                     .get(url)
