@@ -45,6 +45,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     neworkDisconnected = false;
     userTimeZone: string;
     startVibiioParams: boolean;
+    addNotesReminders: false;
+    completedSession: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -125,6 +127,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     this.onVibiio = false;
                     this.availabilitySharedService.emitChange(true);
                     this.updateStatusReminder = true;
+                    this.completedSession = true;
                     this.session.disconnect();
 
                     if (data.reason === 'networkDisconnected') {
