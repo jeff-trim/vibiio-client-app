@@ -27,7 +27,7 @@ export class ResponseErrorService extends Http {
                 console.log('401!', response);
             }
             return Observable.throw(response);
-        }
+        };
     }
 
 }

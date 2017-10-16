@@ -43,6 +43,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     imgData: any;
     subscriber: any;
     neworkDisconnected = false;
+    userTimeZone: string;
     startVibiioParams: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
@@ -62,6 +63,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.activatedRoute.data.subscribe( (data) => {
             // appointment data
             this.appointment = data.appt.appointment;
+            this.userTimeZone = data.appt.appointment.user.time_zone;
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             // vibiio data

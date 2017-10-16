@@ -6,11 +6,13 @@ import { Router } from '@angular/router';
 
 // Components
 import { AppComponent } from './app.component';
+
 // Services
 import { AuthService } from './services/auth.service';
 import { RequestOptionsService } from './services/request-options.service';
 import { ResponseErrorService } from './services/response-error.service';
 import { SidebarMyVibiioSharedService } from './dashboard/services/sidebar-my-vibiio-shared.service';
+import { DateFormatService } from './services/date-format.service';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -24,7 +26,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
-import { SpinnerModule } from './easy-spinner/spinner.module'
+import { SpinnerModule } from './easy-spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { SpinnerModule } from './easy-spinner/spinner.module'
   ],
   providers: [
       AuthService,
+      DateFormatService,
     { provide: RequestOptions, useClass: RequestOptionsService },
     { provide: Http, useClass: ResponseErrorService }
   ],
