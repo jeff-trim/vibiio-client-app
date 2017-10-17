@@ -32,12 +32,10 @@ export class VibiioProfileComponent implements OnInit {
             this.notes = data.profile.vibiio.notes;
             this.description = data.profile.vibiio.description;
         });
-        console.log(this.consumerProfile);
     }
 
-    updateNotes(consumerProfile_id) {
-        this.vibiioProfileService.getVibiio(consumerProfile_id).subscribe( (data) => {
-            console.log('here', data);
+    updateNotes(consumerProfileId) {
+        this.vibiioProfileService.getVibiio(consumerProfileId).subscribe( (data) => {
             this.notes = data.vibiio.notes;
         });
     }
