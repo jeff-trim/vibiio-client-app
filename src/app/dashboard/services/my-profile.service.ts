@@ -19,4 +19,13 @@ export class MyProfileService {
            .get(MY_PROFILE_API)
            .map((response: Response) => response.json());
   }
+
+    updateMyProfile(data: any, id: number): Observable<any> {
+      const url = `${MY_PROFILE_API}${id}`;
+      const payload = { me: data };
+
+      return this.http
+          .patch(url, payload )
+          .map((response: Response) => response.json());
+    }
 }
