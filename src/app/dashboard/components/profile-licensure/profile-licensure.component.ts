@@ -11,11 +11,5 @@ import { MyProfileLicense } from '../../models/my-profile-license.interface';
 
 export class ProfileLicensureComponent {
     @Input()
-    myProfile: any;
-
     licenses: MyProfileLicense;
-
-    ngOnInit() {
-        this.licenses = this.myProfile.profile.licenses;
-    }
 }

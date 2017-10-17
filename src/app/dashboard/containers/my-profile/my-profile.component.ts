@@ -27,7 +27,7 @@ export class MyProfileComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.myProfile = data.myProfile.user;
-            console.log(this.myProfile);
+            this.myLicenses = data.myProfile.user.profile.licenses;
         });
     }
 }
