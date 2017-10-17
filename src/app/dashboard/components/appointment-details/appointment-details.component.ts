@@ -31,6 +31,12 @@ export class AppointmentDetailsComponent  {
     updateStatusReminder = false;
 
     @Input()
+    addNotesReminder = false;
+
+    @Input()
+    completedSession: boolean;
+
+    @Input()
     onVibiio: boolean;
 
     @Input()
@@ -92,11 +98,13 @@ export class AppointmentDetailsComponent  {
       this.endVibiio.emit(event);
       this.onVibiio = false;
       this.updateStatusReminder = true;
+      this.completedSession = true;
       this.availabilitySharedService.emitChange(true);
     }
 
-    toggleUpdateStatusReminder() {
+    closeUpdateStatusReminder() {
       this.updateStatusReminder = !this.updateStatusReminder;
+      this.addNotesReminder = true;
     }
 
     updateNotes() {
