@@ -1,8 +1,7 @@
 <div class="notes-container">
-  <textarea vibAutosize [(ngModel)]="note.body"
+  <textarea vibAutosize [ngModel]="note?.body"
         class="note-body existing"
         type="text"
-        placeholder="note.body"
         id="updatedBody"
         name="body"
         (keydown.shift.enter)="false"></textarea>
