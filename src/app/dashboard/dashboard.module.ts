@@ -37,6 +37,7 @@ import { ExistingNoteComponent } from './components/note/existing-note.component
 import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
 import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
+import { ConsumerNoteComponent } from './components/note/consumer-note.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -53,7 +54,7 @@ import { TodaysVibiiosService } from './services/todays-vibiios.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
-import { ConsumerNoteService } from './services/consumer-note.service';
+import { NoteService } from './services/note.service';
 import { VibiioUpdateService } from './services/vibiio-update.service';
 import { InsurancePolicyService } from './services/insurance-policy.service';
 import { VideoArchiveService } from './services/video-archive.service';
@@ -176,7 +177,8 @@ const dashboardRoutes: Routes = [
     CapitalizePipe,
     RemoveUnderscorePipe,
     AutosizeDirective,
-    PolicyDetailNewComponent
+    PolicyDetailNewComponent,
+    ConsumerNoteComponent
   ],
   imports: [
       CommonModule,
@@ -223,7 +225,7 @@ const dashboardRoutes: Routes = [
     MyDayService,
     MyDayResolver,
     SidebarMyVibiioSharedService,
-    ConsumerNoteService,
+    NoteService,
     VibiioUpdateService,
     InsurancePolicyService,
     VibiioProfileService,

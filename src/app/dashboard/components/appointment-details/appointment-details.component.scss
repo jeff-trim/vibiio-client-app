@@ -76,19 +76,23 @@ h1.appointment-title {
 }
 
 /deep/ .appointment-information h2 {
-	  font-family: Montserrat;
-	  font-size: 3.75rem;
-	  font-weight: 700;
-	  letter-spacing: normal;
-	  color: $azure;
+    font-family: Montserrat;
+    font-size: 3.75rem;
+    font-weight: 700;
+    letter-spacing: normal;
+    color: $azure;
     line-height: 1.55;
 }
 
 /deep/ .appointment-information {
     @media (min-width: $small) {
-       padding-left: 25px;
-       padding-right: 60px;
-   }
+        padding-left: 25px;
+        padding-right: 60px;
+    }
+    
+    &.appointment-notes {
+        width: 85%;
+    }
 }
 
 /deep/ h2 {
@@ -100,14 +104,6 @@ h1.appointment-title {
     &.customer-notes {
       margin-top: 14px;
   }
-}
-
-.pink-underline {
-    width: 7%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-bottom: 3px solid $pink;
 }
 
 /deep/ .long-pink-underline {
@@ -133,7 +129,7 @@ h1.appointment-title {
         border: 3px solid $pink;   
     }
     
-    vib-consumer-notes {
+    vib-vibiio-notes {
         width: 100%;
     }
 }
@@ -166,4 +162,58 @@ h1.appointment-title {
             color: $pink;
         }
     }
+}
+
+.pink-underline {
+    width: 80px;
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid $pink;
+}
+
+.notes-row {
+    margin-bottom: 103px;
+    display: flex;
+    flex-direction: row;
+    &.on-playback { 
+        margin-top: 0;
+    }
+}
+
+.note-row {
+    display: flex;
+    flex-direction: column;
+    .label {
+        color: $blue;
+
+    }
+}
+
+.info-element {
+    padding-bottom: 11px;
+    position: relative;
+    margin: 6.5px 0 18px 0;
+    .label {
+        color: $blue;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.8rem;
+        font-stretch: normal;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    &.sub-heading {
+        margin-bottom: 20px;
+    }
+    &.no-margin-bottom {
+        margin-bottom: 0;
+    }
+}
+
+.pink-underline {
+    width: 9%;
+    border-bottom: 3px solid $pink;
+    bottom: 0;
+    left: 0;
+    position: absolute;
 }
