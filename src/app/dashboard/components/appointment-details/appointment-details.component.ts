@@ -57,11 +57,13 @@ export class AppointmentDetailsComponent  {
     @Output()
     claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    @Output()
+    refreshNotes: EventEmitter<any> = new EventEmitter<any>();
+
     constructor(private StatusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
-                private dateFormatService: DateFormatService) {
-                }
+                private dateFormatService: DateFormatService) {}
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -76,32 +78,36 @@ export class AppointmentDetailsComponent  {
         });
     }
 
-   connect() {
-    this.startVibiio.emit(event);
-    this.onVibiio = true;
-    this.updateStatusReminder = false;
-    // check to see if appointment has been claimed and auto assign
-    if (this.appointment.vibiiographer_id == null) {
-      this.claimVibiio.emit(true);
+    connect() {
+      this.startVibiio.emit(event);
+      this.onVibiio = true;
+      this.updateStatusReminder = false;
+      // check to see if appointment has been claimed and auto assign
+      if (this.appointment.vibiiographer_id == null) {
+        this.claimVibiio.emit(true);
+      }
     }
-  }
 
-    disconnect() {
-    this.endVibiio.emit(event);
-    this.onVibiio = false;
-    this.updateStatusReminder = true;
-    this.availabilitySharedService.emitChange(true);
-  }
+      disconnect() {
+      this.endVibiio.emit(event);
+      this.onVibiio = false;
+      this.updateStatusReminder = true;
+      this.availabilitySharedService.emitChange(true);
+    }
 
-  toggleUpdateStatusReminder() {
-    this.updateStatusReminder = !this.updateStatusReminder;
-  }
+    toggleUpdateStatusReminder() {
+      this.updateStatusReminder = !this.updateStatusReminder;
+    }
 
-  parseDate(time: number): string  {
-    return this.dateFormatService.parseDate(time, this.timeZone);
-  }
+    updateNotes() {
+      this.refreshNotes.emit(event);
+    }
 
-  parseTime(time: number): string  {
-    return this.dateFormatService.parseTime(time, this.timeZone);
-  }
+    parseDate(time: number) {
+      return this.dateFormatService.parseDate(time, this.timeZone);
+    }
+
+    parseTime(time: number) {
+      return this.dateFormatService.parseTime(time, this.timeZone);
+    }
 }

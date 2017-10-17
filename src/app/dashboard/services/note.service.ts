@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class ConsumerNoteService {
+export class NoteService {
     constructor(private http: Http) { }
 
     createNote(data: any): Observable <any> {
@@ -19,7 +19,7 @@ export class ConsumerNoteService {
                     .catch( (error: any) => Observable.throw(error.json()));
     }
 
-    updateNote(data: any, id:number): Observable <any> {
+    updateNote(data: any, id: number): Observable <any> {
         const url = `${API_URL}/notes/${id}`;
         const body = { note: data };
 
@@ -27,6 +27,24 @@ export class ConsumerNoteService {
                    .patch(url, body)
                    .map( (response: Response) => response.json())
                    .catch( (error: any) => Observable.throw(error.json()));
+    }
+
+    getNote(id: number) {
+        const url = `${API_URL}/notes/${id}`;
+
+        return this.http
+                   .get(url)
+                   .map( (response: Response) => response.json())
+                   .catch( (error: any) => Observable.throw(error.json()));
+    }
+
+    getAllNotes(vibiioId: number) {
+        const url = `${API_URL}/vibiios_notes/${vibiioId}`;
+
+        return this.http
+                    .get(url)
+                    .map( (response: Response) => response.json())
+                    .catch( (error: any) => Observable.throw(error.json()));
     }
 
 }

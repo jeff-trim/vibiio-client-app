@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Form, Validators } from '@angular/forms';
 
 // Services
-import { ConsumerNoteService } from '../../services/consumer-note.service';
+import { NoteService } from '../../services/note.service';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
-    selector: 'vib-new-consumer-note',
+    selector: 'vib-new-vibiio-note',
     styleUrls: ['note.component.scss'],
     templateUrl: 'new-note.component.html'
 })
@@ -17,41 +17,18 @@ import { Note } from '../../models/consumer-note.interface';
 
 export class NewNoteComponent {
     note = new Note;
-    submitted = false;
 
     @Input()
     vibiio_id: number;
 
-    constructor( private noteService: ConsumerNoteService ) { }
+    @Output()
+    createNote: EventEmitter<any> = new EventEmitter<any>();
 
-    onSubmit(newBody: string) {
-        const options = {
-            body: newBody,
-            vibiio_id: this.vibiio_id
-        };
+    onSubmit(noteBody: string) {
+        this.createNote.emit(noteBody);
+    }
 
-        if (newBody === undefined) {
-            this.submitted = false;
-        } else if (this.submitted === true) {
-                this.noteService
-                .updateNote(options, this.note.id)
-                .subscribe( (data) => {
-                    this.note = data.note;
-                    this.submitted = true;
-                },
-                    (error: any) => {
-                        console.log( 'error updating note' );
-                });
-        } else {
-            this.noteService
-            .createNote(options)
-            .subscribe( (data) => {
-                this.note = data.note;
-                this.submitted = true;
-            },
-                (error: any) => {
-                    console.log( 'error creating note' );
-            });
-        }
+    clearNoteBody() {
+        this.note.body = '';
     }
 }

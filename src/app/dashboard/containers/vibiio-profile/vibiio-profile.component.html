@@ -29,12 +29,28 @@
   <div class="flex">
     <div class="vibiio-profile-information notes-row">
 
-      <div class="info-element">
-        <span class="label">Customer Notes</span>
-        <span class="pink-underline"></span>
+      <div class="note-row col-md-6">
+        <div class="info-element">
+          <span class="label">Customer Notes</span>
+          <span class="pink-underline"></span>
+        </div>
+        <vib-consumer-note [description]="description"></vib-consumer-note>
       </div>
-      <vib-consumer-notes [vibiio]="consumerProfile" [notes]="notes"></vib-consumer-notes>
-    
-    </div>
+      
+      <div class="col-md-1">
+      </div>
+
+      <div class="note-row col-md-6">
+
+        <div class="info-element">
+          <span class="label">Vibiio Notes</span>
+          <span class="pink-underline"></span>
+        </div>
+        <vib-vibiio-notes [vibiioId]="consumerProfile.id"
+                          [notes]="notes">
+        </vib-vibiio-notes>
+      </div>
+        
+    </div> 
   </div>
 </div>

@@ -8,6 +8,7 @@ import { VibiioProfileService } from '../../services/vibiio-profile.service';
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { VideoSnapshot } from '../../models/video-snapshot.interface';
 import { Note } from '../../models/consumer-note.interface';
+import { Vibiio } from '../../models/vibiio.interface';
 
 @Component({
     selector: 'vibiio-profile',
@@ -18,6 +19,8 @@ import { Note } from '../../models/consumer-note.interface';
 export class VibiioProfileComponent implements OnInit {
     consumerProfile: ConsumerProfile;
     notes: Note[];
+    vibiioId: number;
+    description: string;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private vibiioProfileService: VibiioProfileService) { }
@@ -25,7 +28,15 @@ export class VibiioProfileComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe( (data) => {
             this.consumerProfile = data.profile.vibiio;
+            this.vibiioId = this.consumerProfile.id;
             this.notes = data.profile.vibiio.notes;
+            this.description = data.profile.vibiio.description;
+        });
+    }
+
+    updateNotes(consumerProfileId) {
+        this.vibiioProfileService.getVibiio(consumerProfileId).subscribe( (data) => {
+            this.notes = data.vibiio.notes;
         });
     }
 }

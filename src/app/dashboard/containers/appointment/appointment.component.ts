@@ -14,7 +14,7 @@ import { OPENTOK_API_KEY } from '../../../../environments/environment';
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { VideoChatTokenService } from '../../services/video-chat-token.service';
-import { ConsumerNoteService } from '../../services/consumer-note.service';
+import { NoteService } from '../../services/note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
 import { AppointmentService } from '../../services/appointment.service';
@@ -188,7 +188,16 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     claimVibiio(event) {
         this.updateAppointmentService.updateVibiiographer(this.appointment.id)
             .subscribe((data) => {
-                console.log(data);
+            },
+        (error: any) => {
+            console.log('error ', error);
+        });
+    }
+
+    updateNotes(appointment_id) {
+        this.updateAppointmentService.getAppointmentDetails(appointment_id)
+            .subscribe((data) => {
+                this.appointment = data.appointment;
             },
         (error: any) => {
             console.log('error ', error);
