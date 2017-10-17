@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -17,6 +16,6 @@ import { Note } from '../../models/consumer-note.interface';
 
 export class ConsumerNoteComponent {
     @Input()
-    description?: Note;
+    description: Note;
 }
 
