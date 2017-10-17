@@ -1,14 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
-//components
+// Components
 import { KeyValueComponent } from '../../components/key-value/key-value.component';
 import { ProfileInformationComponent } from '../../components/profile-information/profile-information.component';
 import { ProfileLicensureComponent } from '../../components/profile-licensure/profile-licensure.component';
 import { MomentModule } from 'angular2-moment';
 
-// services
+// Services
 import { MyProfileService } from '../../services/my-profile.service';
+import { MyProfile } from '../../models/my-profile.interface';
+import { MyProfileLicense } from '../../models/my-profile-license.interface';
 
 @Component({
   selector: 'my-profile',
@@ -16,7 +18,8 @@ import { MyProfileService } from '../../services/my-profile.service';
   templateUrl: 'my-profile.component.html'})
 
 export class MyProfileComponent implements OnInit {
-    myProfile: any;
+    myProfile: MyProfile;
+    myLicenses: MyProfileLicense[];
 
     constructor(private myProfileService: MyProfileService,
                 private activatedRoute: ActivatedRoute) { }
@@ -24,6 +27,7 @@ export class MyProfileComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.myProfile = data.myProfile.user;
+            console.log(this.myProfile);
         });
     }
 }

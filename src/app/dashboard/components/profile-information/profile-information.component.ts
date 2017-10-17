@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+// Models
+import { MyProfileLicense } from '../../models/my-profile-license.interface';
+
 @Component({
     selector: 'profile-information',
     styleUrls: ['profile-information.component.scss'],
@@ -8,5 +11,5 @@ import { Component, Input } from '@angular/core';
 
 export class ProfileInformationComponent  {
     @Input()
-    myProfile
+    myProfile: MyProfileLicense;
 }

@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 
+// Models
+import { MyProfileLicense } from '../../models/my-profile-license.interface';
+
 @Component({
     selector: 'profile-licensure',
     styleUrls: ['profile-licensure.component.scss'],
@@ -8,10 +11,11 @@ import { Component, Input } from '@angular/core';
 
 export class ProfileLicensureComponent {
     @Input()
-    myProfile
-    licenses
+    myProfile: any;
 
-    ngOnInit(){
-        this.licenses = this.myProfile.profile.licenses
+    licenses: MyProfileLicense;
+
+    ngOnInit() {
+        this.licenses = this.myProfile.profile.licenses;
     }
 }
