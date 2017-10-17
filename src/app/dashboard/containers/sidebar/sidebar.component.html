@@ -69,18 +69,17 @@
     [hidden] ='customerCategoryVisibility'>
   </app-sidebar-customer>
 
-  <div class="title-row"
-       (click)='toggleProfileVisibility($event)'>
-      <div class="title">
-          <a routerLink="my_profile" routerLinkActive="active">
-              My Profile
-          </a>
-    </div>
-    <div class='arrow'
-         [class.left-arrow]='profileVisibility'
-         [class.active-arrow]='!profileVisibility'>
-    </div>
+  <div class="title-row">
+    <div class="title">
+        <a routerLink="my_profile" routerLinkActive="active">
+            My Profile
+        </a>
   </div>
+  <div class='arrow'
+       [class.left-arrow]='profileVisibility'
+       routerLink="my_profile">
+  </div>
+</div>
   </span>
   <div class="title-row">
     <div class="title"
