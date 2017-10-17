@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { SpinnerService } from './easy-spinner/services/spinner.service'
+import { SpinnerService } from './easy-spinner/services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +10,13 @@ import { SpinnerService } from './easy-spinner/services/spinner.service'
 })
 
 export class AppComponent implements OnInit {
-  title: string;
+  title = 'Vibiio';
 
     constructor( public titleService: Title,
                  private router: Router,
                  private spinner: SpinnerService) {}
 
   ngOnInit () {
-    this.title = 'Vibiio';
     this.titleService.setTitle(this.title);
       this.router.events.subscribe((event) => {
         if (event instanceof NavigationStart ) {
@@ -27,6 +26,6 @@ export class AppComponent implements OnInit {
         } else if (event instanceof NavigationError) {
             this.spinner.hide();
         }
-    })
+    });
   }
 }

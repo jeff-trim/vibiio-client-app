@@ -7,6 +7,9 @@ import { Vibiio } from '../../models/vibiio.interface';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 
+// Services
+import { DateFormatService } from '../../../services/date-format.service';
+
 @Component({
     selector: 'consumer-profile',
     templateUrl: 'consumer-profile.component.html',
@@ -22,12 +25,15 @@ export class ConsumerProfileComponent implements AfterContentChecked {
 
     insurance_policy?: InsurancePolicy;
     updateStatusReminder: boolean;
+    userTimeZone: string;
 
     constructor(private statusUpdateService: VibiioUpdateService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService) {}
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
+                private dateFormatService: DateFormatService) {}
 
     ngAfterContentChecked() {
         this.insurance_policy = this.consumerProfile.insurance_policy;
+        this.userTimeZone = this.consumerProfile.user_info.time_zone;
     }
 
     updateStatus(event) {
@@ -41,5 +47,13 @@ export class ConsumerProfileComponent implements AfterContentChecked {
           }, (error: any) => {
               console.log('error updating claim status');
           });
-      }
+    }
+
+    parseDate(time: number): string  {
+        return this.dateFormatService.parseDate(time, this.userTimeZone);
+    }
+
+    parseTime(time: number): string  {
+        return this.dateFormatService.parseTime(time, this.userTimeZone);
+    }
 }

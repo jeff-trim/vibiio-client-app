@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import * as moment_tz from 'moment-timezone';
 
+// Service
+import { DateFormatService } from '../../../services/date-format.service';
+
 // interfaces
 import { Appointment } from '../../models/appointment.interface';
 
@@ -26,12 +29,18 @@ export class CustomerProfileComponent {
     @Output()
     updateAppointment: EventEmitter<any> = new EventEmitter<any>();
 
+    constructor(private dateFormatService: DateFormatService) { }
+
     // parses unix time and displays time in relation to timezone
-    parseUnixTime(time) {
-        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
+    parseTime(time: number): string  {
+        return this.dateFormatService.parseTime(time, this.timeZone);
     }
 
-    toggleAppointment(appointment: Appointment){
+    parseDate(time: number): string  {
+        return this.dateFormatService.parseDate(time, this.timeZone);
+    }
+
+    toggleAppointment(appointment: Appointment) {
         if (this.appointment.vibiiographer_id === null) {
             this.appointment.vibiiographer_id = this.vibiiographerId;
             this.updateAppointment.emit({appointment: this.appointment, index: this.index });

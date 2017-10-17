@@ -1,6 +1,8 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { ResponseErrorService } from './response-error.service';
 import { MockBackend } from '@angular/http/testing';
+import { Router } from '@angular/router';
+import { routerStub } from '../../../testing/router-stub';
 import { Http, HttpModule, XHRBackend, Response, ResponseOptions } from '@angular/http';
 import { AuthService } from './auth.service';
 
@@ -13,8 +15,8 @@ describe('ResponseErrorService', () => {
           ResponseErrorService,
           AuthService,
           { provide: XHRBackend, useClass: MockBackend },
-          { provide: Http, useClass: ResponseErrorService}
-
+          { provide: Http, useClass: ResponseErrorService},
+          { provide: Router, useValue: routerStub }
            ]
       });
   }));
@@ -26,12 +28,11 @@ describe('ResponseErrorService', () => {
   }));
 
   it('should logout a user if server responds with 401', () => {
-    //spyOn(auth, 'logout');
+    // spyOn(auth, 'logout');
 
-    //mockbackend.connections.subscribe( connection => {
-      //connection.mockRespond( new Response(new ResponseOptions({status: 401})));
-    //});
-    //expect(auth.logout).toHaveBeenCalled();
+    // mockbackend.connections.subscribe( connection => {
+      // connection.mockRespond( new Response(new ResponseOptions({status: 401})));
+    // });
+    // expect(auth.logout).toHaveBeenCalled();
   });
-
 });

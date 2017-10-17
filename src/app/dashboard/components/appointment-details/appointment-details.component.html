@@ -76,6 +76,12 @@
     <key-value [key]="'Zip Code'"
                [value]="appointment.address?.zip"></key-value>
 
+    <key-value [key]="'Vibiio Date'"
+               [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
+
+    <key-value [key]="'Vibiio Start Time'"
+               [value]="parseTime(appointment.scheduled_datetime)"></key-value>
+
     <span *ngFor="let policy of appointment.insurance_policies">
       <vib-policy-detail-edit [policy]='policy'></vib-policy-detail-edit>
     </span>

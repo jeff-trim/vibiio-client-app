@@ -6,6 +6,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
+import { DateFormatService } from '../../../services/date-format.service';
 
 // Components
 import { NotesComponent } from '../../containers/notes/notes.component';
@@ -44,6 +45,9 @@ export class AppointmentDetailsComponent  {
     @Input()
     neworkDisconnected: boolean;
 
+    @Input()
+    timeZone: string;
+
     @Output()
     startVibiio: EventEmitter<any> = new EventEmitter<any>();
 
@@ -58,8 +62,8 @@ export class AppointmentDetailsComponent  {
 
     constructor(private StatusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService) {
-                }
+                private availabilitySharedService: AvailabilitySharedService,
+                private dateFormatService: DateFormatService) {}
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -74,28 +78,36 @@ export class AppointmentDetailsComponent  {
         });
     }
 
-   connect() {
-    this.startVibiio.emit(event);
-    this.onVibiio = true;
-    this.updateStatusReminder = false;
-    // check to see if appointment has been claimed and auto assign
-    if (this.appointment.vibiiographer_id == null) {
-      this.claimVibiio.emit(true);
+    connect() {
+      this.startVibiio.emit(event);
+      this.onVibiio = true;
+      this.updateStatusReminder = false;
+      // check to see if appointment has been claimed and auto assign
+      if (this.appointment.vibiiographer_id == null) {
+        this.claimVibiio.emit(true);
+      }
     }
-  }
 
-    disconnect() {
-    this.endVibiio.emit(event);
-    this.onVibiio = false;
-    this.updateStatusReminder = true;
-    this.availabilitySharedService.emitChange(true);
-  }
+      disconnect() {
+      this.endVibiio.emit(event);
+      this.onVibiio = false;
+      this.updateStatusReminder = true;
+      this.availabilitySharedService.emitChange(true);
+    }
 
-  toggleUpdateStatusReminder() {
-    this.updateStatusReminder = !this.updateStatusReminder;
-  }
+    toggleUpdateStatusReminder() {
+      this.updateStatusReminder = !this.updateStatusReminder;
+    }
 
-  updateNotes() {
-    this.refreshNotes.emit(event);
-  }
+    updateNotes() {
+      this.refreshNotes.emit(event);
+    }
+
+    parseDate(time: number) {
+      return this.dateFormatService.parseDate(time, this.timeZone);
+    }
+
+    parseTime(time: number) {
+      return this.dateFormatService.parseTime(time, this.timeZone);
+    }
 }

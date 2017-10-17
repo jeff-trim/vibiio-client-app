@@ -1,7 +1,9 @@
 import { Component,  Input } from '@angular/core';
 import { Appointment } from '../../models/appointment.interface';
-import { RouterLink } from '@angular/router'
-import * as moment_tz from 'moment-timezone'
+import { RouterLink } from '@angular/router';
+
+// Services
+import { DateFormatService } from '../../../services/date-format.service';
 
 @Component({
   selector: 'app-sidebar-schedule',
@@ -27,8 +29,10 @@ export class SidebarScheduleComponent {
     @Input()
     timeZone: number;
 
+    constructor(private dateFormatService: DateFormatService) { }
+
     parseTime(time: number): string  {
-        return moment_tz.unix(time).tz(this.timeZone).format('h:mm A');
+      return this.dateFormatService.parseTime(time, this.timeZone);
     }
 }
 

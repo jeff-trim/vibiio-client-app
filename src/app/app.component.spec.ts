@@ -1,26 +1,37 @@
 import { TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
-import { RouterOutletStubComponent } from 'testing/router-stubs.ts';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterOutletComponent } from '../../testing/router-outlet-stub';
+import { routerStub } from '../../testing/router-stub';
+import { SpinnerComponent } from './easy-spinner/components/spinner.component';
+import { SpinnerService } from './easy-spinner/services/spinner.service';
+import { SpinnerServiceStub } from '../../testing/spinner-service-stub';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
+@Component({
+  selector: 'app-spinner',
+  template: `
+  <div>
+  </div>
+  `
+})
+class MockSpinnerComponent { }
 
 describe('AppComponent', () => {
-    beforeEach(async(() => {
-        class RouterStub {
-            navigateByUrl(url: string) { return url; }
-        }
-
-      TestBed.configureTestingModule({
-    imports: [
-        RouterModule
-        
+  beforeEach(async(() => {
+  TestBed.configureTestingModule({
+    declarations: [
+      AppComponent,
+      RouterOutletComponent,
+      MockSpinnerComponent
     ],
-      declarations: [
-          AppComponent      ],
-          providers: [
-              { provide: Router, useClass: RouterStub }
-          ]
+    providers: [
+      { provide: Router, useValue: routerStub },
+      { provide: SpinnerService, useClass: SpinnerServiceStub }
+    ]
     }).compileComponents();
   }));
 
@@ -33,14 +44,10 @@ describe('AppComponent', () => {
   it(`should have as a title`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Vibiio Client App');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).
-      toContain('Vibiio Client App');
+    expect(app.title).toEqual('Vibiio');
   }));
 });
+
+
+
+
