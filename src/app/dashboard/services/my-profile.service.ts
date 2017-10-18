@@ -20,12 +20,12 @@ export class MyProfileService {
            .map((response: Response) => response.json());
   }
 
-    updateMyProfile(data: any, id: number): Observable<any> {
-      const url = `${MY_PROFILE_API}${id}`;
+    updateMyProfile(data: any): Observable<any> {
       const payload = { me: data };
 
       return this.http
-          .patch(url, payload )
-          .map((response: Response) => response.json());
+          .patch(MY_PROFILE_API, payload )
+          .map((response: Response) => response.json())
+          .catch( (error: any) => Observable.throw(error.json()));
     }
 }

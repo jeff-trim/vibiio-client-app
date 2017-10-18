@@ -3,31 +3,137 @@
   <div class="long-pink-underline" ></div>
 </div>
 
+<form [formGroup]="myProfileForm"
+      ngSubmit="onSubmit()">
+  <div formGroupName="userData">
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">First Name</span>
+      <input [(ngModel)]="myProfile.first_name"
+          formControlName="firstName" 
+          placeholder="First Name"
+          type="text" 
+          class="value end-md" 
+          id="firstName">
+      <span class="pink-underline"></span>  
+    </div>
+    
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">Last Name</span>
+      <input [(ngModel)]="myProfile.last_name"
+          formControlName="lastName" 
+          placeholder="Last Name"
+          type="text" 
+          class="value end-md" 
+          id="lastName">
+      <span class="pink-underline"></span>  
+    </div>
+    
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">Company</span>
+      <input [(ngModel)]="myProfile.company"
+          formControlName="company" 
+          placeholder="Company"
+          type="text" 
+          class="value end-md" 
+          id="company">
+      <span class="pink-underline"></span>  
+    </div>
+    
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">Cell Phone</span>
+      <input [(ngModel)]="myProfile.phone"
+          formControlName="phone" 
+          placeholder="Cell Phone"
+          type="text" 
+          class="value end-md" 
+          id="cellPhone">
+      <span class="pink-underline"></span>  
+    </div>
+  </div>
 
-<key-value [key]="'First Name'"
-           [value]="myProfile.first_name"></key-value>
+  <div formGroupName="addressData">
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">Address</span>
+      <input [(ngModel)]="myProfile.address.address_one"
+          formControlName="address_one" 
+          placeholder="Address"
+          type="text" 
+          class="value end-md" 
+          id="line_one">
+      <span class="pink-underline"></span>  
+    </div>
 
-<key-value [key]="'Last Name'"
-           [value]="myProfile.last_name" ></key-value>
+    <div *ngIf="myProfile.address.address_two" 
+      class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">Address 2</span>
+      <input [(ngModel)]="myProfile.address.address_two"
+          formControlName="address_two" 
+          placeholder="Address 2"
+          type="text" 
+          class="value end-md" 
+          id="line_two">
+      <span class="pink-underline"></span>  
+    </div>
 
-<key-value [key]="'Company'"
-           [value]="myProfile.company"></key-value>
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">City</span>
+      <input [(ngModel)]="myProfile.address.city"
+          formControlName="city" 
+          placeholder="City"
+          type="text" 
+          class="value end-md" 
+          id="city">
+      <span class="pink-underline"></span>  
+    </div>
 
-<key-value [key]="'Cell Phone'"
-           [value]="myProfile.phone"></key-value>
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">State</span>
+      <input [(ngModel)]="myProfile.address.state"
+          formControlName="state" 
+          placeholder="State"
+          type="text" 
+          class="value end-md" 
+          id="state">
+      <span class="pink-underline"></span>  
+    </div>
 
-<key-value [key]="'Address'"
-           [value]="myProfile.address.address_one"></key-value>
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">Zip</span>
+      <input [(ngModel)]="myProfile.address.zip"
+          formControlName="zip" 
+          placeholder="Zip Code"
+          type="text" 
+          class="value end-md" 
+          id="zip">
+      <span class="pink-underline"></span>  
+    </div>
+  </div>
 
-<key-value *ngIf="myProfile.address.address_two"
-           [key]="'Address Two'"
-           [value]="myProfile.address.address_one"></key-value>
-
-<key-value [key]="'City'"
-           [value]="myProfile.address.city"></key-value>
-
-<key-value [key]="'State'"
-           [value]="myProfile.address.state"></key-value>
-
-<key-value [key]="'Zip'"
-           [value]="myProfile.address.zip"></key-value>
+</form>

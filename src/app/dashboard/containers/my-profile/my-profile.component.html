@@ -1,15 +1,27 @@
-<h1 class="col-xs
-           col-md-offset-1
-           profile-title
-           pink">My profile</h1>
-<div class="flex" >
+<div class="flex">
+  <h1 class="col-xs
+  col-md-offset-1
+  profile-title
+  pink">My profile</h1>
+  
+  <h3 class="col-xs
+             col-md-offset-5
+             blue"
+             (click)=saveMyProfileForm()>SAVE</h3>
+  
+  <h3 class="col-xs
+             pink">CANCEL</h3>
+
+</div>
+
+<div class="flex">
   <div class="col-xs-12
               col-sm-6
               col-md-5
               col-md-offset-1
               profile-information" >
     <profile-information
-      [myProfile]="myProfile" ></profile-information>
+      [myProfile]="myProfile"></profile-information>
   </div>
   <div class="col-xs-12
               col-sm-6
