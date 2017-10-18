@@ -1,9 +1,13 @@
 @import '../../../../assets/css/_variables.scss';
+
 .flex {
     display: flex;
     flex-direction: column;
     @media(min-width: $small){
         flex-direction: row;
+    }
+    &.flex-bottom {
+        align-items: baseline;
     }
 }
 
@@ -69,6 +73,22 @@
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
+}
+
+/deep/ h4 {
+    height: 18px;
+	font-family: $copy-font;
+	font-size: 13px;
+	font-weight: 800;
+	letter-spacing: 1px;
+	text-align: right;
+    &.save-text{
+        color: $blue;
+    }
+    &.cancel-text{
+        color: $pink;
+        margin-left: 26px;
+    }
 }
 
 .pink-underline {

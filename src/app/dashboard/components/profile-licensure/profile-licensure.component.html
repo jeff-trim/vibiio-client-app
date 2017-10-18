@@ -1,11 +1,13 @@
 <div class="info-element" >
   <h2>licensure</h2>
-  <div class="long-pink-underline" ></div>
+  <div class="long-pink-underline"></div>
 </div>
 
-<div *ngFor="let license of licenses">
+<div class="restrict-height">
+  <div *ngFor="let license of licenses">
     <key-value [key]="'State'"
-               [value]="license.state"></key-value>
+    [value]="license.state"></key-value>
     <key-value [key]="'License Number'"
-               [value]="license.license_number"></key-value>
+    [value]="license.license_number"></key-value>
+  </div>
 </div>

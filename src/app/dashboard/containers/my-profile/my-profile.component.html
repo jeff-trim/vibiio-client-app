@@ -1,21 +1,36 @@
-<h1 class="col-xs
-           col-md-offset-1
-           profile-title
-           pink">My profile</h1>
-<div class="flex" >
+<div class="flex
+            flex-bottom">
+  <h1 class="col-xs
+  col-md-offset-1
+  profile-title
+  pink">My profile</h1>
+  
+  <h4 class="col-md-offset-4
+             save-text"
+     (click)=saveMyProfileForm()>SAVE</h4>
+  
+  <h4 class="cancel-text"
+      (click)="resetMyProfileForm()">CANCEL</h4>
+
+</div>
+
+<div class="flex">
   <div class="col-xs-12
               col-sm-6
               col-md-5
               col-md-offset-1
               profile-information" >
     <profile-information
-      [myProfile]="myProfile" ></profile-information>
+      [myProfile]="myProfile"></profile-information>
   </div>
   <div class="col-xs-12
               col-sm-6
               col-md-5
               profile-licensure">
-      <profile-licensure
-          [myProfile]="myProfile" ></profile-licensure>
+  
+    <profile-licensure
+          [licenses]="myLicenses"></profile-licensure>
+    <profile-new-licensure
+            (sumbitLicenseForm)="createLicense($event)"></profile-new-licensure>
   </div>
 </div>

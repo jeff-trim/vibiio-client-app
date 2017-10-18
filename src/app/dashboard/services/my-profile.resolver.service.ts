@@ -14,7 +14,7 @@ export class MyProfileResolver implements Resolve<any> {
                 private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<any>{
+            state: RouterStateSnapshot): Observable<any> {
                 return this.service.getMyProfile();
             }
 }

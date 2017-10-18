@@ -35,3 +35,18 @@
     left: 0;
     border-bottom: 3px solid $pink;
 }
+
+.add-license {
+    display: flex;
+    align-items: center;
+    .add-text {
+        margin-left: 8px;
+        width: 118px;
+        height: 18px;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: $pink;
+    }
+}
