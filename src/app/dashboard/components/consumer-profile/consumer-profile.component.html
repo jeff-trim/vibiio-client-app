@@ -23,14 +23,9 @@
                [value]="parseTime(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
 
     <span *ngIf="insurance_policy != undefined"> 
-      <vib-policy-detail-edit [policy]='insurance_policy'></vib-policy-detail-edit>
+      <vib-policy-detail [policy]='insurance_policy'></vib-policy-detail>
     </span> 
 
-    <span *ngIf="insurance_policy == undefined">
-      <vib-policy-detail-new [consumerId]="consumerProfile.consumer_id"
-                             [vibiioId]="consumerProfile.id">
-      </vib-policy-detail-new>
-    </span>
     <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>
 </div>
