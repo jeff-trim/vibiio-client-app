@@ -12,5 +12,5 @@ import { Note } from '../../models/consumer-note.interface';
 export class ExistingNoteComponent {
 
     @Input()
-    note: Note;
+    note?: Note;
 }
