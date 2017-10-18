@@ -28,6 +28,7 @@ import { ConsumerProfileTitleComponent } from './components/consumer-profile-tit
 import { AppointmentDetailsComponent } from './components/appointment-details/appointment-details.component';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
+import { ProfileNewLicensureComponent } from './components/profile-licensure/profile-new-licensure.component';
 import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
 import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
 import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
@@ -62,6 +63,7 @@ import { VibiioProfileService } from './services/vibiio-profile.service';
 import { ActivityService } from './services/activity.service';
 import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from './services/availability-shared.service';
+import { MyLicenseService } from './services/my-license.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -168,6 +170,7 @@ const dashboardRoutes: Routes = [
     VideoArchiveComponent,
     ProfileInformationComponent,
     ProfileLicensureComponent,
+    ProfileNewLicensureComponent,
     AppointmentNotificationComponent,
     NotesComponent,
     NewNoteComponent,
@@ -234,7 +237,8 @@ const dashboardRoutes: Routes = [
     SidebarMyVibiioSharedService,
     SidebarCustomerStatusSharedService,
     ActivityService,
-    AvailabilitySharedService
+    AvailabilitySharedService,
+    MyLicenseService
   ]
 })
 
