@@ -1,0 +1,40 @@
+<div class="info-element" >
+  <h2>licensure</h2>
+  <div class="long-pink-underline" ></div>
+</div>
+
+<form [formGroup]="myLicenseForm">
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">State</span>
+      <input
+          formControlName="state" 
+          placeholder="State"
+          type="text" 
+          class="value end-md" 
+          id="state">
+      <span class="pink-underline"></span>  
+    </div>
+
+    <div class="info-element
+      row
+      between-xs
+      bottom-xs">
+      <span class="label">License Number</span>
+      <input
+          formControlName="licenseNumber" 
+          placeholder="License Number"
+          type="text" 
+          class="value end-md" 
+          id="licenseNumber">
+      <span class="pink-underline"></span>  
+    </div>
+</form>
+<!-- <div *ngFor="let license of licenses">
+    <key-value [key]="'State'"
+               [value]="license.state"></key-value>
+    <key-value [key]="'License Number'"
+               [value]="license.license_number"></key-value>
+</div> -->
