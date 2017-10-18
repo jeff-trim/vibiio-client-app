@@ -6,6 +6,12 @@
 <form [formGroup]="myProfileForm"
       ngSubmit="onSubmit()">
   <div formGroupName="userData">
+
+    <div *ngIf="myProfileForm.get('userData.firstName').invalid && !myProfileForm.get('userData.firstName').pristine"
+          class="error-message">
+      <p>First Name is Required</p>
+    </div>
+
     <div class="info-element
       row
       between-xs
@@ -17,9 +23,14 @@
           type="text" 
           class="value end-md" 
           id="firstName">
-      <span class="pink-underline"></span>  
+      <span class="pink-underline"></span>
     </div>
-    
+   
+    <div *ngIf="myProfileForm.get('userData.lastName').invalid && !myProfileForm.get('userData.lastName').pristine"
+          class="error-message">
+      <p>Last Name is Required</p>
+    </div>
+
     <div class="info-element
       row
       between-xs
@@ -34,6 +45,11 @@
       <span class="pink-underline"></span>  
     </div>
     
+    <div *ngIf="myProfileForm.get('userData.company').invalid && !myProfileForm.get('userData.company').pristine"
+          class="error-message">
+      <p>Company is Required</p>
+    </div>
+  
     <div class="info-element
       row
       between-xs
@@ -46,6 +62,11 @@
           class="value end-md" 
           id="company">
       <span class="pink-underline"></span>  
+    </div>
+    
+    <div *ngIf="myProfileForm.get('userData.phone').invalid && !myProfileForm.get('userData.phone').pristine"
+          class="error-message">
+      <p>Cell Phone is Required</p>
     </div>
     
     <div class="info-element
@@ -64,6 +85,12 @@
   </div>
 
   <div formGroupName="addressData">
+  
+    <div *ngIf="myProfileForm.get('addressData.addressOne').invalid && !myProfileForm.get('addressData.addressOne').pristine"
+          class="error-message">
+      <p>Address is Required</p>
+    </div>
+
     <div class="info-element
       row
       between-xs
@@ -93,6 +120,11 @@
       <span class="pink-underline"></span>  
     </div>
 
+    <div *ngIf="myProfileForm.get('addressData.city').invalid && !myProfileForm.get('addressData.city').pristine"
+          class="error-message">
+      <p>City is Required</p>
+    </div>
+
     <div class="info-element
       row
       between-xs
@@ -107,6 +139,11 @@
       <span class="pink-underline"></span>  
     </div>
 
+    <div *ngIf="myProfileForm.get('addressData.state').invalid && !myProfileForm.get('addressData.state').pristine"
+          class="error-message">
+      <p> State is Required</p>
+    </div>
+
     <div class="info-element
       row
       between-xs
@@ -119,6 +156,12 @@
           class="value end-md" 
           id="state">
       <span class="pink-underline"></span>  
+    </div>
+
+
+    <div *ngIf="myProfileForm.get('addressData.zip').invalid && !myProfileForm.get('addressData.zip').pristine"
+          class="error-message">
+      <p> Zip Code is Required</p>
     </div>
 
     <div class="info-element

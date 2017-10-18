@@ -25,15 +25,15 @@ export class ProfileInformationComponent implements OnInit {
             'userData': new FormGroup ({
                 'firstName': new FormControl('', Validators.required),
                 'lastName': new FormControl('', Validators.required),
-                'company': new FormControl(),
-                'phone': new FormControl()
+                'company': new FormControl('', Validators.required),
+                'phone': new FormControl('', Validators.required)
             }),
             'addressData': new FormGroup ({
-                'addressOne': new FormControl(),
-                'addressTwo': new FormControl(),
-                'city': new FormControl(),
-                'state': new FormControl(),
-                'zip': new FormControl(),
+                'addressOne': new FormControl('', Validators.required),
+                'addressTwo': new FormControl('', Validators.required),
+                'city': new FormControl('', Validators.required),
+                'state': new FormControl('', Validators.required),
+                'zip': new FormControl('', Validators.required)
             })
         });
     }

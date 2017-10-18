@@ -45,6 +45,11 @@ export class MyProfileComponent implements OnInit {
     }
 
     resetMyProfileForm() {
+        this.profileInformationChild.myProfileForm.reset();
+        this.myProfileService.getMyProfile()
+            .subscribe( (data) => {
+                this.myProfile = data.user;
+            });
         this.profileInformationChild.resetToDefault();
     }
 
