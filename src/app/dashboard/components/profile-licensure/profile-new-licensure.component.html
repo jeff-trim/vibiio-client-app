@@ -1,9 +1,10 @@
 <div class="info-element" >
-  <h2>licensure</h2>
+  <h2>add license</h2>
   <div class="long-pink-underline" ></div>
 </div>
 
-<form [formGroup]="myLicenseForm">
+<form [formGroup]="myLicenseForm"
+      ngSubmit="onSubmit()">
     <div class="info-element
       row
       between-xs
@@ -31,10 +32,10 @@
           id="licenseNumber">
       <span class="pink-underline"></span>  
     </div>
+
+    <div class="add-license"(click)="onSubmit()">
+      <img src="../../../../assets/images/add.svg"
+      class="add">
+      <span class="add-text">ADD LICENSE</span>
+    </div>
 </form>
-<!-- <div *ngFor="let license of licenses">
-    <key-value [key]="'State'"
-               [value]="license.state"></key-value>
-    <key-value [key]="'License Number'"
-               [value]="license.license_number"></key-value>
-</div> -->

@@ -1,16 +1,21 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { MomentModule } from 'angular2-moment';
 
 // Components
 import { KeyValueComponent } from '../../components/key-value/key-value.component';
 import { ProfileInformationComponent } from '../../components/profile-information/profile-information.component';
 import { ProfileLicensureComponent } from '../../components/profile-licensure/profile-licensure.component';
-import { MomentModule } from 'angular2-moment';
+import { ProfileNewLicensureComponent } from '../../components/profile-licensure/profile-new-licensure.component';
 
 // Services
 import { MyProfileService } from '../../services/my-profile.service';
-import { MyProfile } from '../../models/my-profile.interface';
 import { MyProfileLicense } from '../../models/my-profile-license.interface';
+import { MyLicenseService } from '../../services/my-license.service';
+
+// Models
+import { MyProfile } from '../../models/my-profile.interface';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'my-profile',
@@ -24,10 +29,8 @@ export class MyProfileComponent implements OnInit {
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
 
-    @ViewChild (ProfileLicensureComponent)
-    private profileInformationComponent: ProfileLicensureComponent;
-
     constructor(private myProfileService: MyProfileService,
+                private myLicenseService: MyLicenseService,
                 private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
@@ -41,17 +44,20 @@ export class MyProfileComponent implements OnInit {
         this.updateMyProfile(this.profileInformationChild.myProfileForm);
     }
 
+    resetMyProfileForm() {
+        this.profileInformationChild.resetToDefault();
+    }
+
     updateMyProfile(form) {
         const id = this.myProfile.id;
         const addressData = form.value.addressData;
         const userData = form.value.userData;
 
         const options = {
-            id: id,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
+            first_name: userData.firstName,
+            last_name: userData.lastName,
             company: userData.company,
-            cellPhone: userData.phone,
+            phone: userData.phone,
             address_one: addressData.address_one,
             address_two: addressData.address_two,
             city: addressData.city,
@@ -59,8 +65,31 @@ export class MyProfileComponent implements OnInit {
             zip: addressData.zip
         };
 
-        this.myProfileService.updateMyProfile(options).subscribe( (data) => {
-            this.myProfile = data.user;
+        this.myProfileService.updateMyProfile(options)
+            .subscribe( (data) => {
+                this.myProfile = data.user;
         });
     }
+
+    // My License functions
+    createLicense(form: FormGroup) {
+        const options = {
+            state: form.value.state,
+            license_number: form.value.licenseNumber,
+            vibiiographer_id: this.myProfile.id
+        };
+
+        this.myLicenseService.createLicense(options)
+            .subscribe( (data) => {
+                this.refreshLicenses();
+            });
+        }
+
+    refreshLicenses() {
+        this.myLicenseService.getMyLicenses()
+            .subscribe( (data) => {
+                this.myLicenses =  data.licenses;
+            });
+    }
+
 }

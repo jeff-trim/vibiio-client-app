@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormControl, Validators, Validator } from '@angular/forms';
 
 @Component({
     selector: 'profile-new-licensure',
@@ -10,10 +10,17 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class ProfileNewLicensureComponent {
     myLicenseForm: FormGroup;
 
+    @Output()
+    sumbitLicenseForm = new EventEmitter<any>();
+
     constructor() {
         this.myLicenseForm = new FormGroup({
-                'state': new FormControl(),
-                'licenseNumber': new FormControl()
+                'state': new FormControl('', Validators.required),
+                'licenseNumber': new FormControl('', Validators.required)
         });
+    }
+
+    onSubmit() {
+        this.sumbitLicenseForm.emit(this.myLicenseForm);
     }
 }

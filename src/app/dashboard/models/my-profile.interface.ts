@@ -3,8 +3,8 @@ import { Address } from './address.interface';
 
 export interface MyProfile {
     id: number;
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     company: string;
     phone: string;
     address: Address;

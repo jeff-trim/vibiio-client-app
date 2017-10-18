@@ -1,6 +1,6 @@
 export interface MyProfileLicense {
     id: number;
-    licenseNumber: string;
+    license_number: string;
     state: string;
     vibiiographerId: number;
 }

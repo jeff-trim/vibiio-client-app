@@ -5,3 +5,8 @@
     position: relative;
     padding-bottom: 10px;
 }
+
+.restrict-height {
+    max-height: 250px;
+    overflow-y: scroll;
+}

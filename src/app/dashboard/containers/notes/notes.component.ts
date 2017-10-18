@@ -1,6 +1,5 @@
 import { Component, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';
