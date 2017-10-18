@@ -39,6 +39,7 @@
 .add-license {
     display: flex;
     align-items: center;
+    cursor: pointer;
     .add-text {
         margin-left: 8px;
         width: 118px;
@@ -48,5 +49,18 @@
         font-weight: 600;
         letter-spacing: 1px;
         color: $pink;
+    }
+}
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    p {
+        margin: -20px 0;
+        color: red;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px; 
     }
 }

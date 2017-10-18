@@ -81,7 +81,8 @@
 	font-size: 13px;
 	font-weight: 800;
 	letter-spacing: 1px;
-	text-align: right;
+    text-align: right;
+    cursor: pointer;
     &.save-text{
         color: $blue;
     }
