@@ -35,3 +35,16 @@
     left: 0;
     border-bottom: 3px solid $pink;
 }
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    p {
+        margin: -20px 0;
+        color: red;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px; 
+    }
+}

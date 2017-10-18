@@ -5,20 +5,30 @@
 
 <form [formGroup]="myLicenseForm"
       ngSubmit="onSubmit()">
-    <div class="info-element
-      row
-      between-xs
-      bottom-xs">
-      <span class="label">State</span>
-      <input
-          formControlName="state" 
-          placeholder="State"
-          type="text" 
-          class="value end-md" 
-          id="state">
-      <span class="pink-underline"></span>  
+    <div *ngIf="myLicenseForm.get('state').invalid && !myLicenseForm.get('state').pristine"
+          class="error-message">
+      <p>State is Required</p>
     </div>
 
+    <div class="info-element
+                row
+                between-xs
+                bottom-xs">
+      <span class="label">State</span>
+      <input
+            formControlName="state" 
+            placeholder="State"
+            type="text" 
+            class="value end-md" 
+            id="state">
+      <span class="pink-underline"></span>  
+    </div>
+    
+    <div *ngIf="myLicenseForm.get('licenseNumber').invalid && !myLicenseForm.get('licenseNumber').pristine"
+          class="error-message">
+      <p>License Number is Required</p>
+    </div>
+    
     <div class="info-element
       row
       between-xs

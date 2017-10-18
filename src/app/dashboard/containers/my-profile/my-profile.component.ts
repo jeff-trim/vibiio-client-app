@@ -29,6 +29,9 @@ export class MyProfileComponent implements OnInit {
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
 
+    @ViewChild (ProfileNewLicensureComponent)
+    private profileNewLicensureChild: ProfileNewLicensureComponent;
+
     constructor(private myProfileService: MyProfileService,
                 private myLicenseService: MyLicenseService,
                 private activatedRoute: ActivatedRoute) { }
@@ -45,6 +48,11 @@ export class MyProfileComponent implements OnInit {
     }
 
     resetMyProfileForm() {
+        this.profileInformationChild.myProfileForm.reset();
+        this.myProfileService.getMyProfile()
+            .subscribe( (data) => {
+                this.myProfile = data.user;
+            });
         this.profileInformationChild.resetToDefault();
     }
 
@@ -82,6 +90,7 @@ export class MyProfileComponent implements OnInit {
         this.myLicenseService.createLicense(options)
             .subscribe( (data) => {
                 this.refreshLicenses();
+                this.profileNewLicensureChild.myLicenseForm.reset();
             });
         }
 
