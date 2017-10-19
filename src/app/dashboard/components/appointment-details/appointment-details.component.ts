@@ -31,7 +31,6 @@ export class AppointmentDetailsComponent  {
     vibiioConnecting: boolean;
 
     @Input()
-
     onVibiio: boolean;
 
     @Input()
