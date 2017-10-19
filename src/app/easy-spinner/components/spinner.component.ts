@@ -10,13 +10,23 @@ import { SpinnerService } from '../services/spinner.service';
 
 export class SpinnerComponent implements OnInit {
     spinnerShow = false;
+    dashboardSpinner: boolean;
 
-    constructor( private spinnerService: SpinnerService ) { }
+    constructor(private spinnerService: SpinnerService) { }
 
     ngOnInit() {
         this.spinnerService.spinnerControl.subscribe(data => {
+          this.setSpinner(window.location.href);
           this.spinnerShow = data;
         });
+     }
+
+     setSpinner(href) {
+         if (href.includes('/dashboard/') ) {
+             this.dashboardSpinner = true;
+        } else {
+            this.dashboardSpinner = false;
+         }
      }
 
 }

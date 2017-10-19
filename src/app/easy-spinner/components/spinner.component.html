@@ -1,5 +1,6 @@
 <div *ngIf="spinnerShow" class="spinner-background-wrap">
-  <div class="wrap">
+  <div class="wrap"
+       [ngClass]= "{'dashboard-spinner': dashboardSpinner}">
     <div class="spinner-wrap">
       <div class="spinner">
         <img src="assets/images/loading.gif" />

@@ -177,7 +177,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
         this.availabilityParams = true;
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
-        this.router.navigate(['/dashboard/my-vibiios']);
+
+        // captures params after login
+        this.activatedRoute
+            .queryParams
+            .subscribe(params => {
+            // Defaults to false if no query param provided.
+                this.availabilityParams = params['available'] || false;
+        });
     }
 
     ngAfterViewInit() {
