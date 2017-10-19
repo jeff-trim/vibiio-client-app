@@ -89,6 +89,7 @@ export class AppointmentDetailsComponent  {
 
     connect() {
       this.startVibiio.emit(event);
+      this.vibiioConnecting = true;
       this.onVibiio = true;
       this.updateStatusReminder = false;
       // check to see if appointment has been claimed and auto assign
@@ -100,6 +101,7 @@ export class AppointmentDetailsComponent  {
       disconnect() {
       this.endVibiio.emit(event);
       this.onVibiio = false;
+      this.vibiioConnecting = false;
       this.updateStatusReminder = true;
       this.completedSession = true;
       this.availabilitySharedService.emitChange(true);
