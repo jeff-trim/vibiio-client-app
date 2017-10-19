@@ -9,9 +9,12 @@
 
 .wrap {
 	width: 100%;
-	position: absolute;
+    position: absolute;
 	top: 20%;
-  margin: 0 auto;
+    margin: 0 auto;
+    &.dashboard-spinner {
+        left: 10%;
+    }
 }
 .spinner-wrap {
 	margin: auto;
