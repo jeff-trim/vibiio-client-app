@@ -85,12 +85,27 @@
     cursor: pointer;
     &.save-text{
         color: $blue;
+        overflow-y: hidden;
+        text-align: start;
+        width: 100px;
     }
     &.cancel-text{
         color: $pink;
         margin-left: 26px;
     }
 }
+
+.save-after-element::after {
+    animation: ellipsis .01s steps(1) 2s;
+    content: "D";
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    animation-duration: 4s;
+  }
+  @keyframes ellipsis {
+    0% { width: 2ch; }
+  }
 
 .pink-underline {
     width: 7%;
