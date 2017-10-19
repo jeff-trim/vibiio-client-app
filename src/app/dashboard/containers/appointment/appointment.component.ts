@@ -99,10 +99,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.triggerActivity(this.vibiio.id,
                 'Vibiiograher manually started video',
                 'Video session started');
-            this.vibiioConnecting = false;
-            this.session.connect(this.token, (error) => {
-                // Video options
-                const options = {
+                this.session.connect(this.token, (error) => {
+                    this.vibiioConnecting = false;
+                    // Video options
+                    const options = {
                     width: 312,
                     height: 461.1
                 };
