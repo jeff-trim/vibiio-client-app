@@ -108,8 +108,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
                     // Initialize a publisher and publish the audio only stream to the session
                     this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
-                    this.vibiioConnecting = false;
                     this.session.publish(this.publisher).publishVideo(false);
+                    this.vibiioConnecting = false;
 
                     // Subscribe to stream created events
                     this.session.on('streamCreated', (data) => {
