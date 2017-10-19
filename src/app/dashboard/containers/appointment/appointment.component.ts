@@ -1,5 +1,5 @@
 import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // Components
 import { AppointmentDetailsComponent } from '../../components/appointment-details/appointment-details.component';
@@ -33,7 +33,6 @@ declare var OT: any;
 export class AppointmentComponent implements OnInit, AfterViewInit {
     onVibiio = false;
     vibiioConnecting = false;
-    updateStatusReminder = false;
     index: number;
     appointment: Appointment;
     consumer_id: number;
@@ -47,8 +46,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     neworkDisconnected = false;
     userTimeZone: string;
     startVibiioParams: boolean;
-    addNotesReminders: false;
-    completedSession: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -58,7 +55,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
-                private spinner: SpinnerService) { }
+                private spinner: SpinnerService,
+                private router: Router) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -94,7 +92,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.spinner.show();
             this.vibiioConnecting = true;
             this.onVibiio = true;
-            this.updateStatusReminder = false;
         }
     }
 
@@ -133,9 +130,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
                     this.availabilitySharedService.emitChange(true);
-                    this.updateStatusReminder = true;
-                    this.completedSession = true;
                     this.session.disconnect();
+                    this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
 
                     if (data.reason === 'networkDisconnected') {
                         data.preventDefault();
