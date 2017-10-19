@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Services
 import { AppointmentService } from '../../services/appointment.service';
@@ -28,13 +28,7 @@ export class AppointmentDetailsComponent  {
     imgData: string;
 
     @Input()
-    updateStatusReminder = false;
-
-    @Input()
-    addNotesReminder = false;
-
-    @Input()
-    completedSession: boolean;
+    vibiioConnecting: boolean;
 
     @Input()
     onVibiio: boolean;
@@ -69,7 +63,8 @@ export class AppointmentDetailsComponent  {
     constructor(private StatusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
-                private dateFormatService: DateFormatService) {}
+                private dateFormatService: DateFormatService,
+                private router: Router) {}
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -77,7 +72,6 @@ export class AppointmentDetailsComponent  {
         .updateVibiio(options, event.vibiioId)
         .subscribe( (data) => {
             this.vibiio = data.vibiio;
-            this.updateStatusReminder = false;
             this.sidebarCustomerStatusSharedService.emitChange(data);
         }, (error: any) => {
             console.log('error updating claim status');
@@ -86,25 +80,19 @@ export class AppointmentDetailsComponent  {
 
     connect() {
       this.startVibiio.emit(event);
+      this.vibiioConnecting = true;
       this.onVibiio = true;
-      this.updateStatusReminder = false;
       // check to see if appointment has been claimed and auto assign
       if (this.appointment.vibiiographer_id == null) {
         this.claimVibiio.emit(true);
       }
     }
 
-      disconnect() {
+    disconnect() {
       this.endVibiio.emit(event);
-      this.onVibiio = false;
-      this.updateStatusReminder = true;
-      this.completedSession = true;
+      this.vibiioConnecting = false;
       this.availabilitySharedService.emitChange(true);
-    }
-
-    closeUpdateStatusReminder() {
-      this.updateStatusReminder = !this.updateStatusReminder;
-      this.addNotesReminder = true;
+      this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
     }
 
     updateNotes() {

@@ -175,6 +175,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             this.vibiiographerProfile = data.myProfile;
         });
 
+        this.availabilityParams = true;
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
 
         // captures params after login

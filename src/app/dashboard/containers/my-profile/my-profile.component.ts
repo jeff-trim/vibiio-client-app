@@ -25,6 +25,7 @@ import { FormGroup } from '@angular/forms';
 export class MyProfileComponent implements OnInit {
     myProfile: MyProfile;
     myLicenses: MyProfileLicense[];
+    isSaving = false;
 
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
@@ -44,6 +45,7 @@ export class MyProfileComponent implements OnInit {
     }
 
     saveMyProfileForm() {
+        this.isSaving = true;
         this.updateMyProfile(this.profileInformationChild.myProfileForm);
     }
 
@@ -76,6 +78,7 @@ export class MyProfileComponent implements OnInit {
         this.myProfileService.updateMyProfile(options)
             .subscribe( (data) => {
                 this.myProfile = data.user;
+                this.isSaving = false;
         });
     }
 

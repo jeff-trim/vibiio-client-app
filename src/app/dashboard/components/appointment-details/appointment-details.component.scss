@@ -11,9 +11,33 @@
     margin-top: 25px;
     margin-left: 0;
     float: left;
+    display: flex;
+    flex-direction: column;
     #subscriber-stream {
         margin: auto;
     }
+    .waiting-text {
+        max-height: 20px;
+        align-self: flex-start;
+        color: $pink;
+        font-family: $base-font;
+        font-size: 1.8em;
+        font-weight: bold;
+        line-height: 1.16;
+    }
+    .waiting-house {
+        height: 225px;
+        width: 300px;
+        margin: auto;
+        background-image: url(../../../../assets/images/opening_slide.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
 
 /deep/ .pink {

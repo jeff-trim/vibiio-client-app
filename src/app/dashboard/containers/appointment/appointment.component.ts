@@ -1,5 +1,5 @@
 import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // Components
 import { AppointmentDetailsComponent } from '../../components/appointment-details/appointment-details.component';
@@ -21,6 +21,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
+import { SpinnerService } from '../../../easy-spinner/services/spinner.service';
 
 declare var OT: any;
 
@@ -31,7 +32,7 @@ declare var OT: any;
 
 export class AppointmentComponent implements OnInit, AfterViewInit {
     onVibiio = false;
-    updateStatusReminder = false;
+    vibiioConnecting = false;
     index: number;
     appointment: Appointment;
     consumer_id: number;
@@ -45,8 +46,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     neworkDisconnected = false;
     userTimeZone: string;
     startVibiioParams: boolean;
-    addNotesReminders: false;
-    completedSession: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -55,7 +54,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private updateAppointmentService: AppointmentService,
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService ) { }
+                private availabilitySharedService: AvailabilitySharedService,
+                private spinner: SpinnerService,
+                private router: Router) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -88,8 +89,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         // Video session starts if vibiio was started from dashboard
         if (this.startVibiioParams) {
             this.connectToSession(this.startVibiioParams);
+            this.spinner.show();
+            this.vibiioConnecting = true;
             this.onVibiio = true;
-            this.updateStatusReminder = false;
         }
     }
 
@@ -115,6 +117,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 this.session.on('streamCreated', (data) => {
                     this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options,
                     (stats) => {
+                        this.vibiioConnecting = false;
+                        this.spinner.hide();
                         // wait till subscriber is set
                         this.captureSnapshot();
                         this.updateVibiioStatus();
@@ -126,9 +130,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
                     this.availabilitySharedService.emitChange(true);
-                    this.updateStatusReminder = true;
-                    this.completedSession = true;
                     this.session.disconnect();
+                    this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
 
                     if (data.reason === 'networkDisconnected') {
                         data.preventDefault();
