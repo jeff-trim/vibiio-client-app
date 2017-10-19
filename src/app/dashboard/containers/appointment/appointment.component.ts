@@ -21,7 +21,6 @@ import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
-import { SpinnerService } from '../../../easy-spinner/services/spinner.service';
 
 declare var OT: any;
 
@@ -55,7 +54,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
-                private spinner: SpinnerService,
                 private router: Router) { }
 
     ngOnInit() {
@@ -89,7 +87,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         // Video session starts if vibiio was started from dashboard
         if (this.startVibiioParams) {
             this.connectToSession(this.startVibiioParams);
-            this.spinner.show();
             this.vibiioConnecting = true;
             this.onVibiio = true;
         }
@@ -112,13 +109,12 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 // Initialize a publisher and publish the audio only stream to the session
                 this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
                 this.session.publish(this.publisher).publishVideo(false);
+                this.vibiioConnecting = false;
 
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (data) => {
                     this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options,
                     (stats) => {
-                        this.vibiioConnecting = false;
-                        this.spinner.hide();
                         // wait till subscriber is set
                         this.captureSnapshot();
                         this.updateVibiioStatus();
