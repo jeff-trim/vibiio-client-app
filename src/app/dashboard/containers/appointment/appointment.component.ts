@@ -93,26 +93,26 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     }
 
     async connectToSession(event) {
-        this.vibiioConnecting = false;
         this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
             // this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9YWMzZWI4NzBlMDU4ZGNhMzNhY2MyMGRhODkxOTRhYzE1YjI2NGQ2ZTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNak01TVRJM01qa3pObjV3V21welZ6STRRbE5sVUUxVFoydG9NQzk2UVVoSFdXbC1mZyZjcmVhdGVfdGltZT0xNTAyMzkxMjcyJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIzOTEyNzIuOTY0MzE1OTg4MzgwOTcmZXhwaXJlX3RpbWU9MTUwNDk4MzI3Mg==";
             this.triggerActivity(this.vibiio.id,
-                                 'Vibiiograher manually started video',
-                                 'Video session started');
-            this.session.connect(this.token, (error) => {
-                // Video options
-                const options = {
-                    width: 312,
-                    height: 461.1
-                };
+                'Vibiiograher manually started video',
+                'Video session started');
+                this.session.connect(this.token, (error) => {
+                    // Video options
+                    const options = {
+                        width: 312,
+                        height: 461.1
+                    };
 
-                // Initialize a publisher and publish the audio only stream to the session
-                this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
-                this.session.publish(this.publisher).publishVideo(false);
-
-                // Subscribe to stream created events
-                this.session.on('streamCreated', (data) => {
+                    // Initialize a publisher and publish the audio only stream to the session
+                    this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
+                    this.session.publish(this.publisher).publishVideo(false);
+                    
+                    // Subscribe to stream created events
+                    this.session.on('streamCreated', (data) => {
+                    this.vibiioConnecting = false;
                     this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options,
                     (stats) => {
                         // wait till subscriber is set
