@@ -114,8 +114,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                         // wait till subscriber is set
                         this.captureSnapshot();
                         this.updateVibiioStatus();
-                        // To Remove
-                        console.log('Vibiio should update to claim status');
                 });
                     this.neworkDisconnected = false;
                     this.onVibiio = true;
@@ -181,8 +179,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
-        // To Remove
-        console.log('EndSession method in parent ran completely. Notice sent to user.');
+        this.updateVibiioStatus();
     }
 
     claimVibiio(event) {
