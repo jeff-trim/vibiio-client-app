@@ -28,6 +28,10 @@ export class AppointmentDetailsComponent  {
     imgData: string;
 
     @Input()
+    vibiioConnecting: boolean;
+
+    @Input()
+
     onVibiio: boolean;
 
     @Input()
@@ -77,6 +81,7 @@ export class AppointmentDetailsComponent  {
 
     connect() {
       this.startVibiio.emit(event);
+      this.vibiioConnecting = true;
       this.onVibiio = true;
       // check to see if appointment has been claimed and auto assign
       if (this.appointment.vibiiographer_id == null) {
@@ -86,6 +91,7 @@ export class AppointmentDetailsComponent  {
 
     disconnect() {
       this.endVibiio.emit(event);
+      this.vibiioConnecting = false;
       this.availabilitySharedService.emitChange(true);
       this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
     }
