@@ -31,6 +31,7 @@ declare var OT: any;
 
 export class AppointmentComponent implements OnInit, AfterViewInit {
     onVibiio = false;
+    vibiioConnecting = false;
     updateStatusReminder = false;
     index: number;
     appointment: Appointment;
@@ -88,6 +89,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         // Video session starts if vibiio was started from dashboard
         if (this.startVibiioParams) {
             this.connectToSession(this.startVibiioParams);
+            this.vibiioConnecting = true;
             this.onVibiio = true;
             this.updateStatusReminder = false;
         }
@@ -113,6 +115,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
                 // Subscribe to stream created events
                 this.session.on('streamCreated', (data) => {
+                    this.vibiioConnecting = false;
                     this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', options,
                     (stats) => {
                         // wait till subscriber is set

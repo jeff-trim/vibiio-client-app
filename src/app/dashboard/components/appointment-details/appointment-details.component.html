@@ -100,10 +100,13 @@
       <div class="long-pink-underline" ></div>
 
       <div class="row center-xs video-container">
+        <div *ngIf="!vibiioConnecting">
+          <div class="waiting-house"></div>
+          <div class="waiting-text">Connecting...</div>
           <div id="subscriber-stream"></div>
       </div>
     </div>
-
+<!-- 
     <div *ngIf="(!onVibiio && !updateStatusReminder && !completedSession)" 
          class="vibiio-message">
       <p class="first-vibiio">🤙</p>
@@ -111,7 +114,7 @@
       <p class="first-vibiio-text">Ready to introduce yourself?</p>
       <p class="first-vibiio-text pink link"
          (click)="connect($event)">Call {{ appointment.user.first_name }} now.</p>
-    </div>
+    </div> -->
         
     <div *ngIf="(updateStatusReminder && !addNotesReminder)" 
          class="vibiio-message">
