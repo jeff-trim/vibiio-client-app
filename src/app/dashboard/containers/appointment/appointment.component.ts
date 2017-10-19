@@ -1,5 +1,5 @@
 import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // Components
 import { AppointmentDetailsComponent } from '../../components/appointment-details/appointment-details.component';
@@ -55,7 +55,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
-                private spinner: SpinnerService) { }
+                private spinner: SpinnerService,
+                private router: Router) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -130,6 +131,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     this.onVibiio = false;
                     this.availabilitySharedService.emitChange(true);
                     this.session.disconnect();
+                    this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
 
                     if (data.reason === 'networkDisconnected') {
                         data.preventDefault();
