@@ -104,7 +104,6 @@
       </div>
     </div>
 
-    <!-- <div *ngIf="(!onVibiio && !updateStatusReminder && !completedSession)"      -->
     <div *ngIf="(!onVibiio)" 
          class="vibiio-message">
       <p class="first-vibiio">🤙</p>
@@ -113,19 +112,6 @@
       <p class="first-vibiio-text pink link"
          (click)="connect($event)">Call {{ appointment.user.first_name }} now.</p>
     </div>
-        
-    <!-- <div *ngIf="(updateStatusReminder && !addNotesReminder)" 
-         class="vibiio-message">
-      <p class="first-vibiio">🤙</p>
-      <p class="first-vibiio-text pink">Don't forget to update the claim status!</p>    
-      <p class="first-vibiio-text" (click)="closeUpdateStatusReminder()">close</p>
-    </div> -->
-
-    <!-- <div *ngIf="(addNotesReminder && completedSession)" 
-         class="vibiio-message">
-      <p class="first-vibiio">👍</p>
-      <p class="first-vibiio-text pink">Great job on that vibiio! Do you need to add any notes?</p> 
-    </div> -->
 
     <div *ngIf="(!onVibiio && neworkDisconnected)" 
          class="vibiio-message">
