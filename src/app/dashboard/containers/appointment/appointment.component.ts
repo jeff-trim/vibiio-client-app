@@ -31,7 +31,7 @@ declare var OT: any;
 
 export class AppointmentComponent implements OnInit, AfterViewInit {
     onVibiio = false;
-    updateStatusReminder = false;
+    // updateStatusReminder = false;
     index: number;
     appointment: Appointment;
     consumer_id: number;
@@ -45,8 +45,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     neworkDisconnected = false;
     userTimeZone: string;
     startVibiioParams: boolean;
-    addNotesReminders: false;
-    completedSession: boolean;
+    // addNotesReminders: false;
+    // completedSession: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private tokenService: VideoChatTokenService,
@@ -55,7 +55,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private updateAppointmentService: AppointmentService,
                 private vibiioUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService ) { }
+                private availabilitySharedService: AvailabilitySharedService) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -89,7 +89,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         if (this.startVibiioParams) {
             this.connectToSession(this.startVibiioParams);
             this.onVibiio = true;
-            this.updateStatusReminder = false;
+            // this.updateStatusReminder = false;
         }
     }
 
@@ -126,8 +126,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
                     this.availabilitySharedService.emitChange(true);
-                    this.updateStatusReminder = true;
-                    this.completedSession = true;
+                    // this.updateStatusReminder = true;
+                    // this.completedSession = true;
                     this.session.disconnect();
 
                     if (data.reason === 'networkDisconnected') {
@@ -185,7 +185,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
-        this.updateVibiioStatus();
+        // this.updateVibiioStatus();
+        // To Remove
+        console.log('EndSession method in parent ran completely. Vibiio status should be updated.');
+        console.log('Vibiiographer ended session notice to user should have run');
     }
 
     claimVibiio(event) {
