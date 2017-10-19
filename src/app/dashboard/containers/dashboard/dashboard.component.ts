@@ -184,7 +184,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             // Defaults to false if no query param provided.
                 this.availabilityParams = params['available'] || false;
         });
-        this.router.navigate(['/dashboard/my-vibiios']);
     }
 
     ngAfterViewInit() {
