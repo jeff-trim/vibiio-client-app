@@ -100,8 +100,11 @@
       <div class="long-pink-underline" ></div>
 
       <div class="row center-xs video-container">
-          <div id="subscriber-stream"></div>
-      </div>
+        <div *ngIf="vibiioConnecting">
+          <div class="waiting-house"></div>
+          <div class="waiting-text">Connecting...</div>
+        </div>
+        <div id="subscriber-stream"></div>
     </div>
 
     <div *ngIf="(!onVibiio && !updateStatusReminder && !completedSession)" 
