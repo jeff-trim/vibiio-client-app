@@ -17,15 +17,15 @@ import { DateFormatService } from '../../../services/date-format.service';
 })
 
 export class ConsumerProfileComponent implements AfterContentChecked {
+    insurance_policy?: InsurancePolicy;
+    updateStatusReminder: boolean;
+    userTimeZone: string;
+
     @Input()
     consumerProfile: ConsumerProfile;
 
     @Input()
     vibiio: Vibiio;
-
-    insurance_policy?: InsurancePolicy;
-    updateStatusReminder: boolean;
-    userTimeZone: string;
 
     constructor(private statusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
