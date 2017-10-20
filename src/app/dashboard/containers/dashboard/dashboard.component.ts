@@ -48,7 +48,7 @@ declare var OT: any;
 `,
 })
 
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit {
     session: any;
     vibiio: Vibiio;
     token: VideoChatToken;
@@ -175,23 +175,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             this.vibiiographerProfile = data.myProfile;
         });
 
-        this.availabilityParams = true;
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
-
-        // captures params after login
-        this.activatedRoute
-            .queryParams
-            .subscribe(params => {
-            // Defaults to false if no query param provided.
-                this.availabilityParams = params['available'] || false;
-        });
-    }
-
-    ngAfterViewInit() {
-        // Vibiiographer is available after login + child component initialization
-        if (this.availabilityParams) {
-            this.toggleActionCable(this.availabilityParams);
-        }
+        this.toggleActionCable(true);
     }
 
 }
