@@ -17,7 +17,7 @@ import { DateFormatService } from '../../../services/date-format.service';
 })
 
 export class ConsumerProfileComponent implements AfterContentChecked {
-    insurance_policy?: InsurancePolicy;
+    insurancePolicy?: InsurancePolicy;
     updateStatusReminder: boolean;
     userTimeZone: string;
 
@@ -32,7 +32,7 @@ export class ConsumerProfileComponent implements AfterContentChecked {
                 private dateFormatService: DateFormatService) {}
 
     ngAfterContentChecked() {
-        this.insurance_policy = this.consumerProfile.insurance_policy;
+        this.insurancePolicy = this.consumerProfile.insurance_policy;
         this.userTimeZone = this.consumerProfile.user_info.time_zone;
     }
 
