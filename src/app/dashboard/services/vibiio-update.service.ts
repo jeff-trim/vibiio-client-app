@@ -12,8 +12,8 @@ const VIBIIO_UPDATE_URL = `${API_URL}/vibiios/`;
 export class VibiioUpdateService {
     constructor(private http: Http) { }
 
-    updateVibiio(data: any, id: number): Observable <any> {
-        const url = `${VIBIIO_UPDATE_URL}${id}`;
+    updateVibiio(data: any): Observable <any> {
+        const url = `${VIBIIO_UPDATE_URL}${data.id}`;
         const payload = { vibiio: data };
 
     return this.http

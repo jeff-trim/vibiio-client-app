@@ -11,7 +11,7 @@
              [(ngModel)]="vibiio.status" 
              id="status"
              name="status"
-             (change)=onSubmit(vibiio.status)>
+             (change)=onSubmit(vibiio)>
                 <option class="label" [ngValue]="vibiio.status" selected>{{ vibiio.status | capitalize | removeUnderscore }}</option>  
                 <option value="scheduled">Scheduled</option>
                 <option value="claim_in_progress">Claim in Progress</option>

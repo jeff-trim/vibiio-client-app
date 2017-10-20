@@ -36,10 +36,9 @@ export class ConsumerProfileComponent implements AfterContentChecked {
         this.userTimeZone = this.consumerProfile.user_info.time_zone;
     }
 
-    updateStatus(event) {
-        const options = { status: event.status };
+    updateStatus(vibiio: Vibiio) {
         this.statusUpdateService
-          .updateVibiio(options, event.vibiioId)
+          .updateVibiio(vibiio)
           .subscribe( (data) => {
               this.vibiio = data.vibiio;
               this.updateStatusReminder = false;

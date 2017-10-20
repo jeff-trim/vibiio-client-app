@@ -109,7 +109,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     // Initialize a publisher and publish the audio only stream to the session
                     this.publisher = OT.initPublisher({insertDefaultUI: false}, options);
                     this.session.publish(this.publisher).publishVideo(false);
-                    
+
                     // Subscribe to stream created events
                     this.session.on('streamCreated', (data) => {
                     this.vibiioConnecting = false;
@@ -117,7 +117,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     (stats) => {
                         // wait till subscriber is set
                         this.captureSnapshot();
-                        this.updateVibiioStatus();
+                        this.vibiio.status = 'claim_in_progress';
+                        this.updateVibiio(this.vibiio);
                 });
                     this.neworkDisconnected = false;
                     this.onVibiio = true;
@@ -162,13 +163,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             ).subscribe((data) => {});
     }
 
-    updateVibiioStatus() {
-        const options = {
-            status: 'claim_in_progress'
-        };
 
+    updateVibiio(vibiio: Vibiio) {
         this.vibiioUpdateService
-            .updateVibiio(options, this.vibiio.id)
+            .updateVibiio(vibiio)
             .subscribe( (data) => {
                 this.vibiio.status = data.vibiio.status;
                 this.sidebarCustomerStatusSharedService.emitChange(data);
@@ -184,7 +182,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
-        this.updateVibiioStatus();
     }
 
     claimVibiio(event) {
