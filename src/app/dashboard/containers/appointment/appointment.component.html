@@ -1,5 +1,5 @@
 
-<appointment-details [appointment]="appointment"
+<vib-appointment-details [appointment]="appointment"
                      [timeZone]="userTimeZone"
                      [user]="user"
                      [vibiio]="vibiio"
@@ -8,7 +8,6 @@
                      [neworkDisconnected]="neworkDisconnected"
                      (startVibiio)="connectToSession($event)"
                      (endVibiio)="endSession($event)"
-                     (claimVibiio)="claimVibiio($event)"
                      (refreshNotes)="updateNotes(appointment.id)"
                      (updateStatus)="updateVibiio($event)">
-</appointment-details>
+</vib-appointment-details>

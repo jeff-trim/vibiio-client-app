@@ -91,6 +91,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     }
 
     async connectToSession(event) {
+        this.vibiioConnecting = true;
+        this.onVibiio = true;
+        this.checkVibiioClaimStatus();
         this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
             // this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9YWMzZWI4NzBlMDU4ZGNhMzNhY2MyMGRhODkxOTRhYzE1YjI2NGQ2ZTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNak01TVRJM01qa3pObjV3V21welZ6STRRbE5sVUUxVFoydG9NQzk2UVVoSFdXbC1mZyZjcmVhdGVfdGltZT0xNTAyMzkxMjcyJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIzOTEyNzIuOTY0MzE1OTg4MzgwOTcmZXhwaXJlX3RpbWU9MTUwNDk4MzI3Mg==";
@@ -119,7 +122,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                         this.updateVibiio(this.vibiio);
                 });
                     this.neworkDisconnected = false;
-                    this.onVibiio = true;
                 });
                 // subscribe to stream destroyed events
                 this.session.on('streamDestroyed', (data) => {
@@ -179,9 +181,19 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
+        this.vibiioConnecting = false;
+        this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
+        this.availabilitySharedService.emitChange(true);
     }
 
-    claimVibiio(event) {
+     // check to see if appointment has been claimed and auto assign
+    checkVibiioClaimStatus() {
+         if (this.appointment.vibiiographer_id == null) {
+             this.claimVibiio();
+            }
+    }
+
+    claimVibiio() {
         this.updateAppointmentService.updateVibiiographer(this.appointment.id)
             .subscribe((data) => {
             },
