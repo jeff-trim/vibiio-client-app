@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Output, OnInit, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // Components
@@ -25,7 +25,8 @@ declare var OT: any;
 
 @Component({
     selector: 'appointment',
-    templateUrl: 'appointment.component.html'
+    templateUrl: 'appointment.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AppointmentComponent implements OnInit, AfterViewInit {
@@ -168,9 +169,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.vibiioUpdateService
             .updateVibiio(vibiio)
             .subscribe( (data) => {
-                this.vibiio.status = data.vibiio.status;
+                this.vibiio = data.vibiio;
             }, (error: any) => {
-                console.log('error updating claim status');
+                console.log('error updating vibiio');
             });
     }
 
