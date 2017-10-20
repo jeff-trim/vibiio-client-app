@@ -20,13 +20,12 @@ export class VideoArchiveComponent {
     video_url: string;
     showVideo = false;
     showArchive = true;
-
     snapshot?: VideoSnapshot;
+    archive?: VideoArchive;
 
     @Input()
     snapshots?: VideoSnapshot[];
 
-    archive?: VideoArchive;
 
     constructor(private archiveService: VideoArchiveService) {}
 

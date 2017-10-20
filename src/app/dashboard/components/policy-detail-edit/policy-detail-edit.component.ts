@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Form } from '@angular/forms';
 
 // Services
 import { InsurancePolicyService } from '../../services/insurance-policy.service';
