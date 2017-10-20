@@ -23,13 +23,9 @@ export class ClaimStatusComponent {
     currentStatus: string;
 
     @Output()
-    updatedStatus = new EventEmitter<any>();
+    updatedStatus = new EventEmitter<Vibiio>();
 
-    onSubmit(status: string) {
-        const updateInfo = {
-            status: status,
-            vibiioId: this.vibiio.id
-        };
-        this.updatedStatus.emit(updateInfo);
+    onSubmit(vibiio: Vibiio) {
+        this.updatedStatus.emit(vibiio);
     }
 }
