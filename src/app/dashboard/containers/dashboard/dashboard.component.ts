@@ -119,7 +119,6 @@ export class DashboardComponent implements OnInit {
 
     fillWaitingList(data) {
         for (const notification of data.content){
-            console.log('Step 3a: receiveData ran fillWaitingList. notification of data.content was: ' + notification);
             this.receiveNotificationData(notification);
         }
     }
