@@ -19,7 +19,6 @@ import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
 
 declare var OT: any;
@@ -52,7 +51,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private activityService: ActivityService,
                 private updateAppointmentService: AppointmentService,
                 private vibiioUpdateService: VibiioUpdateService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
                 private router: Router) { }
 
@@ -169,7 +167,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             .updateVibiio(vibiio)
             .subscribe( (data) => {
                 this.vibiio.status = data.vibiio.status;
-                this.sidebarCustomerStatusSharedService.emitChange(data);
             }, (error: any) => {
                 console.log('error updating claim status');
             });

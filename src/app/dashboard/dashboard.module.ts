@@ -62,7 +62,7 @@ import { InsurancePolicyService } from './services/insurance-policy.service';
 import { VideoArchiveService } from './services/video-archive.service';
 import { VibiioProfileService } from './services/vibiio-profile.service';
 import { ActivityService } from './services/activity.service';
-import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-status-shared.service';
+import { VibiioUpdatesToSidebarService } from './services/vibiio-updates-to-sidebar.service';
 import { AvailabilitySharedService } from './services/availability-shared.service';
 import { MyLicenseService } from './services/my-license.service';
 
@@ -237,7 +237,7 @@ const dashboardRoutes: Routes = [
     VibiioProfileService,
     VibiioProfileResolver,
     SidebarMyVibiioSharedService,
-    SidebarCustomerStatusSharedService,
+    VibiioUpdatesToSidebarService,
     ActivityService,
     AvailabilitySharedService,
     MyLicenseService

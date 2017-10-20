@@ -8,7 +8,7 @@ import { MyAppointmentsService } from '../../services/my-appointments.service';
 import { CustomerStatusCountService } from '../../services/customer-status-count.service';
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service';
 import { MyAvailabilityService } from '../../services/my-availability.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
+import { VibiioUpdatesToSidebarService } from '../../services/vibiio-updates-to-sidebar.service';
 import { AuthService } from '../../../services/auth.service';
 
 // Interfaces
@@ -41,21 +41,19 @@ export class SidebarComponent implements OnInit {
                 private activatedRoute: ActivatedRoute,
                 private availabilityService: MyAvailabilityService,
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
+                private vibiioUpdatesToSidebarService: VibiioUpdatesToSidebarService,
                 private authService: AuthService,
                 private router: Router) {
 
         // subscribes to shared service and listens for changes passed from the
         // my vibiio container
         sidebarMyVibiioSharedService.changeEmitted$.subscribe(
-            response => this.myScheduledVibiios = response.my_day
+            response => (this.myScheduledVibiios = response.my_day)
         );
-       // subscribes to shared service and listens for changes passed from the
+        // subscribes to shared service and listens for changes passed from the
         // my vibiio container
-        this.sidebarCustomerStatusSharedService.changeEmitted$.subscribe(
-            response => {
-              this.getStatusUpdate();
-            }
+        this.vibiioUpdatesToSidebarService.changeEmitted$.subscribe(
+            response => (this.getStatusUpdate())
         );
     }
 
