@@ -2,9 +2,12 @@
 
 .vibiio-archive-container {
     display: flex;
+    height: 275px;
+    overflow-x: scroll;
     width: 100%;
     padding: 0;
-    max-width: none;
+    min-width: 375px;
+    max-width: 375px;
 }
 .vibiio-snapshot-container {
     margin: 0 10px;
