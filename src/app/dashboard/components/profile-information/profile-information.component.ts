@@ -2,8 +2,6 @@ import { Component, Input, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Models
-import { MyProfileLicense } from '../../models/my-profile-license.interface';
-import { MyProfileService } from '../../services/my-profile.service';
 import { MyProfile } from '../../models/my-profile.interface';
 
 @Component({

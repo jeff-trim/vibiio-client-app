@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class SidebarCustomerStatusSharedService {
-    // data: any;
+export class VibiioUpdatesToSidebarService {
     private emitChangeSource = new Subject<any>();
 
     changeEmitted$ = this.emitChangeSource.asObservable();

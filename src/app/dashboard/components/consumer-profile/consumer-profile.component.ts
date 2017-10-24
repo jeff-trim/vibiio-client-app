@@ -5,7 +5,6 @@ import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 
 // Services
 import { DateFormatService } from '../../../services/date-format.service';
@@ -17,33 +16,30 @@ import { DateFormatService } from '../../../services/date-format.service';
 })
 
 export class ConsumerProfileComponent implements AfterContentChecked {
+    insurancePolicy?: InsurancePolicy;
+    updateStatusReminder: boolean;
+    userTimeZone: string;
+
     @Input()
     consumerProfile: ConsumerProfile;
 
     @Input()
     vibiio: Vibiio;
 
-    insurance_policy?: InsurancePolicy;
-    updateStatusReminder: boolean;
-    userTimeZone: string;
-
     constructor(private statusUpdateService: VibiioUpdateService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private dateFormatService: DateFormatService) {}
 
     ngAfterContentChecked() {
-        this.insurance_policy = this.consumerProfile.insurance_policy;
+        this.insurancePolicy = this.consumerProfile.insurance_policy;
         this.userTimeZone = this.consumerProfile.user_info.time_zone;
     }
 
-    updateStatus(event) {
-        const options = { status: event.status };
+    updateStatus(vibiio: Vibiio) {
         this.statusUpdateService
-          .updateVibiio(options, event.vibiioId)
+          .updateVibiio(vibiio)
           .subscribe( (data) => {
               this.vibiio = data.vibiio;
               this.updateStatusReminder = false;
-              this.sidebarCustomerStatusSharedService.emitChange(data);
           }, (error: any) => {
               console.log('error updating claim status');
           });
