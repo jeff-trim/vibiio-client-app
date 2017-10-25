@@ -10,9 +10,7 @@
                class="form-control"
                placeholder="Enter Email"
                required>
-        <div *ngIf="email.errors?.required && !email.pristine">
-          Email is required
-        </div>
+        <span class="pink-underline"></span>       
       </div>
       <div class="input-group">
         <input type="password"
@@ -22,10 +20,14 @@
                class="form-control"
                placeholder="Enter Password"
                required>
-        <div *ngIf="password.errors?.required && !password.pristine">
+        <span class="pink-underline"></span> 
+        <div class="errors" *ngIf="email.errors?.required && !email.pristine">
+          Email is required
+        </div>
+        <div class="errors" *ngIf="password.errors?.required && !password.pristine">
           Password is required
         </div>
-        <div *ngIf="unauthorized">
+        <div class="errors" *ngIf="unauthorized">
           Invalid email or password
         </div>
       </div>

@@ -12,7 +12,7 @@ import { Credentials } from '../models/credentials.interface';
 @Component({
     selector: 'app-login',
     template: `
-      <div>
+      <div class="holder">
         <app-login-greeting></app-login-greeting>
         <app-login-form
           (submitLogin)="submitLogin($event)"
