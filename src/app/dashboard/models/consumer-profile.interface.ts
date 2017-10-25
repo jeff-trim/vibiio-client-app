@@ -18,6 +18,6 @@ export interface ConsumerProfile {
        policy_number?: number;
        time_zone: string;
     };
-    insurance_policy: InsurancePolicy;
+    insurance_policies: InsurancePolicy[];
     snapshots?: VideoSnapshot[];
 }
