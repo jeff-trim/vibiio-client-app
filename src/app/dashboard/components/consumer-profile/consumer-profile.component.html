@@ -22,9 +22,9 @@
     <key-value [key]="'Vibiio Start Time'"
                [value]="parseTime(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
 
-    <span *ngIf="insurance_policy != undefined"> 
-      <vib-policy-detail [policy]='insurance_policy'></vib-policy-detail>
-    </span> 
+  
+    <vib-insurance-policy [insurancePolicies]="consumerProfile.insurance_policies"
+                          [consumerId]="consumerProfile.id"></vib-insurance-policy>
 
     <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>

@@ -17,6 +17,7 @@ import { User } from '../../models/user.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { Note } from '../../models/consumer-note.interface';
 import { ResponseErrorService } from '../../../services/response-error.service';
+import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 @Component({
     selector: 'appointment-details',

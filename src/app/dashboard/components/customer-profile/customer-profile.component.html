@@ -59,15 +59,9 @@
     <key-value [key]="'Zip'"
                [value]="appointment.user.address.zip"></key-value>
 
-    <span *ngFor="let policy of appointment.insurance_policies">
-
-      <key-value [key]="'Carrier'"
-                 [value]="policy.carrier"></key-value>
-
-      <key-value [key]="'Policy Number'"
-                 [value]="policy.policy_number"></key-value>
-    </span>
-
+    <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
+                          [consumerId]="appointment.consumer_id"></vib-insurance-policy>
+    
   </div>
   <div class="col-xs-12
               col-sm-6

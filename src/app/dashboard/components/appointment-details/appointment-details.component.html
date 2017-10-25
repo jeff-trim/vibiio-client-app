@@ -82,11 +82,11 @@
     <key-value [key]="'Vibiio Start Time'"
                [value]="parseTime(appointment.scheduled_datetime)"></key-value>
 
-    <span *ngFor="let policy of appointment.insurance_policies">
-      <vib-policy-detail [policy]='policy'></vib-policy-detail>
-    </span>
+    
+    <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
+                          [consumerId]="appointment.consumer_id"></vib-insurance-policy>
 
-    <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
+    <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
   </div>
 
   <div class="col-xs-12
