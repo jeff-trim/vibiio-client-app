@@ -1,43 +1,9 @@
 @import '../../../../assets/css/_variables.scss';
 
-.info-element {
-    margin: 0px 0 20px 0;
-    position: relative;
-    padding-bottom: 10px;
-
-    .label {
-        font-family: $base-font;
-        font-size: 1.65rem;
-        font-weight: 700;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
-        color: $greyish-brown;
-    }
-
-    .value {
-        font-family: $copy-font;
-        font-size: 1.45rem;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
-        color: $greyish-brown;
-        -webkit-appearance: none;
-        border: none;
-    }
-}
-
-.pink-underline {
-    width: 7%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-bottom: 3px solid $pink;
-}
 .add-policy {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
     cursor: pointer;
     .add-text {
         margin-left: 8px;
@@ -55,6 +21,7 @@
     justify-content: flex-end;
     h4 {
         height: 18px;
+        margin: 0 auto 20px;
         font-family: $copy-font;
         font-size: 13px;
         font-weight: 800;
@@ -85,16 +52,3 @@
   @keyframes ellipsis {
     0% { width: 2ch; }
   }
-
-  .error-message {
-    display: flex;
-    justify-content: center;
-    p {
-        margin: -20px 0;
-        color: red;
-        font-family: $copy-font;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 1px; 
-    }
-}
