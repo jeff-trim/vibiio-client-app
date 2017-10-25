@@ -1,0 +1,26 @@
+<span *ngFor="let policy of insurancePolicies">
+    <vib-policy-detail [policy]="policy"></vib-policy-detail>
+</span>
+  <vib-policy-detail-new *ngIf="showNewForm"
+                         (newPolicy)="createPolicy($event)"></vib-policy-detail-new>
+  
+  <div *ngIf="!showNewForm" 
+      class="add-policy">
+      <img src="../../../../assets/images/add.svg"
+           class="add"
+           (click)="showForm()">
+      <span class="add-text"
+           (click)="showForm()">ADD POLICY</span>
+      
+  </div>
+
+  <div *ngIf="showNewForm"
+       class="flex">
+      <h4 class="col-md-offset-4
+                  save-text"
+          [ngClass]="{ 'save-after-element': isSaving }"
+          (click)="submitForm()">SAVE</h4>
+
+      <h4 class="cancel-text"
+          (click)="resetForm()">CANCEL</h4>
+  </div>

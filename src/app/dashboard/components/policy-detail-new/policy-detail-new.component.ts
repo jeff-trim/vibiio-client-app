@@ -1,8 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
-// Services
-import { InsurancePolicyService } from '../../services/insurance-policy.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Models
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
@@ -14,32 +11,23 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
 })
 
 export class PolicyDetailNewComponent {
-    policy?: InsurancePolicy;
+    newPolicyForm: FormGroup;
+    policy: InsurancePolicy;
 
-    @Input()
-    consumerId: number;
+    @Output()
+    newPolicy: EventEmitter<InsurancePolicy> = new EventEmitter<InsurancePolicy>();
 
-    @Input()
-    vibiioId: number;
-
-    constructor(private policyService: InsurancePolicyService ) { }
-
-    onSubmit(form: FormGroup) {
-      const options = {
-            carrier: form.value.carrier,
-            policy_number: form.value.policy_number,
-            claim_id: form.value.claim_id,
-            consumer_id: this.consumerId,
-            vibiio_id: this.vibiioId
-        };
-
-        this.policyService
-            .newPolicy(options)
-            .subscribe( (data) => {
-                this.policy = data.insurance_policy;
-            },
-            (error: any) => {
-                console.log( 'error updating note' );
+    constructor() {
+        this.newPolicyForm = new FormGroup({
+            'carrier': new FormControl('', Validators.required),
+            'policy_number': new FormControl('', Validators.required),
+            'claim_id': new FormControl('', Validators.required)
         });
+     }
+
+    onSubmit() {
+        if (this.newPolicyForm.valid) {
+            this.newPolicy.emit(this.newPolicyForm.value);
+        }
     }
 }

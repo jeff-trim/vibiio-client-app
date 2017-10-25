@@ -40,6 +40,7 @@ import { PolicyDetailComponent } from './components/policy-detail/policy-detail.
 import { PolicyDetailEditComponent } from './components/policy-detail-edit/policy-detail-edit.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
 import { ConsumerNoteComponent } from './components/note/consumer-note.component';
+import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -183,7 +184,8 @@ const dashboardRoutes: Routes = [
     AutosizeDirective,
     PolicyDetailNewComponent,
     PolicyDetailEditComponent,
-    ConsumerNoteComponent
+    ConsumerNoteComponent,
+    InsurancePolicyComponent
   ],
   imports: [
       CommonModule,

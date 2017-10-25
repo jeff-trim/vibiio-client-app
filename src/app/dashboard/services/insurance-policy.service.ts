@@ -6,6 +6,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+// Models
+import { InsurancePolicy } from '../models/insurance-policy.interface';
+
 const POLICY_URL = `${API_URL}/insurance_policies/`;
 
 @Injectable()
@@ -22,9 +25,9 @@ export class InsurancePolicyService {
                .catch( (error: any) => Observable.throw(error));
     }
 
-     newPolicy(data: any): Observable <any> {
+     newPolicy(policy: InsurancePolicy): Observable <any> {
         const url = `${POLICY_URL}`;
-        const payload = { insurance_policy: data };
+        const payload = { insurance_policy: policy };
 
     return this.http
             .post(url, payload)

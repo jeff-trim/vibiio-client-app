@@ -23,7 +23,7 @@ export class ConsumerProfileComponent implements AfterContentChecked {
     @Input()
     vibiio: Vibiio;
 
-    insurance_policy?: InsurancePolicy;
+    insurancePolicies?: InsurancePolicy[];
     updateStatusReminder: boolean;
     userTimeZone: string;
 
@@ -32,7 +32,7 @@ export class ConsumerProfileComponent implements AfterContentChecked {
                 private dateFormatService: DateFormatService) {}
 
     ngAfterContentChecked() {
-        this.insurance_policy = this.consumerProfile.insurance_policy;
+        this.insurancePolicies = this.consumerProfile.insurance_policies;
         this.userTimeZone = this.consumerProfile.user_info.time_zone;
     }
 
