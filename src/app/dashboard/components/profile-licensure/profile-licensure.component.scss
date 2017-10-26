@@ -13,4 +13,22 @@
 
 .license-style {
     margin-bottom: 45px;
+    margin-right: 10px;
+}
+
+#scrollbar::-webkit-scrollbar-track
+{
+    background: rgba(236, 0, 140, 0.25);
+    border-radius: 10px;
+}
+
+#scrollbar::-webkit-scrollbar
+{
+	width: 10px;
+}
+
+#scrollbar::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-color: $pink;
 }
