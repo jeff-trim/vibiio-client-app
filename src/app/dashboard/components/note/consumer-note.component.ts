@@ -16,6 +16,6 @@ import { Note } from '../../models/consumer-note.interface';
 
 export class ConsumerNoteComponent {
     @Input()
-    description?: Note;
+    description?: string;
 }
 
