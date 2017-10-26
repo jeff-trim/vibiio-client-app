@@ -8,5 +8,7 @@ export interface MyProfile {
     company: string;
     phone: string;
     address: Address;
-    licenses: MyProfileLicense[];
+    profile: {
+        licenses: MyProfileLicense[];
+    };
 }
