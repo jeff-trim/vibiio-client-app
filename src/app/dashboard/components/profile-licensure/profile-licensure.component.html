@@ -4,7 +4,8 @@
 </div>
 
 <div class="restrict-height">
-  <div *ngFor="let license of licenses">
+  <div *ngFor="let license of licenses"
+       class="license-style">
     <key-value [key]="'State'"
     [value]="license.state"></key-value>
     <key-value [key]="'License Number'"

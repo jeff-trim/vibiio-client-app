@@ -26,6 +26,7 @@ export class MyProfileComponent implements OnInit {
     myProfile: MyProfile;
     myLicenses: MyProfileLicense[];
     isSaving = false;
+    addLicensureForm = false;
 
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
@@ -82,6 +83,10 @@ export class MyProfileComponent implements OnInit {
         });
     }
 
+    toggleLicensureForm() {
+        this.addLicensureForm = !this.addLicensureForm;
+    }
+
     // My License functions
     createLicense(form: FormGroup) {
         const options = {
@@ -94,6 +99,7 @@ export class MyProfileComponent implements OnInit {
             .subscribe( (data) => {
                 this.refreshLicenses();
                 this.profileNewLicensureChild.myLicenseForm.reset();
+                this.addLicensureForm = false;
             });
         }
 
