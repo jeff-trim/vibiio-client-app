@@ -28,10 +28,21 @@
               col-sm-6
               col-md-5
               profile-licensure">
-  
+
     <profile-licensure
           [licenses]="myLicenses"></profile-licensure>
-    <profile-new-licensure
-            (sumbitLicenseForm)="createLicense($event)"></profile-new-licensure>
+
+    <div class="add-license">
+      <img src="../../../../assets/images/add.svg"
+          (click)="toggleLicensureForm()"
+           class="add">
+      <span class="add-text"
+            (click)="toggleLicensureForm()">ADD LICENSE</span>
+    </div>
+
+    <div *ngIf="(addLicensureForm)">
+      <profile-new-licensure
+              (sumbitLicenseForm)="createLicense($event)"></profile-new-licensure>
+    </div>        
   </div>
 </div>
