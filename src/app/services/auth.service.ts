@@ -1,31 +1,39 @@
 import { Injectable } from '@angular/core';
-import { LocalStoreManagerService } from './local-store-manager.service';
 
 @Injectable()
 export class AuthService {
   token: string;
   // be sure to change the name of app-token to your-app-name-token
-  constructor(private storageManager: LocalStoreManagerService) {}
+  constructor() {}
   isLoggedIn() {
     if (this.getToken().length > 0) { return true; }
     return false;
   }
 
   getToken() {
-    const token = this.storageManager.getData('app-token') || '';
+    const token = this.getData('app-token') || '';
     return token;
+  }
+
+  getData(key: string) {
+    let data = localStorage.getItem(key);
+
+    if (!data) {
+      data = sessionStorage.getItem(key);
+    }
+    return data;
   }
 
   setToken(token: string, remember: boolean) {
     if (remember) {
-      this.storageManager.savePermanentData(token, 'app-token');
+      localStorage.setItem(token, 'app-token');
     } else {
-      this.storageManager.saveSyncedSessionData(token, 'app-token');
+      sessionStorage.setItem(token, 'app-token');
     }
   }
 
   logout() {
-    this.storageManager.deleteData('app-token');
+    localStorage.clear();
   }
 }
 
