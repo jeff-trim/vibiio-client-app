@@ -16,6 +16,7 @@
     }
 
     .value {
+        max-width: 50%;
         font-family: $copy-font;
         font-size: 1.45rem;
         font-weight: normal;
@@ -35,62 +36,11 @@
     left: 0;
     border-bottom: 3px solid $pink;
 }
-.add-policy {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    .add-text {
-        margin-left: 8px;
-        width: 118px;
-        height: 18px;
-        font-family: $copy-font;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        color: $pink;
-    }
-}
-.flex {
-    display: flex;
-    justify-content: flex-end;
-    h4 {
-        height: 18px;
-        font-family: $copy-font;
-        font-size: 13px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        text-align: right;
-        cursor: pointer;
-        &.save-text{
-            color: $blue;
-            overflow-y: hidden;
-            text-align: start;
-            width: 100px;
-        }
-        &.cancel-text{
-            color: $pink;
-            margin-left: 26px;
-        }
-    }
-}
 
-.save-after-element::after {
-    animation: ellipsis .01s steps(1) 2s;
-    content: "D";
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
-    animation-duration: 4s;
-  }
-  @keyframes ellipsis {
-    0% { width: 2ch; }
-  }
-
-  .error-message {
+.error-message {
     display: flex;
     justify-content: center;
     p {
-        margin: -20px 0;
         color: red;
         font-family: $copy-font;
         font-size: 13px;
