@@ -38,6 +38,7 @@ export class MyVibiiosComponent implements OnInit {
     vibiiographerId: number;
     vibiiographerName: string;
     sliderVisibility = true;
+    downArrow = false;
     sliderConfig: SliderConfig;
 
     constructor(private activatedRoute: ActivatedRoute,
@@ -157,6 +158,7 @@ export class MyVibiiosComponent implements OnInit {
     // toggles visibility of range slider
     toggleSliderVisibility() {
         this.sliderVisibility = !this.sliderVisibility;
+        this.downArrow = !this.downArrow;
     }
 
     // used to filter out appointments based on slider information

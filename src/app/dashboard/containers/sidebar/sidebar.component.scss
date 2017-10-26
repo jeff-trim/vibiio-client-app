@@ -12,6 +12,10 @@ a {
   color: white;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .sidebar {
     top: 0;
     left: 0;
@@ -33,12 +37,14 @@ a {
             width: 37px;
             background-image: url(../../../../assets/images/switch-on.svg);
             background-repeat: no-repeat;
+            cursor: pointer;
         }
         .availability-icon-off {
             height: 27px;
             width: 37px;
             background-image: url(../../../../assets/images/switch-off.svg);
             background-repeat: no-repeat;
+            cursor: pointer;
         }
         .availability-message {
             font-family: $copy-font;
@@ -80,13 +86,16 @@ a {
             width: 30px;
             height: 30px;
             background-size: cover;
+            cursor: pointer;
         }
         .left-arrow {
             background-image: url(../../../../assets/images/left.svg);
             transform: rotate(180deg);
+            cursor: pointer;
         }
         .active-arrow {
             background-image: url(../../../../assets/images/active-arrow.svg);
+            cursor: pointer;
         }
     }
 }
@@ -96,6 +105,7 @@ a {
     height: 40px;
     margin-top: 10px;
     position: relative;
+    cursor: pointer;
 
     @media(min-width: $medium){
         display: none;

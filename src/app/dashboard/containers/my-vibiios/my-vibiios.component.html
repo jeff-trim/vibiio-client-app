@@ -9,13 +9,18 @@
   <p class="col-md-offset-1
             welcomeText">
     💁 You have {{ myVibiioCount }} vibiio<span *ngIf="myVibiioCount > 1">s</span> scheduled today. Manage your schedule by selecting Vibiios from below.</p>
-  <div *ngIf="appointments?.length > 0" >
-    <div class="flex" >
+  
+  <div *ngIf="appointments?.length >= 0">
+    <div class="flex">
       <span class="sliderToggle
                   col-xs-12
-                  col-md-offset-1"
-            (click)="toggleSliderVisibility()">
-        <p class="toggleText">Filter Requested Vibiios</p>
+                  col-md-offset-1">
+        <p class="toggleText"
+          (click)="toggleSliderVisibility()">Filter Requested Vibiios</p>
+        <img (click)="toggleSliderVisibility()"
+            class="upArrow"
+            [class.downArrow]="downArrow"           
+            src="assets/images/down-arrow-magenta.png" alt="down-arrow-magenta">
       </span>
 
       <div *ngIf="sliderVisibility"
@@ -30,7 +35,11 @@
                     (change)="onChange($event)"
                     (set)="updateAppointments($event)"></nouislider>
       </div>
+    </div>
+  </div>
 
+  <div class="flex">
+    <div *ngIf="appointments?.length > 0" >
       <div class="profile-information"
           infiniteScroll
           [infiniteScrollDistance]="2"
@@ -49,13 +58,22 @@
         </ng-container>
       </div>
     </div>
-  </div>
-  <div *ngIf="(appointments == undefined)"
-       class="col-xs-12
-              pink
-              centered
-              no-vibiio-text">
-    <p class="centered">No Vibiios scheduled at this time.</p>
-    <p>Make yourself available for a live Vibiio, sit back and wait</p>
+
+    <div *ngIf="appointments?.length == 0"
+          class="col-xs-12
+                pink
+                centered
+                no-vibiio-text" >
+      <p class="centered">No requested Vibiios at this time.</p>
+    </div>
+
+    <div *ngIf="(appointments == undefined)"
+        class="col-xs-12
+                pink
+                centered
+                no-vibiio-text">
+      <p class="centered">No Vibiios scheduled at this time.</p>
+      <p>Make yourself available for a live Vibiio, sit back and wait</p>
+    </div>
   </div>
 </div>

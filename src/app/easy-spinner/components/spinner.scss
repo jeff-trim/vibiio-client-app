@@ -5,6 +5,9 @@
     top: 0;
     left: 0;
     z-index: 999999;
+    -webkit-backdrop-filter: blur(6px);
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
 }
 
 .wrap {
