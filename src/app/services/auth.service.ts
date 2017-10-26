@@ -12,7 +12,7 @@ export class AuthService {
   }
 
   getToken() {
-    const token = localStorage.getItem('app-token') || '';
+    const token = this.storageManager.getData('app-token') || '';
     return token;
   }
 
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    this.storageManager.deleteData('app-token');
   }
 }
 
