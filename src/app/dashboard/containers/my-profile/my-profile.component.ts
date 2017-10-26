@@ -50,12 +50,10 @@ export class MyProfileComponent implements OnInit {
     }
 
     resetMyProfileForm() {
-        this.profileInformationChild.myProfileForm.reset();
         this.myProfileService.getMyProfile()
             .subscribe( (data) => {
                 this.myProfile = data.user;
             });
-        this.profileInformationChild.resetToDefault();
     }
 
     updateMyProfile(form) {
@@ -68,8 +66,8 @@ export class MyProfileComponent implements OnInit {
             last_name: userData.lastName,
             company: userData.company,
             phone: userData.phone,
-            address_one: addressData.address_one,
-            address_two: addressData.address_two,
+            address_one: addressData.addressOne,
+            address_two: addressData.addressTwo,
             city: addressData.city,
             state: addressData.state,
             zip: addressData.zip

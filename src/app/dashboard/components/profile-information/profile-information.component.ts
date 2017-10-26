@@ -37,22 +37,4 @@ export class ProfileInformationComponent implements OnInit {
             })
         });
     }
-
-    resetToDefault() {
-        this.myProfileForm.setValue({
-            userData: {
-                firstName: this.myProfile.first_name,
-                lastName: this.myProfile.last_name,
-                company: this.myProfile.company,
-                phone: this.myProfile.phone,
-            },
-            addressData: {
-                addressOne: this.myProfile.address.address_one,
-                addressTwo: this.myProfile.address.address_two,
-                city: this.myProfile.address.city,
-                state: this.myProfile.address.state,
-                zip: this.myProfile.address.zip
-            }
-        });
-    }
 }
