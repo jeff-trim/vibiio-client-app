@@ -26,14 +26,15 @@ export class AuthService {
 
   setToken(token: string, remember: boolean) {
     if (remember) {
-      localStorage.setItem(token, 'app-token');
+      localStorage.setItem('app-token', token);
     } else {
-      sessionStorage.setItem(token, 'app-token');
+      sessionStorage.setItem('app-token', token);
     }
   }
 
   logout() {
     localStorage.clear();
+    sessionStorage.clear();
   }
 }
 
