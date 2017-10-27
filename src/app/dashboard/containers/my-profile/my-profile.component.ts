@@ -27,6 +27,7 @@ export class MyProfileComponent implements OnInit {
     myLicenses: MyProfileLicense[];
     isSaving = false;
     addLicensureForm = false;
+    isEditing = false;
 
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
@@ -45,6 +46,10 @@ export class MyProfileComponent implements OnInit {
         });
     }
 
+    editMyProfileForm() {
+        this.isEditing = true;
+    }
+
     saveMyProfileForm() {
         this.isSaving = true;
         this.updateMyProfile(this.profileInformationChild.myProfileForm);
@@ -55,6 +60,7 @@ export class MyProfileComponent implements OnInit {
             .subscribe( (data) => {
                 this.myProfile = data.user;
             });
+        this.isEditing = false;
     }
 
     updateMyProfile(form) {
@@ -78,6 +84,7 @@ export class MyProfileComponent implements OnInit {
             .subscribe( (data) => {
                 this.myProfile = data.user;
                 this.isSaving = false;
+                this.isEditing = false;
         });
     }
 
