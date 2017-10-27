@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 // Models
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
@@ -16,7 +16,7 @@ import { DateFormatService } from '../../../services/date-format.service';
     styleUrls: ['consumer-profile.component.scss']
 })
 
-export class ConsumerProfileComponent implements AfterContentChecked {
+export class ConsumerProfileComponent implements OnInit {
     @Input()
     consumerProfile: ConsumerProfile;
 
@@ -31,7 +31,7 @@ export class ConsumerProfileComponent implements AfterContentChecked {
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private dateFormatService: DateFormatService) {}
 
-    ngAfterContentChecked() {
+    ngOnInit() {
         this.insurancePolicies = this.consumerProfile.insurance_policies;
         this.userTimeZone = this.consumerProfile.user_info.time_zone;
     }
