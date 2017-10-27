@@ -5,12 +5,19 @@
   profile-title
   pink">My profile</h1>
   
-  <h4 class="col-md-offset-4
+  <h4 *ngIf="!isEditing"
+      class="col-md-offset-4
+             edit-text"
+      (click)=editMyProfileForm()>EDIT</h4>
+
+  <h4 *ngIf="isEditing"
+      class="col-md-offset-4
              save-text"
-     [ngClass]="{ 'save-after-element': isSaving }"
-     (click)=saveMyProfileForm()>SAVE</h4>
+      [ngClass]="{ 'save-after-element': isSaving }"
+      (click)=saveMyProfileForm()>SAVE</h4>
   
-  <h4 class="cancel-text"
+  <h4 *ngIf="isEditing"
+      class="cancel-text"
       (click)="resetMyProfileForm()">CANCEL</h4>
 
 </div>
