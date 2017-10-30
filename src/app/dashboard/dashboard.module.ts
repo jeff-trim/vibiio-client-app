@@ -41,6 +41,7 @@ import { PolicyDetailEditComponent } from './components/policy-detail-edit/polic
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
 import { ConsumerNoteComponent } from './components/note/consumer-note.component';
 import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
+import { SortButtonComponent } from './components/sort-button/sort-button.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -86,7 +87,6 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
-import { SortButtonComponent } from './components/sort-button/sort-button.component';
 
 // Routes
 const dashboardRoutes: Routes = [

@@ -26,6 +26,8 @@ export class ConsumerStatusComponent implements OnInit {
         this.activatedRoute.data.subscribe((data) => {
             this.consumerProfiles = data.cons.vibiios;
         });
+        console.log(this.consumerProfiles);
+
         this.activatedRoute.params.subscribe((params) => {
             if (params['status'] === undefined) {
                 this.consumerStatus = 'All customers';
