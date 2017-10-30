@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 // Models
 import { Config, FormSetup } from '../../dynamic-form/models/config.interface';
@@ -8,27 +8,43 @@ import { ConsumerSignUp } from '../models/consumer-sign-up.interface';
 // Services
 import { SpinnerService } from '../../easy-spinner/services/spinner.service';
 import { ConsumerSignUpService } from '../services/consumer-sign-up.service';
-
-// Form Configuration
 import { consumerSignUp } from '../services/form-config';
+import { RetrieveInsuranceService } from '../services/retrieve-insurance.service';
 
 @Component({
   selector: 'vib-consumer-sign-up',
-  templateUrl: 'consumer-sign-up.component.html'
+  styleUrls: ['consumer-sign-up.component.scss'],
+  template: `
+  <div class="holder">
+    <div class="logo"></div>
+    <h1>Consumer Sign Up</h1>
+    <vib-dynamic-form [config]="form?.inputs"
+                      (submitted)="submitForm($event)"></vib-dynamic-form>
+  </div>
+  `
 })
 
 export class ConsumerSignUpComponent implements OnInit {
-  // config = consumerSignUp;
   form: FormSetup;
+  providers: String[];
   confirmed = false;
   badRequest = false;
 
-  constructor(private router: Router,
+  constructor(private router: ActivatedRoute,
               private spinner: SpinnerService,
-              private consumerSignUpService: ConsumerSignUpService) {}
+              private consumerSignUpService: ConsumerSignUpService,
+              private retrieveInsuranceService: RetrieveInsuranceService) {}
 
   ngOnInit() {
-    this.form = consumerSignUp;
+    // this.form = consumerSignUp;
+    this.router.data.subscribe( (data: { providers: String[] }) => {
+      console.log(data);
+        // map over array to create a label and a value for each item
+        // might have to wrap it in a promise, to make sure that they waited
+        // might want to move this to a service. Wrap that function/service in a promise
+        // I'm interested in the resolve. True when the index is the last index of the array.
+        // Assign new array to the carrier field
+    });
   }
 
   submitForm(event) {

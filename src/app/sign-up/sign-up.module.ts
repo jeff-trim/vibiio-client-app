@@ -13,6 +13,8 @@ import { ConsumerSignUpComponent } from './containers/consumer-sign-up.component
 // Services
 import { SpinnerService } from '../easy-spinner/services/spinner.service';
 import { ConsumerSignUpService } from './services/consumer-sign-up.service';
+import { RetrieveInsuranceService } from './services/retrieve-insurance.service';
+import { InsuranceResolverService } from './services/insurance-resolver.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ConsumerSignUpService } from './services/consumer-sign-up.service';
   ],
   providers: [
     ConsumerSignUpService,
-    SpinnerService
+    SpinnerService,
+    RetrieveInsuranceService,
+    InsuranceResolverService
   ]
 })
 

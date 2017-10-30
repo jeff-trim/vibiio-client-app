@@ -1,7 +1,7 @@
 import { Config } from '../../dynamic-form/models/config.interface';
 import { Validators } from '@angular/forms';
 
-export const consumerSignUp = {
+export let consumerSignUp = {
   title: 'Sign Up',
   inputs: [
     {
@@ -45,7 +45,7 @@ export const consumerSignUp = {
       placeholder: 'Phone Number',
       validators: [
         Validators.required,
-        Validators.minLength(10),
+        // Validators.minLength(10),
       ]
     },
     {
@@ -92,9 +92,9 @@ export const consumerSignUp = {
       ]
     },
     {
-      type: 'input',
-      inputType: 'text',
+      type: 'select',
       name: 'carrier',
+      options: [],
       placeholder: 'Provider',
       validators: [
         Validators.required,
@@ -120,8 +120,18 @@ export const consumerSignUp = {
       ]
     },
     {
+      type: 'input',
+      inputType: 'password',
+      name: 'password_confirmation',
+      placeholder: 'Password Confirmation',
+      validators: [
+        Validators.required,
+        Validators.minLength(7)
+      ]
+    },
+    {
       label: 'Submit',
-      name: 'Create User',
+      name: 'submit',
       type: 'button'
     }
   ]
