@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 // Modules
@@ -24,7 +23,6 @@ const routes: Routes = [];
   imports: [
     CommonModule,
     HttpModule,
-    FormsModule,
     RouterModule.forChild(routes),
     DynamicFormModule
   ],
