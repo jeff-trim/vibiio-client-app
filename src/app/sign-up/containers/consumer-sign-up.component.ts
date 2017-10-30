@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
 // Models
@@ -17,14 +17,19 @@ import { consumerSignUp } from '../services/form-config';
   templateUrl: 'consumer-sign-up.component.html'
 })
 
-export class ConsumerSignUpComponent {
-  config = consumerSignUp;
+export class ConsumerSignUpComponent implements OnInit {
+  // config = consumerSignUp;
+  form: FormSetup;
   confirmed = false;
   badRequest = false;
 
   constructor(private router: Router,
               private spinner: SpinnerService,
               private consumerSignUpService: ConsumerSignUpService) {}
+
+  ngOnInit() {
+    this.form = consumerSignUp;
+  }
 
   submitForm(event) {
     console.log('Here is the submitted event!', event);
