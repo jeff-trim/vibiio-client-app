@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 // Modules
+import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 
 // Containers
 import { ConsumerSignUpComponent } from './containers/consumer-sign-up.component';
@@ -25,6 +26,7 @@ const routes: Routes = [];
     HttpModule,
     FormsModule,
     RouterModule.forChild(routes),
+    DynamicFormModule
   ],
   exports: [
   ],
