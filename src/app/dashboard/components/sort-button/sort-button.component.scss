@@ -1,0 +1,49 @@
+@import '../../../../assets/css/variables';
+
+.info-element {
+    margin: 0px 0 20px 0;
+    position: relative;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    .select-style {
+        width: 100%;
+    }
+    
+    .label {
+        font-family: $copy-font;
+        font-weight: 600;
+        line-height: 1.62;
+        font-size: 1.65rem;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        color: $blue;
+    }
+    select {
+        font-family: $copy-font;
+        font-size: 1.65rem;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        color: $blue;
+        border-radius: 5px;
+        border: solid 3px $blue;
+        padding-left: 45px;
+        width: 145px;
+        height: 42px;
+        background-color: $white;
+        -webkit-appearance: none;
+        background-image: url('../../../../assets/images/down-arrow-cyan.png');
+        background-repeat: no-repeat;
+        background-position-x: 90%;
+        background-position-y: 50%;
+        cursor: pointer;
+        // &:focus {
+        //     outline: none;
+        // }
+    }
+}

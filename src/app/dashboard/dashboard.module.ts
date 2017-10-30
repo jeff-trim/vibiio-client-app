@@ -86,6 +86,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
+import { SortButtonComponent } from './components/sort-button/sort-button.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -185,7 +186,8 @@ const dashboardRoutes: Routes = [
     PolicyDetailNewComponent,
     PolicyDetailEditComponent,
     ConsumerNoteComponent,
-    InsurancePolicyComponent
+    InsurancePolicyComponent,
+    SortButtonComponent
   ],
   imports: [
       CommonModule,

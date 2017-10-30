@@ -1,0 +1,22 @@
+<form (ngSubmit)="onSubmit()"
+      #sortConsumersForm="ngForm">
+
+  <div class="info-element
+              row
+              between-xs
+              bottom-xs">
+
+    <div class="select-style">   
+        <select id="property"
+                name="property"
+                (change)=onSubmit()>
+            <option class="label">SORT</option>  
+            <option value="nameAsc">A-Z</option>
+            <option value="nameDesc">Z-A</option>
+            <option value="dateAsc">Date: Soonest First</option>
+            <option value="dateDesc">Date: Latest First</option>
+            <option value="status">Status</option>
+        </select>
+    </div>
+  </div>
+</form>
