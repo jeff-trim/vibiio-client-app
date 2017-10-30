@@ -40,9 +40,9 @@ export class ConsumerSignUpComponent implements OnInit {
     this.router.data.subscribe( (data: { providers: String[] }) => {
       console.log(data);
         // map over array to create a label and a value for each item
-        // might have to wrap it in a promise, to make sure that they waited
-        // might want to move this to a service. Wrap that function/service in a promise
-        // I'm interested in the resolve. True when the index is the last index of the array.
+        // might have to wrap it in a promise, to make sure that the component has waited before loading the page
+        // might want to move the above logic to a service, and wrap that function/service in a promise
+          // I'm interested in the resolve. True when the index is the last index of the array.
         // Assign new array to the carrier field
     });
   }
