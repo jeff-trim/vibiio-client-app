@@ -14,7 +14,9 @@ import { ConsumerSignUpComponent } from './containers/consumer-sign-up.component
 // Services
 import { SpinnerService } from '../easy-spinner/services/spinner.service';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'sign-up', component: ConsumerSignUpComponent }
+];
 
 @NgModule({
   declarations: [
