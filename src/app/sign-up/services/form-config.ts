@@ -6,6 +6,15 @@ export const consumerSignUp = {
   inputs: [
     {
       type: 'input',
+      inputType: 'hidden',
+      name: 'profile_type',
+      value: 'consumer',
+      validators: [
+        Validators.required
+      ]
+    },
+    {
+      type: 'input',
       inputType: 'text',
       name: 'first_name',
       placeholder: 'First Name',
@@ -26,7 +35,7 @@ export const consumerSignUp = {
       type: 'input',
       inputType: 'email',
       name: 'email',
-      placeholder: 'Email',
+      placeholder: 'Email Address',
       validators: [
         Validators.required,
         Validators.pattern('[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}')
@@ -39,7 +48,7 @@ export const consumerSignUp = {
       placeholder: 'Phone Number',
       validators: [
         Validators.required,
-           Validators.minLength(10),
+        Validators.minLength(10),
       ]
     },
     {
@@ -83,6 +92,24 @@ export const consumerSignUp = {
       validators: [
         Validators.required,
         Validators.minLength(5)
+      ]
+    },
+    {
+      type: 'input',
+      inputType: 'text',
+      name: 'carrier',
+      placeholder: 'Provider',
+      validators: [
+        Validators.required,
+      ]
+    },
+    {
+      type: 'input',
+      inputType: 'text',
+      name: 'acct_number',
+      placeholder: 'Policy Number',
+      validators: [
+        Validators.required,
       ]
     },
     {
