@@ -9,9 +9,6 @@ export const consumerSignUp = {
       inputType: 'hidden',
       name: 'profile_type',
       value: 'consumer',
-      validators: [
-        Validators.required
-      ]
     },
     {
       type: 'input',

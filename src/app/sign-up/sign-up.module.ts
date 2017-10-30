@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
 
 // Modules
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
@@ -13,10 +12,7 @@ import { ConsumerSignUpComponent } from './containers/consumer-sign-up.component
 
 // Services
 import { SpinnerService } from '../easy-spinner/services/spinner.service';
-
-const routes: Routes = [
-  { path: 'sign-up', component: ConsumerSignUpComponent }
-];
+import { ConsumerSignUpService } from './services/consumer-sign-up.service';
 
 @NgModule({
   declarations: [
@@ -25,12 +21,13 @@ const routes: Routes = [
   imports: [
     CommonModule,
     HttpModule,
-    RouterModule.forChild(routes),
+
     DynamicFormModule
   ],
   exports: [
   ],
   providers: [
+    ConsumerSignUpService,
     SpinnerService
   ]
 })
