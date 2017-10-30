@@ -4,7 +4,7 @@
 
   <h1 class="col-xs pink">{{ this.consumerStatus }}</h1>
   <div class="col-md-offset-10">
-    <vib-sort-button (sort)="sort($event)"></vib-sort-button>
+    <vib-sort-button (sortConsumers)="sortConsumers($event)"></vib-sort-button>
   </div>
   
   <ng-container *ngFor="let consumerProfile of consumerProfiles">

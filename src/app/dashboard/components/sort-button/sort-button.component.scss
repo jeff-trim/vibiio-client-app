@@ -23,6 +23,10 @@
         color: $blue;
     }
     select {
+        width: 145px;
+        height: 42px;
+        padding-right: 12.5px;
+        text-align-last: center;
         font-family: $copy-font;
         font-size: 1.65rem;
         font-weight: 600;
@@ -32,9 +36,6 @@
         color: $blue;
         border-radius: 5px;
         border: solid 3px $blue;
-        padding-left: 45px;
-        width: 145px;
-        height: 42px;
         background-color: $white;
         -webkit-appearance: none;
         background-image: url('../../../../assets/images/down-arrow-cyan.png');
@@ -42,8 +43,5 @@
         background-position-x: 90%;
         background-position-y: 50%;
         cursor: pointer;
-        // &:focus {
-        //     outline: none;
-        // }
     }
 }

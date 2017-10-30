@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'vib-sort-button',
   templateUrl: './sort-button.component.html',
   styleUrls: ['./sort-button.component.scss']
 })
-export class SortButtonComponent implements OnInit {
+export class SortButtonComponent {
+  form: FormGroup;
+  sortConsumers: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.form = fb.group({
+      'sortType': ['']
+    });
+  }
 
-  ngOnInit() {
+  onSubmit(sortType: string) {
+    console.log(sortType);
+    this.sortConsumers.emit(sortType);
   }
 
 }

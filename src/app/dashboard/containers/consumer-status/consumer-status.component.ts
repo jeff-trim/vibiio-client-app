@@ -37,4 +37,9 @@ export class ConsumerStatusComponent implements OnInit {
             }
         });
     }
+    sortConsumers(sortType: string) {
+        // call service
+        // return property and direction
+    }
+
 }
