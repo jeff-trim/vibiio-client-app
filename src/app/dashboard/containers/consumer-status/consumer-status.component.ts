@@ -37,7 +37,7 @@ export class ConsumerStatusComponent implements OnInit {
             this.consumerProfiles = data.cons.vibiios;
         });
 
-        this.sortTypes = Object.assign({}, this.sortTypes, this.sortService.build());
+        this.sortTypes = this.sortService.build();
 
         this.activatedRoute.params.subscribe((params) => {
             if (params['status'] === undefined) {
