@@ -45,7 +45,7 @@ export let consumerSignUp = {
       placeholder: 'Phone Number',
       validators: [
         Validators.required,
-        // Validators.minLength(10),
+        // Validators.pattern('')
       ]
     },
     {
