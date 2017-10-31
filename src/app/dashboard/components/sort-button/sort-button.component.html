@@ -1,0 +1,21 @@
+<form (ngSubmit)="onSubmit(form.value.sortOptions)"
+      [formGroup]="form"
+      #sortConsumersForm="ngForm">
+
+  <div class="info-element
+              row
+              between-xs
+              bottom-xs">
+
+    <div class="select-style">   
+        <select id="sortType"
+                formControlName="sortOptions"
+                (change)=onSubmit(form.value.sortOptions)>
+                <option class="label" disabled>SORT</option>  
+                <ng-container *ngFor="let sort of sortTypes">
+                    <option [value]="sort.name">{{ sort.name }}</option>
+                </ng-container>
+        </select>
+    </div>
+  </div>
+</form>

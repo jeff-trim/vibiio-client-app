@@ -41,6 +41,7 @@ import { PolicyDetailEditComponent } from './components/policy-detail-edit/polic
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
 import { ConsumerNoteComponent } from './components/note/consumer-note.component';
 import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
+import { SortButtonComponent } from './components/sort-button/sort-button.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -66,6 +67,7 @@ import { ActivityService } from './services/activity.service';
 import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from './services/availability-shared.service';
 import { MyLicenseService } from './services/my-license.service';
+import { ConsumerSortService } from './services/consumer-sort.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -86,6 +88,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -185,7 +188,9 @@ const dashboardRoutes: Routes = [
     PolicyDetailNewComponent,
     PolicyDetailEditComponent,
     ConsumerNoteComponent,
-    InsurancePolicyComponent
+    InsurancePolicyComponent,
+    SortButtonComponent,
+    OrderByPipe
   ],
   imports: [
       CommonModule,
@@ -242,7 +247,8 @@ const dashboardRoutes: Routes = [
     SidebarCustomerStatusSharedService,
     ActivityService,
     AvailabilitySharedService,
-    MyLicenseService
+    MyLicenseService,
+    ConsumerSortService
   ]
 })
 
