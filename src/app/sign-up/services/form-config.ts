@@ -8,7 +8,7 @@ export let consumerSignUp = {
       type: 'input',
       inputType: 'hidden',
       name: 'profile_type',
-      value: 'consumer',
+      value: 'consumer'
     },
     {
       type: 'input',
@@ -132,7 +132,8 @@ export let consumerSignUp = {
     {
       label: 'Submit',
       name: 'submit',
-      type: 'button'
+      type: 'button',
+      id: 'test-button'
     }
   ]
 };

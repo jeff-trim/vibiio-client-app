@@ -19,7 +19,8 @@ import { MapProvidersService } from '../services/map-providers.service';
   <div class="holder">
     <div class="logo"></div>
     <h1>Consumer Sign Up</h1>
-    <vib-dynamic-form [config]="form?.inputs"
+    <vib-dynamic-form id="sign-up-form"
+                      [config]="form?.inputs"
                       (submitted)="submitForm($event)"></vib-dynamic-form>
   </div>
   `

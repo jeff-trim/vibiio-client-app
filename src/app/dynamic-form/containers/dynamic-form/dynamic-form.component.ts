@@ -5,6 +5,7 @@ import { Config } from '../../models/config.interface';
 
 @Component({
     selector: 'vib-dynamic-form',
+    styleUrls: ['dynamic-form.component.scss'],
     template: `
       <form
         class="dynamic-form"
