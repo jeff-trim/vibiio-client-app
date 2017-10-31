@@ -3,14 +3,21 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';
+import { ConsumerSortService } from '../../services/consumer-sort.service';
 
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { VideoSnapshot } from '../../models/video-snapshot.interface';
 import { Vibiio } from '../../models/vibiio.interface';
+import { SortType } from '../../models/sort-type.interface';
+import { SortOptions } from '../../models/sort-options';
+
+// Pipes
+import { OrderByPipe } from '../../pipes/order-by.pipe';
+
 
 @Component({
-    selector: 'consumer-status',
+    selector: 'vib-consumer-status',
     templateUrl: 'consumer-status.component.html',
     styleUrls: ['consumer-status.component.scss']
 })
@@ -18,15 +25,20 @@ import { Vibiio } from '../../models/vibiio.interface';
 export class ConsumerStatusComponent implements OnInit {
     consumerProfiles: ConsumerProfile[];
     consumerStatus: string;
+    sortTypes: SortType[];
+    direction = 1;
+    property = 'appointment_scheduled_datetime';
 
     constructor(private activatedRoute: ActivatedRoute,
-                private consumerStatusService: ConsumerStatusService) {}
+                private consumerStatusService: ConsumerStatusService,
+                private sortService: ConsumerSortService) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.consumerProfiles = data.cons.vibiios;
         });
-        console.log(this.consumerProfiles);
+
+        this.sortTypes = this.sortService.build();
 
         this.activatedRoute.params.subscribe((params) => {
             if (params['status'] === undefined) {
@@ -37,9 +49,11 @@ export class ConsumerStatusComponent implements OnInit {
             }
         });
     }
-    sortConsumers(sortType: string) {
-        // call service
-        // return property and direction
-    }
 
+    sortConsumers(name: string) {
+        const sortOptions = this.sortService.getOptions(name);
+
+        this.direction = sortOptions.desc ? 1 : -1;
+        this.property = sortOptions.property;
+    }
 }

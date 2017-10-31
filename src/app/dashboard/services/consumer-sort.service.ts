@@ -3,11 +3,11 @@ import { SortType } from '../models/sort-type.interface';
 
 @Injectable()
 export class ConsumerSortService {
-  nameAsc: SortType = { label: 'A - Z', options: { property: 'last_name', desc: true } };
-  nameDesc: SortType =  { label: 'Z - A', options: { property: 'last_name', desc: false } };
-  dateAsc: SortType = { label: 'SOONEST', options: { property: 'appointment_scheduled_datetime', desc: true } };
-  dateDesc: SortType  = { label: 'LATEST', options: { property: 'appointment_scheduled_datetime', desc: false } };
-  status: SortType = { label: 'STATUS', options: { property: 'status', desc: false } };
+  nameAsc: SortType = { name: 'A - Z', options: { property: 'last_name', desc: true } };
+  nameDesc: SortType =  { name: 'Z - A', options: { property: 'last_name', desc: false } };
+  dateAsc: SortType = { name: 'SOONEST', options: { property: 'appointment_scheduled_datetime', desc: true } };
+  dateDesc: SortType  = { name: 'LATEST', options: { property: 'appointment_scheduled_datetime', desc: false } };
+  status: SortType = { name: 'STATUS', options: { property: 'status', desc: false } };
   bundle: Array<SortType> = [];
 
   build() {
@@ -20,8 +20,8 @@ export class ConsumerSortService {
     return this.bundle;
   }
 
-  getOptions(label: string) {
-    return this.bundle.find(sortType => label === sortType.label).options;
+  getOptions(name: string) {
+    return this.bundle.find(sortType => name === sortType.name).options;
   }
 
   private addItem(type: SortType): void {
