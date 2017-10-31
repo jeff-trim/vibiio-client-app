@@ -37,7 +37,7 @@ export class ConsumerStatusComponent implements OnInit {
             this.consumerProfiles = data.cons.vibiios;
         });
 
-        this.sortTypes = this.sortService.build();
+        this.sortTypes = Object.assign({}, this.sortTypes, this.sortService.build());
 
         this.activatedRoute.params.subscribe((params) => {
             if (params['status'] === undefined) {
@@ -52,7 +52,7 @@ export class ConsumerStatusComponent implements OnInit {
     sortConsumers(name: string) {
         const sortOptions = this.sortService.getOptions(name);
 
-        this.direction = sortOptions.desc ? 1 : -1;
-        this.property = sortOptions.property;
+        this.direction = Object.assign({}, this.direction, sortOptions.desc ? 1 : -1);
+        this.property = Object.assign({}, this.property, sortOptions.property);
     }
 }
