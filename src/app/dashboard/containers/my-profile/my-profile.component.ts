@@ -26,6 +26,8 @@ export class MyProfileComponent implements OnInit {
     myProfile: MyProfile;
     myLicenses: MyProfileLicense[];
     isSaving = false;
+    addLicensureForm = false;
+    isEditing = false;
 
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
@@ -44,18 +46,21 @@ export class MyProfileComponent implements OnInit {
         });
     }
 
+    editMyProfileForm() {
+        this.isEditing = true;
+    }
+
     saveMyProfileForm() {
         this.isSaving = true;
         this.updateMyProfile(this.profileInformationChild.myProfileForm);
     }
 
     resetMyProfileForm() {
-        this.profileInformationChild.myProfileForm.reset();
         this.myProfileService.getMyProfile()
             .subscribe( (data) => {
                 this.myProfile = data.user;
             });
-        this.profileInformationChild.resetToDefault();
+        this.isEditing = false;
     }
 
     updateMyProfile(form) {
@@ -68,8 +73,8 @@ export class MyProfileComponent implements OnInit {
             last_name: userData.lastName,
             company: userData.company,
             phone: userData.phone,
-            address_one: addressData.address_one,
-            address_two: addressData.address_two,
+            address_one: addressData.addressOne,
+            address_two: addressData.addressTwo,
             city: addressData.city,
             state: addressData.state,
             zip: addressData.zip
@@ -79,7 +84,12 @@ export class MyProfileComponent implements OnInit {
             .subscribe( (data) => {
                 this.myProfile = data.user;
                 this.isSaving = false;
+                this.isEditing = false;
         });
+    }
+
+    toggleLicensureForm() {
+        this.addLicensureForm = !this.addLicensureForm;
     }
 
     // My License functions
@@ -94,6 +104,7 @@ export class MyProfileComponent implements OnInit {
             .subscribe( (data) => {
                 this.refreshLicenses();
                 this.profileNewLicensureChild.myLicenseForm.reset();
+                this.addLicensureForm = false;
             });
         }
 

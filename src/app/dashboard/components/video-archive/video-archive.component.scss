@@ -8,6 +8,10 @@
     padding: 0;
     min-width: 375px;
     max-width: 375px;
+    &.on-playback {
+        height: auto;
+        max-width: 405px;
+    }
 }
 .vibiio-snapshot-container {
     margin: 0 10px;
@@ -60,4 +64,8 @@
     margin-top: 70px;
     font-size: 2rem;
     font-weight: 600;
+}
+
+video {
+    max-height: 315px;
 }

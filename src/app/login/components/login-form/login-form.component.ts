@@ -14,23 +14,25 @@ export class LoginFormComponent implements OnInit {
   submitLogin: EventEmitter<Credentials> = new EventEmitter<Credentials>();
 
   @Input()
-  unauthorized: boolean
+  unauthorized: boolean;
 
   ngOnInit() {
     this.credentials = {
-      email: 'vibiiographer@example.com',
+      email: '',
       password: '',
       remember: false
     };
   }
 
-  constructor() {};
+  constructor() {}
 
-    toggleRememberMe(){
-        this.credentials.remember = !this.credentials.remember
+    toggleRememberMe() {
+        this.credentials.remember = !this.credentials.remember;
     }
 
   login(value: Credentials, isValid: boolean) {
+    value = Object.assign({}, value, { remember: this.credentials.remember });
+
     if (isValid) {
       this.submitLogin.emit(value);
     }

@@ -3,6 +3,7 @@ import { VideoSnapshot } from './video-snapshot.interface';
 
 export interface ConsumerProfile {
     id: number;
+    consumer_id: number;
     appointment_scheduled_datetime: [
         number
     ];

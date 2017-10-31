@@ -93,6 +93,9 @@
         color: $pink;
         margin-left: 26px;
     }
+    &.edit-text{
+        color: $pink;
+    }
 }
 
 .save-after-element::after {
@@ -133,5 +136,22 @@
         height: 3rem;
         line-height: 2;
         float: right;
+    }
+}
+
+.add-license {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    cursor: pointer;
+    .add-text {
+        margin-left: 8px;
+        width: 118px;
+        height: 18px;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: $pink;
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Services
@@ -23,7 +23,7 @@ import { Credentials } from '../models/credentials.interface';
 })
 
 export class LoginComponent {
-  unauthorized: boolean = false
+  unauthorized = false;
 
   constructor(private loginService: LoginService,
               private authService: AuthService,
@@ -35,7 +35,7 @@ export class LoginComponent {
       .subscribe(
         (data: Jwt) => {
           if (data.role === 'vibiiographer') {
-            this.authService.setToken(data.jwt);
+              this.authService.setToken(data.jwt, event.remember);
               this.router.navigate(['/dashboard/my-vibiios']);
               this.unauthorized = false;
           } else {

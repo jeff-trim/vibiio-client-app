@@ -105,22 +105,23 @@
           <div class="waiting-text">Connecting...</div>
         </div>
         <div id="subscriber-stream"></div>
-    </div>
+      </div>
 
-    <div *ngIf="(!onVibiio)" 
-         class="vibiio-message">
-      <p class="first-vibiio">🤙</p>
-      <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio!</p>
-      <p class="first-vibiio-text">Ready to introduce yourself?</p>
-      <p class="first-vibiio-text pink link"
-         (click)="connect($event)">Call {{ appointment.user.first_name }} now.</p>
-    </div>
+      <div *ngIf="(!onVibiio)" 
+          class="vibiio-message">
+        <p class="first-vibiio">🤙</p>
+        <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio!</p>
+        <p class="first-vibiio-text">Ready to introduce yourself?</p>
+        <p class="first-vibiio-text pink link"
+          (click)="connect($event)">Call {{ appointment.user.first_name }} now.</p>
+      </div>
 
-    <div *ngIf="(!onVibiio && neworkDisconnected)" 
-         class="vibiio-message">
-      <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection    
-                                        or because the other party lost their connection.</p>
-    </div>
+      <div *ngIf="(!onVibiio && neworkDisconnected)" 
+          class="vibiio-message">
+        <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection    
+                                          or because the other party lost their connection.</p>
+      </div>
+    </div> 
   </div> 
 </div>
 

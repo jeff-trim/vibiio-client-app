@@ -17,7 +17,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "vib",
       "styles": [
         "styles.scss",
         "assets/css/flexboxgrid.min.css",
