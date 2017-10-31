@@ -6,7 +6,7 @@ export interface Config {
     label?: string;
     name: string;
     placeholder?: string;
-    options?: Option[];
+    options?: Select[];
     value?: any;
     disabled?: boolean;
     validators?: ValidatorFn[];
@@ -17,7 +17,7 @@ export interface FormSetup {
     inputs: Config[];
 }
 
-export interface Option {
+export interface Select {
     label: string;
     value: string;
 }
