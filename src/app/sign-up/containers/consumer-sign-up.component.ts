@@ -44,8 +44,6 @@ export class ConsumerSignUpComponent implements OnInit {
   }
 
   submitForm(event) {
-    console.log('Here is the submitted event!', event);
-
     this.spinner.show();
     this.consumerSignUpService.registerConsumer(event)
         .subscribe( (data) => {
