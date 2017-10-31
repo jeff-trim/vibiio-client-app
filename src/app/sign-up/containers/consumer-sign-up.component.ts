@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Models
-import { Config, FormSetup } from '../../dynamic-form/models/config.interface';
+import { FormSetup } from '../../dynamic-form/models/config.interface';
 import { ConsumerSignUp } from '../models/consumer-sign-up.interface';
 
 // Services
@@ -10,6 +10,7 @@ import { SpinnerService } from '../../easy-spinner/services/spinner.service';
 import { ConsumerSignUpService } from '../services/consumer-sign-up.service';
 import { consumerSignUp } from '../services/form-config';
 import { RetrieveInsuranceService } from '../services/retrieve-insurance.service';
+import { MapProvidersService } from '../services/map-providers.service';
 
 @Component({
   selector: 'vib-consumer-sign-up',
@@ -25,25 +26,20 @@ import { RetrieveInsuranceService } from '../services/retrieve-insurance.service
 })
 
 export class ConsumerSignUpComponent implements OnInit {
-  form: FormSetup;
-  providers: String[];
-  confirmed = false;
-  badRequest = false;
+  form: FormSetup = consumerSignUp;
 
-  constructor(private router: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
               private spinner: SpinnerService,
               private consumerSignUpService: ConsumerSignUpService,
-              private retrieveInsuranceService: RetrieveInsuranceService) {}
+              private retrieveInsuranceService: RetrieveInsuranceService,
+              private mapProvidersService: MapProvidersService) {}
 
   ngOnInit() {
-    // this.form = consumerSignUp;
-    this.router.data.subscribe( (data: { providers: String[] }) => {
-      console.log(data);
-        // map over array to create a label and a value for each item
-        // might have to wrap it in a promise, to make sure that the component has waited before loading the page
-        // might want to move the above logic to a service, and wrap that function/service in a promise
-          // I'm interested in the resolve. True when the index is the last index of the array.
-        // Assign new array to the carrier field
+    this.route.data.subscribe( (data: { providers: any }) => {
+      this.mapProvidersService.mapProviders(data.providers.insurance_providers).then( (mapped_data) => {
+        this.form.inputs[10].options = mapped_data;
+      });
     });
   }
 
@@ -54,11 +50,11 @@ export class ConsumerSignUpComponent implements OnInit {
     this.consumerSignUpService.registerConsumer(event)
         .subscribe( (data) => {
           this.spinner.hide();
-          this.confirmed = true;
+          console.log('user submitted');
+          // this.router.navigate(['sign_in']);
         },
         (error: any) => {
           this.spinner.hide();
-          this.badRequest = true;
         });
   }
 }

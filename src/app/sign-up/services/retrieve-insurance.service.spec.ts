@@ -4,7 +4,7 @@ import { INSURANCE } from '../../../../testing/mock-insurance';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { Http, HttpModule, XHRBackend, Response, ResponseOptions } from '@angular/http';
 
-describe('RetrieveInsuranceProvidersService', () => {
+describe('RetrieveInsuranceService', () => {
   let mockbackend, service;
 
   beforeEach(async(() => {
