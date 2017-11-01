@@ -42,15 +42,20 @@
     background-color: transparent;
 }
 
-
 //select dropdown
 .jcf-select-drop .jcf-select-drop-content {
+    border-left: solid 3px white;
+    border-right: solid 3px white;
+    border-bottom: solid 3px white;
     border: none;
 }
 
 //dropdown box
 .jcf-list-content {
-    background-color: $pink; 
+    background-color: $pink;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; 
+    overflow: none;
 }
 
 //unselected dropdown rows
@@ -65,7 +70,6 @@
     min-width: 327px;
     width: 100%;
 }
-
 
 // selected dropdown row
 .jcf-option.jcf-selected.jcf-hover {
@@ -115,8 +119,6 @@
         background-color: transparent;
     }
 }
-
-
 
 .jcf-select-consumer-sort {
     //select dropdown
