@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'appointment-notification',
     styleUrls: ['./appointment-notification.component.scss'],
     template: `
-<div class="notification-bar">
+<div class="notification-bar" title="{{ notificationData.content.message_body }}">
   <div class="message">{{ notificationData.content.message_body }}</div>
   <div class="button-wrap"
        *ngIf="displayConnectIcon()">
@@ -19,23 +19,23 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 
 export class AppointmentNotificationComponent {
     @Input()
-    notificationData
+    notificationData;
 
     @Output()
-    claimAppointment: EventEmitter<any> = new EventEmitter<any>()
-    messageBody: string
+    claimAppointment: EventEmitter<any> = new EventEmitter<any>();
+    messageBody: string;
 
-    constructor(){}
+    constructor() {}
 
-    displayConnectIcon(){
-        if(this.notificationData.notification_type === "error") {
-            return false
+    displayConnectIcon() {
+        if (this.notificationData.notification_type === 'error') {
+            return false;
         } else {
-            return true
+            return true;
         }
     }
 
-    emitAppointment(){
-        this.claimAppointment.emit(this.notificationData)
+    emitAppointment() {
+        this.claimAppointment.emit(this.notificationData);
     }
 }
