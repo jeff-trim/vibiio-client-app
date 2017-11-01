@@ -8,15 +8,15 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
     selector: 'form-select',
     styleUrls: ['form-select.component.scss'],
     template: `
-      <div 
-       class="dynamic-field form-input" 
+      <div
+       class="dynamic-field form-input"
        [formGroup]="group">
          <label>{{ config.label }}</label>
-         <select [formControlName]="config.name" 
+         <select [formControlName]="config.name"
                  [class.error-message]="errorArray.length > 0">
             <option value="">{{ config.placeholder }}</option>
-            <option *ngFor="let option of config.options">
-            {{ option }}
+            <option value="{{ option.value }}" *ngFor="let option of config.options">
+            {{ option.label }}
             </option>
          </select>
       </div>
@@ -34,7 +34,7 @@ export class FormSelectComponent implements OnInit {
     errorArray: string[] = [];
     handleErrors;
 
-    constructor() { 
+    constructor() {
         this.handleErrors = errorMessages;
     }
 

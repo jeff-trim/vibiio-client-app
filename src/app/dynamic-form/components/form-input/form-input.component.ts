@@ -17,6 +17,7 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
           [attr.placeholder]="config.placeholder"
           [formControlName]="config.name"
           [class.error-message]="errorArray.length > 0" />
+          <span class="pink-underline"></span>
       </div>
       <div *ngIf="control.errors && !control.pristine">
         <p *ngFor="let error of errorArray">{{ error }}</p>
