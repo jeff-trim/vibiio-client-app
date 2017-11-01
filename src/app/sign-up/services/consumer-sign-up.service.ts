@@ -24,7 +24,6 @@ export class ConsumerSignUpService {
 
   registerConsumer(data: ConsumerSignUp) {
     const consumer = { user: this.addProfileType(data) };
-    console.log('Updated consumer data', consumer);
 
     return this.http
                .post(`${API_URL}/users`, consumer)
