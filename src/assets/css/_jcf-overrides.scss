@@ -11,33 +11,32 @@
     min-width: 327px;
     width: 100%;
     background-color: $white;
-    border: solid 2px $pink;
+    // border: solid 2px $pink;
     -webkit-appearance: none;
-   
     border: none;
     cursor: pointer;
     &:focus {
         outline: none;
     }
-    &.jcf-unselectable {
-        // selected text
-        .jcf-select-text {
-            font-family: $base-font;
-            font-size: 1.65rem;
-            font-weight: 700;
-            font-style: normal;
-            font-stretch: normal;
-            letter-spacing: normal;
-            color: $pink;
-            min-width: 327px;
-            width: 100%;
-            background-color: $white; 
-        }
-    }
+}
+
+// initial text
+.jcf-select .jcf-select-text {
+    font-family: $base-font;
+    font-size: 1.65rem;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: $pink;
+    min-width: 327px;
+    width: 100%;
+    background-color: $white; 
+    border: none;
 }
 
 // select opener icon
-.jcf-select .jcf-select-opener {
+.jcf-unselectable .jcf-select-opener {
     background-image: url(assets/images/down-arrow-magenta.png);
     background-repeat: no-repeat;
     background-position-x: 99%;
@@ -45,7 +44,7 @@
     background-color: white;
 }
 
-// whole select box
+//select dropdown
 .jcf-select-drop .jcf-select-drop-content {
     border: none;
 }
@@ -63,12 +62,19 @@
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
-    color: white;
+    color: $white;
     min-width: 327px;
     width: 100%;
 }
 
+
 // selected dropdown row
+.jcf-option.jcf-selected.jcf-hover {
+    color: $pink;
+    background-color: white; 
+}
+
+// hovering dropdown row
 .jcf-select-drop .jcf-hover,
 .jcf-list-box .jcf-selected {
     color: $pink;
