@@ -8,10 +8,8 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: $pink;
-    min-width: 327px;
     width: 100%;
     background-color: $white;
-    // border: solid 2px $pink;
     -webkit-appearance: none;
     border: none;
     cursor: pointer;
@@ -29,7 +27,7 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: $pink;
-    min-width: 327px;
+    // min-width: 327px;
     width: 100%;
     background-color: $white; 
     border: none;
@@ -41,8 +39,9 @@
     background-repeat: no-repeat;
     background-position-x: 99%;
     background-position-y: 50%;
-    background-color: white;
+    background-color: transparent;
 }
+
 
 //select dropdown
 .jcf-select-drop .jcf-select-drop-content {
@@ -71,7 +70,7 @@
 // selected dropdown row
 .jcf-option.jcf-selected.jcf-hover {
     color: $pink;
-    background-color: white; 
+    background-color: white;
 }
 
 // hovering dropdown row
@@ -80,3 +79,81 @@
     color: $pink;
     background-color: white;
  }
+
+ // sort styles
+.select-style {
+    width: 145px;
+    height: 35px;
+    //initial container
+    .jcf-select {
+        width: 145px;
+        height: 35px;
+        padding-top: 7px;
+        min-width: none;
+        text-align-last: center;
+        //initial text
+        .jcf-select-text {
+            border-radius: 5px;
+            border: solid 3px $blue;
+            padding-right: 12.5px;
+            font-family: $copy-font;
+            color: $blue;
+            height: 35px;
+            padding-top: 7px;
+            margin-left: 8px;
+            &.jcf-focus {
+                border: solid 3px $blue !important;
+            }
+        }
+    }
+    // select opener icon
+    .jcf-unselectable .jcf-select-opener {
+        background-image: url(assets/images/down-arrow-cyan.png);
+        background-repeat: no-repeat;
+        background-position-x: 99%;
+        background-position-y: 75%;
+        background-color: transparent;
+    }
+}
+
+
+
+.jcf-select-consumer-sort {
+    //select dropdown
+    .jcf-select-drop .jcf-select-drop-content {
+        border: none;
+    }
+
+    &:focus {
+        border: solid 3px $blue !important;
+        outline: none;
+    }
+    //dropdown box
+    .jcf-list-content {
+        width: 162.5px;
+        margin-left: 8px;
+        min-width: none;
+        background-color: $blue;
+        border-left: solid 3px $blue;
+        border-right: solid 3px $blue;
+        border-bottom: solid 3px $blue;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    // selected dropdown row
+    .jcf-option.jcf-disabled.jcf-selected {
+        color: $blue !important;
+        background-color: $white; 
+    }
+
+    // disabled row
+    .jcf-option.jcf-disabled.jcf-selected {
+        color: $blue;
+        background-color: white;
+    }
+    .jcf-option.jcf-hover.jcf-selected {
+        color: $blue;
+        background-color: white;
+    }
+}
+
