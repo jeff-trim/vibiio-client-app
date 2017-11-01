@@ -27,6 +27,7 @@ import { PasswordResetModule } from './password-reset/password-reset.module';
 import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { SpinnerModule } from './easy-spinner/spinner.module';
+import { SignUpModule } from './sign-up/sign-up.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SpinnerModule } from './easy-spinner/spinner.module';
       PasswordResetModule,
       DynamicFormModule,
       SpinnerModule,
-      AppRoutingModule
+      AppRoutingModule,
+      SignUpModule
   ],
   providers: [
       AuthService,
