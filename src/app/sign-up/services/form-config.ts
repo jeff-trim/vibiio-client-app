@@ -6,12 +6,6 @@ export let consumerSignUp = {
   inputs: [
     {
       type: 'input',
-      inputType: 'hidden',
-      name: 'profile_type',
-      value: 'consumer'
-    },
-    {
-      type: 'input',
       inputType: 'text',
       name: 'first_name',
       placeholder: 'First Name',
@@ -44,8 +38,7 @@ export let consumerSignUp = {
       name: 'phone',
       placeholder: 'Phone Number',
       validators: [
-        Validators.required,
-        // Validators.pattern('')
+        Validators.required
       ]
     },
     {

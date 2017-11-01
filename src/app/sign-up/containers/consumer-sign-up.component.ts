@@ -39,7 +39,7 @@ export class ConsumerSignUpComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( (data: { providers: any }) => {
       this.mapProvidersService.mapProviders(data.providers.insurance_providers).then( (mapped_data) => {
-        this.form.inputs[10].options = mapped_data;
+        this.form.inputs[9].options = mapped_data;
       });
     });
   }
@@ -49,8 +49,7 @@ export class ConsumerSignUpComponent implements OnInit {
     this.consumerSignUpService.registerConsumer(event)
         .subscribe( (data) => {
           this.spinner.hide();
-          console.log('user submitted');
-          // this.router.navigate(['sign_in']);
+          this.router.navigate(['sign_in']);
         },
         (error: any) => {
           this.spinner.hide();

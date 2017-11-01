@@ -13,10 +13,18 @@ import { API_URL } from '../../../environments/environment';
 
 @Injectable()
 export class ConsumerSignUpService {
+  userData: ConsumerSignUp;
+
   constructor(private http: Http) {}
 
+  addProfileType(userData) {
+    this.userData = userData;
+    return Object.assign({}, this.userData, { profile_type: 'consumer' });
+  }
+
   registerConsumer(data: ConsumerSignUp) {
-    const consumer = { user: data };
+    const consumer = { user: this.addProfileType(data) };
+    console.log('Updated consumer data', consumer);
 
     return this.http
                .post(`${API_URL}/users`, consumer)
