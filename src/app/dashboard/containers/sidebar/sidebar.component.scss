@@ -74,6 +74,9 @@ a {
         display: flex;
         justify-content: space-between;
         margin: 30px 0 10px;
+        &:focus {
+            outline: none;
+        }
         .title {
             font-size: 16px;
             line-height: 1.88;
@@ -92,10 +95,52 @@ a {
             background-image: url(../../../../assets/images/left.svg);
             transform: rotate(180deg);
             cursor: pointer;
+            animation-duration: 500ms;
+            animation-name: rotate-snap;
+            animation-fill-mode: forwards;
         }
         .active-arrow {
             background-image: url(../../../../assets/images/active-arrow.svg);
             cursor: pointer;
+            animation-name: active-rotate-snap;
+            animation-duration: 500ms;
+            animation-fill-mode: forwards;
+        }
+        @keyframes active-rotate-snap {
+            0% {
+                background-image: url(../../../../assets/images/left.svg);
+                transform: rotate(180deg);
+            }
+            65% {
+                background-image: url(../../../../assets/images/active-arrow.svg);
+                transform: rotate(0deg);
+            }
+            75% {
+                background-image: url(../../../../assets/images/active-arrow.svg);
+                transform: rotate(-20deg);
+            }
+            100% {
+                background-image: url(../../../../assets/images/active-arrow.svg);
+                transform: rotate(0deg);
+            }
+        }
+        @keyframes rotate-snap {
+            0% {
+                background-image: url(../../../../assets/images/active-arrow.svg);
+                transform: rotate(0deg);
+            }
+            65% {
+                background-image: url(../../../../assets/images/left.svg);
+                transform: rotate(180deg);
+            }
+            75% {
+                background-image: url(../../../../assets/images/left.svg);
+                transform: rotate(200deg);
+            }
+            100% {
+                background-image: url(../../../../assets/images/left.svg);
+                transform: rotate(180deg);
+            }
         }
     }
 }
