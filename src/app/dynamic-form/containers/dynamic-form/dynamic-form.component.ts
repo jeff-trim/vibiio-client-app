@@ -5,6 +5,7 @@ import { Config } from '../../models/config.interface';
 
 @Component({
     selector: 'vib-dynamic-form',
+    styleUrls: ['dynamic-form.component.scss'],
     template: `
       <form
         class="dynamic-form"
@@ -37,15 +38,16 @@ export class DynamicFormComponent implements OnInit {
     }
 
     createGroup() {
-       const group = this.fb.group({});
-       this.config
-           .forEach(
-             control => group.addControl(control.name,
-                                         this.fb.control(
-                                         { value: control.value, disabled: control.disabled }, control.validators))
-           );
+      const group = this.fb.group({});
 
-       return group;
+      this.config
+          .forEach(
+            control => group.addControl(control.name,
+                                        this.fb.control(
+                                        { value: control.value, disabled: control.disabled }, control.validators))
+          );
+
+      return group;
     }
 
     formSubmit(value) {
