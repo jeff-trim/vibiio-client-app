@@ -58,6 +58,7 @@ span.jcf-select .jcf-select-opener {
     border-bottom-right-radius: 5px; 
     overflow: none;
     cursor: pointer;
+    width: inherit !important;
 }
 
 //unselected dropdown rows
@@ -85,6 +86,17 @@ span.jcf-option.jcf-hover {
     color: $pink !important;
     background-color: $white;
     cursor: pointer;
+}
+
+// removes scrollbars
+.jcf-scrollbar.jcf-scrollbar-vertical {
+    display: none !important;
+    background: transparent;
+}
+
+.jcf-scrollbar.jcf-scrollbar-horizontal {
+    display: none !important;
+    background: transparent;
 }
 
  // sort button styles
@@ -147,7 +159,7 @@ span.jcf-option.jcf-hover {
         background: transparent !important;
     }
     .jcf-list-content.jcf-list-content {
-        width: 157.5px;
+        width: 157.5px !important;
         margin-left: 8px;
         min-width: none;
         background-color: $blue;
@@ -202,13 +214,6 @@ span.jcf-option.jcf-hover {
         font-weight: 700;
         margin-left: 330px;
         cursor: pointer;
-        // .jcf-list-content {
-        //     width: 400px !important;
-        //     // span.jcf-option {
-        //     //     text-overflow: ellipsis;
-        //     //     width: 300px;
-        //     // }
-        // }
     }
     .jcf-list .jcf-option {
         text-overflow: ellipsis;
