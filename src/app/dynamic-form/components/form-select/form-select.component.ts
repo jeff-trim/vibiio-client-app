@@ -9,7 +9,7 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
     styleUrls: ['form-select.component.scss'],
     template: `
       <div
-       class="dynamic-field form-input"
+       class="dynamic-field form-input signup-select"
        [formGroup]="group">
          <label>{{ config.label }}</label>
          <select [formControlName]="config.name"
