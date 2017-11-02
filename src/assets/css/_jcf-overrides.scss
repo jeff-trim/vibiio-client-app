@@ -73,6 +73,8 @@ span.jcf-select .jcf-select-opener {
     min-width: 327px;
     width: 100%;
     cursor: pointer;
+    max-width: 382px !important;
+    text-overflow: ellipsis !important;
 }
 
 // selected dropdown row
@@ -208,27 +210,18 @@ span.jcf-option.jcf-hover {
     .jcf-select {
         max-width: 400px;
         height: 30px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
         font-size: 1.8rem;
         font-weight: 700;
         margin-left: 330px;
         cursor: pointer;
     }
     .jcf-list .jcf-option {
-        text-overflow: ellipsis;
         font-size: 1.8rem;
         font-weight: 700;
-        width: 360px !important;
-        text-overflow: ellipsis;
         cursor: pointer;
     }
     .jcf-select-text span {
         font-size: 1.8rem;
         cursor: pointer;
-    }
-    .jcf-option {
-        max-width: 360px;
-        text-overflow: ellipsis;
     }
 }
