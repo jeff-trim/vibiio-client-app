@@ -27,10 +27,10 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: $pink;
-    // min-width: 327px;
     width: 100%;
     background-color: $white; 
     border: none;
+    cursor: pointer;
 }
 
 // select opener icon
@@ -57,6 +57,7 @@ span.jcf-select .jcf-select-opener {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px; 
     overflow: none;
+    cursor: pointer;
 }
 
 //unselected dropdown rows
@@ -70,17 +71,20 @@ span.jcf-select .jcf-select-opener {
     color: $white !important;
     min-width: 327px;
     width: 100%;
+    cursor: pointer;
 }
 
 // selected dropdown row
 span.jcf-option.jcf-selected.jcf-hover {
     color: $pink !important;
     background-color: $white;
+    cursor: pointer;
 }
 
 span.jcf-option.jcf-hover {
     color: $pink !important;
     background-color: $white;
+    cursor: pointer;
 }
 
  // sort button styles
@@ -94,6 +98,7 @@ span.jcf-option.jcf-hover {
         padding-top: 7px;
         min-width: none;
         text-align-last: center;
+        cursor: pointer;
         //initial text
         .jcf-select-text {
             border-radius: 5px;
@@ -105,6 +110,7 @@ span.jcf-option.jcf-hover {
             padding-top: 7px;
             margin-left: 8px;
             width: inherit;
+            cursor: pointer;
         }
     }
     // select opener icon
@@ -129,6 +135,7 @@ span.jcf-option.jcf-hover {
     //select dropdown
     .jcf-select-drop .jcf-select-drop-content {
         border: none;
+        cursor: pointer;
     }
 
     //dropdown box
@@ -149,6 +156,7 @@ span.jcf-option.jcf-hover {
         border-bottom: solid 3px $blue;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
+        cursor: pointer;
     }
     // selected dropdown row
     .jcf-option.jcf-disabled.jcf-selected {
@@ -167,12 +175,55 @@ span.jcf-option.jcf-hover {
     .jcf-option.jcf-hover.jcf-selected {
         color: $blue;
         background-color: white;
+        cursor: pointer;
     }
     span.jcf-option.jcf-hover {
         color: $blue !important;
         background-color: white;
+        cursor: pointer;
     }
     &.jcf-select.jcf-unselectable {
         border: none !important;
+    }
+}
+
+// Sign up select
+.signup-select {
+    max-width: 400px;;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    .jcf-select {
+        max-width: 400px;
+        height: 30px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-left: 330px;
+        cursor: pointer;
+        // .jcf-list-content {
+        //     width: 400px !important;
+        //     // span.jcf-option {
+        //     //     text-overflow: ellipsis;
+        //     //     width: 300px;
+        //     // }
+        // }
+    }
+    .jcf-list .jcf-option {
+        text-overflow: ellipsis;
+        font-size: 1.8rem;
+        font-weight: 700;
+        width: 360px !important;
+        text-overflow: ellipsis;
+        cursor: pointer;
+    }
+    .jcf-select-text span {
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+    .jcf-option {
+        max-width: 360px;
+        text-overflow: ellipsis;
     }
 }
