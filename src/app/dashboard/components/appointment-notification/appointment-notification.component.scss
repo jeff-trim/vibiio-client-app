@@ -30,6 +30,11 @@
 }
 .message {
   margin: 0 0 0 30px;
+  max-height: 1.6rem;
+  min-width: 615px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .message, .button-label {
