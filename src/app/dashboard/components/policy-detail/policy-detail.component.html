@@ -4,9 +4,9 @@
                     between-xs
                     bottom-xs">
             <span class="label">Provider</span>
-              <input [ngModel]="policy?.carrier"
+              <input [(ngModel)]="policy.carrier"
                    disabled     
-                   name="carrier" 
+                   FormControlName="carrier" 
                    placeholder="CARRIER"
                    type="text" 
                    class="value end-md" 
@@ -19,9 +19,9 @@
                     between-xs
                     bottom-xs">
             <span class="label">Policy Number</span>
-            <input [ngModel]="policy?.policy_number"
+            <input [(ngModel)]="policy.policy_number"
                     disabled
-                    name="policy_number"
+                    FormControlName="policy_number"
                     placeholder="POLICY NUMBER"
                     type="text"
                     class="value end-md"
@@ -34,9 +34,9 @@
                     between-xs
                     bottom-xs">
             <span class="label">Claim ID</span>
-            <input [ngModel]="policy?.claim_id"
+            <input [(ngModel)]="policy.claim_id"
                     disabled        
-                    name="claim_id"
+                    FormControlName="claim_id"
                     placeholder="CLAIM ID"
                     type="text"
                     class="value end-md"

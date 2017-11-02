@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
+// Components
+import { InsurancePolicyComponent } from '../insurance-policy/insurance-policy.component';
+
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';
 import { ConsumerSortService } from '../../services/consumer-sort.service';
@@ -35,6 +38,9 @@ export class ConsumerStatusComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.consumerProfiles = data.cons.vibiios;
+            // this.consumerProfiles.forEach( (profile) => {
+            //     console.log(profile.insurance_policies);
+            // });
         });
 
         this.sortTypes = this.sortService.build();

@@ -1,8 +1,12 @@
 <div class="existing-policy-container"
      id="scrollbar">
 
-    <span *ngFor="let policy of insurancePolicies">
-        <vib-policy-detail [policy]="policy"></vib-policy-detail>
+    <span *ngIf="insurancePolicies">
+        <span *ngFor="let policy of insurancePolicies">
+            <vib-policy-detail [policy]="policy"
+            (editPolicy)="onEdit($event)"
+            (updatePolicy)="updatePolicy($event)"></vib-policy-detail>
+        </span>
     </span>
 </div>
 

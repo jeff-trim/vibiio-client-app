@@ -17,15 +17,14 @@ import { DateFormatService } from '../../../services/date-format.service';
 })
 
 export class ConsumerProfileComponent implements OnInit {
-    @Input()
-    consumerProfile: ConsumerProfile;
-
-    @Input()
-    vibiio: Vibiio;
-
     insurancePolicies?: InsurancePolicy[];
     updateStatusReminder: boolean;
     userTimeZone: string;
+    isUpdatingInsurancePolicy = new EventEmitter<boolean>();
+    isEditingInsurancePolicy = new EventEmitter<boolean>();
+
+    @Input() consumerProfile: ConsumerProfile;
+    @Input() vibiio: Vibiio;
 
     constructor(private statusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
@@ -55,5 +54,13 @@ export class ConsumerProfileComponent implements OnInit {
 
     parseTime(time: number): string  {
         return this.dateFormatService.parseTime(time, this.userTimeZone);
+    }
+
+    insuranceOnEdit(isEditing) {
+        this.isEditingInsurancePolicy.emit(isEditing);
+    }
+
+    insuranceOnUpdate(isUpdating) {
+        this.isUpdatingInsurancePolicy.emit(isUpdating);
     }
 }

@@ -27,7 +27,7 @@ export class PolicyDetailEditComponent {
         };
 
         this.updateService
-            .updatePolicy(options, policy.id)
+            .updatePolicy(options)
             .subscribe( (data) => {
                 this.policy = data.insurance_policy;
             },

@@ -11,13 +11,18 @@
   
   <ng-container *ngFor="let consumerProfile of consumerProfiles | orderBy: {property: property, direction: direction}">
     <div class="flex">
+      
       <consumer-profile-title [consumerProfile]="consumerProfile"></consumer-profile-title>
+      
       <div class="consumer-profile-container">
         <div class="col-md-6
                     consumer-profile-detail">
+          
           <consumer-profile [consumerProfile]="consumerProfile"
                             [vibiio]="consumerProfile"></consumer-profile>
+
         </div>
+        
         <div class="col-md-7
                     col-md-offset-1">
           <video-archive [snapshots]="consumerProfile.snapshots"></video-archive>
