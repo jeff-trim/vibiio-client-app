@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 
 // Components
 import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.component';
@@ -14,7 +15,8 @@ import { DynamicFieldDirective } from './directive/dynamic-field/dynamic-field.d
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JcfModule
   ],
   declarations: [
     DynamicFormComponent,
