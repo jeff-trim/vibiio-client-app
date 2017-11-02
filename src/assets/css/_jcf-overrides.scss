@@ -19,7 +19,7 @@
 }
 
 // initial text
-.jcf-select .jcf-select-text {
+.jcf-select-text span {
     font-family: $base-font;
     font-size: 1.65rem;
     font-weight: 700;
@@ -34,7 +34,7 @@
 }
 
 // select opener icon
-.jcf-unselectable .jcf-select-opener {
+span.jcf-select .jcf-select-opener {
     background-image: url(assets/images/down-arrow-magenta.png);
     background-repeat: no-repeat;
     background-position-x: 99%;
@@ -43,11 +43,12 @@
 }
 
 //select dropdown
-.jcf-select-drop .jcf-select-drop-content {
-    border-left: solid 3px white;
-    border-right: solid 3px white;
-    border-bottom: solid 3px white;
+.jcf-select.jcf-unselectable {
     border: none;
+}
+
+.jcf-select-drop .jcf-select-drop-content {
+    border: none !important;
 }
 
 //dropdown box
@@ -66,25 +67,23 @@
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
-    color: $white;
+    color: $white !important;
     min-width: 327px;
     width: 100%;
 }
 
 // selected dropdown row
-.jcf-option.jcf-selected.jcf-hover {
-    color: $pink;
-    background-color: white;
+span.jcf-option.jcf-selected.jcf-hover {
+    color: $pink !important;
+    background-color: $white;
 }
 
-// hovering dropdown row
-.jcf-select-drop .jcf-hover,
-.jcf-list-box .jcf-selected {
-    color: $pink;
-    background-color: white;
- }
+span.jcf-option.jcf-hover {
+    color: $pink !important;
+    background-color: $white;
+}
 
- // sort styles
+ // sort button styles
 .select-style {
     width: 145px;
     height: 35px;
@@ -105,9 +104,7 @@
             height: 35px;
             padding-top: 7px;
             margin-left: 8px;
-            &.jcf-focus {
-                border: solid 3px $blue !important;
-            }
+            width: inherit;
         }
     }
     // select opener icon
@@ -118,6 +115,14 @@
         background-position-y: 75%;
         background-color: transparent;
     }
+
+    .jcf-focus * {
+        border-color: $blue !important;
+    }
+
+    span.jcf-option-label .jcf-focus {
+        border: none !important;
+    }
 }
 
 .jcf-select-consumer-sort {
@@ -126,13 +131,16 @@
         border: none;
     }
 
-    &:focus {
-        border: solid 3px $blue !important;
-        outline: none;
-    }
     //dropdown box
-    .jcf-list-content {
-        width: 162.5px;
+    .jcf-select-text span {
+        color: $blue !important;
+    }
+
+    span.jcf-list {
+        background: transparent !important;
+    }
+    .jcf-list-content.jcf-list-content {
+        width: 157.5px;
         margin-left: 8px;
         min-width: none;
         background-color: $blue;
@@ -153,9 +161,22 @@
         color: $blue;
         background-color: white;
     }
+    .jcf-option.jcf-disabled.jcf-option-label {
+        color: $blue !important;
+    }
     .jcf-option.jcf-hover.jcf-selected {
         color: $blue;
         background-color: white;
     }
+    span.jcf-option.jcf-hover {
+        color: $blue !important;
+        background-color: white;
+    }
+    &.jcf-select.jcf-unselectable {
+        border: none !important;
+    }
 }
 
+span.jcf-select .jcf-unselectable .jcf-select-consumer-sort .jcf-drop-active .jcf-focus {
+    border-color: $blue !important;
+}
