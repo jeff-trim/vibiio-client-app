@@ -8,6 +8,12 @@ span.pink-underline {
   border-bottom: 3px solid $pink;
 } 
 
+p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: $pink;
+}
+
 .form-input {
   margin-bottom: 15px;
   margin: 0 auto;
@@ -27,7 +33,6 @@ span.pink-underline {
   input:focus {
     outline: none;
   }
-  
 }
 .form-input:hover{
   input {
