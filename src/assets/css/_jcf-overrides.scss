@@ -204,15 +204,13 @@ span.jcf-option.jcf-hover {
 // Sign up select
 .signup-select {
     max-width: 400px;;
-    height: 30px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    height: 40px;
+    margin: 0 auto;
     .jcf-select {
         max-width: 400px;
         height: 30px;
         font-size: 1.8rem;
-        font-weight: 700;
-        margin-left: 510px;
+        font-weight: 700;      
         cursor: pointer;
     }
     .jcf-list .jcf-option {
