@@ -22,26 +22,4 @@
         letter-spacing: normal;
         color: $blue;
     }
-    select {
-        width: 145px;
-        height: 42px;
-        padding-right: 12.5px;
-        text-align-last: center;
-        font-family: $copy-font;
-        font-size: 1.65rem;
-        font-weight: 600;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
-        color: $blue;
-        border-radius: 5px;
-        border: solid 3px $blue;
-        background-color: $white;
-        -webkit-appearance: none;
-        background-image: url('../../../../assets/images/down-arrow-cyan.png');
-        background-repeat: no-repeat;
-        background-position-x: 90%;
-        background-position-y: 50%;
-        cursor: pointer;
-    }
 }

@@ -6,13 +6,11 @@
                 between-xs
                 bottom-xs">
   
-        <div class="select-style">   
-            <select 
-             [(ngModel)]="vibiio.status" 
-             id="status"
-             name="status"
-             (change)=onSubmit(vibiio.status)>
-                <option class="label" [ngValue]="vibiio.status" selected>{{ vibiio.status | capitalize | removeUnderscore }}</option>  
+        <div class="claim-status-style">   
+            <select [(ngModel)]="vibiio.status" 
+                    id="status"
+                    name="status"
+                    (change)=onSubmit(vibiio.status) jcf>
                 <option value="scheduled">Scheduled</option>
                 <option value="claim_in_progress">Claim in Progress</option>
                 <option value="completed">Completed</option>

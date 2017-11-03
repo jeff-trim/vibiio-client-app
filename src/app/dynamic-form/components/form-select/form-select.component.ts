@@ -9,11 +9,12 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
     styleUrls: ['form-select.component.scss'],
     template: `
       <div
-       class="dynamic-field form-input"
+       class="dynamic-field form-input signup-select"
        [formGroup]="group">
          <label>{{ config.label }}</label>
          <select [formControlName]="config.name"
-                 [class.error-message]="errorArray.length > 0">
+                 [class.error-message]="errorArray.length > 0"
+                 jcf>
             <option value="">{{ config.placeholder }}</option>
             <option value="{{ option.value }}" *ngFor="let option of config.options">
             {{ option.label }}

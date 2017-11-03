@@ -8,9 +8,11 @@
               bottom-xs">
 
     <div class="select-style">   
-        <select id="sortType"
+        <select class="consumer-sort"
+                id="sortType"
                 formControlName="sortOptions"
-                (change)=onSubmit(form.value.sortOptions)>
+                (change)=onSubmit(form.value.sortOptions)
+                jcf>
                 <option class="label" disabled>SORT</option>  
                 <ng-container *ngFor="let sort of sortTypes">
                     <option [value]="sort.name">{{ sort.name }}</option>

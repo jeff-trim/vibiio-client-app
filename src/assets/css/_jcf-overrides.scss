@@ -1,0 +1,227 @@
+@import 'variables';
+
+.jcf-select {
+    font-family: $base-font;
+    font-size: 1.65rem;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: $pink;
+    width: 100%;
+    background-color: $white;
+    -webkit-appearance: none;
+    border: none;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
+}
+
+// initial text
+.jcf-select-text span {
+    font-family: $base-font;
+    font-size: 1.65rem;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: $pink;
+    width: 100%;
+    background-color: $white; 
+    border: none;
+    cursor: pointer;
+}
+
+// select opener icon
+span.jcf-select .jcf-select-opener {
+    background-image: url(assets/images/down-arrow-magenta.png);
+    background-repeat: no-repeat;
+    background-position-x: 99%;
+    background-position-y: 50%;
+    background-color: transparent;
+}
+
+//select dropdown
+.jcf-select.jcf-unselectable {
+    border: none;
+}
+
+.jcf-select-drop .jcf-select-drop-content {
+    border: none !important;
+}
+
+//dropdown box
+.jcf-list-content {
+    background-color: $pink;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; 
+    overflow: none;
+    cursor: pointer;
+    width: inherit !important;
+}
+
+//unselected dropdown rows
+.jcf-list .jcf-option {
+    font-family: $base-font;
+    font-size: 1.65rem;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: $white !important;
+    min-width: 327px;
+    width: 100%;
+    cursor: pointer;
+    max-width: 382px !important;
+    text-overflow: ellipsis !important;
+}
+
+// selected dropdown row
+span.jcf-option.jcf-selected.jcf-hover {
+    color: $pink !important;
+    background-color: $white;
+    cursor: pointer;
+}
+
+span.jcf-option.jcf-hover {
+    color: $pink !important;
+    background-color: $white;
+    cursor: pointer;
+}
+
+// removes scrollbars
+.jcf-scrollbar.jcf-scrollbar-vertical {
+    display: none !important;
+    background: transparent;
+}
+
+.jcf-scrollbar.jcf-scrollbar-horizontal {
+    display: none !important;
+    background: transparent;
+}
+
+ // sort button styles
+.select-style {
+    width: 145px;
+    height: 35px;
+    //initial container
+    .jcf-select {
+        width: 145px;
+        height: 35px;
+        padding-top: 7px;
+        min-width: none;
+        text-align-last: center;
+        cursor: pointer;
+        //initial text
+        .jcf-select-text {
+            border-radius: 5px;
+            border: solid 3px $blue;
+            padding-right: 12.5px;
+            font-family: $copy-font;
+            color: $blue;
+            height: 35px;
+            padding-top: 7px;
+            margin-left: 8px;
+            width: inherit;
+            cursor: pointer;
+        }
+    }
+    // select opener icon
+    .jcf-unselectable .jcf-select-opener {
+        background-image: url(assets/images/down-arrow-cyan.png);
+        background-repeat: no-repeat;
+        background-position-x: 99%;
+        background-position-y: 75%;
+        background-color: transparent;
+    }
+
+    .jcf-focus * {
+        border-color: $blue !important;
+    }
+
+    span.jcf-option-label .jcf-focus {
+        border: none !important;
+    }
+}
+
+.jcf-select-consumer-sort {
+    //select dropdown
+    .jcf-select-drop .jcf-select-drop-content {
+        border: none;
+        cursor: pointer;
+    }
+
+    //dropdown box
+    .jcf-select-text span {
+        color: $blue !important;
+    }
+
+    span.jcf-list {
+        background: transparent !important;
+    }
+    .jcf-list-content.jcf-list-content {
+        width: 157.5px !important;
+        margin-left: 8px;
+        min-width: none;
+        background-color: $blue;
+        border-left: solid 3px $blue;
+        border-right: solid 3px $blue;
+        border-bottom: solid 3px $blue;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        cursor: pointer;
+    }
+    // selected dropdown row
+    .jcf-option.jcf-disabled.jcf-selected {
+        color: $blue !important;
+        background-color: $white; 
+    }
+
+    // disabled row
+    .jcf-option.jcf-disabled.jcf-selected {
+        color: $blue;
+        background-color: white;
+    }
+    .jcf-option.jcf-disabled.jcf-option-label {
+        color: $blue !important;
+    }
+    .jcf-option.jcf-hover.jcf-selected {
+        color: $blue;
+        background-color: white;
+        cursor: pointer;
+    }
+    span.jcf-option.jcf-hover {
+        color: $blue !important;
+        background-color: white;
+        cursor: pointer;
+    }
+    &.jcf-select.jcf-unselectable {
+        border: none !important;
+    }
+}
+
+// Sign up select
+.signup-select {
+    max-width: 400px;;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    .jcf-select {
+        max-width: 400px;
+        height: 30px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-left: 510px;
+        cursor: pointer;
+    }
+    .jcf-list .jcf-option {
+        font-size: 1.8rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .jcf-select-text span {
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+}
