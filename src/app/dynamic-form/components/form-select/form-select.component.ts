@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Config } from '../../models/config.interface';
 
+
 import { validationMessages, errorMessages } from '../../models/validation-messages';
 
 @Component({
@@ -15,7 +16,7 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
          <select [formControlName]="config.name"
                  [class.error-message]="errorArray.length > 0"
                  jcf>
-            <option value="undefined" disabled>Provider</option>
+            <option [ngValue]="null">Provider</option>
             <option value="{{ option.value }}" *ngFor="let option of config.options">
                 {{ option.label }}
             </option>
@@ -48,5 +49,7 @@ export class FormSelectComponent implements OnInit {
                                                             this.errorArray,
                                                             this.errorMessages);
                     });
+        // Need to include global jcf object in component
+        // jcf.refreshAll();
     }
 }
