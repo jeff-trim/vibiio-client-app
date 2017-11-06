@@ -17,11 +17,13 @@ import { MapProvidersService } from '../services/map-providers.service';
   styleUrls: ['consumer-sign-up.component.scss'],
   template: `
   <div class="holder">
-    <div class="logo"></div>
-    <h1>Consumer Sign Up</h1>
-    <vib-dynamic-form id="sign-up-form"
-                      [config]="form?.inputs"
-                      (submitted)="submitForm($event)"></vib-dynamic-form>
+    <div class="col-xs-12">
+      <div class="logo"></div>
+      <h1>Consumer Sign Up</h1>
+      <vib-dynamic-form id="sign-up-form"
+                        [config]="form?.inputs"
+                        (submitted)="submitForm($event)"></vib-dynamic-form>
+    <div>
   </div>
   `
 })

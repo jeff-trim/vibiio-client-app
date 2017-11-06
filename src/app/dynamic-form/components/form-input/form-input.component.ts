@@ -8,8 +8,8 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
     selector: 'form-input',
     styleUrls: ['form-input.component.scss'],
     template: `
-      <div 
-       class="dynamic-field form-input" 
+      <div
+       class="dynamic-field form-input col-xs-12"
        [formGroup]="group">
          <label>{{ config.label }}</label>
          <input
