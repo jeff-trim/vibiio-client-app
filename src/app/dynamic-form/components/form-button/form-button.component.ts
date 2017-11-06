@@ -8,8 +8,8 @@ import { Config } from '../../models/config.interface';
     selector: 'form-input',
     styleUrls: ['form-button.component.scss'],
     template: `
-      <div 
-       class="dynamic-field form-input" 
+      <div
+       class="dynamic-field form-input col-xs-12"
        [formGroup]="group">
          <button
           type="submit">
