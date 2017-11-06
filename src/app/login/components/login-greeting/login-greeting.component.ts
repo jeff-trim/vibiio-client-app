@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-login-greeting',
   styleUrls: ['login-greeting.component.scss'],
   template: `
-    <div class="center col-xs-12 contain">
+    <div class="center col-xs-12">
       <div class="logo"></div>
       <div class="welcome">
         <h1>Welcome to vibiio!</h1>
