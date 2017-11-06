@@ -10,7 +10,7 @@ export function errorMessages(errorsObject, name, errorArray, errorMessages): st
             errorArray = [];
             const keys = Object.keys(errorsObject);
             keys.forEach( key => {
-               const error = name + ' ' + errorMessages[key];
+               const error = name.replace('_', ' ') + ' ' + errorMessages[key];
                errorArray.push(error);
             });
         }
