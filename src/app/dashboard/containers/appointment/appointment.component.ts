@@ -102,8 +102,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 this.session.connect(this.token, (error) => {
                     // Video options
                     const options = {
-                        width: 312,
-                        height: 461.1
+                        width: '100%',
+                        height: '100%'
                     };
 
                     // Initialize a publisher and publish the audio only stream to the session
