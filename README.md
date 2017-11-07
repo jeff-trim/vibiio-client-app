@@ -1,6 +1,6 @@
 # Vibiio Angular 2 Web Client App
 
-Documentation can be found in [*Asansa*](https://app.asana.com/0/293243103762528/board).
+Documentation can be found in [*Asana*](https://app.asana.com/0/293243103762528/board).
 
 ## Development
 
