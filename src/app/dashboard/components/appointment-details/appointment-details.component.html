@@ -104,7 +104,15 @@
           <div class="waiting-house"></div>
           <div class="waiting-text">Connecting...</div>
         </div>
-        <div id="subscriber-stream"></div>
+        <div *ngIf="(onVibiio)">
+          <div class="subscriber-holder">
+            <div id="subscriber-stream"></div>
+          </div>
+          <div class="fullscreen">
+            <img src="../../../../assets/images/add.svg">
+            <span class="fullscreen-text">FULLSCREEN</span>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="(!onVibiio)" 
