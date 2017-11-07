@@ -87,7 +87,6 @@ export let consumerSignUp = {
     {
       type: 'select',
       name: 'carrier',
-      value: null,
       options: [],
       placeholder: 'Provider',
       validators: [
