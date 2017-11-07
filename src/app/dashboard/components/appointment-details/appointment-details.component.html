@@ -104,15 +104,25 @@
           <div class="waiting-house"></div>
           <div class="waiting-text">Connecting...</div>
         </div>
-        <div *ngIf="(onVibiio)">
+        <!-- <div *ngIf="(onVibiio)"> -->
           <div class="subscriber-holder">
-            <div id="subscriber-stream"></div>
+            <div id="subscriber-stream"
+                 [class.on-fullscreen]="vibiioFullscreen"></div>
           </div>
-          <div class="fullscreen">
-            <img src="../../../../assets/images/add.svg">
-            <span class="fullscreen-text">FULLSCREEN</span>
+          <div class="fullscreen-button"
+               (click)="toggleVibiioFullscreen()">
+            <div *ngIf="(!vibiioFullscreen)">
+              <img class="fullscreen-icon"
+                   src="../../../../assets/images/fullscreen-enter-pink.svg">
+              <span class="fullscreen-text">FULLSCREEN</span>
+            </div>
+            <div *ngIf="(vibiioFullscreen)">
+                <img class="fullscreen-icon"
+                     src="../../../../assets/images/fullscreen-exit-white.svg">
+                <span class="fullscreen-text">EXIT FULLSCREEN</span>
+              </div>
           </div>
-        </div>
+        <!-- </div> -->
       </div>
 
       <div *ngIf="(!onVibiio)" 

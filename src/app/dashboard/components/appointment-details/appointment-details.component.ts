@@ -27,6 +27,7 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 export class AppointmentDetailsComponent  {
     imgData: string;
+    vibiioFullscreen = false;
 
     @Input()
     vibiioConnecting: boolean;
@@ -106,5 +107,9 @@ export class AppointmentDetailsComponent  {
 
     parseTime(time: number) {
       return this.dateFormatService.parseTime(time, this.timeZone);
+    }
+
+    toggleVibiioFullscreen() {
+      this.vibiioFullscreen = !this.vibiioFullscreen;
     }
 }
