@@ -29,25 +29,37 @@
         margin: auto;
         width: 100%;
         height: 100%;
+        // & .OT_video-element {
+        //     object-fit: contain !important; 
+        // }
     }
     .fullscreen-button {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         margin-top: 10px;
-        z-index: 999;
         cursor: pointer;
         .fullscreen-icon {
             width: 20px;
+            margin-right: 10px;
         }
         .fullscreen-text {
-            width: 118px;
             height: 18px;
             font-family: $copy-font;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 1px;
             color: $pink;
+        }
+    }
+    .fs-button-position {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 9999;
+        margin: 10px;
+        & .fullscreen-text {
+            color: white;
         }
     }
     .waiting-text {
