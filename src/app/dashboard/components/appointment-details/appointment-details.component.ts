@@ -28,6 +28,7 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 export class AppointmentDetailsComponent  {
     imgData: string;
+    vibiioFullscreen = false;
     isEditingInsurance = false;
     isUpdatingInsurance = false;
 
@@ -107,4 +108,7 @@ export class AppointmentDetailsComponent  {
       this.insuranceStatusService.updateStatus(false);
       this.insuranceStatusService.editStatus(false);
   }
+    toggleVibiioFullscreen() {
+      this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
 }
