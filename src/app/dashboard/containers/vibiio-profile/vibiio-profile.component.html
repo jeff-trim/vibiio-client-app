@@ -3,6 +3,20 @@
             col-md-offset-1">
   <h1 class="col-xs
              pink">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
+  <h4 *ngIf="!isEditingInsurance"
+      class="col-md-offset-4
+            edit-text"
+      (click)=onPolicyEdit()>EDIT</h4>
+
+  <h4 *ngIf="isEditingInsurance"
+      class="col-md-offset-4
+             save-text"
+      [ngClass]="{ 'save-after-element': isUpdatingInsurance }"
+      (click)=onPolicyUpdate()>SAVE</h4>
+  
+  <h4 *ngIf="isEditingInsurance"
+      class="cancel-text"
+      (click)="resetInsuranceForm()">CANCEL</h4>
 
   <div class="flex">
 <!--insert 'profile and vibiio titles-->
@@ -13,7 +27,10 @@
           <div class="long-pink-underline" ></div>
         </div>
         <consumer-profile [consumerProfile]="consumerProfile"
-                          [vibiio]="consumerProfile"></consumer-profile>
+                          [vibiio]="consumerProfile"
+                          (isEditingInsurance)=onPolicyEdit($event)
+                          (isUpdatingInsurance)=onInsuranceUpdate($event)>
+        </consumer-profile>
       </div>
 
       <div class="col-md-offset-1">

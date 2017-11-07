@@ -220,10 +220,6 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-"angular2-autosize@git+https://github.com/chrum/angular2-autosize.git":
-  version "1.0.2"
-  resolved "git+https://github.com/chrum/angular2-autosize.git#50cb10472413254dee909a8f2a99e4c26c2ffda6"
-
 angular2-jcf-directive@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/angular2-jcf-directive/-/angular2-jcf-directive-0.1.1.tgz#1ec35bad741ea8beae3e8e56daba55cbb3d816b0"

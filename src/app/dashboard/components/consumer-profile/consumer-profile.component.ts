@@ -20,8 +20,8 @@ export class ConsumerProfileComponent implements OnInit {
     insurancePolicies?: InsurancePolicy[];
     updateStatusReminder: boolean;
     userTimeZone: string;
-    isUpdatingInsurancePolicy = new EventEmitter<boolean>();
-    isEditingInsurancePolicy = new EventEmitter<boolean>();
+    isUpdatingInsurance = new EventEmitter<boolean>();
+    isEditingInsurance = new EventEmitter<boolean>();
 
     @Input() consumerProfile: ConsumerProfile;
     @Input() vibiio: Vibiio;
@@ -57,10 +57,10 @@ export class ConsumerProfileComponent implements OnInit {
     }
 
     insuranceOnEdit(isEditing) {
-        this.isEditingInsurancePolicy.emit(isEditing);
+        this.isEditingInsurance.emit(isEditing);
     }
 
     insuranceOnUpdate(isUpdating) {
-        this.isUpdatingInsurancePolicy.emit(isUpdating);
+        this.isUpdatingInsurance.emit(isUpdating);
     }
 }

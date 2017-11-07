@@ -26,7 +26,7 @@ export class InsurancePolicyService {
                .catch( (error: any) => Observable.throw(error));
     }
 
-     newPolicy(policy: InsurancePolicy): Observable <any> {
+    newPolicy(policy: InsurancePolicy): Observable <any> {
         const url = `${POLICY_URL}`;
         const payload = { insurance_policy: policy };
 

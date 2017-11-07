@@ -1,8 +1,9 @@
-import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { InsurancePolicyService } from '../../services/insurance-policy.service';
 import { PolicyDetailNewComponent } from '../../components/policy-detail-new/policy-detail-new.component';
 import { PolicyDetailComponent } from '../../components/policy-detail/policy-detail.component';
+import { InsuranceStatusService } from '../../services/insurance-status.service';
 
 @Component({
   selector: 'vib-insurance-policy',
@@ -10,7 +11,7 @@ import { PolicyDetailComponent } from '../../components/policy-detail/policy-det
   styleUrls: ['./insurance-policy.component.scss']
 })
 
-export class InsurancePolicyComponent {
+export class InsurancePolicyComponent implements OnInit {
   isSaving: boolean;
   showNewForm = false;
   formValid: boolean;
@@ -27,7 +28,15 @@ export class InsurancePolicyComponent {
   @ViewChild(PolicyDetailComponent)
   updatePolicyChild: PolicyDetailComponent;
 
-  constructor(private policyService: InsurancePolicyService) { }
+  constructor(private policyService: InsurancePolicyService,
+              private insuranceStatusService: InsuranceStatusService) { }
+
+  ngOnInt() {
+    this.insuranceStatusService.onEdit$.subscribe(
+        data => {
+          this.toggleActionCable(data);
+        });
+  }
 
   createPolicy(insurancePolicy: InsurancePolicy) {
     this.isSaving = true;
@@ -48,17 +57,17 @@ export class InsurancePolicyComponent {
   }
 
   updatePolicy(insurancePolicy: InsurancePolicy) {
-    this.isUpdating.emit(true);
+    this.insuranceStatusService.updateStatus(true);
     this.policyService.updatePolicy(insurancePolicy)
         .subscribe( (data) => {
           this.insurancePolicies = Object.assign( {}, this.insurancePolicies, data.policies);
-          this.isUpdating.emit(false);
-          this.isEditing.emit(false);
+          this.insuranceStatusService.updateStatus(false);
+          this.insuranceStatusService.editStatus(false);
         },
         (error: any) => {
           console.log( 'error updating policy' );
-          this.isEditing.emit(false);
-          this.isUpdating.emit(false);
+          this.insuranceStatusService.editStatus(false);
+          this.insuranceStatusService.updateStatus(false);
       });
   }
 
@@ -67,8 +76,8 @@ export class InsurancePolicyComponent {
         .subscribe( (data) => {
             this.insurancePolicies = Object.assign({}, this.insurancePolicies, data.policies);
         });
-    this.isEditing.emit(false);
-  }
+        this.insuranceStatusService.editStatus(false);
+      }
 
   showForm() {
     this.showNewForm = true;
@@ -84,6 +93,6 @@ export class InsurancePolicyComponent {
   }
 
   onEdit(isEditing) {
-    this.isEditing.emit(true);
+    this.insuranceStatusService.editStatus(isEditing);
   }
 }
