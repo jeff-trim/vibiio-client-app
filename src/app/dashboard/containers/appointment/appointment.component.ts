@@ -100,10 +100,12 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 'Vibiiograher manually started video',
                 'Video session started');
                 this.session.connect(this.token, (error) => {
-                    // Video options
+                    // Video options - Append sets it as the child of the id below
                     const options = {
-                        width: 312,
-                        height: 461.1
+                        insertMode: 'append',
+                        fitMode: 'contain',
+                        width: '100%',
+                        height: '100%'
                     };
 
                     // Initialize a publisher and publish the audio only stream to the session

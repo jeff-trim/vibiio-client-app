@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login-greeting',
   styleUrls: ['login-greeting.component.scss'],
   template: `
-    <div>
+    <div class="center col-xs-12">
       <div class="logo"></div>
       <div class="welcome">
         <h1>Welcome to vibiio!</h1>

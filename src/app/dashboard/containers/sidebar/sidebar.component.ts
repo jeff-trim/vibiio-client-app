@@ -24,7 +24,7 @@ import { Appointment} from '../../models/appointment.interface';
 export class SidebarComponent implements OnInit {
   myScheduledVibiios: any;
   customersCategories: CustomerStatusCount[];
-  scheduledVibiiosVisibility = false;
+  scheduledVibiiosVisibility = true;
   customerCategoryVisibility = true;
   profileVisibility = true;
   sidebarVisibility: boolean;

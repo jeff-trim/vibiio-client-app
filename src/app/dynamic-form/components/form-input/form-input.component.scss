@@ -18,7 +18,19 @@ p {
   margin-bottom: 15px;
   margin: 0 auto;
   width: 400px;
-  padding-bottom: 20px;  
+  padding-bottom: 20px;
+  ::-webkit-input-placeholder { /* Chrome */
+    color: $greyish-brown;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $greyish-brown;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $greyish-brown;
+  }
+  :-moz-placeholder { /* Firefox 4 - 18 */
+    color: $greyish-brown;
+  }
   input {
     width: 100%;
     height: 30px;

@@ -1,73 +1,74 @@
-<div>
-  <form #form="ngForm"
-        novalidate>
-    <div class="form-input-group">
-      <div class="input-group">
-        <input type="email"
-               name="email"
-               [ngModel]="credentials?.email"
-               #email="ngModel"
-               class="form-control"
-               placeholder="Enter Email"
-               required>
-        <span class="pink-underline"></span>       
-      </div>
-      <div class="input-group">
-        <input type="password"
-               name="password"
-               [ngModel]="credentials?.password"
-               #password="ngModel"
-               class="form-control"
-               placeholder="Enter Password"
-               required>
-        <span class="pink-underline"></span> 
-        <div class="errors" *ngIf="email.errors?.required && !email.pristine">
-          Email is required
+<form #form="ngForm" novalidate class="col-xs-12">
+  <div class="form-input-group">
+    <div class="input-group">
+      <input type="email"
+            name="email"
+            [ngModel]="credentials?.email"
+            #email="ngModel"
+            class="form-control"
+            placeholder="Enter Email"
+            required>
+      <span class="pink-underline"></span>       
+    </div>
+    <div class="input-group">
+      <input type="password"
+            name="password"
+            [ngModel]="credentials?.password"
+            #password="ngModel"
+            class="form-control"
+            placeholder="Enter Password"
+            required>
+      <span class="pink-underline"></span> 
+    </div>
+
+    <div class="errors" *ngIf="email.errors?.required && !email.pristine">
+        Email is required
+    </div>
+    <div class="errors" *ngIf="password.errors?.required && !password.pristine">
+        Password is required
+    </div>
+    <div class="errors" *ngIf="unauthorized">
+        Invalid email or password
+    </div>
+  </div>
+
+  <div class="login-options row col-xs-12">
+    <div class="remember-me col-xs-6">
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="remember-me-input"
+              (click)="toggleRememberMe()"
+              [ngClass]="{'checked': credentials.remember,
+                          'unchecked': !credentials.remember}"></div>
         </div>
-        <div class="errors" *ngIf="password.errors?.required && !password.pristine">
-          Password is required
-        </div>
-        <div class="errors" *ngIf="unauthorized">
-          Invalid email or password
+        <div id="remember-me" class="col-xs-offset-1 col-xs-10">
+          Remember Me
         </div>
       </div>
     </div>
-    <div class="login-options row">
-      <div class="remember-me col-xs-6">
-        <div class="row">
-          <div class="col-xs-1">
-            <div class="remember-me-input"
-                 (click)="toggleRememberMe()"
-                 [ngClass]="{'checked': credentials.remember,
-                            'unchecked': !credentials.remember}"></div>
-          </div>
-          <div id="remember-me" class="col-xs-offset-1 col-xs-10">
-            Remember Me
-          </div>
-        </div>
-      </div>
-      <div class="password-reset col-xs-6">
-        <div class="row">
-          <div class="col-xs-offset-2 col-xs-1">
-            <a routerLink="/password-reset">
-              <object data="assets/images/help.svg"
-                      type="image/svg+xml"
-                      class="info">
-              </object>
-            </a>
-          </div>
-          <a routerLink="/password-reset" class="col-xs-9" id="forgot-password">
-              Forgot Password?
+
+    <div class="password-reset col-xs-6">
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-1">
+          <a routerLink="/password-reset">
+            <object data="assets/images/help.svg"
+                    type="image/svg+xml"
+                    class="info">
+            </object>
           </a>
         </div>
+        <a routerLink="/password-reset" class="col-xs-9" id="forgot-password">
+            Forgot Password?
+        </a>
       </div>
     </div>
-    <div class="form-submit">
-      <button type="submit"
-              class="button button-primary"
-              (click)="login(form.value, form.valid)"
-              [disabled]="form.invalid"
-              [class.disabled]="form.invalid">sign in</button>
-    </div>
-  </form>
-</div>
+  </div>
+
+  <div class="form-submit col-xs-12">
+    <button type="submit"
+            class="button button-primary"
+            (click)="login(form.value, form.valid)"
+            [disabled]="form.invalid"
+            [class.disabled]="form.invalid">sign in</button>
+  </div>
+</form>

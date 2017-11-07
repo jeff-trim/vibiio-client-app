@@ -1,5 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as screenfull from 'screenfull';
 
 // Services
 import { AppointmentService } from '../../services/appointment.service';
@@ -27,6 +28,7 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 export class AppointmentDetailsComponent  {
     imgData: string;
+    vibiioFullscreen = false;
 
     @Input()
     vibiioConnecting: boolean;
@@ -106,5 +108,14 @@ export class AppointmentDetailsComponent  {
 
     parseTime(time: number) {
       return this.dateFormatService.parseTime(time, this.timeZone);
+    }
+
+    toggleVibiioFullscreen() {
+      this.vibiioFullscreen = !this.vibiioFullscreen;
+
+      // Toggles fullscreen using screenfull package
+      if (screenfull.enabled) {
+        screenfull.toggle();
+      }
     }
 }
