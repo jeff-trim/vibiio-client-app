@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Config } from '../../models/config.interface';
-import * as jcf from 'jcf';
 
 import { validationMessages, errorMessages } from '../../models/validation-messages';
 
@@ -16,7 +15,7 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
          <select [formControlName]="config.name"
                  [class.error-message]="errorArray.length > 0"
                  jcf>
-            <option [ngValue]="null">Provider</option>
+            <option value="undefined" disabled>Provider</option>
             <option value="{{ option.value }}" *ngFor="let option of config.options">
                 {{ option.label }}
             </option>
@@ -49,8 +48,5 @@ export class FormSelectComponent implements OnInit {
                                                             this.errorArray,
                                                             this.errorMessages);
                     });
-
-        // Refresh select element so that select placeholder appears on initialization
-        jcf.refreshAll();
     }
 }
