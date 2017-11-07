@@ -1,5 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as screenfull from 'screenfull';
 
 // Services
 import { AppointmentService } from '../../services/appointment.service';
@@ -111,5 +112,10 @@ export class AppointmentDetailsComponent  {
 
     toggleVibiioFullscreen() {
       this.vibiioFullscreen = !this.vibiioFullscreen;
+
+      // Toggles fullscreen using screenfull package
+      if (screenfull.enabled) {
+        screenfull.toggle();
+      }
     }
 }
