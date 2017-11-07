@@ -49,7 +49,8 @@ export class FormSelectComponent implements OnInit {
                                                             this.errorArray,
                                                             this.errorMessages);
                     });
-        // Need to include global jcf object in component
-        // jcf.refreshAll();
+
+        // Refresh select element so that select placeholder appears on initialization
+        jcf.refreshAll();
     }
 }
