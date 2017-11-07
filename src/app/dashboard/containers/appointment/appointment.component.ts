@@ -103,6 +103,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     // Video options - Append sets it as the child of the id below
                     const options = {
                         insertMode: 'append',
+                        fitMode: 'contain',
                         width: '100%',
                         height: '100%'
                     };
