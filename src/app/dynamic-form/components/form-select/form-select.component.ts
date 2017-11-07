@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Config } from '../../models/config.interface';
-
+import * as jcf from 'jcf';
 
 import { validationMessages, errorMessages } from '../../models/validation-messages';
 
