@@ -90,6 +90,9 @@ a {
             height: 30px;
             background-size: cover;
             cursor: pointer;
+            &:focus {
+                outline: none;
+            }
         }
         .left-arrow {
             background-image: url(../../../../assets/images/left.svg);
