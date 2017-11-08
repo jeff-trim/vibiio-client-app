@@ -22,7 +22,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     </div>
 
     <div class="bottom-row">
-        <div class="description">Writing a short description for a vibiio here at the moment</div>
+        <div class="description">
+            Writing a short description for a vibiio here at the moment.
+        </div>
     </div>
 
   </div>
