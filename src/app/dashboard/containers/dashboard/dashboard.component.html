@@ -9,13 +9,17 @@
   <div class="col-xs-12
               col-md-9
               dashboard-outlet">
-    <span *ngFor="let consumer of waitingConsumers">
-        <appointment-notification
-            [notificationData]="consumer['consumerData']"
-            (claimAppointment)="claimAppointment($event)"
-            *ngIf="notificationDrawerVisibility"></appointment-notification>
-    </span>        
-    <div class="notification-bar" *ngIf="userAvailability">
+    <div class="notification-holder"
+         id="scrollbar"
+         *ngIf="notificationDrawerVisibility">          
+      <span *ngFor="let consumer of waitingConsumers">
+          <appointment-notification
+              [notificationData]="consumer['consumerData']"
+              (claimAppointment)="claimAppointment($event)"></appointment-notification>
+      </span>
+    </div>  
+
+    <div class="notification-drawer" *ngIf="userAvailability">
       <div class="message">
         <div *ngIf="!notificationDrawerVisibility">
             <span *ngIf="waitingConsumers.length > 1">{{ waitingConsumers.length }} customers are requesting live vibiios! Answer one now.</span>

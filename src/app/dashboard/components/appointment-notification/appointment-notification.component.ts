@@ -5,13 +5,26 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./appointment-notification.component.scss'],
     template: `
 <div class="notification-bar" title="{{ notificationData.content.message_body }}">
-  <div class="message">{{ notificationData.content.message_body }}</div>
-  <div class="button-wrap"
-       *ngIf="displayConnectIcon()">
-    <span class="button-label">Start Vibiio</span>
-    <img class="claim-button"
-         (click)="emitAppointment()"
-         src="assets/images/start_white.svg" />
+  <div class="wrapper">
+    <div class="top-row">
+        <div class="notification">
+            <div class="name">FirstName LastName</div>
+            <span class="pink-underline"></span>
+            <div class="timer">Waiting for X seconds</div>
+        </div>
+
+        <div class="button-wrap" *ngIf="displayConnectIcon()">
+            <span class="button-label">Start Vibiio</span>
+            <img class="claim-button"
+                (click)="emitAppointment()"
+                src="assets/images/start.svg" />
+        </div>
+    </div>
+
+    <div class="bottom-row">
+        <div class="description">Writing a short description for a vibiio here at the moment</div>
+    </div>
+
   </div>
 </div>
 `
