@@ -3,20 +3,23 @@
             col-md-offset-1">
   <h1 class="col-xs
              pink">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
-  <h4 *ngIf="!isEditingInsurance"
-      class="col-md-offset-4
-            edit-text"
-      (click)=onPolicyEdit()>EDIT</h4>
-
-  <h4 *ngIf="isEditingInsurance"
-      class="col-md-offset-4
-             save-text"
-      [ngClass]="{ 'save-after-element': isUpdatingInsurance }"
-      (click)=onPolicyUpdate()>SAVE</h4>
   
-  <h4 *ngIf="isEditingInsurance"
-      class="cancel-text"
-      (click)="resetInsuranceForm()">CANCEL</h4>
+    <div class="row edit-button-row">
+      <h4 *ngIf="!isEditingInsurance"
+          class="col-md-offset-4
+                 edit-text"
+          (click)=onPolicyEdit()>EDIT</h4>
+
+      <h4 *ngIf="isEditingInsurance"
+          class="col-md-offset-4
+                 save-text"
+          [ngClass]="{ 'save-after-element': isUpdatingInsurance }"
+          (click)=onPolicyUpdate()>SAVE</h4>
+
+      <h4 *ngIf="isEditingInsurance"
+          class="cancel-text"
+          (click)="onCancelPolicyEdit()">CANCEL</h4>
+    </div>
 
   <div class="flex">
 <!--insert 'profile and vibiio titles-->
@@ -27,9 +30,7 @@
           <div class="long-pink-underline" ></div>
         </div>
         <consumer-profile [consumerProfile]="consumerProfile"
-                          [vibiio]="consumerProfile"
-                          (isEditingInsurance)=onPolicyEdit($event)
-                          (isUpdatingInsurance)=onInsuranceUpdate($event)>
+                        [vibiio]="consumerProfile">
         </consumer-profile>
       </div>
 

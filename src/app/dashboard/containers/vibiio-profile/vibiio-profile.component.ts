@@ -39,11 +39,11 @@ export class VibiioProfileComponent implements OnInit {
         });
 
         this.insuranceStatusService.onEdit$.subscribe( (data) => {
-            this.isEditingInsurance = Object.assign({}, this.isEditingInsurance, data);
+            this.isEditingInsurance = data;
         });
 
         this.insuranceStatusService.onUpdate$.subscribe( (data) => {
-            this.isUpdatingInsurance = Object.assign({}, this.isUpdatingInsurance, data);
+            this.isUpdatingInsurance = data;
         });
     }
 
@@ -54,10 +54,18 @@ export class VibiioProfileComponent implements OnInit {
     }
 
     onPolicyEdit() {
-        this.isEditingInsurance = Object.assign({}, this.isEditingInsurance, true);
+        this.isEditingInsurance = true;
+        this.insuranceStatusService.editStatus(true);
     }
 
     onPolicyUpdate() {
-        this.isUpdatingInsurance = Object.assign({}, this.isUpdatingInsurance, true);
+        this.isUpdatingInsurance = true;
+        this.insuranceStatusService.updateStatus(true);
+    }
+
+    onCancelPolicyEdit() {
+        this.insuranceStatusService.cancelEdit(true);
+        this.insuranceStatusService.updateStatus(false);
+        this.insuranceStatusService.editStatus(false);
     }
 }
