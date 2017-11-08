@@ -4,8 +4,7 @@
     <span *ngIf="insurancePolicies">
         <span *ngFor="let policy of insurancePolicies">
             <vib-policy-detail [policy]="policy"
-            (editPolicy)="onEdit($event)"
-            (updatePolicy)="updatePolicy($event)"></vib-policy-detail>
+                               [onEdit]="onEdit"></vib-policy-detail>
         </span>
     </span>
 </div>

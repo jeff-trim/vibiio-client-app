@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { API_URL } from '../../../environments/environment';
 import 'rxjs/add/operator/map';
@@ -37,10 +37,14 @@ export class InsurancePolicyService {
     }
 
     getPolicies(consumerId: number): Observable <any> {
-        const url = `${POLICY_URL}/${consumerId}`;
+        const url = `${POLICY_URL}`;
+
+        const options = new RequestOptions({
+            params: { consumer_id: consumerId }
+        });
 
     return this.http
-            .get(url)
+            .get(url, options)
                .map( (response: Response) => response.json() )
                .catch( (error: any) => Observable.throw(error));
     }

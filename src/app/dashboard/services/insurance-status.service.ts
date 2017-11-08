@@ -3,11 +3,13 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class InsuranceStatusService {
-  private updatingPolicy = new Subject<any>();
-  private editingPolicy = new Subject<any>();
+  private updatingPolicy = new Subject<boolean>();
+  private editingPolicy = new Subject<boolean>();
+  private cancelingEdit = new Subject<boolean>();
 
-  onEdit$ = this.editingPolicy.asObservable();
   onUpdate$ = this.updatingPolicy.asObservable();
+  onEdit$ = this.editingPolicy.asObservable();
+  onCancel$ = this.cancelingEdit.asObservable();
 
   editStatus(data) {
     this.editingPolicy.next(data);
@@ -15,5 +17,9 @@ export class InsuranceStatusService {
 
   updateStatus(data) {
     this.updatingPolicy.next(data);
+  }
+
+  cancelEdit(data) {
+    this.cancelingEdit.next(data);
   }
 }

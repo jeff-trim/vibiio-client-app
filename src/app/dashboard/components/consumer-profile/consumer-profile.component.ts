@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 
 // Models
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
@@ -20,8 +20,6 @@ export class ConsumerProfileComponent implements OnInit {
     insurancePolicies?: InsurancePolicy[];
     updateStatusReminder: boolean;
     userTimeZone: string;
-    isUpdatingInsurance = new EventEmitter<boolean>();
-    isEditingInsurance = new EventEmitter<boolean>();
 
     @Input() consumerProfile: ConsumerProfile;
     @Input() vibiio: Vibiio;
@@ -54,13 +52,5 @@ export class ConsumerProfileComponent implements OnInit {
 
     parseTime(time: number): string  {
         return this.dateFormatService.parseTime(time, this.userTimeZone);
-    }
-
-    insuranceOnEdit(isEditing) {
-        this.isEditingInsurance.emit(isEditing);
-    }
-
-    insuranceOnUpdate(isUpdating) {
-        this.isUpdatingInsurance.emit(isUpdating);
     }
 }

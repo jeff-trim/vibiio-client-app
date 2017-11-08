@@ -15,12 +15,10 @@ export class InsurancePolicyComponent implements OnInit {
   isSaving: boolean;
   showNewForm = false;
   formValid: boolean;
+  onEdit = false;
 
   @Input() insurancePolicies?: InsurancePolicy[];
   @Input() consumerId: number;
-
-  @Output() isUpdating = new EventEmitter<boolean>();
-  @Output() isEditing = new EventEmitter<boolean>();
 
   @ViewChild(PolicyDetailNewComponent)
   newPolicyChild: PolicyDetailNewComponent;
@@ -31,11 +29,25 @@ export class InsurancePolicyComponent implements OnInit {
   constructor(private policyService: InsurancePolicyService,
               private insuranceStatusService: InsuranceStatusService) { }
 
-  ngOnInt() {
+  ngOnInit() {
     this.insuranceStatusService.onEdit$.subscribe(
         data => {
-          this.toggleActionCable(data);
-        });
+            this.onEdit = Object.assign({}, this.onEdit, data);
+          });
+    this.insuranceStatusService.onCancel$.subscribe(
+      data => {
+        if (data) {
+          this.resetUpdateForm();
+          this.onEdit = false;
+          console.log('cancelled:', data);
+        }
+      });
+    this.insuranceStatusService.onUpdate$.subscribe(
+      (data) => {
+        if (data) {
+          this.updatePolicyChild.onSubmit();
+        }
+    });
   }
 
   createPolicy(insurancePolicy: InsurancePolicy) {
@@ -56,28 +68,13 @@ export class InsurancePolicyComponent implements OnInit {
     });
   }
 
-  updatePolicy(insurancePolicy: InsurancePolicy) {
-    this.insuranceStatusService.updateStatus(true);
-    this.policyService.updatePolicy(insurancePolicy)
-        .subscribe( (data) => {
-          this.insurancePolicies = Object.assign( {}, this.insurancePolicies, data.policies);
-          this.insuranceStatusService.updateStatus(false);
-          this.insuranceStatusService.editStatus(false);
-        },
-        (error: any) => {
-          console.log( 'error updating policy' );
-          this.insuranceStatusService.editStatus(false);
-          this.insuranceStatusService.updateStatus(false);
-      });
-  }
 
   resetUpdatePolicyForm() {
     this.policyService.getPolicies(this.consumerId)
         .subscribe( (data) => {
             this.insurancePolicies = Object.assign({}, this.insurancePolicies, data.policies);
         });
-        this.insuranceStatusService.editStatus(false);
-      }
+  }
 
   showForm() {
     this.showNewForm = true;
@@ -92,7 +89,14 @@ export class InsurancePolicyComponent implements OnInit {
     this.showNewForm = false;
   }
 
-  onEdit(isEditing) {
-    this.insuranceStatusService.editStatus(isEditing);
+  resetUpdateForm() {
+    this.policyService.getPolicies(this.consumerId)
+      .subscribe( (data) => {
+        this.insurancePolicies = Object.assign([], this.insurancePolicies, data.insrance_policies);
+        this.updatePolicyChild.resetForm();
+        this.insuranceStatusService.editStatus(false);
+      }, (error) => {
+        console.log('error resetting form');
+      });
   }
 }

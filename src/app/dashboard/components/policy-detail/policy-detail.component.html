@@ -1,12 +1,13 @@
-  <form>
+  <form [formGroup]="editForm">
         <div class="info-element
                     row
                     between-xs
                     bottom-xs">
             <span class="label">Provider</span>
               <input [(ngModel)]="policy.carrier"
-                   disabled     
-                   FormControlName="carrier" 
+                   [attr.disabled]="!onEdit ? true : null"
+                   formControlName="carrier"
+                   name="carrier" 
                    placeholder="CARRIER"
                    type="text" 
                    class="value end-md" 
@@ -20,8 +21,9 @@
                     bottom-xs">
             <span class="label">Policy Number</span>
             <input [(ngModel)]="policy.policy_number"
-                    disabled
-                    FormControlName="policy_number"
+                    [attr.disabled]="!onEdit ? true : null"
+                    formControlName="policy_number"
+                    name="policy_number"
                     placeholder="POLICY NUMBER"
                     type="text"
                     class="value end-md"
@@ -35,8 +37,9 @@
                     bottom-xs">
             <span class="label">Claim ID</span>
             <input [(ngModel)]="policy.claim_id"
-                    disabled        
-                    FormControlName="claim_id"
+                    [attr.disabled]="!onEdit ? true : null"       
+                    formControlName="claim_id"
+                    name="claim_id"
                     placeholder="CLAIM ID"
                     type="text"
                     class="value end-md"
