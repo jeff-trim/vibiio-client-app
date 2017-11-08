@@ -25,27 +25,7 @@ declare var OT: any;
 
 @Component({
     selector: 'app-vibiio', styleUrls: ['./dashboard.component.scss'],
-  template: `
-<div class="row">
-  <app-sidebar (emitAvailability)="toggleActionCable($event)"
-               [available]="userAvailability"
-               class="col-xs-12
-                      col-md-3
-                      side-bar-component">
-  </app-sidebar>
-  <div class="col-xs-12
-              col-md-9
-              dashboard-outlet">
-<span *ngFor="let consumer of waitingConsumers">
-    <appointment-notification
-        [notificationData]="consumer['consumerData']"
-        (claimAppointment)="claimAppointment($event)"
-        *ngIf="notificationShow"></appointment-notification>
-</span>
-        <router-outlet></router-outlet>
-  </div>
-</div>
-`,
+    templateUrl: 'dashboard.component.html'
 })
 
 export class DashboardComponent implements OnInit {
@@ -61,6 +41,7 @@ export class DashboardComponent implements OnInit {
     userAvailability: boolean;
     cable: any;
     readonly jwt: string = this.authService.getToken();
+    notificationDrawerVisibility = false;
 
     constructor(
         private router: Router,
@@ -169,6 +150,10 @@ export class DashboardComponent implements OnInit {
         });
     }
 
+    toggleNotificationDrawerVisibility(event) {
+        this.notificationDrawerVisibility = !this.notificationDrawerVisibility;
+    }
+
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.vibiio = data.vibiio;
@@ -177,6 +162,7 @@ export class DashboardComponent implements OnInit {
 
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
         this.toggleActionCable(true);
+        console.log('Number of Consumers waiting: ', this.waitingConsumers.length);
     }
 
 }
