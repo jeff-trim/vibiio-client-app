@@ -1,20 +1,68 @@
 @import '../../../../assets/css/_variables.scss';
 
 .notification-bar{
-  background: $pink;
+  background: white;
+  width: 85%;
+  height: 180px;
+  display: flex;
+  // to remove
+  margin-bottom: 1px;
+  
+}
+
+.wrapper {
   width: 100%;
-  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: $pink;
+}
+
+.top-row {
+  // width: 100%;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1px;
+  padding-left: 125px;
+  padding-top: 75px; 
+} 
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  // width: 50%;
+  height: 100%;
+  .pink-underline {
+    width: 25px;
+    display: block;
+    border-bottom: 3px solid $pink;
+    margin-top: 5px;
+  }
+  .name {
+    color: #585858;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .timer {
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    text-transform: uppercase;
+  }
 }
+
 .button-wrap {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  min-width: 200px;
+  // width: 20%;
+  height: 100%;
   align-items: center;
 
   .claim-button {
@@ -24,23 +72,27 @@
   }
   .button-label {
     text-transform: uppercase;
-    font-size: 1.1rem;
     cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    height: 100%;
+    padding-right: 10px;
   }
 }
-.message {
-  margin: 0 0 0 30px;
-  max-height: 1.6rem;
-  min-width: 615px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+.bottom-row {
+  width: 100%;
+  padding-left: 125px;
 }
 
-.message, .button-label {
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+.description {
+  color: #585858;
+  font-size: 1.5rem;
+  // margin: 0 0 0 30px;
+  // max-height: 1.6rem;
+  // min-width: 615px;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // white-space: nowrap;
 }
-
-
