@@ -162,7 +162,6 @@ export class DashboardComponent implements OnInit {
 
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
         this.toggleActionCable(true);
-        console.log('Number of Consumers waiting: ', this.waitingConsumers.length);
     }
 
 }
