@@ -5,16 +5,25 @@
             <div class="name">{{ consumerName }}</div>
             <span class="pink"></span>
 
-            <div class="timer" *ngIf="minutes == 1">
-                Waiting for {{ minutes }} minute <span *ngIf="seconds !== 0">and {{ seconds }} seconds</span>
+            <div class="timer" *ngIf="minutes === '1' && seconds !== ''">
+                Waiting for {{ minutes }} minute and {{ seconds }} seconds
             </div>
-            <div class="timer" *ngIf="minutes > 1">
-                Waiting for {{ minutes }} minutes <span *ngIf="seconds != 0">and {{ seconds }} seconds</span>
+            <div class="timer" *ngIf="minutes === '1' && seconds === ''">
+                Waiting for {{ minutes }} minute
             </div>
-            <div class="timer" *ngIf="minutes == 0 && seconds == 1">
+            <div class="timer" *ngIf="minutes > '1' && seconds !== ''">
+                Waiting for {{ minutes }} minutes and {{ seconds }} seconds
+            </div>
+            <div class="timer" *ngIf="minutes > '1' && seconds === '1'">
+                    Waiting for {{ minutes }} minutes and {{ seconds }} second
+                </div>
+            <div class="timer" *ngIf="minutes > '1' && seconds === ''">
+                Waiting for {{ minutes }} minutes
+            </div>
+            <div class="timer" *ngIf="minutes === '' && seconds === '1'">
                 Waiting for {{ seconds }} second
             </div>
-            <div class="timer" *ngIf="minutes == 0 && seconds != 0">
+            <div class="timer" *ngIf="minutes === '' && seconds !== ''">
                 Waiting for {{ seconds }} seconds
             </div>
         </div>
