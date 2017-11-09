@@ -1,6 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import * as jcf from 'jcf';
 // Models
 import { FormSetup } from '../../dynamic-form/models/config.interface';
 import { ConsumerSignUp } from '../models/consumer-sign-up.interface';
@@ -28,7 +28,7 @@ import { MapProvidersService } from '../services/map-providers.service';
   `
 })
 
-export class ConsumerSignUpComponent implements OnInit {
+export class ConsumerSignUpComponent implements OnInit, AfterViewChecked {
   form: FormSetup = consumerSignUp;
 
   constructor(private route: ActivatedRoute,
@@ -41,9 +41,13 @@ export class ConsumerSignUpComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( (data: { providers: any }) => {
       this.mapProvidersService.mapProviders(data.providers.insurance_providers).then( (mapped_data) => {
-        this.form.inputs[9].options = mapped_data;
+        this.form.inputs[10] = Object.assign({}, this.form.inputs[10], { options: mapped_data });
       });
     });
+  }
+
+  ngAfterViewChecked() {
+    jcf.refreshAll();
   }
 
   submitForm(event) {
