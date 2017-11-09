@@ -35,21 +35,6 @@ export class PolicyDetailComponent implements OnInit {
         }
     }
 
-
-    onSubmit() {
-        this.policyService.updatePolicy(this.editForm.value)
-        .subscribe( (data) => {
-          this.policy = Object.assign( {}, this.policy, data.policy);
-          this.insuranceStatusService.updateStatus(false);
-          this.insuranceStatusService.editStatus(false);
-        },
-        (error: any) => {
-          console.log( 'error updating policy' );
-          this.insuranceStatusService.editStatus(false);
-          this.insuranceStatusService.updateStatus(false);
-      });
-    }
-
     resetForm() {
         this.editForm.patchValue(this.policy);
     }

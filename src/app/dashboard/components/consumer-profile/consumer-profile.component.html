@@ -24,9 +24,7 @@
 
   
     <vib-insurance-policy [insurancePolicies]="consumerProfile.insurance_policies"
-                          [consumerId]="consumerProfile.consumer_id"
-                          (isUpdating)="insuranceOnUpdate($event)"
-                          (isEditing)="insuranceOnEdit($event)"></vib-insurance-policy>
+                          [consumerId]="consumerProfile.consumer_id"></vib-insurance-policy>
 
     <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>

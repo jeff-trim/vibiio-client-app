@@ -40,6 +40,22 @@
         (click)="disconnect($event)">
     </div>
   </div>
+  <div class="row edit-button-row">
+    <h4 *ngIf="!isEditingInsurance"
+        class="col-md-offset-4
+               edit-text"
+        (click)=onPolicyEdit()>EDIT</h4>
+
+    <h4 *ngIf="isEditingInsurance"
+        class="col-md-offset-4
+               save-text"
+        [ngClass]="{ 'save-after-element': isUpdatingInsurance }"
+        (click)=onPolicyUpdate()>SAVE</h4>
+
+    <h4 *ngIf="isEditingInsurance"
+        class="cancel-text"
+        (click)="onCancelPolicyEdit()">CANCEL</h4>
+  </div>
 </div>
 
 <div class="flex" >
@@ -84,7 +100,9 @@
 
     
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
-                          [consumerId]="appointment.consumer_id"></vib-insurance-policy>
+                          [consumerId]="appointment.consumer_id"
+                          (isUpdating)="insuranceOnUpdate($event)"
+                          (isEditing)="insuranceOnEdit($event)"></vib-insurance-policy>
 
     <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
   </div>

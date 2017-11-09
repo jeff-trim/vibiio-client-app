@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, ViewChildren, QueryList, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { InsurancePolicyService } from '../../services/insurance-policy.service';
 import { PolicyDetailNewComponent } from '../../components/policy-detail-new/policy-detail-new.component';
@@ -23,8 +23,8 @@ export class InsurancePolicyComponent implements OnInit {
   @ViewChild(PolicyDetailNewComponent)
   newPolicyChild: PolicyDetailNewComponent;
 
-  @ViewChild(PolicyDetailComponent)
-  updatePolicyChild: PolicyDetailComponent;
+  @ViewChildren(PolicyDetailComponent)
+  updatePolicyChild: QueryList<PolicyDetailComponent>;
 
   constructor(private policyService: InsurancePolicyService,
               private insuranceStatusService: InsuranceStatusService) { }
@@ -45,7 +45,12 @@ export class InsurancePolicyComponent implements OnInit {
     this.insuranceStatusService.onUpdate$.subscribe(
       (data) => {
         if (data) {
-          this.updatePolicyChild.onSubmit();
+          this.updatePolicyChild.forEach(policyInstance => {
+            if (policyInstance.editForm.dirty) {
+              this.updatePolicy(policyInstance.editForm.value);
+            }
+          });
+          this.resetUpdatePolicyForm();
         }
     });
   }
@@ -92,11 +97,24 @@ export class InsurancePolicyComponent implements OnInit {
   resetUpdateForm() {
     this.policyService.getPolicies(this.consumerId)
       .subscribe( (data) => {
+        // this.updatePolicyChild.resetForm();
         this.insurancePolicies = Object.assign([], this.insurancePolicies, data.insrance_policies);
-        this.updatePolicyChild.resetForm();
         this.insuranceStatusService.editStatus(false);
       }, (error) => {
         console.log('error resetting form');
       });
+  }
+
+  updatePolicy(policy: InsurancePolicy) {
+      this.policyService.updatePolicy(policy)
+        .subscribe( (data) => {
+          this.insuranceStatusService.updateStatus(false);
+          this.insuranceStatusService.editStatus(false);
+      },
+      (error: any) => {
+        console.log( 'error updating policy' );
+        this.insuranceStatusService.editStatus(false);
+        this.insuranceStatusService.updateStatus(false);
+    });
   }
 }

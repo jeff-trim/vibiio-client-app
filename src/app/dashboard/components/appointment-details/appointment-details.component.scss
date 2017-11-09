@@ -241,3 +241,29 @@ h1.appointment-title {
     left: 0;
     position: absolute;
 }
+
+.edit-button-row {
+    justify-content: flex-end;
+    h4 {
+        height: 18px;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-align: right;
+        cursor: pointer;
+        &.save-text{
+            color: $blue;
+            overflow-y: hidden;
+            text-align: start;
+            width: 100px;
+        }
+        &.cancel-text{
+            color: $pink;
+            margin-left: 26px;
+        }
+        &.edit-text{
+            color: $pink;
+        }
+    }
+}
