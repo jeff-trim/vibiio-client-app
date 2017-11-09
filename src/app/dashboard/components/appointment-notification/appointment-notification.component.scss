@@ -1,9 +1,14 @@
 @import '../../../../assets/css/_variables.scss';
 
-.notification-bar{
+.notification-bar {
   background: white;
-  width: 85%;
-  height: 180px;
+  width: 90%;
+  height: 150px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  &.first-bar {
+    margin-top: 80px;
+  }
 }
 
 .wrapper {
@@ -19,7 +24,6 @@
   flex-direction: row;
   justify-content: space-between;
   padding-left: 125px;
-  padding-top: 75px; 
   align-items: center;
 } 
 

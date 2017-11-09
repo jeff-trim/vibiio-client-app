@@ -4,7 +4,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     selector: 'appointment-notification',
     styleUrls: ['./appointment-notification.component.scss'],
     template: `
-<div class="notification-bar" title="{{ notificationData.content.message_body }}">
+<div class="notification-bar" [ngClass]="{'first-bar': rowIndex == 0}" title="{{ notificationData.content.message_body }}">
   <div class="wrapper">
     <div class="top-row">
         <div class="notification">
@@ -23,7 +23,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
     <div class="bottom-row">
         <div class="description">
-            Writing a short description for a vibiio here at the moment.
+            My rows index is {{ rowIndex }}. Writing a short description for a vibiio here at the moment. 
+            Writing a longer description now to test out the ellipsis.
+            Is it appearing? Do you see it? Typing more and more. More words. more text. Yada Yada Yada Yada.
         </div>
     </div>
 
@@ -35,6 +37,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class AppointmentNotificationComponent {
     @Input()
     notificationData;
+
+    @Input()
+    rowIndex: number;
 
     @Output()
     claimAppointment: EventEmitter<any> = new EventEmitter<any>();
