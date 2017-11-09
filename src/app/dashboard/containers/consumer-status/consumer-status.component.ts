@@ -38,9 +38,6 @@ export class ConsumerStatusComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.consumerProfiles = data.cons.vibiios;
-            // this.consumerProfiles.forEach( (profile) => {
-            //     console.log(profile.insurance_policies);
-            // });
         });
 
         this.sortTypes = this.sortService.build();
