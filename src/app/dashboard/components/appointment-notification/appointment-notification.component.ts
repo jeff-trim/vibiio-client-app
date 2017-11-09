@@ -3,42 +3,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
     selector: 'appointment-notification',
     styleUrls: ['./appointment-notification.component.scss'],
-    template: `
-<div class="notification-bar" [ngClass]="{'first-bar': rowIndex == 0}" title="{{ parseDescription() }}">
-  <div class="wrapper">
-    <div class="top-row">
-        <div class="notification">
-            <div class="name">{{ parseConsumer() }}</div>
-            <span class="pink"></span>
-
-            <div class="timer" *ngIf="parseMinutes() == 1">
-                Waiting for <span>{{ parseMinutes() }} minute and </span>{{ parseSeconds() }} seconds
-            </div>
-            <div class="timer" *ngIf="parseMinutes() > 1">
-                Waiting for <span>{{ parseMinutes() }} minutes and </span>{{ parseSeconds() }} seconds
-            </div>
-            <div class="timer" *ngIf="parseMinutes() == 0">
-                Waiting for {{ parseSeconds() }} seconds
-            </div>
-        </div>
-
-        <div class="button-wrap" *ngIf="displayConnectIcon()">
-            <span class="button-label">Start Vibiio</span>
-            <img class="claim-button"
-                (click)="emitAppointment()"
-                src="assets/images/start.svg" />
-        </div>
-    </div>
-
-    <div class="bottom-row">
-        <div class="description" *ngIf="parseDescription()">{{ parseDescription() }}</div>
-    </div>
-
-  </div>
-</div>
-`
+    templateUrl: 'appointment-notification.component.html'
 })
 
+ // There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
 export class AppointmentNotificationComponent {
     @Input()
     notificationData;
@@ -65,9 +33,8 @@ export class AppointmentNotificationComponent {
     }
 
     parseConsumer() {
-        // There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
         return this.notificationData.content.message_body.match(/Consumer:(.*)Waiting:/)[1];
-    }
+      }
 
     parseWaitingTime() {
         if (this.notificationData.content.message_body.match(/Description:/)) {
