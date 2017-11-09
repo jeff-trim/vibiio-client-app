@@ -124,6 +124,7 @@
   max-height:    -moz-calc(100% - 80px);
   max-height:         calc(100% - 80px);
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #scrollbar::-webkit-scrollbar-track
