@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
     selector: 'appointment-notification',
@@ -7,7 +7,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 
  // There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
-export class AppointmentNotificationComponent {
+export class AppointmentNotificationComponent implements OnInit {
+    consumerName: string;
+    waitingTime: string;
+    minutes: string;
+    seconds: string;
+    description: string;
+
     @Input()
     notificationData;
 
@@ -20,6 +26,13 @@ export class AppointmentNotificationComponent {
 
     constructor() {}
 
+    ngOnInit() {
+        this.consumerName = JSON.parse(this.notificationData.content.message_body).consumer;
+        this.description = JSON.parse(this.notificationData.content.message_body).description;
+        this.minutes = JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '');
+        this.seconds = JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, '');
+    }
+
     displayConnectIcon() {
         if (this.notificationData.notification_type === 'error') {
             return false;
@@ -30,34 +43,5 @@ export class AppointmentNotificationComponent {
 
     emitAppointment() {
         this.claimAppointment.emit(this.notificationData);
-    }
-
-    parseConsumer() {
-        return this.notificationData.content.message_body.match(/Consumer:(.*)Waiting:/)[1];
-      }
-
-    parseWaitingTime() {
-        if (this.notificationData.content.message_body.match(/Description:/)) {
-            return this.notificationData.content.message_body.match(/Waiting:(.*)Description:/)[1];
-        } else {
-            return this.notificationData.content.message_body.match(/Waiting:(.*)/)[1];
-        }
-    }
-
-    // Hours not included because consumers can schedule vibiios after 2 minutes
-    parseMinutes() {
-        const waitingTime = this.parseWaitingTime();
-        return waitingTime.match(/:(.*)/)[1].split(':')[0].replace(/^0+/, '');
-    }
-
-    parseSeconds() {
-        const waitingTime = this.parseWaitingTime();
-        return waitingTime.match(/:(.*)/)[1].split(':')[1].replace(/^0+/, '');
-    }
-
-    parseDescription() {
-        if (this.notificationData.content.message_body.match(/Description:/)) {
-            return this.notificationData.content.message_body.match(/Description:(.*)/)[1];
-        }
     }
 }
