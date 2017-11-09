@@ -4,13 +4,22 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     selector: 'appointment-notification',
     styleUrls: ['./appointment-notification.component.scss'],
     template: `
-<div class="notification-bar" [ngClass]="{'first-bar': rowIndex == 0}" title="{{ notificationData.content.message_body }}">
+<div class="notification-bar" [ngClass]="{'first-bar': rowIndex == 0}" title="{{ parseDescription() }}">
   <div class="wrapper">
     <div class="top-row">
         <div class="notification">
             <div class="name">{{ parseConsumer() }}</div>
             <span class="pink"></span>
-            <div class="timer">Waiting for {{ parseWaitingTime() }} seconds</div>
+
+            <div class="timer" *ngIf="parseMinutes() == 1">
+                Waiting for <span>{{ parseMinutes() }} minute and </span>{{ parseSeconds() }} seconds
+            </div>
+            <div class="timer" *ngIf="parseMinutes() > 1">
+                Waiting for <span>{{ parseMinutes() }} minutes and </span>{{ parseSeconds() }} seconds
+            </div>
+            <div class="timer" *ngIf="parseMinutes() == 0">
+                Waiting for {{ parseSeconds() }} seconds
+            </div>
         </div>
 
         <div class="button-wrap" *ngIf="displayConnectIcon()">
@@ -56,7 +65,7 @@ export class AppointmentNotificationComponent {
     }
 
     parseConsumer() {
-        // There is a point in the lifecycle where it freezes up on receiving a new vibiio , because it is still null
+        // There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
         return this.notificationData.content.message_body.match(/Consumer:(.*)Waiting:/)[1];
     }
 
@@ -66,6 +75,17 @@ export class AppointmentNotificationComponent {
         } else {
             return this.notificationData.content.message_body.match(/Waiting:(.*)/)[1];
         }
+    }
+
+    // Hours not included because consumers can schedule vibiios after 2 minutes
+    parseMinutes() {
+        const waitingTime = this.parseWaitingTime();
+        return waitingTime.match(/:(.*)/)[1].split(':')[0].replace(/^0+/, '');
+    }
+
+    parseSeconds() {
+        const waitingTime = this.parseWaitingTime();
+        return waitingTime.match(/:(.*)/)[1].split(':')[1].replace(/^0+/, '');
     }
 
     parseDescription() {
