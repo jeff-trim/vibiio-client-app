@@ -3,7 +3,6 @@
 .notification-bar {
   background: white;
   width: 90%;
-  height: 150px;
   margin-top: 40px;
   margin-bottom: 20px;
   &.first-bar {
@@ -31,7 +30,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  .pink-underline {
+  .pink {
     width: 25px;
     display: block;
     border-bottom: 3px solid $pink;
@@ -90,9 +89,9 @@
   padding-top: 25px;
   // Update description so that it cuts off and has an ellipses
   // margin: 0 0 0 30px;
-  // max-height: 1.6rem;
-  // min-width: 615px;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  // white-space: nowrap;
+  max-height: 1.8rem;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
