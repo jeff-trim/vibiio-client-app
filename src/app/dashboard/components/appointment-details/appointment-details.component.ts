@@ -109,12 +109,13 @@ export class AppointmentDetailsComponent  {
       this.insuranceStatusService.updateStatus(false);
       this.insuranceStatusService.editStatus(false);
   }
-    toggleVibiioFullscreen() {
-      this.vibiioFullscreen = !this.vibiioFullscreen;
 
-      // Toggles fullscreen using screenfull package
-      if (screenfull.enabled) {
-        screenfull.toggle();
-      }
+  toggleVibiioFullscreen() {
+    this.vibiioFullscreen = !this.vibiioFullscreen;
+
+    // Toggles fullscreen using screenfull package
+    if (screenfull.enabled) {
+      screenfull.toggle();
     }
+  }
 }
