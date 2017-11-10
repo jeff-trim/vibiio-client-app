@@ -100,9 +100,8 @@
 
     
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
-                          [consumerId]="appointment.consumer_id"
-                          (isUpdating)="insuranceOnUpdate($event)"
-                          (isEditing)="insuranceOnEdit($event)"></vib-insurance-policy>
+                          [consumerId]="appointment.consumer_id">
+    </vib-insurance-policy>
 
     <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
   </div>
