@@ -11,11 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class ProfileLicensureComponent implements OnInit {
-    @Input() license: MyProfileLicense;
     editForm: FormGroup;
+    @Input() onEdit = false;
+    @Input() license: MyProfileLicense;
 
     updateLicense = new EventEmitter<MyProfileLicense>();
-
 
     constructor(private fb: FormBuilder) {}
 

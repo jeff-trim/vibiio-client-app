@@ -28,8 +28,9 @@
               col-md-5
               col-md-offset-1
               profile-information" >
-    <vib-profile-information
-      [myProfile]="myProfile"></vib-profile-information>
+    <vib-profile-information [myProfile]="myProfile"
+                             [onEdit]="isEditing">
+    </vib-profile-information>
   </div>
   <div class="col-xs-12
               col-sm-6
@@ -37,8 +38,10 @@
               profile-licensure">
 
     
-        <vib-profile-licensure *ngFor="let license of myLicenses"
-          [license]="license"></vib-profile-licensure>
+    <vib-profile-licensure *ngFor="let license of myLicenses"
+                            [license]="license"
+                            [onEdit]="isEditing">
+    </vib-profile-licensure>
 
     <div class="add-license">
       <img src="../../../../assets/images/add.svg"

@@ -57,6 +57,8 @@ export class MyProfileComponent implements OnInit {
         this.isSaving = true;
         this.updateLicences();
         this.updateMyProfile(this.profileInformationChild.myProfileForm);
+        this.isSaving = false;
+        this.isEditing = false;
     }
 
     updateLicences() {
@@ -110,8 +112,6 @@ export class MyProfileComponent implements OnInit {
         this.myProfileService.updateMyProfile(options)
             .subscribe( (data) => {
                 this.myProfile = data.user;
-                this.isSaving = false;
-                this.isEditing = false;
         });
     }
 

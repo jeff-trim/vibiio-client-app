@@ -17,11 +17,12 @@
                     bottom-xs">
         <span class="label">State</span>
         <input [(ngModel)]="license.state"
-                formControlName="state" 
-                placeholder="State"
-                type="text" 
-                class="value end-md" 
-                id="state">
+               [attr.disabled]="!onEdit ? true : null" 
+               formControlName="state" 
+               placeholder="State"
+               type="text" 
+               class="value end-md" 
+               id="state">
         <span class="pink-underline"></span>
         </div>
         
@@ -35,11 +36,12 @@
                     bottom-xs">
           <span class="label">License Number</span>
           <input [(ngModel)]="license.license_number"
-                formControlName="license_number" 
-                placeholder="License Number"
-                type="text" 
-                class="value end-md" 
-                id="license_number">
+                 [attr.disabled]="!onEdit ? true : null" 
+                 formControlName="license_number" 
+                 placeholder="License Number"
+                 type="text" 
+                 class="value end-md" 
+                 id="license_number">
           <span class="pink-underline"></span>
           </div>
     </form>
