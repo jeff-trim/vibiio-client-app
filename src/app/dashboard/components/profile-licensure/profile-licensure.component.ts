@@ -24,7 +24,7 @@ export class ProfileLicensureComponent implements OnInit {
             'id': [this.license.id, Validators.required],
             'state': ['', Validators.required],
             'license_number': ['', Validators.required],
-            'vibiiographer_id': [this.license.vibiiographerId, Validators.required]
+            'vibiiographer_id': [this.license.vibiiographer_id, Validators.required]
         });
     }
 }

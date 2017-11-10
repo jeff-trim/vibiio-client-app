@@ -55,16 +55,19 @@ export class MyProfileComponent implements OnInit {
 
     saveForms() {
         this.isSaving = true;
-        this.updateMyProfile(this.profileInformationChild.myProfileForm);
         this.updateLicences();
+        this.updateMyProfile(this.profileInformationChild.myProfileForm);
     }
 
     updateLicences() {
         this.profileLicenesesChildren.forEach(license => {
             if (license.editForm.dirty && license.editForm.valid) {
-                this.myLicenseService.updateMyLicense(license.editForm.value);
+                this.myLicenseService.updateMyLicense(license.editForm.value)
+                .subscribe( (data) => {
+                    license.license = data.license;
+                });
             }
-    });
+        });
     }
 
     resetForms() {

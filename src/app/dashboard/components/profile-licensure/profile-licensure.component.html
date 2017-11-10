@@ -5,9 +5,8 @@
 
 <div class="restrict-height" id="scrollbar">
     <form [formGroup]="editForm"
-          ngSubmit="onSubmit()">
-      <div formGroupName="userData">
-
+          ngSubmit="onSubmit()"
+          novalidate>
         <div *ngIf="editForm.get('state').invalid && !editForm.get('state').pristine"
               class="error-message">
           <p>State is Required</p>
@@ -35,7 +34,7 @@
                     between-xs
                     bottom-xs">
           <span class="label">License Number</span>
-          <input [(ngModel)]="editForm.license_number"
+          <input [(ngModel)]="license.license_number"
                 formControlName="license_number" 
                 placeholder="License Number"
                 type="text" 
@@ -43,7 +42,6 @@
                 id="license_number">
           <span class="pink-underline"></span>
           </div>
-      </div>
     </form>
 </div> 
       <!-- <div class="license-style">

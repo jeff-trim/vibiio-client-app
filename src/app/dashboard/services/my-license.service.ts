@@ -28,11 +28,12 @@ export class MyLicenseService {
       .catch( (error: any) => Observable.throw(error));
   }
 
-  updateMyLicense(license: MyProfileLicense): Observable<any> {
+  updateMyLicense(license: MyProfileLicense): Observable <any> {
+    const UPDATE_LICENSE_API = `${LICENSE_API}/${license.id}`;
     const payload = { license: license };
 
     return this.http
-      .patch(`${LICENSE_API}/${license.id}`, payload)
+      .put(UPDATE_LICENSE_API, payload)
       .map( (response: Response) => response.json() )
       .catch( (error: any) => Observable.throw(error));
   }
