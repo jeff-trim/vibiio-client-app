@@ -7,7 +7,7 @@ import { MyProfileService } from '../../services/my-profile.service';
 import { MyProfile } from '../../models/my-profile.interface';
 
 @Component({
-    selector: 'profile-information',
+    selector: 'vib-profile-information',
     styleUrls: ['profile-information.component.scss'],
     templateUrl: 'profile-information.component.html'
 })
