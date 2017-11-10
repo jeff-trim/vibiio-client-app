@@ -4,6 +4,7 @@ import { InsurancePolicyService } from '../../services/insurance-policy.service'
 import { PolicyDetailNewComponent } from '../../components/policy-detail-new/policy-detail-new.component';
 import { PolicyDetailComponent } from '../../components/policy-detail/policy-detail.component';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'vib-insurance-policy',
@@ -39,7 +40,6 @@ export class InsurancePolicyComponent implements OnInit {
         if (data) {
           this.resetUpdateForm();
           this.onEdit = false;
-          console.log('cancelled:', data);
         }
       });
     this.insuranceStatusService.onUpdate$.subscribe(
@@ -47,10 +47,19 @@ export class InsurancePolicyComponent implements OnInit {
         if (data) {
           this.updatePolicyChild.forEach(policyInstance => {
             if (policyInstance.editForm.dirty) {
-              this.updatePolicy(policyInstance.editForm.value);
-            }
+              this.policyService.updatePolicy(policyInstance.editForm.value)
+                  .subscribe( (data) => {
+                    this.insuranceStatusService.updateStatus(false);
+                    this.insuranceStatusService.editStatus(false);
+                    policyInstance.policy = data.policy;
+                  },
+                  (error: any) => {
+                    console.log( 'error updating policy' );
+                    this.insuranceStatusService.editStatus(false);
+                    this.insuranceStatusService.updateStatus(false);
+                  });
+              }
           });
-          this.resetUpdatePolicyForm();
         }
     });
   }
@@ -73,14 +82,6 @@ export class InsurancePolicyComponent implements OnInit {
     });
   }
 
-
-  resetUpdatePolicyForm() {
-    this.policyService.getPolicies(this.consumerId)
-        .subscribe( (data) => {
-            this.insurancePolicies = Object.assign({}, this.insurancePolicies, data.policies);
-        });
-  }
-
   showForm() {
     this.showNewForm = true;
   }
@@ -97,24 +98,10 @@ export class InsurancePolicyComponent implements OnInit {
   resetUpdateForm() {
     this.policyService.getPolicies(this.consumerId)
       .subscribe( (data) => {
-        // this.updatePolicyChild.resetForm();
-        this.insurancePolicies = Object.assign([], this.insurancePolicies, data.insrance_policies);
+        this.insurancePolicies = Object.assign([], this.insurancePolicies, data.insurance_policies);
         this.insuranceStatusService.editStatus(false);
       }, (error) => {
         console.log('error resetting form');
       });
-  }
-
-  updatePolicy(policy: InsurancePolicy) {
-      this.policyService.updatePolicy(policy)
-        .subscribe( (data) => {
-          this.insuranceStatusService.updateStatus(false);
-          this.insuranceStatusService.editStatus(false);
-      },
-      (error: any) => {
-        console.log( 'error updating policy' );
-        this.insuranceStatusService.editStatus(false);
-        this.insuranceStatusService.updateStatus(false);
-    });
   }
 }
