@@ -1,15 +1,6 @@
 @import '../../../../assets/css/variables';
 
-.dashboard-outlet {
-  padding-left: 0;
-  @media(min-width: $medium){
-    height: 100vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-
-  }
-}
-
+// Side Bar Container
 .side-bar-component {
   padding-right: 0 !important;
   @media(min-width: $medium){
@@ -17,3 +8,139 @@
   }
 }
 
+// Dashboard Container
+.dashboard-outlet {
+  padding-left: 0;
+  @media(min-width: $medium){
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+// Notification Drawer
+.notification-drawer {
+  background: $pink;
+  width: 100%;
+  height: 80px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.button-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  min-width: 200px;
+  height: 100%;
+  align-items: center;
+  .drawer-button {
+    margin: 15px 30px 15px 15px;
+    cursor: pointer;
+  }
+  .button-label {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+}
+.message {
+  margin: 5px 0 0 30px;
+  max-height: 2.0rem;
+  min-width: 300px;
+  white-space: nowrap;
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.message, .button-label {
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+// Drawer arrow
+.arrow {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  cursor: pointer;
+  &:focus {
+      outline: none;
+  }
+}
+.down-arrow {
+  background-image: url(../../../../assets/images/left.svg);
+  cursor: pointer;
+  animation-duration: 500ms;
+  animation-name: return-downward-state;
+  animation-fill-mode: forwards;
+}
+.active-arrow {
+  background-image: url(../../../../assets/images/left.svg);
+  transform: rotate(270deg);
+  cursor: pointer;
+  animation-name: return-upward-state;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
+
+// Arrow animations
+@keyframes return-downward-state {
+  0% {
+      transform: rotate(90deg);
+  }
+  65% {
+      transform: rotate(270deg);
+  }
+  75% {
+      transform: rotate(290deg);
+  }
+  100% {
+      transform: rotate(270deg);
+  }
+}
+@keyframes return-upward-state {
+  0% {
+      transform: rotate(270deg);
+  }
+  65% {
+      transform: rotate(90deg);
+  }
+  75% {
+      transform: rotate(70deg);
+  }
+  100% {
+      transform: rotate(90deg);
+  }
+}
+
+// Notification holder
+.notification-holder {
+  background: white;
+  width: 100%;
+  max-height: -webkit-calc(100% - 80px);
+  max-height:    -moz-calc(100% - 80px);
+  max-height:         calc(100% - 80px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#scrollbar::-webkit-scrollbar-track
+{
+    background: rgba(236, 0, 140, 0.25);
+    border-radius: 10px;
+}
+
+#scrollbar::-webkit-scrollbar
+{
+  width: 10px;
+}
+
+#scrollbar::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    max-height: 100px;
+    background-color: $pink;
+}

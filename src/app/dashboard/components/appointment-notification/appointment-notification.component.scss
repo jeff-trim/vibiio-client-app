@@ -1,20 +1,62 @@
 @import '../../../../assets/css/_variables.scss';
 
-.notification-bar{
-  background: $pink;
+.notification-bar {
+  background: white;
+  width: 90%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  &.first-bar {
+    margin-top: 80px;
+  }
+}
+
+.wrapper {
   width: 100%;
-  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: $pink;
+}
+
+.top-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-left: 125px;
   align-items: center;
-  margin-bottom: 1px;
+} 
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .pink {
+    width: 25px;
+    display: block;
+    border-bottom: 3px solid $pink;
+    margin-top: 5px;
+  }
+  .name {
+    color: #585858;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .timer {
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    text-transform: uppercase;
+  }
 }
+
 .button-wrap {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  min-width: 200px;
+  height: 100%;
   align-items: center;
 
   .claim-button {
@@ -24,23 +66,30 @@
   }
   .button-label {
     text-transform: uppercase;
-    font-size: 1.1rem;
     cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    height: 100%;
+    padding-right: 10px;
   }
 }
-.message {
-  margin: 0 0 0 30px;
-  max-height: 1.6rem;
-  min-width: 615px;
+
+.bottom-row {
+  width: 100%;
+  padding-left: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.description {
+  color: #585858;
+  font-size: 1.5rem;
+  padding-top: 25px;
+  max-height: 1.8rem;
+  max-width: 85%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.message, .button-label {
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-

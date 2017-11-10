@@ -1,31 +1,37 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
     selector: 'appointment-notification',
     styleUrls: ['./appointment-notification.component.scss'],
-    template: `
-<div class="notification-bar" title="{{ notificationData.content.message_body }}">
-  <div class="message">{{ notificationData.content.message_body }}</div>
-  <div class="button-wrap"
-       *ngIf="displayConnectIcon()">
-    <span class="button-label">Start Vibiio</span>
-    <img class="claim-button"
-         (click)="emitAppointment()"
-         src="assets/images/start_white.svg" />
-  </div>
-</div>
-`
+    templateUrl: 'appointment-notification.component.html'
 })
 
-export class AppointmentNotificationComponent {
+ // There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
+export class AppointmentNotificationComponent implements OnInit {
+    consumerName: string;
+    waitingTime: string;
+    minutes: string;
+    seconds: string;
+    description: string;
+
     @Input()
     notificationData;
+
+    @Input()
+    rowIndex: number;
 
     @Output()
     claimAppointment: EventEmitter<any> = new EventEmitter<any>();
     messageBody: string;
 
     constructor() {}
+
+    ngOnInit() {
+        this.consumerName = JSON.parse(this.notificationData.content.message_body).consumer;
+        this.description = JSON.parse(this.notificationData.content.message_body).description;
+        this.minutes = JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '');
+        this.seconds = JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, '');
+    }
 
     displayConnectIcon() {
         if (this.notificationData.notification_type === 'error') {
