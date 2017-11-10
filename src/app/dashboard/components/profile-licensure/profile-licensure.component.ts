@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
 import { MyProfileLicense } from '../../models/my-profile-license.interface';
 
 @Component({
-    selector: 'profile-licensure',
+    selector: 'vib-profile-licensure',
     styleUrls: ['profile-licensure.component.scss'],
     templateUrl: 'profile-licensure.component.html'
 })
