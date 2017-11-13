@@ -1,9 +1,4 @@
-<div class="info-element" >
-  <h2>licensure</h2>
-  <div class="long-pink-underline"></div>
-</div>
-
-<div class="restrict-height" id="scrollbar">
+<div>
     <form [formGroup]="editForm"
           ngSubmit="onSubmit()"
           novalidate>
@@ -16,8 +11,7 @@
                     between-xs
                     bottom-xs">
         <span class="label">State</span>
-        <input [(ngModel)]="license.state"
-               [attr.disabled]="!onEdit ? true : null" 
+        <input [attr.disabled]="!onEdit ? true : null" 
                formControlName="state" 
                placeholder="State"
                type="text" 
@@ -35,8 +29,7 @@
                     between-xs
                     bottom-xs">
           <span class="label">License Number</span>
-          <input [(ngModel)]="license.license_number"
-                 [attr.disabled]="!onEdit ? true : null" 
+          <input [attr.disabled]="!onEdit ? true : null" 
                  formControlName="license_number" 
                  placeholder="License Number"
                  type="text" 

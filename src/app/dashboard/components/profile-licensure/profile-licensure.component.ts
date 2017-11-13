@@ -22,8 +22,8 @@ export class ProfileLicensureComponent implements OnInit {
     ngOnInit() {
         this.editForm = this.fb.group({
             'id': [this.license.id, Validators.required],
-            'state': ['', Validators.required],
-            'license_number': ['', Validators.required],
+            'state': [this.license.state, Validators.required],
+            'license_number': [this.license.license_number, Validators.required],
             'vibiiographer_id': [this.license.vibiiographer_id, Validators.required]
         });
     }
