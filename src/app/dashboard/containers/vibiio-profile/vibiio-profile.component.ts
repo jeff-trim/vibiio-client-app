@@ -10,6 +10,8 @@ import { VideoSnapshot } from '../../models/video-snapshot.interface';
 import { Note } from '../../models/consumer-note.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
+import { ISubscription } from 'rxjs/Subscription';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     selector: 'vib-vibiio-profile',
@@ -17,14 +19,14 @@ import { InsuranceStatusService } from '../../services/insurance-status.service'
     styleUrls: ['vibiio-profile.component.scss']
 })
 
-export class VibiioProfileComponent implements OnInit {
+export class VibiioProfileComponent implements OnInit, OnDestroy {
     consumerProfile: ConsumerProfile;
     notes: Note[];
     vibiioId: number;
     description: string;
     isEditingInsurance = false;
     isUpdatingInsurance = false;
-
+    alive = true;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private vibiioProfileService: VibiioProfileService,
@@ -38,13 +40,21 @@ export class VibiioProfileComponent implements OnInit {
             this.description = data.profile.vibiio.description;
         });
 
-        this.insuranceStatusService.onEdit$.subscribe( (data) => {
-            this.isEditingInsurance = data;
-        });
+        this.insuranceStatusService.onEdit$
+            .takeWhile(() => this.alive)
+            .subscribe( (data) => {
+                this.isEditingInsurance = data;
+            });
 
-        this.insuranceStatusService.onUpdate$.subscribe( (data) => {
-            this.isUpdatingInsurance = data;
+        this.insuranceStatusService.onUpdate$
+            .takeWhile(() => this.alive)
+            .subscribe( (data) => {
+                this.isUpdatingInsurance = data;
         });
+    }
+
+    ngOnDestroy() {
+        this.alive = false;
     }
 
     updateNotes(consumerProfileId) {

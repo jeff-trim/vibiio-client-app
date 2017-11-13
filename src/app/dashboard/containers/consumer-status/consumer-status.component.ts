@@ -1,9 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
-// Components
-import { InsurancePolicyComponent } from '../insurance-policy/insurance-policy.component';
-
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';
 import { ConsumerSortService } from '../../services/consumer-sort.service';
