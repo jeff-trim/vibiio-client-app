@@ -10,7 +10,7 @@ export class InsuranceResolverService implements Resolve<String[]> {
   constructor(private router: Router,
               private listService: RetrieveInsuranceService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<String[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return this.listService.getInsuranceProviders();
   }
 }

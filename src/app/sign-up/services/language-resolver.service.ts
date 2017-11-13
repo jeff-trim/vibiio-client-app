@@ -9,7 +9,7 @@ export class LanguageResolverService implements Resolve<String[]> {
   constructor(private router: Router,
               private listService: RetrieveLanguageService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<String[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return this.listService.getLanguageOptions();
   }
 }
