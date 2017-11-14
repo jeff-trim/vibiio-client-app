@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { SpinnerService } from './easy-spinner/services/spinner.service';
+import { Angulartics2Mixpanel } from 'angulartics2/mixpanel';
+import { Angulartics2 } from 'angulartics2';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,8 @@ export class AppComponent implements OnInit {
 
     constructor( public titleService: Title,
                  private router: Router,
-                 private spinner: SpinnerService) {}
+                 private spinner: SpinnerService,
+                 mixpanel: Angulartics2Mixpanel) {}
 
   ngOnInit () {
     this.titleService.setTitle(this.title);

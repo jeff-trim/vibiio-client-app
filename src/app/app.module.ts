@@ -28,6 +28,8 @@ import { JcfModule } from '../../node_modules/angular2-jcf-directive/jcfModule/j
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { SpinnerModule } from './easy-spinner/spinner.module';
 import { SignUpModule } from './sign-up/sign-up.module';
+import { Angulartics2Mixpanel } from 'angulartics2/mixpanel';
+import { Angulartics2Module } from 'angulartics2';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { SignUpModule } from './sign-up/sign-up.module';
       DynamicFormModule,
       SpinnerModule,
       AppRoutingModule,
-      SignUpModule
+      SignUpModule,
+      Angulartics2Module.forRoot([Angulartics2Mixpanel])
   ],
   providers: [
       AuthService,
