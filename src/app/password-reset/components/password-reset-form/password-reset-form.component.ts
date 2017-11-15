@@ -1,6 +1,7 @@
 import { Component, Output, Input, EventEmitter, } from '@angular/core';
 import { Validator } from '@angular/forms';
 import { Credentials } from '../../models/credentials.interface';
+import { Router } from '@angular/router/src/router';
 
 @Component({
     selector: 'vib-password-reset-form',
@@ -20,6 +21,16 @@ export class PasswordResetFormComponent {
     @Input() resetAction: string;
     @Output() submitPasswordReset: EventEmitter<any> = new EventEmitter<any>();
     @Output() submitNewPassword: EventEmitter<any> = new EventEmitter<any>();
+
+    constructor(private router: Router) {}
+
+    toLogin() {
+        if (!this.nativeAppLink) {
+            this.router.navigate(['/sign_in']);
+        } else {
+            this.router.navigateByUrl('vibiio://');
+        }
+    }
 
     onBlur(event, email) {
         if (email.errors === null) {
