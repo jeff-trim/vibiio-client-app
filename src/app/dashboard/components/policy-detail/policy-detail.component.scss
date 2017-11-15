@@ -25,6 +25,7 @@
         color: $greyish-brown;
         -webkit-appearance: none;
         border: none;
+        max-width: 50%;
     }
 }
 
@@ -34,4 +35,17 @@
     bottom: 0;
     left: 0;
     border-bottom: 3px solid $pink;
+}
+
+.error-message {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    p {
+        color: red;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px; 
+    }
 }

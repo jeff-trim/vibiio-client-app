@@ -33,6 +33,9 @@
 npm-debug.log
 testem.log
 /typings
+.nvmrc
+node.sh
+
 
 # e2e
 /e2e/*.js

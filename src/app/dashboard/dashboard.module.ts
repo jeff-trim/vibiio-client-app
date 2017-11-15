@@ -89,6 +89,7 @@ import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { InsuranceStatusService } from './services/insurance-status.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -248,7 +249,8 @@ const dashboardRoutes: Routes = [
     ActivityService,
     AvailabilitySharedService,
     MyLicenseService,
-    ConsumerSortService
+    ConsumerSortService,
+    InsuranceStatusService
   ]
 })
 

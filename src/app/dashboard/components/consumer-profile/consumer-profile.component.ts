@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 
 // Models
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
@@ -17,15 +17,12 @@ import { DateFormatService } from '../../../services/date-format.service';
 })
 
 export class ConsumerProfileComponent implements OnInit {
-    @Input()
-    consumerProfile: ConsumerProfile;
-
-    @Input()
-    vibiio: Vibiio;
-
     insurancePolicies?: InsurancePolicy[];
     updateStatusReminder: boolean;
     userTimeZone: string;
+
+    @Input() consumerProfile: ConsumerProfile;
+    @Input() vibiio: Vibiio;
 
     constructor(private statusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,

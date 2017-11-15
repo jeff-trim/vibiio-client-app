@@ -1,17 +1,22 @@
-  <form>
+  <form [formGroup]="editForm">
         <div class="info-element
                     row
                     between-xs
                     bottom-xs">
             <span class="label">Provider</span>
-              <input [ngModel]="policy?.carrier"
-                   disabled     
+              <input [(ngModel)]="policy.carrier"
+                   [attr.disabled]="!onEdit ? true : null"
+                   formControlName="carrier"
                    name="carrier" 
-                   placeholder="CARRIER"
+                   placeholder="Provider"
                    type="text" 
                    class="value end-md" 
                    id="provider">
-            <span class="pink-underline"></span>  
+            <span class="pink-underline"></span>
+            <div *ngIf="editForm.get('carrier').invalid && !editForm.get('carrier').pristine"
+                 class="error-message">
+                <p>Provider is Required</p>
+            </div>
         </div>
 
         <div class="info-element
@@ -19,14 +24,19 @@
                     between-xs
                     bottom-xs">
             <span class="label">Policy Number</span>
-            <input [ngModel]="policy?.policy_number"
-                    disabled
+            <input [(ngModel)]="policy.policy_number"
+                    [attr.disabled]="!onEdit ? true : null"
+                    formControlName="policy_number"
                     name="policy_number"
-                    placeholder="POLICY NUMBER"
+                    placeholder="Policy Number"
                     type="text"
                     class="value end-md"
                     id="policy_number">
             <span class="pink-underline"></span>
+            <div *ngIf="editForm.get('policy_number').invalid && !editForm.get('policy_number').pristine"
+                 class="error-message">
+                <p>Policy Number is Required</p>
+            </div>  
         </div>
 
         <div class="info-element
@@ -34,13 +44,18 @@
                     between-xs
                     bottom-xs">
             <span class="label">Claim ID</span>
-            <input [ngModel]="policy?.claim_id"
-                    disabled        
+            <input [(ngModel)]="policy.claim_id"
+                    [attr.disabled]="!onEdit ? true : null"       
+                    formControlName="claim_id"
                     name="claim_id"
-                    placeholder="CLAIM ID"
+                    placeholder="Claim Id"
                     type="text"
                     class="value end-md"
                     id="claim_id">
             <span class="pink-underline"></span>
-        </div>
+            <div *ngIf="editForm.get('claim_id').invalid && !editForm.get('claim_id').pristine"
+                 class="error-message">
+                <p>Claim ID is Required</p>
+            </div>
+       </div>
 </form>

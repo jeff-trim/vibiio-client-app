@@ -8,6 +8,7 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
 import { DateFormatService } from '../../../services/date-format.service';
+import { InsuranceStatusService } from '../../services/insurance-status.service';
 
 // Components
 import { NotesComponent } from '../../containers/notes/notes.component';
@@ -21,7 +22,7 @@ import { ResponseErrorService } from '../../../services/response-error.service';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 
 @Component({
-    selector: 'appointment-details',
+    selector: 'vib-appointment-details',
     templateUrl: 'appointment-details.component.html',
     styleUrls: ['appointment-details.component.scss']
 })
@@ -29,45 +30,28 @@ import { InsurancePolicy } from '../../models/insurance-policy.interface';
 export class AppointmentDetailsComponent  {
     imgData: string;
     vibiioFullscreen = false;
+    isEditingInsurance = false;
+    isUpdatingInsurance = false;
 
-    @Input()
-    vibiioConnecting: boolean;
+    @Input() vibiioConnecting: boolean;
+    @Input() onVibiio: boolean;
+    @Input() appointment: Appointment;
+    @Input() user: User;
+    @Input() vibiio: Vibiio;
+    @Input() neworkDisconnected: boolean;
+    @Input() timeZone: string;
 
-    @Input()
-    onVibiio: boolean;
-
-    @Input()
-    appointment: Appointment;
-
-    @Input()
-    user: User;
-
-    @Input()
-    vibiio: Vibiio;
-
-    @Input()
-    neworkDisconnected: boolean;
-
-    @Input()
-    timeZone: string;
-
-    @Output()
-    startVibiio: EventEmitter<any> = new EventEmitter<any>();
-
-    @Output()
-    endVibiio: EventEmitter<any> = new EventEmitter<any>();
-
-    @Output()
-    claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    @Output()
-    refreshNotes: EventEmitter<any> = new EventEmitter<any>();
+    @Output() startVibiio: EventEmitter<any> = new EventEmitter<any>();
+    @Output() endVibiio: EventEmitter<any> = new EventEmitter<any>();
+    @Output() claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() refreshNotes: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(private StatusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private availabilitySharedService: AvailabilitySharedService,
                 private dateFormatService: DateFormatService,
-                private router: Router) {}
+                private router: Router,
+                private insuranceStatusService: InsuranceStatusService) {}
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -110,12 +94,28 @@ export class AppointmentDetailsComponent  {
       return this.dateFormatService.parseTime(time, this.timeZone);
     }
 
-    toggleVibiioFullscreen() {
-      this.vibiioFullscreen = !this.vibiioFullscreen;
+    onPolicyEdit() {
+      this.isEditingInsurance = true;
+      this.insuranceStatusService.editStatus(true);
+  }
 
-      // Toggles fullscreen using screenfull package
-      if (screenfull.enabled) {
-        screenfull.toggle();
-      }
+  onPolicyUpdate() {
+      this.isUpdatingInsurance = true;
+      this.insuranceStatusService.updateStatus(true);
+  }
+
+  onCancelPolicyEdit() {
+      this.insuranceStatusService.cancelEdit(true);
+      this.insuranceStatusService.updateStatus(false);
+      this.insuranceStatusService.editStatus(false);
+  }
+
+  toggleVibiioFullscreen() {
+    this.vibiioFullscreen = !this.vibiioFullscreen;
+
+    // Toggles fullscreen using screenfull package
+    if (screenfull.enabled) {
+      screenfull.toggle();
     }
+  }
 }

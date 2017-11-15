@@ -28,9 +28,8 @@
               col-md-5
               col-md-offset-1
               profile-information" >
-    <vib-profile-information [myProfile]="myProfile"
-                             [onEdit]="isEditing">
-    </vib-profile-information>
+    <vib-profile-information
+      [myProfile]="myProfile"></vib-profile-information>
   </div>
   <div class="col-xs-12
               col-sm-6
@@ -38,18 +37,18 @@
               profile-licensure">
 
     <div class="info-element" >
-      <h2>licensure</h2>
-      <div class="long-pink-underline"></div>
-    </div>
-            
-    <div class="restrict-height"
-         id="scrollbar">
-      <vib-profile-licensure *ngFor="let license of myLicenses"
-                            [license]="license"
-                            [onEdit]="isEditing">
-      </vib-profile-licensure>
+            <h2>licensure</h2>
+            <div class="long-pink-underline"></div>
     </div>
     
+    <div class="restrict-height"
+            id="scrollbar">
+        <vib-profile-licensure *ngFor="let license of myLicenses"
+                            [license]="license"
+                            [onEdit]="isEditing">
+        </vib-profile-licensure>
+    </div>
+
     <div class="add-license">
       <img src="../../../../assets/images/add.svg"
           (click)="toggleLicensureForm()"
