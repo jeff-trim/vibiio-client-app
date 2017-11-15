@@ -7,18 +7,18 @@ import { MyProfileService } from '../../services/my-profile.service';
 import { MyProfile } from '../../models/my-profile.interface';
 
 @Component({
-    selector: 'profile-information',
+    selector: 'vib-profile-information',
     styleUrls: ['profile-information.component.scss'],
     templateUrl: 'profile-information.component.html'
 })
 
 export class ProfileInformationComponent implements OnInit {
-    @Input()
-    myProfile: MyProfile;
+    myProfileForm: FormGroup;
+
+    @Input() onEdit = false;
+    @Input() myProfile: MyProfile;
 
     updateProfile: EventEmitter<FormGroup> = new EventEmitter;
-
-    myProfileForm: FormGroup;
 
     ngOnInit() {
         this.myProfileForm = new FormGroup({
