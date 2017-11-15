@@ -19,6 +19,7 @@ export class PasswordResetComponent implements OnInit {
     copy: string;
     jwt = 'request-reset';
     resetAction: string;
+    role: string;
 
     welcomeHeader = 'Forgot Your Password?';
     welcomeCopy = 'No problem! Just enter your password below and we’ll send you a link to reset it.';
