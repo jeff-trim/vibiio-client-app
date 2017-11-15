@@ -1,9 +1,9 @@
-import { Component, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Output, Input, EventEmitter, } from '@angular/core';
 import { Validator } from '@angular/forms';
 import { Credentials } from '../../models/credentials.interface';
 
 @Component({
-    selector: 'app-password-reset-form',
+    selector: 'vib-password-reset-form',
     styleUrls: ['password-reset-form.component.scss'],
     templateUrl: 'password-reset-form.component.html'
 })
@@ -14,30 +14,26 @@ export class PasswordResetFormComponent {
     passwordConfirmation: string;
     emailValid: Boolean = false;
     emailPresence: Boolean = false;
+
+    @Input() nativeAppLink: boolean;
     @Input() resetResponse: any;
     @Input() resetAction: string;
     @Output() submitPasswordReset: EventEmitter<any> = new EventEmitter<any>();
     @Output() submitNewPassword: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor() {}
-
-    ngOnChanges(changes: SimpleChanges) {
-        this.resetResponse
-    }
-
     onBlur(event, email) {
         if (email.errors === null) {
-            this.emailValid = true
+            this.emailValid = true;
         } else if (email.errors.pattern) {
-            this.emailValid = false
+            this.emailValid = false;
         }
     }
 
     submitPw(isValid: boolean, value: string) {
-        if(isValid){
+        if (isValid) {
             this.submitNewPassword.emit(value);
-        };
-    };
+        }
+    }
 
     reset(value: Credentials, isValid: boolean) {
         if (isValid) {

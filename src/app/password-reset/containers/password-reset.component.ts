@@ -19,12 +19,12 @@ export class PasswordResetComponent implements OnInit {
     copy: string;
     jwt = 'request-reset';
     resetAction: string;
-    role: string;
+    nativeAppLogin: boolean;
 
     welcomeHeader = 'Forgot Your Password?';
     welcomeCopy = 'No problem! Just enter your password below and we’ll send you a link to reset it.';
     successHeader = 'Thanks!';
-    successCopy ='Click below to resend it if needed, and don\'t forget to check those pesky SPAM folders!';
+    successCopy = 'Click below to resend it if needed, and don\'t forget to check those pesky SPAM folders!';
     failureHeader = 'Error';
     failureCopy = 'An error has occurred, please contact support.';
     resetHeader = 'New Password Time!';
@@ -44,6 +44,7 @@ export class PasswordResetComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe((params) => {
             this.jwt = params['token'];
             if (this.jwt) {
+                this.setLoginRedirect(params['role']);
                 this.resetAction = 'new-pw';
                 this.setText(this.resetHeader, this.resetCopy);
             } else {
@@ -51,6 +52,14 @@ export class PasswordResetComponent implements OnInit {
                 this.setText(this.welcomeHeader, this.welcomeCopy);
             }
         });
+    }
+
+    setLoginRedirect (role) {
+        if (role === 'Consumer') {
+            this.nativeAppLogin = true;
+        } else {
+            this.nativeAppLogin = false;
+        }
     }
 
     submitPasswordReset(event: Credentials) {
