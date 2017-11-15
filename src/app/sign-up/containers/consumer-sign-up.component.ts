@@ -4,6 +4,8 @@ import * as jcf from 'jcf';
 // Models
 import { FormSetup } from '../../dynamic-form/models/config.interface';
 import { ConsumerSignUp } from '../models/consumer-sign-up.interface';
+import { InsuranceProviderList } from '../../dashboard/models/insurance-provider-list.interface';
+import { LanguageList } from '../../dashboard/models/language-list.interface';
 
 // Services
 import { SpinnerService } from '../../easy-spinner/services/spinner.service';
@@ -43,7 +45,7 @@ export class ConsumerSignUpComponent implements OnInit, AfterViewChecked {
               private mapLanguagesService: MapLanguagesService) {}
 
   ngOnInit() {
-    this.route.data.subscribe( (data: { providers: any, languages: any}) => {
+    this.route.data.subscribe( (data: { providers: InsuranceProviderList, languages: LanguageList}) => {
       this.mapProvidersService.mapProviders(data.providers.insurance_providers).then( (mapped_providers) => {
         this.form.inputs[10] = Object.assign({}, this.form.inputs[10], { options: mapped_providers });
       });
