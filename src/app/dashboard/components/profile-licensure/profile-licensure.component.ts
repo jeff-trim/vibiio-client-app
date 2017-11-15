@@ -10,6 +10,5 @@ import { MyProfileLicense } from '../../models/my-profile-license.interface';
 })
 
 export class ProfileLicensureComponent {
-    @Input()
-    licenses: MyProfileLicense;
+    @Input() licenses: MyProfileLicense[];
 }
