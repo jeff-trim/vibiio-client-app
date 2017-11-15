@@ -8,17 +8,17 @@
   <h4 *ngIf="!isEditing"
       class="col-md-offset-4
              edit-text"
-      (click)=editMyProfileForm()>EDIT</h4>
+      (click)=editForms()>EDIT</h4>
 
   <h4 *ngIf="isEditing"
       class="col-md-offset-4
              save-text"
       [ngClass]="{ 'save-after-element': isSaving }"
-      (click)=saveMyProfileForm()>SAVE</h4>
+      (click)=saveForms()>SAVE</h4>
   
   <h4 *ngIf="isEditing"
       class="cancel-text"
-      (click)="resetMyProfileForm()">CANCEL</h4>
+      (click)="resetForms()">CANCEL</h4>
 
 </div>
 
@@ -28,17 +28,28 @@
               col-md-5
               col-md-offset-1
               profile-information" >
-    <profile-information
-      [myProfile]="myProfile"></profile-information>
+    <vib-profile-information [myProfile]="myProfile"
+                             [onEdit]="isEditing">
+    </vib-profile-information>
   </div>
   <div class="col-xs-12
               col-sm-6
               col-md-5
               profile-licensure">
 
-    <profile-licensure
-          [licenses]="myLicenses"></profile-licensure>
-
+    <div class="info-element" >
+      <h2>licensure</h2>
+      <div class="long-pink-underline"></div>
+    </div>
+            
+    <div class="restrict-height"
+         id="scrollbar">
+      <vib-profile-licensure *ngFor="let license of myLicenses"
+                            [license]="license"
+                            [onEdit]="isEditing">
+      </vib-profile-licensure>
+    </div>
+    
     <div class="add-license">
       <img src="../../../../assets/images/add.svg"
           (click)="toggleLicensureForm()"

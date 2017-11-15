@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { MomentModule } from 'angular2-moment';
 
@@ -18,7 +18,7 @@ import { MyProfile } from '../../models/my-profile.interface';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'my-profile',
+  selector: 'vib-my-profile',
   styleUrls: ['my-profile.component.scss'],
   templateUrl: 'my-profile.component.html'})
 
@@ -35,6 +35,9 @@ export class MyProfileComponent implements OnInit {
     @ViewChild (ProfileNewLicensureComponent)
     private profileNewLicensureChild: ProfileNewLicensureComponent;
 
+    @ViewChildren(ProfileLicensureComponent)
+    private profileLicenesesChildren: QueryList<ProfileLicensureComponent>;
+
     constructor(private myProfileService: MyProfileService,
                 private myLicenseService: MyLicenseService,
                 private activatedRoute: ActivatedRoute) { }
@@ -46,21 +49,47 @@ export class MyProfileComponent implements OnInit {
         });
     }
 
-    editMyProfileForm() {
+    editForms() {
         this.isEditing = true;
     }
 
-    saveMyProfileForm() {
+    saveForms() {
         this.isSaving = true;
+        this.updateLicences();
         this.updateMyProfile(this.profileInformationChild.myProfileForm);
+        this.isSaving = false;
+        this.isEditing = false;
     }
 
-    resetMyProfileForm() {
-        this.myProfileService.getMyProfile()
-            .subscribe( (data) => {
-                this.myProfile = data.user;
-            });
+    updateLicences() {
+        this.profileLicenesesChildren.forEach(license => {
+            if (license.editForm.dirty && license.editForm.valid) {
+                this.myLicenseService.updateMyLicense(license.editForm.value)
+                .subscribe( (data) => {
+                    license.license = data.license;
+                });
+            }
+        });
+    }
+
+    resetForms() {
+        this.refreshProfile();
+        this.refreshLicenses();
         this.isEditing = false;
+    }
+
+    refreshProfile() {
+        this.myProfileService.getMyProfile()
+        .subscribe( (data) => {
+            this.myProfile = data.user;
+        });
+    }
+
+    refreshLicenses() {
+        this.myLicenseService.getMyLicenses()
+            .subscribe( (data) => {
+                this.myLicenses =  data.licenses;
+            });
     }
 
     updateMyProfile(form) {
@@ -83,8 +112,6 @@ export class MyProfileComponent implements OnInit {
         this.myProfileService.updateMyProfile(options)
             .subscribe( (data) => {
                 this.myProfile = data.user;
-                this.isSaving = false;
-                this.isEditing = false;
         });
     }
 
@@ -107,12 +134,4 @@ export class MyProfileComponent implements OnInit {
                 this.addLicensureForm = false;
             });
         }
-
-    refreshLicenses() {
-        this.myLicenseService.getMyLicenses()
-            .subscribe( (data) => {
-                this.myLicenses =  data.licenses;
-            });
-    }
-
 }
