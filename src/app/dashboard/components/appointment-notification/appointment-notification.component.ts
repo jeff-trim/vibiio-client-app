@@ -32,8 +32,8 @@ export class AppointmentNotificationComponent implements OnInit {
     ngOnInit() {
         this.consumerName = JSON.parse(this.notificationData.content.message_body).consumer;
         this.description = JSON.parse(this.notificationData.content.message_body).description;
-        this.minutes = parseInt(JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, ''));
-        this.seconds = parseInt(JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, ''));
+        this.minutes = parseInt(JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '')) || 0;
+        this.seconds = parseInt(JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, '')) || 0;
         this.timer = Observable.timer(0,1000);
         this.sub = this.timer.subscribe(t => this.tickerFunc());
     }
