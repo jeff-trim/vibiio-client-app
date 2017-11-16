@@ -124,13 +124,16 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     this.neworkDisconnected = false;
                     this.onVibiio = true;
                 });
+
+                
+                    
                 // subscribe to stream destroyed events
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
                     this.availabilitySharedService.emitChange(true);
                     this.session.disconnect();
                     this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
-
+console.log("DESTROYED");
                     if (data.reason === 'networkDisconnected') {
                         data.preventDefault();
                         const subscribers = this.session.getSubscribersForStream(data.stream);

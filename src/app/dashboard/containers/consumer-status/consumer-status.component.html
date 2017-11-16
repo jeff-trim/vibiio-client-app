@@ -1,6 +1,6 @@
 <div class="col-md-9
             my-vibiio-container
-            col-md-offset-1"> 
+            col-md-offset-1">
 
   <h1 class="col-xs pink">{{ this.consumerStatus }}</h1>
   <div class="col-md-offset-10">
@@ -8,8 +8,9 @@
                      (sortConsumers)="sortConsumers($event)">
     </vib-sort-button>
   </div>
-  
-  <ng-container *ngFor="let consumerProfile of consumerProfiles | orderBy: {property: property, direction: direction}">
+
+  <ng-container *ngFor="let consumerProfile of consumerProfiles |
+                        orderBy: {property: property, direction: direction}">
     <div class="flex">
       <consumer-profile-title [consumerProfile]="consumerProfile"></consumer-profile-title>
       <div class="consumer-profile-container">
