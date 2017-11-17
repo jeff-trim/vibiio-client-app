@@ -13,20 +13,16 @@ export class OrderByPipe implements PipeTransform {
     };
 
     sortByText(array, args) {
-        var arr =[]
-        arr = array.sort((a,b) => {
+        return array.sort((a,b) => {
             if(args.property = "last_name"){
                 return this.sortAlpha(a["user_info"]["last_name"], b["user_info"]["last_name"], args.direction);
             } else {
                 return this.sortAlpha(a[args.property], b[args.property], args.direction);
             };
         });
-        return arr
     };
 
     sortAlpha(a,b, direction) {
-        console.log(a);
-        console.log(b);
         if (a < b) {
             return -1 * direction;
         } else if ( a > b) {
@@ -37,8 +33,7 @@ export class OrderByPipe implements PipeTransform {
     };
 
     sortByNumber(array, args) {
-        var arr = []
-        arr = array.sort(function(a,b) {
+        return array.sort((a,b) => {
             if(!a[args.property][0]){
                 a[args.property] = [0]
             };
@@ -47,6 +42,5 @@ export class OrderByPipe implements PipeTransform {
             };
             return (a[args.property][0] - b[args.property][0]) * args.direction;
         });
-        return arr
     }
 }
