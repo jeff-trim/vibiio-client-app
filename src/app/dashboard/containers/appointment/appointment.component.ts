@@ -133,7 +133,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     this.availabilitySharedService.emitChange(true);
                     this.session.disconnect();
                     this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
-console.log("DESTROYED");
+
                     if (data.reason === 'networkDisconnected') {
                         data.preventDefault();
                         const subscribers = this.session.getSubscribersForStream(data.stream);
