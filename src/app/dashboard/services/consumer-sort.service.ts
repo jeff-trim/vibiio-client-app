@@ -4,9 +4,9 @@ import { SortType } from '../models/sort-type.interface';
 @Injectable()
 export class ConsumerSortService {
     nameAsc: SortType = { name: 'A - Z',
-                          options: { property: 'last_name', desc: false } };
+                          options: { property: 'last_name', desc: true } };
     nameDesc: SortType =  { name: 'Z - A',
-                            options: { property: 'last_name', desc: true } };
+                            options: { property: 'last_name', desc: false } };
     dateAsc: SortType = { name: 'SOONEST',
                           options: { property: 'appointment_scheduled_datetime', desc: false } };
     dateDesc: SortType  = { name: 'LATEST',

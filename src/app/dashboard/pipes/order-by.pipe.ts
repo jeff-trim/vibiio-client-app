@@ -8,20 +8,32 @@ export class OrderByPipe implements PipeTransform {
         if(args.property === "appointment_scheduled_datetime") {
             return this.sortByNumber(records, args);
         } else {
-            return this.sortAlphabetically(records, args);
+            return this.sortByText(records, args);
         }
     };
 
-    sortAlphabetically(array, args) {
-        return array.sort(function(a,b) {
-            if (a[args.property] < b[args.property]) {
-                return -1 * args.direction;
-            } else if ( a[args.property] > b[args.property]) {
-                return 1 * args.direction;
+    sortByText(array, args) {
+        var arr =[]
+        arr = array.sort((a,b) => {
+            if(args.property = "last_name"){
+                return this.sortAlpha(a["user_info"]["last_name"], b["user_info"]["last_name"], args.direction);
             } else {
-                return 0;
+                return this.sortAlpha(a[args.property], b[args.property], args.direction);
             };
-        })
+        });
+        return arr
+    };
+
+    sortAlpha(a,b, direction) {
+        console.log(a);
+        console.log(b);
+        if (a < b) {
+            return -1 * direction;
+        } else if ( a > b) {
+            return 1 * direction;
+        } else {
+            return 0;
+        };
     };
 
     sortByNumber(array, args) {
@@ -33,8 +45,6 @@ export class OrderByPipe implements PipeTransform {
             if(!b[args.property][0]){
                 b[args.property] = [0]
             };
-            console.log(b[args.property][0]);
-            console.log(a[args.property][0]);
             return (a[args.property][0] - b[args.property][0]) * args.direction;
         });
         return arr
