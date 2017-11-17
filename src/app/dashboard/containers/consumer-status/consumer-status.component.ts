@@ -51,8 +51,7 @@ export class ConsumerStatusComponent implements OnInit {
 
     sortConsumers(name: string) {
         const sortOptions = this.sortService.getOptions(name);
-
-        this.direction = Object.assign({}, this.direction, sortOptions.desc ? 1 : -1);
-        this.property = Object.assign({}, this.property, sortOptions.property);
+        this.direction = sortOptions.desc ? 1 : -1;
+        this.property = sortOptions.property;
     }
 }

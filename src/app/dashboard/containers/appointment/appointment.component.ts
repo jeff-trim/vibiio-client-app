@@ -124,6 +124,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     this.neworkDisconnected = false;
                     this.onVibiio = true;
                 });
+
+                
+                    
                 // subscribe to stream destroyed events
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
