@@ -16,7 +16,7 @@
           col-md-2
           start-vibiio
           link"
-          (click)="connect($event)">
+          (click)="connect()">
           start vibiio
     </div>
 
@@ -26,18 +26,18 @@
         col-md-2
         start-vibiio
         link"
-        (click)="disconnect($event)">
+        (click)="disconnect()">
         end vibiio
     </div>
  
     <div class="col-xs link">
       <img  *ngIf="(!onVibiio)"
             src="../../../../assets/images/call-controls.svg"
-            (click)="connect($event)">
+            (click)="connect()">
       <img  *ngIf="(onVibiio)"
         src="../../../../assets/images/call-controls.svg"
         class="end-call"
-        (click)="disconnect($event)">
+        (click)="disconnect()">
     </div>
   </div>
   <div class="row edit-button-row">

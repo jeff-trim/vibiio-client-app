@@ -41,8 +41,8 @@ export class AppointmentDetailsComponent  {
     @Input() neworkDisconnected: boolean;
     @Input() timeZone: string;
 
-    @Output() startVibiio: EventEmitter<any> = new EventEmitter<any>();
-    @Output() endVibiio: EventEmitter<any> = new EventEmitter<any>();
+    @Output() startVibiio = new EventEmitter<boolean>();
+    @Output() endVibiio = new EventEmitter<boolean>();
     @Output() claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() refreshNotes: EventEmitter<any> = new EventEmitter<any>();
 
@@ -66,7 +66,7 @@ export class AppointmentDetailsComponent  {
     }
 
     connect() {
-      this.startVibiio.emit(event);
+      this.startVibiio.emit(true);
       this.vibiioConnecting = true;
       this.onVibiio = true;
       // check to see if appointment has been claimed and auto assign
@@ -76,7 +76,7 @@ export class AppointmentDetailsComponent  {
     }
 
     disconnect() {
-      this.endVibiio.emit(event);
+      this.endVibiio.emit(true);
       this.vibiioConnecting = false;
       this.availabilitySharedService.emitChange(true);
       this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
