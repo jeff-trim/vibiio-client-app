@@ -93,12 +93,11 @@
                [value]="appointment.address?.zip"></key-value>
 
     <key-value [key]="'Vibiio Date'"
-               [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
+               [value]="parseDate(appointment.scheduled_datetime)"></key-value>
 
     <key-value [key]="'Vibiio Start Time'"
                [value]="parseTime(appointment.scheduled_datetime)"></key-value>
 
-    
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
                           [consumerId]="appointment.consumer_id">
     </vib-insurance-policy>

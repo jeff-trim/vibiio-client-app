@@ -19,6 +19,10 @@ export class PolicyDetailEditComponent {
 
     constructor(private updateService: InsurancePolicyService) { }
 
+    mouseEnter(){
+        console.log('test');
+    };
+
     onSubmit(policy: InsurancePolicy) {
         const options = {
             carrier: policy.carrier,

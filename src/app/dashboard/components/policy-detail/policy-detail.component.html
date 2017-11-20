@@ -2,7 +2,8 @@
         <div class="info-element
                     row
                     between-xs
-                    bottom-xs">
+                    bottom-xs"
+        (mouseenter)="mouseEnter()">
             <span class="label">Provider</span>
               <input [(ngModel)]="policy.carrier"
                    [attr.disabled]="!onEdit ? true : null"
@@ -36,7 +37,7 @@
             <div *ngIf="editForm.get('policy_number').invalid && !editForm.get('policy_number').pristine"
                  class="error-message">
                 <p>Policy Number is Required</p>
-            </div>  
+            </div>
         </div>
 
         <div class="info-element
@@ -45,7 +46,7 @@
                     bottom-xs">
             <span class="label">Claim ID</span>
             <input [(ngModel)]="policy.claim_id"
-                    [attr.disabled]="!onEdit ? true : null"       
+                    [attr.disabled]="!onEdit ? true : null"
                     formControlName="claim_id"
                     name="claim_id"
                     placeholder="Claim Id"
