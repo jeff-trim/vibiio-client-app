@@ -23,10 +23,6 @@ export class PolicyDetailComponent implements OnInit {
                 private insuranceStatusService: InsuranceStatusService) {
     }
 
-    mouseEnter() {
-        console.log("enter");
-    }
-
     ngOnInit() {
         if (this.policy) {
             this.editForm = this.fb.group({
