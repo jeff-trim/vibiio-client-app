@@ -1,7 +1,7 @@
 import { Component, Output, Input, EventEmitter, } from '@angular/core';
 import { Validator } from '@angular/forms';
 import { Credentials } from '../../models/credentials.interface';
-import { Router } from '@angular/router/src/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'vib-password-reset-form',
