@@ -26,8 +26,21 @@
         -webkit-appearance: none;
         border: none;
     }
+
+    .pink-underline {
+        -webkit-transition: width .5s; /* Safari */
+        transition: width .5s;
+        width: 7%;
+    }
 }
 
+.info-element:hover {
+    .pink-underline {
+        -webkit-transition: width .5s; /* Safari */
+        transition: width .5s;
+        width: 100%;
+    }
+}
 .pink-underline {
     width: 7%;
     position: absolute;
