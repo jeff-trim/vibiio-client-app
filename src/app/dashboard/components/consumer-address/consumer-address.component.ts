@@ -26,8 +26,4 @@ export class ConsumerAddressComponent implements OnInit {
       'id': [this.address.id, Validators.required]
     });
   }
-
-  resetForm() {
-    this.editForm.patchValue(this.address);
-  }
 }

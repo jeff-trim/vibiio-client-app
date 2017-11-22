@@ -25,4 +25,11 @@ export class ConsumerUpdateService {
                .map((response: Response) => response.json())
                .catch((error: any) => Observable.throw(error.json()));
   }
+
+  refreshAddress(id: number) {
+    return this.http
+                .get(`${API_URL}/addresses/${id}`)
+                .map((response: Response) => response.json())
+                .catch((error: any) => Observable.throw(error.json()));
+  }
 }

@@ -124,6 +124,11 @@ export class AppointmentDetailsComponent  {
   onCancel() {
       this.isEditingForms = false;
       this.formStatusService.onCancel();
+      this.consumerUpdateService.refreshAddress(this.appointment.address.id)
+        .subscribe( (data) => {
+          console.log(data);
+          this.appointment.address = data.address;
+        });
   }
 
   toggleVibiioFullscreen() {
