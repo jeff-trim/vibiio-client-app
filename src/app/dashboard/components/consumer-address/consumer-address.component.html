@@ -5,7 +5,7 @@
               bottom-xs">
       <span class="label">Address</span>
         <input [(ngModel)]="address.address_one"
-             [attr.disabled]="!onEdit ? true : null"
+             [attr.disabled]="onEdit ? true : null"
              formControlName="address_one"
              name="address_one" 
              placeholder="Address"
@@ -26,7 +26,7 @@
               bottom-xs">
       <span class="label">Address Two</span>
       <input [(ngModel)]="address.address_two"
-              [attr.disabled]="!onEdit ? true : null"
+              [attr.disabled]="onEdit ? true : null"
               formControlName="address_two"
               name="address_two"
               placeholder="Address Two"
@@ -42,7 +42,7 @@
               bottom-xs">
       <span class="label">City</span>
       <input [(ngModel)]="address.city"
-              [attr.disabled]="!onEdit ? true : null"       
+              [attr.disabled]="onEdit ? true : null"       
               formControlName="city"
               name="city"
               placeholder="City"
@@ -62,7 +62,7 @@
               bottom-xs">
       <span class="label">State</span>
       <input [(ngModel)]="address.state"
-              [attr.disabled]="!onEdit ? true : null"       
+              [attr.disabled]="onEdit ? true : null"       
               formControlName="state"
               name="state"
               placeholder="State"
@@ -82,7 +82,7 @@
               bottom-xs">
       <span class="label">Zip</span>
       <input [(ngModel)]="address.zip"
-              [attr.disabled]="!onEdit ? true : null"       
+              [attr.disabled]="onEdit ? true : null"       
               formControlName="zip"
               name="zip"
               placeholder="Zip"

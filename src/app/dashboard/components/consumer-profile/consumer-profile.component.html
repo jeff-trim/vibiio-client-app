@@ -10,11 +10,9 @@
     <key-value [key]="'Phone Number'"
                [value]="consumerProfile.user_info.phone_number"></key-value>
 
-    <key-value [key]="'Address'"
-               [value]="consumerProfile.user_info.address_one"></key-value>
-
-    <key-value [key]="'Zip'"
-               [value]="consumerProfile.user_info.zipcode"></key-value>
+    <vib-consumer-address [address]="consumerProfile.address"
+                          [onEdit]="'false'">
+    </vib-consumer-address>
 
     <key-value [key]="'Vibiio Date'"
                [value]="parseDate(consumerProfile.appointment_scheduled_datetime[0])"></key-value>

@@ -11,7 +11,7 @@ import { SidebarCustomerStatusSharedService } from '../../services/sidebar-custo
 import { DateFormatService } from '../../../services/date-format.service';
 
 @Component({
-    selector: 'consumer-profile',
+    selector: 'vib-consumer-profile',
     templateUrl: 'consumer-profile.component.html',
     styleUrls: ['consumer-profile.component.scss']
 })
@@ -23,6 +23,7 @@ export class ConsumerProfileComponent implements OnInit {
 
     @Input() consumerProfile: ConsumerProfile;
     @Input() vibiio: Vibiio;
+    @Input() onEdit: boolean;
 
     constructor(private statusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
