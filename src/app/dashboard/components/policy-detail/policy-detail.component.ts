@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Models
@@ -11,17 +11,25 @@ import { InsuranceStatusService } from '../../services/insurance-status.service'
     styleUrls: ['policy-detail.component.scss']
 })
 
-export class PolicyDetailComponent implements OnInit {
+export class PolicyDetailComponent implements OnInit, OnDestroy {
+    editForm: FormGroup;
+    alive: boolean;
+
     @Input() policy?: InsurancePolicy;
     @Input() onEdit= false;
-
-    editForm: FormGroup;
 
     constructor(private fb: FormBuilder,
                 private insuranceStatusService: InsuranceStatusService) {
     }
 
     ngOnInit() {
+        this.alive = true;
+        this.insuranceStatusService.onEdit$
+            .takeWhile(() => this.alive)
+            .subscribe(
+            data => {
+                this.onEdit = Object.assign({}, this.onEdit, data);
+            });
         if (this.policy) {
             this.editForm = this.fb.group({
                 'carrier': [this.policy.carrier, Validators.required],
@@ -35,5 +43,9 @@ export class PolicyDetailComponent implements OnInit {
 
     resetForm() {
         this.editForm.patchValue(this.policy);
+    }
+
+    ngOnDestroy() {
+        this.alive = false;
     }
 }
