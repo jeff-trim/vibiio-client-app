@@ -52,7 +52,7 @@
       <span class="pink-underline"></span>
       <div *ngIf="editForm.get('city').invalid && !editForm.get('city').pristine"
            class="error-message">
-          <p>City</p>
+          <p>City is required</p>
       </div>
   </div>
 
@@ -72,10 +72,10 @@
       <span class="pink-underline"></span>
       <div *ngIf="editForm.get('state').invalid && !editForm.get('state').pristine"
            class="error-message">
-          <p>State</p>
+          <p>State is required</p>
       </div>
   </div>
-  
+
   <div class="info-element
               row
               between-xs
@@ -92,7 +92,7 @@
       <span class="pink-underline"></span>
       <div *ngIf="editForm.get('zip').invalid && !editForm.get('zip').pristine"
            class="error-message">
-          <p>Zip</p>
+          <p>Zip is required</p>
       </div>
   </div>
 </form>

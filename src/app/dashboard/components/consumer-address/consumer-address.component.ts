@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core/src/metadata/directives';
-import { FormGroup } from '@angular/forms';
-import { FormBuilder } from '@angular/forms/src/form_builder';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Address } from '../../models/address.interface';
-import { Validators } from '@angular/forms/src/validators';
 
 @Component({
   selector: 'vib-consumer-address',

@@ -68,6 +68,9 @@ import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-
 import { AvailabilitySharedService } from './services/availability-shared.service';
 import { MyLicenseService } from './services/my-license.service';
 import { ConsumerSortService } from './services/consumer-sort.service';
+import { AddressStatusService } from './services/address-status.service';
+import { AppointmentDetailsFormStatusService } from './services/appointment-details-form-status.service';
+import { ConsumerUpdateService } from './services/consumer-update.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -252,7 +255,10 @@ const dashboardRoutes: Routes = [
     AvailabilitySharedService,
     MyLicenseService,
     ConsumerSortService,
-    InsuranceStatusService
+    InsuranceStatusService,
+    AddressStatusService,
+    AppointmentDetailsFormStatusService,
+    ConsumerUpdateService
   ]
 })
 
