@@ -1,0 +1,98 @@
+<form [formGroup]="editForm">
+  <div class="info-element
+              row
+              between-xs
+              bottom-xs">
+      <span class="label">Address</span>
+        <input [(ngModel)]="address.address_one"
+             [attr.disabled]="!onEdit ? true : null"
+             formControlName="address_one"
+             name="address_one" 
+             placeholder="Address"
+             type="text" 
+             class="value end-md" 
+             id="provider">
+      <span class="pink-underline"></span>
+      <div *ngIf="editForm.get('address_one').invalid && !editForm.get('address_one').pristine"
+           class="error-message">
+          <p>Address is Required</p>
+      </div>
+  </div>
+
+  <div *ngIf="address.address_two"
+        class="info-element
+              row
+              between-xs
+              bottom-xs">
+      <span class="label">Address Two</span>
+      <input [(ngModel)]="address.address_two"
+              [attr.disabled]="!onEdit ? true : null"
+              formControlName="address_two"
+              name="address_two"
+              placeholder="Address Two"
+              type="text"
+              class="value end-md"
+              id="address_two">
+      <span class="pink-underline"></span>
+  </div>
+
+  <div class="info-element
+              row
+              between-xs
+              bottom-xs">
+      <span class="label">City</span>
+      <input [(ngModel)]="address.city"
+              [attr.disabled]="!onEdit ? true : null"       
+              formControlName="city"
+              name="city"
+              placeholder="City"
+              type="text"
+              class="value end-md"
+              id="city">
+      <span class="pink-underline"></span>
+      <div *ngIf="editForm.get('city').invalid && !editForm.get('city').pristine"
+           class="error-message">
+          <p>City</p>
+      </div>
+  </div>
+
+  <div class="info-element
+              row
+              between-xs
+              bottom-xs">
+      <span class="label">State</span>
+      <input [(ngModel)]="address.state"
+              [attr.disabled]="!onEdit ? true : null"       
+              formControlName="state"
+              name="state"
+              placeholder="State"
+              type="text"
+              class="value end-md"
+              id="state">
+      <span class="pink-underline"></span>
+      <div *ngIf="editForm.get('state').invalid && !editForm.get('state').pristine"
+           class="error-message">
+          <p>State</p>
+      </div>
+  </div>
+  
+  <div class="info-element
+              row
+              between-xs
+              bottom-xs">
+      <span class="label">Zip</span>
+      <input [(ngModel)]="address.zip"
+              [attr.disabled]="!onEdit ? true : null"       
+              formControlName="zip"
+              name="zip"
+              placeholder="Zip"
+              type="text"
+              class="value end-md"
+              id="zip">
+      <span class="pink-underline"></span>
+      <div *ngIf="editForm.get('zip').invalid && !editForm.get('zip').pristine"
+           class="error-message">
+          <p>Zip</p>
+      </div>
+  </div>
+</form>

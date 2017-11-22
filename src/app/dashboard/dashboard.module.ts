@@ -90,6 +90,7 @@ import { AutosizeDirective } from './directives/autosize.directive';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { InsuranceStatusService } from './services/insurance-status.service';
+import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -191,7 +192,8 @@ const dashboardRoutes: Routes = [
     ConsumerNoteComponent,
     InsurancePolicyComponent,
     SortButtonComponent,
-    OrderByPipe
+    OrderByPipe,
+    ConsumerAddressComponent
   ],
   imports: [
       CommonModule,
