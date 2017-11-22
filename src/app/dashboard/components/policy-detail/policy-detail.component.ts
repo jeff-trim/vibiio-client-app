@@ -3,7 +3,6 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Models
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
-import { InsurancePolicyService } from '../../services/insurance-policy.service';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class PolicyDetailComponent implements OnInit {
     editForm: FormGroup;
 
     constructor(private fb: FormBuilder,
-                private policyService: InsurancePolicyService,
                 private insuranceStatusService: InsuranceStatusService) {
     }
 
