@@ -41,20 +41,20 @@
     </div>
   </div>
   <div class="row edit-button-row">
-    <h4 *ngIf="!isEditingInsurance"
+    <h4 *ngIf="!isEditingForms"
         class="col-md-offset-4
                edit-text"
-        (click)=onPolicyEdit()>EDIT</h4>
+        (click)=onEdit()>EDIT</h4>
 
-    <h4 *ngIf="isEditingInsurance"
+    <h4 *ngIf="isEditingForms"
         class="col-md-offset-4
                save-text"
-        [ngClass]="{ 'save-after-element': isUpdatingInsurance }"
-        (click)=onPolicyUpdate()>SAVE</h4>
+        [ngClass]="{ 'save-after-element': isUpdatingForms }"
+        (click)=onUpdate()>SAVE</h4>
 
-    <h4 *ngIf="isEditingInsurance"
+    <h4 *ngIf="isEditingForms"
         class="cancel-text"
-        (click)="onCancelPolicyEdit()">CANCEL</h4>
+        (click)="onCancel()">CANCEL</h4>
   </div>
 </div>
 
@@ -76,22 +76,9 @@
     <key-value [key]="'Phone Number'"
                [value]="appointment.user?.phone"></key-value>
 
-    <key-value [key]="'Address'"
-               [value]="appointment.address?.address_one"></key-value>
-
-    <key-value *ngIf="appointment.address?.address_two"
-               [key]="'Address Two'"
-               [value]="appointment.address?.address_two"></key-value>
-
-    <key-value [key]="'City'"
-               [value]="appointment.address?.city"></key-value>
-
-    <key-value [key]="'State'"
-               [value]="appointment.address?.state"></key-value>
-
-    <key-value [key]="'Zip Code'"
-               [value]="appointment.address?.zip"></key-value>
-
+    <vib-consumer-address [address]="appointment.address"
+                          [onEdit]="isEditingForms"></vib-consumer-address>
+    
     <key-value [key]="'Vibiio Date'"
                [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
 
