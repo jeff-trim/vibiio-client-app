@@ -25,7 +25,7 @@ import { AvailabilitySharedService } from '../../services/availability-shared.se
 declare var OT: any;
 
 @Component({
-    selector: 'appointment',
+    selector: 'vib-appointment',
     templateUrl: 'appointment.component.html'
 })
 
@@ -125,8 +125,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     this.onVibiio = true;
                 });
 
-                
-                    
                 // subscribe to stream destroyed events
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
