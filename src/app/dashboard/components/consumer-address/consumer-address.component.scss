@@ -30,11 +30,17 @@
 }
 
 .pink-underline {
+    -webkit-transition: width .5s; /* Safari */
+    transition: width .5s;
     width: 7%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-bottom: 3px solid $pink;
+}
+
+.info-element:hover {
+    .pink-underline {
+        -webkit-transition: width .5s; /* Safari */
+        transition: width .5s;
+        width: 100%;
+    }
 }
 
 .error-message {
