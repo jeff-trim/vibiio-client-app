@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 @Component({
     selector: 'appointment-notification',
@@ -10,9 +11,11 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 export class AppointmentNotificationComponent implements OnInit {
     consumerName: string;
     waitingTime: string;
-    minutes: string;
-    seconds: string;
+    minutes: number;
+    seconds: number;
     description: string;
+    private timer;
+    private sub: Subscription;
 
     @Input()
     notificationData;
@@ -29,8 +32,23 @@ export class AppointmentNotificationComponent implements OnInit {
     ngOnInit() {
         this.consumerName = JSON.parse(this.notificationData.content.message_body).consumer;
         this.description = JSON.parse(this.notificationData.content.message_body).description;
-        this.minutes = JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '');
-        this.seconds = JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, '');
+        this.minutes = parseInt(JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '')) || 0;
+        this.seconds = parseInt(JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, '')) || 0;
+        this.timer = Observable.timer(0,1000);
+        this.sub = this.timer.subscribe(t => this.tickerFunc());
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    tickerFunc(){
+        if(this.seconds < 59){
+            this.seconds += 1
+        } else {
+            this.minutes = this.minutes += 1
+            this.seconds = 0;
+        }
     }
 
     displayConnectIcon() {
