@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, ViewChild } from '@angular/core';
 
 // Models
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
@@ -9,6 +9,9 @@ import { SidebarCustomerStatusSharedService } from '../../services/sidebar-custo
 
 // Services
 import { DateFormatService } from '../../../services/date-format.service';
+import { Address } from '../../models/address.interface';
+import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
+import { ConsumerUpdateService } from '../../services/consumer-update.service';
 
 @Component({
     selector: 'vib-consumer-profile',
@@ -25,9 +28,12 @@ export class ConsumerProfileComponent implements OnInit {
     @Input() vibiio: Vibiio;
     @Input() onEdit: boolean;
 
+    @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
+
     constructor(private statusUpdateService: VibiioUpdateService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private dateFormatService: DateFormatService) {}
+                private dateFormatService: DateFormatService,
+                private consumerUpdateService: ConsumerUpdateService) {}
 
     ngOnInit() {
         this.insurancePolicies = this.consumerProfile.insurance_policies;
@@ -45,6 +51,23 @@ export class ConsumerProfileComponent implements OnInit {
           }, (error: any) => {
               console.log('error updating claim status');
           });
+    }
+
+    updateAddress() {
+        if (this.addressForm.editForm.valid) {
+            const address = this.addressForm.editForm.value;
+            this.consumerUpdateService.updateAddress(address)
+              .subscribe( (data) => {
+                this.consumerProfile.address = data.address;
+              });
+          }
+    }
+
+    refreshAddress() {
+        this.consumerUpdateService.refreshAddress(this.consumerProfile.address.id)
+        .subscribe( (data) => {
+          this.consumerProfile.address = data.address;
+        });
     }
 
     parseDate(time: number): string  {

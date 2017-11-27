@@ -75,7 +75,6 @@ export class AppointmentDetailsComponent  {
         const address = this.addressForm.editForm.value;
         this.consumerUpdateService.updateAddress(address)
           .subscribe( (data) => {
-            console.log(data);
             this.appointment.address = data.address;
           });
       }
@@ -126,7 +125,6 @@ export class AppointmentDetailsComponent  {
       this.formStatusService.onCancel();
       this.consumerUpdateService.refreshAddress(this.appointment.address.id)
         .subscribe( (data) => {
-          console.log(data);
           this.appointment.address = data.address;
         });
   }

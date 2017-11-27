@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // Services
@@ -12,6 +12,9 @@ import { Vibiio } from '../../models/vibiio.interface';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { VibiioProfileFormStatusService } from '../../services/vibiio-profile-form-status.service';
+import { ConsumerUpdateService } from '../../services/consumer-update.service';
+import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
 
 @Component({
     selector: 'vib-vibiio-profile',
@@ -24,13 +27,15 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
     notes: Note[];
     vibiioId: number;
     description: string;
-    isEditingInsurance = false;
-    isUpdatingInsurance = false;
+    isEditing = false;
+    isUpdating = false;
     alive = true;
+
+    @ViewChild(ConsumerProfileComponent) consumerProfileChild: ConsumerProfileComponent;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private vibiioProfileService: VibiioProfileService,
-                private insuranceStatusService: InsuranceStatusService) { }
+                private formStatusService: VibiioProfileFormStatusService) { }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe( (data) => {
@@ -38,18 +43,6 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
             this.vibiioId = this.consumerProfile.id;
             this.notes = data.profile.vibiio.notes;
             this.description = data.profile.vibiio.description;
-        });
-
-        this.insuranceStatusService.onEdit$
-            .takeWhile(() => this.alive)
-            .subscribe( (data) => {
-                this.isEditingInsurance = data;
-            });
-
-        this.insuranceStatusService.onUpdate$
-            .takeWhile(() => this.alive)
-            .subscribe( (data) => {
-                this.isUpdatingInsurance = data;
         });
     }
 
@@ -63,19 +56,21 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
         });
     }
 
-    onPolicyEdit() {
-        this.isEditingInsurance = true;
-        this.insuranceStatusService.editStatus(true);
+    onFormEdit() {
+        this.formStatusService.onFormEdit();
+        this.isEditing = true;
     }
 
-    onPolicyUpdate() {
-        this.isUpdatingInsurance = true;
-        this.insuranceStatusService.updateStatus(true);
+    onFormUpdate() {
+        this.formStatusService.onFormUpdate();
+        this.isUpdating = true;
+        this.consumerProfileChild.updateAddress();
     }
 
-    onCancelPolicyEdit() {
-        this.insuranceStatusService.cancelEdit(true);
-        this.insuranceStatusService.updateStatus(false);
-        this.insuranceStatusService.editStatus(false);
+    onCancel() {
+        this.formStatusService.onCancel();
+        this.consumerProfileChild.refreshAddress();
+        this.isEditing = false;
+        this.isUpdating = false;
     }
 }

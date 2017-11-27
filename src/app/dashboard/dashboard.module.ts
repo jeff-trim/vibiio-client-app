@@ -71,6 +71,7 @@ import { ConsumerSortService } from './services/consumer-sort.service';
 import { AddressStatusService } from './services/address-status.service';
 import { AppointmentDetailsFormStatusService } from './services/appointment-details-form-status.service';
 import { ConsumerUpdateService } from './services/consumer-update.service';
+import { VibiioProfileFormStatusService } from './services/vibiio-profile-form-status.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -257,8 +258,9 @@ const dashboardRoutes: Routes = [
     ConsumerSortService,
     InsuranceStatusService,
     AddressStatusService,
+    ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
-    ConsumerUpdateService
+    VibiioProfileFormStatusService
   ]
 })
 
