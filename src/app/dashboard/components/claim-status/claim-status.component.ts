@@ -1,6 +1,7 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
+import * as jcf from 'jcf';
 
 // Pipes
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
@@ -15,15 +16,19 @@ import { Vibiio } from '../../models/vibiio.interface';
     templateUrl: 'claim-status.component.html'
 })
 
-export class ClaimStatusComponent {
+export class ClaimStatusComponent implements AfterViewChecked {
     @Input()
     vibiio: Vibiio;
 
-    statuses = ['Scheduled', 'Claim in Progress', 'Completed'];
+    statuses = ['Unanswered', 'Scheduled', 'Claim in Progress', 'Completed'];
     currentStatus: string;
 
     @Output()
     updatedStatus = new EventEmitter<any>();
+
+    ngAfterViewChecked() {
+        jcf.refreshAll();
+    }
 
     onSubmit(status: string) {
         const updateInfo = {
@@ -32,4 +37,5 @@ export class ClaimStatusComponent {
         };
         this.updatedStatus.emit(updateInfo);
     }
+
 }
