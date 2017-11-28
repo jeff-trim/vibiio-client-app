@@ -1,6 +1,8 @@
 @import 'variables';
 
 .jcf-select {
+    margin-left: 0;
+    text-align: -webkit-left;
     font-family: $base-font;
     font-size: 1.65rem;
     font-weight: 700;
@@ -20,6 +22,7 @@
 
 // initial text
 .jcf-select-text span {
+    margin-left: 0;
     font-family: $base-font;
     font-size: 1.65rem;
     font-weight: 700;
@@ -111,7 +114,7 @@ span.jcf-option.jcf-hover {
         height: 35px;
         padding-top: 7px;
         min-width: none;
-        text-align-last: center;
+        text-align-last: center;        
         cursor: pointer;
         //initial text
         .jcf-select-text {
@@ -221,5 +224,12 @@ span.jcf-option.jcf-hover {
     .jcf-select-text span {
         font-size: 1.8rem;
         cursor: pointer;
+    }
+}
+
+//claim status styles
+.claim-status-style {
+    .jcf-select .jcf-select-text {
+        margin-left: 0;
     }
 }
