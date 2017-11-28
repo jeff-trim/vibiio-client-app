@@ -25,7 +25,7 @@ import { AvailabilitySharedService } from '../../services/availability-shared.se
 declare var OT: any;
 
 @Component({
-    selector: 'appointment',
+    selector: 'vib-appointment',
     templateUrl: 'appointment.component.html'
 })
 
@@ -90,6 +90,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.vibiioConnecting = true;
             this.onVibiio = true;
         }
+        console.log(this.vibiio.status);
+        
     }
 
     async connectToSession(event) {

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, AfterViewChecked } from '@angular/core';
 import { Config, FormSetup } from '../../../dynamic-form/models/config.interface';
 import { Form, Validators } from '@angular/forms';
 import * as jcf from 'jcf';

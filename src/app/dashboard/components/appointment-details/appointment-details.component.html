@@ -103,7 +103,6 @@
                           [consumerId]="appointment.consumer_id">
     </vib-insurance-policy>
 
-    <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
   </div>
 
   <div class="col-xs-12
@@ -129,19 +128,20 @@
           </div>
 
           <div [class.fs-button-position]="vibiioFullscreen"
-               (click)="toggleVibiioFullscreen()">
-
+              (click)="toggleVibiioFullscreen()">
             <div class="fullscreen-button" *ngIf="(!vibiioFullscreen)">
               <img class="fullscreen-icon"
-                   src="../../../../assets/images/fullscreen-enter-pink.svg">
+                    src="../../../../assets/images/fullscreen-enter-pink.svg">
               <span class="fullscreen-text">FULLSCREEN</span>
             </div>
-
+              
             <div class="fullscreen-button" *ngIf="(vibiioFullscreen)">
               <img class="fullscreen-icon"
                     src="../../../../assets/images/fullscreen-exit-white.svg">
             </div>
           </div>
+          <vib-claim-status (updatedStatus)="updateStatus($event)"
+                            [vibiio]="vibiio"></vib-claim-status>
         </div>
       </div>
 
@@ -159,6 +159,11 @@
         <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection    
                                           or because the other party lost their connection.</p>
       </div>
+      
+      <vib-claim-status *ngIf="(!onVibiio)"
+                        (updatedStatus)="updateStatus($event)"
+                        [vibiio]="vibiio"></vib-claim-status>
+      
     </div> 
   </div> 
 </div>
