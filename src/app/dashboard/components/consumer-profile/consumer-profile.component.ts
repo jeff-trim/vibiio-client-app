@@ -1,16 +1,18 @@
 import { Component, Input, Output, OnInit, ViewChild } from '@angular/core';
 
+// Components
+import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
+
 // Models
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { Vibiio } from '../../models/vibiio.interface';
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
+import { Address } from '../../models/address.interface';
 
 // Services
+import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { DateFormatService } from '../../../services/date-format.service';
-import { Address } from '../../models/address.interface';
-import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
+import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
 
 @Component({

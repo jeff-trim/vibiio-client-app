@@ -11,7 +11,6 @@ import { DateFormatService } from '../../../services/date-format.service';
 import { AppointmentDetailsFormStatusService } from '../../services/appointment-details-form-status.service';
 
 // Components
-import { NotesComponent } from '../../containers/notes/notes.component';
 import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
 
 // Interfaces
