@@ -2,7 +2,8 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs">
+              bottom-xs"
+              [ngClass]="{ 'info-element-hover': onEdit }">
       <span class="label">Address</span>
         <input [attr.disabled]="!onEdit ? true : null"
              formControlName="address_one"
@@ -12,7 +13,7 @@
              class="value end-md" 
              id="provider">
       <span class="pink-underline"></span>
-      <div *ngIf="editForm.get('address_one').invalid && !editForm.get('address_one').pristine"
+      <div *ngIf="checkErrors(editForm.get('address_one'))"
            class="error-message">
           <p>Address is Required</p>
       </div>
@@ -22,7 +23,8 @@
         class="info-element
               row
               between-xs
-              bottom-xs">
+              bottom-xs"
+              [ngClass]="{ 'info-element-hover': onEdit }">
       <span class="label">Address Two</span>
       <input [attr.disabled]="!onEdit ? true : null"
               formControlName="address_two"
@@ -37,7 +39,8 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs">
+              bottom-xs"
+              [ngClass]="{ 'info-element-hover': onEdit }">
       <span class="label">City</span>
       <input [attr.disabled]="!onEdit ? true : null"       
               formControlName="city"
@@ -47,7 +50,7 @@
               class="value end-md"
               id="city">
       <span class="pink-underline"></span>
-      <div *ngIf="editForm.get('city').invalid && !editForm.get('city').pristine"
+      <div *ngIf="checkErrors(editForm.get('city'))"
            class="error-message">
           <p>City is required</p>
       </div>
@@ -56,7 +59,8 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs">
+              bottom-xs"
+              [ngClass]="{ 'info-element-hover': onEdit }">
       <span class="label">State</span>
       <input [attr.disabled]="!onEdit ? true : null"       
               formControlName="state"
@@ -66,7 +70,7 @@
               class="value end-md"
               id="state">
       <span class="pink-underline"></span>
-      <div *ngIf="editForm.get('state').invalid && !editForm.get('state').pristine"
+      <div *ngIf="checkErrors(editForm.get('state'))"
            class="error-message">
           <p>State is required</p>
       </div>
@@ -75,7 +79,8 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs">
+              bottom-xs"
+              [ngClass]="{ 'info-element-hover': onEdit }">
       <span class="label">Zip</span>
       <input [attr.disabled]="!onEdit ? true : null"       
               formControlName="zip"
@@ -85,7 +90,7 @@
               class="value end-md"
               id="zip">
       <span class="pink-underline"></span>
-      <div *ngIf="editForm.get('zip').invalid && !editForm.get('zip').pristine"
+      <div *ngIf="checkErrors(editForm.get('zip'))"
            class="error-message">
           <p>Zip is required</p>
       </div>

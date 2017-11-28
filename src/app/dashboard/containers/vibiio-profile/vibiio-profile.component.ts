@@ -62,9 +62,10 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
     }
 
     onFormUpdate() {
-        this.formStatusService.onFormUpdate();
         this.isUpdating = true;
+        this.formStatusService.onFormUpdate();
         this.consumerProfileChild.updateAddress();
+        this.isEditing = false;
     }
 
     onCancel() {

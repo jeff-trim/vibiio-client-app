@@ -2,10 +2,10 @@
         <div class="info-element
                     row
                     between-xs
-                    bottom-xs">
+                    bottom-xs"
+                    [ngClass]="{ 'info-element-hover': onEdit }">
             <span class="label">Provider</span>
-              <input [(ngModel)]="policy.carrier"
-                   [attr.disabled]="!onEdit ? true : null"
+              <input [attr.disabled]="!onEdit ? true : null"
                    formControlName="carrier"
                    name="carrier" 
                    placeholder="Provider"
@@ -13,7 +13,7 @@
                    class="value end-md" 
                    id="provider">
             <span class="pink-underline"></span>
-            <div *ngIf="editForm.get('carrier').invalid && !editForm.get('carrier').pristine"
+            <div *ngIf="checkErrors(editForm.get('carrier'))"
                  class="error-message">
                 <p>Provider is Required</p>
             </div>
@@ -22,10 +22,10 @@
         <div class="info-element
                     row
                     between-xs
-                    bottom-xs">
+                    bottom-xs"
+                    [ngClass]="{ 'info-element-hover': onEdit }">
             <span class="label">Policy Number</span>
-            <input [(ngModel)]="policy.policy_number"
-                    [attr.disabled]="!onEdit ? true : null"
+            <input [attr.disabled]="!onEdit ? true : null"
                     formControlName="policy_number"
                     name="policy_number"
                     placeholder="Policy Number"
@@ -33,7 +33,7 @@
                     class="value end-md"
                     id="policy_number">
             <span class="pink-underline"></span>
-            <div *ngIf="editForm.get('policy_number').invalid && !editForm.get('policy_number').pristine"
+            <div *ngIf="checkErrors(editForm.get('policy_number'))"
                  class="error-message">
                 <p>Policy Number is Required</p>
             </div>  
@@ -42,10 +42,10 @@
         <div class="info-element
                     row
                     between-xs
-                    bottom-xs">
+                    bottom-xs"
+                    [ngClass]="{ 'info-element-hover': onEdit }">
             <span class="label">Claim ID</span>
-            <input [(ngModel)]="policy.claim_id"
-                    [attr.disabled]="!onEdit ? true : null"       
+            <input [attr.disabled]="!onEdit ? true : null"       
                     formControlName="claim_id"
                     name="claim_id"
                     placeholder="Claim Id"
@@ -53,7 +53,7 @@
                     class="value end-md"
                     id="claim_id">
             <span class="pink-underline"></span>
-            <div *ngIf="editForm.get('claim_id').invalid && !editForm.get('claim_id').pristine"
+            <div *ngIf="checkErrors(editForm.get('claim_id'))"
                  class="error-message">
                 <p>Claim ID is Required</p>
             </div>

@@ -4,6 +4,7 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 // Models
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
+import { FormControl } from '@angular/forms/src/model';
 
 @Component({
     selector: 'vib-policy-detail',
@@ -48,4 +49,8 @@ export class PolicyDetailComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.alive = false;
     }
+
+    checkErrors(field: FormControl): boolean {
+        return (field.invalid);
+      }
 }
