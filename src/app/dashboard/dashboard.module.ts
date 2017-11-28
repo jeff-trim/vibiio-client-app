@@ -68,6 +68,10 @@ import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-
 import { AvailabilitySharedService } from './services/availability-shared.service';
 import { MyLicenseService } from './services/my-license.service';
 import { ConsumerSortService } from './services/consumer-sort.service';
+import { AddressStatusService } from './services/address-status.service';
+import { AppointmentDetailsFormStatusService } from './services/appointment-details-form-status.service';
+import { ConsumerUpdateService } from './services/consumer-update.service';
+import { VibiioProfileFormStatusService } from './services/vibiio-profile-form-status.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -90,6 +94,7 @@ import { AutosizeDirective } from './directives/autosize.directive';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { InsuranceStatusService } from './services/insurance-status.service';
+import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -191,7 +196,8 @@ const dashboardRoutes: Routes = [
     ConsumerNoteComponent,
     InsurancePolicyComponent,
     SortButtonComponent,
-    OrderByPipe
+    OrderByPipe,
+    ConsumerAddressComponent
   ],
   imports: [
       CommonModule,
@@ -250,7 +256,11 @@ const dashboardRoutes: Routes = [
     AvailabilitySharedService,
     MyLicenseService,
     ConsumerSortService,
-    InsuranceStatusService
+    InsuranceStatusService,
+    AddressStatusService,
+    ConsumerUpdateService,
+    AppointmentDetailsFormStatusService,
+    VibiioProfileFormStatusService
   ]
 })
 

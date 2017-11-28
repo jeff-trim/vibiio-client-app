@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class InsuranceStatusService {
-  private updatingPolicy = new Subject<boolean>();
-  private editingPolicy = new Subject<boolean>();
+export class AddressStatusService {
+  private updatingAddress = new Subject<boolean>();
+  private editingAddress = new Subject<boolean>();
   private cancelingEdit = new Subject<boolean>();
 
-  onUpdate$ = this.updatingPolicy.asObservable();
-  onEdit$ = this.editingPolicy.asObservable();
+  onUpdate$ = this.updatingAddress.asObservable();
+  onEdit$ = this.editingAddress.asObservable();
   onCancel$ = this.cancelingEdit.asObservable();
 
   editStatus(data) {
-    this.editingPolicy.next(data);
+    this.editingAddress.next(data);
   }
 
   updateStatus(data) {
-    this.updatingPolicy.next(data);
+    this.updatingAddress.next(data);
   }
 
   cancelEdit(data) {
