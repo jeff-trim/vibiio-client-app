@@ -20,9 +20,6 @@ export class ClaimStatusComponent implements AfterViewChecked {
     @Input()
     vibiio: Vibiio;
 
-    statuses = ['Unanswered', 'Scheduled', 'Claim in Progress', 'Completed'];
-    currentStatus: string;
-
     @Output()
     updatedStatus = new EventEmitter<any>();
 
