@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Address } from '../../models/address.interface';
-import { FormControl } from '@angular/forms/src/model';
 
 @Component({
   selector: 'vib-consumer-address',
@@ -28,7 +27,7 @@ export class ConsumerAddressComponent implements OnInit {
     });
   }
 
-  checkErrors(field: FormControl): boolean {
+  checkErrors(field: AbstractControl): boolean {
     return (field.invalid);
   }
 }
