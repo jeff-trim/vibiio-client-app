@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Address } from '../../models/address.interface';
+import { FormControl } from '@angular/forms/src/model';
 
 @Component({
   selector: 'vib-consumer-address',
@@ -25,5 +26,9 @@ export class ConsumerAddressComponent implements OnInit {
       'zip': [this.address.zip, Validators.required],
       'id': [this.address.id, Validators.required]
     });
+  }
+
+  checkErrors(field: FormControl): boolean {
+    return (field.invalid);
   }
 }
