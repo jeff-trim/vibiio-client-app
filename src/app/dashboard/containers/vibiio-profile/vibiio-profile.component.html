@@ -5,20 +5,20 @@
              pink">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
   
     <div class="row edit-button-row">
-      <h4 *ngIf="!isEditingInsurance"
+      <h4 *ngIf="!isEditing"
           class="col-md-offset-4
                  edit-text"
-          (click)=onPolicyEdit()>EDIT</h4>
+          (click)=onFormEdit()>EDIT</h4>
 
-      <h4 *ngIf="isEditingInsurance"
+      <h4 *ngIf="isEditing"
           class="col-md-offset-4
                  save-text"
-          [ngClass]="{ 'save-after-element': isUpdatingInsurance }"
-          (click)=onPolicyUpdate()>SAVE</h4>
+          [ngClass]="{ 'save-after-element': isUpdating }"
+          (click)=onFormUpdate()>SAVE</h4>
 
-      <h4 *ngIf="isEditingInsurance"
+      <h4 *ngIf="isEditing"
           class="cancel-text"
-          (click)="onCancelPolicyEdit()">CANCEL</h4>
+          (click)="onCancel()">CANCEL</h4>
     </div>
 
   <div class="flex">
@@ -29,9 +29,10 @@
           <h2>profile</h2>
           <div class="long-pink-underline" ></div>
         </div>
-        <consumer-profile [consumerProfile]="consumerProfile"
-                        [vibiio]="consumerProfile">
-        </consumer-profile>
+        <vib-consumer-profile [consumerProfile]="consumerProfile"
+                          [vibiio]="consumerProfile"
+                          [onEdit]="isEditing">
+        </vib-consumer-profile>
       </div>
 
       <div class="col-md-offset-1">

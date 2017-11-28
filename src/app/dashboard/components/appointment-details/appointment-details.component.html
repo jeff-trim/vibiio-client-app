@@ -16,7 +16,7 @@
           col-md-2
           start-vibiio
           link"
-          (click)="connect($event)">
+          (click)="connect()">
           start vibiio
     </div>
 
@@ -26,35 +26,35 @@
         col-md-2
         start-vibiio
         link"
-        (click)="disconnect($event)">
+        (click)="disconnect()">
         end vibiio
     </div>
  
     <div class="col-xs link">
       <img  *ngIf="(!onVibiio)"
             src="../../../../assets/images/call-controls.svg"
-            (click)="connect($event)">
+            (click)="connect()">
       <img  *ngIf="(onVibiio)"
         src="../../../../assets/images/call-controls.svg"
         class="end-call"
-        (click)="disconnect($event)">
+        (click)="disconnect()">
     </div>
   </div>
   <div class="row edit-button-row">
-    <h4 *ngIf="!isEditingInsurance"
+    <h4 *ngIf="!isEditingForms"
         class="col-md-offset-4
                edit-text"
-        (click)=onPolicyEdit()>EDIT</h4>
+        (click)=onEdit()>EDIT</h4>
 
-    <h4 *ngIf="isEditingInsurance"
+    <h4 *ngIf="isEditingForms"
         class="col-md-offset-4
                save-text"
-        [ngClass]="{ 'save-after-element': isUpdatingInsurance }"
-        (click)=onPolicyUpdate()>SAVE</h4>
+        [ngClass]="{ 'save-after-element': isUpdatingForms }"
+        (click)=onUpdate()>SAVE</h4>
 
-    <h4 *ngIf="isEditingInsurance"
+    <h4 *ngIf="isEditingForms"
         class="cancel-text"
-        (click)="onCancelPolicyEdit()">CANCEL</h4>
+        (click)="onCancel()">CANCEL</h4>
   </div>
 </div>
 
@@ -76,22 +76,9 @@
     <key-value [key]="'Phone Number'"
                [value]="appointment.user?.phone"></key-value>
 
-    <key-value [key]="'Address'"
-               [value]="appointment.address?.address_one"></key-value>
-
-    <key-value *ngIf="appointment.address?.address_two"
-               [key]="'Address Two'"
-               [value]="appointment.address?.address_two"></key-value>
-
-    <key-value [key]="'City'"
-               [value]="appointment.address?.city"></key-value>
-
-    <key-value [key]="'State'"
-               [value]="appointment.address?.state"></key-value>
-
-    <key-value [key]="'Zip Code'"
-               [value]="appointment.address?.zip"></key-value>
-
+    <vib-consumer-address [address]="appointment.address"
+                          [onEdit]="isEditingForms"></vib-consumer-address>
+    
     <key-value [key]="'Vibiio Date'"
                [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
 
@@ -103,7 +90,6 @@
                           [consumerId]="appointment.consumer_id">
     </vib-insurance-policy>
 
-    <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
   </div>
 
   <div class="col-xs-12
@@ -129,19 +115,20 @@
           </div>
 
           <div [class.fs-button-position]="vibiioFullscreen"
-               (click)="toggleVibiioFullscreen()">
-
+              (click)="toggleVibiioFullscreen()">
             <div class="fullscreen-button" *ngIf="(!vibiioFullscreen)">
               <img class="fullscreen-icon"
-                   src="../../../../assets/images/fullscreen-enter-pink.svg">
+                    src="../../../../assets/images/fullscreen-enter-pink.svg">
               <span class="fullscreen-text">FULLSCREEN</span>
             </div>
-
+              
             <div class="fullscreen-button" *ngIf="(vibiioFullscreen)">
               <img class="fullscreen-icon"
                     src="../../../../assets/images/fullscreen-exit-white.svg">
             </div>
           </div>
+          <vib-claim-status (updatedStatus)="updateStatus($event)"
+                            [vibiio]="vibiio"></vib-claim-status>
         </div>
       </div>
 
@@ -159,6 +146,11 @@
         <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection    
                                           or because the other party lost their connection.</p>
       </div>
+      
+      <vib-claim-status *ngIf="(!onVibiio)"
+                        (updatedStatus)="updateStatus($event)"
+                        [vibiio]="vibiio"></vib-claim-status>
+      
     </div> 
   </div> 
 </div>

@@ -10,10 +10,13 @@
             <select [(ngModel)]="vibiio.status" 
                     id="status"
                     name="status"
-                    (change)=onSubmit(vibiio.status) jcf>
-                <option value="scheduled">Scheduled</option>
-                <option value="claim_in_progress">Claim in Progress</option>
-                <option value="completed">Completed</option>
+                    (change)=onSubmit(vibiio.status)
+                    jcf>
+                    <option value="">Status</option>
+                    <option value="scheduled">Scheduled</option>
+                    <option value="claim_in_progress">Claim in Progress</option>
+                    <option value="completed">Completed</option>
+                    <option value="unanswered">Unanswered</option>
             </select>
             <span class="pink-underline"></span>
         </div>

@@ -36,7 +36,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
               private insuranceStatusService: InsuranceStatusService) { }
 
   ngOnInit() {
-    this.alive =true;
+    this.alive = true;
     this.insuranceStatusService.onEdit$
         .takeWhile(() => this.alive)
         .subscribe(

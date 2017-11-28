@@ -13,12 +13,11 @@
                         (newPolicy)="createPolicy($event)"></vib-policy-detail-new>
 
 <div *ngIf="!showNewForm" 
-    class="add-policy">
+    class="add-policy"
+    (click)="showForm()">
     <img src="../../../../assets/images/add.svg"
-        class="add"
-        (click)="showForm()">
-    <span class="add-text"
-        (click)="showForm()">ADD POLICY</span>
+        class="add">
+    <span class="add-text">ADD POLICY</span>
     
 </div>
 
