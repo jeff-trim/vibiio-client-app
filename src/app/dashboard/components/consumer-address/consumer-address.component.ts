@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Address } from '../../models/address.interface';
 
@@ -14,6 +14,8 @@ export class ConsumerAddressComponent implements OnInit {
 
   editForm: FormGroup;
 
+  @Output() formChanged = new EventEmitter<boolean>();
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -24,6 +26,11 @@ export class ConsumerAddressComponent implements OnInit {
       'state': [this.address.state, Validators.required],
       'zip': [this.address.zip, Validators.required],
       'id': [this.address.id, Validators.required]
+    });
+
+    this.editForm.valueChanges.subscribe(data => {
+     console.log('Form changes', data);
+     this.formChanged.emit(true);
     });
   }
 

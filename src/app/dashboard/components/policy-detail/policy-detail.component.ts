@@ -18,6 +18,8 @@ export class PolicyDetailComponent implements OnInit {
     @Input() policy?: InsurancePolicy;
     @Input() onEdit: boolean;
 
+    @Output() formChanged = new EventEmitter<boolean>();
+
     constructor(private fb: FormBuilder,
                 private insuranceStatusService: InsuranceStatusService) {
     }
@@ -32,6 +34,10 @@ export class PolicyDetailComponent implements OnInit {
                 'id': [this.policy.id, Validators.required]
             });
         }
+        this.editForm.valueChanges.subscribe(data => {
+            console.log('Form changes', data);
+            this.formChanged.emit(true);
+           });
     }
 
     resetForm() {
