@@ -9,3 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.0.0] - 2017-11-28
 ### Added
 - Start Versioning
+
+## [2.0.1] - 2017-11-28 
+## Fixed 
+- Vibiiographer profile display bugs
