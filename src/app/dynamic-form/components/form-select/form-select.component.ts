@@ -15,7 +15,7 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
          <select [formControlName]="config.name"
                  [class.error-message]="errorArray.length > 0"
                  jcf>
-            <option value="undefined" disabled>Provider</option>
+            <option [ngValue]="config.value" disabled>{{ config.placeholder }}</option>
             <option value="{{ option.value }}" *ngFor="let option of config.options">
                 {{ option.label }}
             </option>

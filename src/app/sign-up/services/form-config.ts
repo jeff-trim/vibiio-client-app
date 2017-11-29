@@ -86,8 +86,19 @@ export let consumerSignUp = {
     },
     {
       type: 'select',
+      name: 'language',
+      value: null,
+      options: [{ label: 'English', value: 'english'}, {label: 'Spanish', value: 'spanish' }],
+      placeholder: 'Preferred Language',
+      validators: [
+        Validators.required,
+      ]
+    },
+    {
+      type: 'select',
       name: 'carrier',
       options: [],
+      value: null,
       placeholder: 'Provider',
       validators: [
         Validators.required,
