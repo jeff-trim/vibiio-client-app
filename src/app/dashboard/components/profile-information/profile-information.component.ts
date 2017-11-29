@@ -23,17 +23,17 @@ export class ProfileInformationComponent implements OnInit {
     ngOnInit() {
         this.myProfileForm = new FormGroup({
             'userData': new FormGroup ({
-                'firstName': new FormControl('', Validators.required),
-                'lastName': new FormControl('', Validators.required),
-                'company': new FormControl('', Validators.required),
-                'phone': new FormControl('', Validators.required)
+                'firstName': new FormControl(this.myProfile.first_name, Validators.required),
+                'lastName': new FormControl(this.myProfile.last_name, Validators.required),
+                'company': new FormControl(this.myProfile.company, Validators.required),
+                'phone': new FormControl(this.myProfile.phone, Validators.required)
             }),
             'addressData': new FormGroup ({
-                'addressOne': new FormControl('', Validators.required),
-                'addressTwo': new FormControl('', Validators.required),
-                'city': new FormControl('', Validators.required),
-                'state': new FormControl('', Validators.required),
-                'zip': new FormControl('', Validators.required)
+                'addressOne': new FormControl(this.myProfile.address.address_one, Validators.required),
+                'addressTwo': new FormControl(this.myProfile.address.address_two, Validators.required),
+                'city': new FormControl(this.myProfile.address.city, Validators.required),
+                'state': new FormControl(this.myProfile.address.state, Validators.required),
+                'zip': new FormControl(this.myProfile.address.zip, Validators.required)
             })
         });
     }

@@ -67,6 +67,7 @@ export class MyProfileComponent implements OnInit {
                 this.myLicenseService.updateMyLicense(license.editForm.value)
                 .subscribe( (data) => {
                     license.license = data.license;
+                    this.isEditing = false;
                 });
             }
         });
@@ -82,6 +83,7 @@ export class MyProfileComponent implements OnInit {
         this.myProfileService.getMyProfile()
         .subscribe( (data) => {
             this.myProfile = data.user;
+            this.isEditing = false;
         });
     }
 
@@ -89,6 +91,7 @@ export class MyProfileComponent implements OnInit {
         this.myLicenseService.getMyLicenses()
             .subscribe( (data) => {
                 this.myLicenses =  data.licenses;
+                this.isEditing = false;
             });
     }
 
@@ -112,6 +115,7 @@ export class MyProfileComponent implements OnInit {
         this.myProfileService.updateMyProfile(options)
             .subscribe( (data) => {
                 this.myProfile = data.user;
+                this.isEditing = false;
         });
     }
 
