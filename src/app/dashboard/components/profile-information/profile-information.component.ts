@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 // Models
 import { MyProfileLicense } from '../../models/my-profile-license.interface';
@@ -22,19 +22,19 @@ export class ProfileInformationComponent implements OnInit {
 
     ngOnInit() {
         this.myProfileForm = new FormGroup({
-            'userData': new FormGroup ({
                 'firstName': new FormControl(this.myProfile.first_name, Validators.required),
                 'lastName': new FormControl(this.myProfile.last_name, Validators.required),
                 'company': new FormControl(this.myProfile.company, Validators.required),
-                'phone': new FormControl(this.myProfile.phone, Validators.required)
-            }),
-            'addressData': new FormGroup ({
+                'phone': new FormControl(this.myProfile.phone, Validators.required),
                 'addressOne': new FormControl(this.myProfile.address.address_one, Validators.required),
                 'addressTwo': new FormControl(this.myProfile.address.address_two, Validators.required),
                 'city': new FormControl(this.myProfile.address.city, Validators.required),
                 'state': new FormControl(this.myProfile.address.state, Validators.required),
                 'zip': new FormControl(this.myProfile.address.zip, Validators.required)
-            })
         });
     }
+
+    checkErrors(field: AbstractControl): boolean {
+        return (field.invalid);
+      }
 }

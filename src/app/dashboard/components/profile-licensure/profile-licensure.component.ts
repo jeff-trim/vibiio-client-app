@@ -12,7 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class ProfileLicensureComponent implements OnInit {
     editForm: FormGroup;
-    @Input() onEdit = false;
     @Input() license: MyProfileLicense;
 
     updateLicense = new EventEmitter<MyProfileLicense>();
