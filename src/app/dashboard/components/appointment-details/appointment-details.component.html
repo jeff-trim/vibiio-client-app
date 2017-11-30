@@ -75,10 +75,10 @@
     <vib-consumer-address [address]="address"
                           (formChanged)="onEdit($event)"></vib-consumer-address>
     
-    <key-value [key]="'Vibiio Date'"
+    <key-value [key]="'Date'"
                [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
 
-    <key-value [key]="'Vibiio Start Time'"
+    <key-value [key]="'Start Time'"
                [value]="parseTime(appointment.scheduled_datetime)"></key-value>
 
     
