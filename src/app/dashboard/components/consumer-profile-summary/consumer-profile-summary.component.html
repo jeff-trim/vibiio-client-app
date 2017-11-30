@@ -1,0 +1,41 @@
+<div class="col-md-6
+            col-xs
+            profile-information-container">
+
+  <div class="profile-information">
+
+    <key-value [key]="'Email'"
+               [value]="consumerProfile.user_info.email"></key-value>
+
+    <key-value [key]="'Phone Number'"
+               [value]="consumerProfile.user_info.phone_number"></key-value>
+
+    <key-value [key]="'Address'"
+               [value]="consumerProfile.address.address_one"></key-value>
+
+    <key-value *ngIf="consumerProfile.address.address_two"
+               [key]="'Address 2'"
+               [value]="consumerProfile.address.address_two"></key-value>
+
+    <key-value [key]="'City'"
+               [value]="consumerProfile.address.city"></key-value>
+    
+    <key-value [key]="'State'"
+               [value]="consumerProfile.address.state"></key-value>
+    
+    <key-value [key]="'Zip'"
+               [value]="consumerProfile.address.zip"></key-value>
+
+    <key-value [key]="'Vibiio Date'"
+               [value]="parseDate(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
+
+    <key-value [key]="'Vibiio Start Time'" 
+               [value]="parseTime(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
+
+  
+    <vib-insurance-policy-summary [policies]="policies"></vib-insurance-policy-summary>
+ 
+    <!-- <vib-claim-status (updatedStatus)=updateStatus($event)
+                      [vibiio]="vibiio"></vib-claim-status> -->
+  </div>
+</div>
