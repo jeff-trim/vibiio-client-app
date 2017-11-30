@@ -163,7 +163,7 @@
 }
 .restrict-height {
     max-height: 250px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #scrollbar::-webkit-scrollbar-track

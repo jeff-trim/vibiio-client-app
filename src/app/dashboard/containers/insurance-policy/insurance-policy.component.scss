@@ -59,7 +59,7 @@
 .existing-policy-container{
     max-height: 150px;
     padding-right: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #scrollbar::-webkit-scrollbar-track{
