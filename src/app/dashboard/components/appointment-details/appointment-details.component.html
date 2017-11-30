@@ -72,8 +72,8 @@
     <key-value [key]="'Phone Number'"
                [value]="appointment.user?.phone"></key-value>
 
-    <vib-consumer-address [address]="appointment.address"
-                          (formChanged)="onEdit()"></vib-consumer-address>
+    <vib-consumer-address [address]="address"
+                          (formChanged)="onEdit($event)"></vib-consumer-address>
     
     <key-value [key]="'Vibiio Date'"
                [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
@@ -84,7 +84,7 @@
     
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
                           [consumerId]="appointment.consumer_id"
-                          (editingPolicy)="onEdit()">
+                          (editingPolicy)="onEdit($event)">
     </vib-insurance-policy>
 
   </div>

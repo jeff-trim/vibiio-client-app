@@ -106,7 +106,6 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
     this.policyService.getPolicies(this.consumerId)
       .subscribe( (data) => {
         this.insurancePolicies = Object.assign([], this.insurancePolicies, data.insurance_policies);
-        console.log(this.insurancePolicies);
       }, (error) => {
         console.log('error resetting form');
       });

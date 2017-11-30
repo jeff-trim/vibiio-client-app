@@ -21,6 +21,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
+import { Address } from '../../models/address.interface';
 
 declare var OT: any;
 
@@ -34,6 +35,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     vibiioConnecting = false;
     index: number;
     appointment: Appointment;
+    address: Address;
     consumer_id: number;
     user: User;
     session: any;
@@ -64,6 +66,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.activatedRoute.data.subscribe( (data) => {
             // appointment data
             this.appointment = data.appt.appointment;
+            this.address = this.appointment.address;
             this.userTimeZone = data.appt.appointment.user.time_zone;
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
@@ -90,8 +93,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.vibiioConnecting = true;
             this.onVibiio = true;
         }
-        console.log(this.vibiio.status);
-        
     }
 
     async connectToSession() {
