@@ -21,6 +21,7 @@ export class InsuranceStatusService {
 
   cancelEdit(data) {
     this.cancelingEdit.next(data);
+    this.editingPolicy.next(false);
     this.editStatus(false);
     this.updateStatus(false);
   }

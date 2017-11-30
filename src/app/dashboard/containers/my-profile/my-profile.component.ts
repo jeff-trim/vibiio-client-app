@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, OnInit, AfterViewChecked, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
 
 // Components
@@ -15,14 +16,13 @@ import { MyLicenseService } from '../../services/my-license.service';
 
 // Models
 import { MyProfile } from '../../models/my-profile.interface';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'vib-my-profile',
   styleUrls: ['my-profile.component.scss'],
   templateUrl: 'my-profile.component.html'})
 
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit, AfterViewChecked {
     myProfile: MyProfile;
     myLicenses: MyProfileLicense[];
     isSaving = false;
@@ -49,8 +49,18 @@ export class MyProfileComponent implements OnInit {
         });
     }
 
-    editForms() {
-        this.isEditing = true;
+    ngAfterViewChecked() {
+        this.profileInformationChild.myProfileForm.valueChanges
+        .subscribe(data => {
+            this.isEditing = true;
+        });
+
+        this.profileLicenesesChildren.forEach(license => {
+            license.editForm.valueChanges
+            .subscribe(data => {
+                this.isEditing = true;
+            });
+        });
     }
 
     saveForms() {
@@ -82,7 +92,7 @@ export class MyProfileComponent implements OnInit {
     refreshProfile() {
         this.myProfileService.getMyProfile()
         .subscribe( (data) => {
-            this.myProfile = data.user;
+            this.profileInformationChild.myProfileForm.patchValue(data.user);
             this.isEditing = false;
         });
     }
@@ -93,6 +103,9 @@ export class MyProfileComponent implements OnInit {
                 this.myLicenses =  data.licenses;
                 this.isEditing = false;
             });
+        this.profileLicenesesChildren.forEach(licenseForm => {
+            licenseForm.editForm.patchValue(licenseForm.license);
+        });
     }
 
     updateMyProfile(form) {

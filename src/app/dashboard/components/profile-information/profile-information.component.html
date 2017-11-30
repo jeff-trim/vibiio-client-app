@@ -5,9 +5,8 @@
 
 <form [formGroup]="myProfileForm"
       ngSubmit="onSubmit()">
-  <div formGroupName="userData">
 
-    <div *ngIf="myProfileForm.get('userData.firstName').invalid && !myProfileForm.get('userData.firstName').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('firstName'))"
           class="error-message">
       <p>First Name is Required</p>
     </div>
@@ -17,8 +16,7 @@
       between-xs
       bottom-xs">
       <span class="label">First Name</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="firstName" 
+      <input formControlName="firstName" 
              placeholder="First Name"
              type="text" 
              class="value end-md" 
@@ -26,7 +24,7 @@
       <span class="pink-underline"></span>
     </div>
    
-    <div *ngIf="myProfileForm.get('userData.lastName').invalid && !myProfileForm.get('userData.lastName').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('lastName'))"
           class="error-message">
       <p>Last Name is Required</p>
     </div>
@@ -36,8 +34,7 @@
       between-xs
       bottom-xs">
       <span class="label">Last Name</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="lastName" 
+      <input formControlName="lastName" 
              placeholder="Last Name"
              type="text" 
              class="value end-md" 
@@ -45,7 +42,7 @@
       <span class="pink-underline"></span>  
     </div>
     
-    <div *ngIf="myProfileForm.get('userData.company').invalid && !myProfileForm.get('userData.company').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('company'))"
           class="error-message">
       <p>Company is Required</p>
     </div>
@@ -55,8 +52,7 @@
       between-xs
       bottom-xs">
       <span class="label">Company</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="company" 
+      <input formControlName="company" 
              placeholder="Company"
              type="text" 
              class="value end-md" 
@@ -64,7 +60,7 @@
       <span class="pink-underline"></span>  
     </div>
     
-    <div *ngIf="myProfileForm.get('userData.phone').invalid && !myProfileForm.get('userData.phone').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('phone'))"
           class="error-message">
       <p>Cell Phone is Required</p>
     </div>
@@ -74,19 +70,15 @@
       between-xs
       bottom-xs">
       <span class="label">Cell Phone</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="phone" 
+      <input formControlName="phone" 
              placeholder="Cell Phone"
              type="text" 
              class="value end-md" 
              id="cellPhone">
       <span class="pink-underline"></span>  
     </div>
-  </div>
 
-  <div formGroupName="addressData">
-  
-    <div *ngIf="myProfileForm.get('addressData.addressOne').invalid && !myProfileForm.get('addressData.addressOne').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('addressOne'))"
           class="error-message">
       <p>Address is Required</p>
     </div>
@@ -96,8 +88,7 @@
       between-xs
       bottom-xs">
       <span class="label">Address</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="addressOne" 
+      <input formControlName="addressOne" 
              placeholder="Address"
              type="text" 
              class="value end-md" 
@@ -111,8 +102,7 @@
       between-xs
       bottom-xs">
       <span class="label">Address 2</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="addressTwo" 
+      <input formControlName="addressTwo" 
              placeholder="Address 2"
              type="text" 
              class="value end-md" 
@@ -120,7 +110,7 @@
       <span class="pink-underline"></span>  
     </div>
 
-    <div *ngIf="myProfileForm.get('addressData.city').invalid && !myProfileForm.get('addressData.city').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('city'))"
           class="error-message">
       <p>City is Required</p>
     </div>
@@ -130,8 +120,7 @@
       between-xs
       bottom-xs">
       <span class="label">City</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="city" 
+      <input formControlName="city" 
              placeholder="City"
              type="text" 
              class="value end-md" 
@@ -139,7 +128,7 @@
       <span class="pink-underline"></span>  
     </div>
 
-    <div *ngIf="myProfileForm.get('addressData.state').invalid && !myProfileForm.get('addressData.state').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('state'))"
           class="error-message">
       <p> State is Required</p>
     </div>
@@ -149,8 +138,7 @@
       between-xs
       bottom-xs">
       <span class="label">State</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="state" 
+      <input formControlName="state" 
              placeholder="State"
              type="text" 
              class="value end-md" 
@@ -159,7 +147,7 @@
     </div>
 
 
-    <div *ngIf="myProfileForm.get('addressData.zip').invalid && !myProfileForm.get('addressData.zip').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('zip'))"
           class="error-message">
       <p> Zip Code is Required</p>
     </div>
@@ -169,14 +157,12 @@
       between-xs
       bottom-xs">
       <span class="label">Zip</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="zip" 
+      <input formControlName="zip" 
              placeholder="Zip Code"
              type="text" 
              class="value end-md" 
              id="zip">
       <span class="pink-underline"></span>  
-    </div>
   </div>
 
 </form>
