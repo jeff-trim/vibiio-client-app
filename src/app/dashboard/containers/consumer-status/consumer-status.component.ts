@@ -9,7 +9,7 @@ import { ConsumerSortService } from '../../services/consumer-sort.service';
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { VideoSnapshot } from '../../models/video-snapshot.interface';
 import { Vibiio } from '../../models/vibiio.interface';
-import {SortType } from '../../models/sort-type.interface';
+import { SortType } from '../../models/sort-type.interface';
 
 // Pipes
 import { OrderByPipe } from '../../pipes/order-by.pipe';

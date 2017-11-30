@@ -19,9 +19,8 @@ export class ConsumerProfileSummaryComponent implements OnInit {
   ngOnInit() {
     this.userTimeZone = this.consumerProfile.user_info.time_zone;
     this.policies = this.consumerProfile.insurance_policies;
-
-    console.log(this.consumerProfile);
   }
+
   parseDate(time: number): string  {
     return this.dateFormatService.parseDate(time, this.userTimeZone);
   }
