@@ -41,10 +41,6 @@
     </div>
   </div>
   <div class="row edit-button-row">
-    <h4 *ngIf="!isEditingForms"
-        class="col-md-offset-4
-               edit-text"
-        (click)=onEdit()>EDIT</h4>
 
     <h4 *ngIf="isEditingForms"
         class="col-md-offset-4
@@ -77,7 +73,7 @@
                [value]="appointment.user?.phone"></key-value>
 
     <vib-consumer-address [address]="appointment.address"
-                          [onEdit]="isEditingForms"></vib-consumer-address>
+                          (formChanged)="onEdit()"></vib-consumer-address>
     
     <key-value [key]="'Vibiio Date'"
                [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
@@ -87,7 +83,8 @@
 
     
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
-                          [consumerId]="appointment.consumer_id">
+                          [consumerId]="appointment.consumer_id"
+                          (editingPolicy)="onEdit()">
     </vib-insurance-policy>
 
   </div>

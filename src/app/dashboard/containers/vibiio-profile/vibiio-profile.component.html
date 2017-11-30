@@ -5,11 +5,6 @@
              pink">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
   
     <div class="row edit-button-row">
-      <h4 *ngIf="!isEditing"
-          class="col-md-offset-4
-                 edit-text"
-          (click)=onFormEdit()>EDIT</h4>
-
       <h4 *ngIf="isEditing"
           class="col-md-offset-4
                  save-text"
@@ -30,8 +25,8 @@
           <div class="long-pink-underline" ></div>
         </div>
         <vib-consumer-profile [consumerProfile]="consumerProfile"
-                          [vibiio]="consumerProfile"
-                          [onEdit]="isEditing">
+                              [vibiio]="consumerProfile"
+                              (editingForm)="onFormEdit($event)">
         </vib-consumer-profile>
       </div>
 

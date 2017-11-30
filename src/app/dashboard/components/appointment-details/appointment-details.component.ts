@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as screenfull from 'screenfull';
 
@@ -28,7 +28,7 @@ import { ConsumerUpdateService } from '../../services/consumer-update.service';
     styleUrls: ['appointment-details.component.scss']
 })
 
-export class AppointmentDetailsComponent  {
+export class AppointmentDetailsComponent {
     imgData: string;
     vibiioFullscreen = false;
     isEditingForms = false;
@@ -56,6 +56,7 @@ export class AppointmentDetailsComponent  {
                 private router: Router,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private consumerUpdateService:  ConsumerUpdateService) {}
+
 
     updateStatus(event) {
       const options = { status: event.status };

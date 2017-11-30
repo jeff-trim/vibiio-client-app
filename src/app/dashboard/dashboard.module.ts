@@ -37,7 +37,6 @@ import { NewNoteComponent } from './components/note/new-note.component';
 import { ExistingNoteComponent } from './components/note/existing-note.component';
 import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
 import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
-import { PolicyDetailEditComponent } from './components/policy-detail-edit/policy-detail-edit.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
 import { ConsumerNoteComponent } from './components/note/consumer-note.component';
 import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
@@ -192,7 +191,6 @@ const dashboardRoutes: Routes = [
     RemoveUnderscorePipe,
     AutosizeDirective,
     PolicyDetailNewComponent,
-    PolicyDetailEditComponent,
     ConsumerNoteComponent,
     InsurancePolicyComponent,
     SortButtonComponent,

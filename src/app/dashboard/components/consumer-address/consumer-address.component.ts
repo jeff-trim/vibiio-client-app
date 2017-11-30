@@ -10,7 +10,6 @@ import { Address } from '../../models/address.interface';
 
 export class ConsumerAddressComponent implements OnInit {
   @Input() address: Address;
-  @Input() onEdit = false;
 
   editForm: FormGroup;
 
@@ -29,7 +28,6 @@ export class ConsumerAddressComponent implements OnInit {
     });
 
     this.editForm.valueChanges.subscribe(data => {
-     console.log('Form changes', data);
      this.formChanged.emit(true);
     });
   }

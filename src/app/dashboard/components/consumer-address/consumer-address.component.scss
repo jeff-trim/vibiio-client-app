@@ -33,6 +33,9 @@
     -webkit-transition: width .5s; /* Safari */
     transition: width .5s;
     width: 7%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 .info-element:hover {
