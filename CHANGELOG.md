@@ -17,3 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.0.*] - * 
 ## Added
 - Dummy component to display consumer info on the 'All Consumer' and 'Consumers by Status' views
+
+## Removed
+- edit button from UI
+

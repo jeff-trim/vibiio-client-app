@@ -10,7 +10,7 @@ import { SpinnerService } from './easy-spinner/services/spinner.service';
 })
 
 export class AppComponent implements OnInit {
-  title = 'Vibiio';
+  title = 'vibiio';
 
     constructor( public titleService: Title,
                  private router: Router,

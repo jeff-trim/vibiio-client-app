@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy  } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 // Services
@@ -9,16 +9,16 @@ import { ConsumerSortService } from '../../services/consumer-sort.service';
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { VideoSnapshot } from '../../models/video-snapshot.interface';
 import { Vibiio } from '../../models/vibiio.interface';
-import {SortType } from '../../models/sort-type.interface';
+import { SortType } from '../../models/sort-type.interface';
 
 // Pipes
 import { OrderByPipe } from '../../pipes/order-by.pipe';
 
-
 @Component({
     selector: 'vib-consumer-status',
     templateUrl: 'consumer-status.component.html',
-    styleUrls: ['consumer-status.component.scss']
+    styleUrls: ['consumer-status.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ConsumerStatusComponent implements OnInit {
