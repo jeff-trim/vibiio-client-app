@@ -33,9 +33,13 @@
     -webkit-transition: width .5s; /* Safari */
     transition: width .5s;
     width: 7%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-bottom: 3px solid $pink;
 }
 
-.info-element-hover:hover {
+.info-element:hover {
     .pink-underline {
         -webkit-transition: width .5s; /* Safari */
         transition: width .5s;

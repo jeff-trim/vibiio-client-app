@@ -5,11 +5,6 @@
   profile-title
   pink">My profile</h1>
   
-  <h4 *ngIf="!isEditing"
-      class="col-md-offset-4
-             edit-text"
-      (click)=editForms()>EDIT</h4>
-
   <h4 *ngIf="isEditing"
       class="col-md-offset-4
              save-text"
@@ -28,9 +23,8 @@
               col-md-5
               col-md-offset-1
               profile-information" >
-    <vib-profile-information
-      [myProfile]="myProfile"
-      [onEdit]="isEditing"></vib-profile-information>
+    
+    <vib-profile-information [myProfile]="myProfile"></vib-profile-information>
   </div>
   <div class="col-xs-12
               col-sm-6
@@ -45,8 +39,7 @@
     <div class="restrict-height"
             id="scrollbar">
         <vib-profile-licensure *ngFor="let license of myLicenses"
-                            [license]="license"
-                            [onEdit]="isEditing">
+                            [license]="license">
         </vib-profile-licensure>
     </div>
 

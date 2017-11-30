@@ -26,6 +26,8 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
   @Input() insurancePolicies?: InsurancePolicy[];
   @Input() consumerId: number;
 
+  @Output() editingPolicy: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @ViewChild(PolicyDetailNewComponent)
   newPolicyChild: PolicyDetailNewComponent;
 
@@ -37,12 +39,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.alive = true;
-    this.insuranceStatusService.onEdit$
-        .takeWhile(() => this.alive)
-        .subscribe(
-        data => {
-            this.onEdit = Object.assign({}, this.onEdit, data);
-        });
+
     this.insuranceStatusService.onCancel$
       .takeWhile(() => this.alive)
       .subscribe(
@@ -88,6 +85,10 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
     });
   }
 
+  editingForm() {
+    this.editingPolicy.emit(true);
+  }
+
   showForm() {
     this.showNewForm = true;
   }
@@ -105,7 +106,6 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
     this.policyService.getPolicies(this.consumerId)
       .subscribe( (data) => {
         this.insurancePolicies = Object.assign([], this.insurancePolicies, data.insurance_policies);
-        this.insuranceStatusService.editStatus(false);
       }, (error) => {
         console.log('error resetting form');
       });
