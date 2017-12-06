@@ -6,18 +6,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [2.0.0] - 2017-11-28
-### Added
-- Start Versioning
-
-## [2.0.1] - 2017-11-28 
-## Fixed 
-- Vibiiographer profile display bugs
-
-## [2.0.*] - * 
+## [2.0.2] - 2017-12-6
 ## Added
 - Dummy component to display consumer info on the 'All Consumer' and 'Consumers by Status' views
+
+## Changed
+- Form UX
 
 ## Removed
 - edit button from UI
 
+## [2.0.1] - 2017-11-28
+## Fixed
+- Vibiiographer profile display bugs
+
+## [2.0.0] - 2017-11-28
+### Added
+- Start Versioning
