@@ -5,6 +5,7 @@ import { Address } from './address.interface';
 export interface ConsumerProfile {
     id: number;
     consumer_id: number;
+    status: string;
     appointment_scheduled_datetime: [
         number
     ];

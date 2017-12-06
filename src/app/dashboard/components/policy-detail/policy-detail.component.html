@@ -2,16 +2,14 @@
         <div class="info-element
                     row
                     between-xs
-                    bottom-xs"
-                    [ngClass]="{ 'info-element-hover': onEdit }">
+                    bottom-xs">
             <span class="label">Provider</span>
-              <input [attr.disabled]="!onEdit ? true : null"
-                   formControlName="carrier"
-                   name="carrier" 
-                   placeholder="Provider"
-                   type="text" 
-                   class="value end-md" 
-                   id="provider">
+              <input formControlName="carrier"
+                     name="carrier" 
+                     placeholder="Provider"
+                     type="text" 
+                     class="value end-md" 
+                     id="provider">
             <span class="pink-underline"></span>
             <div *ngIf="checkErrors(editForm.get('carrier'))"
                  class="error-message">
@@ -22,11 +20,9 @@
         <div class="info-element
                     row
                     between-xs
-                    bottom-xs"
-                    [ngClass]="{ 'info-element-hover': onEdit }">
+                    bottom-xs">
             <span class="label">Policy Number</span>
-            <input [attr.disabled]="!onEdit ? true : null"
-                    formControlName="policy_number"
+            <input  formControlName="policy_number"
                     name="policy_number"
                     placeholder="Policy Number"
                     type="text"
@@ -42,11 +38,9 @@
         <div class="info-element
                     row
                     between-xs
-                    bottom-xs"
-                    [ngClass]="{ 'info-element-hover': onEdit }">
+                    bottom-xs">
             <span class="label">Claim ID</span>
-            <input [attr.disabled]="!onEdit ? true : null"       
-                    formControlName="claim_id"
+            <input formControlName="claim_id"
                     name="claim_id"
                     placeholder="Claim Id"
                     type="text"

@@ -22,14 +22,13 @@ import { ConsumerProfileComponent } from '../../components/consumer-profile/cons
     styleUrls: ['vibiio-profile.component.scss']
 })
 
-export class VibiioProfileComponent implements OnInit, OnDestroy {
+export class VibiioProfileComponent implements OnInit {
     consumerProfile: ConsumerProfile;
     notes: Note[];
     vibiioId: number;
     description: string;
     isEditing = false;
     isUpdating = false;
-    alive = true;
 
     @ViewChild(ConsumerProfileComponent) consumerProfileChild: ConsumerProfileComponent;
 
@@ -46,19 +45,14 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
-        this.alive = false;
-    }
-
     updateNotes(consumerProfileId) {
         this.vibiioProfileService.getVibiio(consumerProfileId).subscribe( (data) => {
             this.notes = data.vibiio.notes;
         });
     }
 
-    onFormEdit() {
-        this.formStatusService.onFormEdit();
-        this.isEditing = true;
+    onFormEdit(event) {
+        this.isEditing = event;
     }
 
     onFormUpdate() {

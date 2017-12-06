@@ -2,16 +2,14 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs"
-              [ngClass]="{ 'info-element-hover': onEdit }">
+              bottom-xs">
       <span class="label">Address</span>
-        <input [attr.disabled]="!onEdit ? true : null"
-             formControlName="address_one"
-             name="address_one" 
-             placeholder="Address"
-             type="text" 
-             class="value end-md" 
-             id="provider">
+        <input formControlName="address_one"
+               name="address_one" 
+               placeholder="Address"
+               type="text" 
+               class="value end-md" 
+               id="provider">
       <span class="pink-underline"></span>
       <div *ngIf="checkErrors(editForm.get('address_one'))"
            class="error-message">
@@ -23,11 +21,9 @@
         class="info-element
               row
               between-xs
-              bottom-xs"
-              [ngClass]="{ 'info-element-hover': onEdit }">
+              bottom-xs">
       <span class="label">Address Two</span>
-      <input [attr.disabled]="!onEdit ? true : null"
-              formControlName="address_two"
+      <input  formControlName="address_two"
               name="address_two"
               placeholder="Address Two"
               type="text"
@@ -39,11 +35,9 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs"
-              [ngClass]="{ 'info-element-hover': onEdit }">
+              bottom-xs">
       <span class="label">City</span>
-      <input [attr.disabled]="!onEdit ? true : null"       
-              formControlName="city"
+      <input  formControlName="city"
               name="city"
               placeholder="City"
               type="text"
@@ -59,11 +53,9 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs"
-              [ngClass]="{ 'info-element-hover': onEdit }">
+              bottom-xs">
       <span class="label">State</span>
-      <input [attr.disabled]="!onEdit ? true : null"       
-              formControlName="state"
+      <input  formControlName="state"
               name="state"
               placeholder="State"
               type="text"
@@ -79,11 +71,9 @@
   <div class="info-element
               row
               between-xs
-              bottom-xs"
-              [ngClass]="{ 'info-element-hover': onEdit }">
+              bottom-xs">
       <span class="label">Zip</span>
-      <input [attr.disabled]="!onEdit ? true : null"       
-              formControlName="zip"
+      <input  formControlName="zip"
               name="zip"
               placeholder="Zip"
               type="text"

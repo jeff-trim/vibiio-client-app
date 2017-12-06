@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as screenfull from 'screenfull';
 
@@ -21,6 +21,7 @@ import { Note } from '../../models/consumer-note.interface';
 import { ResponseErrorService } from '../../../services/response-error.service';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
+import { Address } from '../../models/address.interface';
 
 @Component({
     selector: 'vib-appointment-details',
@@ -28,12 +29,7 @@ import { ConsumerUpdateService } from '../../services/consumer-update.service';
     styleUrls: ['appointment-details.component.scss']
 })
 
-export class AppointmentDetailsComponent  {
-    imgData: string;
-    vibiioFullscreen = false;
-    isEditingForms = false;
-    isUpdatingForms = false;
-
+export class AppointmentDetailsComponent {
     @Input() vibiioConnecting: boolean;
     @Input() onVibiio: boolean;
     @Input() appointment: Appointment;
@@ -41,6 +37,12 @@ export class AppointmentDetailsComponent  {
     @Input() vibiio: Vibiio;
     @Input() neworkDisconnected: boolean;
     @Input() timeZone: string;
+    @Input() address: Address;
+
+    imgData: string;
+    vibiioFullscreen = false;
+    isEditingForms = false;
+    isUpdatingForms = false;
 
     @Output() startVibiio = new EventEmitter<boolean>();
     @Output() endVibiio = new EventEmitter<boolean>();
@@ -56,6 +58,7 @@ export class AppointmentDetailsComponent  {
                 private router: Router,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private consumerUpdateService:  ConsumerUpdateService) {}
+
 
     updateStatus(event) {
       const options = { status: event.status };
@@ -74,7 +77,7 @@ export class AppointmentDetailsComponent  {
         const address = this.addressForm.editForm.value;
         this.consumerUpdateService.updateAddress(address)
           .subscribe( (data) => {
-            this.appointment.address = data.address;
+            this.address = data.address;
           });
       }
     }
@@ -108,8 +111,8 @@ export class AppointmentDetailsComponent  {
       return this.dateFormatService.parseTime(time, this.timeZone);
     }
 
-    onEdit() {
-      this.isEditingForms = true;
+    onEdit(event) {
+      this.isEditingForms = event;
       this.formStatusService.onFormEdit();
   }
 
@@ -120,11 +123,11 @@ export class AppointmentDetailsComponent  {
   }
 
   onCancel() {
-      this.isEditingForms = false;
       this.formStatusService.onCancel();
-      this.consumerUpdateService.refreshAddress(this.appointment.address.id)
+      this.consumerUpdateService.refreshAddress(this.address.id)
         .subscribe( (data) => {
-          this.appointment.address = data.address;
+          this.addressForm.editForm.patchValue(data.address);
+          this.isEditingForms = false;
         });
   }
 

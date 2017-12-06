@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, Output, OnInit, ViewChild, EventEmitter } from '@angular/core';
 
 // Components
 import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
@@ -25,10 +25,12 @@ export class ConsumerProfileComponent implements OnInit {
     insurancePolicies?: InsurancePolicy[];
     updateStatusReminder: boolean;
     userTimeZone: string;
+    address: Address;
 
     @Input() consumerProfile: ConsumerProfile;
     @Input() vibiio: Vibiio;
-    @Input() onEdit: boolean;
+
+    @Output() editingForm: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
 
@@ -40,6 +42,11 @@ export class ConsumerProfileComponent implements OnInit {
     ngOnInit() {
         this.insurancePolicies = this.consumerProfile.insurance_policies;
         this.userTimeZone = this.consumerProfile.user_info.time_zone;
+        this.address = this.consumerProfile.address;
+    }
+
+    onEdit(event) {
+        this.editingForm.emit(event);
     }
 
     updateStatus(event) {
@@ -66,9 +73,10 @@ export class ConsumerProfileComponent implements OnInit {
     }
 
     refreshAddress() {
-        this.consumerUpdateService.refreshAddress(this.consumerProfile.address.id)
+        this.consumerUpdateService.refreshAddress(this.address.id)
         .subscribe( (data) => {
-          this.consumerProfile.address = data.address;
+          this.addressForm.editForm.patchValue(data.address);
+          this.editingForm.emit(false);
         });
     }
 

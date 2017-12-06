@@ -35,6 +35,7 @@
             overflow-y: hidden;
             text-align: start;
             width: 100px;
+            margin-left: 0;
         }
         &.cancel-text{
             color: $pink;
@@ -58,7 +59,7 @@
 .existing-policy-container{
     max-height: 150px;
     padding-right: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #scrollbar::-webkit-scrollbar-track{

@@ -10,19 +10,20 @@
     <key-value [key]="'Phone Number'"
                [value]="consumerProfile.user_info.phone_number"></key-value>
 
-    <vib-consumer-address [address]="consumerProfile.address"
-                          [onEdit]="onEdit">
+    <vib-consumer-address [address]="address"
+                          (formChanged)="onEdit($event)">
     </vib-consumer-address>
 
-    <key-value [key]="'Vibiio Date'"
+    <key-value [key]="'Date'"
                [value]="parseDate(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
     
-    <key-value [key]="'Vibiio Start Time'"
+    <key-value [key]="'Start Time'"
                [value]="parseTime(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
 
   
     <vib-insurance-policy [insurancePolicies]="consumerProfile.insurance_policies"
-                          [consumerId]="consumerProfile.consumer_id"></vib-insurance-policy>
+                          [consumerId]="consumerProfile.consumer_id"
+                          (editingPolicy)="onEdit($event)"></vib-insurance-policy>
 
     <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>
