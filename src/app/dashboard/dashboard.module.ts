@@ -37,11 +37,14 @@ import { NewNoteComponent } from './components/note/new-note.component';
 import { ExistingNoteComponent } from './components/note/existing-note.component';
 import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
 import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
-import { PolicyDetailEditComponent } from './components/policy-detail-edit/policy-detail-edit.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
 import { ConsumerNoteComponent } from './components/note/consumer-note.component';
 import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
 import { SortButtonComponent } from './components/sort-button/sort-button.component';
+import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
+import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
+import { ConsumerProfileSummaryComponent } from './components/consumer-profile-summary/consumer-profile-summary.component';
+import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -68,6 +71,11 @@ import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-
 import { AvailabilitySharedService } from './services/availability-shared.service';
 import { MyLicenseService } from './services/my-license.service';
 import { ConsumerSortService } from './services/consumer-sort.service';
+import { AddressStatusService } from './services/address-status.service';
+import { AppointmentDetailsFormStatusService } from './services/appointment-details-form-status.service';
+import { ConsumerUpdateService } from './services/consumer-update.service';
+import { VibiioProfileFormStatusService } from './services/vibiio-profile-form-status.service';
+import { InsuranceStatusService } from './services/insurance-status.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -87,7 +95,6 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
-import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 
 // Routes
@@ -186,11 +193,13 @@ const dashboardRoutes: Routes = [
     RemoveUnderscorePipe,
     AutosizeDirective,
     PolicyDetailNewComponent,
-    PolicyDetailEditComponent,
     ConsumerNoteComponent,
     InsurancePolicyComponent,
     SortButtonComponent,
-    OrderByPipe
+    OrderByPipe,
+    ConsumerAddressComponent,
+    ConsumerProfileSummaryComponent,
+    InsurancePolicySummaryComponent
   ],
   imports: [
       CommonModule,
@@ -248,7 +257,12 @@ const dashboardRoutes: Routes = [
     ActivityService,
     AvailabilitySharedService,
     MyLicenseService,
-    ConsumerSortService
+    ConsumerSortService,
+    InsuranceStatusService,
+    AddressStatusService,
+    ConsumerUpdateService,
+    AppointmentDetailsFormStatusService,
+    VibiioProfileFormStatusService
   ]
 })
 

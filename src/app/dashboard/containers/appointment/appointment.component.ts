@@ -21,11 +21,12 @@ import { AppointmentService } from '../../services/appointment.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
+import { Address } from '../../models/address.interface';
 
 declare var OT: any;
 
 @Component({
-    selector: 'appointment',
+    selector: 'vib-appointment',
     templateUrl: 'appointment.component.html'
 })
 
@@ -34,6 +35,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     vibiioConnecting = false;
     index: number;
     appointment: Appointment;
+    address: Address;
     consumer_id: number;
     user: User;
     session: any;
@@ -64,6 +66,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.activatedRoute.data.subscribe( (data) => {
             // appointment data
             this.appointment = data.appt.appointment;
+            this.address = this.appointment.address;
             this.userTimeZone = data.appt.appointment.user.time_zone;
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
@@ -86,13 +89,13 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         // Video session starts if vibiio was started from dashboard
         if (this.startVibiioParams) {
-            this.connectToSession(this.startVibiioParams);
+            this.connectToSession();
             this.vibiioConnecting = true;
             this.onVibiio = true;
         }
     }
 
-    async connectToSession(event) {
+    async connectToSession() {
         this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
             // this.token ="T1==cGFydG5lcl9pZD00NTUwMDI5MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9YWMzZWI4NzBlMDU4ZGNhMzNhY2MyMGRhODkxOTRhYzE1YjI2NGQ2ZTpzZXNzaW9uX2lkPTFfTVg0ME5UVXdNREk1TW41LU1UVXdNak01TVRJM01qa3pObjV3V21welZ6STRRbE5sVUUxVFoydG9NQzk2UVVoSFdXbC1mZyZjcmVhdGVfdGltZT0xNTAyMzkxMjcyJnJvbGU9cHVibGlzaGVyJm5vbmNlPTE1MDIzOTEyNzIuOTY0MzE1OTg4MzgwOTcmZXhwaXJlX3RpbWU9MTUwNDk4MzI3Mg==";
@@ -124,6 +127,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                     this.neworkDisconnected = false;
                     this.onVibiio = true;
                 });
+
                 // subscribe to stream destroyed events
                 this.session.on('streamDestroyed', (data) => {
                     this.onVibiio = false;
@@ -179,7 +183,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             });
     }
 
-    endSession(event) {
+    endSession() {
         this.session.disconnect();
         this.triggerActivity(
             this.vibiio.id,

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, AfterViewChecked, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
 
 // Components
@@ -15,14 +16,13 @@ import { MyLicenseService } from '../../services/my-license.service';
 
 // Models
 import { MyProfile } from '../../models/my-profile.interface';
-import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'my-profile',
+  selector: 'vib-my-profile',
   styleUrls: ['my-profile.component.scss'],
   templateUrl: 'my-profile.component.html'})
 
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit, AfterViewChecked {
     myProfile: MyProfile;
     myLicenses: MyProfileLicense[];
     isSaving = false;
@@ -35,6 +35,9 @@ export class MyProfileComponent implements OnInit {
     @ViewChild (ProfileNewLicensureComponent)
     private profileNewLicensureChild: ProfileNewLicensureComponent;
 
+    @ViewChildren(ProfileLicensureComponent)
+    private profileLicenesesChildren: QueryList<ProfileLicensureComponent>;
+
     constructor(private myProfileService: MyProfileService,
                 private myLicenseService: MyLicenseService,
                 private activatedRoute: ActivatedRoute) { }
@@ -46,21 +49,63 @@ export class MyProfileComponent implements OnInit {
         });
     }
 
-    editMyProfileForm() {
-        this.isEditing = true;
-    }
+    ngAfterViewChecked() {
+        this.profileInformationChild.myProfileForm.valueChanges
+        .subscribe(data => {
+            this.isEditing = true;
+        });
 
-    saveMyProfileForm() {
-        this.isSaving = true;
-        this.updateMyProfile(this.profileInformationChild.myProfileForm);
-    }
-
-    resetMyProfileForm() {
-        this.myProfileService.getMyProfile()
-            .subscribe( (data) => {
-                this.myProfile = data.user;
+        this.profileLicenesesChildren.forEach(license => {
+            license.editForm.valueChanges
+            .subscribe(data => {
+                this.isEditing = true;
             });
+        });
+    }
+
+    saveForms() {
+        this.isSaving = true;
+        this.updateLicences();
+        this.updateMyProfile(this.profileInformationChild.myProfileForm);
+        this.isSaving = false;
         this.isEditing = false;
+    }
+
+    updateLicences() {
+        this.profileLicenesesChildren.forEach(license => {
+            if (license.editForm.dirty && license.editForm.valid) {
+                this.myLicenseService.updateMyLicense(license.editForm.value)
+                .subscribe( (data) => {
+                    license.license = data.license;
+                    this.isEditing = false;
+                });
+            }
+        });
+    }
+
+    resetForms() {
+        this.refreshProfile();
+        this.refreshLicenses();
+        this.isEditing = false;
+    }
+
+    refreshProfile() {
+        this.myProfileService.getMyProfile()
+        .subscribe( (data) => {
+            this.profileInformationChild.myProfileForm.patchValue(data.user);
+            this.isEditing = false;
+        });
+    }
+
+    refreshLicenses() {
+        this.myLicenseService.getMyLicenses()
+            .subscribe( (data) => {
+                this.myLicenses =  data.licenses;
+                this.isEditing = false;
+            });
+        this.profileLicenesesChildren.forEach(licenseForm => {
+            licenseForm.editForm.patchValue(licenseForm.license);
+        });
     }
 
     updateMyProfile(form) {
@@ -83,7 +128,6 @@ export class MyProfileComponent implements OnInit {
         this.myProfileService.updateMyProfile(options)
             .subscribe( (data) => {
                 this.myProfile = data.user;
-                this.isSaving = false;
                 this.isEditing = false;
         });
     }
@@ -107,12 +151,4 @@ export class MyProfileComponent implements OnInit {
                 this.addLicensureForm = false;
             });
         }
-
-    refreshLicenses() {
-        this.myLicenseService.getMyLicenses()
-            .subscribe( (data) => {
-                this.myLicenses =  data.licenses;
-            });
-    }
-
 }

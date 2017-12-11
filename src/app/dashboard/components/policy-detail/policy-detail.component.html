@@ -1,17 +1,20 @@
-  <form>
+  <form [formGroup]="editForm">
         <div class="info-element
                     row
                     between-xs
                     bottom-xs">
             <span class="label">Provider</span>
-              <input [ngModel]="policy?.carrier"
-                   disabled     
-                   name="carrier" 
-                   placeholder="CARRIER"
-                   type="text" 
-                   class="value end-md" 
-                   id="provider">
-            <span class="pink-underline"></span>  
+              <input formControlName="carrier"
+                     name="carrier" 
+                     placeholder="Provider"
+                     type="text" 
+                     class="value end-md" 
+                     id="provider">
+            <span class="pink-underline"></span>
+            <div *ngIf="checkErrors(editForm.get('carrier'))"
+                 class="error-message">
+                <p>Provider is Required</p>
+            </div>
         </div>
 
         <div class="info-element
@@ -19,14 +22,17 @@
                     between-xs
                     bottom-xs">
             <span class="label">Policy Number</span>
-            <input [ngModel]="policy?.policy_number"
-                    disabled
+            <input  formControlName="policy_number"
                     name="policy_number"
-                    placeholder="POLICY NUMBER"
+                    placeholder="Policy Number"
                     type="text"
                     class="value end-md"
                     id="policy_number">
             <span class="pink-underline"></span>
+            <div *ngIf="checkErrors(editForm.get('policy_number'))"
+                 class="error-message">
+                <p>Policy Number is Required</p>
+            </div>  
         </div>
 
         <div class="info-element
@@ -34,13 +40,16 @@
                     between-xs
                     bottom-xs">
             <span class="label">Claim ID</span>
-            <input [ngModel]="policy?.claim_id"
-                    disabled        
+            <input formControlName="claim_id"
                     name="claim_id"
-                    placeholder="CLAIM ID"
+                    placeholder="Claim Id"
                     type="text"
                     class="value end-md"
                     id="claim_id">
             <span class="pink-underline"></span>
-        </div>
+            <div *ngIf="checkErrors(editForm.get('claim_id'))"
+                 class="error-message">
+                <p>Claim ID is Required</p>
+            </div>
+       </div>
 </form>

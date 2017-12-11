@@ -2,5 +2,5 @@ export interface MyProfileLicense {
     id: number;
     license_number: string;
     state: string;
-    vibiiographerId: number;
+    vibiiographer_id: number;
 }

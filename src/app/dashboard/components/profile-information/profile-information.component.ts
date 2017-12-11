@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 // Models
 import { MyProfileLicense } from '../../models/my-profile-license.interface';
@@ -7,34 +7,34 @@ import { MyProfileService } from '../../services/my-profile.service';
 import { MyProfile } from '../../models/my-profile.interface';
 
 @Component({
-    selector: 'profile-information',
+    selector: 'vib-profile-information',
     styleUrls: ['profile-information.component.scss'],
     templateUrl: 'profile-information.component.html'
 })
 
 export class ProfileInformationComponent implements OnInit {
-    @Input()
-    myProfile: MyProfile;
+    myProfileForm: FormGroup;
+
+    @Input() onEdit = false;
+    @Input() myProfile: MyProfile;
 
     updateProfile: EventEmitter<FormGroup> = new EventEmitter;
 
-    myProfileForm: FormGroup;
-
     ngOnInit() {
         this.myProfileForm = new FormGroup({
-            'userData': new FormGroup ({
-                'firstName': new FormControl('', Validators.required),
-                'lastName': new FormControl('', Validators.required),
-                'company': new FormControl('', Validators.required),
-                'phone': new FormControl('', Validators.required)
-            }),
-            'addressData': new FormGroup ({
-                'addressOne': new FormControl('', Validators.required),
-                'addressTwo': new FormControl('', Validators.required),
-                'city': new FormControl('', Validators.required),
-                'state': new FormControl('', Validators.required),
-                'zip': new FormControl('', Validators.required)
-            })
+                'firstName': new FormControl(this.myProfile.first_name, Validators.required),
+                'lastName': new FormControl(this.myProfile.last_name, Validators.required),
+                'company': new FormControl(this.myProfile.company, Validators.required),
+                'phone': new FormControl(this.myProfile.phone, Validators.required),
+                'addressOne': new FormControl(this.myProfile.address.address_one, Validators.required),
+                'addressTwo': new FormControl(this.myProfile.address.address_two, Validators.required),
+                'city': new FormControl(this.myProfile.address.city, Validators.required),
+                'state': new FormControl(this.myProfile.address.state, Validators.required),
+                'zip': new FormControl(this.myProfile.address.zip, Validators.required)
         });
     }
+
+    checkErrors(field: AbstractControl): boolean {
+        return (field.invalid);
+      }
 }

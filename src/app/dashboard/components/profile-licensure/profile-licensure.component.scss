@@ -1,34 +1,68 @@
 @import '../../../../assets/css/_variables.scss';
 
-.info-element {
-    margin: 0px 0 20px 0;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.restrict-height {
-    max-height: 250px;
-    overflow-y: scroll;
-}
-
 .license-style {
     margin-bottom: 45px;
     margin-right: 10px;
 }
 
-#scrollbar::-webkit-scrollbar-track
-{
-    background: rgba(236, 0, 140, 0.25);
-    border-radius: 10px;
+
+.info-element {
+    margin: 0px 0 20px 0;
+    position: relative;
+    padding-bottom: 10px;
+
+    .label {
+        font-family: $base-font;
+        font-size: 1.65rem;
+        font-weight: 700;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        color: $greyish-brown;
+    }
+
+    .value {
+        font-family: $copy-font;
+        font-size: 1.45rem;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        color: $greyish-brown;
+        -webkit-appearance: none;
+        border: none;
+    }
 }
 
-#scrollbar::-webkit-scrollbar
-{
-	width: 10px;
+
+.pink-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid $pink;
+    -webkit-transition: width .5s; /* Safari */
+    transition: width .5s;
+    width: 7%;
 }
 
-#scrollbar::-webkit-scrollbar-thumb
-{
-    border-radius: 10px;
-    background-color: $pink;
+.info-element:hover {
+    .pink-underline {
+        -webkit-transition: width .5s; /* Safari */
+        transition: width .5s;
+        width: 100%;
+    }
+}
+
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    p {
+        margin: -20px 0;
+        color: red;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px; 
+    }
 }

@@ -1,9 +1,11 @@
 import { InsurancePolicy } from './insurance-policy.interface';
 import { VideoSnapshot } from './video-snapshot.interface';
+import { Address } from './address.interface';
 
 export interface ConsumerProfile {
     id: number;
     consumer_id: number;
+    status: string;
     appointment_scheduled_datetime: [
         number
     ];
@@ -13,12 +15,11 @@ export interface ConsumerProfile {
        last_name: string;
        email: string;
        phone_number: string;
-       address_one: string;
-       zipcode: number;
        provider?: string;
        policy_number?: number;
        time_zone: string;
     };
+    address: Address;
     insurance_policies: InsurancePolicy[];
     snapshots?: VideoSnapshot[];
 }

@@ -5,9 +5,8 @@
 
 <form [formGroup]="myProfileForm"
       ngSubmit="onSubmit()">
-  <div formGroupName="userData">
 
-    <div *ngIf="myProfileForm.get('userData.firstName').invalid && !myProfileForm.get('userData.firstName').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('firstName'))"
           class="error-message">
       <p>First Name is Required</p>
     </div>
@@ -17,16 +16,15 @@
       between-xs
       bottom-xs">
       <span class="label">First Name</span>
-      <input [(ngModel)]="myProfile.first_name"
-          formControlName="firstName" 
-          placeholder="First Name"
-          type="text" 
-          class="value end-md" 
-          id="firstName">
+      <input formControlName="firstName" 
+             placeholder="First Name"
+             type="text" 
+             class="value end-md" 
+             id="firstName">
       <span class="pink-underline"></span>
     </div>
    
-    <div *ngIf="myProfileForm.get('userData.lastName').invalid && !myProfileForm.get('userData.lastName').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('lastName'))"
           class="error-message">
       <p>Last Name is Required</p>
     </div>
@@ -36,16 +34,15 @@
       between-xs
       bottom-xs">
       <span class="label">Last Name</span>
-      <input [(ngModel)]="myProfile.last_name"
-          formControlName="lastName" 
-          placeholder="Last Name"
-          type="text" 
-          class="value end-md" 
-          id="lastName">
+      <input formControlName="lastName" 
+             placeholder="Last Name"
+             type="text" 
+             class="value end-md" 
+             id="lastName">
       <span class="pink-underline"></span>  
     </div>
     
-    <div *ngIf="myProfileForm.get('userData.company').invalid && !myProfileForm.get('userData.company').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('company'))"
           class="error-message">
       <p>Company is Required</p>
     </div>
@@ -55,16 +52,15 @@
       between-xs
       bottom-xs">
       <span class="label">Company</span>
-      <input [(ngModel)]="myProfile.company"
-          formControlName="company" 
-          placeholder="Company"
-          type="text" 
-          class="value end-md" 
-          id="company">
+      <input formControlName="company" 
+             placeholder="Company"
+             type="text" 
+             class="value end-md" 
+             id="company">
       <span class="pink-underline"></span>  
     </div>
     
-    <div *ngIf="myProfileForm.get('userData.phone').invalid && !myProfileForm.get('userData.phone').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('phone'))"
           class="error-message">
       <p>Cell Phone is Required</p>
     </div>
@@ -74,19 +70,15 @@
       between-xs
       bottom-xs">
       <span class="label">Cell Phone</span>
-      <input [(ngModel)]="myProfile.phone"
-          formControlName="phone" 
-          placeholder="Cell Phone"
-          type="text" 
-          class="value end-md" 
-          id="cellPhone">
+      <input formControlName="phone" 
+             placeholder="Cell Phone"
+             type="text" 
+             class="value end-md" 
+             id="cellPhone">
       <span class="pink-underline"></span>  
     </div>
-  </div>
 
-  <div formGroupName="addressData">
-  
-    <div *ngIf="myProfileForm.get('addressData.addressOne').invalid && !myProfileForm.get('addressData.addressOne').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('addressOne'))"
           class="error-message">
       <p>Address is Required</p>
     </div>
@@ -96,12 +88,11 @@
       between-xs
       bottom-xs">
       <span class="label">Address</span>
-      <input [(ngModel)]="myProfile.address.address_one"
-          formControlName="addressOne" 
-          placeholder="Address"
-          type="text" 
-          class="value end-md" 
-          id="line_one">
+      <input formControlName="addressOne" 
+             placeholder="Address"
+             type="text" 
+             class="value end-md" 
+             id="line_one">
       <span class="pink-underline"></span>  
     </div>
 
@@ -111,16 +102,15 @@
       between-xs
       bottom-xs">
       <span class="label">Address 2</span>
-      <input [(ngModel)]="myProfile.address.address_two"
-          formControlName="addressTwo" 
-          placeholder="Address 2"
-          type="text" 
-          class="value end-md" 
-          id="line_two">
+      <input formControlName="addressTwo" 
+             placeholder="Address 2"
+             type="text" 
+             class="value end-md" 
+             id="line_two">
       <span class="pink-underline"></span>  
     </div>
 
-    <div *ngIf="myProfileForm.get('addressData.city').invalid && !myProfileForm.get('addressData.city').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('city'))"
           class="error-message">
       <p>City is Required</p>
     </div>
@@ -130,16 +120,15 @@
       between-xs
       bottom-xs">
       <span class="label">City</span>
-      <input [(ngModel)]="myProfile.address.city"
-          formControlName="city" 
-          placeholder="City"
-          type="text" 
-          class="value end-md" 
-          id="city">
+      <input formControlName="city" 
+             placeholder="City"
+             type="text" 
+             class="value end-md" 
+             id="city">
       <span class="pink-underline"></span>  
     </div>
 
-    <div *ngIf="myProfileForm.get('addressData.state').invalid && !myProfileForm.get('addressData.state').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('state'))"
           class="error-message">
       <p> State is Required</p>
     </div>
@@ -149,17 +138,16 @@
       between-xs
       bottom-xs">
       <span class="label">State</span>
-      <input [(ngModel)]="myProfile.address.state"
-          formControlName="state" 
-          placeholder="State"
-          type="text" 
-          class="value end-md" 
-          id="state">
+      <input formControlName="state" 
+             placeholder="State"
+             type="text" 
+             class="value end-md" 
+             id="state">
       <span class="pink-underline"></span>  
     </div>
 
 
-    <div *ngIf="myProfileForm.get('addressData.zip').invalid && !myProfileForm.get('addressData.zip').pristine"
+    <div *ngIf="checkErrors(myProfileForm.get('zip'))"
           class="error-message">
       <p> Zip Code is Required</p>
     </div>
@@ -169,14 +157,12 @@
       between-xs
       bottom-xs">
       <span class="label">Zip</span>
-      <input [(ngModel)]="myProfile.address.zip"
-          formControlName="zip" 
-          placeholder="Zip Code"
-          type="text" 
-          class="value end-md" 
-          id="zip">
+      <input formControlName="zip" 
+             placeholder="Zip Code"
+             type="text" 
+             class="value end-md" 
+             id="zip">
       <span class="pink-underline"></span>  
-    </div>
   </div>
 
 </form>

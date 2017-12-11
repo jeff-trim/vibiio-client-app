@@ -1,0 +1,51 @@
+<div class="row">
+  <app-sidebar (emitAvailability)="toggleActionCable($event)"
+               [available]="userAvailability"
+               class="col-xs-12
+                      col-md-3
+                      side-bar-component">
+  </app-sidebar>
+
+  <div class="col-xs-12
+              col-md-9
+              dashboard-outlet">
+    <div class="notification-holder" 
+          id="scrollbar" 
+          *ngIf="notificationDrawerVisibility">          
+      <span *ngFor="let consumer of waitingConsumers; let index = index">
+          <appointment-notification
+              [rowIndex]="index"
+              [notificationData]="consumer['consumerData']"
+              (claimAppointment)="claimAppointment($event)"></appointment-notification>
+      </span>
+    </div> 
+     
+    <div class="notification-drawer" *ngIf="userAvailability">
+      <div class="message">
+        <div *ngIf="!notificationDrawerVisibility">
+            <span *ngIf="waitingConsumers.length > 1">{{ waitingConsumers.length }} customers are requesting live vibiios! Answer one now.</span>
+            <span *ngIf="waitingConsumers.length == 1">One customer is requesting a live vibiio! Answer it now.</span>
+            <span *ngIf="waitingConsumers.length == 0">There are no customers requesting live vibiios!</span>
+        </div>
+
+        <div *ngIf="notificationDrawerVisibility">
+            <span *ngIf="waitingConsumers.length > 1">Viewing all {{ waitingConsumers.length }} live vibiio requests.</span>
+            <span *ngIf="waitingConsumers.length == 1">Viewing one live vibiio request.</span>
+            <span *ngIf="waitingConsumers.length == 0">There are no customers requesting live vibiios!</span>
+        </div>
+      </div>
+
+      <div class="button-wrap">
+        <span class="button-label" *ngIf="!notificationDrawerVisibility">SHOW</span>
+        <span class="button-label" *ngIf="notificationDrawerVisibility">HIDE</span>
+
+        <div class="arrow drawer-button"
+             [class.down-arrow]='!notificationDrawerVisibility'
+             [class.active-arrow]='notificationDrawerVisibility'
+             (click)='toggleNotificationDrawerVisibility($event)'>
+        </div>
+      </div>
+    </div>     
+    <router-outlet></router-outlet>
+  </div>
+</div>

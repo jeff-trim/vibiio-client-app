@@ -199,6 +199,7 @@ h1.appointment-title {
 }
 
 .vibiio-message {
+    margin-bottom: 30px;
 
     .first-vibiio {
         width: 77px;
@@ -280,4 +281,32 @@ h1.appointment-title {
     bottom: 0;
     left: 0;
     position: absolute;
+}
+
+.edit-button-row {
+    justify-content: flex-end;
+    h4 {
+        height: 18px;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-align: right;
+        cursor: pointer;
+        margin-bottom: 0;
+        margin-top: 0;
+        &.save-text{
+            color: $blue;
+            overflow-y: hidden;
+            text-align: start;
+            width: 100px;
+        }
+        &.cancel-text{
+            color: $pink;
+            margin-left: 26px;
+        }
+        &.edit-text{
+            color: $pink;
+        }
+    }
 }

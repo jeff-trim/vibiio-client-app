@@ -24,6 +24,45 @@ h2 {
       margin-top: 14px;
     }
 }
+.edit-button-row {
+    justify-content: flex-end;
+    h4 {
+        height: 18px;
+        font-family: $copy-font;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-align: right;
+        cursor: pointer;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        &.save-text{
+            color: $blue;
+            overflow-y: hidden;
+            text-align: start;
+            width: 100px;
+        }
+        &.cancel-text{
+            color: $pink;
+            margin-left: 26px;
+        }
+        &.edit-text{
+            color: $pink;
+        }
+    }
+}
+
+.save-after-element::after {
+    animation: ellipsis .01s steps(1) 2s;
+    content: "D";
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    animation-duration: 4s;
+}
+    @keyframes ellipsis {
+    0% { width: 2ch; }
+}
 
 .info-element {
     .label {
