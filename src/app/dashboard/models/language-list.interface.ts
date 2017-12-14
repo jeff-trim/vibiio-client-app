@@ -1,3 +1,3 @@
-export class LanguageList {
+export interface LanguageList {
     languages: string[];
 }
