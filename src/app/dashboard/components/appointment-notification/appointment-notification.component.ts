@@ -33,7 +33,6 @@ export class AppointmentNotificationComponent implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit() {
-        console.log(this.notificationData.content.language);
         this.consumerName = JSON.parse(this.notificationData.content.message_body).consumer;
         this.description = JSON.parse(this.notificationData.content.message_body).description;
         this.minutes = parseInt(JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '')) || 0;
