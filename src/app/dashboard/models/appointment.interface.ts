@@ -17,5 +17,6 @@ export interface Appointment {
     address: Address;
     claim_id: number;
     customer_notes: Note;
+    language: string;
 }
 
