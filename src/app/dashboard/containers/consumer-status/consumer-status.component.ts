@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy  } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { RemoveUnderscorePipe } from '../../pipes/remove-underscore.pipe';
 
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';
@@ -17,8 +18,7 @@ import { OrderByPipe } from '../../pipes/order-by.pipe';
 @Component({
     selector: 'vib-consumer-status',
     templateUrl: 'consumer-status.component.html',
-    styleUrls: ['consumer-status.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['consumer-status.component.scss']
 })
 
 export class ConsumerStatusComponent implements OnInit {
