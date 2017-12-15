@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Added
 - underscore to /consumer-status params
 
+## Removed
+- OnPush Change detection from consumer-status-component
 
 ## [2.0.2] - 2017-12-6
 ## Added

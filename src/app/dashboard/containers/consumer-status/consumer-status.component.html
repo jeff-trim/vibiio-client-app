@@ -2,7 +2,7 @@
             my-vibiio-container
             col-md-offset-1">
 
-  <h1 class="col-xs pink">{{ this.consumerStatus }}</h1>
+  <h1 class="col-xs pink">{{ this.consumerStatus | removeUnderscore }} </h1>
   <div class="col-md-offset-10">
     <vib-sort-button [sortTypes]="sortTypes"
                      (sortConsumers)="sortConsumers($event)">
