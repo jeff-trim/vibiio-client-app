@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
+import { Notification } from '../../models/notification.interface';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     selector: 'appointment-notification',
@@ -8,17 +10,18 @@ import { Observable, Subscription } from 'rxjs/Rx';
 })
 
  // There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
-export class AppointmentNotificationComponent implements OnInit {
+export class AppointmentNotificationComponent implements OnInit, OnDestroy {
     consumerName: string;
     waitingTime: string;
     minutes: number;
     seconds: number;
     description: string;
+    language: string;
     private timer;
     private sub: Subscription;
 
     @Input()
-    notificationData;
+    notificationData: Notification;
 
     @Input()
     rowIndex: number;
@@ -34,19 +37,20 @@ export class AppointmentNotificationComponent implements OnInit {
         this.description = JSON.parse(this.notificationData.content.message_body).description;
         this.minutes = parseInt(JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '')) || 0;
         this.seconds = parseInt(JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, '')) || 0;
-        this.timer = Observable.timer(0,1000);
+        this.timer = Observable.timer(0, 1000);
         this.sub = this.timer.subscribe(t => this.tickerFunc());
+        this.language = this.notificationData.content.language;
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
 
-    tickerFunc(){
-        if(this.seconds < 59){
-            this.seconds += 1
+    tickerFunc() {
+        if (this.seconds < 59) {
+            this.seconds += 1;
         } else {
-            this.minutes = this.minutes += 1
+            this.minutes = this.minutes += 1;
             this.seconds = 0;
         }
     }
