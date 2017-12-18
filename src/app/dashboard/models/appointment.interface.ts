@@ -15,7 +15,6 @@ export interface Appointment {
     consumer: Consumer;
     insurance_policies: InsurancePolicy[];
     address: Address;
-    claim_id: number;
     customer_notes: Note;
 }
 

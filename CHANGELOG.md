@@ -5,25 +5,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.4] - 2017-12-18
+### Removed
+- claim id is no longer part of insurance policies
+
 ## [2.0.3] - 2017-12-15
-## Added
+### Added
 - underscore to /consumer-status params
 
-## Removed
+### Removed
 - OnPush Change detection from consumer-status-component
 
 ## [2.0.2] - 2017-12-6
-## Added
+### Added
 - Dummy component to display consumer info on the 'All Consumer' and 'Consumers by Status' views
 
-## Changed
+### Changed
 - Form UX
 
-## Removed
+### Removed
 - edit button from UI
 
 ## [2.0.1] - 2017-11-28
-## Fixed
+### Fixed
 - Vibiiographer profile display bugs
 
 ## [2.0.0] - 2017-11-28
