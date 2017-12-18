@@ -20,8 +20,7 @@ export class PolicyDetailNewComponent {
     constructor() {
         this.newPolicyForm = new FormGroup({
             'carrier': new FormControl('', Validators.required),
-            'policy_number': new FormControl('', Validators.required),
-            'claim_id': new FormControl('', Validators.required)
+            'policy_number': new FormControl('', Validators.required)
         });
      }
 
