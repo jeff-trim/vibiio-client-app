@@ -29,7 +29,6 @@ export class PolicyDetailComponent implements OnInit {
             this.editForm = this.fb.group({
                 'carrier': [this.policy.carrier, Validators.required],
                 'policy_number': [this.policy.policy_number, Validators.required],
-                'claim_id': [this.policy.claim_id, Validators.required],
                 'consumer_id': [this.policy.consumer_id, Validators.required],
                 'id': [this.policy.id, Validators.required]
             });

@@ -34,22 +34,4 @@
                 <p>Policy Number is Required</p>
             </div>  
         </div>
-
-        <div class="info-element
-                    row
-                    between-xs
-                    bottom-xs">
-            <span class="label">Claim ID</span>
-            <input formControlName="claim_id"
-                    name="claim_id"
-                    placeholder="Claim Id"
-                    type="text"
-                    class="value end-md"
-                    id="claim_id">
-            <span class="pink-underline"></span>
-            <div *ngIf="checkErrors(editForm.get('claim_id'))"
-                 class="error-message">
-                <p>Claim ID is Required</p>
-            </div>
-       </div>
 </form>
