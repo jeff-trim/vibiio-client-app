@@ -51,9 +51,11 @@
             (click)="toggleLicensureForm()">ADD LICENSE</span>
     </div>
 
-    <div *ngIf="(addLicensureForm)">
+    <div *ngIf="addLicensureForm">
       <profile-new-licensure
-              (sumbitLicenseForm)="createLicense($event)"></profile-new-licensure>
+        (closeForm)="closeForm($event)"
+        (sumbitLicenseForm)="createLicense($event)"
+      ></profile-new-licensure>
     </div>        
   </div>
 </div>
