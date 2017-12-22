@@ -1,19 +1,18 @@
 <div class="flex
-            flex-bottom">
+            flex-bottom my-profile-header">
   <h1 class="col-xs
   col-md-offset-1
   profile-title
   pink">My profile</h1>
-  
-  <h4 *ngIf="isEditing"
-      class="col-md-offset-4
-             save-text"
-      [ngClass]="{ 'save-after-element': isSaving }"
-      (click)=saveForms()>SAVE</h4>
-  
-  <h4 *ngIf="isEditing"
-      class="cancel-text"
-      (click)="resetForms()">CANCEL</h4>
+ 
+  <div class="save-cancel-container" *ngIf="isEditing">
+    <h4 class="save-text"
+        [ngClass]="{ 'save-after-element': isSaving }"
+        (click)=saveForms()>SAVE</h4>
+    
+    <h4 class="cancel-text"
+        (click)="resetForms()">CANCEL</h4>
+  </div>
 
 </div>
 
@@ -51,9 +50,11 @@
             (click)="toggleLicensureForm()">ADD LICENSE</span>
     </div>
 
-    <div *ngIf="(addLicensureForm)">
+    <div *ngIf="addLicensureForm">
       <profile-new-licensure
-              (sumbitLicenseForm)="createLicense($event)"></profile-new-licensure>
+        (closeForm)="closeForm($event)"
+        (sumbitLicenseForm)="createLicense($event)"
+      ></profile-new-licensure>
     </div>        
   </div>
 </div>

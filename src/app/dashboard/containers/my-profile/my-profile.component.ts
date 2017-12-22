@@ -150,5 +150,9 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
                 this.profileNewLicensureChild.myLicenseForm.reset();
                 this.addLicensureForm = false;
             });
-        }
+    }
+
+    closeForm(event) {
+      this.addLicensureForm = event;
+    }
 }
