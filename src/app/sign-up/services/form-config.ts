@@ -66,9 +66,10 @@ export let consumerSignUp = {
       ]
     },
     {
-      type: 'input',
-      inputType: 'text',
+      type: 'select',
       name: 'state',
+      value: null,
+      options: [],
       placeholder: 'State',
       validators: [
         Validators.required
@@ -88,7 +89,7 @@ export let consumerSignUp = {
       type: 'select',
       name: 'language',
       value: null,
-      options: [{ label: 'English', value: 'english'}, {label: 'Spanish', value: 'spanish' }],
+      options: [],
       placeholder: 'Preferred Language',
       validators: [
         Validators.required,

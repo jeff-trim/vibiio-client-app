@@ -12,14 +12,17 @@ h1 {
 	line-height: 1.22;
 	letter-spacing: -2px;
     text-transform: none;
+    &.bold {
+        font-weight: 600;
+    }
 }
 
-h2 {
+h2, .vibiio-profile-information h2 {
     font-family: $base-font;
     font-size: 3.375rem;
     font-weight: 700; color: $blue;
     line-height: 1.3;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     &.customer-notes {
       margin-top: 14px;
     }
@@ -84,13 +87,12 @@ h2 {
     position: absolute;
 }
 
-.vibiio-profile-information h2 {
-	font-family: $base-font;
-    font-size: 3.75rem;
-	font-weight: 700;
-    letter-spacing: normal;
-	color: $azure;
-    line-height: 1.55;
+.header-pink-underline {
+    width: 80px;
+    border-bottom: 3px solid $pink;
+    bottom: 0;
+    left: 0;
+    position: absolute;
 }
 
 .notes-row {

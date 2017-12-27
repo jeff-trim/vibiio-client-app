@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { MyProfileLicense } from '../../models/my-profile-license.interface';
 import { MyProfileService } from '../../services/my-profile.service';
 import { MyProfile } from '../../models/my-profile.interface';
+import { states } from '../../models/states';
 
 @Component({
     selector: 'vib-profile-information',
@@ -14,11 +15,16 @@ import { MyProfile } from '../../models/my-profile.interface';
 
 export class ProfileInformationComponent implements OnInit {
     myProfileForm: FormGroup;
+    states: string[];
 
     @Input() onEdit = false;
     @Input() myProfile: MyProfile;
 
     updateProfile: EventEmitter<FormGroup> = new EventEmitter;
+
+    constructor() {
+        this.states = states;
+    }
 
     ngOnInit() {
         this.myProfileForm = new FormGroup({

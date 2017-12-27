@@ -2,7 +2,8 @@
             my-vibiio-container
             col-md-offset-1">
   <h1 class="col-xs
-             pink">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
+             pink
+             bold">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
   
     <div class="row edit-button-row">
       <h4 *ngIf="isEditing"
@@ -22,7 +23,7 @@
       <div class="col-md-6">
         <div class="info-element sub-heading">
           <h2>profile</h2>
-          <div class="long-pink-underline" ></div>
+          <div class="header-pink-underline" ></div>
         </div>
         <vib-consumer-profile [consumerProfile]="consumerProfile"
                               [vibiio]="consumerProfile"
@@ -33,7 +34,7 @@
       <div class="col-md-offset-1">
         <div class="info-element sub-heading">
           <h2>vibiio</h2>
-          <div class="long-pink-underline" ></div>
+          <div class="header-pink-underline" ></div>
         </div>
         <video-archive [snapshots]="consumerProfile.snapshots"></video-archive>
       </div>
@@ -45,8 +46,8 @@
 
       <div class="note-row col-md-6">
         <div class="info-element">
-          <span class="label">Customer Notes</span>
-          <span class="pink-underline"></span>
+          <h2 class="label">customer notes</h2>
+          <span class="header-pink-underline"></span>
         </div>
         <vib-consumer-note [description]="description"></vib-consumer-note>
       </div>
@@ -57,8 +58,8 @@
       <div class="note-row col-md-6">
 
         <div class="info-element">
-          <span class="label">Vibiio Notes</span>
-          <span class="pink-underline"></span>
+          <h2 class="label">vibiio notes</h2>
+          <span class="header-pink-underline"></span>
         </div>
         <vib-vibiio-notes [vibiioId]="consumerProfile.id"
                           [notes]="notes">

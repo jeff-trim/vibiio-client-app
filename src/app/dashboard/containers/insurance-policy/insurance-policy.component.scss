@@ -60,6 +60,7 @@
     max-height: 150px;
     padding-right: 10px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #scrollbar::-webkit-scrollbar-track{
