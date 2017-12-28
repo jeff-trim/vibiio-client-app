@@ -56,10 +56,10 @@ export class ConsumerSignUpComponent implements OnInit, AfterViewChecked {
       this.formSelectMapperService.mapValues(data.languages.languages).then( (mapped_languages) => {
         this.form.inputs[9] = Object.assign({}, this.form.inputs[9], { options: mapped_languages });
       });
+    });
 
-      this.formSelectMapperService.mapValues(this.states).then( (mapped_states) => {
-        this.form.inputs[7] = Object.assign({}, this.form.inputs[7], { options: mapped_states});
-      });
+    this.formSelectMapperService.mapValues(this.states).then( (mapped_states) => {
+      this.form.inputs[7] = Object.assign({}, this.form.inputs[7], { options: mapped_states });
     });
   }
 

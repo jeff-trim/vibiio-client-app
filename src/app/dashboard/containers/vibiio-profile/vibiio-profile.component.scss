@@ -7,14 +7,11 @@
 
 h1 {
     font-family: $base-font;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 4.2rem;
 	line-height: 1.22;
 	letter-spacing: -2px;
     text-transform: none;
-    &.bold {
-        font-weight: 600;
-    }
 }
 
 h2, .vibiio-profile-information h2 {

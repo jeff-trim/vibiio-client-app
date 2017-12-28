@@ -92,7 +92,7 @@ export let consumerSignUp = {
       options: [],
       placeholder: 'Preferred Language',
       validators: [
-        Validators.required,
+        Validators.required
       ]
     },
     {
@@ -102,7 +102,7 @@ export let consumerSignUp = {
       value: null,
       placeholder: 'Provider',
       validators: [
-        Validators.required,
+        Validators.required
       ]
     },
     {
