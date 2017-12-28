@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 // Models
@@ -13,9 +13,13 @@ import { states } from '../../models/states';
     templateUrl: 'profile-information.component.html'
 })
 
-export class ProfileInformationComponent implements OnInit {
+export class ProfileInformationComponent implements OnInit, AfterViewInit {
     myProfileForm: FormGroup;
     states: string[];
+    selectedState: string;
+
+    @ViewChild('stateselect')
+    select: ElementRef;
 
     @Input() onEdit = false;
     @Input() myProfile: MyProfile;
@@ -38,6 +42,15 @@ export class ProfileInformationComponent implements OnInit {
                 'state': new FormControl(this.myProfile.address.state, Validators.required),
                 'zip': new FormControl(this.myProfile.address.zip, Validators.required)
         });
+
+        this.selectedState = this.myProfile.address.state;
+    }
+
+    ngAfterViewInit() {
+        if (this.selectedState) {
+          this.myProfileForm.get('state');
+          this.select.nativeElement.dispatchEvent( new Event( 'change' ) );
+        }
     }
 
     checkErrors(field: AbstractControl): boolean {
