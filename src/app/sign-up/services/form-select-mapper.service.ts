@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class MapProvidersService {
+export class FormSelectMapperService {
 
-  mapProviders(array): Promise<any> {
+  mapValues(array): Promise<any> {
     return Promise.resolve(
       array.map(x => new Object({ label: x, value: x }) )
     );

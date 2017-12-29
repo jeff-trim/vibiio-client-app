@@ -12,7 +12,7 @@ import { LanguageResolverService } from './sign-up/services/language-resolver.se
 import { InsurancePolicyService } from './dashboard/services/insurance-policy.service';
 
 const appRoutes: Routes = [
-    { path: 'sign-up', component: ConsumerSignUpComponent, resolve: {
+    { path: 'sign_up', component: ConsumerSignUpComponent, resolve: {
         providers: InsuranceResolverService,
         languages: LanguageResolverService
        }
