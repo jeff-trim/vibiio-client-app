@@ -15,9 +15,10 @@ import { SpinnerService } from '../easy-spinner/services/spinner.service';
 import { ConsumerSignUpService } from './services/consumer-sign-up.service';
 import { RetrieveInsuranceService } from './services/retrieve-insurance.service';
 import { InsuranceResolverService } from './services/insurance-resolver.service';
+import { MapProvidersService } from './services/map-providers.service';
 import { RetrieveLanguageService } from './services/retrieve-language.service';
 import { LanguageResolverService } from './services/language-resolver.service';
-import { FormSelectMapperService } from './services/form-select-mapper.service';
+import { MapLanguagesService } from './services/map-langauages.service';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,10 @@ import { FormSelectMapperService } from './services/form-select-mapper.service';
     SpinnerService,
     RetrieveInsuranceService,
     InsuranceResolverService,
+    MapProvidersService,
     RetrieveLanguageService,
     LanguageResolverService,
-    FormSelectMapperService
+    MapLanguagesService
   ]
 })
 

@@ -52,9 +52,6 @@ span.jcf-select .jcf-select-opener {
 
 .jcf-select-drop .jcf-select-drop-content {
     border: none !important;
-    box-shadow: 0px 5px 10px #bbbbbb;
-    -moz-box-shadow: 0px 5px 10px #bbbbbb;
-    -webkit-box-shadow: 0px 5px 10px #bbbbbb;   
 }
 
 //dropdown box
@@ -128,7 +125,7 @@ span.jcf-option.jcf-hover {
             color: $blue;
             height: 35px;
             padding-top: 7px;
-            margin-left: 0px !important;
+            margin-left: 8px;
             width: inherit;
             cursor: pointer;
         }
@@ -168,6 +165,7 @@ span.jcf-option.jcf-hover {
     }
     .jcf-list-content.jcf-list-content {
         width: 157.5px !important;
+        margin-left: 8px;
         min-width: none;
         background-color: $blue;
         border-left: solid 3px $blue;
@@ -233,12 +231,5 @@ span.jcf-option.jcf-hover {
 .claim-status-style {
     .jcf-select .jcf-select-text {
         margin-left: 0;
-    }
-}
-
-// profile select
-.profile-select {
-    .jcf-list-content {
-        height: 240px;
     }
 }

@@ -11,23 +11,17 @@ import { NoteService } from '../../services/note.service';
 
 @Component({
     selector: 'vib-vibiio-notes',
-    template: `
-    <div class="note-wrapper" [ngClass]="{ 'active-form-border': isAddingNotes }">
-        <vib-new-vibiio-note
-            *ngIf="location != '/dashboard/my-vibiios'"
-            (addingNote)="addingNote($event)"
-            (createNote)="createNote($event)">
-        </vib-new-vibiio-note>
-
-        <ng-container *ngFor='let note of notes'>
-            <vib-existing-vibiio-note [note]='note'></vib-existing-vibiio-note>
-        </ng-container>
-    </div>`,
+    template: `<vib-new-vibiio-note
+                    *ngIf="location != '/dashboard/my-vibiios'"
+                    (createNote)="createNote($event)">
+                </vib-new-vibiio-note>
+                 <ng-container *ngFor='let note of notes'>
+                   <vib-existing-vibiio-note [note]='note'></vib-existing-vibiio-note>
+                 </ng-container>`,
     styleUrls: ['notes.component.scss']
 })
 
 export class NotesComponent {
-    isAddingNotes= false;
     location = '';
     @Input()
     notes?: Note[];
@@ -61,10 +55,6 @@ export class NotesComponent {
             (error: any) => {
                 console.log( 'error creating note' );
         });
-    }
-
-    addingNote(event) {
-        this.isAddingNotes = !this.isAddingNotes;
     }
 
     getNotes(vibiioId) {
