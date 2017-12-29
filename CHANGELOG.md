@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.5] - 2017-12-29
+### Changed
+- added background blur to spinner
+- switched save and cancel button position on insurance policy component
+
 ## [2.0.4] - 2017-12-18
 ### Removed
 - claim id is no longer part of insurance policies
