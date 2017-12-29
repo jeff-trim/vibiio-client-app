@@ -16,5 +16,6 @@ export interface Appointment {
     insurance_policies: InsurancePolicy[];
     address: Address;
     customer_notes: Note;
+    language: string;
 }
 

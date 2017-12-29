@@ -9,6 +9,7 @@ export interface ConsumerSignUp {
   city: string;
   state: string;
   zip: string;
+  language: string;
   carrier: string;
   acct_number: string;
   time_zone: string;

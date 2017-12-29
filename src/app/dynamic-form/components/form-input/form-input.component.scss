@@ -6,7 +6,7 @@ span.pink-underline {
   width: 31px;
   display: block;
   border-bottom: 3px solid $pink;
-} 
+}
 
 p {
   font-size: 1.4rem;
@@ -51,6 +51,8 @@ p {
     opacity: .5;
   }
   span.pink-underline {
+    -webkit-transition: width .5s; /* Safari */
+    transition: width .5s;
     width: 100%;
     display: block;
     border-bottom: 3px solid $pink;
@@ -59,10 +61,5 @@ p {
 .form-input:active{
   input {
     opacity: 1;
-  }
-  span.pink-underline {
-    width: 100%;
-    display: block;
-    border-bottom: 3px solid $pink;
   }
 }

@@ -8,21 +8,24 @@ import { validationMessages, errorMessages } from '../../models/validation-messa
     selector: 'form-select',
     styleUrls: ['form-select.component.scss'],
     template: `
-      <div
-       class="dynamic-field form-input signup-select"
-       [formGroup]="group">
-         <label>{{ config.label }}</label>
-         <select [formControlName]="config.name"
-                 [class.error-message]="errorArray.length > 0"
-                 jcf>
-            <option value="undefined" disabled>Provider</option>
-            <option value="{{ option.value }}" *ngFor="let option of config.options">
-                {{ option.label }}
-            </option>
-         </select>
-      </div>
-      <div *ngIf="control.errors && !control.pristine">
-        <p *ngFor="let error of errorArray">{{ error }}</p>
+     <div class="select-wrapper">
+        <div
+        class="dynamic-field form-input signup-select"
+        [formGroup]="group">
+            <label>{{ config.label }}</label>
+            <select [formControlName]="config.name"
+                    [class.error-message]="errorArray.length > 0"
+                    jcf>
+                <option [ngValue]="config.value" disabled>{{ config.placeholder }}</option>
+                <option value="{{ option.value }}" *ngFor="let option of config.options">
+                    {{ option.label }}
+                </option>
+            </select>
+        </div>
+        <div *ngIf="control.errors && !control.pristine">
+            <p *ngFor="let error of errorArray">{{ error }}</p>
+        </div>
+        <span class="pink-underline"></span>
       </div>
     `
 })

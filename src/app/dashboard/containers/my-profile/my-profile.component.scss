@@ -164,6 +164,7 @@
 .restrict-height {
     max-height: 250px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #scrollbar::-webkit-scrollbar-track
@@ -181,4 +182,25 @@
 {
     border-radius: 10px;
     background-color: $pink;
+}
+
+.my-profile-header {
+    position: relative;
+}
+
+.save-cancel-container {
+    display: flex;
+    position: absolute;
+    top: 70%;
+    right: 11%;
+    @media(max-width: $medium) {
+      top: 90%;
+      right: unset;
+      left: 4%;
+    }
+    @media(max-width: $xsmall) {
+      top: 90%;
+      right: unset;
+      left: 2%;
+    }
 }
