@@ -23,11 +23,10 @@
 
 <div *ngIf="showNewForm"
     class="flex">
-    <h4 class="col-md-offset-4
-                save-text"
+    <h4 class="cancel-text col-md-offset-4"
+    (click)="resetForm()">CANCEL</h4>
+    
+    <h4 class="save-text"
         [ngClass]="{ 'save-after-element': isSaving }"
         (click)="submitForm()">SAVE</h4>
-
-    <h4 class="cancel-text"
-        (click)="resetForm()">CANCEL</h4>
 </div>

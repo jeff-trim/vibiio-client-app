@@ -18,6 +18,7 @@ export interface ConsumerProfile {
        provider?: string;
        policy_number?: number;
        time_zone: string;
+       language: string;
     };
     address: Address;
     insurance_policies: InsurancePolicy[];

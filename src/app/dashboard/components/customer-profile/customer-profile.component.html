@@ -59,6 +59,9 @@
     <key-value [key]="'Zip'"
                [value]="appointment.user.address.zip"></key-value>
 
+    <key-value [key]="'Language'"
+               [value]="appointment.user.profile.language"></key-value>
+
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
                           [consumerId]="appointment.consumer_id"></vib-insurance-policy>
     

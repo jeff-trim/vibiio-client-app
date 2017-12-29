@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 @Component({
-  selector: 'app-spinner',
+  selector: 'vib-spinner',
   template: `
   <div>
   </div>

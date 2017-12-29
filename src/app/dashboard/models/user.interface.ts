@@ -12,5 +12,6 @@ export interface User {
     profile: {
         uuid: string;
         available?: boolean;
-    }
+        language: string;
+    };
 }

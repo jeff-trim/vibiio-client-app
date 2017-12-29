@@ -3,8 +3,7 @@
   <div class="long-pink-underline" ></div>
 </div>
 
-<form [formGroup]="myLicenseForm"
-      ngSubmit="onSubmit()">
+<form [formGroup]="myLicenseForm">
     <div *ngIf="myLicenseForm.get('state').invalid && !myLicenseForm.get('state').pristine"
           class="error-message">
       <p>State is Required</p>
@@ -43,9 +42,12 @@
       <span class="pink-underline"></span>  
     </div>
 
-    <div class="add-license"(click)="onSubmit()">
-      <img src="../../../../assets/images/add.svg"
-      class="add">
-      <span class="add-text">SUBMIT</span>
+    <div class="row middle-xs">
+      <h4 class="col-xs-4 save-text"
+        (click)="onSubmit(myLicenseForm.valid)">SAVE</h4>
+
+      <h4 class="col-xs-4 cancel-text"
+          (click)="hideForm()">CANCEL</h4>
     </div>
+
 </form>

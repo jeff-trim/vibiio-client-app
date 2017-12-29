@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SpinnerService } from '../services/spinner.service';
 
 @Component({
-    selector: 'app-spinner',
+    selector: 'vib-spinner',
     styleUrls: ['spinner.scss'],
     templateUrl: 'spinner.component.html'
 })

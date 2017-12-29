@@ -13,6 +13,9 @@ export class ProfileNewLicensureComponent implements OnInit {
     @Output()
     sumbitLicenseForm = new EventEmitter<any>();
 
+    @Output()
+    closeForm = new EventEmitter<boolean>();
+
     ngOnInit() {
         this.myLicenseForm = new FormGroup({
                 'state': new FormControl('', Validators.required),
@@ -20,7 +23,13 @@ export class ProfileNewLicensureComponent implements OnInit {
         });
     }
 
-    onSubmit() {
+    onSubmit(formValid) {
+      if (formValid) {
         this.sumbitLicenseForm.emit(this.myLicenseForm);
+      }
+    }
+
+    hideForm() {
+      this.closeForm.emit(false);
     }
 }
