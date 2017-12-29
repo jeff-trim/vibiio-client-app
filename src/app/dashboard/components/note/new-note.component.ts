@@ -24,19 +24,11 @@ export class NewNoteComponent {
     @Output()
     createNote: EventEmitter<any> = new EventEmitter<any>();
 
-    @Output()
-    addingNote: EventEmitter<any> = new EventEmitter<any>();
-
     onSubmit(noteBody: string) {
         this.createNote.emit(noteBody);
-        this.onAddingNote();
     }
 
     clearNoteBody() {
         this.note.body = '';
-    }
-
-    onAddingNote() {
-        this.addingNote.emit();
     }
 }

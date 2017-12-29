@@ -58,8 +58,6 @@ form {
       width: 100%;
       display: block;
       border-bottom: 3px solid $pink;
-      -webkit-transition: width .5s; /* Safari */
-      transition: width .5s;
     }
   }
   .input-group:active{
