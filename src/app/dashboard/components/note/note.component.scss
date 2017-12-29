@@ -7,14 +7,17 @@ form {
     }
 }
 
+.vibiio-note {
+  background-color: $light-grey;
+}
+
 .notes-container {
-  background-color: $light-grey; 
   padding: 2px;
+  caret-color: $azure; 
   .note-body {
     width: 100%;
     -webkit-appearance: none;
     border: none;
-    background-color: $light-grey;  
     margin: 0;
     padding: 0;
     color: $greyish-brown;
@@ -49,5 +52,8 @@ form {
 .button-sm {
   height: 45px;
   width: 85px;
-  margin: 1% 0% 1% 74%;
+  margin: 1% 10px 10px 74%;
+  &:focus {
+      outline: none;
+  }
 }

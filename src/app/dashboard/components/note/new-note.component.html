@@ -1,14 +1,15 @@
 <form ng-submit="onSubmit(note?.body)"
       #newNoteForm>
-  <div class="notes-container">
-    <textarea vibAutosize class="note-body" 
+  <div class="notes-container vibiio-note">
+    <textarea vibAutosize class="note-body vibiio-note" 
          [(ngModel)]="note.body"
          contenteditable="true" 
          type="text"
          placeholder="Type your notes here"
          id="body"
          name="body"
-         (keydown.shift.enter)="false">
+         (keydown.shift.enter)="false"
+         (click)=onAddingNote()>
     </textarea>
     
     <button type="submit"
