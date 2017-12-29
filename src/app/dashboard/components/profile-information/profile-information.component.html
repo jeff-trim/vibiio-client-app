@@ -137,12 +137,17 @@
       row
       between-xs
       bottom-xs">
-      <span class="label">State</span>
-      <input formControlName="state" 
-             placeholder="State"
-             type="text" 
-             class="value end-md" 
-             id="state">
+      <span class="label" id="state-label">State</span>
+      <select formControlName="state" 
+              class="value end-md select profile-select" 
+              id="state"
+              jcf
+              #stateselect>
+        <option value="">Select a state</option>
+        <option *ngFor="let state of states" 
+                value="{{ state }}">{{ state }}
+        </option>
+      </select>
       <span class="pink-underline"></span>  
     </div>
 
