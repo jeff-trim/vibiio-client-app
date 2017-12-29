@@ -27,7 +27,7 @@ describe('FormSelectMapperService', () => {
     ).toBe(true);
   });
 
-  it('should convert array of strings to object literals for dynamic form', () => {
+  it('should convert array to objects for dynamic form', () => {
     service.mapValues(LANGUAGES.languages).then((data) => {
      mapped_data = data;
      expect(mapped_data).toEqual(MAPPED_LANGUAGES);
