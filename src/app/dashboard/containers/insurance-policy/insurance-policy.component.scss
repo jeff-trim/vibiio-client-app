@@ -33,7 +33,6 @@
         &.save-text{
             color: $blue;
             overflow-y: hidden;
-            text-align: start;
             width: 100px;
             margin-left: 0;
         }
@@ -60,6 +59,7 @@
     max-height: 150px;
     padding-right: 10px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #scrollbar::-webkit-scrollbar-track{
