@@ -1,10 +1,11 @@
 export interface SliderConfig {
-    start: number,
+    start: number;
     range: {
         min: number,
         max: number
-    },
-    step: number,
-    tooltips: any,
-    connect: boolean
+    };
+    step?: number;
+    tooltips: any;
+    connect: boolean;
+    behaviour?: string;
 }
