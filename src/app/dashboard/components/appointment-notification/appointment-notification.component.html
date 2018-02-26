@@ -40,13 +40,9 @@
     </div>
 
     <div class="bottom-row">
-      <div *ngIf="description !== null && !fullDescription">
-        <div class="description">{{ description }}</div>
-        <h4 class="description-button" (click)="fullDescription = true">VIEW FULL DESCRIPTION</h4>
-      </div>
-      <div *ngIf="description !== null && fullDescription">
-        <div class="description-full">{{ description }}</div>
-        <h4 class="description-button" (click)="fullDescription = false">HIDE FULL DESCRIPTION</h4>
+      <div *ngIf="description">
+        <div [ngClass]="{'description':!fullDescription, 'description-full':fullDescription}">{{ description }}</div>
+        <h4 class="description-button" (click)="fullDescription = !fullDescription">VIEW FULL DESCRIPTION</h4>
       </div>
     </div>
 
