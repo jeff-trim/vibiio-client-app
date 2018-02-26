@@ -2966,9 +2966,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng2-nouislider@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/ng2-nouislider/-/ng2-nouislider-1.6.1.tgz#0c2f6e97ce15e8ed26bcdb365b91a32b9fd0799c"
+ng2-nouislider@^1.7.7:
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/ng2-nouislider/-/ng2-nouislider-1.7.7.tgz#b841f4b313c8c9c8a763c80f3a59d5aa4c3a70c8"
 
 ngx-infinite-scroll@^0.5.1:
   version "0.5.1"
@@ -3106,9 +3106,9 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-nouislider@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-10.0.0.tgz#166145168bc05701ef5168c17d171f79154c174e"
+nouislider@^11.0.3:
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-11.0.3.tgz#a45a31bb7846bbced498afa514a513da197d22b2"
 
 "npmlog@0 || 1 || 2 || 3 || 4", npmlog@^4.0.0, npmlog@^4.0.1:
   version "4.0.2"

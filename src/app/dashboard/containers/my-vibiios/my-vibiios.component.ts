@@ -39,7 +39,7 @@ export class MyVibiiosComponent implements OnInit {
     vibiiographerName: string;
     sliderVisibility = true;
     downArrow = false;
-    sliderConfig: SliderConfig;
+    sliderConfig: any;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private myDayService: MyDayService,
@@ -62,18 +62,34 @@ export class MyVibiiosComponent implements OnInit {
             // setup config object for slider in onInit because otherwise the values aren't
             // available on instantiation
             if (data.appointments.appointments.appointments.length > 0) {
-                this.sliderConfig = {
-                    start: this.appointments[0].scheduled_datetime,
-                    range: {
-                        min: this.todaysVibiios.range_min,
-                        max: this.todaysVibiios.range_max
-                    },
-                    step: 900,
-                    tooltips: [new TimeFormatter(this.todaysVibiios.user_time_zone),
-                            new TimeFormatter(this.todaysVibiios.user_time_zone)],
-                    connect: true
-                };
-                this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max];
+              this.sliderConfig = {
+                start: this.appointments[0].scheduled_datetime,
+                behaviour: 'drag',
+                range: {
+                  min: this.todaysVibiios.range_min,
+                  max: this.todaysVibiios.range_max
+                },
+                tooltips: [new TimeFormatter(this.todaysVibiios.user_time_zone),
+                  new TimeFormatter(this.todaysVibiios.user_time_zone)],
+                connect: true
+              };
+
+              // this.sliderConfig = {
+              //   behaviour: 'drag',
+              //   connect: true,
+              //   margin: 2,
+              //   limit: 20, // NOTE: overwritten by [limit]="10"
+              //   range: {
+              //     min: 0,
+              //     max: 20
+              //   },
+              //   pips: {
+              //     mode: 'steps',
+              //     density: 5
+              //   }
+              // };
+
+              this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max];
             }
         });
     }
@@ -95,7 +111,8 @@ export class MyVibiiosComponent implements OnInit {
     // it updates the range which in turn removes or
     // adds appointments to the view
     onChange(value) {
-        this.range = value;
+      console.log(value, this.sliderConfig);
+      this.range = value;
     }
 
     // monitors slider for changes and refreshes the list of appointments
@@ -165,6 +182,6 @@ export class MyVibiiosComponent implements OnInit {
     // referenced in the component ngIf
     appointmentRange(appointment) {
         appointment.scheduled_datetime >= this.range[0] &&
-        appointment.scheduled_datetime <= this.range[1]
+        appointment.scheduled_datetime <= this.range[1];
     }
 }
