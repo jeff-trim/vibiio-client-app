@@ -23,7 +23,7 @@ export class ResponseErrorService extends Http {
         return ( response: Response ) => {
             if (response.status === 401) {
               this.authService.logout();
-              this.router.navigate(['/sign_in'])
+              this.router.navigate(['/sign_in']);
                 console.log('401!', response);
             }
             return Observable.throw(response);

@@ -14,13 +14,13 @@ export interface ConsumerProfile {
        first_name: string;
        last_name: string;
        email: string;
-       phone_number: string;
+       phone: string;
        provider?: string;
        policy_number?: number;
        time_zone: string;
-       language: string;
     };
-    address: Address;
-    insurance_policies: InsurancePolicy[];
+    language: string;
+    address?: Address;
+    insurance_policies?: InsurancePolicy[];
     snapshots?: VideoSnapshot[];
 }
