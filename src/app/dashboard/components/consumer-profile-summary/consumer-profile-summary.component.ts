@@ -22,10 +22,10 @@ export class ConsumerProfileSummaryComponent implements OnInit {
   }
 
   parseDate(time: number): string  {
-    return this.dateFormatService.parseDate(time, this.userTimeZone);
+    return this.dateFormatService.parseUtcDate(time, this.userTimeZone);
   }
 
   parseTime(time: number): string  {
-    return this.dateFormatService.parseTime(time, this.userTimeZone);
+    return this.dateFormatService.parseUtcTime(time, this.userTimeZone);
   }
 }

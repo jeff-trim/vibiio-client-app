@@ -41,7 +41,7 @@ export class ConsumerStatusComponent implements OnInit {
         });
 
         this.activatedRoute.params.subscribe((params) => {
-            if (params['status'] !== undefined) {
+            if (params['status'] !== '') {
                 this.consumerStatus = params['status'];
                 this.displayStatus = this.consumerStatus.charAt(0).toUpperCase()
                     + params['status'].slice(1);
