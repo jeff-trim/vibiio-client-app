@@ -19,13 +19,9 @@ export class AllConsumersService {
       if (query) {
         url = url.concat(`?term=${query}`);
       }
-      console.log(url);
       return this.http
         .get(url)
-        .map((response: any) => {
-          console.log(response.json());
-            return response.json();
-          })
+        .map((response: any) => response.json())
         .catch(error => {
           console.error('An error occurred:', error.error.json());
           return error.error.json();
@@ -33,13 +29,9 @@ export class AllConsumersService {
       }
 
     byStatus(status?: string, query?: string): Observable<ConsumerProfile[]> {
-      console.log(this.constructUrl(status, query));
       return this.http
         .get(this.constructUrl(status, query))
-        .map((response: any) => {
-          console.log(response.json());
-            return response.json();
-          })
+        .map((response: any) => response.json())
         .catch(error => {
           console.error('An error occurred:', error.error.json());
           return error.error.json();
@@ -47,16 +39,14 @@ export class AllConsumersService {
     }
 
     private constructUrl(status?: string, query?: string) {
-      let url = ALL_CONSUMERS_API;
+      const url = ALL_CONSUMERS_API;
 
       if (status && query) {
-        url = url.concat(`?status=${status}&term=${query}`);
+        return url.concat(`?status=${status}&term=${query}`);
       } else if (status) {
-        url = url.concat(`?status=${status}`);
+        return url.concat(`?status=${status}`);
       } else if (query) {
-        url = url.concat(`?term=${query}`);
+        return url.concat(`?term=${query}`);
       }
-      console.log(url);
-      return url;
     }
 }

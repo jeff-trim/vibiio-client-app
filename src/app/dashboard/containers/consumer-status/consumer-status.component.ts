@@ -32,13 +32,9 @@ export class ConsumerStatusComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private sortService: ConsumerSortService,
-                private consumersService: AllConsumersService) {}
+                private consumersService: AllConsumersService) {
 
-    ngOnInit() {
-        this.activatedRoute.data.subscribe((res) => {
-            console.log('res', res);
-            this.consumerProfiles = res.data;
-        });
+        this.activatedRoute.data.subscribe((res) => this.consumerProfiles = res.data);
 
         this.activatedRoute.params.subscribe((params) => {
             if (params['status'] !== '') {
@@ -49,9 +45,10 @@ export class ConsumerStatusComponent implements OnInit {
                 this.displayStatus = 'All Consumers';
             }
         });
+    }
 
+    ngOnInit() {
         this.sortTypes = this.sortService.build();
-
     }
 
     sortConsumers(name: string) {
@@ -64,17 +61,11 @@ export class ConsumerStatusComponent implements OnInit {
         if (this.consumerStatus) {
             this.consumersService
                 .byStatus(this.consumerStatus, query)
-                .subscribe( res => {
-                console.log(res);
-                this.consumerProfiles = res;
-            });
+                .subscribe( res => this.consumerProfiles = res);
         } else {
             this.consumersService
                 .index(query)
-                .subscribe( res => {
-                    console.log(res);
-                    this.consumerProfiles = res;
-            });
+                .subscribe( res => this.consumerProfiles = res);
         }
       }
 }

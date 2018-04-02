@@ -11,6 +11,7 @@ export class VibiioSearchComponent {
 
   search() {
     this.queryEmitter.emit(this.query.nativeElement.value);
+    this.clearTerm();
   }
 
   clearTerm() {

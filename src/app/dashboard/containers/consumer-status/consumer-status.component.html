@@ -4,23 +4,25 @@
 
   <h1 class="col-xs pink">{{ this.displayStatus | removeUnderscore }} </h1>
   
-  <vib-vibiio-search (queryEmitter)="search($event)"></vib-vibiio-search>
-
-  <div class="col-md-offset-8">
-  <ng-template #noResults>
-        <p class="col-md-3
-            welcomeText"> No Consumers match that status.</p>
-  </ng-template>
-
-    <vib-sort-button [sortTypes]="sortTypes"
-                     (sortConsumers)="sortConsumers($event)">
-    </vib-sort-button>
+  <div class="flex">
+    <div class="search-and-sort">
+      <vib-vibiio-search (queryEmitter)="search($event)"></vib-vibiio-search>
+        <ng-template #noResults>
+          <p class="col-md-3
+          welcomeText"> No Consumers match that status.</p>
+        </ng-template>
+        
+        <vib-sort-button [sortTypes]="sortTypes"
+                         (sortConsumers)="sortConsumers($event)">
+        </vib-sort-button>
+    </div>
   </div>
 
   <div *ngIf="(consumerProfiles.length > 0); else noResults">
 
 
-    <div *ngFor="let consumerProfile of consumerProfiles">
+    <div *ngFor="let consumerProfile of consumerProfiles |
+         orderBy: {property: property, direction: direction}">
       <div class="flex">
         
         <vib-consumer-profile-title [consumerProfile]="consumerProfile"></vib-consumer-profile-title>
