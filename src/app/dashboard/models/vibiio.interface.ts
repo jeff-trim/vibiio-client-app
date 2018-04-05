@@ -6,6 +6,6 @@ export interface Vibiio {
     vibiio_type: string;
     video_session_id: string;
     description: string;
-    notes: Note[];
+    notes?: Note[];
     vibiiographer_id: number;
 }
