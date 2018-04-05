@@ -5,8 +5,6 @@ import * as moment_tz from 'moment-timezone';
 export class DateFormatService {
   // returns from rails DB queries
   parseDate(time, timeZone)  {
-    console.log(time);
-    
     return moment_tz.unix(time).tz(timeZone).format('MM-DD-YYYY');
   }
 
