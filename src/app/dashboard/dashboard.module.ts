@@ -45,6 +45,7 @@ import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-
 import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
 import { ConsumerProfileSummaryComponent } from './components/consumer-profile-summary/consumer-profile-summary.component';
 import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
+import { VibiioSearchComponent } from './components/vibiio-search/vibiio-search.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -141,14 +142,14 @@ const dashboardRoutes: Routes = [
             path: 'consumer-status/:status',
             component: ConsumerStatusComponent,
             resolve: {
-               cons: ConsumerStatusResolver
+              data: AllConsumersResolver
             }
           },
            {
-            path: 'all-consumers',
+            path: 'all-consumers/:status',
             component: ConsumerStatusComponent,
             resolve: {
-               cons: AllConsumersResolver
+               data: AllConsumersResolver
             }
           },
           {
@@ -199,7 +200,8 @@ const dashboardRoutes: Routes = [
     OrderByPipe,
     ConsumerAddressComponent,
     ConsumerProfileSummaryComponent,
-    InsurancePolicySummaryComponent
+    InsurancePolicySummaryComponent,
+    VibiioSearchComponent
   ],
   imports: [
       CommonModule,

@@ -51,7 +51,7 @@
                             [index]="i"
                             [timeZone]="todaysVibiios.user_time_zone"
                             [vibiiographerId]="vibiiographerId"
-                            (appointmentId)="appointmentId"
+                            (appointmentId)="appointment.id"
                             (updateAppointment)="updateAppointment($event)"
                             *ngIf="appointment.scheduled_datetime >= range[0] &&
                                           appointment.scheduled_datetime <= range[1]"
