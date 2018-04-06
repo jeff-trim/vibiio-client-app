@@ -23,7 +23,7 @@ import { OrderByPipe } from '../../pipes/order-by.pipe';
 })
 
 export class ConsumerStatusComponent implements OnInit {
-    consumerProfiles: any;
+    consumerProfiles: ConsumerProfile[];
     consumerStatus: string;
     displayStatus: string;
     sortTypes: SortType[];

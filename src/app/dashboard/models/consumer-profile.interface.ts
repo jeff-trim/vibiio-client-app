@@ -6,9 +6,8 @@ export interface ConsumerProfile {
     id: number;
     consumer_id: number;
     status: string;
-    appointment_scheduled_datetime: [
-        number
-    ];
+    appointment_scheduled_datetime: number;
+    language: string;
     user_info: {
        id: number
        first_name: string;
@@ -19,7 +18,6 @@ export interface ConsumerProfile {
        policy_number?: number;
        time_zone: string;
     };
-    language: string;
     address?: Address;
     insurance_policies?: InsurancePolicy[];
     snapshots?: VideoSnapshot[];
