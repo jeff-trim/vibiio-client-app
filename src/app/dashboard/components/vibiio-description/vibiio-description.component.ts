@@ -9,12 +9,12 @@ import { NoteService } from '../../services/note.service';
 import { Note } from '../../models/consumer-note.interface';
 
 @Component({
-    selector: 'vib-consumer-note',
-    styleUrls: ['note.component.scss'],
-    templateUrl: 'consumer-note.component.html'
+    selector: 'vib-vibiio-description',
+    styleUrls: ['vibiio-description.component.scss'],
+    templateUrl: 'vibiio-description.component.html'
   })
 
-export class ConsumerNoteComponent {
+export class VibiioDescriptionComponent {
     @Input()
     description?: string;
 }

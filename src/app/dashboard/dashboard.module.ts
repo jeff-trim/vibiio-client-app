@@ -38,7 +38,6 @@ import { ExistingNoteComponent } from './components/note/existing-note.component
 import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
 import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
-import { ConsumerNoteComponent } from './components/note/consumer-note.component';
 import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
 import { SortButtonComponent } from './components/sort-button/sort-button.component';
 import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
@@ -46,6 +45,8 @@ import { ConsumerAddressComponent } from './components/consumer-address/consumer
 import { ConsumerProfileSummaryComponent } from './components/consumer-profile-summary/consumer-profile-summary.component';
 import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
 import { VibiioSearchComponent } from './components/vibiio-search/vibiio-search.component';
+import { VibiioDescriptionComponent } from './components/vibiio-description/vibiio-description.component';
+import { CustomerNoteComponent } from './components/customer-note/customer-note.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -194,14 +195,15 @@ const dashboardRoutes: Routes = [
     RemoveUnderscorePipe,
     AutosizeDirective,
     PolicyDetailNewComponent,
-    ConsumerNoteComponent,
     InsurancePolicyComponent,
     SortButtonComponent,
     OrderByPipe,
     ConsumerAddressComponent,
     ConsumerProfileSummaryComponent,
     InsurancePolicySummaryComponent,
-    VibiioSearchComponent
+    VibiioSearchComponent,
+    VibiioDescriptionComponent,
+    CustomerNoteComponent
   ],
   imports: [
       CommonModule,

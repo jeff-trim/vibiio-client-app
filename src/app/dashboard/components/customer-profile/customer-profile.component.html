@@ -82,9 +82,9 @@
                [value]="parseTime(appointment.scheduled_datetime)"></key-value>
     
     <div class="info-element">
-      <span class="label">Customer Notes</span>
+      <span class="label">Vibiio Description</span>
       <span class="pink-underline"></span>
     </div>
 
-    <vib-consumer-note [description]="appointment.vibiio.description"></vib-consumer-note>
+    <vib-vibiio-description [description]="appointment.vibiio.description"></vib-vibiio-description>
   </div>
