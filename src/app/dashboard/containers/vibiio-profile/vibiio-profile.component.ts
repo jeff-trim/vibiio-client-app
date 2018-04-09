@@ -25,6 +25,7 @@ import { ConsumerProfileComponent } from '../../components/consumer-profile/cons
 export class VibiioProfileComponent implements OnInit {
     consumerProfile: ConsumerProfile;
     notes: Note[];
+    contacts: string[];
     vibiioId: number;
     description: string;
     isEditing = false;
@@ -42,6 +43,7 @@ export class VibiioProfileComponent implements OnInit {
             this.vibiioId = this.consumerProfile.id;
             this.notes = data.profile.vibiio.notes;
             this.description = data.profile.vibiio.description;
+            this.contacts = data.profile.vibiio.contacts;
         });
     }
 

@@ -55,7 +55,16 @@
           <h2 class="label">customer notes</h2>
           <span class="header-pink-underline"></span>
         </div>
-        <vib-customer-note [notes]="description"></vib-customer-note>
+
+        <div *ngIf="contacts; else noContacts">
+            <div *ngFor="let contact of contacts">
+              <vib-customer-note [note]="contact"></vib-customer-note>
+            </div>
+          </div>
+          <ng-template #noContacts>
+            <p>No Customer Notes</p>
+          </ng-template>
+
       </div>
       
       <div class="col-md-1">

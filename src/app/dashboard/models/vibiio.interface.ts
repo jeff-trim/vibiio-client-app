@@ -8,4 +8,5 @@ export interface Vibiio {
     description: string;
     notes?: Note[];
     vibiiographer_id: number;
+    contacts: string[];
 }

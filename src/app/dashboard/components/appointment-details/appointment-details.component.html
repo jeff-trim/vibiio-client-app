@@ -175,8 +175,15 @@
           <span class="label">customer notes</span>
           <span class="pink-underline"></span>
         </div>
-      
-        <vib-customer-note [notes]="appointment.vibiio.description"></vib-customer-note>
+
+        <div *ngIf="appointment.vibiio.contacts.length < 0; else noContact">
+          <div *ngFor="let contact of appointment.vibiio.contacts">
+            <vib-customer-note [note]="contact"></vib-customer-note>
+          </div>
+        </div>
+        <ng-template #noContact>
+          <p>No Customer Notes</p>
+        </ng-template>
       </div>
       
       <div class="col-md-1">

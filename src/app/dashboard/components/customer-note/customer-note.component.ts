@@ -16,6 +16,6 @@ import { Note } from '../../models/consumer-note.interface';
 
 export class CustomerNoteComponent {
     @Input()
-    notes?: string;
+    note?: string;
 }
 
