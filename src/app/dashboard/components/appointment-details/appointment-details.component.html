@@ -176,9 +176,9 @@
           <span class="pink-underline"></span>
         </div>
 
-        <div *ngIf="appointment.vibiio.contacts.length < 0; else noContact">
+        <div *ngIf="(appointment.vibiio.contacts?.length > 0); else noContact">
           <div *ngFor="let contact of appointment.vibiio.contacts">
-            <vib-customer-note [note]="contact"></vib-customer-note>
+            <vib-customer-note [note]="contact.message"></vib-customer-note>
           </div>
         </div>
         <ng-template #noContact>

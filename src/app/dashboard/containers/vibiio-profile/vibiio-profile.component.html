@@ -57,13 +57,13 @@
         </div>
 
         <div *ngIf="contacts; else noContacts">
-            <div *ngFor="let contact of contacts">
-              <vib-customer-note [note]="contact"></vib-customer-note>
-            </div>
+          <div *ngFor="let contact of contacts">
+            <vib-customer-note [note]="contact.message"></vib-customer-note>
           </div>
-          <ng-template #noContacts>
-            <p>No Customer Notes</p>
-          </ng-template>
+        </div>
+        <ng-template #noContacts>
+          <p>No Customer Notes</p>
+        </ng-template>
 
       </div>
       
