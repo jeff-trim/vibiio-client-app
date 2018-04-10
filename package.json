@@ -12,8 +12,8 @@
     "start": "node server.js"
   },
   "engines": {
-    "node": "6.9.2",
-    "npm": "3.10.9"
+    "node": "8.9.4",
+    "npm": "5.6.0"
   },
   "private": true,
   "dependencies": {
@@ -35,9 +35,9 @@
     "express": "^4.15.2",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.14",
-    "ng2-nouislider": "^1.6.1",
+    "ng2-nouislider": "^1.7.7",
     "ngx-infinite-scroll": "^0.5.1",
-    "nouislider": "^10.0.0",
+    "nouislider": "^11.0.3",
     "rxjs": "^5.1.0",
     "screenfull": "^3.3.2",
     "typescript": "^2.3.2",

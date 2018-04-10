@@ -3,7 +3,7 @@ import { Note } from './consumer-note.interface';
 export interface CustomerProfile {
     name: string;
     email: string;
-    phone_number: string;
+    phone: string;
     address: string;
     zip_code: number;
     provider: string;

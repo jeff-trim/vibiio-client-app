@@ -9,35 +9,35 @@
   <p class="col-md-offset-1
             welcomeText">
     💁 You have {{ myVibiioCount }} vibiio<span *ngIf="myVibiioCount > 1">s</span> scheduled today. Manage your schedule by selecting vibiios from below.</p>
-  
-  <div *ngIf="(appointments != undefined)">
 
-    <div class="flex">
-      <span class="sliderToggle
-                  col-xs-12
-                  col-md-offset-1">
-        <p class="toggleText"
-          (click)="toggleSliderVisibility()">Filter Requested vibiios</p>
-        <img (click)="toggleSliderVisibility()"
-            class="upArrow"
-            [class.downArrow]="downArrow"           
-            src="assets/images/down-arrow-magenta.png" alt="down-arrow-magenta">
-      </span>
+  <!--<div *ngIf="(appointments != undefined)">-->
 
-      <div *ngIf="sliderVisibility"
-          class="range-slider
-                  col-xs-10
-                  col-xs-offset-1
-                  col-md-11
-                  col-md-offset-1">
+    <!--<div class="flex">-->
+      <!--<span class="sliderToggle-->
+                  <!--col-xs-12-->
+                  <!--col-md-offset-1">-->
+        <!--<p class="toggleText"-->
+          <!--(click)="toggleSliderVisibility()">Filter Requested vibiios</p>-->
+        <!--<img (click)="toggleSliderVisibility()"-->
+            <!--class="upArrow"-->
+            <!--[class.downArrow]="downArrow"-->
+            <!--src="assets/images/down-arrow-magenta.png" alt="down-arrow-magenta">-->
+      <!--</span>-->
 
-        <nouislider [config]="sliderConfig"
-                    [(ngModel)]="range"
-                    (change)="onChange($event)"
-                    (set)="updateAppointments($event)"></nouislider>
-      </div>
-    </div>
-  </div>
+      <!--<div *ngIf="sliderVisibility"-->
+          <!--class="range-slider-->
+                  <!--col-xs-10-->
+                  <!--col-xs-offset-1-->
+                  <!--col-md-11-->
+                  <!--col-md-offset-1">-->
+
+        <!--<nouislider [config]="sliderConfig"-->
+                    <!--[(ngModel)]="range"-->
+                    <!--(change)="onChange($event)"-->
+                    <!--(set)="updateAppointments($event)"></nouislider>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 
   <div class="flex">
     <div *ngIf="appointments?.length > 0" >
@@ -51,7 +51,7 @@
                             [index]="i"
                             [timeZone]="todaysVibiios.user_time_zone"
                             [vibiiographerId]="vibiiographerId"
-                            (appointmentId)="appointmentId"
+                            (appointmentId)="appointment.id"
                             (updateAppointment)="updateAppointment($event)"
                             *ngIf="appointment.scheduled_datetime >= range[0] &&
                                           appointment.scheduled_datetime <= range[1]"
@@ -69,7 +69,7 @@
     </div>
 
     <div *ngIf="(appointments == undefined)"
-         class="pink 
+         class="pink
                 no-vibiio-text
                 col-md-offset-1">
       <p>No vibiios scheduled at this time.</p>

@@ -21,8 +21,8 @@
               col-sm-6
               col-md-5
               col-md-offset-1
-              profile-information" >
-    
+              profile-information">
+
     <vib-profile-information [myProfile]="myProfile"></vib-profile-information>
   </div>
   <div class="col-xs-12
@@ -55,6 +55,32 @@
         (closeForm)="closeForm($event)"
         (sumbitLicenseForm)="createLicense($event)"
       ></profile-new-licensure>
-    </div>        
+    </div>
+    
+    <div class="info-element">
+      <h2>notifications</h2>
+      <div class="long-pink-underline" ></div>
+    </div>
+
+    <div class="info-element row between-xs bottom-xs" (click)=toggleReceiveTexts()>
+      <span class="label">Text Notifications</span>
+      <div class="availability-container" *ngIf="(receivingTexts); else off">
+          <div class="availability-icon-on"></div>
+          <div class="availability-message">
+            ON
+          </div>
+        </div>
+      
+        <ng-template #off>
+          <div class="availability-container">
+            <div class="availability-icon-off"></div>
+            <div class="availability-message">
+              <span class="pink">OFF</span>
+            </div>
+          </div>
+        </ng-template>
+      <span class="pink-underline"></span>  
+    </div>
+
   </div>
 </div>

@@ -40,7 +40,10 @@
     </div>
 
     <div class="bottom-row">
-        <div class="description" *ngIf="description !== null">{{ description }}</div>
+      <div *ngIf="description">
+        <div [ngClass]="{'description':!fullDescription, 'description-full':fullDescription}">{{ description }}</div>
+        <h4 class="description-button" (click)="fullDescription = !fullDescription">VIEW FULL DESCRIPTION</h4>
+      </div>
     </div>
 
   </div>
