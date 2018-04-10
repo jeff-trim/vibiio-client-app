@@ -28,6 +28,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     isSaving = false;
     addLicensureForm = false;
     isEditing = false;
+    receivingTexts: boolean;
 
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
@@ -45,6 +46,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.myProfile = data.myProfile.user;
+            this.receivingTexts  = data.myProfile.user.receive_texts;
             this.myLicenses = data.myProfile.user.profile.licenses;
         });
     }
@@ -134,6 +136,17 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
 
     toggleLicensureForm() {
         this.addLicensureForm = !this.addLicensureForm;
+    }
+
+    toggleReceiveTexts() {
+        this.receivingTexts = !this.receivingTexts;
+        const isReceiving = this.receivingTexts;
+        const options = {receive_texts: isReceiving};
+
+        this.myProfileService.updateMyProfile(options)
+        .subscribe( (data) => {
+            this.receivingTexts = data.user.receive_texts;
+        });
     }
 
     // My License functions
