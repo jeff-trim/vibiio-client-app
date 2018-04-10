@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as screenfull from 'screenfull';
 
@@ -29,7 +29,7 @@ import { Address } from '../../models/address.interface';
     styleUrls: ['appointment-details.component.scss']
 })
 
-export class AppointmentDetailsComponent implements OnInit {
+export class AppointmentDetailsComponent {
     @Input() vibiioConnecting: boolean;
     @Input() onVibiio: boolean;
     @Input() appointment: Appointment;
@@ -58,10 +58,6 @@ export class AppointmentDetailsComponent implements OnInit {
                 private router: Router,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private consumerUpdateService:  ConsumerUpdateService) {}
-
-      ngOnInit() {
-        console.log(this.appointment);
-      }
 
     updateStatus(event) {
       const options = { status: event.status };
