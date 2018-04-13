@@ -1,7 +1,7 @@
 import { InsurancePolicy } from './insurance-policy.interface';
 import { VideoSnapshot } from './video-snapshot.interface';
 import { Address } from './address.interface';
-import { Contact } from '../../../../../vibiio-admin-client/src/app/models/contact.interface';
+import { Contact } from './contact.interface';
 
 export interface ConsumerProfile {
     id: number;

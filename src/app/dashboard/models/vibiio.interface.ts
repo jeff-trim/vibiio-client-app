@@ -1,5 +1,5 @@
 import { Note } from './consumer-note.interface';
-import { Contact } from '../../../../../vibiio-admin-client/src/app/models/contact.interface';
+import { Contact } from './contact.interface';
 
 export interface Vibiio {
     id: number;

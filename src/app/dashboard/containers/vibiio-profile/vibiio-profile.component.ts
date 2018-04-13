@@ -15,7 +15,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { VibiioProfileFormStatusService } from '../../services/vibiio-profile-form-status.service';
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
 import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
-import { Contact } from '../../../../../../vibiio-admin-client/src/app/models/contact.interface';
+import { Contact } from '../../models/contact.interface';
 
 @Component({
     selector: 'vib-vibiio-profile',
