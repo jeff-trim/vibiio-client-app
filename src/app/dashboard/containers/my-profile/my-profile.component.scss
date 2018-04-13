@@ -204,3 +204,49 @@
       left: 2%;
     }
 }
+
+.availability-container {
+    display: flex;
+    .availability-icon-on {
+        height: 27px;
+        width: 37px;
+        background-image: url(../../../../assets/images/switch-on-blue.svg);
+        background-repeat: no-repeat;
+        cursor: pointer;
+        -webkit-transition: all ease 200ms;
+        transition: all ease 200ms;
+    }
+    .availability-icon-off {
+        height: 27px;
+        width: 37px;
+        background-image: url(../../../../assets/images/switch-off.svg);
+        background-repeat: no-repeat;
+        cursor: pointer;
+        -webkit-transition: all ease 200ms;
+        transition: all ease 200ms;
+    }
+    .availability-message {
+        font-family: $copy-font;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 1px;
+        margin-left: 10px;
+        color: $blue;
+        -webkit-transition: all ease 200ms;
+        transition: all ease 200ms;
+    }
+}
+
+.label {
+    font-family: $base-font;
+    font-size: 1.65rem;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: $greyish-brown;
+}
