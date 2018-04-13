@@ -15,6 +15,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { VibiioProfileFormStatusService } from '../../services/vibiio-profile-form-status.service';
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
 import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
+import { Contact } from '../../../../../../vibiio-admin-client/src/app/models/contact.interface';
 
 @Component({
     selector: 'vib-vibiio-profile',
@@ -25,6 +26,7 @@ import { ConsumerProfileComponent } from '../../components/consumer-profile/cons
 export class VibiioProfileComponent implements OnInit {
     consumerProfile: ConsumerProfile;
     notes: Note[];
+    contacts: Contact[];
     vibiioId: number;
     description: string;
     isEditing = false;
@@ -42,6 +44,7 @@ export class VibiioProfileComponent implements OnInit {
             this.vibiioId = this.consumerProfile.id;
             this.notes = data.profile.vibiio.notes;
             this.description = data.profile.vibiio.description;
+            this.contacts = data.profile.vibiio.contacts;
         });
     }
 

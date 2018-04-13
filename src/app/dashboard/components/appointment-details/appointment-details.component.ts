@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ViewChild, } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as screenfull from 'screenfull';
 
@@ -58,7 +58,6 @@ export class AppointmentDetailsComponent {
                 private router: Router,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private consumerUpdateService:  ConsumerUpdateService) {}
-
 
     updateStatus(event) {
       const options = { status: event.status };

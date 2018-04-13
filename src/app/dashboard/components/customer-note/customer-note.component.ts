@@ -9,13 +9,13 @@ import { NoteService } from '../../services/note.service';
 import { Note } from '../../models/consumer-note.interface';
 
 @Component({
-    selector: 'vib-consumer-note',
-    styleUrls: ['note.component.scss'],
-    templateUrl: 'consumer-note.component.html'
+    selector: 'vib-customer-note',
+    styleUrls: ['customer-note.component.scss'],
+    templateUrl: 'customer-note.component.html'
   })
 
-export class ConsumerNoteComponent {
+export class CustomerNoteComponent {
     @Input()
-    description?: string;
+    note?: string;
 }
 
