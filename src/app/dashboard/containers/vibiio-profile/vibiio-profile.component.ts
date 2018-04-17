@@ -16,6 +16,8 @@ import { VibiioProfileFormStatusService } from '../../services/vibiio-profile-fo
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
 import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
 import { Contact } from '../../models/contact.interface';
+import { VibiioUpdateService } from '../../services/vibiio-update.service';
+import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 
 @Component({
     selector: 'vib-vibiio-profile',
@@ -36,7 +38,9 @@ export class VibiioProfileComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private vibiioProfileService: VibiioProfileService,
-                private formStatusService: VibiioProfileFormStatusService) { }
+                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
+                private formStatusService: VibiioProfileFormStatusService,
+                private statusUpdateService: VibiioUpdateService) { }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe( (data) => {
@@ -71,4 +75,17 @@ export class VibiioProfileComponent implements OnInit {
         this.isEditing = false;
         this.isUpdating = false;
     }
+
+    // updateStatus(statusUpdate: any) {
+    //     const options = { status: statusUpdate.status };
+    //     this.statusUpdateService
+    //       .updateVibiio(options, statusUpdate.vibiioId)
+    //       .subscribe( (data) => {
+    //           console.log(data);
+    //           this.consumerProfile = data.vibiio;
+    //           this.sidebarCustomerStatusSharedService.emitChange(data);
+    //       }, (error: any) => {
+    //           console.log('error updating claim status');
+    //       });
+    // }
 }

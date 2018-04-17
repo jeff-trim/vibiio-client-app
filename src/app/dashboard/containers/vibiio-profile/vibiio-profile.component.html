@@ -26,6 +26,9 @@
           <div class="header-pink-underline" ></div>
         </div>
         <vib-consumer-profile [consumerProfile]="consumerProfile"
+                              [insurancePolicies]="consumerProfile.insurance_policies"
+                              [address]="consumerProfile.address"
+                              [userTimeZone]="consumerProfile.user_info.time_zone"
                               [vibiio]="consumerProfile"
                               (editingForm)="onFormEdit($event)">
         </vib-consumer-profile>

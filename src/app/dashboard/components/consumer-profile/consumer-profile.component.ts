@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, ViewChild, EventEmitter } from '@angular/core';
+import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 
 // Components
 import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
@@ -21,16 +21,17 @@ import { ConsumerUpdateService } from '../../services/consumer-update.service';
     styleUrls: ['consumer-profile.component.scss']
 })
 
-export class ConsumerProfileComponent implements OnInit {
-    insurancePolicies?: InsurancePolicy[];
+export class ConsumerProfileComponent {
     updateStatusReminder: boolean;
-    userTimeZone: string;
-    address: Address;
 
+    @Input() userTimeZone: string;
+    @Input() address: Address;
+    @Input() insurancePolicies?: InsurancePolicy[];
     @Input() consumerProfile: ConsumerProfile;
     @Input() vibiio: Vibiio;
 
-    @Output() editingForm: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() editingForm = new EventEmitter<boolean>();
+    @Output() updateVibiioStatus = new EventEmitter<any>();
 
     @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
 
@@ -39,20 +40,15 @@ export class ConsumerProfileComponent implements OnInit {
                 private dateFormatService: DateFormatService,
                 private consumerUpdateService: ConsumerUpdateService) {}
 
-    ngOnInit() {
-        this.insurancePolicies = this.consumerProfile.insurance_policies;
-        this.userTimeZone = this.consumerProfile.user_info.time_zone;
-        this.address = this.consumerProfile.address;
-    }
-
     onEdit(event) {
         this.editingForm.emit(event);
     }
 
-    updateStatus(event) {
-        const options = { status: event.status };
+    updateStatus(statusUpdate: any) {
+        const options = { status: statusUpdate.status };
+        // this.updateVibiioStatus.emit(statusUpdate);
         this.statusUpdateService
-          .updateVibiio(options, event.vibiioId)
+          .updateVibiio(options, statusUpdate.vibiioId)
           .subscribe( (data) => {
               this.vibiio = data.vibiio;
               this.updateStatusReminder = false;
