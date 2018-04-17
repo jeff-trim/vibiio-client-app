@@ -10,14 +10,15 @@ export class ActivityService {
     constructor (private http: Http){}
 
     postActivity(vibiio_id: number, message: string, name: string) {
-        const  url = `${API_URL}/activities`
+        const  url = `${API_URL}/activities`;
         const body = {
             activity: {
                 name: name,
                 vibiio_id: vibiio_id,
                 message: message
             }
-        }
+        };
+
         return this.http
                    .post(url, body)
                    .map((response: Response) => response.json())

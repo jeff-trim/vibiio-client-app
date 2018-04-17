@@ -98,6 +98,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { VideoChatService } from './services/video-chat.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -266,7 +267,8 @@ const dashboardRoutes: Routes = [
     AddressStatusService,
     ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
-    VibiioProfileFormStatusService
+    VibiioProfileFormStatusService,
+    VideoChatService
   ]
 })
 

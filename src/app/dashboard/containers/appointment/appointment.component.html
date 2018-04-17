@@ -7,8 +7,15 @@
                          [vibiioConnecting]="vibiioConnecting"
                          [onVibiio]="onVibiio"
                          [neworkDisconnected]="neworkDisconnected"
-                         (startVibiio)="connectToSession()"
+                         [vibiioFullscreen]="vibiioFullscreen"
+                         [isEditingForms]="isEditingForms"
+                         [isUpdatingForms]="isUpdatingForms"
+                         (startVibiio)="getToken()"
                          (endVibiio)="endSession()"
                          (claimVibiio)="claimVibiio($event)"
-                         (refreshNotes)="updateNotes(appointment.id)">
+                         (refreshNotes)="updateNotes(appointment.id)"
+                         (updateVibiioStatus)="updateVibiioStatus($event)"
+                         (refreshAddress)="refreshAddress()"
+                         (isEditing)="onEdit($event)"
+                         (isUpdating)="onUpdate()">
 </vib-appointment-details>
