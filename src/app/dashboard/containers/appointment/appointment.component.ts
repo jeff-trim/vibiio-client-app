@@ -13,7 +13,6 @@ import { Address } from '../../models/address.interface';
 
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
-import { VideoChatTokenService } from '../../services/video-chat-token.service';
 import { NoteService } from '../../services/note.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { ActivityService } from '../../services/activity.service';
@@ -23,13 +22,9 @@ import { SidebarCustomerStatusSharedService } from '../../services/sidebar-custo
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { AppointmentDetailsFormStatusService } from '../../services/appointment-details-form-status.service';
+import { VIDEO_OPTIONS } from '../../../constants/video-options';
 
-const VIDEO_OPTIONS = {
-    insertMode: 'append',
-    fitMode: 'contain',
-    width: '100%',
-    height: '100%'
-};
+declare var OT: any; // for dev only. Comment out before merge/push
 
 @Component({
     selector: 'vib-appointment',
@@ -39,18 +34,18 @@ const VIDEO_OPTIONS = {
 export class AppointmentComponent implements OnInit, AfterViewInit {
     onVibiio = false;
     vibiioConnecting = false;
+    token: string;
+    publisher: any;
+    subscriber: any;
+    imgData: any;
+    session: any;
+    consumer_id: number;
+    vibiio: Vibiio;
     index: number;
     appointment: Appointment;
     address: Address;
-    consumer_id: number;
     user: User;
-    session: any;
-    vibiio: Vibiio;
-    token: string;
-    publisher: any;
-    imgData: any;
-    subscriber: any;
-    neworkDisconnected = false;
+    networkDisconnected = false;
     userTimeZone: string;
     startVibiioParams: boolean;
     vibiioFullscreen = false;
@@ -58,7 +53,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     isEditingForms = false;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private tokenService: VideoChatTokenService,
                 private snapshotService: VideoSnapshotService,
                 private activityService: ActivityService,
                 private updateAppointmentService: AppointmentService,
@@ -81,8 +75,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             this.vibiio = data.appt.appointment.vibiio;
-            // this.session = OT.initSession(45500292, '1_MX40NTUwMDI5Mn5-MTUwMjM5MTI3MjkzNn5wWmpzVzI4QlNlUE1TZ2toMC96QUhHWWl-fg');
-            this.session = this.videoService.initSession(this.vibiio.video_session_id);
+            this.session = OT.initSession(OPENTOK_API_KEY, '2_MX40NTgwNzA4Mn5-MTUyNDA1ODQxMTc5Mn5FcmVYZ2xTQ0pMSmEzdHpiR3NiVDR6MEp-fg');
+            // this.session = this.videoService.initSession(this.vibiio.video_session_id);
         }, (error) => {
             console.log(error);
         });
@@ -105,7 +99,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     getToken() {
         this.vibiioConnecting = true;
         this.onVibiio = true;
-        this.tokenService.getToken(this.vibiio.id).subscribe((data) => {
+        this.videoService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
             this.connectToSession();
         });
@@ -141,7 +135,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 this.captureSnapshot();
                 this.updateVibiioStatus({status: 'claim_in_progress'});
         });
-            this.neworkDisconnected = false;
+            this.networkDisconnected = false;
             this.onVibiio = true;
         });
     }
@@ -158,7 +152,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 const subscribers = this.session.getSubscribersForStream(data.stream);
                 if (subscribers.length > 0) {
                     // Display error message inside the Subscriber
-                    this.neworkDisconnected = true;
+                    this.networkDisconnected = true;
                     data.preventDefault();   // Prevent the Subscriber from being removed
                 }
             }

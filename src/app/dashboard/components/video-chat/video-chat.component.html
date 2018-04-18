@@ -1,0 +1,25 @@
+<div *ngIf="vibiioConnecting">
+  <div class="waiting-house"></div>
+  <div class="waiting-text">Connecting...</div>
+</div>
+<div *ngIf="(onVibiio)">
+  <div class="subscriber-holder" [class.on-fullscreen]="vibiioFullscreen">
+    <div id="subscriber-stream"></div>
+  </div>
+
+  <div [class.fs-button-position]="vibiioFullscreen" (click)="toggleVibiioFullscreen()">
+    <div class="fullscreen-button" *ngIf="(!vibiioFullscreen)">
+      <img class="fullscreen-icon" src="../../../../assets/images/fullscreen-enter-pink.svg">
+      <span class="fullscreen-text">FULLSCREEN</span>
+    </div>
+
+    <div class="fullscreen-button" *ngIf="(vibiioFullscreen)">
+      <img class="fullscreen-icon" src="../../../../assets/images/fullscreen-exit-white.svg">
+    </div>
+  </div>
+</div>
+<vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
+
+<div *ngIf="(!onVibiio && networkDisconnected)" class="vibiio-message">
+  <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection or because the other party lost their connection.</p>
+</div>

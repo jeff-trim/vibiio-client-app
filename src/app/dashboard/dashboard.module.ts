@@ -99,6 +99,7 @@ import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { AutosizeDirective } from './directives/autosize.directive';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { VideoChatService } from './services/video-chat.service';
+import { VideoChatComponent } from './components/video-chat/video-chat.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -204,7 +205,8 @@ const dashboardRoutes: Routes = [
     InsurancePolicySummaryComponent,
     VibiioSearchComponent,
     VibiioDescriptionComponent,
-    CustomerNoteComponent
+    CustomerNoteComponent,
+    VideoChatComponent
   ],
   imports: [
       CommonModule,

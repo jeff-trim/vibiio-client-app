@@ -5,6 +5,10 @@
     flex-direction: row;
 }
 
+vib-video-chat {
+    width: 100%;
+}
+
 h1 {
     font-family: $base-font;
     font-weight: 600;
@@ -104,4 +108,17 @@ h2, .vibiio-profile-information h2 {
 .note-row {
     display: flex;
     flex-direction: column;
+}
+
+.start-vibiio {
+    align-self: center;
+	height: 18px;
+	font-size: 13px;
+	font-weight: 800;
+	letter-spacing: 1px;
+	text-align: right;
+    text-transform: uppercase;
+	color: $pink;
+    margin-top: 33px;
+    cursor: pointer;
 }

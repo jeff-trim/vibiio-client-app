@@ -7,5 +7,5 @@ export const environment = {
   production: false,
 };
 export const API_URL = 'http://localhost:3000';
-export const OPENTOK_API_KEY = '45807082';
+export const OPENTOK_API_KEY = '45999522';
 export const ACTION_CABLE_URL = 'ws://localhost:3000/available';

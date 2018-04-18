@@ -27,7 +27,7 @@ export class AppointmentDetailsComponent {
     @Input() appointment: Appointment;
     @Input() user: User;
     @Input() vibiio: Vibiio;
-    @Input() neworkDisconnected: boolean;
+    @Input() networkDisconnected: boolean;
     @Input() timeZone: string;
     @Input() address: Address;
     @Input() vibiioFullscreen;
