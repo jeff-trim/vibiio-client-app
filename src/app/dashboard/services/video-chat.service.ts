@@ -12,15 +12,15 @@ declare var OT: any;
 
 @Injectable()
 export class VideoChatService {
-  
+
   constructor(private http: Http) {}
 
-  getToken(id: number): Observable<any> {
+  getToken(vibiio_id: number): Observable<any> {
     const url = `${API_URL}/video_chat/auth_tokens`;
 
     const payload = {
       video_chat_auth_token: {
-        vibiio_id: id
+        vibiio_id: 118
       }
     };
 
@@ -31,11 +31,24 @@ export class VideoChatService {
   }
 
   initSession(video_session_id: string) {
-    return OT.initSession(OPENTOK_API_KEY, '1_MX40NTk5OTUyMn5-MTUyNDA2NjI5Nzk3Mn5IdGNTbjlUb21KWkFsOXBqZENxb2ZtUnJ-fg');
-    // return 'T1==cGFydG5lcl9pZD00NTgwNzA4MiZzZGtfdmVyc2lvbj1kZWJ1Z2dlciZzaWc9NDVhY2MxYWE1ZGYyYWExNWU4YmYwYWEwNzM0YWI3OGE1YzEzZTk4NDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3dOekE0TW41LU1UVXlOREExT0RReE1UYzVNbjVGY21WWVoyeFRRMHBNU21FemRIcGlSM05pVkRSNk1FcC1mZyZjcmVhdGVfdGltZT0xNTI0MDU4NTg0JnJvbGU9c3Vic2NyaWJlciZub25jZT0xNTI0MDU4NTg0LjI3MDQxNzM4Njg4Mjk5JmV4cGlyZV90aW1lPTE1MjY2NTA1ODQ='
+    return OT.initSession(OPENTOK_API_KEY, video_session_id);
   }
 
   initPublisher() {
     return OT.initPublisher({insertDefaultUI: false}, VIDEO_OPTIONS);
+  }
+
+  callConsumer(vibiio_id: number): Observable<any> {
+    const url = `${API_URL}/video_chat/vibiiographer_call`;
+
+    const payload = {
+      call: {
+        vibiio_id: vibiio_id
+      }
+    };
+
+   return this.http
+                .post(url, payload)
+                .map( (response: Response) => console.log(response));
   }
 }

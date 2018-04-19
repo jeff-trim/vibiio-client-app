@@ -39,13 +39,10 @@
           <h2>vibiio</h2>
           <div class="header-pink-underline" ></div>
         </div>
-        <video-archive *ngIf="(!onVibiio)"
+        <video-archive *ngIf="(!vibiioConnecting && !onVibiio)"
                        [snapshots]="consumerProfile.snapshots"></video-archive>
         
-        <div class="row center-xs video-container">
-            <div class="subscriber-holder" [class.on-fullscreen]="vibiioFullscreen">
-                <div id="subscriber-stream"></div>
-              </div>
+        <div class="video-container">
             <vib-video-chat [vibiio]="vibiio"
                             [vibiioConnecting]="vibiioConnecting"
                             [onVibiio]="onVibiio"
@@ -53,8 +50,13 @@
                             [networkDisconnected]="networkDisconnected"
                             (updateVibiioStatus)="updateStatus($event)"
                             (toggleFullscreen)="toggleVibiioFullscreen()"></vib-video-chat>
-            <button class="button button-primary button-md"
-                    (click)="connectToSession()">call customer</button>                      
+            <button *ngIf="!onVibiio; else endCall" 
+                    class="button button-primary button-md"
+                    (click)="callConsumer()">Call Consumer</button>
+            <ng-template #endCall>
+              <button class="button button-primary button-md"
+                      (click)="endSession()">End Call</button>                      
+            </ng-template>
         </div>
       </div>
     </div>

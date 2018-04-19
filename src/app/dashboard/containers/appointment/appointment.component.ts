@@ -24,8 +24,6 @@ import { VideoChatService } from '../../services/video-chat.service';
 import { AppointmentDetailsFormStatusService } from '../../services/appointment-details-form-status.service';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
 
-declare var OT: any; // for dev only. Comment out before merge/push
-
 @Component({
     selector: 'vib-appointment',
     templateUrl: 'appointment.component.html'
@@ -75,8 +73,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             this.vibiio = data.appt.appointment.vibiio;
-            this.session = OT.initSession(OPENTOK_API_KEY, '2_MX40NTgwNzA4Mn5-MTUyNDA1ODQxMTc5Mn5FcmVYZ2xTQ0pMSmEzdHpiR3NiVDR6MEp-fg');
-            // this.session = this.videoService.initSession(this.vibiio.video_session_id);
+            this.session = this.videoService.initSession(this.vibiio.video_session_id);
         }, (error) => {
             console.log(error);
         });
@@ -98,7 +95,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
     getToken() {
         this.vibiioConnecting = true;
-        this.onVibiio = true;
         this.videoService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
             this.connectToSession();
@@ -129,7 +125,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     private subscribeToStreamCreatedEvents() {
         this.session.on('streamCreated', (data) => {
             this.vibiioConnecting = false;
-            this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
+             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
             (stats) => {
                 // wait till subscriber is set
                 this.captureSnapshot();

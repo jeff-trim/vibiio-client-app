@@ -24,4 +24,5 @@ export interface ConsumerProfile {
     insurance_policies?: InsurancePolicy[];
     snapshots?: VideoSnapshot[];
     contacts?: Contact[];
+    video_session_id: string;
 }

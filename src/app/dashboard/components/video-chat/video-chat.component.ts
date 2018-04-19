@@ -20,7 +20,7 @@ export class VideoChatComponent {
     this.updateVibiioStatus.emit(status);
   }
 
-    toggleVibiioFullscreen() {
-      this.toggleFullscreen.emit(true);
-    }
+  toggleVibiioFullscreen() {
+    this.toggleFullscreen.emit(true);
+  }
 }

@@ -103,8 +103,8 @@
       <div class="long-pink-underline" ></div>
     </div>
     
-    <div class="row center-xs video-container">
-      <div *ngIf="(!onVibiio)" 
+    <div class="video-container">
+      <div *ngIf="(!onVibiio && !vibiioConnecting)" 
             class="vibiio-message">
         <p class="first-vibiio">🤙</p>
         <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio!</p>
@@ -119,7 +119,7 @@
                       [vibiioFullscreen]="vibiioFullscreen"
                       [networkDisconnected]="networkDisconnected"
                       (updateVibiioStatus)="updateStatus($event)"
-                      (updateVibiioStatus)="toggleVibiioFullscreen()"></vib-video-chat>
+                      (toggleFullscreen)="toggleVibiioFullscreen()"></vib-video-chat>
     </div>        
   </div> 
 </div>
