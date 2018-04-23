@@ -1,9 +1,19 @@
 <div class="col-md-9
             my-vibiio-container
             col-md-offset-1">
-  <h1 class="col-xs
-             pink
-             bold">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
+  <div class="row">
+    <h1 class="col-xs
+              pink
+              bold">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
+    
+    <button *ngIf="!onVibiio" 
+            class="button button-primary button-md m-top-md"
+            (click)="callConsumer()">Call Consumer</button>
+    <!-- <ng-template #endCall>
+      <button class="button button-primary button-md"
+      (click)="endSession()">End Call</button>                      
+    </ng-template>              -->
+  </div>
 
     <div class="row edit-button-row">
       <h4 *ngIf="isEditing"
@@ -50,13 +60,6 @@
                             [networkDisconnected]="networkDisconnected"
                             (updateVibiioStatus)="updateStatus($event)"
                             (toggleFullscreen)="toggleVibiioFullscreen()"></vib-video-chat>
-            <button *ngIf="!onVibiio; else endCall" 
-                    class="button button-primary button-md"
-                    (click)="callConsumer()">Call Consumer</button>
-            <ng-template #endCall>
-              <button class="button button-primary button-md"
-                      (click)="endSession()">End Call</button>                      
-            </ng-template>
         </div>
       </div>
     </div>
