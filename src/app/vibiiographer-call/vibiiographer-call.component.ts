@@ -120,7 +120,7 @@ private subscribeToStreamDestroyedEvents() {
 async captureSnapshot() {
     // wait for image data
     this.imgData = await this.subscriber.getImgData();
-    this.snapshotService.saveSnapshot(this.vibiio.id, this.session.id, this.vibiio.id, this.imgData)
+    this.snapshotService.saveSnapshot(this.vibiio.consumer_id, this.session.id, this.vibiio.id, this.imgData)
         .subscribe( (data) => {},
             (error) => {
                 console.log('error ', error);

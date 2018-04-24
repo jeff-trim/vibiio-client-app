@@ -10,4 +10,5 @@ export interface Vibiio {
     notes?: Note[];
     vibiiographer_id: number;
     contacts: Contact[];
+    consumer_id?: number;
 }
