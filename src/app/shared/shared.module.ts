@@ -18,6 +18,7 @@ import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModul
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { VibiiosService } from './services/vibiios.service';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     VibiioUpdateService,
     VideoSnapshotService,
     ActivityService,
-    AvailabilitySharedService
+    AvailabilitySharedService,
+    VibiiosService
   ],
   exports: [
     VideoChatComponent,
