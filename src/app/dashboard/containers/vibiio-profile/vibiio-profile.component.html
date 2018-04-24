@@ -8,11 +8,7 @@
     
     <button *ngIf="!onVibiio" 
             class="button button-primary button-md m-top-md"
-            (click)="callConsumer()">Call Consumer</button>
-    <!-- <ng-template #endCall>
-      <button class="button button-primary button-md"
-      (click)="endSession()">End Call</button>                      
-    </ng-template>              -->
+            (click)="startCall()">Call Consumer</button>
   </div>
 
     <div class="row edit-button-row">
@@ -51,16 +47,6 @@
         </div>
         <video-archive *ngIf="(!vibiioConnecting && !onVibiio)"
                        [snapshots]="consumerProfile.snapshots"></video-archive>
-        
-        <div class="video-container">
-            <vib-video-chat [vibiio]="vibiio"
-                            [vibiioConnecting]="vibiioConnecting"
-                            [onVibiio]="onVibiio"
-                            [vibiioFullscreen]="vibiioFullscreen"
-                            [networkDisconnected]="networkDisconnected"
-                            (updateVibiioStatus)="updateStatus($event)"
-                            (toggleFullscreen)="toggleVibiioFullscreen()"></vib-video-chat>
-        </div>
       </div>
     </div>
   </div>
@@ -108,3 +94,5 @@
     </div> 
   </div>
 </div>
+
+<div class="vibiiographer-call" #vibiiographerCall></div>

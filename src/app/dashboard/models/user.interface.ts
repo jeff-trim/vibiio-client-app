@@ -14,4 +14,5 @@ export interface User {
         available?: boolean;
         language: string;
     };
+    profile_type?: string;
 }

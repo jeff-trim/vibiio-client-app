@@ -26,6 +26,7 @@ import { AvailabilitySharedService } from '../../services/availability-shared.se
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
 import { OPENTOK_API_KEY } from '../../../../environments/environment';
+import { WindowRefService } from '../../services/window-ref.service';
 
 @Component({
     selector: 'vib-vibiio-profile',
@@ -52,6 +53,7 @@ export class VibiioProfileComponent implements OnInit {
     description: string;
     isEditing = false;
     isUpdating = false;
+    nativeWindow: any;
 
     @ViewChild(ConsumerProfileComponent) consumerProfileChild: ConsumerProfileComponent;
 
@@ -63,7 +65,8 @@ export class VibiioProfileComponent implements OnInit {
                 private videoService: VideoChatService,
                 private snapshotService: VideoSnapshotService,
                 private activityService: ActivityService,
-                private availabilitySharedService: AvailabilitySharedService) { }
+                private availabilitySharedService: AvailabilitySharedService,
+                private winRef: WindowRefService ) { }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe( (data) => {
@@ -73,8 +76,17 @@ export class VibiioProfileComponent implements OnInit {
             this.description = data.profile.vibiio.description;
             this.contacts = data.profile.vibiio.contacts;
             this.vibiio = data.profile.vibiio;
-            this.session = this.videoService.initSession("1_MX40NTk5OTUyMn5-MTUyNDE3MjM2OTYyOX5jTHJBWEJ2WkhPS1ROSnA2ZXg1K2VoWEt-QX4");
+            // this.session = this.videoService.initSession("1_MX40NTk5OTUyMn5-MTUyNDE3MjM2OTYyOX5jTHJBWEJ2WkhPS1ROSnA2ZXg1K2VoWEt-QX4");
+            this.nativeWindow = this.winRef.getNativeWindow();
         });
+    }
+
+    startCall() {
+        const url = `/dashboard/vibiiographer-call/${this.vibiioId}/${this.consumerProfile.consumer_id}`;
+        const strWindowFeatures = `left=20,top=20,titlebar=no,menubar=no,/
+                                   location=no,resizable=yes,scrollbars=no,/
+                                   status=no,height=500,width=375`;
+        const callWindow = this.nativeWindow.open(url, '_blank', `${strWindowFeatures}`);
     }
 
     updateNotes(consumerProfileId) {
@@ -113,109 +125,109 @@ export class VibiioProfileComponent implements OnInit {
           });
     }
 
-    toggleVibiioFullscreen() {
-        this.vibiioFullscreen = !this.vibiioFullscreen;
-        if (screenfull.enabled) {
-          screenfull.toggle();
-        }
-    }
+    // toggleVibiioFullscreen() {
+    //     this.vibiioFullscreen = !this.vibiioFullscreen;
+    //     if (screenfull.enabled) {
+    //       screenfull.toggle();
+    //     }
+    // }
 
-    getToken() {
-        this.vibiioConnecting = true;
-        this.videoService.getToken(this.vibiio.id).subscribe((data) => {
-            this.token = data.video_chat_auth_token.token;
-            this.connectToSession();
-        });
-    }
+    // getToken() {
+    //     this.vibiioConnecting = true;
+    //     this.videoService.getToken(this.vibiio.id).subscribe((data) => {
+    //         this.token = data.video_chat_auth_token.token;
+    //         this.connectToSession();
+    //     });
+    // }
 
-    private connectToSession() {
-        this.triggerActivity(this.vibiio.id,
-            'Vibiiograher manually started video',
-            'Video session started');
+    // private connectToSession() {
+    //     this.triggerActivity(this.vibiio.id,
+    //         'Vibiiograher manually started video',
+    //         'Video session started');
 
-        this.session.connect(this.token, () => {
-            this.initPublisher();
-            this.hideVibiiographerVideo();
-            this.subscribeToStreamCreatedEvents();
-            this.subscribeToStreamDestroyedEvents();
-        });
-    }
+    //     this.session.connect(this.token, () => {
+    //         this.initPublisher();
+    //         this.hideVibiiographerVideo();
+    //         this.subscribeToStreamCreatedEvents();
+    //         this.subscribeToStreamDestroyedEvents();
+    //     });
+    // }
 
-    private initPublisher() {
-        this.publisher = this.videoService.initPublisher();
-    }
+    // private initPublisher() {
+    //     this.publisher = this.videoService.initPublisher();
+    // }
 
-    private hideVibiiographerVideo() {
-        this.session.publish(this.publisher).publishVideo(false);
-    }
+    // private hideVibiiographerVideo() {
+    //     this.session.publish(this.publisher).publishVideo(false);
+    // }
 
-    private subscribeToStreamCreatedEvents() {
-         this.session.on('streamCreated', (data) => {
-            this.vibiioConnecting = false;
-            this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
-            (stats) => {
-                // wait till subscriber is set
-                this.captureSnapshot();
-        });
-            this.networkDisconnected = false;
-            this.onVibiio = true;
-        });
-    }
+    // private subscribeToStreamCreatedEvents() {
+    //      this.session.on('streamCreated', (data) => {
+    //         this.vibiioConnecting = false;
+    //         this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
+    //         (stats) => {
+    //             // wait till subscriber is set
+    //             this.captureSnapshot();
+    //     });
+    //         this.networkDisconnected = false;
+    //         this.onVibiio = true;
+    //     });
+    // }
 
-    private subscribeToStreamDestroyedEvents() {
-        this.session.on('streamDestroyed', (data) => {
-            this.onVibiio = false;
-            this.availabilitySharedService.emitChange(true);
-            this.session.disconnect();
+    // private subscribeToStreamDestroyedEvents() {
+    //     this.session.on('streamDestroyed', (data) => {
+    //         this.onVibiio = false;
+    //         this.availabilitySharedService.emitChange(true);
+    //         this.session.disconnect();
 
-            if (data.reason === 'networkDisconnected') {
-                data.preventDefault();
-                const subscribers = this.session.getSubscribersForStream(data.stream);
-                if (subscribers.length > 0) {
-                    // Display error message inside the Subscriber
-                    this.networkDisconnected = true;
-                    data.preventDefault();   // Prevent the Subscriber from being removed
-                }
-            }
-        });
-    }
+    //         if (data.reason === 'networkDisconnected') {
+    //             data.preventDefault();
+    //             const subscribers = this.session.getSubscribersForStream(data.stream);
+    //             if (subscribers.length > 0) {
+    //                 // Display error message inside the Subscriber
+    //                 this.networkDisconnected = true;
+    //                 data.preventDefault();   // Prevent the Subscriber from being removed
+    //             }
+    //         }
+    //     });
+    // }
 
-    // save snapshot
-    async captureSnapshot() {
-        // wait for image data
-        this.imgData = await this.subscriber.getImgData();
-        this.snapshotService.saveSnapshot(this.consumer_id, this.session.id, this.vibiio.id, this.imgData)
-            .subscribe( (data) => {},
-                (error) => {
-                    console.log('error ', error);
-            });
-    }
+//     // save snapshot
+//     async captureSnapshot() {
+//         // wait for image data
+//         this.imgData = await this.subscriber.getImgData();
+//         this.snapshotService.saveSnapshot(this.consumer_id, this.session.id, this.vibiio.id, this.imgData)
+//             .subscribe( (data) => {},
+//                 (error) => {
+//                     console.log('error ', error);
+//             });
+//     }
 
-  private triggerActivity(vibiio_id: number, message: string, name: string) {
-        this.activityService.postActivity(
-            vibiio_id,
-            message,
-            name
-            ).subscribe((data) => {});
-    }
+//   private triggerActivity(vibiio_id: number, message: string, name: string) {
+//         this.activityService.postActivity(
+//             vibiio_id,
+//             message,
+//             name
+//             ).subscribe((data) => {});
+//     }
 
-    endSession() {
-        this.session.disconnect();
-        this.triggerActivity(
-            this.vibiio.id,
-            'Vibiiographer manually ended video session',
-            'Video session ended'
-        );
-        this.availabilitySharedService.emitChange(true);
-        this.vibiioConnecting = false;
-        this.onVibiio = false;
-    }
+    // endSession() {
+    //     this.session.disconnect();
+    //     this.triggerActivity(
+    //         this.vibiio.id,
+    //         'Vibiiographer manually ended video session',
+    //         'Video session ended'
+    //     );
+    //     this.availabilitySharedService.emitChange(true);
+    //     this.vibiioConnecting = false;
+    //     this.onVibiio = false;
+    // }
 
-    callConsumer() {
-        this.videoService.callConsumer(this.vibiioId).subscribe(
-            () => {
-                this.getToken();
-            }
-        );
-    }
+    // callConsumer() {
+    //     this.videoService.callConsumer(this.vibiioId).subscribe(
+    //         () => {
+    //             this.getToken();
+    //         }
+    //     );
+    // }
 }

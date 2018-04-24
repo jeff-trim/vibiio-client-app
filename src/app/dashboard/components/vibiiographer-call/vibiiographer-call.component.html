@@ -1,0 +1,9 @@
+<div class="vibiiographer-call-container">
+    <vib-video-chat [vibiio]="vibiio"
+                    [vibiioConnecting]="vibiioConnecting"
+                    [onVibiio]="onVibiio"
+                    [vibiioFullscreen]="vibiioFullscreen"
+                    [networkDisconnected]="networkDisconnected"
+                    (updateVibiioStatus)="updateStatus($event)"
+                    (toggleFullscreen)="toggleVibiioFullscreen()"></vib-video-chat>
+</div>
