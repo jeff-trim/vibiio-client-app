@@ -10,10 +10,10 @@ import { Vibiio } from '../../models/vibiio.interface';
 import { Address } from '../../models/address.interface';
 
 // Services
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { DateFormatService } from '../../../services/date-format.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
+import { VibiioUpdateService } from '../../../shared/services/vibiio-update.service';
+import { SidebarCustomerStatusSharedService } from '../../../shared/services/sidebar-customer-status-shared.service';
 
 @Component({
     selector: 'vib-consumer-profile',

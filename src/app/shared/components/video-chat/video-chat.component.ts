@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Vibiio } from '../../models/vibiio.interface';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Vibiio } from '../../../dashboard/models/vibiio.interface';
 
 @Component({
   selector: 'vib-video-chat',
@@ -8,10 +8,11 @@ import { Vibiio } from '../../models/vibiio.interface';
 })
 export class VideoChatComponent {
   @Input() vibiioConnecting: boolean;
-  @Input() onVibiio: boolean;
-  @Input() vibiioFullscreen: boolean;
+  @Input() onVibiio = false;
+  @Input() vibiioFullscreen = false;
+  @Input() networkDisconnected = false;
+
   @Input() vibiio: Vibiio;
-  @Input() networkDisconnected: boolean;
 
   @Output() updateVibiioStatus = new EventEmitter<any>();
   @Output() toggleFullscreen = new EventEmitter<boolean>();

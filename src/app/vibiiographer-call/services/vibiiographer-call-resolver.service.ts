@@ -1,8 +1,12 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import { Vibiio } from '../models/vibiio.interface';
-import { VibiiosService } from './vibiios.service';
+
+// Services
+import { VibiiosService } from '../../shared/services/vibiios.service';
+
+// Models
+import { Vibiio } from '../../dashboard/models/vibiio.interface';
 
 @Injectable()
 export class VibiiographerCallResolverService implements Resolve<any> {

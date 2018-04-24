@@ -8,8 +8,8 @@ import { MyAppointmentsService } from '../../services/my-appointments.service';
 import { CustomerStatusCountService } from '../../services/customer-status-count.service';
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service';
 import { MyAvailabilityService } from '../../services/my-availability.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AuthService } from '../../../services/auth.service';
+import { SidebarCustomerStatusSharedService } from '../../../shared/services/sidebar-customer-status-shared.service';
 
 // Interfaces
 import { CustomerStatusCount } from '../../models/customer-status-count.interface';

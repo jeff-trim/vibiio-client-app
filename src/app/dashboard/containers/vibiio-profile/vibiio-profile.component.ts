@@ -11,12 +11,11 @@ import { VibiioProfileService } from '../../services/vibiio-profile.service';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
 import { VibiioProfileFormStatusService } from '../../services/vibiio-profile-form-status.service';
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { VideoChatService } from '../../services/video-chat.service';
-import { ActivityService } from '../../services/activity.service';
-import { WindowRefService } from '../../services/window-ref.service';
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
+import { WindowRefService } from '../../../shared/services/window-ref.service';
+import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
+import { ActivityService } from '../../../shared/services/activity.service';
+import { VibiioUpdateService } from '../../../shared/services/vibiio-update.service';
+import { SidebarCustomerStatusSharedService } from '../../../shared/services/sidebar-customer-status-shared.service';
 
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 // Models
-import { VideoChatToken } from '../models/video-chat-token.interface';
+import { VideoChatToken } from '../../dashboard/models/video-chat-token.interface';
 
 @Injectable()
 export class VideoChatTokenService {

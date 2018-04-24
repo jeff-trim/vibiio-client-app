@@ -29,6 +29,7 @@ import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { SpinnerModule } from './easy-spinner/spinner.module';
 import { SignUpModule } from './sign-up/sign-up.module';
 import { VibiiographerCallModule } from './vibiiographer-call/vibiiographer-call.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { VibiiographerCallModule } from './vibiiographer-call/vibiiographer-call
       SpinnerModule,
       SignUpModule,
       VibiiographerCallModule,
+      SharedModule,
       AppRoutingModule
   ],
   providers: [

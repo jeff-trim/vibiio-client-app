@@ -6,7 +6,7 @@
   <div  [class.on-fullscreen]="vibiioFullscreen"
         [class.subscriber-holder]="(onVibiio && !vibiioFullscreen)">
     <div id="subscriber-stream" [class.subscriber-stream]="(onVibiio && !vibiioFullscreen)"
-    [class.on-fullscreen]="vibiioFullscreen"></div>
+                                [class.on-fullscreen]="vibiioFullscreen"></div>
   </div>
   <div *ngIf="(onVibiio && !vibiioConnecting)"
        class="fullscreen-button-container"
@@ -28,3 +28,5 @@
 <div *ngIf="(!onVibiio && networkDisconnected)" class="vibiio-message">
   <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection or because the other party lost their connection.</p>
 </div>
+
+{{ vibiioConnecting | json }}

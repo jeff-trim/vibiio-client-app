@@ -8,7 +8,7 @@ import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from '../../pipes/remove-underscore.pipe';
 
 // Models
-import { Vibiio } from '../../models/vibiio.interface';
+import { Vibiio } from '../../../dashboard/models/vibiio.interface';
 
 @Component({
     selector: 'vib-claim-status',

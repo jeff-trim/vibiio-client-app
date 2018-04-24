@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Output, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { async, inject } from '@angular/core/testing';
 import * as screenfull from 'screenfull';
@@ -14,15 +14,15 @@ import { Address } from '../../models/address.interface';
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
 import { NoteService } from '../../services/note.service';
-import { VideoSnapshotService } from '../../services/video-snapshot.service';
-import { ActivityService } from '../../services/activity.service';
-import { AppointmentService } from '../../services/appointment.service';
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
-import { VideoChatService } from '../../services/video-chat.service';
 import { AppointmentDetailsFormStatusService } from '../../services/appointment-details-form-status.service';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
+import { VideoChatService } from '../../../shared/services/video-chat.service';
+import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
+import { SidebarCustomerStatusSharedService } from '../../../shared/services/sidebar-customer-status-shared.service';
+import { VibiioUpdateService } from '../../../shared/services/vibiio-update.service';
+import { AppointmentService } from '../../services/appointment.service';
+import { ActivityService } from '../../../shared/services/activity.service';
+import { VideoSnapshotService } from '../../../shared/services/video-snapshot.service';
 
 @Component({
     selector: 'vib-appointment',
@@ -59,7 +59,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private availabilitySharedService: AvailabilitySharedService,
                 private router: Router,
                 private videoService: VideoChatService,
-                private formStatusService: AppointmentDetailsFormStatusService) { }
+                private formStatusService: AppointmentDetailsFormStatusService,
+                private changeDetector: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params: Params) => {
@@ -95,6 +96,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
     getToken() {
         this.vibiioConnecting = true;
+        this.changeDetector.detectChanges();
         this.videoService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
             this.connectToSession();
@@ -125,6 +127,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     private subscribeToStreamCreatedEvents() {
         this.session.on('streamCreated', (data) => {
             this.vibiioConnecting = false;
+            this.changeDetector.detectChanges();
              this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
             (stats) => {
                 // wait till subscriber is set
@@ -133,6 +136,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         });
             this.networkDisconnected = false;
             this.onVibiio = true;
+            this.changeDetector.detectChanges();
         });
     }
 
@@ -141,6 +145,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.onVibiio = false;
             this.availabilitySharedService.emitChange(true);
             this.session.disconnect();
+            this.changeDetector.detectChanges();
             this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
 
             if (data.reason === 'networkDisconnected') {
@@ -149,6 +154,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 if (subscribers.length > 0) {
                     // Display error message inside the Subscriber
                     this.networkDisconnected = true;
+                    this.changeDetector.detectChanges();
                     data.preventDefault();   // Prevent the Subscriber from being removed
                 }
             }
@@ -182,6 +188,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             .subscribe( (data) => {
                 this.vibiio.status = data.vibiio.status;
                 this.sidebarCustomerStatusSharedService.emitChange(data);
+                this.changeDetector.detectChanges();
             }, (error: any) => {
                 console.log('error updating claim status');
             });
@@ -196,6 +203,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         );
         this.availabilitySharedService.emitChange(true);
         this.vibiioConnecting = false;
+        this.changeDetector.detectChanges();
         this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
     }
 
@@ -222,6 +230,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
     toggleVibiioFullscreen() {
         this.vibiioFullscreen = !this.vibiioFullscreen;
+        this.changeDetector.detectChanges();
         if (screenfull.enabled) {
           screenfull.toggle();
         }
@@ -234,10 +243,12 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     onEdit(formChanged: boolean) {
         this.formStatusService.onFormEdit();
         this.isEditingForms = true;
+        this.changeDetector.detectChanges();
     }
 
     onUpdate() {
         this.formStatusService.onFormUpdate();
         this.isUpdatingForms = true;
+        this.changeDetector.detectChanges();
     }
 }

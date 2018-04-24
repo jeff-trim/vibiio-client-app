@@ -20,7 +20,7 @@ export class VideoChatService {
 
     const payload = {
       video_chat_auth_token: {
-        vibiio_id: 129
+        vibiio_id: 166
       }
     };
 

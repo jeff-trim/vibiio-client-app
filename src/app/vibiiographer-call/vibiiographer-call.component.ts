@@ -1,15 +1,18 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../constants/video-options';
+
+// Models
 import { Vibiio } from '../dashboard/models/vibiio.interface';
-import { WindowRefService } from '../services/window-ref.service';
-import { VideoChatService } from '../dashboard/services/video-chat.service';
-import { SidebarCustomerStatusSharedService } from '../dashboard/services/sidebar-customer-status-shared.service';
-import { VibiioUpdateService } from '../dashboard/services/vibiio-update.service';
-import { VideoSnapshotService } from '../dashboard/services/video-snapshot.service';
-import { ActivityService } from '../dashboard/services/activity.service';
-import { AvailabilitySharedService } from '../dashboard/services/availability-shared.service';
+
+// Services
+import { AvailabilitySharedService } from '../shared/services/availability-shared.service';
+import { ActivityService } from '../shared/services/activity.service';
+import { VideoSnapshotService } from '../shared/services/video-snapshot.service';
+import { VideoChatService } from '../shared/services/video-chat.service';
+import { VibiioUpdateService } from '../shared/services/vibiio-update.service';
+import { SidebarCustomerStatusSharedService } from '../shared/services/sidebar-customer-status-shared.service';
 
 @Component({
   selector: 'vib-vibiiographer-call',
@@ -18,11 +21,11 @@ import { AvailabilitySharedService } from '../dashboard/services/availability-sh
 })
 
 export class VibiiographerCallComponent implements OnInit {
-  vibiioConnecting = true;
-  onVibiio = false;
-  vibiioFullscreen = false;
-  networkDisconnected = false;
   vibiio: Vibiio;
+  vibiioConnecting: boolean;
+  onVibiio: boolean;
+  vibiioFullscreen: boolean;
+  networkDisconnected: boolean;
   token: string;
   publisher: any;
   subscriber: any;
@@ -30,7 +33,6 @@ export class VibiiographerCallComponent implements OnInit {
   session: any;
 
   @Output() updateVibiioStatus = new EventEmitter<any>();
-  @Output() toggleFullscreen = new EventEmitter<boolean>();
 
   constructor(private activatedRoute: ActivatedRoute,
               private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
@@ -38,27 +40,20 @@ export class VibiiographerCallComponent implements OnInit {
               private videoService: VideoChatService,
               private snapshotService: VideoSnapshotService,
               private activityService: ActivityService,
-              private availabilitySharedService: AvailabilitySharedService) {}
+              private availabilitySharedService: AvailabilitySharedService,
+              private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.vibiioConnecting = false;
     this.activatedRoute.data.subscribe( (data) => {
       this.vibiio = data.vibiio.vibiio;
     });
-    this.session = this.videoService.initSession('1_MX40NTk5OTUyMn5-MTUyNDU4MDk2NDIxMn56S2djN21jYXpXdVRRZlcrOTJvREdLOFl-QX4');
+    this.session = this.videoService.initSession('2_MX40NTk5OTUyMn5-MTUyNDU5NTM3OTgxN35EQ0FSa2w4clFKYVdmeDRvNEFZcVBKSEd-QX4');
     this.getToken();
   }
 
-  callConsumer() {
-    this.videoService.callConsumer(this.vibiio.id).subscribe(
-        () => {
-            this.getToken();
-        }
-    );
-  }
-
   getToken() {
-    this.vibiioConnecting = true;
-    this.videoService.getToken(this.vibiio.id).subscribe((data) => {
+      this.videoService.getToken(this.vibiio.id).subscribe((data) => {
         this.token = data.video_chat_auth_token.token;
         this.connectToSession();
     });
@@ -85,22 +80,25 @@ private hideVibiiographerVideo() {
     this.session.publish(this.publisher).publishVideo(false);
 }
 
-private subscribeToStreamCreatedEvents() {
-     this.session.on('streamCreated', (data) => {
-        this.vibiioConnecting = false;
+subscribeToStreamCreatedEvents() {
+    this.vibiioConnecting = true;
+    this.changeDetector.detectChanges();
+    this.session.on('streamCreated', (data) => {
         this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
         (stats) => {
             // wait till subscriber is set
             this.captureSnapshot();
-    });
-        this.networkDisconnected = false;
+        });
         this.onVibiio = true;
+        this.networkDisconnected = false;
+        this.changeDetector.detectChanges();
     });
 }
 
-private subscribeToStreamDestroyedEvents() {
+subscribeToStreamDestroyedEvents() {
     this.session.on('streamDestroyed', (data) => {
         this.onVibiio = false;
+        this.changeDetector.detectChanges();
         this.availabilitySharedService.emitChange(true);
         this.session.disconnect();
 
@@ -110,6 +108,7 @@ private subscribeToStreamDestroyedEvents() {
             if (subscribers.length > 0) {
                 // Display error message inside the Subscriber
                 this.networkDisconnected = true;
+                this.changeDetector.detectChanges();
                 data.preventDefault();   // Prevent the Subscriber from being removed
             }
         }
@@ -143,8 +142,9 @@ endSession() {
         'Video session ended'
     );
     this.availabilitySharedService.emitChange(true);
-    this.vibiioConnecting = false;
     this.onVibiio = false;
+    this.vibiioConnecting = false;
+    this.changeDetector.detectChanges();
 }
 
   updateStatus(status: any) {
@@ -152,6 +152,10 @@ endSession() {
   }
 
   toggleVibiioFullscreen() {
-    this.toggleFullscreen.emit(true);
+    this.vibiioFullscreen = !this.vibiioFullscreen;
+    this.changeDetector.detectChanges();
+    if (screenfull.enabled) {
+      screenfull.toggle();
+    }
   }
 }

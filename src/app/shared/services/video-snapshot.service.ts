@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 // Models
-import { VideoSnapshot } from '../models/video-snapshot.interface';
+import { VideoSnapshot } from '../../dashboard/models/video-snapshot.interface';
 
 const url = `${API_URL}/video_chat/snapshots`;
 

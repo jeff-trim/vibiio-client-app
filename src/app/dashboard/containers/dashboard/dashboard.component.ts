@@ -12,13 +12,13 @@ import { VideoChatToken } from '../../models/video-chat-token.interface';
 import { NotificationWrapper } from '../../models/notification-wrapper.interface';
 
 // Services
-import { VideoChatTokenService } from '../../services/video-chat-token.service';
 import { MyProfileResolver } from '../../services/my-profile.resolver.service';
 import { AuthService } from '../../../services/auth.service';
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
 
 // environment
 import { ACTION_CABLE_URL } from '../../../../environments/environment';
+import { VideoChatTokenService } from '../../../shared/services/video-chat-token.service';
+import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
 
 declare var OT: any;
 

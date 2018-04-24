@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy  } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { RemoveUnderscorePipe } from '../../pipes/remove-underscore.pipe';
 
 // Services
 import { ConsumerStatusService } from '../../services/consumer-status.service';
@@ -14,7 +13,8 @@ import { Vibiio } from '../../models/vibiio.interface';
 import { SortType } from '../../models/sort-type.interface';
 
 // Pipes
-import { OrderByPipe } from '../../pipes/order-by.pipe';
+import { OrderByPipe } from '../../../shared/pipes/order-by.pipe';
+import { RemoveUnderscorePipe } from '../../../shared/pipes/remove-underscore.pipe';
 
 @Component({
     selector: 'vib-consumer-status',

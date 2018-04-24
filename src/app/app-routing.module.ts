@@ -10,8 +10,8 @@ import { LoggedOutGuardService } from './services/guards/logged-out-guard.servic
 import { InsuranceResolverService } from './sign-up/services/insurance-resolver.service';
 import { LanguageResolverService } from './sign-up/services/language-resolver.service';
 import { InsurancePolicyService } from './dashboard/services/insurance-policy.service';
-import { VibiiographerCallResolverService } from './dashboard/services/vibiiographer-call-resolver.service';
 import { VibiiographerCallComponent } from './vibiiographer-call/vibiiographer-call.component';
+import { VibiiographerCallResolverService } from './vibiiographer-call/services/vibiiographer-call-resolver.service';
 
 const appRoutes: Routes = [
     { path: 'sign_up', component: ConsumerSignUpComponent, resolve: {

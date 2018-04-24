@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {API_URL} from '../../../environments/environment';
-import { Vibiio } from '../models/vibiio.interface';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+
+import {API_URL} from '../../../environments/environment';
+import { Vibiio } from '../../dashboard/models/vibiio.interface';
 
 @Injectable()
 export class VibiiosService {
