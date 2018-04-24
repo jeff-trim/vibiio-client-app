@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Services
-import { WindowRefService } from '../services/window-ref.service';
+import { WindowRefService } from './services/window-ref.service';
 import { VideoChatService } from './services/video-chat.service';
 import { VideoChatTokenService } from './services/video-chat-token.service';
 import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-status-shared.service';
@@ -13,7 +13,7 @@ import { ActivityService } from './services/activity.service';
 import { AvailabilitySharedService } from './services/availability-shared.service';
 import { VideoChatComponent } from './components/video-chat/video-chat.component';
 import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
-
+import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
@@ -23,7 +23,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    JcfModule
   ],
   declarations: [
     VideoChatComponent,

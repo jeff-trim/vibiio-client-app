@@ -196,7 +196,6 @@ const dashboardRoutes: Routes = [
   ],
   imports: [
       CommonModule,
-      RouterModule.forChild(dashboardRoutes),
       HttpModule,
       JcfModule,
       NouisliderModule,
@@ -205,7 +204,8 @@ const dashboardRoutes: Routes = [
       DynamicFormModule,
       FormsModule,
       ReactiveFormsModule,
-      SharedModule
+      SharedModule,
+      RouterModule.forChild(dashboardRoutes),
   ],
   exports: [
     DashboardComponent,
@@ -250,7 +250,7 @@ const dashboardRoutes: Routes = [
     AddressStatusService,
     ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
-    VibiioProfileFormStatusService,
+    VibiioProfileFormStatusService
   ]
 })
 
