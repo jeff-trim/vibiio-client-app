@@ -100,7 +100,6 @@ import { AutosizeDirective } from './directives/autosize.directive';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { VideoChatService } from './services/video-chat.service';
 import { VideoChatComponent } from './components/video-chat/video-chat.component';
-import { VibiiographerCallComponent } from './components/vibiiographer-call/vibiiographer-call.component';
 import { WindowRefService } from './services/window-ref.service';
 import { VibiiographerCallResolverService } from './services/vibiiographer-call-resolver.service';
 import { VibiiosService } from './services/vibiios.service';
@@ -166,14 +165,7 @@ const dashboardRoutes: Routes = [
               profile: VibiioProfileResolver,
                cons: AllConsumersResolver
             }
-          },
-          {
-            path: 'vibiiographer-call/:vibiio_id/:consumer_id',
-            component: VibiiographerCallComponent,
-            resolve: {
-              vibiio: VibiiographerCallResolverService
-            }
-          },
+          }
       ]
   }
 ];
@@ -217,8 +209,7 @@ const dashboardRoutes: Routes = [
     VibiioSearchComponent,
     VibiioDescriptionComponent,
     CustomerNoteComponent,
-    VideoChatComponent,
-    VibiiographerCallComponent
+    VideoChatComponent
   ],
   imports: [
       CommonModule,
@@ -237,7 +228,8 @@ const dashboardRoutes: Routes = [
     SidebarComponent,
     MyVibiiosComponent,
     MyProfileComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    VideoChatComponent
   ],
   providers: [
     DashboardResolver,

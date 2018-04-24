@@ -4,11 +4,11 @@
   <div class="row">
     <h1 class="col-xs
               pink
-              bold">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
+              bold">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}
+      <button class="call-button button button-primary m-top-md m-left-sm"
+              (click)="startCall()">Call Consumer</button>
+    </h1>
     
-    <button *ngIf="!onVibiio" 
-            class="button button-primary button-md m-top-md"
-            (click)="startCall()">Call Consumer</button>
   </div>
 
     <div class="row edit-button-row">
@@ -45,8 +45,7 @@
           <h2>vibiio</h2>
           <div class="header-pink-underline" ></div>
         </div>
-        <video-archive *ngIf="(!vibiioConnecting && !onVibiio)"
-                       [snapshots]="consumerProfile.snapshots"></video-archive>
+        <video-archive [snapshots]="consumerProfile.snapshots"></video-archive>
       </div>
     </div>
   </div>
@@ -66,7 +65,7 @@
           <span class="header-pink-underline"></span>
         </div>
 
-        <div *ngIf="contacts; else noContacts">
+        <div *ngIf="contacts?.length > 0; else noContacts">
           <div *ngFor="let contact of contacts">
             <vib-customer-note [note]="contact.message"></vib-customer-note>
           </div>

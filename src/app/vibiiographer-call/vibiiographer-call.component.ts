@@ -1,15 +1,15 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Vibiio } from '../../models/vibiio.interface';
-import { WindowRefService } from '../../services/window-ref.service';
 import * as screenfull from 'screenfull';
-import { VideoChatService } from '../../services/video-chat.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { VideoSnapshotService } from '../../services/video-snapshot.service';
-import { ActivityService } from '../../services/activity.service';
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
-import { VIDEO_OPTIONS } from '../../../constants/video-options';
+import { VIDEO_OPTIONS } from '../constants/video-options';
+import { Vibiio } from '../dashboard/models/vibiio.interface';
+import { WindowRefService } from '../services/window-ref.service';
+import { VideoChatService } from '../dashboard/services/video-chat.service';
+import { SidebarCustomerStatusSharedService } from '../dashboard/services/sidebar-customer-status-shared.service';
+import { VibiioUpdateService } from '../dashboard/services/vibiio-update.service';
+import { VideoSnapshotService } from '../dashboard/services/video-snapshot.service';
+import { ActivityService } from '../dashboard/services/activity.service';
+import { AvailabilitySharedService } from '../dashboard/services/availability-shared.service';
 
 @Component({
   selector: 'vib-vibiiographer-call',
@@ -44,8 +44,8 @@ export class VibiiographerCallComponent implements OnInit {
     this.activatedRoute.data.subscribe( (data) => {
       this.vibiio = data.vibiio.vibiio;
     });
-    this.session = this.videoService.initSession('1_MX40NTk5OTUyMn5-MTUyNDE3MjM2OTYyOX5jTHJBWEJ2WkhPS1ROSnA2ZXg1K2VoWEt-QX4');
-    this.callConsumer();
+    this.session = this.videoService.initSession('1_MX40NTk5OTUyMn5-MTUyNDU4MDk2NDIxMn56S2djN21jYXpXdVRRZlcrOTJvREdLOFl-QX4');
+    this.getToken();
   }
 
   callConsumer() {

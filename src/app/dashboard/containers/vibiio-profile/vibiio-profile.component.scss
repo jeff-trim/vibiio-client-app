@@ -28,6 +28,7 @@ h2, .vibiio-profile-information h2 {
       margin-top: 14px;
     }
 }
+
 .edit-button-row {
     justify-content: flex-end;
     h4 {
@@ -56,6 +57,17 @@ h2, .vibiio-profile-information h2 {
     }
 }
 
+.call-button {
+  height: 45px;
+  max-width: 160px;
+  vertical-align: text-bottom;
+  &:focus {
+      outline: none;
+  }
+  &:hover {
+    box-shadow: 0px 5px 10px #bbbbbb;
+  }
+}
 .save-after-element::after {
     animation: ellipsis .01s steps(1) 2s;
     content: "D";

@@ -62,6 +62,18 @@ a {
     box-shadow: 0px 5px 10px #bbbbbb;
   }
 }
+.button-sm {
+  height: 45px;
+  min-width: 85px;
+  margin: 1% 10px 10px 74%;
+  &:focus {
+      outline: none;
+  }
+  &:hover {
+    box-shadow: 0px 5px 10px #bbbbbb;
+  }
+}
+
 @include media('<450px') {
   .button {
     width: 100%;
@@ -127,4 +139,8 @@ a {
 
 .m-top-md {
   margin-top: 1em;
+}
+
+.m-left-sm {
+  margin-left: 1em;
 }
