@@ -1,4 +1,4 @@
-@import './../../assets/css/_variables.scss';
+@import '../../../../assets/css/_variables.scss';
 
 .vibiiographer-call-container {
     margin-top: 25px;
@@ -69,7 +69,7 @@
     height: 225px;
     width: 300px;
     margin: auto;
-    background-image: url(./../../assets/images/opening_slide.jpg);
+    background-image: url(~/assets/images/opening_slide.jpg);
     background-size: contain;
     background-repeat: no-repeat;
 }

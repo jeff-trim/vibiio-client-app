@@ -91,6 +91,7 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 
 // Directives
 import { AutosizeDirective } from './directives/autosize.directive';
+import { VibiiographerCallComponent } from '../shared/components/vibiiographer-call/vibiiographer-call.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -251,6 +252,9 @@ const dashboardRoutes: Routes = [
     ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
     VibiioProfileFormStatusService
+  ],
+  entryComponents: [
+    VibiiographerCallComponent
   ]
 })
 

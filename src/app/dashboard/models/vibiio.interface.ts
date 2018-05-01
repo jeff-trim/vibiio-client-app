@@ -4,11 +4,11 @@ import { Contact } from './contact.interface';
 export interface Vibiio {
     id: number;
     status: string;
-    vibiio_type: string;
+    vibiio_type?: string;
     video_session_id: string;
-    description: string;
+    description?: string;
     notes?: Note[];
-    vibiiographer_id: number;
-    contacts: Contact[];
+    vibiiographer_id?: number;
+    contacts?: Contact[];
     consumer_id?: number;
 }

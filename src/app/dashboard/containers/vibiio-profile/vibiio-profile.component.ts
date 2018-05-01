@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
-import { ISubscription } from 'rxjs/Subscription';
 
 // Components
 import { ConsumerProfileComponent } from '../../components/consumer-profile/consumer-profile.component';
@@ -11,7 +10,6 @@ import { VibiioProfileService } from '../../services/vibiio-profile.service';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
 import { VibiioProfileFormStatusService } from '../../services/vibiio-profile-form-status.service';
 import { ConsumerUpdateService } from '../../services/consumer-update.service';
-import { WindowRefService } from '../../../shared/services/window-ref.service';
 import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { VibiioUpdateService } from '../../../shared/services/vibiio-update.service';
@@ -22,6 +20,7 @@ import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { Note } from '../../models/consumer-note.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { Contact } from '../../models/contact.interface';
+import { VibiiosService } from '../../../shared/services/vibiios.service';
 
 @Component({
     selector: 'vib-vibiio-profile',
@@ -38,7 +37,6 @@ export class VibiioProfileComponent implements OnInit {
     description: string;
     isEditing = false;
     isUpdating = false;
-    nativeWindow: any;
 
     @ViewChild(ConsumerProfileComponent) consumerProfileChild: ConsumerProfileComponent;
 
@@ -49,7 +47,7 @@ export class VibiioProfileComponent implements OnInit {
                 private statusUpdateService: VibiioUpdateService,
                 private activityService: ActivityService,
                 private availabilitySharedService: AvailabilitySharedService,
-                private winRef: WindowRefService ) { }
+                private vibiioService: VibiiosService ) { }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe( (data) => {
@@ -60,16 +58,11 @@ export class VibiioProfileComponent implements OnInit {
             this.contacts = data.profile.vibiio.contacts;
             this.vibiio = data.profile.vibiio;
             // this.session = this.videoService.initSession("1_MX40NTk5OTUyMn5-MTUyNDE3MjM2OTYyOX5jTHJBWEJ2WkhPS1ROSnA2ZXg1K2VoWEt-QX4");
-            this.nativeWindow = this.winRef.getNativeWindow();
         });
     }
 
     startCall() {
-        const url = `/vibiiographer-call/${this.vibiioId}/${this.consumerProfile.consumer_id}`;
-        const strWindowFeatures = `left=20,top=20,titlebar=no,menubar=no,/
-                                   location=no,resizable=yes,scrollbars=no,/
-                                   status=no,height=500,width=375`;
-        const callWindow = this.nativeWindow.open(url, '_blank', `${strWindowFeatures}`);
+        this.vibiioService.call(this.vibiio);
     }
 
     updateNotes(consumerProfileId) {

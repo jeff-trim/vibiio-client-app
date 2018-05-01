@@ -1,7 +1,8 @@
-import { Component, Output, Input, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, ComponentRef, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';
+import { VibiiographerCallComponent } from '../../../shared/components/vibiiographer-call/vibiiographer-call.component';
 
 // Services
 import { MyAppointmentsService } from '../../services/my-appointments.service';
@@ -14,14 +15,21 @@ import { SidebarCustomerStatusSharedService } from '../../../shared/services/sid
 // Interfaces
 import { CustomerStatusCount } from '../../models/customer-status-count.interface';
 import { Appointment} from '../../models/appointment.interface';
+import { Observable } from 'rxjs/Rx';
+import { Vibiio } from '../../models/vibiio.interface';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { VibiiosService } from '../../../shared/services/vibiios.service';
+
+const vibiiographerCallComponent = VibiiographerCallComponent;
+type VibiiographerCall = VibiiographerCallComponent;
 
 @Component({
-    selector: 'app-sidebar',
+    selector: 'vib-sidebar',
     templateUrl: 'sidebar.component.html',
     styleUrls: ['sidebar.component.scss']
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   myScheduledVibiios: any;
   customersCategories: CustomerStatusCount[];
   scheduledVibiiosVisibility = true;
@@ -29,14 +37,23 @@ export class SidebarComponent implements OnInit {
   profileVisibility = true;
   sidebarVisibility: boolean;
   userTimeZone: string;
-
-  @Output()
-  emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>();
+  vibiio: Vibiio;
+  alive = true;
 
   @Input()
   available: boolean;
 
-    constructor(private appointmentsService: MyAppointmentsService,
+  @Output()
+  emitAvailability: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  component: ComponentRef<VibiiographerCall>;
+
+  @ViewChild('call', { read: ViewContainerRef })
+  call: ViewContainerRef;
+
+    constructor(private reslover: ComponentFactoryResolver,
+                private vibiiosService: VibiiosService,
+                private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusCountService,
                 private activatedRoute: ActivatedRoute,
                 private availabilityService: MyAvailabilityService,
@@ -64,8 +81,20 @@ export class SidebarComponent implements OnInit {
             this.userTimeZone = data.appointments.appointments.user_time_zone;
             this.myScheduledVibiios = data.sidebarMyDay.my_day;
         });
+        this.vibiiosService.calling$
+        .takeWhile(() => this.alive)
+        .subscribe( (vibiio) => {
+          this.vibiio = vibiio;
+          const compFactory = this.reslover.resolveComponentFactory<VibiiographerCall>(vibiiographerCallComponent);
+          this.component = this.call.createComponent(compFactory);
+          this.component.instance.vibiio = vibiio;
+        });
 
         this.getStatusUpdate();
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
     getStatusUpdate() {

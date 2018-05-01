@@ -10,8 +10,6 @@ import { LoggedOutGuardService } from './services/guards/logged-out-guard.servic
 import { InsuranceResolverService } from './sign-up/services/insurance-resolver.service';
 import { LanguageResolverService } from './sign-up/services/language-resolver.service';
 import { InsurancePolicyService } from './dashboard/services/insurance-policy.service';
-import { VibiiographerCallComponent } from './vibiiographer-call/vibiiographer-call.component';
-import { VibiiographerCallResolverService } from './vibiiographer-call/services/vibiiographer-call-resolver.service';
 
 const appRoutes: Routes = [
     { path: 'sign_up', component: ConsumerSignUpComponent, resolve: {
@@ -20,13 +18,6 @@ const appRoutes: Routes = [
        }
     },
     { path: 'sign_in', component: LoginComponent, canActivate: [LoggedOutGuardService]},
-    {
-      path: 'vibiiographer-call/:vibiio_id/:consumer_id',
-      component: VibiiographerCallComponent,
-      resolve: {
-        vibiio: VibiiographerCallResolverService
-      }
-    },
     { path: '', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' },
     { path: '**', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' }
 ];
@@ -39,8 +30,7 @@ const appRoutes: Routes = [
     RouterModule
   ],
   providers: [
-    LoggedOutGuardService,
-    VibiiographerCallResolverService
+    LoggedOutGuardService
   ]
 })
 export class AppRoutingModule { }

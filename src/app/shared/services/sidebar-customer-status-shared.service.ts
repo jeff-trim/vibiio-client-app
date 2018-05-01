@@ -4,7 +4,6 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class SidebarCustomerStatusSharedService {
-    // data: any;
     private emitChangeSource = new Subject<any>();
 
     changeEmitted$ = this.emitChangeSource.asObservable();

@@ -19,6 +19,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { VibiiosService } from './services/vibiios.service';
+import { VibiiographerCallComponent } from './components/vibiiographer-call/vibiiographer-call.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { VibiiosService } from './services/vibiios.service';
     ClaimStatusComponent,
     CapitalizePipe,
     OrderByPipe,
-    RemoveUnderscorePipe
+    RemoveUnderscorePipe,
+    VibiiographerCallComponent
   ],
   providers: [
     WindowRefService,
@@ -50,7 +52,8 @@ import { VibiiosService } from './services/vibiios.service';
     ClaimStatusComponent,
     CapitalizePipe,
     OrderByPipe,
-    RemoveUnderscorePipe
+    RemoveUnderscorePipe,
+    VibiiographerCallComponent
   ]
 })
 export class SharedModule { }

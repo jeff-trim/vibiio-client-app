@@ -25,4 +25,7 @@ export interface ConsumerProfile {
     snapshots?: VideoSnapshot[];
     contacts?: Contact[];
     video_session_id: string;
+    vibiio_type?: string;
+    description?: string;
+    vibiiographer_id?: number;
 }

@@ -47,10 +47,10 @@
          (click)='toggleScheduledVibiios($event)'>
     </div>
   </div>
-  <app-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
+  <vib-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
                         [timeZone]="userTimeZone"
                         [vibiio]="vibiio"
-                        [hidden]="scheduledVibiiosVisibility"></app-sidebar-schedule>
+                        [hidden]="scheduledVibiiosVisibility"></vib-sidebar-schedule>
   <div class="title-row"
        (click)='toggleCustomerCategoryVisibility($event)'
        [routerLink]="['./all-consumers', '']">
@@ -87,4 +87,8 @@
       Sign out
     </div>
   </div>
+</div>
+
+<div class="call-window"
+     #call>
 </div>
