@@ -23,6 +23,7 @@ import { VibiioProfileComponent } from './containers/vibiio-profile/vibiio-profi
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
@@ -206,6 +207,7 @@ const dashboardRoutes: Routes = [
       FormsModule,
       ReactiveFormsModule,
       SharedModule,
+      AngularDraggableModule,
       RouterModule.forChild(dashboardRoutes),
   ],
   exports: [

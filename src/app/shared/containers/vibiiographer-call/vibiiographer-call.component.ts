@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { AngularDraggableDirective } from 'angular2-draggable';
 
 // Models
 import { Vibiio } from '../../../dashboard/models/vibiio.interface';

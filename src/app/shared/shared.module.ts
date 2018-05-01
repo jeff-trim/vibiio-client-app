@@ -19,14 +19,20 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { VibiiosService } from './services/vibiios.service';
-import { VibiiographerCallComponent } from './components/vibiiographer-call/vibiiographer-call.component';
+import { VibiiographerCallComponent } from './containers/vibiiographer-call/vibiiographer-call.component';
+import { AngularDraggableModule } from 'angular2-draggable';
+import { VideoControlsComponent } from './components/video-controls/video-controls.component';
+import { ExpertSearchComponent } from './containers/expert-search/expert-search.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    JcfModule
+    JcfModule,
+    AngularDraggableModule
   ],
   declarations: [
     VideoChatComponent,
@@ -34,7 +40,11 @@ import { VibiiographerCallComponent } from './components/vibiiographer-call/vibi
     CapitalizePipe,
     OrderByPipe,
     RemoveUnderscorePipe,
-    VibiiographerCallComponent
+    VibiiographerCallComponent,
+    VideoControlsComponent,
+    ExpertSearchComponent,
+    SearchResultComponent,
+    SearchFiltersComponent
   ],
   providers: [
     WindowRefService,
@@ -53,7 +63,8 @@ import { VibiiographerCallComponent } from './components/vibiiographer-call/vibi
     CapitalizePipe,
     OrderByPipe,
     RemoveUnderscorePipe,
-    VibiiographerCallComponent
+    VibiiographerCallComponent,
+    VideoControlsComponent
   ]
 })
 export class SharedModule { }
