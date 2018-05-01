@@ -1,0 +1,14 @@
+<div class="expert-search-container">
+  <div class="title">
+    <h3 class="add-to-call">add someone to call:</h3>
+  </div>
+
+  <vib-search-box></vib-search-box>
+  <vib-search-filters [filters]="filters"></vib-search-filters>
+
+  <div class="search-results">
+    <div *ngFor="let result of results">
+      <vib-expert-search-result [result]="result"></vib-expert-search-result>
+    </div>
+  </div>
+</div>

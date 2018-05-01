@@ -47,7 +47,7 @@ import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-
 import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
 import { ConsumerProfileSummaryComponent } from './components/consumer-profile-summary/consumer-profile-summary.component';
 import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
-import { VibiioSearchComponent } from './components/vibiio-search/vibiio-search.component';
+import { SearchBoxComponent } from './components/vibiio-search/vibiio-search.component';
 import { VibiioDescriptionComponent } from './components/vibiio-description/vibiio-description.component';
 import { CustomerNoteComponent } from './components/customer-note/customer-note.component';
 
@@ -92,7 +92,7 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 
 // Directives
 import { AutosizeDirective } from './directives/autosize.directive';
-import { VibiiographerCallComponent } from '../shared/components/vibiiographer-call/vibiiographer-call.component';
+import { VibiiographerCallComponent } from '../shared/containers/vibiiographer-call/vibiiographer-call.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -192,7 +192,6 @@ const dashboardRoutes: Routes = [
     ConsumerAddressComponent,
     ConsumerProfileSummaryComponent,
     InsurancePolicySummaryComponent,
-    VibiioSearchComponent,
     VibiioDescriptionComponent,
     CustomerNoteComponent
   ],

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { VibiioSearchComponent } from './vibiio-search.component';
+import { SearchBoxComponent } from './search-box.component';
 
-describe('VibiioSearchComponent', () => {
-  let component: VibiioSearchComponent;
-  let fixture: ComponentFixture<VibiioSearchComponent>;
+describe('SearchBoxComponent', () => {
+  let component: SearchBoxComponent;
+  let fixture: ComponentFixture<SearchBoxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VibiioSearchComponent ]
+      declarations: [ SearchBoxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VibiioSearchComponent);
+    fixture = TestBed.createComponent(SearchBoxComponent);
     component = fixture.componentInstance;
     spyOn(component.queryEmitter, 'emit');
     fixture.detectChanges();

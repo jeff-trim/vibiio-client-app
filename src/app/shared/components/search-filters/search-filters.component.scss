@@ -1,0 +1,17 @@
+@import '~assets/css/variables';
+
+.search-filter-container {
+    display: flex;
+    justify-content: space-evenly;
+
+
+    .filter {
+        font-family: 'Montserrat';	
+        font-size: 10px;	
+        font-weight: 700;	
+        line-height: 12px;	
+        text-align: right;
+        text-transform: capitalize;
+        color: $grey;
+    }
+}

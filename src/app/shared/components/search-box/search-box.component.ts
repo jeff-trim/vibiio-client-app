@@ -2,8 +2,8 @@ import { Component, OnInit, Output, ViewChild, ElementRef, EventEmitter } from '
 
 @Component({
   selector: 'vib-search-box',
-  templateUrl: './vibiio-search.component.html',
-  styleUrls: ['./vibiio-search.component.scss']
+  templateUrl: './search-box.component.html',
+  styleUrls: ['./search-box.component.scss']
 })
 export class SearchBoxComponent {
   @Output() queryEmitter = new EventEmitter<string>();

@@ -1,0 +1,31 @@
+@import '~assets/css/variables';
+
+.expert-search-result-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px auto;
+
+    .name {
+        color: $grey;
+        font-family: 'Montserrat';
+        font-size: 14px;
+        font-weight: 700;	
+        line-height: 17px;
+    }
+    .add-container {
+        .text {
+            color: $pink;
+            font-family: 'Roboto';
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 17px;
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .icon {
+
+        }
+    }
+}

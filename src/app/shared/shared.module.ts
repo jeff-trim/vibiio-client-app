@@ -23,8 +23,9 @@ import { VibiiographerCallComponent } from './containers/vibiiographer-call/vibi
 import { AngularDraggableModule } from 'angular2-draggable';
 import { VideoControlsComponent } from './components/video-controls/video-controls.component';
 import { ExpertSearchComponent } from './containers/expert-search/expert-search.component';
-import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { ExpertSearchResultComponent } from './components/expert-search-result/expert-search-result.component';
 
 @NgModule({
   imports: [
@@ -43,8 +44,9 @@ import { SearchFiltersComponent } from './components/search-filters/search-filte
     VibiiographerCallComponent,
     VideoControlsComponent,
     ExpertSearchComponent,
-    SearchResultComponent,
-    SearchFiltersComponent
+    SearchFiltersComponent,
+    SearchBoxComponent,
+    ExpertSearchResultComponent
   ],
   providers: [
     WindowRefService,
@@ -64,7 +66,11 @@ import { SearchFiltersComponent } from './components/search-filters/search-filte
     OrderByPipe,
     RemoveUnderscorePipe,
     VibiiographerCallComponent,
-    VideoControlsComponent
+    VideoControlsComponent,
+    SearchBoxComponent,
+    ExpertSearchComponent,
+    SearchFiltersComponent,
+    ExpertSearchResultComponent
   ]
 })
 export class SharedModule { }

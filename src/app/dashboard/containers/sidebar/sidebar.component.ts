@@ -2,7 +2,7 @@ import { Component, Output, Input, EventEmitter, OnInit, ComponentRef, Component
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';
-import { VibiiographerCallComponent } from '../../../shared/components/vibiiographer-call/vibiiographer-call.component';
+import { VibiiographerCallComponent } from '../../../shared/containers/vibiiographer-call/vibiiographer-call.component';
 
 // Services
 import { MyAppointmentsService } from '../../services/my-appointments.service';

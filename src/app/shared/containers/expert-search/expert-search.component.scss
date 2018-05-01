@@ -1,0 +1,34 @@
+@import '~assets/css/variables';
+
+.expert-search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 90%;
+    background-color: $white;
+    padding: 10px;
+    .title {
+        margin: 15px auto;
+        .add-to-call {
+            color: $pink;
+            font-family: 'Roboto';
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 17px;	
+            text-align: right;
+            text-transform: uppercase;
+
+        }
+    }
+    vib-search-filters,
+    vib-expert-search-result {
+        width: 100%;
+    }
+    .search-results {
+        width: 90%;
+        overflow-y: scroll;
+        margin: 20px 5% 0;
+    }
+}
