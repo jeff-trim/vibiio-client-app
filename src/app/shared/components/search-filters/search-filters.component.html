@@ -1,10 +1,9 @@
 <div class="search-filter-container">
-  <div class="filter">
-    all
-  </div>
   <div *ngFor="let filter of filters">
-    <div class="filter">
-      {{ filter}}
+    <div [ngClass]="{'active': term === filter}"
+         (click)="filterResults(filter)"
+         class="filter">
+      {{ filter }}
     </div>
   </div>
 </div>

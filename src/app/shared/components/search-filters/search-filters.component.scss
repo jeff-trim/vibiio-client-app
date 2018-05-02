@@ -3,7 +3,7 @@
 .search-filter-container {
     display: flex;
     justify-content: space-evenly;
-
+    margin-top: 10px;
 
     .filter {
         font-family: 'Montserrat';	
@@ -12,6 +12,11 @@
         line-height: 12px;	
         text-align: right;
         text-transform: capitalize;
+        cursor: pointer;
+        opacity: .30;
         color: $grey;
+        &.active {
+            opacity: 1;
+        }
     }
 }

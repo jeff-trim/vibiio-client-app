@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs/operator/filter';
 
 @Component({
   selector: 'vib-expert-search',
@@ -14,6 +15,7 @@ export class ExpertSearchComponent implements OnInit {
   ];
 
   filters = [
+    'all',
     'vibiiographers',
     'experts'
   ];
@@ -23,4 +25,8 @@ export class ExpertSearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  filterResults(term: string) {
+    //filter search
+    console.log('filter:', term);
+  }
 }

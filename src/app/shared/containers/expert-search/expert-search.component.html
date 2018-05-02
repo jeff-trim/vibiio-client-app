@@ -4,7 +4,9 @@
   </div>
 
   <vib-search-box></vib-search-box>
-  <vib-search-filters [filters]="filters"></vib-search-filters>
+  <vib-search-filters [filters]="filters"
+                      (filter)="filterResults($event)"
+                      ></vib-search-filters>
 
   <div class="search-results">
     <div *ngFor="let result of results">

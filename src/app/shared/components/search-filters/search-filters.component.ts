@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { filter } from 'rxjs/operator/filter';
 
 @Component({
   selector: 'vib-search-filters',
@@ -7,10 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SearchFiltersComponent implements OnInit {
   @Input() filters: string[];
+  term: string;
 
-  constructor() { }
+  @Output() filter = new EventEmitter<string>();
 
   ngOnInit() {
+    this.term = this.filters[0];
   }
 
+  filterResults(filter: string) {
+    this.term = filter;
+    this.filter.emit(filter);
+  }
 }
