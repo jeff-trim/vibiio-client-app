@@ -32,9 +32,11 @@ type VibiiographerCall = VibiiographerCallComponent;
 export class SidebarComponent implements OnInit, OnDestroy {
   myScheduledVibiios: any;
   customersCategories: CustomerStatusCount[];
-  scheduledVibiiosVisibility = true;
-  customerCategoryVisibility = true;
-  profileVisibility = true;
+  scheduledVibiiosActive = false;
+  customerCategoriesActive = false;
+  profileActive = false;
+  expertsActive = false;
+  vibiiographersActive = false;
   sidebarVisibility: boolean;
   userTimeZone: string;
   vibiio: Vibiio;
@@ -113,26 +115,46 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
 
   toggleScheduledVibiios(event) {
-    this.scheduledVibiiosVisibility = !this.scheduledVibiiosVisibility;
-    if (!this.scheduledVibiiosVisibility) {
-      this.customerCategoryVisibility = true;
-      this.profileVisibility = true;
+    this.scheduledVibiiosActive = !this.scheduledVibiiosActive;
+    if (this.scheduledVibiiosActive) {
+      this.customerCategoriesActive = false;
+      this.profileActive = false;
+      this.expertsActive = false;
+      this.vibiiographersActive = false;
     }
   }
 
-  toggleCustomerCategoryVisibility(event) {
-    this.customerCategoryVisibility = !this.customerCategoryVisibility;
-    if (!this.customerCategoryVisibility) {
-      this.scheduledVibiiosVisibility = true;
-      this.profileVisibility = true;
+  toggleCustomerCategories() {
+    this.customerCategoriesActive = !this.customerCategoriesActive;
+    if (this.customerCategoriesActive) {
+      this.scheduledVibiiosActive = false;
+      this.profileActive = false;
+      this.expertsActive = false;
+      this.vibiiographersActive = false;
     }
   }
 
-  toggleProfileVisibility(event) {
-    this.profileVisibility = !this.profileVisibility;
-    if (!this.profileVisibility) {
-      this.scheduledVibiiosVisibility = true;
-      this.customerCategoryVisibility = true;
+  toggleProfile() {
+    this.profileActive = !this.profileActive;
+    if (this.profileActive) {
+      this.scheduledVibiiosActive = false;
+      this.customerCategoriesActive = false;
+      this.expertsActive = false;
+      this.vibiiographersActive = false;
+    }
+  }
+
+  toggleExperts() {
+    this.expertsActive = !this.expertsActive;
+    if (this.expertsActive) {
+      this.vibiiographersActive = false;
+    }
+  }
+
+  toggleVibiiographers() {
+    this.vibiiographersActive = !this.vibiiographersActive;
+    if (this.vibiiographersActive) {
+      this.expertsActive = false;
     }
   }
 

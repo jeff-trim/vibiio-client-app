@@ -4,7 +4,7 @@
     <a [routerLink]="['/dashboard/my-vibiios']">
       <div class="logo-container"></div>
     </a>
-    <div class="hamburger"
+    <div class="hamburger" 
          (click)="toggleSidebar()">
       <span></span>
       <span></span>
@@ -13,8 +13,8 @@
   </div>
 
   <div class="row
-              betweeen-xs"
-              (click)=toggleAvailability()>
+              betweeen-xs" 
+       (click)=toggleAvailability()>
 
     <div class="availability-container"
          *ngIf=(available)>
@@ -35,51 +35,81 @@
 
   <span [ngClass]="{'hidden':!sidebarVisibility}">
     <div class="title-row">
-    <a routerLink="my-vibiios"
-            routerLinkActive="active">
+      <a routerLink="my-vibiios"
+         routerLinkActive="active">
         <div class="title">
           My Scheduled vibiios
         </div>
-    </a>
-    <div class="arrow"
-         [class.left-arrow]='scheduledVibiiosVisibility'
-         [class.active-arrow]='!scheduledVibiiosVisibility'
-         (click)='toggleScheduledVibiios($event)'>
+      </a>
+      <div class="arrow left-arrow"
+           [class.active-arrow]='!scheduledVibiiosActive'
+           (click)='toggleScheduledVibiios($event)'>
+      </div>
     </div>
-  </div>
-  <vib-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
-                        [timeZone]="userTimeZone"
-                        [vibiio]="vibiio"
-                        [hidden]="scheduledVibiiosVisibility"></vib-sidebar-schedule>
-  <div class="title-row"
-       (click)='toggleCustomerCategoryVisibility($event)'
-       [routerLink]="['./all-consumers', '']">
-    <div class="title clickable">
-      All Customers
+    <vib-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
+                          [timeZone]="userTimeZone"
+                          [vibiio]="vibiio"
+                          [hidden]="!scheduledVibiiosActive"></vib-sidebar-schedule>
+    <div class="title-row"
+         (click)='toggleCustomerCategories()'
+         [routerLink]="['./all-consumers', '']">
+      <div class="title clickable">
+        All Customers
+      </div>
+      <div class="arrow left-arrow"
+           [class.active-arrow]='customerCategoriesActive'>
+      </div>
     </div>
-    <div class="arrow"
-        [class.left-arrow]='customerCategoryVisibility'
-        [class.active-arrow]='!customerCategoryVisibility'>
-    </div>
-  </div>
 
-  <vib-sidebar-customer
-    *ngFor="let customersCategory of customersCategories;"
-    [category] = customersCategory
-    [hidden] ='customerCategoryVisibility'>
-  </vib-sidebar-customer>
+    <vib-sidebar-customer *ngFor="let customersCategory of customersCategories;"
+                          [category]=customersCategory
+                          [hidden]='!customerCategoriesActive'>
+    </vib-sidebar-customer>
 
-  <div class="title-row">
-    <div class="title">
-        <a routerLink="my_profile" routerLinkActive="active">
-            My Profile
+    <div class="title-row"
+         (click)="toggleProfile()">
+      <div class="title">
+        <a routerLink="my_profile"
+           routerLinkActive="active">
+          My Profile
         </a>
-  </div>
-  <div class='arrow'
-       [class.left-arrow]='profileVisibility'
-       routerLink="my_profile">
-  </div>
-</div>
+      </div>
+      <div class='arrow left-arrow'
+           [class.active-arrow]='profileActive'
+           routerLink="my_profile">
+      </div>
+    </div>
+
+    <div class="title-row"
+         (click)="toggleExperts()">
+      <div class="title">
+        <a routerLink="experts"
+           routerLinkActive="active">
+          Experts
+        </a>
+      </div>
+
+      <div class='arrow left-arrow'
+           [class.active-arrow]='expertsActive'
+           routerLink="experts">
+      </div>
+    </div>
+
+    <div class="title-row"
+         (click)="toggleVibiiographers()">
+      <div class="title">
+        <a routerLink="vibiiographers"
+           routerLinkActive="active">
+          Vibiiographers
+        </a>
+      </div>
+
+      <div class='arrow left-arrow'
+           [class.active-arrow]='vibiiographersActive'
+           routerLink="vibiiographers">
+      </div>
+    </div>
+
   </span>
   <div class="title-row">
     <div class="title clickable"
@@ -92,11 +122,8 @@
     <vib-expert-search></vib-expert-search>
   </div> -->
 
-    <div class="title-row last">
+  <div class="title-row last">
     <!-- <vib-video-controls></vib-video-controls>  -->
-    <div ngDraggable
-         #call>
-    </div>
+    <div ngDraggable #call></div>
   </div>
 </div>
-
