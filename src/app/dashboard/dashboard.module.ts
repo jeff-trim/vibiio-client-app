@@ -93,6 +93,10 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 // Directives
 import { AutosizeDirective } from './directives/autosize.directive';
 import { VibiiographerCallComponent } from '../shared/containers/vibiiographer-call/vibiiographer-call.component';
+import { VibiiographerListComponent } from './containers/vibiiographer-list/vibiiographer-list.component';
+import { ExpertListComponent } from './containers/expert-list/expert-list.component';
+import { ExpertsResolverService } from '../shared/services/experts-resolver.service';
+import { VibiiographersResolverService } from '../shared/services/vibiiographers-resolver.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -155,6 +159,20 @@ const dashboardRoutes: Routes = [
               profile: VibiioProfileResolver,
                cons: AllConsumersResolver
             }
+          },
+          {
+            path: 'vibiiographers',
+            component: VibiiographerListComponent,
+            resolve: {
+              vibiiographers: VibiiographersResolverService
+            }
+          },
+          {
+            path: 'experts',
+            component: ExpertListComponent,
+            resolve: {
+              experts: ExpertsResolverService
+            }
           }
       ]
   }
@@ -193,7 +211,9 @@ const dashboardRoutes: Routes = [
     ConsumerProfileSummaryComponent,
     InsurancePolicySummaryComponent,
     VibiioDescriptionComponent,
-    CustomerNoteComponent
+    CustomerNoteComponent,
+    VibiiographerListComponent,
+    ExpertListComponent
   ],
   imports: [
       CommonModule,
@@ -252,7 +272,9 @@ const dashboardRoutes: Routes = [
     AddressStatusService,
     ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
-    VibiioProfileFormStatusService
+    VibiioProfileFormStatusService,
+    ExpertsResolverService,
+    VibiiographersResolverService
   ],
   entryComponents: [
     VibiiographerCallComponent

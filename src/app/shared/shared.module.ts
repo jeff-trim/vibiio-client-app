@@ -26,6 +26,9 @@ import { ExpertSearchComponent } from './containers/expert-search/expert-search.
 import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { ExpertSearchResultComponent } from './components/expert-search-result/expert-search-result.component';
+import { UsersService } from './services/users.service';
+import { VibiiographersResolverService } from './services/vibiiographers-resolver.service';
+import { ExpertsResolverService } from './services/experts-resolver.service';
 
 @NgModule({
   imports: [
@@ -57,7 +60,10 @@ import { ExpertSearchResultComponent } from './components/expert-search-result/e
     VideoSnapshotService,
     ActivityService,
     AvailabilitySharedService,
-    VibiiosService
+    VibiiosService,
+    UsersService,
+    VibiiographersResolverService,
+    ExpertsResolverService
   ],
   exports: [
     VideoChatComponent,
