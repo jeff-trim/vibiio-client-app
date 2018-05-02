@@ -11,7 +11,9 @@ export class ExpertSearchComponent implements OnInit {
     'Steve Smith',
     'Stacy Smith',
     'Joe Smith',
-    'Ava Jones'
+    'Ava Jones',
+    'Michell Mitchell',
+    'George Lucas'
   ];
 
   filters = [
@@ -28,5 +30,15 @@ export class ExpertSearchComponent implements OnInit {
   filterResults(term: string) {
     //filter search
     console.log('filter:', term);
+  }
+
+  addExpert(expert: any) {
+    console.log('expert:', expert);
+
+  }
+
+  search(query: string) {
+    console.log('query', query);
+
   }
 }

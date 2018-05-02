@@ -2,14 +2,15 @@
 
 .vibiiographer-call-container {
     margin-top: 25px;
-    width: 200px;
-    height: 295px;
+    width: 300px;
+    height: 400px;
     justify-content: center;
     align-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     background-color: $white;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.35);
 }
 .subscriber-holder {
     width: 312px;
@@ -79,4 +80,8 @@
 
 .ng-draggable {
     cursor: move;
+    z-index: 9;
+    position: absolute;
+    bottom: 11%;
+    left: 2%;
   }

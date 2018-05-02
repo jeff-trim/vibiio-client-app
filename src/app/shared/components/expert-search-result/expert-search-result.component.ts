@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'vib-expert-search-result',
@@ -7,9 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ExpertSearchResultComponent implements OnInit {
   @Input() result: any; // placeholder
+
+  @Output() selected = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addExpert(expert: any) {
+    this.selected.emit(expert);
   }
 
 }
