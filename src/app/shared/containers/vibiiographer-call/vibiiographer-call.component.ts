@@ -33,6 +33,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     imgData: any;
     session: any;
     alive = true;
+    showControls = false;
+    closeSearch = true;
 
     @Input() vibiio: Vibiio;
 
@@ -48,8 +50,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.vibiioConnecting = true;
-        // this.getToken();
-        this.session = this.videoService.initSession('2_MX40NTk5OTUyMn5-MTUyNDU5NTM3OTgxN35EQ0FSa2w4clFKYVdmeDRvNEFZcVBKSEd-QX4');
+        this.getToken();
+        this.session = this.videoService.initSession('1_MX40NTk5OTUyMn5-MTUyNTM3ODIyMzA5MX5pSHFiMlhRQWhCUjBmKzNHc2svdlVDaEF-QX4');
     }
 
     ngOnDestroy() {
@@ -85,13 +87,14 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     subscribeToStreamCreatedEvents() {
-        this.vibiioConnecting = true;
         this.changeDetector.detectChanges();
         this.session.on('streamCreated', (data) => {
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
-                (stats) => {
+            (stats) => {
                     // wait till subscriber is set
                     this.captureSnapshot();
+                    this.vibiioConnecting = false;
+                    this.showControls = true;
                 });
             this.onVibiio = true;
             this.networkDisconnected = false;
@@ -102,6 +105,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
             this.onVibiio = false;
+            this.showControls = false;
             this.changeDetector.detectChanges();
             this.availabilitySharedService.emitChange(true);
             this.session.disconnect();
@@ -148,6 +152,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.availabilitySharedService.emitChange(true);
         this.onVibiio = false;
         this.vibiioConnecting = false;
+        this.showControls = false;
         this.changeDetector.detectChanges();
     }
 
@@ -161,5 +166,18 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         if (screenfull.enabled) {
             screenfull.toggle();
         }
+    }
+
+    toggleSearch() {
+        this.closeSearch = !this.closeSearch;
+        if (!this.closeSearch) {
+            this.showControls = false;
+        } else {
+            this.showControls = true;
+        }
+    }
+
+    toggleMute() {
+        console.log('toggle mute');
     }
 }

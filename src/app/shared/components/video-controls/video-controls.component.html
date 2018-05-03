@@ -1,13 +1,10 @@
-<p>
-  video-controls works!
-</p>
-
 <div class="container">
   <div class="row">
     
-    <div (click)="soundOff()"
+    <div (click)="toggleMute()"
          class="control-icon">
-      <div class="mute"></div>
+      <div *ngIf="!muted" class="mute"></div>
+      <div *ngIf="muted" class="unmute"></div>
     </div>
 
     <div (click)="hangUp()"

@@ -3,14 +3,23 @@
 .expert-search-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
-    max-width: 80%;
-    max-height: 400px;
+    min-height: 400px;
     background-color: $white;
     padding: 10px;
     position: relative;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.35);
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        height: 17px;
+        width: 17px;
+        background-image: url(~assets/images/close.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
     .title {
         margin: 0 auto;
         .add-to-call {
@@ -25,14 +34,21 @@
 
         }
     }
+
     vib-search-filters,
     vib-expert-search-result {
         width: 100%;
     }
+
+    vib-search-box {
+        margin: 0 auto;
+        padding-left: 0.5rem;
+    }
+
     .search-results {
         width: 90%;
         overflow-y: scroll;
-        margin: 20px 5% 0;
+        margin: 10px 5% 0;
     }
 
     .search-results::-webkit-scrollbar-track {

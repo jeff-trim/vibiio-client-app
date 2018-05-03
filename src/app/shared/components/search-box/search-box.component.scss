@@ -10,12 +10,12 @@
 
 .search-icon {
     position: absolute;
-    top: 6px;
-    right: 5px;
+    top: 1rem;
+    right: 6px;
     width: 5rem;
-    height: 4rem;
-    background-image: url(~assets/images/search.svg);
-    background-size: auto;
+    height: 3rem;
+    background-image: url(~assets/images/blue-search@2x.png);
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     margin: 0;

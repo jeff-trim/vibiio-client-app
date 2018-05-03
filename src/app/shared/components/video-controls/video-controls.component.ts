@@ -6,7 +6,7 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
   styleUrls: ['./video-controls.component.scss']
 })
 export class VideoControlsComponent {
-  @Input() muted: boolean = false; // placeholder
+  @Input() muted = false; // placeholder
 
   @Output() mute = new EventEmitter<boolean>();
   @Output() endCall = new EventEmitter<boolean>();
@@ -16,8 +16,9 @@ export class VideoControlsComponent {
     this.endCall.emit(true);
   }
 
-  soundOff() {
-    this.mute.emit(true);
+  toggleMute() {
+    this.muted = !this.muted;
+    this.mute.emit(this.muted);
   }
 
   addExpert() {

@@ -2,8 +2,17 @@
     <vib-video-chat [vibiio]="vibiio"
                     [vibiioConnecting]="vibiioConnecting"
                     [onVibiio]="onVibiio"
+                    [showControls]="showControls"
                     [vibiioFullscreen]="vibiioFullscreen"
                     [networkDisconnected]="networkDisconnected"
                     (updateVibiioStatus)="updateStatus($event)"
-                    (toggleFullscreen)="toggleVibiioFullscreen()"></vib-video-chat>
+                    (toggleFullscreen)="toggleVibiioFullscreen()"
+                    (add)="toggleSearch()"
+                    (endCall)="endSession()"
+                    (mute)="toggleMute()">
+    </vib-video-chat>
+
+    <div *ngIf="!closeSearch">
+        <vib-expert-search (closeSearch)="toggleSearch()"></vib-expert-search>
+    </div>
 </div>

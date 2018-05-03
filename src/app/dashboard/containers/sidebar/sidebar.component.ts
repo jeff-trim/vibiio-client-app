@@ -6,7 +6,9 @@ import { Component,
          ComponentRef,
          ComponentFactoryResolver,
          ViewChild,
-         ViewContainerRef } from '@angular/core';
+         ViewContainerRef, 
+         trigger,
+         transition} from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';
@@ -27,6 +29,7 @@ import { Observable } from 'rxjs/Rx';
 import { Vibiio } from '../../models/vibiio.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { VibiiosService } from '../../../shared/services/vibiios.service';
+import { state, style, animate } from '@angular/core';
 
 const vibiiographerCallComponent = VibiiographerCallComponent;
 type VibiiographerCall = VibiiographerCallComponent;
@@ -49,6 +52,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   userTimeZone: string;
   vibiio: Vibiio;
   alive = true;
+  videoState: string;
 
   @Input()
   available: boolean;

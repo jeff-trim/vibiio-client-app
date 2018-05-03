@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { filter } from 'rxjs/operator/filter';
 import { UsersService } from '../../services/users.service';
 import { SearchBoxComponent } from '../../components/search-box/search-box.component';
@@ -14,6 +14,8 @@ export class ExpertSearchComponent implements OnInit {
   filter: string;
   query: string;
   results: User[];
+
+  @Output() closeSearch = new EventEmitter<boolean>();
 
   filters = [
     'Vibiiographer',
@@ -41,6 +43,7 @@ export class ExpertSearchComponent implements OnInit {
 
   addExpert(expert: any) {
     console.log('expert:', expert);
+    this.close();
   }
 
   search(query?: string) {
@@ -49,6 +52,10 @@ export class ExpertSearchComponent implements OnInit {
       this.userService.index(filter, query).subscribe( data => {
         this.results = data;
       });
+  }
+
+  close() {
+    this.closeSearch.emit(true);
   }
 
 }

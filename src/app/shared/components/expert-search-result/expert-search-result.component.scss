@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin: 20px auto;
+    margin: 30px auto;
     cursor: pointer;
 
     .name {
@@ -15,6 +15,7 @@
         line-height: 17px;
     }
     .add-container {
+        display: flex;
         .text {
             color: $pink;
             font-family: 'Roboto';
@@ -25,8 +26,13 @@
             text-align: right;
             text-transform: uppercase;
         }
-        .icon {
-
+        .add-icon {
+            height: 17px;
+            width: 17px;
+            margin-left: 5px;
+            background-image: url(~assets/images/pink-add.png);
+            background-position: top;
+            background-repeat: no-repeat
         }
     }
 }

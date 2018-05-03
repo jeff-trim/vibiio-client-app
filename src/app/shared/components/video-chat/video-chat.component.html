@@ -5,9 +5,17 @@
 <div>
   <div  [class.on-fullscreen]="vibiioFullscreen"
         [class.subscriber-holder]="(onVibiio && !vibiioFullscreen)">
-    <div id="subscriber-stream" [class.subscriber-stream]="(onVibiio && !vibiioFullscreen)"
-                                [class.on-fullscreen]="vibiioFullscreen"></div>
-  </div>
+    
+        <div id="subscriber-stream" [class.subscriber-stream]="(onVibiio && !vibiioFullscreen)"
+                                    [class.on-fullscreen]="vibiioFullscreen">
+        
+          <vib-video-controls *ngIf="showControls"
+                              (add)="addExpert()"
+                              (endCall)="hangUp()"
+                              (mute)="toggleMute($event)"><vib-video-controls>
+        <!-- </div> -->
+  <!-- </div> -->
+                                      
   <div *ngIf="(onVibiio && !vibiioConnecting)"
        class="fullscreen-button-container"
        (click)="toggleVibiioFullscreen()">
@@ -22,8 +30,8 @@
       </div>
     </div>
   </div>
-</div>
-<vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
+<!-- </div> -->
+<!-- <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status> -->
 
 <div *ngIf="(!onVibiio && networkDisconnected)" class="vibiio-message">
   <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection or because the other party lost their connection.</p>

@@ -29,6 +29,7 @@ import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { SpinnerModule } from './easy-spinner/spinner.module';
 import { SignUpModule } from './sign-up/sign-up.module';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SharedModule } from './shared/shared.module';
       // Angular Modules
       BrowserModule,
       CommonModule,
+      BrowserAnimationsModule,
 
     // Custom Modules
       DashboardModule,
