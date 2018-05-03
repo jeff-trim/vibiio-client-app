@@ -4,12 +4,12 @@ import { User } from '../../models/user.interface';
 import { UsersService } from '../../../shared/services/users.service';
 
 @Component({
-  selector: 'vib-vibiiographer-list',
-  templateUrl: './vibiiographer-list.component.html',
-  styleUrls: ['./vibiiographer-list.component.scss']
+  selector: 'vib-expert-list',
+  templateUrl: './expert-list.component.html',
+  styleUrls: ['./expert-list.component.scss']
 })
-export class VibiiographerListComponent implements OnInit {
-  vibiiographers: User[];
+export class ExpertListComponent implements OnInit {
+  experts: User[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -17,7 +17,9 @@ export class VibiiographerListComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
-      this.vibiiographers = data.vibiiographers;
+      console.log(data);
+      
+      this.experts = data.experts;
     });
   }
 
@@ -27,8 +29,11 @@ export class VibiiographerListComponent implements OnInit {
   // }
 
   search(query?: string) {
-    this.userService.index('Vibiiographer', query).subscribe( data => {
-      this.vibiiographers = data;
+
+    this.userService.index('Expert', query).subscribe( data => {
+      console.log(data);
+      
+      this.experts = data;
     });
   }
 }

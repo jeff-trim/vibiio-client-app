@@ -147,6 +147,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   toggleExperts() {
     this.expertsActive = !this.expertsActive;
     if (this.expertsActive) {
+      this.profileActive = false;
+      this.scheduledVibiiosActive = false;
+      this.customerCategoriesActive = false;
       this.vibiiographersActive = false;
     }
   }
@@ -154,6 +157,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   toggleVibiiographers() {
     this.vibiiographersActive = !this.vibiiographersActive;
     if (this.vibiiographersActive) {
+      this.profileActive = false;
+      this.scheduledVibiiosActive = false;
+      this.customerCategoriesActive = false;
       this.expertsActive = false;
     }
   }
