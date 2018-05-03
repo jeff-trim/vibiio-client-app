@@ -1,4 +1,12 @@
-import { Component, Output, Input, EventEmitter, OnInit, ComponentRef, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component,
+         Output,
+         Input,
+         EventEmitter,
+         OnInit,
+         ComponentRef,
+         ComponentFactoryResolver,
+         ViewChild,
+         ViewContainerRef } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
 import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';

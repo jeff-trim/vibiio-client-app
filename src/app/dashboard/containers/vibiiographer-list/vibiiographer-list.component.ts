@@ -21,14 +21,14 @@ export class VibiiographerListComponent implements OnInit {
     });
   }
 
-  // save for later
-  // viewDetails(id: number) {
-  //   this.router.navigateByUrl('/users/' + id);
-  // }
-
   search(query?: string) {
     this.userService.index('Vibiiographer', query).subscribe( data => {
       this.vibiiographers = data;
     });
   }
+
+  // save for later
+  // viewDetails(id: number) {
+  //   this.router.navigateByUrl('/users/' + id);
+  // }
 }

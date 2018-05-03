@@ -13,11 +13,11 @@
       <div *ngFor="let result of results">
         <vib-expert-search-result [result]="result"
                                   (selected)="addExpert($event)"></vib-expert-search-result>
-          <ng-template #noResults>
-              <p class="col-md-3
-              welcomeText"> No results, try again.</p>
-            </ng-template>
       </div>
     </div>
+    
+    <ng-template #noResults>
+      <p> No results, try again.</p>
+    </ng-template>
   </div>
 </div>

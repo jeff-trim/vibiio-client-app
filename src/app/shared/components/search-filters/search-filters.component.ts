@@ -13,11 +13,12 @@ export class SearchFiltersComponent implements OnInit {
   @Output() filter = new EventEmitter<string>();
 
   ngOnInit() {
-    this.term = this.filters[0];
+    this.term = null;
   }
 
-  filterResults(filter: string) {
+  filterResults(filter?: string) {
     this.term = filter;
+    console.log(this.term);
     this.filter.emit(filter);
   }
 }

@@ -47,7 +47,6 @@ import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-
 import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
 import { ConsumerProfileSummaryComponent } from './components/consumer-profile-summary/consumer-profile-summary.component';
 import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
-import { SearchBoxComponent } from './components/vibiio-search/vibiio-search.component';
 import { VibiioDescriptionComponent } from './components/vibiio-description/vibiio-description.component';
 import { CustomerNoteComponent } from './components/customer-note/customer-note.component';
 

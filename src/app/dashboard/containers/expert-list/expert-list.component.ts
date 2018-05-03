@@ -17,8 +17,6 @@ export class ExpertListComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
-      console.log(data);
-      
       this.experts = data.experts;
     });
   }
@@ -31,8 +29,6 @@ export class ExpertListComponent implements OnInit {
   search(query?: string) {
 
     this.userService.index('Expert', query).subscribe( data => {
-      console.log(data);
-      
       this.experts = data;
     });
   }
