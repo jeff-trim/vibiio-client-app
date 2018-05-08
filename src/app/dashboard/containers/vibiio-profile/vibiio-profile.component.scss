@@ -122,6 +122,10 @@ h2, .vibiio-profile-information h2 {
     flex-direction: column;
 }
 
+.title-row {
+    align-items: center;
+}
+
 .start-vibiio {
     align-self: center;
 	height: 18px;
@@ -131,6 +135,9 @@ h2, .vibiio-profile-information h2 {
 	text-align: right;
     text-transform: uppercase;
 	color: $pink;
-    margin-top: 33px;
+    cursor: pointer;
+}
+
+.link {
     cursor: pointer;
 }
