@@ -30,6 +30,7 @@ import { SpinnerModule } from './easy-spinner/spinner.module';
 import { SignUpModule } from './sign-up/sign-up.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnswerCallModule } from './answer-call/answer-call.module';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       SpinnerModule,
       SignUpModule,
       SharedModule,
+      AnswerCallModule,
       AppRoutingModule
   ],
   providers: [

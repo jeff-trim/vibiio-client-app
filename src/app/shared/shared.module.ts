@@ -29,6 +29,7 @@ import { ExpertSearchResultComponent } from './components/expert-search-result/e
 import { UsersService } from './services/users.service';
 import { VibiiographersResolverService } from './services/vibiiographers-resolver.service';
 import { ExpertsResolverService } from './services/experts-resolver.service';
+import { AddToCallService } from './services/add-to-call.service';
 
 @NgModule({
   imports: [
@@ -63,7 +64,8 @@ import { ExpertsResolverService } from './services/experts-resolver.service';
     VibiiosService,
     UsersService,
     VibiiographersResolverService,
-    ExpertsResolverService
+    ExpertsResolverService,
+    AddToCallService
   ],
   exports: [
     VideoChatComponent,
