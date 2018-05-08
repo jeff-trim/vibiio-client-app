@@ -35,6 +35,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     alive = true;
     showControls = false;
     closeSearch = true;
+    muted = false;
 
     @Input() vibiio: Vibiio;
 
@@ -178,6 +179,12 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     toggleMute() {
+        this.muted = !this.muted;
+        if (this.muted) {
+            this.publisher.setAudioVolume(0);
+        } else {
+            this.publisher.setAudioVolume(100);
+        }
         console.log('toggle mute');
     }
 }
