@@ -7,9 +7,9 @@
     <div id="video-stream" class="video-stream on-fullscreen">
       <vib-video-controls *ngIf="onVibiio" (endCall)="hangUp()"
                           (mute)="toggleMute($event)"></vib-video-controls>
-        <div *ngIf="!onVibiio">
-          {{ consumerName }}
-          {{ vibiiographerName }}
+        <div class="name-container" *ngIf="onVibiio">
+            <vib-call-name-display [name]="consumerName"></vib-call-name-display>
+            <vib-call-name-display [name]="vibiiographerName"></vib-call-name-display>
         </div>
         
       </div>
@@ -18,7 +18,7 @@
     <p vclass="first-vibiio-text pink">
       The call is over
       <br><br>
-        Thank You for Participating
+        Thank you for participating
     </p>
   </div>
 </div>

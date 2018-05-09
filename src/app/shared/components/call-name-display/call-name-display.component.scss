@@ -1,0 +1,13 @@
+@import '~assets/css/variables';
+
+.call-name-display-container {
+    display: flex;
+    justify-content: flex-start;
+    .name {
+        font-size: 10px;
+        font-family: $base-font;
+        line-height: 12px;
+        color: $grey;
+        font-weight: 500;
+    }
+}

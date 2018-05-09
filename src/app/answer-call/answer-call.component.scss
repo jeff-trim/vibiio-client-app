@@ -38,6 +38,15 @@
         margin: auto;
         height: 100%;
         width: 100%;
+        .name-container {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
         vib-video-controls {
             position: absolute;
             bottom: 0;

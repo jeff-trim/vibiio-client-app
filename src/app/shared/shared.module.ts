@@ -80,7 +80,8 @@ import { CallNameDisplayComponent } from './components/call-name-display/call-na
     SearchBoxComponent,
     ExpertSearchComponent,
     SearchFiltersComponent,
-    ExpertSearchResultComponent
+    ExpertSearchResultComponent,
+    CallNameDisplayComponent
   ]
 })
 export class SharedModule { }
