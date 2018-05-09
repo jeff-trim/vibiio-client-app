@@ -30,6 +30,7 @@ import { UsersService } from './services/users.service';
 import { VibiiographersResolverService } from './services/vibiiographers-resolver.service';
 import { ExpertsResolverService } from './services/experts-resolver.service';
 import { AddToCallService } from './services/add-to-call.service';
+import { CallNameDisplayComponent } from './components/call-name-display/call-name-display.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { AddToCallService } from './services/add-to-call.service';
     ExpertSearchComponent,
     SearchFiltersComponent,
     SearchBoxComponent,
-    ExpertSearchResultComponent
+    ExpertSearchResultComponent,
+    CallNameDisplayComponent
   ],
   providers: [
     WindowRefService,

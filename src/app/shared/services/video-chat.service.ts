@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { VIDEO_OPTIONS } from '../../constants/video-options';
+import { EXPERT_VIDEO_OPTIONS } from '../../constants/expert-video-options';
 
 declare var OT: any;
 
@@ -36,6 +37,10 @@ export class VideoChatService {
 
   initPublisher() {
     return OT.initPublisher({insertDefaultUI: false}, VIDEO_OPTIONS);
+  }
+
+  initExpertPublisher() {
+    return OT.initPublisher({insertDefaultUI: false}, EXPERT_VIDEO_OPTIONS);
   }
 
   callConsumer(vibiio_id: number): Observable<any> {

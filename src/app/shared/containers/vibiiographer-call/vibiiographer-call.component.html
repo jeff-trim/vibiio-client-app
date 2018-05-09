@@ -12,7 +12,8 @@
                     (mute)="toggleMute()">
     </vib-video-chat>
 
-    <div *ngIf="!closeSearch">
-        <vib-expert-search (closeSearch)="toggleSearch()"></vib-expert-search>
+    <div *ngIf="closeSearch">
+        <vib-expert-search (closeSearch)="toggleSearch()"
+                            (addExpert)="addExpert($event)"></vib-expert-search>
     </div>
 </div>

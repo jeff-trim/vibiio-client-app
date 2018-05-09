@@ -30,6 +30,7 @@ export class ExpertSearchComponent implements OnInit {
     this.filter = null;
     this.userService.index().subscribe( data => {
       this.results = data;
+      console.log(this.results);
     });
   }
 

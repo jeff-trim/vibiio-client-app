@@ -7,10 +7,12 @@ import { AnswerCallComponent } from './answer-call.component';
 // Services & Resolvers
 import { AnswerCallService } from './services/answer-call.service';
 import { AnswerCallResolverService } from './services/answer-call-resolver.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   declarations: [
     AnswerCallComponent

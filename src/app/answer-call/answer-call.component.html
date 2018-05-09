@@ -1,3 +1,25 @@
-<p>
-  answer-call works!
-</p>
+<div class="answer-call-container">
+
+  <div class="connect-container" *ngIf="!onVibiio">
+    <div class="waiting-house"></div>
+    <div *ngIf="!onVibiio" class="waiting-text">Connecting...</div>
+  </div>
+    <div id="video-stream" class="video-stream on-fullscreen">
+      <vib-video-controls *ngIf="onVibiio" (endCall)="hangUp()"
+                          (mute)="toggleMute($event)"></vib-video-controls>
+        <div *ngIf="!onVibiio">
+          {{ consumerName }}
+          {{ vibiiographerName }}
+        </div>
+        
+      </div>
+
+  <div *ngIf="(!onVibiio && callEnded)" class="vibiio-message">
+    <p vclass="first-vibiio-text pink">
+      The call is over
+      <br><br>
+        Thank You for Participating
+    </p>
+  </div>
+</div>
+
