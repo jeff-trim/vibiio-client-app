@@ -33,6 +33,8 @@ export class AppointmentDetailsComponent {
     @Input() vibiioFullscreen;
     @Input() isEditingForms = false;
     @Input() isUpdatingForms = false;
+    @Input() showVideoControls;
+
 
     @Output() startVibiio = new EventEmitter<boolean>();
     @Output() endVibiio = new EventEmitter<boolean>();

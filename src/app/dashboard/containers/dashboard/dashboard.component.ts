@@ -17,7 +17,6 @@ import { AuthService } from '../../../services/auth.service';
 
 // environment
 import { ACTION_CABLE_URL } from '../../../../environments/environment';
-import { VideoChatTokenService } from '../../../shared/services/video-chat-token.service';
 import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
 
 declare var OT: any;
@@ -31,7 +30,6 @@ declare var OT: any;
 export class DashboardComponent implements OnInit {
     session: any;
     vibiio: Vibiio;
-    token: VideoChatToken;
     subscription: any;
     notificationShow = false;
     vibiiographerProfile: any;
@@ -46,7 +44,6 @@ export class DashboardComponent implements OnInit {
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private tokenService: VideoChatTokenService,
         private authService: AuthService,
         private availabilitySharedService: AvailabilitySharedService
     ) {

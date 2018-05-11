@@ -13,12 +13,14 @@
                 width: 40px;
                 background-image: url(~assets/images/mute.png);
                 background-size: contain;
+                background-repeat: no-repeat;
             }
             .unmute {
                 height: 40px;
                 width: 40px;
                 background-image: url(~assets/images/unmute.png);
                 background-size: contain;
+                background-repeat: no-repeat;
             }
             .end-call {
                 height: 50px;
@@ -26,12 +28,14 @@
                 background-image: url(~assets/images/end-call.png);
                 background-size: contain;
                 margin: 0 20px;
+                background-repeat: no-repeat;
             }
             .add {
                 height: 40px;
                 width: 40px;
                 background-image: url(~assets/images/add-to-call.png);
                 background-size: contain;
+                background-repeat: no-repeat;
             }
         }
     }

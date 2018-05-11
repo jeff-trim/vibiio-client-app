@@ -5,7 +5,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // Services
 import { WindowRefService } from './services/window-ref.service';
 import { VideoChatService } from './services/video-chat.service';
-import { VideoChatTokenService } from './services/video-chat-token.service';
 import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-status-shared.service';
 import { VibiioUpdateService } from './services/vibiio-update.service';
 import { VideoSnapshotService } from './services/video-snapshot.service';
@@ -57,7 +56,6 @@ import { CallNameDisplayComponent } from './components/call-name-display/call-na
   providers: [
     WindowRefService,
     VideoChatService,
-    VideoChatTokenService,
     SidebarCustomerStatusSharedService,
     VibiioUpdateService,
     VideoSnapshotService,

@@ -21,7 +21,7 @@ export class VideoChatService {
 
     const payload = {
       video_chat_auth_token: {
-        vibiio_id: 6
+        vibiio_id: vibiio_id
       }
     };
 
@@ -54,6 +54,7 @@ export class VideoChatService {
 
    return this.http
                 .post(url, payload)
-                .map( (response: Response) => console.log(response));
+                .map( (response: Response) => response.json())
+                .catch( (error: any) => Observable.throw(error));
   }
 }

@@ -1,36 +1,44 @@
-<div *ngIf="vibiioConnecting">
-  <div class="waiting-house"></div>
-  <div class="waiting-text">Connecting...</div>
-</div>
-<div>
-  <div  [class.on-fullscreen]="vibiioFullscreen"
-        [class.subscriber-holder]="(onVibiio && !vibiioFullscreen)">
+<div class="call-container">
 
-    <div id="subscriber-stream" [class.subscriber-stream]="(onVibiio && !vibiioFullscreen)"
-                                [class.on-fullscreen]="vibiioFullscreen">
-      <vib-video-controls *ngIf="showControls"
-                          (add)="addExpert()"
-                          (endCall)="hangUp()"
-                          (mute)="toggleMute($event)"></vib-video-controls>
-    </div>
+  <div class="house-container" *ngIf="vibiioConnecting">
+    <div class="waiting-house"></div>
+    <div class="waiting-text">Connecting...</div>
   </div>
-    
+
+    <div  [class.on-fullscreen]="vibiioFullscreen"
+          [class.subscriber-holder]="(onVibiio && !vibiioFullscreen)">
+
+      <div id="subscriber-stream" [class.subscriber-stream]="(onVibiio && !vibiioFullscreen)"
+                                  [class.on-fullscreen]="vibiioFullscreen">
+        
+        <div *ngIf="((consumerName || expertName) && onVibiio)" class="name-container">
+          <vib-call-name-display [name]="consumerName"></vib-call-name-display>
+          <vib-call-name-display [name]="expertName"></vib-call-name-display>
+        </div>
+        
+        <vib-video-controls *ngIf="showControls"
+                            [class.fullscreen-controls]="vibiioFullscreen"
+                            (add)="addExpert()"
+                            (endCall)="hangUp()"
+                            (mute)="toggleMute($event)"></vib-video-controls>
+      </div>
+    </div>
   </div>
                                       
-  <div *ngIf="(onVibiio && !vibiioConnecting)"
-       class="fullscreen-button-container"
-       (click)="toggleVibiioFullscreen()">
-    <div [class.fs-button-position]="vibiioFullscreen">
-      <div class="fullscreen-button" *ngIf="(!vibiioFullscreen)">
-        <img class="fullscreen-icon" src="../../../../assets/images/fullscreen-enter-pink.svg">
-        <span class="fullscreen-text">FULLSCREEN</span>
-      </div>
-      
-      <div class="fullscreen-button" *ngIf="(vibiioFullscreen)">
-        <img class="fullscreen-icon" src="../../../../assets/images/fullscreen-exit-white.svg">
-      </div>
+<div *ngIf="(onVibiio && !vibiioConnecting && !enableFullscreen)"
+      class="fullscreen-button-container"
+      (click)="toggleVibiioFullscreen()">
+  <div [class.fs-button-position]="vibiioFullscreen">
+    <div class="fullscreen-button" *ngIf="(!vibiioFullscreen)">
+      <img class="fullscreen-icon" src="../../../../assets/images/fullscreen-enter-pink.svg">
+      <span class="fullscreen-text">FULLSCREEN</span>
+    </div>
+    
+    <div class="fullscreen-button" *ngIf="(vibiioFullscreen)">
+      <img class="fullscreen-icon" src="../../../../assets/images/fullscreen-exit-white.svg">
     </div>
   </div>
+</div>
 
 <div *ngIf="(!onVibiio && networkDisconnected)" class="vibiio-message">
   <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection or because the other party lost their connection.</p>

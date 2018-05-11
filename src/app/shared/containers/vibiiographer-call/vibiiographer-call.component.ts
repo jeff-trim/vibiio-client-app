@@ -7,6 +7,7 @@ import { AngularDraggableDirective } from 'angular2-draggable';
 
 // Models
 import { Vibiio } from '../../../dashboard/models/vibiio.interface';
+import { User } from '../../../dashboard/models/user.interface';
 
 // Services
 import { AvailabilitySharedService } from '../../services/availability-shared.service';
@@ -17,6 +18,7 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { EXPERT_VIDEO_OPTIONS } from '../../../constants/expert-video-options';
 import { AddToCallService } from '../../services/add-to-call.service';
+import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
 
 @Component({
     selector: 'vib-vibiiographer-call',
@@ -37,9 +39,12 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     session: any;
     streams: any[];
     alive = true;
-    showControls = false;
+    showControls = true;
     closeSearch = true;
     muted = false;
+    enableFullscreen = false;
+    consumerName: string;
+    expertName: string;
 
     @Input() vibiio: Vibiio;
 
@@ -52,29 +57,32 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         private activityService: ActivityService,
         private availabilitySharedService: AvailabilitySharedService,
         private changeDetector: ChangeDetectorRef,
-        private addToCall: AddToCallService) { }
+        private addToCall: AddToCallService,
+        private vibiioProfileService: VibiioProfileService) { }
 
     ngOnInit() {
         this.vibiioConnecting = true;
-        // this.getToken();
-        // this.session = this.videoService.initSession('1_MX40NTk5OTUyMn5-MTUyNTM3ODIyMzA5MX5pSHFiMlhRQWhCUjBmKzNHc2svdlVDaEF-QX4');
+        this.getToken();
+        this.session = this.videoService.initSession(this.vibiio.video_session_id);
+        this.consumerName = this.vibiio.user_info.first_name;
     }
 
     ngOnDestroy() {
         this.alive = false;
     }
 
-    addExpert(event: any) {
-        // this.
-        // assign expert name
-        // send text to expert
-        // display name in video chat
-        // connect
+    addExpert(expert: User) {
+        this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
+            this.consumerName = data.consumer;
+            this.expertName = data.expert;
+        });
     }
 
     getToken() {
         this.videoService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
+            this.videoService.callConsumer(this.vibiio.id).subscribe( (res) => {
+                });
             this.connectToSession();
         });
     }
@@ -89,7 +97,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             this.hideVibiiographerVideo();
             this.subscribeToStreamCreatedEvents();
             this.subscribeToStreamDestroyedEvents();
-            this.detectSubscriberAudio();
         });
     }
 
@@ -102,87 +109,36 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     subscribeToStreamCreatedEvents() {
+        this.showControls = true;
         this.changeDetector.detectChanges();
         this.session.on('streamCreated', (data) => {
-            // if it's the first stream create a chat, else subscribe to audio
-            this.streams.push(data.stream);
-            console.log('streams', this.streams.length);
-            if (!this.subscriber) {
-                this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
+            this.vibiioConnecting = false;
+            this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
-                        // wait till subscriber is set
-                        this.captureSnapshot();
-                        this.vibiioConnecting = false;
-                        this.showControls = true;
-                    });
+                    this.captureSnapshot();
+                });
             this.onVibiio = true;
             this.networkDisconnected = false;
             this.changeDetector.detectChanges();
-            }
         });
     }
 
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
-            // if it's the first stteam
-            const idx = this.streams.indexOf(data.stream);
-            if (idx > -1) {
-                this.streams.splice(idx, 1);
-                this.changeDetector.detectChanges();
-            }
+            this.session.disconnect();
+            this.vibiioProfileService.hangUp(this.vibiio);
+            this.availabilitySharedService.emitChange(true);
 
-            if (this.streams.length === 1) {
-                this.onVibiio = false;
-                this.showControls = false;
-                this.changeDetector.detectChanges();
-                this.availabilitySharedService.emitChange(true);
-                this.session.disconnect();
-            }
-            // else continue session
-            // if (data.reason === 'networkDisconnected') {
-            //     data.preventDefault();
-            //     const subscribers = this.session.getSubscribersForStream(data.stream);
-            //     if (subscribers.length > 0) {
-            //         // Display error message inside the Subscriber
-            //         this.networkDisconnected = true;
-            //         this.changeDetector.detectChanges();
-            //         data.preventDefault();   // Prevent the Subscriber from being removed
-            //     }
-            // }
-        });
-    }
-
-    detectSubscriberAudio() {
-        this.subscriber.on('audioLevelUpdated', (data) => {
-            const now = Date.now();
-            let activity;
-            if (data.audioLevel > 0.2) {
-                if (!activity) {
-                    activity = {timestamp: now, talking: false};
-                } else if (activity.talking) {
-                    activity.timestamp = now;
-                } else if (now - activity.timestamp > 1000) {
-                    // detected audio activity for more than 1s
-                    // for the first time.
-                    activity.talking = true;
-                    this.startTalking();
+            if (data.reason === 'networkDisconnected') {
+                data.preventDefault();
+                const subscribers = this.session.getSubscribersForStream(data.stream);
+                if (subscribers.length > 0) {
+                    // Display error message inside the Subscriber
+                    this.networkDisconnected = true;
+                    data.preventDefault();   // Prevent the Subscriber from being removed
                 }
-            } else if (activity && now - activity.timestamp > 3000) {
-                // detected low audio activity for more than 3s
-                if (activity.talking) {
-                    this.stopTalking();
-                }
-                activity = null;
             }
         });
-    }
-
-    startTalking() {
-        console.log('talking');
-    }
-
-    stopTalking() {
-        console.log('silence');
     }
 
     // save snapshot
@@ -206,16 +162,14 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     endSession() {
         this.session.disconnect();
+        this.vibiioProfileService.hangUp(this.vibiio);
+        this.availabilitySharedService.emitChange(true);
+
         this.triggerActivity(
             this.vibiio.id,
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
-        this.availabilitySharedService.emitChange(true);
-        this.onVibiio = false;
-        this.vibiioConnecting = false;
-        this.showControls = false;
-        this.changeDetector.detectChanges();
     }
 
     updateStatus(status: any) {
@@ -242,10 +196,9 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     toggleMute() {
         this.muted = !this.muted;
         if (this.muted) {
-            this.publisher.setAudioVolume(0);
+            this.publisher.publishAudio(false);
         } else {
-            this.publisher.setAudioVolume(100);
+            this.publisher.publishAudio(true);
         }
-        console.log('toggle mute');
     }
 }

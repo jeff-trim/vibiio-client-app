@@ -1,5 +1,12 @@
 @import '~assets/css/_variables.scss';
-
+.call-container{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
 .subscriber-holder {
     width: 312px;
     height: 461.1px;
@@ -17,14 +24,27 @@
     margin: auto;
     height: 100%;
     width: 100%;
-    // height: 461.1px;
-    // width: 312px;
+    .name-container {
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
     vib-video-controls {
         position: absolute;
-        bottom: 0;
+        bottom: 15px;
         left: 0;
         z-index: 9;
         width: 100%;
+    }
+    vib-video-controls.fullscreen-controls {
+        position: absolute;
+        z-index: 1;
+        bottom: 30px;
+        left: 45%;
     }
 }
 .fullscreen-button-container {
@@ -61,6 +81,7 @@
 .waiting-text {
     max-height: 20px;
     align-self: flex-start;
+    text-align: center;
     color: $pink;
     font-family: $base-font;
     font-size: 1.8em;
@@ -69,9 +90,8 @@
 }
 .waiting-house {
     height: 175px;
-    width: 100%;
-    // width: 300px;
-    margin: auto;
+    width: 200px;
+    margin: 35px auto;
     background-image: url(~assets/images/opening_slide.jpg);
     background-size: contain;
     background-repeat: no-repeat;

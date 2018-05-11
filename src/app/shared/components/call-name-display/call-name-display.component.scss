@@ -3,9 +3,14 @@
 .call-name-display-container {
     display: flex;
     justify-content: flex-start;
+    position: relative;
     .name {
-        font-size: 10px;
-        font-family: $base-font;
+        position: absolute;
+        top: 15px;
+        left: 0;
+        z-index: 1;
+        font-size: 18px;
+        font-family: $copy-font;
         line-height: 12px;
         color: $grey;
         font-weight: 500;

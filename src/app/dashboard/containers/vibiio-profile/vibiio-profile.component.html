@@ -3,20 +3,21 @@
             col-md-offset-1">
   <div class="row
               title-row">
-    <h1 class="col-xs
+    <h1 class="col-xs-5
               pink
               bold">{{ consumerProfile.user_info.first_name }} {{ consumerProfile.user_info.last_name }}
     </h1>
       <div class="col-xs
-                  col-xs-offset-1
+                  col-xs-offset-4
                   col-md-2
                   start-vibiio
                   link"
-                  (click)="startCall()">Call {{ consumerProfile.user_info.first_name }}</div>
-      <div class="col-xs link">
-        <img  *ngIf="(!onVibiio)"
-              src="../../../../assets/images/call-controls.svg"
-              (click)="startCall()">
+           [class.disabled]="onVibiio"
+           (click)="startCall()">Call {{ consumerProfile.user_info.first_name }}</div>
+      <div class="col-xs link"
+           [class.disabled]="onVibiio">
+        <img src="../../../../assets/images/call-controls.svg"
+             (click)="startCall()">
       </div>
     
   </div>

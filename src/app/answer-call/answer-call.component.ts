@@ -38,7 +38,6 @@ export class AnswerCallComponent implements OnInit {
       this.vibiiographerName = this.callData.vibiiographer;
 
     });
-    console.log(this.callData);
     this.connectCall();
   }
 
@@ -62,10 +61,10 @@ export class AnswerCallComponent implements OnInit {
         if (!this.subscriber) {
             this.subscriber = this.session.subscribe(data.stream, 'video-stream', VIDEO_OPTIONS,
             (stats) => {
-              this.detectSubscriberAudio();
-                });
-        this.changeDetector.detectChanges();
-        }
+              // this.detectSubscriberAudio();
+            });
+          }
+          this.changeDetector.detectChanges();
     });
   }
 
@@ -73,19 +72,10 @@ export class AnswerCallComponent implements OnInit {
     this.session.on('streamDestroyed', (data) => {
       this.onVibiio = false;
       this.callEnded = true;
-        // if it's the first stteam
-        const idx = this.streams.indexOf(data.stream);
-        if (idx > -1) {
-            this.streams.splice(idx, 1);
-            this.changeDetector.detectChanges();
-        }
-
-        if (this.streams.length === 1) {
-            this.changeDetector.detectChanges();
-            this.session.disconnect();
-        }
-      });
-    }
+      this.changeDetector.detectChanges();
+      this.session.disconnect();
+    });
+  }
 
   private initPublisher() {
     this.publisher = this.videoChatService.initPublisher();
@@ -95,50 +85,20 @@ export class AnswerCallComponent implements OnInit {
     this.session.publish(this.publisher).publishVideo(false);
   }
 
-  detectSubscriberAudio() {
-    this.subscriber.on('audioLevelUpdated', (data) => {
-        const now = Date.now();
-        let activity;
-        if (data.audioLevel > 0.2) {
-            if (!activity) {
-                activity = {timestamp: now, talking: false};
-            } else if (activity.talking) {
-                activity.timestamp = now;
-            } else if (now - activity.timestamp > 1000) {
-                // detected audio activity for more than 1s
-                // for the first time.
-                activity.talking = true;
-                this.startTalking();
-            }
-        } else if (activity && now - activity.timestamp > 3000) {
-            // detected low audio activity for more than 3s
-            if (activity.talking) {
-                this.stopTalking();
-            }
-            activity = null;
-        }
-    });
-  }
-
-  startTalking() {
-    console.log('talking');
-  }
-
-  stopTalking() {
-    console.log('silence');
-  }
-
   hangUp() {
     this.session.disconnect();
+    this.callEnded = true;
   }
 
   toggleMute() {
     this.muted = !this.muted;
+    console.log('muted', this.muted);
     if (this.muted) {
         this.publisher.publishAudio(false);
     } else {
         this.publisher.publishAudio(true);
     }
+    this.changeDetector.detectChanges();
   }
 
 

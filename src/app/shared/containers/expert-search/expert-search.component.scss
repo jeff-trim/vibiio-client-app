@@ -2,12 +2,13 @@
 
 .expert-search-container {
     display: flex;
+    width: 312px;
+    height: 461.1px;
+    left: -6px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    min-height: 400px;
     background-color: $white;
-    padding: 10px;
     position: relative;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.35);
     .close {

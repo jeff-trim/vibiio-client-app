@@ -16,6 +16,7 @@ export class ExpertSearchComponent implements OnInit {
   results: User[];
 
   @Output() closeSearch = new EventEmitter<boolean>();
+  @Output() selectedResult = new EventEmitter<User>();
 
   filters = [
     'Vibiiographer',
@@ -30,7 +31,6 @@ export class ExpertSearchComponent implements OnInit {
     this.filter = null;
     this.userService.index().subscribe( data => {
       this.results = data;
-      console.log(this.results);
     });
   }
 
@@ -42,8 +42,8 @@ export class ExpertSearchComponent implements OnInit {
     });
   }
 
-  addExpert(expert: any) {
-    console.log('expert:', expert);
+  addExpert(expert: User) {
+    this.selectedResult.emit(expert);
     this.close();
   }
 

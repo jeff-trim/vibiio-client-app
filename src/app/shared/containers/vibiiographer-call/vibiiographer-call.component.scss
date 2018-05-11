@@ -1,4 +1,9 @@
-@import '../../../../assets/css/_variables.scss';
+@import '~assets/css/_variables.scss';
+
+vib-video-chat {
+    height: 100%;
+    width: 100%;
+}
 
 .vibiiographer-call-container {
     position: relative;

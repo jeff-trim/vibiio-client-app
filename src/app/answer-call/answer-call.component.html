@@ -1,12 +1,14 @@
 <div class="answer-call-container">
 
-  <div class="connect-container" *ngIf="!onVibiio">
+  <div class="connect-container" *ngIf="(!onVibiio && !callEnded)">
     <div class="waiting-house"></div>
     <div *ngIf="!onVibiio" class="waiting-text">Connecting...</div>
   </div>
     <div id="video-stream" class="video-stream on-fullscreen">
-      <vib-video-controls *ngIf="onVibiio" (endCall)="hangUp()"
-                          (mute)="toggleMute($event)"></vib-video-controls>
+      <vib-video-controls *ngIf="onVibiio"
+                          (endCall)="hangUp()"
+                          (mute)="toggleMute($event)"
+                          [muted]="muted"></vib-video-controls>
         <div class="name-container" *ngIf="onVibiio">
             <vib-call-name-display [name]="consumerName"></vib-call-name-display>
             <vib-call-name-display [name]="vibiiographerName"></vib-call-name-display>

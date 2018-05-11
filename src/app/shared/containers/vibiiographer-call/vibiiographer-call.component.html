@@ -9,11 +9,14 @@
                     (toggleFullscreen)="toggleVibiioFullscreen()"
                     (add)="toggleSearch()"
                     (endCall)="endSession()"
-                    (mute)="toggleMute()">
+                    (mute)="toggleMute()"
+                    [consumerName]="consumerName"
+                    [expertName]="expertName"
+                    [enableFullscreen]="enableFullscreen">
     </vib-video-chat>
 
-    <div *ngIf="closeSearch">
+    <div *ngIf="!closeSearch">
         <vib-expert-search (closeSearch)="toggleSearch()"
-                            (addExpert)="addExpert($event)"></vib-expert-search>
+                           (selectedResult)="addExpert($event)"></vib-expert-search>
     </div>
 </div>

@@ -49,6 +49,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     vibiioFullscreen = false;
     isUpdatingForms = false;
     isEditingForms = false;
+    showVideoControls = false;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,
@@ -136,6 +137,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         });
             this.networkDisconnected = false;
             this.onVibiio = true;
+            this.showVideoControls = true;
             this.changeDetector.detectChanges();
         });
     }
@@ -143,6 +145,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     private subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
             this.onVibiio = false;
+            this.showVideoControls = false;
             this.availabilitySharedService.emitChange(true);
             this.session.disconnect();
             this.changeDetector.detectChanges();
@@ -153,6 +156,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 const subscribers = this.session.getSubscribersForStream(data.stream);
                 if (subscribers.length > 0) {
                     // Display error message inside the Subscriber
+                    this.showVideoControls = true;
                     this.networkDisconnected = true;
                     this.changeDetector.detectChanges();
                     data.preventDefault();   // Prevent the Subscriber from being removed

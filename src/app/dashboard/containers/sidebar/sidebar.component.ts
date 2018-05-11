@@ -28,8 +28,8 @@ import { Appointment} from '../../models/appointment.interface';
 import { Observable } from 'rxjs/Rx';
 import { Vibiio } from '../../models/vibiio.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { VibiiosService } from '../../../shared/services/vibiios.service';
-import { state, style, animate } from '@angular/core';
+import { state, style, animate, ChangeDetectorRef } from '@angular/core';
+import { VibiioProfileService } from '../../services/vibiio-profile.service';
 
 const vibiiographerCallComponent = VibiiographerCallComponent;
 type VibiiographerCall = VibiiographerCallComponent;
@@ -66,7 +66,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   call: ViewContainerRef;
 
     constructor(private reslover: ComponentFactoryResolver,
-                private vibiiosService: VibiiosService,
+                private vibiioProfileService: VibiioProfileService,
                 private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusCountService,
                 private activatedRoute: ActivatedRoute,
@@ -74,7 +74,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private authService: AuthService,
-                private router: Router) {
+                private router: Router,
+                private changeDetector: ChangeDetectorRef) {
 
         // subscribes to shared service and listens for changes passed from the
         // my vibiio container
@@ -95,20 +96,39 @@ export class SidebarComponent implements OnInit, OnDestroy {
             this.userTimeZone = data.appointments.appointments.user_time_zone;
             this.myScheduledVibiios = data.sidebarMyDay.my_day;
         });
-        this.vibiiosService.calling$
-        .takeWhile(() => this.alive)
-        .subscribe( (vibiio) => {
-          this.vibiio = vibiio;
-          const compFactory = this.reslover.resolveComponentFactory<VibiiographerCall>(vibiiographerCallComponent);
-          this.component = this.call.createComponent(compFactory);
-          this.component.instance.vibiio = vibiio;
-        });
 
+        this.subscribeToStartCall();
+        this.subscribeToEndCall();
         this.getStatusUpdate();
   }
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  subscribeToStartCall() {
+    this.vibiioProfileService.calling$
+    .takeWhile(() => this.alive)
+    .subscribe( (vibiio) => {
+      if (this.component) {
+        this.component.destroy();
+        this.changeDetector.detectChanges();
+      } else {
+        this.vibiio = vibiio;
+        const compFactory = this.reslover.resolveComponentFactory<VibiiographerCall>(vibiiographerCallComponent);
+        this.component = this.call.createComponent(compFactory);
+        this.component.instance.vibiio = vibiio;
+      }
+    });
+  }
+
+  subscribeToEndCall() {
+    this.vibiioProfileService.hangingUp$
+      .takeWhile(() => this.alive)
+      .subscribe( (vibiio) => {
+        this.component.destroy();
+        this.changeDetector.detectChanges();
+    });
   }
 
     getStatusUpdate() {
