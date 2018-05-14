@@ -81,17 +81,15 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
             .subscribe(params => {
             // Defaults to false if no query param provided.
                 this.startVibiioParams = params['startVibiio'] || false;
+                if (this.startVibiioParams) {
+                    this.answerCall();
+                }
         });
         this.subscribeToEndCall();
     }
 
     ngAfterViewInit() {
         // Video session starts if vibiio was started from dashboard
-        if (this.startVibiioParams) {
-            this.answerCall();
-            this.beginCallActions();
-            this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
-        }
     }
 
     ngOnDestroy() {
@@ -115,6 +113,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     answerCall() {
+        this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         this.beginCallActions();
         this.videoService.call(this.vibiio, false);
     }

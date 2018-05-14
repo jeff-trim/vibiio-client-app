@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
@@ -30,7 +30,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     vibiioConnecting: boolean;
     onVibiio: boolean;
     vibiioFullscreen: boolean;
-    networkDisconnected: boolean;
     token: string;
     publisher: any;
     subscriber: any;
@@ -57,7 +56,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         private snapshotService: VideoSnapshotService,
         private activityService: ActivityService,
         private availabilitySharedService: AvailabilitySharedService,
-        private changeDetector: ChangeDetectorRef,
         private addToCall: AddToCallService,
         private vibiioProfileService: VibiioProfileService) { }
 
@@ -116,7 +114,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     subscribeToStreamCreatedEvents() {
         this.showControls = true;
-        this.changeDetector.detectChanges();
         this.session.on('streamCreated', (data) => {
             this.vibiioConnecting = false;
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
@@ -124,8 +121,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
                     this.captureSnapshot();
                 });
             this.onVibiio = true;
-            this.networkDisconnected = false;
-            this.changeDetector.detectChanges();
         });
     }
 
@@ -134,16 +129,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             this.session.disconnect();
             this.videoService.hangUp(this.vibiio);
             this.availabilitySharedService.emitChange(true);
-
-            if (data.reason === 'networkDisconnected') {
-                data.preventDefault();
-                const subscribers = this.session.getSubscribersForStream(data.stream);
-                if (subscribers.length > 0) {
-                    // Display error message inside the Subscriber
-                    this.networkDisconnected = true;
-                    data.preventDefault();   // Prevent the Subscriber from being removed
-                }
-            }
         });
     }
 
@@ -184,7 +169,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     toggleVibiioFullscreen() {
         this.vibiioFullscreen = !this.vibiioFullscreen;
-        this.changeDetector.detectChanges();
         if (screenfull.enabled) {
             screenfull.toggle();
         }

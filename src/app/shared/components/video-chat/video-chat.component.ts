@@ -10,7 +10,6 @@ export class VideoChatComponent {
   @Input() vibiioConnecting: boolean;
   @Input() onVibiio = false;
   @Input() vibiioFullscreen = false;
-  @Input() networkDisconnected = false;
   @Input() enableFullscreen = true;
   @Input() showControls;
 
