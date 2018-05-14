@@ -87,12 +87,12 @@ export class AnswerCallComponent implements OnInit {
 
   hangUp() {
     this.session.disconnect();
+    this.onVibiio = false;
     this.callEnded = true;
   }
 
   toggleMute() {
     this.muted = !this.muted;
-    console.log('muted', this.muted);
     if (this.muted) {
         this.publisher.publishAudio(false);
     } else {

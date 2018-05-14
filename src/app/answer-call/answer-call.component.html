@@ -5,7 +5,7 @@
     <div *ngIf="!onVibiio" class="waiting-text">Connecting...</div>
   </div>
     <div id="video-stream" class="video-stream on-fullscreen">
-      <vib-video-controls *ngIf="onVibiio"
+      <vib-video-controls *ngIf="(onVibiio && !callEnded)"
                           (endCall)="hangUp()"
                           (mute)="toggleMute($event)"
                           [muted]="muted"></vib-video-controls>
