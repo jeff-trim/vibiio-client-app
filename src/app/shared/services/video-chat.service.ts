@@ -8,13 +8,31 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { VIDEO_OPTIONS } from '../../constants/video-options';
 import { EXPERT_VIDEO_OPTIONS } from '../../constants/expert-video-options';
+import { Subject } from 'rxjs/Subject';
+import { VideoCall } from '../models/video-call.interface';
+import { Vibiio } from '../../dashboard/models/vibiio.interface';
 
 declare var OT: any;
 
 @Injectable()
 export class VideoChatService {
+  private callingConsumer = new Subject<VideoCall>();
+  private endingCall = new Subject<Vibiio>();
+
+  calling$ = this.callingConsumer.asObservable();
+  hangingUp$ = this.endingCall.asObservable();
 
   constructor(private http: Http) {}
+
+  // event emitters
+  call(vibiio: Vibiio, outgoing: boolean) {
+      this.callingConsumer.next({ vibiio: vibiio, outgoing: true });
+  }
+
+  hangUp(vibiio: Vibiio) {
+      this.endingCall.next(vibiio);
+  }
+
 
   getToken(vibiio_id: number): Observable<any> {
     const url = `${API_URL}/video_chat/auth_tokens`;
@@ -43,7 +61,7 @@ export class VideoChatService {
     return OT.initPublisher({insertDefaultUI: false}, EXPERT_VIDEO_OPTIONS);
   }
 
-  callConsumer(vibiio_id: number): Observable<any> {
+  dialConsumer(vibiio_id: number): Observable<any> {
     const url = `${API_URL}/video_chat/vibiiographer_call`;
 
     const payload = {

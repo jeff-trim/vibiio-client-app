@@ -11,6 +11,7 @@ export interface Vibiio {
     vibiiographer_id?: number;
     contacts?: Contact[];
     consumer_id?: number;
+    consumer_name?: string;
     user_info: {
         first_name: string;
     };

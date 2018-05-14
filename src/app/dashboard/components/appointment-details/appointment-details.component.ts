@@ -22,25 +22,19 @@ import { Address } from '../../models/address.interface';
 })
 
 export class AppointmentDetailsComponent {
-    @Input() vibiioConnecting: boolean;
     @Input() onVibiio: boolean;
     @Input() appointment: Appointment;
     @Input() user: User;
     @Input() vibiio: Vibiio;
-    @Input() networkDisconnected: boolean;
     @Input() timeZone: string;
     @Input() address: Address;
-    @Input() vibiioFullscreen;
     @Input() isEditingForms = false;
     @Input() isUpdatingForms = false;
-    @Input() showVideoControls;
 
 
     @Output() startVibiio = new EventEmitter<boolean>();
-    @Output() endVibiio = new EventEmitter<boolean>();
     @Output() claimVibiio = new EventEmitter<boolean>();
     @Output() refreshNotes = new EventEmitter<any>();
-    @Output() toggleFullscreen = new EventEmitter<boolean>();
     @Output() updateVibiioStatus = new EventEmitter<any>();
     @Output() isEditing = new EventEmitter<boolean>();
     @Output() isUpdating = new EventEmitter<boolean>();
@@ -76,11 +70,6 @@ export class AppointmentDetailsComponent {
 
     connect() {
       this.startVibiio.emit(true);
-      this.claimVibiio.emit(true);
-    }
-
-    disconnect() {
-      this.endVibiio.emit(true);
     }
 
     updateNotes() {
@@ -102,9 +91,5 @@ export class AppointmentDetailsComponent {
   onUpdate() {
       this.isUpdating.emit(true);
       this.updateAddress();
-  }
-
-  toggleVibiioFullscreen() {
-    this.toggleFullscreen.emit();
   }
 }

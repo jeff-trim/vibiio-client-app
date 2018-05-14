@@ -47,6 +47,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     expertName: string;
 
     @Input() vibiio: Vibiio;
+    @Input() outgoingCall = true;
 
     @Output() updateVibiioStatus = new EventEmitter<any>();
 
@@ -64,7 +65,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.vibiioConnecting = true;
         this.getToken();
         this.session = this.videoService.initSession(this.vibiio.video_session_id);
-        this.consumerName = this.vibiio.user_info.first_name;
+        this.consumerName = this.vibiio.consumer_name;
+        if (this.outgoingCall) {
+            this.callConsumer();
+        }
     }
 
     ngOnDestroy() {
@@ -81,10 +85,12 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     getToken() {
         this.videoService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
-            this.videoService.callConsumer(this.vibiio.id).subscribe( (res) => {
-                });
             this.connectToSession();
         });
+    }
+
+    callConsumer() {
+        this.videoService.dialConsumer(this.vibiio.id).subscribe( (res) => {});
     }
 
     private connectToSession() {
@@ -126,7 +132,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
             this.session.disconnect();
-            this.vibiioProfileService.hangUp(this.vibiio);
+            this.videoService.hangUp(this.vibiio);
             this.availabilitySharedService.emitChange(true);
 
             if (data.reason === 'networkDisconnected') {
@@ -162,7 +168,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     endSession() {
         this.session.disconnect();
-        this.vibiioProfileService.hangUp(this.vibiio);
+        this.videoService.hangUp(this.vibiio);
         this.availabilitySharedService.emitChange(true);
 
         this.triggerActivity(

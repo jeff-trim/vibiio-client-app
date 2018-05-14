@@ -13,10 +13,10 @@
           id="scrollbar" 
           *ngIf="notificationDrawerVisibility">          
       <span *ngFor="let consumer of waitingConsumers; let index = index">
-          <appointment-notification
+          <vib-appointment-notification
               [rowIndex]="index"
               [notificationData]="consumer['consumerData']"
-              (claimAppointment)="claimAppointment($event)"></appointment-notification>
+              (claimAppointment)="claimAppointment($event)"></vib-appointment-notification>
       </span>
     </div> 
      

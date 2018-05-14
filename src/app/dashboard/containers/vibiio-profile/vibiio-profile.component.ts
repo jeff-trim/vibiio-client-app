@@ -20,6 +20,7 @@ import { ConsumerProfile } from '../../models/consumer-profile.interface';
 import { Note } from '../../models/consumer-note.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { Contact } from '../../models/contact.interface';
+import { VideoChatService } from '../../../shared/services/video-chat.service';
 
 @Component({
     selector: 'vib-vibiio-profile',
@@ -43,6 +44,7 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private vibiioProfileService: VibiioProfileService,
+                private videoChatService: VideoChatService,
                 private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
                 private formStatusService: VibiioProfileFormStatusService,
                 private statusUpdateService: VibiioUpdateService,
@@ -67,18 +69,18 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
     }
 
     startCall() {
-        this.vibiioProfileService.call(this.vibiio);
+        this.videoChatService.call(this.vibiio, true);
         this.onVibiio = true;
     }
 
     subscribeToEndCall() {
-        this.vibiioProfileService.hangingUp$
+        this.videoChatService.hangingUp$
           .takeWhile(() => this.alive)
           .subscribe( (vibiio) => {
             this.onVibiio = false;
             this.refreshProfile();
         });
-      }
+    }
 
     updateNotes(consumerProfileId) {
         this.vibiioProfileService.getVibiio(consumerProfileId).subscribe( (data) => {
@@ -121,6 +123,6 @@ export class VibiioProfileComponent implements OnInit, OnDestroy {
             .getVibiio(this.vibiio.id)
             .subscribe( (data) => {
                 this.consumerProfile = data.vibiio;
-            });
+        });
     }
 }

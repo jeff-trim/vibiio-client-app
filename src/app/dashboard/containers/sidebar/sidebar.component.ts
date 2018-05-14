@@ -29,7 +29,7 @@ import { Observable } from 'rxjs/Rx';
 import { Vibiio } from '../../models/vibiio.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { state, style, animate, ChangeDetectorRef } from '@angular/core';
-import { VibiioProfileService } from '../../services/vibiio-profile.service';
+import { VideoChatService } from '../../../shared/services/video-chat.service';
 
 const vibiiographerCallComponent = VibiiographerCallComponent;
 type VibiiographerCall = VibiiographerCallComponent;
@@ -66,7 +66,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   call: ViewContainerRef;
 
     constructor(private reslover: ComponentFactoryResolver,
-                private vibiioProfileService: VibiioProfileService,
+                private videoChatService: VideoChatService,
                 private appointmentsService: MyAppointmentsService,
                 private statusService: CustomerStatusCountService,
                 private activatedRoute: ActivatedRoute,
@@ -107,23 +107,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   subscribeToStartCall() {
-    this.vibiioProfileService.calling$
+    this.videoChatService.calling$
     .takeWhile(() => this.alive)
-    .subscribe( (vibiio) => {
+    .subscribe( (vibiioCall) => {
       if (this.component) {
         this.component.destroy();
         this.changeDetector.detectChanges();
       } else {
-        this.vibiio = vibiio;
+        this.vibiio = vibiioCall.vibiio;
         const compFactory = this.reslover.resolveComponentFactory<VibiiographerCall>(vibiiographerCallComponent);
         this.component = this.call.createComponent(compFactory);
-        this.component.instance.vibiio = vibiio;
+        this.component.instance.vibiio = vibiioCall.vibiio;
+        this.component.instance.outgoingCall = vibiioCall.outgoing;
       }
     });
   }
 
   subscribeToEndCall() {
-    this.vibiioProfileService.hangingUp$
+    this.videoChatService.hangingUp$
       .takeWhile(() => this.alive)
       .subscribe( (vibiio) => {
         this.component.destroy();

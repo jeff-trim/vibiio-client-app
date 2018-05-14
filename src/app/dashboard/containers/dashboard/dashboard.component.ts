@@ -72,7 +72,9 @@ export class DashboardComponent implements OnInit {
                 this.toggleActionCable(false);
                 this.userAvailability = false;
                 this.router.navigate(['/dashboard/appointment/',
-                                          data.content.appointment_id], { queryParams: { startVibiio: true } });
+                                          data.content.appointment_id],
+                                          { queryParams: { startVibiio: true },
+                                            preserveQueryParams: false });
                 break;
             }
         }

@@ -4,20 +4,13 @@
                          [timeZone]="userTimeZone"
                          [user]="user"
                          [vibiio]="vibiio"
-                         [vibiioConnecting]="vibiioConnecting"
                          [onVibiio]="onVibiio"
-                         [networkDisconnected]="networkDisconnected"
-                         [vibiioFullscreen]="vibiioFullscreen"
                          [isEditingForms]="isEditingForms"
                          [isUpdatingForms]="isUpdatingForms"
-                         [showVideoControls]="showVideoControls"
-                         (startVibiio)="getToken()"
-                         (endVibiio)="endSession()"
-                         (claimVibiio)="claimVibiio($event)"
+                         (startVibiio)="callConsumer()"
                          (refreshNotes)="updateNotes(appointment.id)"
                          (updateVibiioStatus)="updateVibiioStatus($event)"
                          (refreshAddress)="refreshAddress()"
                          (isEditing)="onEdit($event)"
-                         (isUpdating)="onUpdate()"
-                         (toggleFullscreen)="toggleVibiioFullscreen()">
+                         (isUpdating)="onUpdate()">
 </vib-appointment-details>

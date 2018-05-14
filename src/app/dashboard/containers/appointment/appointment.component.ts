@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Output, OnInit, AfterViewInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { async, inject } from '@angular/core/testing';
 import * as screenfull from 'screenfull';
@@ -23,33 +23,27 @@ import { VibiioUpdateService } from '../../../shared/services/vibiio-update.serv
 import { AppointmentService } from '../../services/appointment.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { VideoSnapshotService } from '../../../shared/services/video-snapshot.service';
+import { VibiioProfileService } from '../../services/vibiio-profile.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'vib-appointment',
     templateUrl: 'appointment.component.html'
 })
 
-export class AppointmentComponent implements OnInit, AfterViewInit {
+export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     onVibiio = false;
-    vibiioConnecting = false;
-    token: string;
-    publisher: any;
-    subscriber: any;
-    imgData: any;
-    session: any;
     consumer_id: number;
     vibiio: Vibiio;
     index: number;
     appointment: Appointment;
     address: Address;
     user: User;
-    networkDisconnected = false;
     userTimeZone: string;
     startVibiioParams: boolean;
-    vibiioFullscreen = false;
     isUpdatingForms = false;
     isEditingForms = false;
-    showVideoControls = false;
+    alive: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,
@@ -61,9 +55,12 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 private router: Router,
                 private videoService: VideoChatService,
                 private formStatusService: AppointmentDetailsFormStatusService,
-                private changeDetector: ChangeDetectorRef) { }
+                private vibiioProfileService: VibiioProfileService,
+                private changeDetector: ChangeDetectorRef,
+                private location: Location) { }
 
     ngOnInit() {
+        this.alive = true;
         this.activatedRoute.params.subscribe((params: Params) => {
             this.index = params['id'];
         });
@@ -75,7 +72,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             this.vibiio = data.appt.appointment.vibiio;
-            this.session = this.videoService.initSession(this.vibiio.video_session_id);
         }, (error) => {
             console.log(error);
         });
@@ -85,103 +81,72 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             .subscribe(params => {
             // Defaults to false if no query param provided.
                 this.startVibiioParams = params['startVibiio'] || false;
+                this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         });
+        this.subscribeToEndCall();
     }
 
     ngAfterViewInit() {
         // Video session starts if vibiio was started from dashboard
         if (this.startVibiioParams) {
-            this.getToken();
+            this.answerCall();
+            this.beginCallActions();
         }
     }
 
-    getToken() {
-        this.vibiioConnecting = true;
-        this.changeDetector.detectChanges();
-        this.videoService.getToken(this.vibiio.id).subscribe((data) => {
-            this.token = data.video_chat_auth_token.token;
-            this.connectToSession();
+    ngOnDestroy() {
+        this.alive = false;
+    }
+
+    subscribeToEndCall() {
+        this.videoService.hangingUp$
+          .takeWhile(() => this.alive)
+          .subscribe( (vibiio) => {
+            this.endCallActions();
         });
     }
 
-    private connectToSession() {
-        this.triggerActivity(this.vibiio.id,
-            'Vibiiograher manually started video',
-            'Video session started');
-
-        this.session.connect(this.token, () => {
-            this.initPublisher();
-            this.hideVibiiographerVideo();
-            this.subscribeToStreamCreatedEvents();
-            this.subscribeToStreamDestroyedEvents();
+    refreshProfile() {
+        this.vibiioProfileService
+            .getVibiio(this.vibiio.id)
+            .subscribe( (data) => {
+                this.vibiio = data.vibiio;
         });
     }
 
-    private initPublisher() {
-        this.publisher = this.videoService.initPublisher();
+    answerCall() {
+        this.beginCallActions();
     }
 
-    private hideVibiiographerVideo() {
-        this.session.publish(this.publisher).publishVideo(false);
+    async callConsumer() {
+        this.vibiio = await this.claimVibiio();
+        this.beginCallActions();
     }
 
-    private subscribeToStreamCreatedEvents() {
-        this.session.on('streamCreated', (data) => {
-            this.vibiioConnecting = false;
-            this.changeDetector.detectChanges();
-             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
-            (stats) => {
-                // wait till subscriber is set
-                this.captureSnapshot();
-                this.updateVibiioStatus({status: 'claim_in_progress'});
-        });
-            this.networkDisconnected = false;
-            this.onVibiio = true;
-            this.showVideoControls = true;
-            this.changeDetector.detectChanges();
-        });
-    }
-
-    private subscribeToStreamDestroyedEvents() {
-        this.session.on('streamDestroyed', (data) => {
-            this.onVibiio = false;
-            this.showVideoControls = false;
-            this.availabilitySharedService.emitChange(true);
-            this.session.disconnect();
-            this.changeDetector.detectChanges();
-            this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
-
-            if (data.reason === 'networkDisconnected') {
-                data.preventDefault();
-                const subscribers = this.session.getSubscribersForStream(data.stream);
-                if (subscribers.length > 0) {
-                    // Display error message inside the Subscriber
-                    this.showVideoControls = true;
-                    this.networkDisconnected = true;
-                    this.changeDetector.detectChanges();
-                    data.preventDefault();   // Prevent the Subscriber from being removed
-                }
-            }
-        });
-    }
-
-    // save snapshot
-    async captureSnapshot() {
-        // wait for image data
-        this.imgData = await this.subscriber.getImgData();
-        this.snapshotService.saveSnapshot(this.consumer_id, this.session.id, this.vibiio.id, this.imgData)
-            .subscribe( (data) => {},
-                (error) => {
+    claimVibiio(): Vibiio {
+        if (this.appointment.vibiiographer_id === null) {
+            this.updateAppointmentService
+                .updateVibiiographer(this.appointment.id)
+                .subscribe((data) => {
+                    return data.vibiio;
+                },
+                (error: any) => {
                     console.log('error ', error);
             });
+        }
+        return this.vibiio;
     }
 
-  private triggerActivity(vibiio_id: number, message: string, name: string) {
-        this.activityService.postActivity(
-            vibiio_id,
-            message,
-            name
-            ).subscribe((data) => {});
+    beginCallActions() {
+        this.onVibiio = true;
+        this.availabilitySharedService.emitChange(false);
+        this.videoService.call(this.vibiio, true);
+    }
+
+    endCallActions() {
+        this.onVibiio = false;
+        this.availabilitySharedService.emitChange(true);
+        this.refreshProfile();
     }
 
     updateVibiioStatus(event: any) {
@@ -198,30 +163,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             });
     }
 
-    endSession() {
-        this.session.disconnect();
-        this.triggerActivity(
-            this.vibiio.id,
-            'Vibiiographer manually ended video session',
-            'Video session ended'
-        );
-        this.availabilitySharedService.emitChange(true);
-        this.vibiioConnecting = false;
-        this.changeDetector.detectChanges();
-        this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
-    }
-
-    claimVibiio(event) {
-        if (this.appointment.vibiiographer_id === null) {
-            this.updateAppointmentService
-                .updateVibiiographer(this.appointment.id)
-                .subscribe((res) => {},
-                (error: any) => {
-                    console.log('error ', error);
-            });
-        }
-    }
-
     updateNotes(appointment_id) {
         this.updateAppointmentService.getAppointmentDetails(appointment_id)
             .subscribe((data) => {
@@ -230,14 +171,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         (error: any) => {
             console.log('error ', error);
         });
-    }
-
-    toggleVibiioFullscreen() {
-        this.vibiioFullscreen = !this.vibiioFullscreen;
-        this.changeDetector.detectChanges();
-        if (screenfull.enabled) {
-          screenfull.toggle();
-        }
     }
 
     refreshAddress() {

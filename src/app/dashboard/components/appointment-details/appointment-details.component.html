@@ -10,34 +10,21 @@
               appointment-title
               pink" >{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h1>
 
-    <div *ngIf="(!onVibiio)"
-          class="col-xs
+    <div class="col-xs
           col-xs-offset-1
           col-md-2
           start-vibiio
           link"
+          [class.disabled]="onVibiio"
           (click)="connect()">
           start vibiio
     </div>
 
-    <div *ngIf="(onVibiio)"
-        class="col-xs
-        col-xs-offset-1
-        col-md-2
-        start-vibiio
-        link"
-        (click)="disconnect()">
-        end vibiio
-    </div>
  
-    <div class="col-xs link">
-      <img  *ngIf="(!onVibiio)"
-            src="../../../../assets/images/call-controls.svg"
-            (click)="connect()">
-      <img  *ngIf="(onVibiio)"
-        src="../../../../assets/images/call-controls.svg"
-        class="end-call"
-        (click)="disconnect()">
+    <div class="col-xs link"
+         [class.disabled]="onVibiio"
+         (click)="connect()">
+      <img  src="../../../../assets/images/call-controls.svg">
     </div>
   </div>
   <div class="row edit-button-row">
@@ -104,23 +91,14 @@
     </div>
     
     <div class="video-container">
-      <div *ngIf="(!onVibiio && !vibiioConnecting)" 
-            class="vibiio-message">
+      <div class="vibiio-message"
+           [class.disabled]="onVibiio">
         <p class="first-vibiio">🤙</p>
         <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio!</p>
         <p class="first-vibiio-text">Ready to introduce yourself?</p>
         <p class="first-vibiio-text pink link"
-            (click)="connect($event)">Call {{ appointment.user.first_name }} now.</p>
+            (click)="connect()">Call {{ appointment.user.first_name }} now.</p>
       </div>
-
-      <vib-video-chat [vibiio]="vibiio"
-                      [vibiioConnecting]="vibiioConnecting"
-                      [onVibiio]="onVibiio"
-                      [vibiioFullscreen]="vibiioFullscreen"
-                      [networkDisconnected]="networkDisconnected"
-                      [showControls]="showVideoControls"
-                      (updateVibiioStatus)="updateStatus($event)"
-                      (toggleFullscreen)="toggleVibiioFullscreen()"></vib-video-chat>
     </div>        
   </div> 
 </div>

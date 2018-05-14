@@ -28,4 +28,5 @@ export interface ConsumerProfile {
     vibiio_type?: string;
     description?: string;
     vibiiographer_id?: number;
+    consumer_name?: string;
 }
