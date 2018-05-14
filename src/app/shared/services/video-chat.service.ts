@@ -26,7 +26,7 @@ export class VideoChatService {
 
   // event emitters
   call(vibiio: Vibiio, outgoing: boolean) {
-      this.callingConsumer.next({ vibiio: vibiio, outgoing: true });
+      this.callingConsumer.next({ vibiio: vibiio, outgoing: outgoing });
   }
 
   hangUp(vibiio: Vibiio) {
@@ -45,7 +45,7 @@ export class VideoChatService {
 
     return this.http
                .post(url, payload)
-               .map( (response: Response) => response.json() )
+               .map( (response: Response) => response.json())
                .catch( (error: any) => Observable.throw(error));
   }
 

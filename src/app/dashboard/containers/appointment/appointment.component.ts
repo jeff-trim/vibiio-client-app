@@ -81,7 +81,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
             .subscribe(params => {
             // Defaults to false if no query param provided.
                 this.startVibiioParams = params['startVibiio'] || false;
-                this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         });
         this.subscribeToEndCall();
     }
@@ -91,6 +90,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.startVibiioParams) {
             this.answerCall();
             this.beginCallActions();
+            this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         }
     }
 
@@ -116,11 +116,13 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
 
     answerCall() {
         this.beginCallActions();
+        this.videoService.call(this.vibiio, false);
     }
 
     async callConsumer() {
         this.vibiio = await this.claimVibiio();
         this.beginCallActions();
+        this.videoService.call(this.vibiio, true);
     }
 
     claimVibiio(): Vibiio {
@@ -140,7 +142,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     beginCallActions() {
         this.onVibiio = true;
         this.availabilitySharedService.emitChange(false);
-        this.videoService.call(this.vibiio, true);
     }
 
     endCallActions() {
