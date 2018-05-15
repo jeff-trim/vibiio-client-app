@@ -1,16 +1,15 @@
 @import '~assets/css/variables';
 
 .expert-search-container {
+    position: relative;
     display: flex;
-    width: 312px;
-    height: 461.1px;
-    left: -6px;
+    height: 100%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     background-color: $white;
-    position: relative;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.35);
+    overflow: hidden;
     .close {
         position: absolute;
         top: 10px;

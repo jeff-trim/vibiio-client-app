@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
@@ -20,10 +20,35 @@ import { EXPERT_VIDEO_OPTIONS } from '../../../constants/expert-video-options';
 import { AddToCallService } from '../../services/add-to-call.service';
 import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
 
+
 @Component({
     selector: 'vib-vibiiographer-call',
     templateUrl: './vibiiographer-call.component.html',
-    styleUrls: ['./vibiiographer-call.component.scss']
+    styleUrls: ['./vibiiographer-call.component.scss'],
+    animations: [
+        trigger('slideUpDown', [
+            transition(':enter', [
+                style({transform: 'translateY(100%)'}),
+                animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)')
+            ]),
+            transition(':leave', [
+                style({transform: 'translateY(0)', height: '*'}),
+                animate(600, style({ transform: 'translateY(100%)', height: '0'}))
+            ]),
+        ]),
+        trigger('expandableState', [
+            transition(':enter', [
+              style({ transform: 'translateY(100%)'}),
+              animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
+                style({ transform: 'translateY(0%)', height: '*'})),
+            ]),
+            transition(':leave', [
+              style({ transform: 'translateY(0%)', height: '*' }),
+              animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
+                style({ transform: 'translateY(100%)', height: '0%'})),
+            ]),
+        ])
+    ]
 })
 
 export class VibiiographerCallComponent implements OnInit, OnDestroy {
@@ -44,6 +69,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     enableFullscreen = false;
     consumerName: string;
     expertName: string;
+    state: string;
+    stateExpression = 'collapsed';
 
     @Input() vibiio: Vibiio;
     @Input() outgoingCall = true;
@@ -80,6 +107,14 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         });
     }
 
+    expand() {
+        this.stateExpression = 'expanded';
+    }
+
+    collapse() {
+        this.stateExpression = 'collapsed';
+    }
+
     getToken() {
         this.videoService.getToken(this.vibiio.id).subscribe((data) => {
             this.token = data.video_chat_auth_token.token;
@@ -95,7 +130,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.triggerActivity(this.vibiio.id,
             'Vibiiograher manually started video',
             'Video session started');
-
         this.session.connect(this.token, () => {
             this.initPublisher();
             this.hideVibiiographerVideo();
@@ -178,8 +212,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.closeSearch = !this.closeSearch;
         if (!this.closeSearch) {
             this.showControls = false;
+            this.expand();
         } else {
             this.showControls = true;
+            this.collapse();
         }
     }
 

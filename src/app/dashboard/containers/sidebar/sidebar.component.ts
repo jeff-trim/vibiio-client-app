@@ -7,8 +7,6 @@ import { Component,
          ComponentFactoryResolver,
          ViewChild,
          ViewContainerRef,
-         trigger,
-         transition,
          ApplicationRef,
          Injector,
          EmbeddedViewRef} from '@angular/core';
@@ -31,7 +29,6 @@ import { Appointment} from '../../models/appointment.interface';
 import { Observable } from 'rxjs/Rx';
 import { Vibiio } from '../../models/vibiio.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { state, style, animate, ChangeDetectorRef } from '@angular/core';
 import { VideoChatService } from '../../../shared/services/video-chat.service';
 
 const vibiiographerCallComponent = VibiiographerCallComponent;

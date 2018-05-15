@@ -1,4 +1,5 @@
-<div ngDraggable class="vibiiographer-call-container">
+<div [@slideUpDown]
+     ngDraggable class="vibiiographer-call-container">
     <vib-video-chat [vibiio]="vibiio"
                     [vibiioConnecting]="vibiioConnecting"
                     [onVibiio]="onVibiio"
@@ -14,8 +15,7 @@
                     [enableFullscreen]="enableFullscreen">
     </vib-video-chat>
 
-    <div *ngIf="!closeSearch">
-        <vib-expert-search (closeSearch)="toggleSearch()"
+        <vib-expert-search [@expandableState]='!closeSearch' *ngIf="!closeSearch" 
+                           (closeSearch)="toggleSearch()"
                            (selectedResult)="addExpert($event)"></vib-expert-search>
-    </div>
 </div>
