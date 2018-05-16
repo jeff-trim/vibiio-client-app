@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
@@ -26,8 +26,7 @@ export class AnswerCallComponent implements OnInit {
   callEnded = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private videoChatService: VideoChatService,
-              private changeDetector: ChangeDetectorRef) { }
+              private videoChatService: VideoChatService) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
@@ -48,23 +47,15 @@ export class AnswerCallComponent implements OnInit {
       this.hideVideo();
       this.subscribeToStreamCreatedEvents();
       this.subscribeToStreamDestroyedEvents();
-  });
-}
+    });
+  }
 
   subscribeToStreamCreatedEvents() {
-    this.changeDetector.detectChanges();
     this.session.on('streamCreated', (data) => {
       this.onVibiio = true;
-        // if it's the first stream create a chat, else subscribe to audio
-        this.streams.push(data.stream);
-        console.log('streams', this.streams.length);
-        if (!this.subscriber) {
+
             this.subscriber = this.session.subscribe(data.stream, 'video-stream', VIDEO_OPTIONS,
-            (stats) => {
-              // this.detectSubscriberAudio();
-            });
-          }
-          this.changeDetector.detectChanges();
+            (stats) => {});
     });
   }
 
@@ -72,7 +63,6 @@ export class AnswerCallComponent implements OnInit {
     this.session.on('streamDestroyed', (data) => {
       this.onVibiio = false;
       this.callEnded = true;
-      this.changeDetector.detectChanges();
       this.session.disconnect();
     });
   }
@@ -98,8 +88,5 @@ export class AnswerCallComponent implements OnInit {
     } else {
         this.publisher.publishAudio(true);
     }
-    this.changeDetector.detectChanges();
   }
-
-
 }

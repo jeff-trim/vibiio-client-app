@@ -21,11 +21,6 @@ export class ExpertListComponent implements OnInit {
     });
   }
 
-  // save for later
-  // viewDetails(id: number) {
-  //   this.router.navigateByUrl('/users/' + id);
-  // }
-
   search(query?: string) {
 
     this.userService.index('Expert', query).subscribe( data => {

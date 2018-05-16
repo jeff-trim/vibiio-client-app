@@ -7,9 +7,7 @@ import { ConsumerProfileComponent } from '../../components/consumer-profile/cons
 
 // Services
 import { VibiioProfileService } from '../../services/vibiio-profile.service';
-import { InsuranceStatusService } from '../../services/insurance-status.service';
 import { VibiioProfileFormStatusService } from '../../services/vibiio-profile-form-status.service';
-import { ConsumerUpdateService } from '../../services/consumer-update.service';
 import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { VibiioUpdateService } from '../../../shared/services/vibiio-update.service';

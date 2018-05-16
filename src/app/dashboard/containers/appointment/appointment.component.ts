@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, AfterViewInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, Output, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { async, inject } from '@angular/core/testing';
 import * as screenfull from 'screenfull';
@@ -7,15 +7,11 @@ import * as screenfull from 'screenfull';
 import { Appointment } from '../../models/appointment.interface';
 import { User } from '../../models/user.interface';
 import { Vibiio } from '../../models/vibiio.interface';
-import { VideoChatToken } from '../../models/video-chat-token.interface';
-import { OPENTOK_API_KEY } from '../../../../environments/environment';
 import { Address } from '../../models/address.interface';
 
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
-import { NoteService } from '../../services/note.service';
 import { AppointmentDetailsFormStatusService } from '../../services/appointment-details-form-status.service';
-import { VIDEO_OPTIONS } from '../../../constants/video-options';
 import { VideoChatService } from '../../../shared/services/video-chat.service';
 import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
 import { SidebarCustomerStatusSharedService } from '../../../shared/services/sidebar-customer-status-shared.service';
@@ -31,7 +27,7 @@ import { Location } from '@angular/common';
     templateUrl: 'appointment.component.html'
 })
 
-export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppointmentComponent implements OnInit, OnDestroy {
     onVibiio = false;
     consumer_id: number;
     vibiio: Vibiio;
@@ -56,7 +52,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
                 private videoService: VideoChatService,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private vibiioProfileService: VibiioProfileService,
-                private changeDetector: ChangeDetectorRef,
                 private location: Location) { }
 
     ngOnInit() {
@@ -86,10 +81,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
         });
         this.subscribeToEndCall();
-    }
-
-    ngAfterViewInit() {
-        // Video session starts if vibiio was started from dashboard
     }
 
     ngOnDestroy() {
@@ -157,7 +148,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
             .subscribe( (data) => {
                 this.vibiio.status = data.vibiio.status;
                 this.sidebarCustomerStatusSharedService.emitChange(data);
-                this.changeDetector.detectChanges();
             }, (error: any) => {
                 console.log('error updating claim status');
             });
@@ -180,12 +170,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     onEdit(formChanged: boolean) {
         this.formStatusService.onFormEdit();
         this.isEditingForms = true;
-        this.changeDetector.detectChanges();
     }
 
     onUpdate() {
         this.formStatusService.onFormUpdate();
         this.isUpdatingForms = true;
-        this.changeDetector.detectChanges();
     }
 }

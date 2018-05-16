@@ -26,9 +26,4 @@ export class VibiiographerListComponent implements OnInit {
       this.vibiiographers = data;
     });
   }
-
-  // save for later
-  // viewDetails(id: number) {
-  //   this.router.navigateByUrl('/users/' + id);
-  // }
 }

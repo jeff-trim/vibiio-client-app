@@ -18,7 +18,6 @@ export class SearchFiltersComponent implements OnInit {
 
   filterResults(filter?: string) {
     this.term = filter;
-    console.log(this.term);
     this.filter.emit(filter);
   }
 }
