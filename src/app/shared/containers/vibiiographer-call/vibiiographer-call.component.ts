@@ -1,10 +1,16 @@
-import { Component, Input, Output, EventEmitter, OnInit, trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { AngularDraggableDirective } from 'angular2-draggable';
-
+import {
+    trigger,
+    state,
+    style,
+    animate,
+    transition
+  } from '@angular/animations';
 // Models
 import { Vibiio } from '../../../dashboard/models/vibiio.interface';
 import { User } from '../../../dashboard/models/user.interface';
@@ -38,7 +44,7 @@ import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile
         ]),
         trigger('expandableState', [
             transition(':enter', [
-              style({ transform: 'translateY(100%)'}),
+              style({ transform: 'translateY(100%)', height: '0%'}),
               animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
                 style({ transform: 'translateY(0%)', height: '*'})),
             ]),
