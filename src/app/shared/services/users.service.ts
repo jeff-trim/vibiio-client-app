@@ -13,40 +13,26 @@ export class UsersService {
 
   constructor(private http: Http) {}
 
-  index(role = '', query = ''): Observable<User[]> {
+  private searchUrl(role = '', query = ''): string {
     if (query && role) {
+      return `${API_URL}/expert_search/?type=${role}&term=${query}`;
+    } else if (role) {
+      return `${API_URL}/expert_search/?type=${role}`;
+    } else if (query) {
+      return `${API_URL}/expert_search/?&term=${query}`;
+    } else {
+      return `${API_URL}/expert_search/`;
+    }
+  }
+
+  index(role = '', query = ''): Observable<User[]> {
       return this.http
-        .get(`${API_URL}/expert_search/?type=${role}&term=${query}`)
+        .get(`${this.searchUrl(role, query)}`)
         .map((response: any) => response.json())
         .catch((err) => {
           console.error('An error occurred:', err.error);
           return err.error;
         });
-    } else if (role) {
-      return this.http
-        .get(`${API_URL}/expert_search/?type=${role}`)
-        .map((response: any) => response.json() )
-        .catch((err) => {
-          console.error('An error occurred:', err.error);
-          return err.error;
-        });
-    } else if (query) {
-      return this.http
-        .get(`${API_URL}/expert_search/?&term=${query}`)
-        .map((response: any) => response.json() )
-        .catch((err) => {
-          console.error('An error occurred:', err.error);
-          return err.error;
-        });
-    } else {
-      return this.http
-        .get(`${API_URL}/expert_search/`)
-        .map((response: any) => response.json() )
-        .catch((err) => {
-          console.error('An error occurred:', err.error);
-          return err.error;
-        });
-    }
   }
 
   show(id: number) {
