@@ -112,19 +112,17 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
 
     updateMyProfile(form) {
         const id = this.myProfile.id;
-        const addressData = form.value.addressData;
-        const userData = form.value.userData;
 
         const options = {
-            first_name: userData.firstName,
-            last_name: userData.lastName,
-            company: userData.company,
-            phone: userData.phone,
-            address_one: addressData.addressOne,
-            address_two: addressData.addressTwo,
-            city: addressData.city,
-            state: addressData.state,
-            zip: addressData.zip
+            first_name: form.value.firstName,
+            last_name: form.value.lastName,
+            company: form.value.company,
+            phone: form.value.phone,
+            address_one: form.value.addressOne,
+            address_two: form.value.addressTwo,
+            city: form.value.city,
+            state: form.value.state,
+            zip: form.value.zip
         };
 
         this.myProfileService.updateMyProfile(options)
