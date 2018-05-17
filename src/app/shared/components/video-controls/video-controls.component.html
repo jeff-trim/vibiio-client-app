@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    
+    <div (click)="toggleMute()"
+         class="control-icon">
+      <div *ngIf="muted" class="mute"></div>
+      <div *ngIf="!muted" class="unmute"></div>
+    </div>
+
+    <div (click)="hangUp()"
+         class="control-icon">
+      <div class="end-call"></div>
+    </div>
+
+    <div (click)="addExpert()"
+         class="control-icon">
+      <div class="add"></div>
+    </div>
+  </div>
+</div>

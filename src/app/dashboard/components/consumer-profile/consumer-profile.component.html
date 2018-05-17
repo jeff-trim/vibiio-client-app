@@ -23,12 +23,12 @@
     <key-value [key]="'Start Time'"
                [value]="parseTime(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
 
+    <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
   
     <vib-insurance-policy [insurancePolicies]="consumerProfile.insurance_policies"
                           [consumerId]="consumerProfile.consumer_id"
                           (editingPolicy)="onEdit($event)"></vib-insurance-policy>
 
-    <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>
 </div>
   

@@ -28,6 +28,7 @@ export class AppointmentService {
     };
     return this.http
       .put(APPOINTMENT_DETAILS_API + appointment, payload)
-      .map((response: Response) => response.json());
+      .map((response: Response) => response.json())
+      .catch( (error: any) => Observable.throw(error));
     }
 }

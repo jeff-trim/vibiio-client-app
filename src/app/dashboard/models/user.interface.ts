@@ -7,6 +7,9 @@ export interface User {
     last_name: string;
     company: string;
     phone: string;
+    professions: string[];
+    city: string;
+    state: string;
     time_zone: string;
     address: Address;
     profile: {
@@ -14,4 +17,5 @@ export interface User {
         available?: boolean;
         language: string;
     };
+    profile_type?: string;
 }

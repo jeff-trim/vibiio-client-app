@@ -1,0 +1,21 @@
+<div [@slideUpDown]
+     ngDraggable class="vibiiographer-call-container">
+    <vib-video-chat [vibiio]="vibiio"
+                    [vibiioConnecting]="vibiioConnecting"
+                    [onVibiio]="onVibiio"
+                    [showControls]="showControls"
+                    [vibiioFullscreen]="vibiioFullscreen"
+                    (updateVibiioStatus)="updateStatus($event)"
+                    (toggleFullscreen)="toggleVibiioFullscreen()"
+                    (add)="toggleSearch()"
+                    (endCall)="endSession()"
+                    (mute)="toggleMute()"
+                    [consumerName]="consumerName"
+                    [expertName]="expertName"
+                    [enableFullscreen]="enableFullscreen">
+    </vib-video-chat>
+
+        <vib-expert-search [@expandableState]='!closeSearch' *ngIf="!closeSearch" 
+                           (closeSearch)="toggleSearch()"
+                           (selectedResult)="addExpert($event)"></vib-expert-search>
+</div>

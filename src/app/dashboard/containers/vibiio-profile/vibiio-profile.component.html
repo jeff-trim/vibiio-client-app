@@ -1,10 +1,27 @@
 <div class="col-md-9
             my-vibiio-container
             col-md-offset-1">
-  <h1 class="col-xs
-             pink
-             bold">{{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}</h1>
-  
+  <div class="row
+              title-row">
+    <h1 class="col-xs-5
+              pink
+              bold">{{ consumerProfile.user_info.first_name }} {{ consumerProfile.user_info.last_name }}
+    </h1>
+      <div class="col-xs
+                  col-xs-offset-4
+                  col-md-2
+                  start-vibiio
+                  link"
+           [class.disabled]="onVibiio"
+           (click)="startCall()">Call {{ consumerProfile.user_info.first_name }}</div>
+      <div class="col-xs link"
+           [class.disabled]="onVibiio">
+        <img src="../../../../assets/images/call-controls.svg"
+             (click)="startCall()">
+      </div>
+    
+  </div>
+
     <div class="row edit-button-row">
       <h4 *ngIf="isEditing"
           class="col-md-offset-4
@@ -26,6 +43,9 @@
           <div class="header-pink-underline" ></div>
         </div>
         <vib-consumer-profile [consumerProfile]="consumerProfile"
+                              [insurancePolicies]="consumerProfile.insurance_policies"
+                              [address]="consumerProfile.address"
+                              [userTimeZone]="consumerProfile.user_info.time_zone"
                               [vibiio]="consumerProfile"
                               (editingForm)="onFormEdit($event)">
         </vib-consumer-profile>
@@ -56,7 +76,7 @@
           <span class="header-pink-underline"></span>
         </div>
 
-        <div *ngIf="contacts; else noContacts">
+        <div *ngIf="contacts?.length > 0; else noContacts">
           <div *ngFor="let contact of contacts">
             <vib-customer-note [note]="contact.message"></vib-customer-note>
           </div>
@@ -84,3 +104,5 @@
     </div> 
   </div>
 </div>
+
+<div class="vibiiographer-call" #vibiiographerCall></div>

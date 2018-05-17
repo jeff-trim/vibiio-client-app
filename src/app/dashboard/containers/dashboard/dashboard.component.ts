@@ -12,13 +12,12 @@ import { VideoChatToken } from '../../models/video-chat-token.interface';
 import { NotificationWrapper } from '../../models/notification-wrapper.interface';
 
 // Services
-import { VideoChatTokenService } from '../../services/video-chat-token.service';
 import { MyProfileResolver } from '../../services/my-profile.resolver.service';
 import { AuthService } from '../../../services/auth.service';
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
 
 // environment
 import { ACTION_CABLE_URL } from '../../../../environments/environment';
+import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
 
 declare var OT: any;
 
@@ -31,7 +30,6 @@ declare var OT: any;
 export class DashboardComponent implements OnInit {
     session: any;
     vibiio: Vibiio;
-    token: VideoChatToken;
     subscription: any;
     notificationShow = false;
     vibiiographerProfile: any;
@@ -46,7 +44,6 @@ export class DashboardComponent implements OnInit {
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private tokenService: VideoChatTokenService,
         private authService: AuthService,
         private availabilitySharedService: AvailabilitySharedService
     ) {
@@ -75,7 +72,9 @@ export class DashboardComponent implements OnInit {
                 this.toggleActionCable(false);
                 this.userAvailability = false;
                 this.router.navigate(['/dashboard/appointment/',
-                                          data.content.appointment_id], { queryParams: { startVibiio: true } });
+                                          data.content.appointment_id],
+                                          { queryParams: { startVibiio: true },
+                                            preserveQueryParams: false });
                 break;
             }
         }

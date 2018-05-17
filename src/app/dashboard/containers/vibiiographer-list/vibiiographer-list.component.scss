@@ -1,0 +1,65 @@
+@import '~assets/css/variables';
+
+.vibiiographer-list-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4em;
+    .search {
+        width: 25%;
+        padding: 0.5rem 0.5rem 0.5rem 0;
+    }
+    
+    .user-row {
+        &:hover {
+            background-color: lighten($pink, 40);
+            cursor: pointer;
+        }
+    }
+
+    .info-element-container {
+        width: 60%;
+        &:hover {
+            background-color: lighten($pink, 40);
+                cursor: pointer;
+        }
+
+        .info-element {
+            margin: 20px 0 20px 0;
+            position: relative;
+            padding: 0.5rem 0.5rem 0 0;
+        
+            .label {
+                font-family: $base-font;
+                font-size: 1.65rem;
+                font-weight: 700;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: normal;
+                color: $greyish-brown;
+            }
+
+            .pink-underline {
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                border-bottom: 0.2rem solid $pink;
+                width: 4rem;
+            }
+
+        }
+            .detail {
+                display: flex;
+                justify-content: space-between;
+                width: 50%;
+                font-family: $copy-font;
+                font-size: 1.45rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: normal;
+                color: $greyish-brown;
+                text-transform: capitalize;
+            }
+ 
+    }       
+}

@@ -5,6 +5,10 @@
     flex-direction: row;
 }
 
+vib-video-chat {
+    width: 100%;
+}
+
 h1 {
     font-family: $base-font;
     font-weight: 600;
@@ -24,6 +28,7 @@ h2, .vibiio-profile-information h2 {
       margin-top: 14px;
     }
 }
+
 .edit-button-row {
     justify-content: flex-end;
     h4 {
@@ -52,6 +57,17 @@ h2, .vibiio-profile-information h2 {
     }
 }
 
+.call-button {
+  height: 45px;
+  max-width: 160px;
+  vertical-align: text-bottom;
+  &:focus {
+      outline: none;
+  }
+  &:hover {
+    box-shadow: 0px 5px 10px #bbbbbb;
+  }
+}
 .save-after-element::after {
     animation: ellipsis .01s steps(1) 2s;
     content: "D";
@@ -104,4 +120,28 @@ h2, .vibiio-profile-information h2 {
 .note-row {
     display: flex;
     flex-direction: column;
+}
+
+.title-row {
+    align-items: center;
+}
+
+.start-vibiio {
+    align-self: center;
+	height: 18px;
+	font-size: 13px;
+	font-weight: 800;
+	letter-spacing: 1px;
+	text-align: right;
+    text-transform: uppercase;
+	color: $pink;
+    cursor: pointer;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.disabled {
+    opacity: 0.3;
 }

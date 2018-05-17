@@ -1,4 +1,4 @@
-import { User } from '../../vibiio-admin-client/src/app/models/user.interface';
+import { User } from '../src/app/dashboard/models/user.interface';
 
 export const CONSUMERS: User[] = [
     {

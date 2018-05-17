@@ -8,6 +8,9 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Custom Modules
+import { SharedModule } from '../shared/shared.module';
+
 // Containers
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { MyProfileComponent } from './containers/my-profile/my-profile.component';
@@ -20,6 +23,7 @@ import { VibiioProfileComponent } from './containers/vibiio-profile/vibiio-profi
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 // Components
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
@@ -35,7 +39,6 @@ import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-
 import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component';
 import { NewNoteComponent } from './components/note/new-note.component';
 import { ExistingNoteComponent } from './components/note/existing-note.component';
-import { ClaimStatusComponent } from './components/claim-status/claim-status.component';
 import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
 import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
 import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
@@ -44,7 +47,6 @@ import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-
 import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
 import { ConsumerProfileSummaryComponent } from './components/consumer-profile-summary/consumer-profile-summary.component';
 import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
-import { VibiioSearchComponent } from './components/vibiio-search/vibiio-search.component';
 import { VibiioDescriptionComponent } from './components/vibiio-description/vibiio-description.component';
 import { CustomerNoteComponent } from './components/customer-note/customer-note.component';
 
@@ -60,17 +62,11 @@ import { MyProfileService } from './services/my-profile.service';
 import { MyDayService } from './services/my-day.service';
 import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service';
 import { TodaysVibiiosService } from './services/todays-vibiios.service';
-import { VideoChatTokenService } from './services/video-chat-token.service';
-import { VideoSnapshotService } from './services/video-snapshot.service';
 import { MyAvailabilityService } from './services/my-availability.service';
 import { NoteService } from './services/note.service';
-import { VibiioUpdateService } from './services/vibiio-update.service';
 import { InsurancePolicyService } from './services/insurance-policy.service';
 import { VideoArchiveService } from './services/video-archive.service';
 import { VibiioProfileService } from './services/vibiio-profile.service';
-import { ActivityService } from './services/activity.service';
-import { SidebarCustomerStatusSharedService } from './services/sidebar-customer-status-shared.service';
-import { AvailabilitySharedService } from './services/availability-shared.service';
 import { MyLicenseService } from './services/my-license.service';
 import { ConsumerSortService } from './services/consumer-sort.service';
 import { AddressStatusService } from './services/address-status.service';
@@ -93,11 +89,13 @@ import { MyAvailabilityResolver } from './services/my-availability.resolver.serv
 import { VideoArchiveResolver } from './services/video-archive.resolver.service';
 import { VibiioProfileResolver } from './services/vibiio-profile.resolver.service';
 
-// Pipes
-import { CapitalizePipe } from './pipes/capitalize.pipe';
-import { RemoveUnderscorePipe } from './pipes/remove-underscore.pipe';
+// Directives
 import { AutosizeDirective } from './directives/autosize.directive';
-import { OrderByPipe } from './pipes/order-by.pipe';
+import { VibiiographerCallComponent } from '../shared/containers/vibiiographer-call/vibiiographer-call.component';
+import { VibiiographerListComponent } from './containers/vibiiographer-list/vibiiographer-list.component';
+import { ExpertListComponent } from './containers/expert-list/expert-list.component';
+import { ExpertsResolverService } from '../shared/services/experts-resolver.service';
+import { VibiiographersResolverService } from '../shared/services/vibiiographers-resolver.service';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -161,6 +159,20 @@ const dashboardRoutes: Routes = [
                cons: AllConsumersResolver
             }
           },
+          {
+            path: 'vibiiographers',
+            component: VibiiographerListComponent,
+            resolve: {
+              vibiiographers: VibiiographersResolverService
+            }
+          },
+          {
+            path: 'experts',
+            component: ExpertListComponent,
+            resolve: {
+              experts: ExpertsResolverService
+            }
+          }
       ]
   }
 ];
@@ -189,25 +201,21 @@ const dashboardRoutes: Routes = [
     NotesComponent,
     NewNoteComponent,
     ExistingNoteComponent,
-    ClaimStatusComponent,
     PolicyDetailComponent,
-    CapitalizePipe,
-    RemoveUnderscorePipe,
     AutosizeDirective,
     PolicyDetailNewComponent,
     InsurancePolicyComponent,
     SortButtonComponent,
-    OrderByPipe,
     ConsumerAddressComponent,
     ConsumerProfileSummaryComponent,
     InsurancePolicySummaryComponent,
-    VibiioSearchComponent,
     VibiioDescriptionComponent,
-    CustomerNoteComponent
+    CustomerNoteComponent,
+    VibiiographerListComponent,
+    ExpertListComponent
   ],
   imports: [
       CommonModule,
-      RouterModule.forChild(dashboardRoutes),
       HttpModule,
       JcfModule,
       NouisliderModule,
@@ -215,7 +223,10 @@ const dashboardRoutes: Routes = [
       InfiniteScrollModule,
       DynamicFormModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      SharedModule,
+      AngularDraggableModule,
+      RouterModule.forChild(dashboardRoutes),
   ],
   exports: [
     DashboardComponent,
@@ -227,8 +238,6 @@ const dashboardRoutes: Routes = [
   providers: [
     DashboardResolver,
     DashboardService,
-    VideoSnapshotService,
-    VideoChatTokenService,
     VideoArchiveService,
     VideoArchiveResolver,
     MyAppointmentsService,
@@ -252,21 +261,22 @@ const dashboardRoutes: Routes = [
     MyDayResolver,
     SidebarMyVibiioSharedService,
     NoteService,
-    VibiioUpdateService,
     InsurancePolicyService,
     VibiioProfileService,
     VibiioProfileResolver,
     SidebarMyVibiioSharedService,
-    SidebarCustomerStatusSharedService,
-    ActivityService,
-    AvailabilitySharedService,
     MyLicenseService,
     ConsumerSortService,
     InsuranceStatusService,
     AddressStatusService,
     ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
-    VibiioProfileFormStatusService
+    VibiioProfileFormStatusService,
+    ExpertsResolverService,
+    VibiiographersResolverService
+  ],
+  entryComponents: [
+    VibiiographerCallComponent
   ]
 })
 

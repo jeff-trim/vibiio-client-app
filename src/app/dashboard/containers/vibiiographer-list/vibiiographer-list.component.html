@@ -1,0 +1,30 @@
+<div class="col-xs-offset-1
+            vibiiographer-list-container">
+  <div class="search">
+    <vib-search-box (queryEmitter)="search($event)"></vib-search-box> 
+  </div>
+  
+  <div *ngIf="(vibiiographers?.length > 0); else noResults">
+    <div class="info-element-container" *ngFor="let vibiiographer of vibiiographers">
+      <div class="info-element
+                  row
+                  between-xs
+                  bottom-xs">
+        <div>
+          <span class="label">{{ vibiiographer.first_name }} {{ vibiiographer.last_name }}</span>
+          <span class="pink-underline"></span>
+        </div>
+      </div>
+      <p class="detail"><span>{{ vibiiographer.profile_type }}</span><span>{{ vibiiographer.company }}</span></p>
+    </div>
+  </div>  
+
+  <ng-template #noResults>
+    <div class="info-element
+                row
+                between-xs
+                bottom-xs">
+      <span class="label">No Vibiiographers match that term</span>
+    </div>
+  </ng-template>
+</div>

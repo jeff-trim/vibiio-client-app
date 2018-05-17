@@ -2,6 +2,7 @@ import { InsurancePolicy } from './insurance-policy.interface';
 import { VideoSnapshot } from './video-snapshot.interface';
 import { Address } from './address.interface';
 import { Contact } from './contact.interface';
+import { Vibiio } from './vibiio.interface';
 
 export interface ConsumerProfile {
     id: number;
@@ -23,4 +24,9 @@ export interface ConsumerProfile {
     insurance_policies?: InsurancePolicy[];
     snapshots?: VideoSnapshot[];
     contacts?: Contact[];
+    video_session_id: string;
+    vibiio_type?: string;
+    description?: string;
+    vibiiographer_id?: number;
+    consumer_name?: string;
 }

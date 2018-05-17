@@ -4,7 +4,7 @@ import { Notification } from '../../models/notification.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
-    selector: 'appointment-notification',
+    selector: 'vib-appointment-notification',
     styleUrls: ['./appointment-notification.component.scss'],
     templateUrl: 'appointment-notification.component.html'
 })

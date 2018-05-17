@@ -1,0 +1,24 @@
+<div class="expert-search-container">
+  <div class="close" (click)="close()"></div>
+  <div class="title">
+    <h3 class="add-to-call">add someone to call:</h3>
+  </div>
+
+  <vib-search-box (queryEmitter)="search($event)"></vib-search-box>
+  <vib-search-filters [filters]="filters"
+                      (filter)="filterResults($event)"
+                      ></vib-search-filters>
+
+  <div class="search-results">
+    <div *ngIf="(results?.length > 0); else noResults">
+      <div *ngFor="let result of results">
+        <vib-expert-search-result [result]="result"
+                                  (selected)="addExpert($event)"></vib-expert-search-result>
+      </div>
+    </div>
+    
+    <ng-template #noResults>
+      <p> No results, try again.</p>
+    </ng-template>
+  </div>
+</div>

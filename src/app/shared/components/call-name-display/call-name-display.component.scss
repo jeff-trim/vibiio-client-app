@@ -1,0 +1,15 @@
+@import '~assets/css/variables';
+
+.call-name-display-container {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    .name {
+        z-index: 1;
+        font-size: 18px;
+        font-family: $copy-font;
+        line-height: 6px;
+        color: $grey;
+        font-weight: 500;
+    }
+}

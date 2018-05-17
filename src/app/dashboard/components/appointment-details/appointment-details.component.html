@@ -10,34 +10,21 @@
               appointment-title
               pink" >{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h1>
 
-    <div *ngIf="(!onVibiio)"
-          class="col-xs
+    <div class="col-xs
           col-xs-offset-1
           col-md-2
           start-vibiio
           link"
+          [class.disabled]="onVibiio"
           (click)="connect()">
           start vibiio
     </div>
 
-    <div *ngIf="(onVibiio)"
-        class="col-xs
-        col-xs-offset-1
-        col-md-2
-        start-vibiio
-        link"
-        (click)="disconnect()">
-        end vibiio
-    </div>
  
-    <div class="col-xs link">
-      <img  *ngIf="(!onVibiio)"
-            src="../../../../assets/images/call-controls.svg"
-            (click)="connect()">
-      <img  *ngIf="(onVibiio)"
-        src="../../../../assets/images/call-controls.svg"
-        class="end-call"
-        (click)="disconnect()">
+    <div class="col-xs link"
+         [class.disabled]="onVibiio"
+         (click)="connect()">
+      <img  src="../../../../assets/images/call-controls.svg">
     </div>
   </div>
   <div class="row edit-button-row">
@@ -85,6 +72,9 @@
                [value]="parseTime(appointment.scheduled_datetime)"></key-value>
 
     
+    <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
+
+    
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
                           [consumerId]="appointment.consumer_id"
                           (editingPolicy)="onEdit($event)">
@@ -101,66 +91,27 @@
     <div class="info-element sub-heading">
       <h2>vibiio</h2>
       <div class="long-pink-underline" ></div>
-
-      <div class="row center-xs video-container">
-        <div *ngIf="vibiioConnecting">
-          <div class="waiting-house"></div>
-          <div class="waiting-text">Connecting...</div>
-        </div>
-
-        <div *ngIf="(onVibiio)">
-          <div class="subscriber-holder"
-               [class.on-fullscreen]="vibiioFullscreen">
-            <div id="subscriber-stream"></div>
-          </div>
-
-          <div [class.fs-button-position]="vibiioFullscreen"
-              (click)="toggleVibiioFullscreen()">
-            <div class="fullscreen-button" *ngIf="(!vibiioFullscreen)">
-              <img class="fullscreen-icon"
-                    src="../../../../assets/images/fullscreen-enter-pink.svg">
-              <span class="fullscreen-text">FULLSCREEN</span>
-            </div>
-              
-            <div class="fullscreen-button" *ngIf="(vibiioFullscreen)">
-              <img class="fullscreen-icon"
-                    src="../../../../assets/images/fullscreen-exit-white.svg">
-            </div>
-          </div>
-          <vib-claim-status (updatedStatus)="updateStatus($event)"
-                            [vibiio]="vibiio"></vib-claim-status>
-        </div>
-      </div>
-
-      <div *ngIf="(!onVibiio)" 
-          class="vibiio-message">
+    </div>
+    
+    <div class="video-container">
+      <div class="vibiio-message"
+           [class.disabled]="onVibiio">
         <p class="first-vibiio">🤙</p>
         <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio!</p>
         <p class="first-vibiio-text">Ready to introduce yourself?</p>
         <p class="first-vibiio-text pink link"
-          (click)="connect($event)">Call {{ appointment.user.first_name }} now.</p>
+            (click)="connect()">Call {{ appointment.user.first_name }} now.</p>
       </div>
-
-      <div *ngIf="(!onVibiio && neworkDisconnected)" 
-          class="vibiio-message">
-        <p class="first-vibiio-text pink">Lost connection. This could be due to your internet connection    
-                                          or because the other party lost their connection.</p>
-      </div>
-      
-      <vib-claim-status *ngIf="(!onVibiio)"
-                        (updatedStatus)="updateStatus($event)"
-                        [vibiio]="vibiio"></vib-claim-status>
-      
-    </div> 
+    </div>        
   </div> 
 </div>
 
 <div class="row flex">
   <div class="col-xs-10
-          col-md-offset-1
-          appointment-information
-          appointment-notes">  
-  
+              col-md-offset-1
+              appointment-information
+              appointment-notes">  
+      
     <div class="notes-row">
       
       <div class="note-row col-md-6">
@@ -191,7 +142,7 @@
       
       <div class="note-row col-md-6">
         <div class="info-element">
-          <span class="label">Notes</span>
+          <span class="label">notes</span>
           <span class="pink-underline"></span>
         </div>
         <vib-vibiio-notes 
