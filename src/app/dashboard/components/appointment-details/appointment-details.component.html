@@ -72,6 +72,9 @@
                [value]="parseTime(appointment.scheduled_datetime)"></key-value>
 
     
+    <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
+
+    
     <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
                           [consumerId]="appointment.consumer_id"
                           (editingPolicy)="onEdit($event)">

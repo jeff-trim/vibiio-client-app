@@ -34,16 +34,16 @@
   </div>
 
   <span [ngClass]="{'hidden':!sidebarVisibility}">
-    <div class="title-row">
-      <a routerLink="my-vibiios"
-         routerLinkActive="active">
+    <div class="title-row"
+         routerLink="my-vibiios"
+         (click)='toggleScheduledVibiios($event)'>
+      <a routerLinkActive="active">
         <div class="title">
           My Scheduled vibiios
         </div>
       </a>
       <div class="arrow left-arrow"
-           [class.active-arrow]='!scheduledVibiiosActive'
-           (click)='toggleScheduledVibiios($event)'>
+           [class.active-arrow]='scheduledVibiiosActive'>
       </div>
     </div>
     <vib-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
@@ -67,46 +67,43 @@
     </vib-sidebar-customer>
 
     <div class="title-row"
-         (click)="toggleProfile()">
+         (click)="toggleProfile()"
+         routerLink="my_profile">
       <div class="title">
-        <a routerLink="my_profile"
-           routerLinkActive="active">
+        <a routerLinkActive="active">
           My Profile
         </a>
       </div>
       <div class='arrow left-arrow'
-           [class.active-arrow]='profileActive'
-           routerLink="my_profile">
+           [class.active-arrow]='profileActive'>
       </div>
     </div>
 
     <div class="title-row"
-         (click)="toggleExperts()">
+         (click)="toggleExperts()"
+         routerLink="experts">
       <div class="title">
-        <a routerLink="experts"
-           routerLinkActive="active">
+        <a routerLinkActive="active">
           Experts
         </a>
       </div>
 
       <div class='arrow left-arrow'
-           [class.active-arrow]='expertsActive'
-           routerLink="experts">
+           [class.active-arrow]='expertsActive'>
       </div>
     </div>
 
     <div class="title-row"
-         (click)="toggleVibiiographers()">
+         (click)="toggleVibiiographers()"
+         routerLink="vibiiographers">
       <div class="title">
-        <a routerLink="vibiiographers"
-           routerLinkActive="active">
+        <a routerLinkActive="active">
           Vibiiographers
         </a>
       </div>
 
       <div class='arrow left-arrow'
-           [class.active-arrow]='vibiiographersActive'
-           routerLink="vibiiographers">
+           [class.active-arrow]='vibiiographersActive'>
       </div>
     </div>
 

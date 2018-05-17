@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { User } from '../../models/user.interface';
 import { UsersService } from '../../../shared/services/users.service';
+import { RemoveUnderscorePipe } from '../../../shared/pipes/remove-underscore.pipe';
 
 @Component({
   selector: 'vib-expert-list',

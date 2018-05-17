@@ -104,6 +104,8 @@ a {
         }
         .active-arrow {
             background-image: url(../../../../assets/images/active-arrow.svg);
+            background-size: contain;
+            background-repeat: no-repeat;
             cursor: pointer;
             animation-name: active-rotate-snap;
             animation-duration: 500ms;

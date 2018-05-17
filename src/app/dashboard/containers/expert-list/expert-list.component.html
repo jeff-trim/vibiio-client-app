@@ -14,7 +14,7 @@
             <span class="pink-underline"></span>
           </div>
         </div>
-        <p class="detail"><span>{{ expert.professions[0] }}</span><span>{{ expert.city }}, {{ expert.state }}</span></p>
+        <p class="detail"><span>{{ expert.professions[0] | removeUnderscore }}</span><span>{{ expert.city }}, {{ expert.state }}</span></p>
       </div>
     </div>  
   
