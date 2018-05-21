@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
@@ -85,6 +85,15 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     @Output() updateVibiioStatus = new EventEmitter<any>();
 
     @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
+
+    // handle escape when vibiio is Fullscreen
+    @HostListener('document:keyup', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        const x = event.keyCode;
+        if ((x === 27) && this.vibiioFullscreen) {
+           this.toggleVibiioFullscreen();
+        }
+    }
 
     constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
         private statusUpdateService: VibiioUpdateService,
