@@ -6,7 +6,8 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
   styleUrls: ['./video-controls.component.scss']
 })
 export class VideoControlsComponent {
-  @Input() muted = false; // placeholder
+  @Input() muted = false;
+  @Input() enableAddExpert = true;
 
   @Output() mute = new EventEmitter<boolean>();
   @Output() endCall = new EventEmitter<boolean>();

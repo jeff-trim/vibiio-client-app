@@ -22,8 +22,10 @@ export class AnswerCallComponent implements OnInit {
   session: any;
   streams = [];
   muted = false;
+  vibiioConnecting = true;
   onVibiio = false;
   callEnded = false;
+  enableAddExpert = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private videoChatService: VideoChatService) { }
@@ -52,10 +54,12 @@ export class AnswerCallComponent implements OnInit {
 
   subscribeToStreamCreatedEvents() {
     this.session.on('streamCreated', (data) => {
-      this.onVibiio = true;
+      this.vibiioConnecting = false;
 
-            this.subscriber = this.session.subscribe(data.stream, 'video-stream', VIDEO_OPTIONS,
-            (stats) => {});
+      this.subscriber = this.session.subscribe(data.stream, 'video-stream', VIDEO_OPTIONS,
+        (stats) => {});
+      this.onVibiio = true;
+      console.log(this.vibiioConnecting, this.onVibiio);
     });
   }
 
@@ -68,7 +72,7 @@ export class AnswerCallComponent implements OnInit {
   }
 
   private initPublisher() {
-    this.publisher = this.videoChatService.initPublisher();
+    this.publisher = this.videoChatService.initExpertPublisher();
   }
 
   private hideVideo() {
