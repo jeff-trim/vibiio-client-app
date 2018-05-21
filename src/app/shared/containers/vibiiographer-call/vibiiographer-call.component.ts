@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
@@ -25,6 +25,7 @@ import { SidebarCustomerStatusSharedService } from '../../services/sidebar-custo
 import { EXPERT_VIDEO_OPTIONS } from '../../../constants/expert-video-options';
 import { AddToCallService } from '../../services/add-to-call.service';
 import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
+import { VideoChatComponent } from '../../components/video-chat/video-chat.component';
 
 
 @Component({
@@ -82,6 +83,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     @Input() outgoingCall = true;
 
     @Output() updateVibiioStatus = new EventEmitter<any>();
+
+    @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
 
     constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
         private statusUpdateService: VibiioUpdateService,
@@ -208,9 +211,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     toggleVibiioFullscreen() {
+        const el = document.getElementById('full');
         this.vibiioFullscreen = !this.vibiioFullscreen;
         if (screenfull.enabled) {
-            screenfull.toggle();
+            screenfull.toggle(el);
         }
     }
 

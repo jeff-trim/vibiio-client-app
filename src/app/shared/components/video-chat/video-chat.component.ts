@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, trigger, state, transition, style, animate } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Vibiio } from '../../../dashboard/models/vibiio.interface';
 
 @Component({
@@ -23,6 +23,7 @@ export class VideoChatComponent {
   @Output() endCall = new EventEmitter<boolean>();
   @Output() add = new EventEmitter<boolean>();
 
+  @ViewChild('fullSubscriberScreen') fullSubscriberStream: ElementRef;
 
   updateStatus(status: any) {
     this.updateVibiioStatus.emit(status);
