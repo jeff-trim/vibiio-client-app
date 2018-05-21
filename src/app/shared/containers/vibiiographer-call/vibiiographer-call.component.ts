@@ -75,8 +75,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     enableFullscreen = false;
     consumerName: string;
     expertName: string;
+    expertToAdd: string;
     state: string;
     stateExpression = 'collapsed';
+    chime = new Audio('~assets/audio/chime.mp3');
 
     @Input() vibiio: Vibiio;
     @Input() outgoingCall = true;
@@ -84,8 +86,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     @Output() updateVibiioStatus = new EventEmitter<any>();
 
     constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-        private statusUpdateService: VibiioUpdateService,
         private videoService: VideoChatService,
+        private statusUpdateService: VibiioUpdateService,
         private snapshotService: VideoSnapshotService,
         private activityService: ActivityService,
         private availabilitySharedService: AvailabilitySharedService,
@@ -109,7 +111,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     addExpert(expert: User) {
         this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
             this.consumerName = data.consumer;
-            this.expertName = data.expert;
+            this.expertToAdd = data.expert;
         });
     }
 
@@ -156,6 +158,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.showControls = true;
         this.session.on('streamCreated', (data) => {
             this.vibiioConnecting = false;
+            if(this.expertToAdd) { this.expertConnected(); }
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
                     this.captureSnapshot();
@@ -232,5 +235,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         } else {
             this.publisher.publishAudio(true);
         }
+    }
+
+    expertConnected() {
+        this.expertName = this.expertToAdd;
+        this.chime.play();
     }
 }
