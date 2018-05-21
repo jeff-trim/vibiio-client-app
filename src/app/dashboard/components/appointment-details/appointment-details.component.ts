@@ -14,6 +14,7 @@ import { Vibiio } from '../../models/vibiio.interface';
 import { Note } from '../../models/consumer-note.interface';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { Address } from '../../models/address.interface';
+import { VideoSnapshot } from '../../models/video-snapshot.interface';
 
 @Component({
     selector: 'vib-appointment-details',
@@ -22,12 +23,13 @@ import { Address } from '../../models/address.interface';
 })
 
 export class AppointmentDetailsComponent {
-    @Input() onVibiio: boolean;
     @Input() appointment: Appointment;
     @Input() user: User;
     @Input() vibiio: Vibiio;
-    @Input() timeZone: string;
     @Input() address: Address;
+    @Input() snapshots: VideoSnapshot[];
+    @Input() onVibiio: boolean;
+    @Input() timeZone: string;
     @Input() isEditingForms = false;
     @Input() isUpdatingForms = false;
 
