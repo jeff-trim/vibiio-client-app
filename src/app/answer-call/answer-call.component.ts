@@ -30,9 +30,9 @@ export class AnswerCallComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
-      this.callData = data.callData;
-      this.token = this.callData.token.token;
-      this.sessionId = this.callData.session_id;
+      this.callData = data.connection_data;
+      this.token = this.callData.token_data.token;
+      this.sessionId = this.callData.video_session_id;
       this.consumerName = this.callData.consumer;
       this.vibiiographerName = this.callData.vibiiographer;
 
@@ -81,9 +81,11 @@ export class AnswerCallComponent implements OnInit {
 
   stopPublishing() {
     if (this.subscriber) {
+        this.session.unsubscribe(this.subscriber);
         this.subscriber.destroy();
     }
     if (this.publisher) {
+        this.session.unpublish(this.publisher);
         this.publisher.destroy();
     }
 }
