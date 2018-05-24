@@ -52,18 +52,15 @@ export class AnswerCallComponent implements OnInit {
 
   subscribeToStreamCreatedEvents() {
     this.session.on('streamCreated', (data) => {
-      this.onVibiio = true;
-
             this.subscriber = this.session.subscribe(data.stream, 'video-stream', VIDEO_OPTIONS,
             (stats) => {});
+            this.onVibiio = true;
     });
   }
 
   subscribeToStreamDestroyedEvents() {
     this.session.on('streamDestroyed', (data) => {
-      this.onVibiio = false;
-      this.callEnded = true;
-      this.session.disconnect();
+      this.hangUp();
     });
   }
 
@@ -76,9 +73,11 @@ export class AnswerCallComponent implements OnInit {
   }
 
   hangUp() {
-    this.session.disconnect();
+    this.subscriber.destroy();
+    this.publisher.destroy();
     this.onVibiio = false;
     this.callEnded = true;
+    this.session.disconnect();
   }
 
   toggleMute() {

@@ -166,9 +166,11 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
+            this.subscriber.destroy();
+            this.publisher.destroy();
             this.session.disconnect();
-            this.videoService.hangUp(this.vibiio);
             this.availabilitySharedService.emitChange(true);
+            this.videoService.hangUp(this.vibiio);
         });
     }
 
@@ -192,6 +194,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     endSession() {
+        this.publisher.destroy();
+        this.subscriber.destroy();
         this.session.disconnect();
         this.videoService.hangUp(this.vibiio);
         this.availabilitySharedService.emitChange(true);
