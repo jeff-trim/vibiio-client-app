@@ -73,12 +73,20 @@ export class AnswerCallComponent implements OnInit {
   }
 
   hangUp() {
-    this.subscriber.destroy();
-    this.publisher.destroy();
+    this.stopPublishing();
     this.onVibiio = false;
     this.callEnded = true;
     this.session.disconnect();
   }
+
+  stopPublishing() {
+    if (this.subscriber) {
+        this.subscriber.destroy();
+    }
+    if (this.publisher) {
+        this.publisher.destroy();
+    }
+}
 
   toggleMute() {
     this.muted = !this.muted;
