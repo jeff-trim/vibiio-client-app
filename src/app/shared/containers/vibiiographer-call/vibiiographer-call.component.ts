@@ -22,10 +22,10 @@ import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { EXPERT_VIDEO_OPTIONS } from '../../../constants/expert-video-options';
 import { AddToCallService } from '../../services/add-to-call.service';
 import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
 import { VideoChatComponent } from '../../components/video-chat/video-chat.component';
+import { ConnectionData } from '../../models/transfer-objects/connection-data';
 
 
 @Component({
@@ -106,7 +106,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.vibiioConnecting = true;
-        this.getToken();
+        this.startSession();
         this.session = this.videoService.initSession(this.vibiio.video_session_id);
         this.consumerName = this.vibiio.consumer_name;
         if (this.outgoingCall) {
@@ -133,9 +133,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.stateExpression = 'collapsed';
     }
 
-    getToken() {
-        this.videoService.getToken(this.vibiio.id).subscribe((data) => {
-            this.token = data.video_chat_auth_token.token;
+    startSession() {
+        this.videoService.getConnectionData(this.vibiio.id, undefined, undefined)
+                         .subscribe((data) => {
+            this.token = data.connection_data.token_data.token;
             this.connectToSession();
         });
     }
@@ -178,10 +179,22 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
+            this.stopPublishing();
             this.session.disconnect();
-            this.videoService.hangUp(this.vibiio);
             this.availabilitySharedService.emitChange(true);
+            this.videoService.hangUp(this.vibiio);
         });
+    }
+
+    stopPublishing() {
+        if (this.subscriber) {
+            this.session.unsubscribe(this.subscriber);
+            this.subscriber.destroy();
+        }
+        if (this.publisher) {
+            this.session.unpublish(this.publisher);
+            this.publisher.destroy();
+        }
     }
 
     // save snapshot
@@ -204,6 +217,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     endSession() {
+        this.stopPublishing();
         this.session.disconnect();
         this.videoService.hangUp(this.vibiio);
         this.availabilitySharedService.emitChange(true);

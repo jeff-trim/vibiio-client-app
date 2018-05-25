@@ -30,9 +30,9 @@ export class AnswerCallComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
-      this.callData = data.callData;
-      this.token = this.callData.token.token;
-      this.sessionId = this.callData.session_id;
+      this.callData = data.connection_data;
+      this.token = this.callData.token_data.token;
+      this.sessionId = this.callData.video_session_id;
       this.consumerName = this.callData.consumer;
       this.vibiiographerName = this.callData.vibiiographer;
 
@@ -52,18 +52,15 @@ export class AnswerCallComponent implements OnInit {
 
   subscribeToStreamCreatedEvents() {
     this.session.on('streamCreated', (data) => {
-      this.onVibiio = true;
-
             this.subscriber = this.session.subscribe(data.stream, 'video-stream', VIDEO_OPTIONS,
             (stats) => {});
+            this.onVibiio = true;
     });
   }
 
   subscribeToStreamDestroyedEvents() {
     this.session.on('streamDestroyed', (data) => {
-      this.onVibiio = false;
-      this.callEnded = true;
-      this.session.disconnect();
+      this.hangUp();
     });
   }
 
@@ -76,10 +73,22 @@ export class AnswerCallComponent implements OnInit {
   }
 
   hangUp() {
-    this.session.disconnect();
+    this.stopPublishing();
     this.onVibiio = false;
     this.callEnded = true;
+    this.session.disconnect();
   }
+
+  stopPublishing() {
+    if (this.subscriber) {
+        this.session.unsubscribe(this.subscriber);
+        this.subscriber.destroy();
+    }
+    if (this.publisher) {
+        this.session.unpublish(this.publisher);
+        this.publisher.destroy();
+    }
+}
 
   toggleMute() {
     this.muted = !this.muted;
