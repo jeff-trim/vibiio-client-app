@@ -7,10 +7,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { VIDEO_OPTIONS } from '../../constants/video-options';
-import { EXPERT_VIDEO_OPTIONS } from '../../constants/expert-video-options';
 import { Subject } from 'rxjs/Subject';
 import { VideoCall } from '../models/video-call.interface';
 import { Vibiio } from '../../dashboard/models/vibiio.interface';
+import { ConnectionData } from '../models/transfer-objects/connection-data';
 
 declare var OT: any;
 
@@ -33,18 +33,19 @@ export class VideoChatService {
       this.endingCall.next(vibiio);
   }
 
+  connectionUrl(vibiio_id?: number, token?: string, userId?: number): string {
+    if (vibiio_id) {
+     return `${API_URL}/connect?vibiio_id=${vibiio_id}`;
+    } else {
+      return `${API_URL}/connect?user=${userId}&token=${token}`;
+    }
+  }
 
-  getToken(vibiio_id: number): Observable<any> {
-    const url = `${API_URL}/video_chat/auth_tokens`;
-
-    const payload = {
-      video_chat_auth_token: {
-        vibiio_id: vibiio_id
-      }
-    };
+  getConnectionData(vibiio_id?: number, token?: string, userId?: number): Observable<any> {
+    const url =  this.connectionUrl(vibiio_id, token, userId);
 
     return this.http
-               .post(url, payload)
+               .get(url)
                .map( (response: Response) => response.json())
                .catch( (error: any) => Observable.throw(error));
   }
@@ -55,10 +56,6 @@ export class VideoChatService {
 
   initPublisher() {
     return OT.initPublisher({insertDefaultUI: false}, VIDEO_OPTIONS);
-  }
-
-  initExpertPublisher() {
-    return OT.initPublisher({insertDefaultUI: false}, EXPERT_VIDEO_OPTIONS);
   }
 
   dialConsumer(vibiio_id: number): Observable<any> {

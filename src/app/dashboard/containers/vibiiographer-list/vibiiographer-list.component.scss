@@ -3,9 +3,9 @@
 .vibiiographer-list-container {
     display: flex;
     flex-direction: column;
-    padding-top: 4em;
+    padding-top: 3em;
     .search {
-        width: 25%;
+        width: 46%;
         padding: 0.5rem 0.5rem 0.5rem 0;
     }
     
@@ -47,19 +47,19 @@
             }
 
         }
-            .detail {
-                display: flex;
-                justify-content: space-between;
-                width: 50%;
-                font-family: $copy-font;
-                font-size: 1.45rem;
-                font-weight: normal;
-                font-style: normal;
-                font-stretch: normal;
-                letter-spacing: normal;
-                color: $greyish-brown;
-                text-transform: capitalize;
-            }
- 
+
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            width: 75%;
+            font-family: $copy-font;
+            font-size: 1.45rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: normal;
+            color: $greyish-brown;
+            text-transform: capitalize;
+        }
     }       
 }

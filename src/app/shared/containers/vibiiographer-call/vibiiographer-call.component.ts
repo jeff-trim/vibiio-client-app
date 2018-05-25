@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
@@ -22,9 +22,10 @@ import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { EXPERT_VIDEO_OPTIONS } from '../../../constants/expert-video-options';
 import { AddToCallService } from '../../services/add-to-call.service';
 import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
+import { VideoChatComponent } from '../../components/video-chat/video-chat.component';
+import { ConnectionData } from '../../models/transfer-objects/connection-data';
 
 
 @Component({
@@ -75,17 +76,30 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     enableFullscreen = false;
     consumerName: string;
     expertName: string;
+    expertToAdd: string;
     state: string;
     stateExpression = 'collapsed';
+    chime = new Audio('~assets/audio/chime.mp3');
 
     @Input() vibiio: Vibiio;
     @Input() outgoingCall = true;
 
     @Output() updateVibiioStatus = new EventEmitter<any>();
 
+    @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
+
+    // handle escape when vibiio is Fullscreen
+    @HostListener('document:keyup', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        const x = event.keyCode;
+        if ((x === 27) && this.vibiioFullscreen) {
+           this.toggleVibiioFullscreen();
+        }
+    }
+
     constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-        private statusUpdateService: VibiioUpdateService,
         private videoService: VideoChatService,
+        private statusUpdateService: VibiioUpdateService,
         private snapshotService: VideoSnapshotService,
         private activityService: ActivityService,
         private availabilitySharedService: AvailabilitySharedService,
@@ -94,7 +108,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.vibiioConnecting = true;
-        this.getToken();
+        this.startSession();
         this.session = this.videoService.initSession(this.vibiio.video_session_id);
         this.consumerName = this.vibiio.consumer_name;
         if (this.outgoingCall) {
@@ -109,7 +123,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     addExpert(expert: User) {
         this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
             this.consumerName = data.consumer;
-            this.expertName = data.expert;
+            this.expertToAdd = data.expert;
         });
     }
 
@@ -121,9 +135,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.stateExpression = 'collapsed';
     }
 
-    getToken() {
-        this.videoService.getToken(this.vibiio.id).subscribe((data) => {
-            this.token = data.video_chat_auth_token.token;
+    startSession() {
+        this.videoService.getConnectionData(this.vibiio.id, undefined, undefined)
+                         .subscribe((data) => {
+            this.token = data.connection_data.token_data.token;
             this.connectToSession();
         });
     }
@@ -156,6 +171,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.showControls = true;
         this.session.on('streamCreated', (data) => {
             this.vibiioConnecting = false;
+            if(this.expertToAdd) { this.expertConnected(); }
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
                     this.captureSnapshot();
@@ -166,10 +182,22 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
+            this.stopPublishing();
             this.session.disconnect();
-            this.videoService.hangUp(this.vibiio);
             this.availabilitySharedService.emitChange(true);
+            this.videoService.hangUp(this.vibiio);
         });
+    }
+
+    stopPublishing() {
+        if (this.subscriber) {
+            this.session.unsubscribe(this.subscriber);
+            this.subscriber.destroy();
+        }
+        if (this.publisher) {
+            this.session.unpublish(this.publisher);
+            this.publisher.destroy();
+        }
     }
 
     // save snapshot
@@ -192,6 +220,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     endSession() {
+        this.stopPublishing();
         this.session.disconnect();
         this.videoService.hangUp(this.vibiio);
         this.availabilitySharedService.emitChange(true);
@@ -208,9 +237,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     toggleVibiioFullscreen() {
+        const el = document.getElementById('full');
         this.vibiioFullscreen = !this.vibiioFullscreen;
         if (screenfull.enabled) {
-            screenfull.toggle();
+            screenfull.toggle(el);
         }
     }
 
@@ -232,5 +262,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         } else {
             this.publisher.publishAudio(true);
         }
+    }
+
+    expertConnected() {
+        this.expertName = this.expertToAdd;
+        this.chime.play();
     }
 }
