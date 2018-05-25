@@ -1,7 +1,6 @@
 import { Component, Output, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { async, inject } from '@angular/core/testing';
-import * as screenfull from 'screenfull';
 
 // Models
 import { Appointment } from '../../models/appointment.interface';

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as screenfull from 'screenfull';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
@@ -24,6 +24,7 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
 import { AddToCallService } from '../../services/add-to-call.service';
 import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
+import { VideoChatComponent } from '../../components/video-chat/video-chat.component';
 import { ConnectionData } from '../../models/transfer-objects/connection-data';
 
 
@@ -82,6 +83,17 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     @Input() outgoingCall = true;
 
     @Output() updateVibiioStatus = new EventEmitter<any>();
+
+    @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
+
+    // handle escape when vibiio is Fullscreen
+    @HostListener('document:keyup', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        const x = event.keyCode;
+        if ((x === 27) && this.vibiioFullscreen) {
+           this.toggleVibiioFullscreen();
+        }
+    }
 
     constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
         private statusUpdateService: VibiioUpdateService,
@@ -222,9 +234,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     toggleVibiioFullscreen() {
+        const el = document.getElementById('full');
         this.vibiioFullscreen = !this.vibiioFullscreen;
         if (screenfull.enabled) {
-            screenfull.toggle();
+            screenfull.toggle(el);
         }
     }
 
