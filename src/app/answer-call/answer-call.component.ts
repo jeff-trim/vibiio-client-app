@@ -69,7 +69,7 @@ export class AnswerCallComponent implements OnInit {
   }
 
   private initPublisher() {
-    this.publisher = this.videoChatService.initExpertPublisher();
+    this.publisher = this.videoChatService.initPublisher();
   }
 
   private hideVideo() {
