@@ -10,7 +10,7 @@ import {
     style,
     animate,
     transition
-  } from '@angular/animations';
+} from '@angular/animations';
 // Models
 import { Vibiio } from '../../../dashboard/models/vibiio.interface';
 import { User } from '../../../dashboard/models/user.interface';
@@ -35,24 +35,24 @@ import { ConnectionData } from '../../models/transfer-objects/connection-data';
     animations: [
         trigger('slideUpDown', [
             transition(':enter', [
-                style({transform: 'translateY(100%)'}),
+                style({ transform: 'translateY(100%)' }),
                 animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)')
             ]),
             transition(':leave', [
-                style({transform: 'translateY(0)', height: '*'}),
-                animate(600, style({ transform: 'translateY(100%)', height: '0'}))
+                style({ transform: 'translateY(0)', height: '*' }),
+                animate(600, style({ transform: 'translateY(100%)', height: '0' }))
             ]),
         ]),
         trigger('expandableState', [
             transition(':enter', [
-              style({ transform: 'translateY(100%)', height: '0%'}),
-              animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
-                style({ transform: 'translateY(0%)', height: '*'})),
+                style({ transform: 'translateY(100%)', height: '0%' }),
+                animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
+                    style({ transform: 'translateY(0%)', height: '*' })),
             ]),
             transition(':leave', [
-              style({ transform: 'translateY(0%)', height: '*' }),
-              animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
-                style({ transform: 'translateY(100%)', height: '0%'})),
+                style({ transform: 'translateY(0%)', height: '*' }),
+                animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
+                    style({ transform: 'translateY(100%)', height: '0%' })),
             ]),
         ])
     ]
@@ -79,7 +79,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     expertToAdd: string;
     state: string;
     stateExpression = 'collapsed';
-    chime = new Audio('~assets/audio/chime.mp3');
+    chime = new Audio('/assets/audio/chime.mp3');
 
     @Input() vibiio: Vibiio;
     @Input() outgoingCall = true;
@@ -88,14 +88,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
 
-    // handle escape when vibiio is Fullscreen
-    @HostListener('document:keyup', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
-        const x = event.keyCode;
-        if ((x === 27) && this.vibiioFullscreen) {
-           this.toggleVibiioFullscreen();
-        }
-    }
 
     constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
         private videoService: VideoChatService,
@@ -105,6 +97,15 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         private availabilitySharedService: AvailabilitySharedService,
         private addToCall: AddToCallService,
         private vibiioProfileService: VibiioProfileService) { }
+
+            // handle escape when vibiio is Fullscreen
+    @HostListener('document:keyup', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        const x = event.keyCode;
+        if ((x === 27) && this.vibiioFullscreen) {
+            this.toggleVibiioFullscreen();
+        }
+    }
 
     ngOnInit() {
         this.vibiioConnecting = true;
@@ -121,7 +122,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     addExpert(expert: User) {
-        this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
+        this.addToCall.callUser(expert.id, this.vibiio.id).subscribe((data) => {
             this.consumerName = data.consumer;
             this.expertToAdd = data.expert;
         });
@@ -137,41 +138,21 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     startSession() {
         this.videoService.getConnectionData(this.vibiio.id, undefined, undefined)
-                         .subscribe((data) => {
-            this.token = data.connection_data.token_data.token;
-            this.connectToSession();
-        });
+            .subscribe((data) => {
+                this.token = data.connection_data.token_data.token;
+                this.connectToSession();
+            });
     }
 
     callConsumer() {
-        this.videoService.dialConsumer(this.vibiio.id).subscribe( (res) => {});
-    }
-
-    private connectToSession() {
-        this.triggerActivity(this.vibiio.id,
-            'Vibiiograher manually started video',
-            'Video session started');
-        this.session.connect(this.token, () => {
-            this.initPublisher();
-            this.hideVibiiographerVideo();
-            this.subscribeToStreamCreatedEvents();
-            this.subscribeToStreamDestroyedEvents();
-        });
-    }
-
-    private initPublisher() {
-        this.publisher = this.videoService.initPublisher();
-    }
-
-    private hideVibiiographerVideo() {
-        this.session.publish(this.publisher).publishVideo(false);
+        this.videoService.dialConsumer(this.vibiio.id).subscribe((res) => { });
     }
 
     subscribeToStreamCreatedEvents() {
         this.showControls = true;
         this.session.on('streamCreated', (data) => {
             this.vibiioConnecting = false;
-            if(this.expertToAdd) { this.expertConnected(); }
+            if (this.expertToAdd) { this.expertConnected(); }
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
                     this.captureSnapshot();
@@ -209,14 +190,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
                 (error) => {
                     console.log('error ', error);
                 });
-    }
-
-    private triggerActivity(vibiio_id: number, message: string, name: string) {
-        this.activityService.postActivity(
-            vibiio_id,
-            message,
-            name
-        ).subscribe((data) => { });
     }
 
     endSession() {
@@ -267,5 +240,33 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     expertConnected() {
         this.expertName = this.expertToAdd;
         this.chime.play();
+    }
+
+    private connectToSession() {
+        this.triggerActivity(this.vibiio.id,
+            'Vibiiograher manually started video',
+            'Video session started');
+        this.session.connect(this.token, () => {
+            this.initPublisher();
+            this.hideVibiiographerVideo();
+            this.subscribeToStreamCreatedEvents();
+            this.subscribeToStreamDestroyedEvents();
+        });
+    }
+
+    private initPublisher() {
+        this.publisher = this.videoService.initPublisher();
+    }
+
+    private hideVibiiographerVideo() {
+        this.session.publish(this.publisher).publishVideo(false);
+    }
+
+    private triggerActivity(vibiio_id: number, message: string, name: string) {
+        this.activityService.postActivity(
+            vibiio_id,
+            message,
+            name
+        ).subscribe((data) => { });
     }
 }
