@@ -103,6 +103,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        console.log('call', this.vibiio);
         this.vibiioConnecting = true;
         this.startSession();
         this.session = this.videoService.initSession(this.vibiio.video_session_id);
