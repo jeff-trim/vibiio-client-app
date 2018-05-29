@@ -34,7 +34,10 @@ export class ConsumerStatusComponent implements OnInit {
                 private sortService: ConsumerSortService,
                 private consumersService: AllConsumersService) {
 
-        this.activatedRoute.data.subscribe((res) => this.consumerProfiles = res.data);
+        this.activatedRoute.data.subscribe((res) => {
+            console.log(res.data);
+            this.consumerProfiles = res.data;
+        });
 
         this.activatedRoute.params.subscribe((params) => {
             if (params['status'] !== '') {

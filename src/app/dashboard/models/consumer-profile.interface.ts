@@ -6,6 +6,7 @@ import { Vibiio } from './vibiio.interface';
 
 export interface ConsumerProfile {
     id: number;
+    appointment_id: number;
     consumer_id: number;
     status: string;
     appointment_scheduled_datetime: number;

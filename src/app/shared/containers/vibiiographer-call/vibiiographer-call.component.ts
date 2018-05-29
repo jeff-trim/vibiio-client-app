@@ -1,31 +1,26 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import * as screenfull from 'screenfull';
-import { VIDEO_OPTIONS } from '../../../constants/video-options';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { AngularDraggableDirective } from 'angular2-draggable';
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition
-} from '@angular/animations';
+import * as screenfull from 'screenfull';
+
+// Components
+import { VideoChatComponent } from '../../components/video-chat/video-chat.component';
+
 // Models
 import { Vibiio } from '../../../dashboard/models/vibiio.interface';
 import { User } from '../../../dashboard/models/user.interface';
+import { VIDEO_OPTIONS } from '../../../constants/video-options';
 
 // Services
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
-import { ActivityService } from '../../services/activity.service';
-import { VideoSnapshotService } from '../../services/video-snapshot.service';
-import { VideoChatService } from '../../services/video-chat.service';
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { AddToCallService } from '../../services/add-to-call.service';
 import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
-import { VideoChatComponent } from '../../components/video-chat/video-chat.component';
-import { ConnectionData } from '../../models/transfer-objects/connection-data';
+import { ActivityService } from '../../services/activity.service';
+import { AddToCallService } from '../../services/add-to-call.service';
+import { AvailabilitySharedService } from '../../services/availability-shared.service';
+import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
+import { VibiioUpdateService } from '../../services/vibiio-update.service';
+import { VideoChatService } from '../../services/video-chat.service';
+import { VideoSnapshotService } from '../../services/video-snapshot.service';
+
 
 
 @Component({
@@ -128,14 +123,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         });
     }
 
-    expand() {
-        this.stateExpression = 'expanded';
-    }
-
-    collapse() {
-        this.stateExpression = 'collapsed';
-    }
-
     startSession() {
         this.videoService.getConnectionData(this.vibiio.id, undefined, undefined)
             .subscribe((data) => {
@@ -221,10 +208,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.closeSearch = !this.closeSearch;
         if (!this.closeSearch) {
             this.showControls = false;
-            this.expand();
         } else {
             this.showControls = true;
-            this.collapse();
         }
     }
 
