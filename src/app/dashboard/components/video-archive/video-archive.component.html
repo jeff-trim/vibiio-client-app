@@ -19,6 +19,7 @@
     
     <div *ngIf="(showVideo)"
         class="col-md-3 vibiio-archive-container on-playback">
+        <div class="close" (click)="toggleVideo()"></div>
         <video preload="auto"
                 height="461"
                 width="405"

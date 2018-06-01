@@ -20,6 +20,7 @@ import { ActivityService } from '../../../shared/services/activity.service';
 import { VideoSnapshotService } from '../../../shared/services/video-snapshot.service';
 import { VibiioProfileService } from '../../services/vibiio-profile.service';
 import { Location } from '@angular/common';
+import { VideoSnapshot } from '../../models/video-snapshot.interface';
 
 @Component({
     selector: 'vib-appointment',
@@ -34,6 +35,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     appointment: Appointment;
     address: Address;
     user: User;
+    snapshots: VideoSnapshot[];
     userTimeZone: string;
     startVibiioParams: boolean;
     isUpdatingForms = false;
@@ -69,6 +71,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             if (this.startVibiioParams) {
                 this.answerCall();
             }
+            this.snapshots = data.appt.appointment.snapshots;
         }, (error) => {
             console.log(error);
         });
