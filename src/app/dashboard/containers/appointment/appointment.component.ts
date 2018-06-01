@@ -68,8 +68,10 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             this.vibiio = data.appt.appointment.vibiio;
+            if (this.startVibiioParams) {
+                this.answerCall();
+            }
             this.snapshots = data.appt.appointment.snapshots;
-            console.log(data);
         }, (error) => {
             console.log(error);
         });
@@ -79,9 +81,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             .subscribe(params => {
             // Defaults to false if no query param provided.
                 this.startVibiioParams = params['startVibiio'] || false;
-                if (this.startVibiioParams) {
-                    this.answerCall();
-                }
         });
         this.subscribeToEndCall();
     }
