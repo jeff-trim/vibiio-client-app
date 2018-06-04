@@ -1,25 +1,18 @@
 <div class="answer-call-container">
 
-  <div *ngIf="(vibiioConnecting)"
-       class="connect-container">
-    <div class="waiting-house"></div>
-    <div class="waiting-text">Connecting...</div>
-  </div>
-
   <div id="video-stream" class="video-stream on-fullscreen">
-    <vib-video-controls *ngIf="(onVibiio && !callEnded)"
-                        (endCall)="hangUp()"
+    <vib-video-controls *ngIf="!callEnded"
+                              (endCall)="hangUp()"
                         (mute)="toggleMute($event)"
                         [muted]="muted"
                         [enableAddExpert]="enableAddExpert"></vib-video-controls>
-      <div class="name-container"
-            *ngIf="onVibiio">
+      <div class="name-container">
           <vib-call-name-display [name]="consumerName"></vib-call-name-display>
           <vib-call-name-display [name]="vibiiographerName"></vib-call-name-display>
       </div>
   </div>
 
-  <div *ngIf="(!onVibiio && callEnded)"
+  <div *ngIf="(callEnded)"
        class="vibiio-message">
     <p class="first-vibiio-text pink">
       The call is over
