@@ -18,7 +18,7 @@
             class="name-container"
             [class.fullscreen-name-container]="vibiioFullscreen">
         <vib-call-name-display [name]="consumerName"></vib-call-name-display>
-        <vib-call-name-display [name]="expertName"></vib-call-name-display>
+        <vib-call-name-display *ngIf="(expertName?.length > 0)" [name]="expertName"></vib-call-name-display>
       </div>
       
       <div *ngIf="(onVibiio && !vibiioConnecting)"
