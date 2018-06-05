@@ -55,7 +55,7 @@ declare var OT: any;
     ]
 })
 
-export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnDestroy {
+export class VibiiographerCallComponent implements OnInit, OnDestroy {
     vibiioConnecting: boolean;
     onVibiio: boolean;
     vibiioFullscreen: boolean;
@@ -65,7 +65,7 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     subscriber: any;
     expert: any;
     imgData: any;
-    streams: any[];
+    streams = [];
     showControls= true;
     closeSearch = true;
     muted = false;
@@ -74,8 +74,6 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     consumerName: string;
     expertName: string;
     expertToAdd: string;
-    state: string;
-    stateExpression = 'collapsed';
     chime = new Audio('/assets/audio/chime.mp3');
 
     @Input() vibiio: Vibiio;
@@ -112,15 +110,7 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
         if (this.outgoingCall) {
             this.callConsumer();
         }
-    }
-
-    ngAfterContentInit() {
-        // this.getConnectionData();
-        // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
-        // this.consumerName = this.vibiio.consumer_name;
-        // if (this.outgoingCall) {
-        //     this.callConsumer();
-        // }
+        console.log(this.vibiio.id);
     }
 
     ngOnDestroy() {
@@ -163,9 +153,10 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     }
 
     subscribeToStreamCreatedEvents() {
-        this.vibiioConnecting = false;
-        this.onVibiio = true;
         this.session.on('streamCreated', (data) => {
+            this.onVibiio = true;
+            this.vibiioConnecting = false;
+
             // multiple archives fix
             let alreadySubscribed = false;
             const subscribers = this.session.getSubscribersForStream(data.stream);

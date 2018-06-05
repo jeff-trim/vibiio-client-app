@@ -1,6 +1,7 @@
 import { Component, Output, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { async, inject } from '@angular/core/testing';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 // Models
 import { Appointment } from '../../models/appointment.interface';
@@ -31,7 +32,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     onVibiio = false;
     consumer_id: number;
     vibiio: Vibiio;
-    index: number;
     appointment: Appointment;
     address: Address;
     user: User;
@@ -41,6 +41,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     isUpdatingForms = false;
     isEditingForms = false;
     alive: boolean;
+    inputData: Subscription;
+    startCallTrigger: Subscription;
+
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,
@@ -58,11 +61,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.alive = true;
-        this.activatedRoute.params.subscribe((params: Params) => {
-            this.index = params['id'];
-        });
 
-        this.activatedRoute.data.subscribe( (data) => {
+        this.inputData = this.activatedRoute.data.subscribe( (data) => {
             this.appointment = data.appt.appointment;
             this.address = this.appointment.address;
             this.userTimeZone = data.appt.appointment.user.time_zone;
@@ -81,8 +81,13 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.alive = false;
     }
 
+    ngOnRouteChange() {
+        this.startCallTrigger.unsubscribe();
+        this.inputData.unsubscribe();
+    }
+
     getStartParams() {
-        this.activatedRoute
+            this.startCallTrigger = this.activatedRoute
             .queryParams
             .subscribe(params => {
                 // Defaults to false if no query param provided.
@@ -90,7 +95,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 if (this.startVibiioParams) {
                     this.answerCall();
                 }
-        });
+            });
     }
 
     subscribeToEndCall() {
@@ -123,7 +128,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     claimVibiio(): Vibiio {
-        console.log('claiming', this.vibiio.id);
         if (this.vibiio.vibiiographer_id === null) {
             this.updateAppointmentService
                 .updateVibiiographer(this.appointment.id)
