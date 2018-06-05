@@ -1,6 +1,7 @@
-import { Component, Output, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, Output, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { async, inject } from '@angular/core/testing';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 // Models
 import { Appointment } from '../../models/appointment.interface';
@@ -31,7 +32,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     onVibiio = false;
     consumer_id: number;
     vibiio: Vibiio;
-    index: number;
     appointment: Appointment;
     address: Address;
     user: User;
@@ -41,6 +41,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     isUpdatingForms = false;
     isEditingForms = false;
     alive: boolean;
+    inputData: Subscription;
+    startCallTrigger: Subscription;
+
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,
@@ -53,15 +56,13 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 private videoService: VideoChatService,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private vibiioProfileService: VibiioProfileService,
-                private location: Location) { }
+                private location: Location,
+                private ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.alive = true;
-        this.activatedRoute.params.subscribe((params: Params) => {
-            this.index = params['id'];
-        });
 
-        this.activatedRoute.data.subscribe( (data) => {
+        this.inputData = this.activatedRoute.data.subscribe( (data) => {
             this.appointment = data.appt.appointment;
             this.address = this.appointment.address;
             this.userTimeZone = data.appt.appointment.user.time_zone;
@@ -73,25 +74,28 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         }, (error) => {
             console.log(error);
         });
-
         this.subscribeToEndCall();
     }
-
 
     ngOnDestroy() {
         this.alive = false;
     }
 
+    ngOnRouteChange() {
+        this.startCallTrigger.unsubscribe();
+        this.inputData.unsubscribe();
+    }
+
     getStartParams() {
-        this.activatedRoute
+            this.startCallTrigger = this.activatedRoute
             .queryParams
             .subscribe(params => {
-            // Defaults to false if no query param provided.
+                // Defaults to false if no query param provided.
                 this.startVibiioParams = params['startVibiio'] || false;
                 if (this.startVibiioParams) {
                     this.answerCall();
                 }
-        });
+            });
     }
 
     subscribeToEndCall() {
@@ -107,6 +111,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             .getVibiio(this.vibiio.id)
             .subscribe( (data) => {
                 this.vibiio = data.vibiio;
+                this.snapshots = data.vibiio.snapshots;
         });
     }
 
@@ -116,14 +121,13 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.videoService.call(this.vibiio, false);
     }
 
-    async callConsumer() {
-        this.vibiio = await this.claimVibiio();
+    callConsumer() {
         this.beginCallActions();
         this.videoService.call(this.vibiio, true);
     }
 
     claimVibiio(): Vibiio {
-        if (this.appointment.vibiiographer_id === null) {
+        if (this.vibiio.vibiiographer_id === null) {
             this.updateAppointmentService
                 .updateVibiiographer(this.appointment.id)
                 .subscribe((data) => {
@@ -136,9 +140,11 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         return this.vibiio;
     }
 
-    beginCallActions() {
+    async beginCallActions() {
         this.onVibiio = true;
         this.availabilitySharedService.emitChange(false);
+        this.vibiio = await this.claimVibiio();
+        this.updateVibiioStatus({status: 'claim_in_progress'});
     }
 
     endCallActions() {

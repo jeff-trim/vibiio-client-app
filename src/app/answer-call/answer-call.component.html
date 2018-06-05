@@ -1,8 +1,10 @@
 <div class="answer-call-container">
 
-  <div id="video-stream" class="video-stream on-fullscreen">
+  <div *ngIf="!callEnded"
+       id="video-stream" 
+       class="video-stream on-fullscreen">
     <vib-video-controls *ngIf="!callEnded"
-                              (endCall)="hangUp()"
+                        (endCall)="hangUp()"
                         (mute)="toggleMute($event)"
                         [muted]="muted"
                         [enableAddExpert]="enableAddExpert"></vib-video-controls>

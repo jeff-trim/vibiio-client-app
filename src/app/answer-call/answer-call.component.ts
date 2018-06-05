@@ -71,9 +71,9 @@ export class AnswerCallComponent implements OnInit {
   }
 
   hangUp() {
-    this.stopPublishing();
     this.callEnded = true;
     this.session.disconnect();
+    this.stopPublishing();
   }
 
   stopPublishing() {
