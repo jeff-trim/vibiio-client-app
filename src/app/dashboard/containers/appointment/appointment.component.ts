@@ -142,6 +142,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.onVibiio = true;
         this.availabilitySharedService.emitChange(false);
         this.vibiio = await this.claimVibiio();
+        this.updateVibiioStatus({status: 'claim_in_progress'});
     }
 
     endCallActions() {
@@ -151,6 +152,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     updateVibiioStatus(event: any) {
+        console.log('updating', event);
+
         const options = { status: event.status };
 
         this.vibiioUpdateService
