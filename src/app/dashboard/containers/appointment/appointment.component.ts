@@ -110,7 +110,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.vibiioProfileService
             .getVibiio(this.vibiio.id)
             .subscribe( (data) => {
-                console.log('refreshing', data);
                 this.vibiio = data.vibiio;
                 this.snapshots = data.vibiio.snapshots;
         });
@@ -132,7 +131,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.updateAppointmentService
                 .updateVibiiographer(this.appointment.id)
                 .subscribe((data) => {
-                    console.log('claim data', data);
                     return data.vibiio;
                 },
                 (error: any) => {
@@ -156,8 +154,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     updateVibiioStatus(event: any) {
-        console.log('updating', event);
-
         const options = { status: event.status };
 
         this.vibiioUpdateService

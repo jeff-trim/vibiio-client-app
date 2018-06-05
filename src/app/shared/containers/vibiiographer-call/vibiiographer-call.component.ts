@@ -110,7 +110,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         if (this.outgoingCall) {
             this.callConsumer();
         }
-        console.log(this.vibiio.id);
     }
 
     ngOnDestroy() {
@@ -171,7 +170,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             if (!alreadySubscribed) {
                 this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
-                    console.log('initiating capture');
                     this.captureSnapshot();
                 });
                 this.streams.push(data.stream.connection.connectionId);
@@ -202,7 +200,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     stopPublishing() {
-        console.log('stop Publishing');
         if (this.subscriber) {
             this.session.unsubscribe(this.subscriber);
             this.subscriber.destroy();
@@ -221,10 +218,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     saveSnapshot() {
-        console.log('saving');
         this.snapshotService.saveSnapshot(this.vibiio.consumer_id, this.session.id, this.vibiio.id, this.imgData)
-            .subscribe((data) => { console.log('save data', data);
-            },
+            .subscribe(
                 (error) => {
                     console.log('error ', error);
         });
