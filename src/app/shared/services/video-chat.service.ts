@@ -17,7 +17,7 @@ declare var OT: any;
 @Injectable()
 export class VideoChatService {
   private callingConsumer = new Subject<VideoCall>();
-  private endingCall = new Subject<Vibiio>();
+  private endingCall = new Subject<any>();
 
   calling$ = this.callingConsumer.asObservable();
   hangingUp$ = this.endingCall.asObservable();
@@ -29,8 +29,8 @@ export class VideoChatService {
       this.callingConsumer.next({ vibiio: vibiio, outgoing: outgoing });
   }
 
-  hangUp(vibiio: Vibiio) {
-      this.endingCall.next(vibiio);
+  hangUp() {
+      this.endingCall.next();
   }
 
   connectionUrl(vibiio_id?: number, token?: string, userId?: number): string {

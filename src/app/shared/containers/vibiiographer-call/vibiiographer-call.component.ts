@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, EventEmitter, HostListener,
+    Input, OnInit, AfterContentInit, OnDestroy, Output, ViewChild, ChangeDetectorRef } from '@angular/core';
 import * as screenfull from 'screenfull';
 
 // Components
@@ -10,6 +10,7 @@ import { VideoChatComponent } from '../../components/video-chat/video-chat.compo
 import { Vibiio } from '../../../dashboard/models/vibiio.interface';
 import { User } from '../../../dashboard/models/user.interface';
 import { VIDEO_OPTIONS } from '../../../constants/video-options';
+import { OPENTOK_API_KEY } from '../../../../environments/environment';
 
 // Services
 import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
@@ -21,7 +22,7 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 
-
+declare var OT: any;
 
 @Component({
     selector: 'vib-vibiiographer-call',
@@ -53,8 +54,8 @@ import { VideoSnapshotService } from '../../services/video-snapshot.service';
     ]
 })
 
-export class VibiiographerCallComponent implements OnInit, OnDestroy {
-    vibiioConnecting: boolean;
+export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnDestroy {
+    vibiioConnecting = true;
     onVibiio: boolean;
     vibiioFullscreen: boolean;
     token: string;
@@ -64,11 +65,11 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     imgData: any;
     session: any;
     streams: any[];
-    alive = true;
     showControls = true;
     closeSearch = true;
     muted = false;
-    enableFullscreen = false;
+    alive: boolean;
+    enableFullscreen = true;
     consumerName: string;
     expertName: string;
     expertToAdd: string;
@@ -83,7 +84,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
 
-
     constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
         private videoService: VideoChatService,
         private statusUpdateService: VibiioUpdateService,
@@ -91,9 +91,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         private activityService: ActivityService,
         private availabilitySharedService: AvailabilitySharedService,
         private addToCall: AddToCallService,
-        private vibiioProfileService: VibiioProfileService) { }
+        private vibiioProfileService: VibiioProfileService,
+        private ref: ChangeDetectorRef) { }
 
-            // handle escape when vibiio is Fullscreen
+    // handle escape when vibiio is Fullscreen
     @HostListener('document:keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
         const x = event.keyCode;
@@ -103,9 +104,13 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.alive = true;
         this.vibiioConnecting = true;
+    }
+
+    ngAfterContentInit() {
         this.startSession();
-        this.session = this.videoService.initSession(this.vibiio.video_session_id);
+        this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
         this.consumerName = this.vibiio.consumer_name;
         if (this.outgoingCall) {
             this.callConsumer();
@@ -114,6 +119,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.alive = false;
+        this.session.disconnect();
     }
 
     addExpert(expert: User) {
@@ -125,6 +131,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     startSession() {
         this.videoService.getConnectionData(this.vibiio.id, undefined, undefined)
+            .takeWhile(() => this.alive)
             .subscribe((data) => {
                 this.token = data.connection_data.token_data.token;
                 this.connectToSession();
@@ -136,28 +143,27 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     subscribeToStreamCreatedEvents() {
-        this.showControls = true;
+        this.vibiioConnecting = false;
         this.session.on('streamCreated', (data) => {
-            this.vibiioConnecting = false;
             if (this.expertToAdd) { this.expertConnected(); }
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
-                (stats) => {
-                    this.captureSnapshot();
-                });
+            () => {
+                this.imgData = this.subscriber.getImgData().then().this.saveSnapshot();
+            });
+            this.showControls = true;
             this.onVibiio = true;
+            this.ref.detectChanges();
         });
     }
 
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
             this.stopPublishing();
-            this.session.disconnect();
-            this.availabilitySharedService.emitChange(true);
-            this.videoService.hangUp(this.vibiio);
         });
     }
 
     stopPublishing() {
+        console.log('stop Publishing');
         if (this.subscriber) {
             this.session.unsubscribe(this.subscriber);
             this.subscriber.destroy();
@@ -166,12 +172,12 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             this.session.unpublish(this.publisher);
             this.publisher.destroy();
         }
+        this.session.disconnect();
+        this.videoService.hangUp();
     }
 
     // save snapshot
-    async captureSnapshot() {
-        // wait for image data
-        this.imgData = await this.subscriber.getImgData();
+    saveSnapshot() {
         this.snapshotService.saveSnapshot(this.vibiio.consumer_id, this.session.id, this.vibiio.id, this.imgData)
             .subscribe((data) => { },
                 (error) => {
@@ -181,10 +187,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     endSession() {
         this.stopPublishing();
-        this.session.disconnect();
-        this.videoService.hangUp(this.vibiio);
-        this.availabilitySharedService.emitChange(true);
-
         this.triggerActivity(
             this.vibiio.id,
             'Vibiiographer manually ended video session',
@@ -236,11 +238,12 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             this.hideVibiiographerVideo();
             this.subscribeToStreamCreatedEvents();
             this.subscribeToStreamDestroyedEvents();
+            this.ref.detectChanges();
         });
     }
 
     private initPublisher() {
-        this.publisher = this.videoService.initPublisher();
+        this.publisher = OT.initPublisher({insertDefaultUI: false}, VIDEO_OPTIONS);
     }
 
     private hideVibiiographerVideo() {

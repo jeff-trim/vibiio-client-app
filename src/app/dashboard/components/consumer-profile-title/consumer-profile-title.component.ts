@@ -18,6 +18,5 @@ export class ConsumerProfileTitleComponent {
 
     viewDetails() {
         this.router.navigateByUrl(`/dashboard/appointment/${this.consumerProfile.appointment_id}`);
-        console.log(this.consumerProfile.appointment_id);
     }
 }
