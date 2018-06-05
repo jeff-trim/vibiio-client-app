@@ -117,8 +117,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     answerCall() {
-        this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         this.beginCallActions();
+        this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         this.videoService.call(this.vibiio, false);
     }
 
