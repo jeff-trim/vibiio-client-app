@@ -61,10 +61,10 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     vibiioFullscreen: boolean;
     token: string;
     publisher: any;
+    session: any;
     subscriber: any;
     expert: any;
     imgData: any;
-    session: any;
     streams: any[];
     showControls= true;
     closeSearch = true;
@@ -107,20 +107,24 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     ngOnInit() {
         this.alive = true;
         this.vibiioConnecting = true;
-    }
-
-    ngAfterContentInit() {
         this.getConnectionData();
-        this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
         this.consumerName = this.vibiio.consumer_name;
         if (this.outgoingCall) {
             this.callConsumer();
         }
     }
 
+    ngAfterContentInit() {
+        // this.getConnectionData();
+        // this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
+        // this.consumerName = this.vibiio.consumer_name;
+        // if (this.outgoingCall) {
+        //     this.callConsumer();
+        // }
+    }
+
     ngOnDestroy() {
         this.alive = false;
-        this.session.disconnect();
     }
 
     addExpert(expert: User) {
@@ -141,6 +145,7 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
 
 
     private connectToSession() {
+        this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
         this.session.connect(this.token, () => {
             this.initPublisher();
             this.hideVibiiographerVideo();
@@ -161,21 +166,48 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
         this.vibiioConnecting = false;
         this.onVibiio = true;
         this.session.on('streamCreated', (data) => {
-            console.log('stream created', data.stream);
-            if (this.expertToAdd) { this.expertConnected(); }
-            this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
-            (stats) => {
-                console.log('initiating capture');
-                this.captureSnapshot();
-            });
-            this.ref.detectChanges();
+            // multiple archives fix
+            let alreadySubscribed = false;
+            const subscribers = this.session.getSubscribersForStream(data.stream);
+
+            for (const subscriber of subscribers) {
+                if (subscriber.stream.connection.connectionId === data.stream.connection.connectionId) {
+                    alreadySubscribed = true;
+                }
+            }
+
+            // if new connection
+            if (!alreadySubscribed) {
+                this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
+                (stats) => {
+                    console.log('initiating capture');
+                    this.captureSnapshot();
+                });
+                this.streams.push(data.stream.connection.connectionId);
+
+                if (this.expertToAdd) {
+                    this.expertConnected();
+                }
+            }
         });
     }
 
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
-            this.stopPublishing();
+            const streamId = data.stream.connection.connectionId;
+            this.removeStream(streamId);
+
+            if (this.streams.length === 0) {
+                this.stopPublishing();
+            }
         });
+    }
+
+    removeStream(streamId: string) {
+        const index: number = this.streams.indexOf(streamId);
+        if (index !== -1) {
+            this.streams.splice(index, 1);
+        }
     }
 
     stopPublishing() {
