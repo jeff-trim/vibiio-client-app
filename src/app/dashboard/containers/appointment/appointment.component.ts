@@ -1,13 +1,15 @@
-import { Component, Output, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { async, inject } from '@angular/core/testing';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Component, Output, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { async } from '@angular/core/testing';
+import { Observable } from 'rxjs/Rx';
+import { Location } from '@angular/common';
 
 // Models
 import { Appointment } from '../../models/appointment.interface';
 import { User } from '../../models/user.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { Address } from '../../models/address.interface';
+import { VideoSnapshot } from '../../models/video-snapshot.interface';
 
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
@@ -20,8 +22,6 @@ import { AppointmentService } from '../../services/appointment.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { VideoSnapshotService } from '../../../shared/services/video-snapshot.service';
 import { VibiioProfileService } from '../../services/vibiio-profile.service';
-import { Location } from '@angular/common';
-import { VideoSnapshot } from '../../models/video-snapshot.interface';
 
 @Component({
     selector: 'vib-appointment',
@@ -41,8 +41,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     isUpdatingForms = false;
     isEditingForms = false;
     alive: boolean;
-    inputData: Subscription;
-    startCallTrigger: Subscription;
 
 
     constructor(private activatedRoute: ActivatedRoute,
@@ -56,13 +54,11 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 private videoService: VideoChatService,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private vibiioProfileService: VibiioProfileService,
-                private location: Location,
-                private ref: ChangeDetectorRef) { }
+                private location: Location) { }
 
     ngOnInit() {
         this.alive = true;
-
-        this.inputData = this.activatedRoute.data.subscribe( (data) => {
+        this.activatedRoute.data.subscribe( (data) => {
             this.appointment = data.appt.appointment;
             this.address = this.appointment.address;
             this.userTimeZone = data.appt.appointment.user.time_zone;
@@ -81,21 +77,19 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.alive = false;
     }
 
-    ngOnRouteChange() {
-        this.startCallTrigger.unsubscribe();
-        this.inputData.unsubscribe();
-    }
-
     getStartParams() {
-            this.startCallTrigger = this.activatedRoute
+        this.activatedRoute
             .queryParams
             .subscribe(params => {
-                // Defaults to false if no query param provided.
                 this.startVibiioParams = params['startVibiio'] || false;
-                if (this.startVibiioParams) {
+                if (this.startVibiioParams && this.isCorrectAppointment()) {
                     this.answerCall();
                 }
             });
+    }
+
+    isCorrectAppointment() {
+        return (this.activatedRoute.snapshot.params.id === this.appointment.id.toString());
     }
 
     subscribeToEndCall() {

@@ -31,10 +31,11 @@
             </div>
         </div>
 
-        <div class="button-wrap" *ngIf="displayConnectIcon()">
+        <div class="button-wrap"
+             *ngIf="displayConnectIcon()"
+             (click)="emitAppointment()">
             <span class="button-label">Start Vibiio</span>
             <img class="claim-button"
-                (click)="emitAppointment()"
                 src="assets/images/start.svg" />
         </div>
     </div>
