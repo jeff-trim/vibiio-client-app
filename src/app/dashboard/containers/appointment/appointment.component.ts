@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { async, inject } from '@angular/core/testing';
 
@@ -53,7 +53,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 private videoService: VideoChatService,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private vibiioProfileService: VibiioProfileService,
-                private location: Location) { }
+                private location: Location,
+                private ref: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.alive = true;
@@ -104,7 +105,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.vibiioProfileService
             .getVibiio(this.vibiio.id)
             .subscribe( (data) => {
+                console.log('refreshing', data);
                 this.vibiio = data.vibiio;
+                this.snapshots = data.vibiio.snapshots;
         });
     }
 
@@ -120,10 +123,12 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     claimVibiio(): Vibiio {
-        if (this.appointment.vibiiographer_id === null) {
+        console.log('claiming', this.vibiio.id);
+        if (this.vibiio.vibiiographer_id === null) {
             this.updateAppointmentService
                 .updateVibiiographer(this.appointment.id)
                 .subscribe((data) => {
+                    console.log('claim data', data);
                     return data.vibiio;
                 },
                 (error: any) => {

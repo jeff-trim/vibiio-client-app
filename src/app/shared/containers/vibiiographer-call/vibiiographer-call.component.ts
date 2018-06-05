@@ -21,6 +21,7 @@ import { SidebarCustomerStatusSharedService } from '../../services/sidebar-custo
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
+import { Observable } from 'rxjs/Rx';
 
 declare var OT: any;
 
@@ -55,7 +56,7 @@ declare var OT: any;
 })
 
 export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnDestroy {
-    vibiioConnecting = true;
+    vibiioConnecting: boolean;
     onVibiio: boolean;
     vibiioFullscreen: boolean;
     token: string;
@@ -65,7 +66,7 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     imgData: any;
     session: any;
     streams: any[];
-    showControls = true;
+    showControls= true;
     closeSearch = true;
     muted = false;
     alive: boolean;
@@ -109,7 +110,7 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     }
 
     ngAfterContentInit() {
-        this.startSession();
+        this.getConnectionData();
         this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
         this.consumerName = this.vibiio.consumer_name;
         if (this.outgoingCall) {
@@ -129,7 +130,7 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
         });
     }
 
-    startSession() {
+    getConnectionData() {
         this.videoService.getConnectionData(this.vibiio.id, undefined, undefined)
             .takeWhile(() => this.alive)
             .subscribe((data) => {
@@ -138,20 +139,35 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
             });
     }
 
+
+    private connectToSession() {
+        this.session.connect(this.token, () => {
+            this.initPublisher();
+            this.hideVibiiographerVideo();
+            this.subscribeToStreamCreatedEvents();
+            this.subscribeToStreamDestroyedEvents();
+        });
+
+        this.triggerActivity(this.vibiio.id,
+            'Vibiiograher manually started video',
+            'Video session started');
+    }
+
     callConsumer() {
         this.videoService.dialConsumer(this.vibiio.id).subscribe((res) => { });
     }
 
     subscribeToStreamCreatedEvents() {
         this.vibiioConnecting = false;
+        this.onVibiio = true;
         this.session.on('streamCreated', (data) => {
+            console.log('stream created', data.stream);
             if (this.expertToAdd) { this.expertConnected(); }
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
-            () => {
-                this.imgData = this.subscriber.getImgData().then().this.saveSnapshot();
+            (stats) => {
+                console.log('initiating capture');
+                this.captureSnapshot();
             });
-            this.showControls = true;
-            this.onVibiio = true;
             this.ref.detectChanges();
         });
     }
@@ -176,13 +192,19 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
         this.videoService.hangUp();
     }
 
-    // save snapshot
+    captureSnapshot() {
+        this.imgData = this.subscriber.getImgData();
+        this.saveSnapshot();
+    }
+
     saveSnapshot() {
+        console.log('saving');
         this.snapshotService.saveSnapshot(this.vibiio.consumer_id, this.session.id, this.vibiio.id, this.imgData)
-            .subscribe((data) => { },
+            .subscribe((data) => { console.log('save data', data);
+            },
                 (error) => {
                     console.log('error ', error);
-                });
+        });
     }
 
     endSession() {
@@ -227,19 +249,6 @@ export class VibiiographerCallComponent implements OnInit, AfterContentInit, OnD
     expertConnected() {
         this.expertName = this.expertToAdd;
         this.chime.play();
-    }
-
-    private connectToSession() {
-        this.triggerActivity(this.vibiio.id,
-            'Vibiiograher manually started video',
-            'Video session started');
-        this.session.connect(this.token, () => {
-            this.initPublisher();
-            this.hideVibiiographerVideo();
-            this.subscribeToStreamCreatedEvents();
-            this.subscribeToStreamDestroyedEvents();
-            this.ref.detectChanges();
-        });
     }
 
     private initPublisher() {
