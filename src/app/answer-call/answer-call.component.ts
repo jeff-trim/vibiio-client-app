@@ -22,8 +22,6 @@ export class AnswerCallComponent implements OnInit {
   session: any;
   streams = [];
   muted = false;
-  vibiioConnecting = true;
-  onVibiio = false;
   callEnded = false;
   enableAddExpert = false;
 
@@ -32,12 +30,11 @@ export class AnswerCallComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
-      this.callData = data.connection_data;
+      this.callData = data.callData.connection_data;
       this.token = this.callData.token_data.token;
       this.sessionId = this.callData.video_session_id;
       this.consumerName = this.callData.consumer;
       this.vibiiographerName = this.callData.vibiiographer;
-
     });
     this.connectCall();
   }
@@ -53,12 +50,9 @@ export class AnswerCallComponent implements OnInit {
   }
 
   subscribeToStreamCreatedEvents() {
-    this.session.on('streamCreated', (data) => {
-      this.vibiioConnecting = false;
-
-      this.subscriber = this.session.subscribe(data.stream, 'video-stream', VIDEO_OPTIONS,
+    this.session.on('streamCreated', (event) => {
+      this.subscriber = this.session.subscribe(event.stream, 'video-stream', VIDEO_OPTIONS,
         (stats) => {});
-      this.onVibiio = true;
     });
   }
 
@@ -78,7 +72,6 @@ export class AnswerCallComponent implements OnInit {
 
   hangUp() {
     this.stopPublishing();
-    this.onVibiio = false;
     this.callEnded = true;
     this.session.disconnect();
   }
