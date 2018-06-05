@@ -32,7 +32,7 @@ export class AnswerCallComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
-      this.callData = data.connection_data;
+      this.callData = data.callData.connection_data;
       this.token = this.callData.token_data.token;
       this.sessionId = this.callData.video_session_id;
       this.consumerName = this.callData.consumer;
