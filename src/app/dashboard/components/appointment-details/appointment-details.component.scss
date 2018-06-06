@@ -251,3 +251,19 @@ h1.appointment-title {
         }
     }
 }
+.empty-state {
+    width: 100%;
+    -webkit-appearance: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: $greyish-brown;
+    font-family: $base-font;
+    font-size: 1.8rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: normal;
+    resize: none;
+    max-height: 150px;
+}
