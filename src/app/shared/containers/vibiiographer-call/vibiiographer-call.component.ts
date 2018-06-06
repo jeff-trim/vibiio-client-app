@@ -170,7 +170,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             if (!alreadySubscribed) {
                 this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
-                    this.captureSnapshot();
+                    setTimeout(() => this.captureSnapshot(), 5000);
                 });
                 this.streams.push(data.stream.connection.connectionId);
 
@@ -219,7 +219,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     saveSnapshot() {
         this.snapshotService.saveSnapshot(this.vibiio.consumer_id, this.session.id, this.vibiio.id, this.imgData)
-            .subscribe(
+            .subscribe((data) => {},
                 (error) => {
                     console.log('error ', error);
         });
