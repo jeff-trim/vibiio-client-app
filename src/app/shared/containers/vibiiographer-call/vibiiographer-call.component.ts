@@ -22,6 +22,7 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { Observable } from 'rxjs/Rx';
+import { StreamData } from '../../models/transfer-objects/stream-data';
 
 declare var OT: any;
 
@@ -65,7 +66,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     subscriber: any;
     expert: any;
     imgData: any;
-    streams = [];
+    streams: StreamData[] = [];
     showControls= true;
     closeSearch = true;
     muted = false;
@@ -116,13 +117,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.alive = false;
     }
 
-    addExpert(expert: User) {
-        this.addToCall.callUser(expert.id, this.vibiio.id).subscribe((data) => {
-            this.consumerName = data.consumer;
-            this.expertToAdd = data.expert;
-        });
-    }
-
     getConnectionData() {
         this.videoService.getConnectionData(this.vibiio.id, undefined, undefined)
             .takeWhile(() => this.alive)
@@ -132,6 +126,17 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             });
     }
 
+    addExpert(expert: User) {
+        this.addToCall.callUser(expert.id, this.vibiio.id).subscribe((data) => {
+            this.consumerName = data.consumer;
+            this.expertToAdd = data.expert;
+        });
+    }
+
+    callConsumer() {
+        this.consumerName = this.vibiio.consumer_name;
+        this.videoService.dialConsumer(this.vibiio.id).subscribe((res) => { });
+    }
 
     private connectToSession() {
         this.session = OT.initSession(OPENTOK_API_KEY, this.vibiio.video_session_id);
@@ -147,56 +152,118 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             'Video session started');
     }
 
-    callConsumer() {
-        this.videoService.dialConsumer(this.vibiio.id).subscribe((res) => { });
-    }
-
     subscribeToStreamCreatedEvents() {
         this.session.on('streamCreated', (data) => {
+            const stream = data.stream;
             this.onVibiio = true;
             this.vibiioConnecting = false;
 
             // multiple archives fix
-            let alreadySubscribed = false;
-            const subscribers = this.session.getSubscribersForStream(data.stream);
+            if (!this.isAlreadySubscribed(stream)) {
+                this.processNewStream(stream);
+            }
+        });
+    }
+
+    isAlreadySubscribed(stream: any): boolean {
+        let isAlreadySubscribed = false;
+            const subscribers = this.session.getSubscribersForStream(stream);
 
             for (const subscriber of subscribers) {
-                if (subscriber.stream.connection.connectionId === data.stream.connection.connectionId) {
-                    alreadySubscribed = true;
+                if (this.streamExists(subscriber, stream)) {
+                    isAlreadySubscribed = true;
                 }
             }
+        return isAlreadySubscribed;
+    }
 
-            // if new connection
-            if (!alreadySubscribed) {
-                this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
-                (stats) => {
+    streamExists(subscriber: any, stream: any ): boolean {
+        return subscriber.stream.connection.connectionId === stream.connection.connectionId;
+    }
+
+    processNewStream(stream: any) {
+        const streamData: StreamData = this.videoService.parseStreamData(stream);
+        this.addToStreamsArray(streamData);
+        this.filterStreamData(streamData);
+        this.subscribe(stream);
+    }
+
+    isExpertStream(streamData: StreamData): boolean {
+        return (streamData.profile === 'Expert' || streamData.profile === 'Vibiiographer');
+    }
+
+    isConsumerStream(streamData: StreamData): boolean {
+        return (streamData.profile === 'Consumer');
+    }
+
+    expertConnected(streamData: StreamData) {
+        this.expertName = streamData.firstName;
+        this.chime.play();
+    }
+
+    consumerConnected(streamData: StreamData) {
+        console.log('consumer connected', streamData);
+        this.consumerName = streamData.firstName;
+        this.ref.detectChanges();
+    }
+
+    addToStreamsArray(streamData: StreamData) {
+        this.streams.push(streamData);
+    }
+
+    filterStreamData(streamData: StreamData) {
+        console.log('isExpertStream?:', this.isExpertStream(streamData));
+        if (this.isExpertStream(streamData)) {
+            this.expertConnected(streamData);
+        } else {
+            this.consumerConnected(streamData);
+        }
+    }
+
+    subscribe(stream: any) {
+        this.subscriber = this.session.subscribe(stream, 'subscriber-stream', VIDEO_OPTIONS,
+            (stats) => {
+                if (this.streams.length === 1) {
                     setTimeout(() => this.captureSnapshot(), 5000);
-                });
-                this.streams.push(data.stream.connection.connectionId);
-
-                if (this.expertToAdd) {
-                    this.expertConnected();
                 }
-            }
         });
     }
 
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
-            const streamId = data.stream.connection.connectionId;
-            this.removeStream(streamId);
+            const stream = data.stream;
+            this.processUnsubscribe(stream);
+        });
+    }
 
-            if (this.streams.length === 0) {
-                this.stopPublishing();
+    processUnsubscribe(stream: any) {
+        const streamId = stream.connection.connectionId;
+        const streamData: StreamData = this.videoService.parseStreamData(stream);
+        this.removeStreamFromArray(streamId);
+        this.removeNameDisplay(streamData);
+        if (this.isLastStream()) {
+            this.stopPublishing();
+        }
+    }
+
+    removeStreamFromArray(streamId: string) {
+        this.streams.forEach( (stream, index) => {
+            if (stream.streamId === streamId) {
+                this.streams.splice(index, 1);
             }
         });
     }
 
-    removeStream(streamId: string) {
-        const index: number = this.streams.indexOf(streamId);
-        if (index !== -1) {
-            this.streams.splice(index, 1);
+    removeNameDisplay(streamData: StreamData) {
+        if (this.isExpertStream(streamData)) {
+            this.expertName = null;
+        } else {
+            this.consumerName = null;
         }
+    }
+
+    isLastStream(): boolean {
+        return this.streams.length === 0;
     }
 
     stopPublishing() {
@@ -262,11 +329,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         } else {
             this.publisher.publishAudio(true);
         }
-    }
-
-    expertConnected() {
-        this.expertName = this.expertToAdd;
-        this.chime.play();
     }
 
     private initPublisher() {

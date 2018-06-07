@@ -11,6 +11,7 @@ import { Subject } from 'rxjs/Subject';
 import { VideoCall } from '../models/video-call.interface';
 import { Vibiio } from '../../dashboard/models/vibiio.interface';
 import { ConnectionData } from '../models/transfer-objects/connection-data';
+import { StreamData } from '../models/transfer-objects/stream-data';
 
 declare var OT: any;
 
@@ -71,5 +72,25 @@ export class VideoChatService {
                 .post(url, payload)
                 .map( (response: Response) => response.json())
                 .catch( (error: any) => Observable.throw(error));
+  }
+
+  parseStreamData(stream: any): StreamData {
+    const metaData: string = stream.connection.data;
+
+    const data: StreamData = {
+      firstName: this.getFirstName(metaData),
+      streamId: stream.connection.connectionId,
+      profile: this.getProfileType(metaData)
+    };
+
+    return data;
+  }
+
+  private getFirstName(metaData: string): string {
+    return metaData.split(/first_name=(.*)&/)[1];
+  }
+
+  private getProfileType(metaData: string): string {
+    return metaData.split(/profile=/)[1];
   }
 }
