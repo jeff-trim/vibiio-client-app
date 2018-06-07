@@ -60,10 +60,7 @@ export class AnswerCallComponent implements OnInit {
   subscribeToStreamDestroyedEvents() {
     this.session.on('streamDestroyed', (data) => {
         const streamId = data.stream.connection.connectionId;
-        console.log(this.streams);
         this.removeStreamFromArray(streamId);
-        console.log('is last stream', this.isLastStream());
-        console.log('after', this.streams);
 
         if (this.isLastStream()) {
             this.hangUp();
