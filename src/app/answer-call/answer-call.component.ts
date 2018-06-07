@@ -53,13 +53,31 @@ export class AnswerCallComponent implements OnInit {
     this.session.on('streamCreated', (event) => {
       this.subscriber = this.session.subscribe(event.stream, 'video-stream', VIDEO_OPTIONS,
         (stats) => {});
+        this.streams.push(event.stream);
     });
   }
 
   subscribeToStreamDestroyedEvents() {
     this.session.on('streamDestroyed', (data) => {
-      this.hangUp();
+        const streamId = data.stream.connection.connectionId;
+
+        this.removeStreamFromArray(streamId);
+
+        if (this.isLastStream()) {
+            this.hangUp();
+        }
     });
+  }
+
+  removeStreamFromArray(streamId: string) {
+    const index: number = this.streams.indexOf(streamId);
+    if (index !== -1) {
+        this.streams.splice(index, 1);
+    }
+  }
+
+  isLastStream(): boolean {
+    return this.streams.length === 0;
   }
 
   private initPublisher() {
