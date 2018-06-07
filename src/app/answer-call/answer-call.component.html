@@ -9,8 +9,8 @@
                         [muted]="muted"
                         [enableAddExpert]="enableAddExpert"></vib-video-controls>
       <div class="name-container">
-          <vib-call-name-display [name]="consumerName"></vib-call-name-display>
-          <vib-call-name-display [name]="vibiiographerName"></vib-call-name-display>
+          <vib-call-name-display *ngIf="(consumerName?.length > 0)" [name]="consumerName"></vib-call-name-display>
+          <vib-call-name-display *ngIf="(vibiiographerName?.length > 0)" [name]="vibiiographerName"></vib-call-name-display>
       </div>
   </div>
 

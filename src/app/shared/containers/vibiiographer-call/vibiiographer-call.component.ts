@@ -202,7 +202,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     consumerConnected(streamData: StreamData) {
-        console.log('consumer connected', streamData);
         this.consumerName = streamData.firstName;
         this.ref.detectChanges();
     }
@@ -212,7 +211,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     filterStreamData(streamData: StreamData) {
-        console.log('isExpertStream?:', this.isExpertStream(streamData));
         if (this.isExpertStream(streamData)) {
             this.expertConnected(streamData);
         } else {
