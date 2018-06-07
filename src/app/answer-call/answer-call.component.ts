@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 import { consumerSignUp } from '../sign-up/services/form-config';
@@ -26,7 +25,8 @@ export class AnswerCallComponent implements OnInit {
   enableAddExpert = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private videoChatService: VideoChatService) { }
+              private videoChatService: VideoChatService,
+              private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
@@ -53,15 +53,17 @@ export class AnswerCallComponent implements OnInit {
     this.session.on('streamCreated', (event) => {
       this.subscriber = this.session.subscribe(event.stream, 'video-stream', VIDEO_OPTIONS,
         (stats) => {});
-        this.streams.push(event.stream);
+        this.streams.push(event.stream.connection.connectionId);
     });
   }
 
   subscribeToStreamDestroyedEvents() {
     this.session.on('streamDestroyed', (data) => {
         const streamId = data.stream.connection.connectionId;
-
+        console.log(this.streams);
         this.removeStreamFromArray(streamId);
+        console.log('is last stream', this.isLastStream());
+        console.log('after', this.streams);
 
         if (this.isLastStream()) {
             this.hangUp();
@@ -70,10 +72,7 @@ export class AnswerCallComponent implements OnInit {
   }
 
   removeStreamFromArray(streamId: string) {
-    const index: number = this.streams.indexOf(streamId);
-    if (index !== -1) {
-        this.streams.splice(index, 1);
-    }
+    this.streams = this.streams.filter(stream => stream !== streamId);
   }
 
   isLastStream(): boolean {
@@ -90,6 +89,7 @@ export class AnswerCallComponent implements OnInit {
 
   hangUp() {
     this.callEnded = true;
+    this.ref.detectChanges();
     this.session.disconnect();
     this.stopPublishing();
   }
