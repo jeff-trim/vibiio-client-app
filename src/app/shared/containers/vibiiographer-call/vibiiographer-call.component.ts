@@ -91,8 +91,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         private activityService: ActivityService,
         private availabilitySharedService: AvailabilitySharedService,
         private addToCall: AddToCallService,
-        private vibiioProfileService: VibiioProfileService,
-        private ref: ChangeDetectorRef) { }
+        private vibiioProfileService: VibiioProfileService) { }
 
     // handle escape when vibiio is Fullscreen
     @HostListener('document:keyup', ['$event'])
@@ -107,7 +106,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.alive = true;
         this.vibiioConnecting = true;
         this.getConnectionData();
-        this.consumerName = this.vibiio.consumer_name;
         if (this.outgoingCall) {
             this.callConsumer();
         }
@@ -134,7 +132,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     callConsumer() {
-        this.consumerName = this.vibiio.consumer_name;
         this.videoService.dialConsumer(this.vibiio.id).subscribe((res) => { });
     }
 
@@ -203,7 +200,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     consumerConnected(streamData: StreamData) {
         this.consumerName = streamData.firstName;
-        this.ref.detectChanges();
     }
 
     addToStreamsArray(streamData: StreamData) {
