@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 import { consumerSignUp } from '../sign-up/services/form-config';
 import { VideoChatService } from '../shared/services/video-chat.service';
 import { VIDEO_OPTIONS } from '../constants/video-options';
+import { StreamData } from '../shared/models/transfer-objects/stream-data';
 
 @Component({
   selector: 'vib-answer-call',
@@ -20,13 +20,14 @@ export class AnswerCallComponent implements OnInit {
   publisher: any;
   callData: any;
   session: any;
-  streams = [];
+  streams: StreamData[] = [];
   muted = false;
   callEnded = false;
   enableAddExpert = false;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private videoChatService: VideoChatService) { }
+              private videoChatService: VideoChatService,
+              private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
@@ -51,6 +52,10 @@ export class AnswerCallComponent implements OnInit {
 
   subscribeToStreamCreatedEvents() {
     this.session.on('streamCreated', (event) => {
+      const streamData: StreamData = this.videoChatService.parseStreamData(event.stream);
+
+      this.addToStreamsArray(streamData);
+
       this.subscriber = this.session.subscribe(event.stream, 'video-stream', VIDEO_OPTIONS,
         (stats) => {});
     });
@@ -58,8 +63,42 @@ export class AnswerCallComponent implements OnInit {
 
   subscribeToStreamDestroyedEvents() {
     this.session.on('streamDestroyed', (data) => {
-      this.hangUp();
+      const streamData: StreamData = this.videoChatService.parseStreamData(data.stream);
+
+        const streamId = data.stream.connection.connectionId;
+        this.removeStreamFromArray(streamId);
+        if (this.isLastStream()) {
+            this.hangUp();
+        }
     });
+  }
+
+  addToStreamsArray(streamData: StreamData) {
+    this.streams.push(streamData);
+  }
+
+  removeStreamFromArray(streamId: string) {
+    this.streams.forEach( (stream, index) => {
+        if (stream.streamId === streamId) {
+            this.streams.splice(index, 1);
+        }
+    });
+  }
+
+  removeNameDisplay(streamData: StreamData) {
+    if (this.isVibiiographerStream(streamData)) {
+        this.vibiiographerName = null;
+    } else {
+        this.consumerName = null;
+    }
+  }
+
+  isVibiiographerStream(streamData: StreamData): boolean {
+    return (streamData.profile === 'Vibiiographer');
+  }
+
+  isLastStream(): boolean {
+    return this.streams.length === 0;
   }
 
   private initPublisher() {
@@ -72,6 +111,7 @@ export class AnswerCallComponent implements OnInit {
 
   hangUp() {
     this.callEnded = true;
+    this.ref.detectChanges();
     this.session.disconnect();
     this.stopPublishing();
   }
