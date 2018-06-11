@@ -1,8 +1,8 @@
 <div class='sidebar'>
   <div class="row
               between-xs">
-    <a [routerLink]="['/dashboard/my-vibiios']">
-      <div class="logo-container"></div>
+    <a [routerLink]="['/dashboard/my-videos']">
+      <div class="logo-container">Company Name Here</div>
     </a>
     <div class="hamburger" 
          (click)="toggleSidebar()">
@@ -35,11 +35,11 @@
 
   <span [ngClass]="{'hidden':!sidebarVisibility}">
     <div class="title-row"
-         routerLink="my-vibiios"
+         routerLink="my-videos"
          (click)='toggleScheduledVibiios($event)'>
       <a routerLinkActive="active">
         <div class="title">
-          My Scheduled vibiios
+          My Scheduled Sessions
         </div>
       </a>
       <div class="arrow left-arrow"
@@ -98,7 +98,7 @@
          routerLink="vibiiographers">
       <div class="title">
         <a routerLinkActive="active">
-          Vibiiographers
+          Videographers
         </a>
       </div>
 
