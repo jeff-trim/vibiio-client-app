@@ -3,5 +3,5 @@ export const  VIDEO_OPTIONS = {
     fitMode: 'contain',
     width: '100%',
     height: '100%',
-    style: { buttonDisplayMode: 'off' }
+    style: { buttonDisplayMode: 'off', nameDisplayMode: 'off' }
 };

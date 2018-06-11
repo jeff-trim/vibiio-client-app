@@ -23,7 +23,7 @@ import { MyVibiios } from '../../models/my-vibiios.interface';
 import {TimeFormatter } from '../../classes/time-formatter.class';
 
 @Component({
-    selector: 'my-vibiios',
+    selector: 'vib-my-vibiios',
     templateUrl: 'my-vibiios.component.html', styleUrls: ['my-vibiios.component.scss']
 })
 
