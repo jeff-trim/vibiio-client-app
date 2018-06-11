@@ -35,30 +35,23 @@ export class ExpertSearchComponent implements OnInit {
   }
 
   filterResults(term?: string) {
-    console.log('filter');
-    this.filter = term;
-    let filter;
+    this.filter = this.nomenclatureFix(term);
 
-    if (this.filter) {
-      filter = this.nomenclatureFix();
-    }
     const query = this.searchBoxChild.query.nativeElement.value;
-    this.userService.index(filter, query).subscribe( data => {
+    this.userService.index(this.filter, query).subscribe( data => {
       this.results = data;
+
     });
   }
 
   addExpert(expert: User) {
-    console.log('add e');
-
     this.selectedResult.emit(expert);
     this.close();
   }
 
   search(query?: string) {
-    console.log('search');
-    const filter = this.nomenclatureFix();
-    this.query = query;
+    const filter = this.nomenclatureFix(this.filter);
+    this.query = this.nomenclatureFix(query);
 
     this.userService.index(filter, query).subscribe( data => {
       this.results = data;
@@ -66,17 +59,15 @@ export class ExpertSearchComponent implements OnInit {
   }
 
   close() {
-    console.log('close');
-
     this.closeSearch.emit(true);
   }
 
   // temp fix to Remove vibiiographer language for demo;
-  nomenclatureFix(): string {
-    if (this.filter === 'Videographer') {
+  nomenclatureFix(term: string): string {
+    if (term === 'Videographer') {
       return 'Vibiiographer';
     } else {
-      return this.filter;
+      return term;
     }
   }
 

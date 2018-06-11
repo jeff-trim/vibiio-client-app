@@ -1,7 +1,12 @@
 <div class="expert-search-result-container"
      (click)="addExpert(result)">
-  <div class="name">
-    {{ result.first_name }} {{ result.last_name }}
+  <div class="details-container">
+    <div class="name">
+      {{ result.first_name }} {{ result.last_name }}
+    </div>
+    <div class="profession">
+      {{ profession | removeUnderscore | capitalize }}
+    </div>
   </div>
 
   <div class="add-container">
