@@ -147,6 +147,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             this.consumerName = data.consumer;
             this.expertToAdd = data.expert;
         });
+        this.closeSearch = true;
     }
 
     callConsumer() {

@@ -32,9 +32,13 @@
 
       <vib-video-controls *ngIf="showControls"
                           [class.fullscreen-controls]="vibiioFullscreen"
-                          (add)="addExpert()"
+                          (add)="toggleSearch()"
                           (endCall)="hangUp()"
                           (mute)="toggleMute($event)"></vib-video-controls>
+      
+      <vib-expert-search [@expandableState]='!closeSearch' *ngIf="!closeSearch" 
+                          (closeSearch)="toggleSearch()"
+                          (selectedResult)="addExpert($event)"></vib-expert-search>
                           
     </div>
   </div>
