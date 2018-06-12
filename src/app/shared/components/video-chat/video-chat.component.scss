@@ -105,3 +105,14 @@ vib-video-controls.fullscreen-controls {
         left: 25%;
     }
 }
+
+vib-expert-search {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 9999999999999;
+}
+
