@@ -114,7 +114,7 @@ const dashboardRoutes: Routes = [
             }
           },
           {
-            path: 'my-vibiios',
+            path: 'my-videos',
             component: MyVibiiosComponent,
               resolve: {
                   appointments: MyAppointmentsResolver,

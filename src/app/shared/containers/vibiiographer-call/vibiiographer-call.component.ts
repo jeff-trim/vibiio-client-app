@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostListener,
-    Input, OnInit, AfterContentInit, OnDestroy, Output, ViewChild, ChangeDetectorRef } from '@angular/core';
+    Input, OnInit, AfterContentInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import * as screenfull from 'screenfull';
 
 // Components
@@ -59,7 +59,7 @@ declare var OT: any;
 export class VibiiographerCallComponent implements OnInit, OnDestroy {
     vibiioConnecting: boolean;
     onVibiio: boolean;
-    vibiioFullscreen: boolean;
+    vibiioFullscreen = false;
     token: string;
     publisher: any;
     session: any;
@@ -93,12 +93,30 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         private addToCall: AddToCallService,
         private vibiioProfileService: VibiioProfileService) { }
 
-    // handle escape when vibiio is Fullscreen
-    @HostListener('document:keyup', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
-        const x = event.keyCode;
-        if ((x === 27) && this.vibiioFullscreen) {
-            this.toggleVibiioFullscreen();
+    @HostListener('document:webkitfullscreenchange', [])
+        chromeFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    @HostListener('document:mozfullscreenchange', [])
+        mozFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    @HostListener('document:fullscreenchange', [])
+        safFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    @HostListener('document:MSfullscreenchange', [])
+        ieFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    toggleVibiioFullscreen() {
+        const el = document.getElementById('full');
+        if (screenfull.enabled) {
+            screenfull.toggle(el);
         }
     }
 
@@ -299,17 +317,11 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.updateVibiioStatus.emit(status);
     }
 
-    toggleVibiioFullscreen() {
-        const el = document.getElementById('full');
-        this.vibiioFullscreen = !this.vibiioFullscreen;
-        if (screenfull.enabled) {
-            screenfull.toggle(el);
-        }
-    }
+
 
     toggleSearch() {
         this.closeSearch = !this.closeSearch;
-        if (!this.closeSearch) {
+        if (!this.closeSearch && !this.vibiioFullscreen) {
             this.showControls = false;
         } else {
             this.showControls = true;

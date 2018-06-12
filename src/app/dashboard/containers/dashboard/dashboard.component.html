@@ -23,15 +23,15 @@
     <div class="notification-drawer" *ngIf="userAvailability">
       <div class="message">
         <div *ngIf="!notificationDrawerVisibility">
-            <span *ngIf="waitingConsumers.length > 1">{{ waitingConsumers.length }} customers are requesting live vibiios! Answer one now.</span>
-            <span *ngIf="waitingConsumers.length == 1">One customer is requesting a live vibiio! Answer it now.</span>
-            <span *ngIf="waitingConsumers.length == 0">There are no customers requesting live vibiios!</span>
+            <span *ngIf="waitingConsumers.length > 1">{{ waitingConsumers.length }} customers are requesting live videos! Answer one now.</span>
+            <span *ngIf="waitingConsumers.length == 1">One customer is requesting a live video! Answer it now.</span>
+            <span *ngIf="waitingConsumers.length == 0">There are no customers requesting live videos!</span>
         </div>
 
         <div *ngIf="notificationDrawerVisibility">
-            <span *ngIf="waitingConsumers.length > 1">Viewing all {{ waitingConsumers.length }} live vibiio requests.</span>
-            <span *ngIf="waitingConsumers.length == 1">Viewing one live vibiio request.</span>
-            <span *ngIf="waitingConsumers.length == 0">There are no customers requesting live vibiios!</span>
+            <span *ngIf="waitingConsumers.length > 1">Viewing all {{ waitingConsumers.length }} live video requests.</span>
+            <span *ngIf="waitingConsumers.length == 1">Viewing one live video request.</span>
+            <span *ngIf="waitingConsumers.length == 0">There are no customers requesting live videos!</span>
         </div>
       </div>
 

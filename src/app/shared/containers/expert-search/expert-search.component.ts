@@ -19,7 +19,7 @@ export class ExpertSearchComponent implements OnInit {
   @Output() selectedResult = new EventEmitter<User>();
 
   filters = [
-    'Vibiiographer',
+    'Videographer',
     'Expert'
   ];
 
@@ -35,10 +35,12 @@ export class ExpertSearchComponent implements OnInit {
   }
 
   filterResults(term?: string) {
-    this.filter = term;
+    this.filter = this.nomenclatureFix(term);
+
     const query = this.searchBoxChild.query.nativeElement.value;
-    this.userService.index(term, query).subscribe( data => {
+    this.userService.index(this.filter, query).subscribe( data => {
       this.results = data;
+
     });
   }
 
@@ -48,15 +50,25 @@ export class ExpertSearchComponent implements OnInit {
   }
 
   search(query?: string) {
-    this.query = query;
-    const filter = this.filter;
-      this.userService.index(filter, query).subscribe( data => {
-        this.results = data;
-      });
+    const filter = this.nomenclatureFix(this.filter);
+    this.query = this.nomenclatureFix(query);
+
+    this.userService.index(filter, query).subscribe( data => {
+      this.results = data;
+    });
   }
 
   close() {
     this.closeSearch.emit(true);
+  }
+
+  // temp fix to Remove vibiiographer language for demo;
+  nomenclatureFix(term: string): string {
+    if (term === 'Videographer') {
+      return 'Vibiiographer';
+    } else {
+      return term;
+    }
   }
 
 }

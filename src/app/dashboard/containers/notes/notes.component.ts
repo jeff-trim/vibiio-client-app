@@ -14,7 +14,7 @@ import { NoteService } from '../../services/note.service';
     template: `
     <div class="note-wrapper" [ngClass]="{ 'active-form-border': isAddingNotes }">
         <vib-new-vibiio-note
-            *ngIf="location != '/dashboard/my-vibiios'"
+            *ngIf="location != '/dashboard/my-videos'"
             (addingNote)="addingNote($event)"
             (createNote)="createNote($event)">
         </vib-new-vibiio-note>
