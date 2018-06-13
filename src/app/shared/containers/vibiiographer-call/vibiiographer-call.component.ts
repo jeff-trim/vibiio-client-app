@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostListener,
-    Input, OnInit, AfterContentInit, OnDestroy, Output, ViewChild } from '@angular/core';
+         Input, OnInit, AfterContentInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import * as screenfull from 'screenfull';
 
 // Components
@@ -21,8 +21,8 @@ import { SidebarCustomerStatusSharedService } from '../../services/sidebar-custo
 import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
-import { Observable } from 'rxjs/Rx';
 import { StreamData } from '../../models/transfer-objects/stream-data';
+import { Subscription, Observable } from 'rxjs/Rx';
 
 declare var OT: any;
 
@@ -68,13 +68,16 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     imgData: any;
     streams: StreamData[] = [];
     showControls= true;
-    closeSearch = true;
     muted = false;
     alive: boolean;
     enableFullscreen = true;
     consumerName: string;
     expertName: string;
-    expertToAdd: string;
+    expertFullName: string;
+    expertWaitingToJoin = false;
+    fadeTimer: Observable<any>;
+    fadeSubscription: Subscription;
+
     chime = new Audio('/assets/audio/chime.mp3');
 
     @Input() vibiio: Vibiio;
@@ -143,12 +146,29 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     addExpert(expert: User) {
-        this.addToCall.callUser(expert.id, this.vibiio.id).subscribe((data) => {
+        this.expertFullName = `${expert.first_name} ${expert.last_name}`;
+
+        this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
+
             this.consumerName = data.consumer;
-            this.expertToAdd = data.expert;
+            this.expertWaitingToJoin = true;
+            this.setNotificationFadeOutTimer();
         });
-        this.closeSearch = true;
     }
+
+    setNotificationFadeOutTimer() {
+        if (this.fadeSubscription) {
+            this.fadeSubscription.unsubscribe();
+        }
+
+        this.fadeTimer = Observable.timer(3000);
+        this.expertWaitingToJoin   = true;
+
+        this.fadeSubscription = this.fadeTimer.subscribe(() => {
+            this.expertWaitingToJoin = false;
+        });
+      }
+
 
     callConsumer() {
         this.videoService.dialConsumer(this.vibiio.id).subscribe((res) => { });
@@ -171,6 +191,13 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     subscribeToStreamCreatedEvents() {
         this.session.on('streamCreated', (data) => {
             const stream = data.stream;
+
+            if (this.expertWaitingToJoin) { this.expertConnected(stream); }
+            this.subscriber = this.session.subscribe(stream, 'subscriber-stream', VIDEO_OPTIONS,
+                (stats) => {
+                    this.captureSnapshot();
+                });
+
             this.onVibiio = true;
             this.vibiioConnecting = false;
 
@@ -316,17 +343,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     updateStatus(status: any) {
         this.updateVibiioStatus.emit(status);
-    }
-
-
-
-    toggleSearch() {
-        this.closeSearch = !this.closeSearch;
-        if (!this.closeSearch && !this.vibiioFullscreen) {
-            this.showControls = false;
-        } else {
-            this.showControls = true;
-        }
     }
 
     toggleMute() {

@@ -10,10 +10,10 @@
                     (add)="addExpert($event)"
                     (endCall)="endSession()"
                     (mute)="toggleMute()"
-                    (exitSearch)="toggleSearch()"
                     [consumerName]="consumerName"
+                    [expertAdded]="expertWaitingToJoin"
                     [expertName]="expertName"
-                    [closeSearch]="closeSearch"
+                    [expertFullName]="expertFullName"
                     [enableFullscreen]="enableFullscreen">
     </vib-video-chat>
 </div>

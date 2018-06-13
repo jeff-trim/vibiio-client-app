@@ -46,7 +46,6 @@ export class ExpertSearchComponent implements OnInit {
 
   addExpert(expert: User) {
     this.selectedResult.emit(expert);
-    this.close();
   }
 
   search(query?: string) {
