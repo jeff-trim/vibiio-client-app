@@ -1,6 +1,5 @@
 <div class="call-container">
-  <vib-expert-added-notification [expertFullName]="expertFullName"></vib-expert-added-notification>
-
+  
   <div class="house-container" *ngIf="vibiioConnecting">
     <div class="waiting-house"></div>
     <div class="waiting-text">Connecting...</div>
@@ -36,10 +35,13 @@
                           (add)="toggleSearch()"
                           (endCall)="hangUp()"
                           (mute)="toggleMute($event)"></vib-video-controls>
-      
-      <vib-expert-search [@expandableState]='!closeSearch' *ngIf="!closeSearch" 
-                          (closeSearch)="toggleSearch()"
-                          (selectedResult)="addExpert($event)"></vib-expert-search>
+
+      <vib-expert-added-notification [@visibilityChanged]="expertAdded" *ngIf="expertAdded"
+                                     [expertFullName]="expertFullName"></vib-expert-added-notification>
+
+      <vib-expert-search [@expandableState]="!closeSearch" *ngIf="!closeSearch" 
+                         (closeSearch)="toggleSearch()"
+                         (selectedResult)="addExpert($event)"></vib-expert-search>
                           
     </div>
   </div>

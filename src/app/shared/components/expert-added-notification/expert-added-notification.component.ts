@@ -1,16 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 
 @Component({
   selector: 'vib-expert-added-notification',
   templateUrl: './expert-added-notification.component.html',
   styleUrls: ['./expert-added-notification.component.scss']
 })
-export class ExpertAddedNotificationComponent implements OnInit {
+export class ExpertAddedNotificationComponent implements OnChanges {
   @Input() expertFullName: string;
-  message = `A text message has been sent to ${this.expertFullName} inviting them to the call`;
-  constructor() { }
+  message: string;
 
-  ngOnInit() {
+  ngOnChanges() {
+    this.message = `A text message has been sent to ${this.expertFullName} inviting them to the call.`;
   }
 
 }

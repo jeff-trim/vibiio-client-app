@@ -19,6 +19,16 @@ import { User } from '../../../dashboard/models/user.interface';
             animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
                 style({ transform: 'translateY(100%)', height: '0%' })),
         ]),
+    ]),
+    trigger('visibilityChanged', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 }))
+    ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('300ms', style({ opacity: 0 }))
+      ]),
     ])
   ]
 })
@@ -28,11 +38,12 @@ export class VideoChatComponent {
   @Input() vibiioFullscreen = false;
   @Input() enableFullscreen = true;
   @Input() showControls;
-  @Input() closeSearch;
+  @Input() closeSearch = true;
   @Input() vibiio: Vibiio;
   @Input() consumerName: string;
   @Input() expertName: string;
   @Input() expertFullName: string;
+  @Input() expertAdded = false;
 
   @Output() updateVibiioStatus = new EventEmitter<any>();
   @Output() toggleFullscreen = new EventEmitter<boolean>();
