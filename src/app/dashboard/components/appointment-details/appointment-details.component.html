@@ -17,7 +17,7 @@
           link"
           [class.disabled]="onVibiio"
           (click)="connect()">
-          start vibiio
+          call {{ appointment.user.first_name}}
     </div>
 
  
@@ -89,20 +89,27 @@
             appointment-information" >
 
     <div class="info-element sub-heading">
-      <h2>vibiio</h2>
+      <h2>video</h2>
       <div class="long-pink-underline" ></div>
     </div>
-    
-    <div class="video-container">
-      <div class="vibiio-message"
-           [class.disabled]="onVibiio">
-        <p class="first-vibiio">🤙</p>
-        <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first vibiio!</p>
-        <p class="first-vibiio-text">Ready to introduce yourself?</p>
-        <p class="first-vibiio-text pink link"
-            (click)="connect()">Call {{ appointment.user.first_name }} now.</p>
-      </div>
-    </div>        
+
+    <video-archive *ngIf="(snapshots?.length > 0); else noArchives"
+                   [snapshots]="snapshots"></video-archive>
+
+    <ng-template #noArchives>
+      <div class="video-container">
+        <div class="vibiio-message"
+            [class.disabled]="onVibiio">
+          <p class="first-vibiio">🤙</p>
+          <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first video!</p>
+          <p class="first-vibiio-text"> Once they have, they will be saved and appear here.</p>
+          <p class="first-vibiio-text">Ready to introduce yourself?</p>
+          <p class="first-vibiio-text pink link"
+             (click)="connect()">Call {{ appointment.user.first_name }} now.</p>
+        </div>
+      </div>        
+    </ng-template>
+
   </div> 
 </div>
 
@@ -116,7 +123,7 @@
       
       <div class="note-row col-md-6">
         <div class="info-element">
-          <span class="label">vibiio description</span>
+          <span class="label">video description</span>
           <span class="pink-underline"></span>
         </div>
         
@@ -133,7 +140,7 @@
           </div>
         </div>
         <ng-template #noContact>
-          <p>No Customer Notes</p>
+          <p class='empty-state'>No Customer Notes</p>
         </ng-template>
       </div>
       

@@ -26,8 +26,8 @@ const appRoutes: Routes = [
         callData: AnswerCallResolverService
       }
     },
-    { path: '', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' },
-    { path: '**', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' }
+    { path: '', redirectTo: '/dashboard/my-videos', pathMatch: 'full' },
+    { path: '**', redirectTo: '/dashboard/my-videos', pathMatch: 'full' }
 ];
 
 @NgModule({

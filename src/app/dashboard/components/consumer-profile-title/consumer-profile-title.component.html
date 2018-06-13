@@ -2,12 +2,12 @@
               info-element
               between-xs
               bottom-xs">
-    <h2 (click)="viewDetails(consumerProfile.id)">
+    <h2 (click)="viewDetails()">
         {{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}
         <div class="long-pink-underline"></div>
-        <span class="details-text"
-              (click)="viewDetails(consumerProfile.id)">view details
-                <img src='../../../../assets/images/arrow-magenta.svg'
-                     class="right-arrow"></span>
+        <span class="details-text">view details
+            <img src='../../../../assets/images/arrow-magenta.svg'
+                  class="right-arrow">
+        </span>
     </h2>
 </div>

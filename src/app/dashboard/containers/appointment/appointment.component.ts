@@ -1,13 +1,15 @@
 import { Component, Output, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { async, inject } from '@angular/core/testing';
-import * as screenfull from 'screenfull';
+import { async } from '@angular/core/testing';
+import { Observable } from 'rxjs/Rx';
+import { Location } from '@angular/common';
 
 // Models
 import { Appointment } from '../../models/appointment.interface';
 import { User } from '../../models/user.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { Address } from '../../models/address.interface';
+import { VideoSnapshot } from '../../models/video-snapshot.interface';
 
 // Services
 import { AppointmentResolver } from '../../services/appointment.resolver.service';
@@ -20,7 +22,6 @@ import { AppointmentService } from '../../services/appointment.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { VideoSnapshotService } from '../../../shared/services/video-snapshot.service';
 import { VibiioProfileService } from '../../services/vibiio-profile.service';
-import { Location } from '@angular/common';
 
 @Component({
     selector: 'vib-appointment',
@@ -31,15 +32,16 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     onVibiio = false;
     consumer_id: number;
     vibiio: Vibiio;
-    index: number;
     appointment: Appointment;
     address: Address;
     user: User;
+    snapshots: VideoSnapshot[];
     userTimeZone: string;
     startVibiioParams: boolean;
     isUpdatingForms = false;
     isEditingForms = false;
     alive: boolean;
+
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,
@@ -56,10 +58,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.alive = true;
-        this.activatedRoute.params.subscribe((params: Params) => {
-            this.index = params['id'];
-        });
-
         this.activatedRoute.data.subscribe( (data) => {
             this.appointment = data.appt.appointment;
             this.address = this.appointment.address;
@@ -67,24 +65,31 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
             this.vibiio = data.appt.appointment.vibiio;
+            this.snapshots = data.appt.appointment.snapshots;
+            this.getStartParams();
         }, (error) => {
             console.log(error);
-        });
-
-        this.activatedRoute
-            .queryParams
-            .subscribe(params => {
-            // Defaults to false if no query param provided.
-                this.startVibiioParams = params['startVibiio'] || false;
-                if (this.startVibiioParams) {
-                    this.answerCall();
-                }
         });
         this.subscribeToEndCall();
     }
 
     ngOnDestroy() {
         this.alive = false;
+    }
+
+    getStartParams() {
+        this.activatedRoute
+            .queryParams
+            .subscribe(params => {
+                this.startVibiioParams = params['startVibiio'] || false;
+                if (this.startVibiioParams && this.isCorrectAppointment()) {
+                    this.answerCall();
+                }
+            });
+    }
+
+    isCorrectAppointment() {
+        return (this.activatedRoute.snapshot.params.id === this.appointment.id.toString());
     }
 
     subscribeToEndCall() {
@@ -100,23 +105,23 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             .getVibiio(this.vibiio.id)
             .subscribe( (data) => {
                 this.vibiio = data.vibiio;
+                this.snapshots = data.vibiio.snapshots;
         });
     }
 
     answerCall() {
-        this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         this.beginCallActions();
+        this.location.replaceState(`dashboard/appointment/${this.appointment.id}`);
         this.videoService.call(this.vibiio, false);
     }
 
-    async callConsumer() {
-        this.vibiio = await this.claimVibiio();
+    callConsumer() {
         this.beginCallActions();
         this.videoService.call(this.vibiio, true);
     }
 
     claimVibiio(): Vibiio {
-        if (this.appointment.vibiiographer_id === null) {
+        if (this.vibiio.vibiiographer_id === null) {
             this.updateAppointmentService
                 .updateVibiiographer(this.appointment.id)
                 .subscribe((data) => {
@@ -129,9 +134,11 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         return this.vibiio;
     }
 
-    beginCallActions() {
+    async beginCallActions() {
         this.onVibiio = true;
         this.availabilitySharedService.emitChange(false);
+        this.vibiio = await this.claimVibiio();
+        this.updateVibiioStatus({status: 'claim_in_progress'});
     }
 
     endCallActions() {

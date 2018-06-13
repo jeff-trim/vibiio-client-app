@@ -19,7 +19,6 @@ import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { AppointmentComponent } from './containers/appointment/appointment.component';
 import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
 import { NotesComponent } from './containers/notes/notes.component';
-import { VibiioProfileComponent } from './containers/vibiio-profile/vibiio-profile.component';
 
 // libraries
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -72,7 +71,6 @@ import { ConsumerSortService } from './services/consumer-sort.service';
 import { AddressStatusService } from './services/address-status.service';
 import { AppointmentDetailsFormStatusService } from './services/appointment-details-form-status.service';
 import { ConsumerUpdateService } from './services/consumer-update.service';
-import { VibiioProfileFormStatusService } from './services/vibiio-profile-form-status.service';
 import { InsuranceStatusService } from './services/insurance-status.service';
 
 // resolvers
@@ -116,7 +114,7 @@ const dashboardRoutes: Routes = [
             }
           },
           {
-            path: 'my-vibiios',
+            path: 'my-videos',
             component: MyVibiiosComponent,
               resolve: {
                   appointments: MyAppointmentsResolver,
@@ -152,14 +150,6 @@ const dashboardRoutes: Routes = [
             }
           },
           {
-            path: 'vibiio-profile/:id',
-            component: VibiioProfileComponent,
-            resolve: {
-              profile: VibiioProfileResolver,
-               cons: AllConsumersResolver
-            }
-          },
-          {
             path: 'vibiiographers',
             component: VibiiographerListComponent,
             resolve: {
@@ -189,7 +179,6 @@ const dashboardRoutes: Routes = [
     ConsumerProfileComponent,
     ConsumerProfileTitleComponent,
     ConsumerStatusComponent,
-    VibiioProfileComponent,
     AppointmentComponent,
     MyVibiiosComponent,
     MyProfileComponent,
@@ -263,7 +252,6 @@ const dashboardRoutes: Routes = [
     NoteService,
     InsurancePolicyService,
     VibiioProfileService,
-    VibiioProfileResolver,
     SidebarMyVibiioSharedService,
     MyLicenseService,
     ConsumerSortService,
@@ -271,7 +259,6 @@ const dashboardRoutes: Routes = [
     AddressStatusService,
     ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
-    VibiioProfileFormStatusService,
     ExpertsResolverService,
     VibiiographersResolverService
   ],

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-const ADD_TO_CALL_API = `${API_URL}/user_calls`;
+const ADD_TO_CALL_API = `${API_URL}/invite_text`;
 
 @Injectable()
 export class AddToCallService {
@@ -25,12 +25,5 @@ export class AddToCallService {
       .post(ADD_TO_CALL_API, options)
       .map( (response: Response) => response.json())
       .catch( (error: any) => Observable.throw(error));
-  }
-
-  retrieveCallData(token: string, userId: number) {
-    return this.http
-            .get(`${ADD_TO_CALL_API}/${userId}/?token=${token}`)
-            .map( (response: Response) => response.json())
-            .catch( (error: any) => Observable.throw(error));
   }
 }

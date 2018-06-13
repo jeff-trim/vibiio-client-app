@@ -16,7 +16,7 @@ export class ConsumerProfileTitleComponent {
 
     constructor(private router: Router) { }
 
-    viewDetails(id: number) {
-        this.router.navigateByUrl('/dashboard/vibiio-profile/' + id);
+    viewDetails() {
+        this.router.navigateByUrl(`/dashboard/appointment/${this.consumerProfile.appointment_id}`);
     }
 }

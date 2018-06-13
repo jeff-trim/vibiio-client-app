@@ -19,6 +19,7 @@
         background-image: url(~assets/images/close.png);
         background-size: contain;
         background-repeat: no-repeat;
+        z-index: 99;
     }
     .title {
         margin: 0 auto;
