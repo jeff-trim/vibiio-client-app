@@ -75,6 +75,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     enableFullscreen = false;
     consumerName: string;
     expertName: string;
+    expertFullName: string;
     expertToAdd: string;
     state: string;
     stateExpression = 'collapsed';
@@ -109,6 +110,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     addExpert(expert: User) {
+        this.expertFullName = `${expert.first_name} ${expert.last_name}`;
         this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
             this.consumerName = data.consumer;
             this.expertToAdd = data.expert;
@@ -158,7 +160,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.showControls = true;
         this.session.on('streamCreated', (data) => {
             this.vibiioConnecting = false;
-            if(this.expertToAdd) { this.expertConnected(); }
+            if (this.expertToAdd) { this.expertConnected(); }
             this.subscriber = this.session.subscribe(data.stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
                     this.captureSnapshot();

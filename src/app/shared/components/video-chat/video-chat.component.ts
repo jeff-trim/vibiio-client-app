@@ -16,6 +16,7 @@ export class VideoChatComponent {
   @Input() vibiio: Vibiio;
   @Input() consumerName: string;
   @Input() expertName: string;
+  @Input() expertFullName: string;
 
   @Output() updateVibiioStatus = new EventEmitter<any>();
   @Output() toggleFullscreen = new EventEmitter<boolean>();
