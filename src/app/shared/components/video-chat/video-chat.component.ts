@@ -32,13 +32,15 @@ import { User } from '../../../dashboard/models/user.interface';
     ])
   ]
 })
+
 export class VideoChatComponent {
+  closeSearch = true;
+
   @Input() vibiioConnecting: boolean;
   @Input() onVibiio = false;
   @Input() vibiioFullscreen = false;
   @Input() enableFullscreen = true;
   @Input() showControls;
-  @Input() closeSearch = true;
   @Input() vibiio: Vibiio;
   @Input() consumerName: string;
   @Input() expertName: string;
