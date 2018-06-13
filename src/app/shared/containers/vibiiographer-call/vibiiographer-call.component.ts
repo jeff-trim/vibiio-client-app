@@ -1,7 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostListener,
          Input, OnInit, AfterContentInit, OnDestroy, Output, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import * as screenfull from 'screenfull';
 
 // Components
@@ -23,7 +22,7 @@ import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { StreamData } from '../../models/transfer-objects/stream-data';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription, Observable } from 'rxjs/Rx';
 
 declare var OT: any;
 
@@ -78,6 +77,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     expertWaitingToJoin = false;
     fadeTimer: Observable<any>;
     fadeSubscription: Subscription;
+
     chime = new Audio('/assets/audio/chime.mp3');
 
     @Input() vibiio: Vibiio;
@@ -149,6 +149,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.expertFullName = `${expert.first_name} ${expert.last_name}`;
 
         this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
+
             this.consumerName = data.consumer;
             this.expertWaitingToJoin = true;
             this.setNotificationFadeOutTimer();
@@ -167,6 +168,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             this.expertWaitingToJoin = false;
         });
       }
+
 
     callConsumer() {
         this.videoService.dialConsumer(this.vibiio.id).subscribe((res) => { });
@@ -195,6 +197,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
                 (stats) => {
                     this.captureSnapshot();
                 });
+
             this.onVibiio = true;
             this.vibiioConnecting = false;
 
