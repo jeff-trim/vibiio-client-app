@@ -15,6 +15,7 @@ import { Note } from '../../models/consumer-note.interface';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
 import { Address } from '../../models/address.interface';
 import { VideoSnapshot } from '../../models/video-snapshot.interface';
+import { Consultant } from '../../models/consultant.interface';
 
 @Component({
     selector: 'vib-appointment-details',
@@ -32,7 +33,7 @@ export class AppointmentDetailsComponent {
     @Input() timeZone: string;
     @Input() isEditingForms = false;
     @Input() isUpdatingForms = false;
-
+    @Input() consultants: Consultant[];
 
     @Output() startVibiio = new EventEmitter<boolean>();
     @Output() claimVibiio = new EventEmitter<boolean>();
