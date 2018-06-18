@@ -11,5 +11,6 @@ export interface MyProfile {
     receive_texts: boolean;
     profile: {
         licenses: MyProfileLicense[];
+        languages: string[];
     };
 }
