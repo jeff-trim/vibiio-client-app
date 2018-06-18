@@ -42,8 +42,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     isUpdatingForms = false;
     isEditingForms = false;
     alive: boolean;
-    consultants: Consultant[];
-
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,
@@ -68,7 +66,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.user = data.appt.appointment.user;
             this.vibiio = data.appt.appointment.vibiio;
             this.snapshots = data.appt.appointment.snapshots;
-            this.consultants = this.vibiio.consultants;
             this.getStartParams();
         }, (error) => {
             console.log(error);

@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Vibiiographers search for and add experts to a call
   - 3-way calling allows experts to call in
   - Call avatars
+  - Experts and Vibiiographers connecting to a call as a 3rd party are referred to as consultants.
+  - Consultants are listed on the vibiio detail page.
   
 ## [2.1.0] - 2018-1-5
 ### Added
