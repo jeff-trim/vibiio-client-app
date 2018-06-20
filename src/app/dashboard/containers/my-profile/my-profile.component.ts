@@ -29,6 +29,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     addLicensureForm = false;
     isEditing = false;
     receivingTexts: boolean;
+    availableLanguages = ['english', 'spanish', 'french'];
 
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
@@ -125,11 +126,23 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
             zip: form.value.zip
         };
 
+        this.sendProfileUpdateData(options);
+    }
+
+    sendProfileUpdateData(options: any) {
         this.myProfileService.updateMyProfile(options)
             .subscribe( (data) => {
                 this.myProfile = data.user;
                 this.isEditing = false;
         });
+    }
+
+    updateLanguages(languages: string[]): void {
+        const options = {
+            languages: languages
+        };
+
+        this.sendProfileUpdateData(options);
     }
 
     toggleLicensureForm() {

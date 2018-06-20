@@ -94,6 +94,7 @@ import { VibiiographerListComponent } from './containers/vibiiographer-list/vibi
 import { ExpertListComponent } from './containers/expert-list/expert-list.component';
 import { ExpertsResolverService } from '../shared/services/experts-resolver.service';
 import { VibiiographersResolverService } from '../shared/services/vibiiographers-resolver.service';
+import { ProfileLanguagesComponent } from './components/profile-languages/profile-languages.component';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -201,7 +202,8 @@ const dashboardRoutes: Routes = [
     VibiioDescriptionComponent,
     CustomerNoteComponent,
     VibiiographerListComponent,
-    ExpertListComponent
+    ExpertListComponent,
+    ProfileLanguagesComponent
   ],
   imports: [
       CommonModule,

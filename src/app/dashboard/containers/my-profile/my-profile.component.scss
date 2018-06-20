@@ -36,17 +36,19 @@
 /deep/ .profile-information h2,
 /deep/ .profile-licensure h2 {
 	  font-family: Montserrat;
-	  font-size: 3.75rem;
+	  font-size: 2.75rem;
 	  font-weight: 700;
 	  letter-spacing: normal;
 	  color: $azure;
-    line-height: 1.55;
+      line-height: 1.55;
 }
 
 /deep/ .profile-information {
     @media (min-width: $small) {
        padding-left: 25px;
        padding-right: 60px;
+       padding-bottom: 60px;
+       margin-bottom: 60px;
    }
 }
 
@@ -144,16 +146,18 @@
     align-items: center;
     margin-top: 25px;
     cursor: pointer;
-    .add-text {
-        margin-left: 8px;
-        width: 118px;
-        height: 18px;
-        font-family: $copy-font;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        color: $pink;
-    }
+}
+
+.add-text {
+    margin-left: 8px;
+    width: 118px;
+    height: 18px;
+    font-family: $copy-font;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: $pink;
+    text-transform: uppercase;
 }
 
 .info-element {
@@ -249,4 +253,4 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: $greyish-brown;
-}
+  }
