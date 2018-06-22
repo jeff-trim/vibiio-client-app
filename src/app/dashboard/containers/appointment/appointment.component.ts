@@ -22,6 +22,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { VideoSnapshotService } from '../../../shared/services/video-snapshot.service';
 import { VibiioProfileService } from '../../services/vibiio-profile.service';
+import { Consultant } from '../../models/consultant.interface';
 
 @Component({
     selector: 'vib-appointment',
@@ -41,7 +42,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     isUpdatingForms = false;
     isEditingForms = false;
     alive: boolean;
-
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,

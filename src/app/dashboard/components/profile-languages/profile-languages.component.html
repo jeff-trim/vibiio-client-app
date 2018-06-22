@@ -1,0 +1,59 @@
+<div class="info-element">
+  <h2>spoken languages</h2>
+  <div class="long-pink-underline" ></div>
+</div>
+
+<span *ngIf="(languages?.length > 0); else noLanguages"></span>
+<div *ngFor="let language of languages"
+     class="info-element
+            row
+            between-xs
+            bottom-xs">
+  <span class="label">{{ language }}</span>
+  <div class="remove-widget">
+    <span class="remove-text end-md"
+          (click)=removeLanguage(language)>
+      remove
+      <img src="../../../../assets/images/add.svg"
+          class="remove">
+    </span>
+  </div>
+</div>
+
+
+<div class="add-widget-container">
+  <div [@fadeInOut]="!adding" *ngIf="!adding"
+        (click)="toggleForm()"
+      class="add-widget">
+    <img src="../../../../assets/images/add.svg"
+          class="add">
+    <span class="add-text">ADD LANGUAGE</span>
+  </div>
+
+  <form [formGroup]="addLanguageForm"
+        class="add-widget-form"
+        [@fadeInOut]="adding"
+        *ngIf="adding">
+
+    <div class="info-element
+                row
+                between-xs
+                bottom-xs">
+      <span class="label">Language</span>
+      <select formControlName="language" 
+              class="value end-md select language-select"
+              (change)="addLanguage()"
+              jcf>
+        <option value="">Select a language</option>
+        <option *ngFor="let language of availableLanguages" 
+                value="{{ language }}">{{ language }}
+        </option>
+      </select>
+      <span class="pink-underline"></span>  
+    </div>
+  </form>
+</div>
+
+<ng-template #noLanguages>
+    <p class='empty-state'>add at least one language to accept Videos!</p>
+</ng-template>

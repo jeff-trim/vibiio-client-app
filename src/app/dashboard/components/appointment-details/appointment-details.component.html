@@ -140,8 +140,25 @@
           </div>
         </div>
         <ng-template #noContact>
-          <p class='empty-state'>No Customer Notes</p>
+          <p class='empty-state'>no notes</p>
         </ng-template>
+
+        <div class="info-element">
+          <span class="label">consultant history</span>
+          <span class="pink-underline"></span>
+        </div>
+
+        <div *ngIf="(consultants?.length > 0); else noConsults">
+          <div *ngFor="let consultant of consultants">
+            <key-value [key]="consultant.full_name"
+            [value]="consultant.profession"></key-value>
+          </div>
+        </div>
+        <ng-template #noConsults>
+          <p class='empty-state'>no consults</p>
+        </ng-template>
+
+
       </div>
       
       <div class="col-md-1">

@@ -5,9 +5,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
 - Vibiiographer can opt in/out of text notifications
-
-
+- Calling:
+  - All calls are handled in a pop-out window
+  - The call window can be made fullscreen
+  - Vibiiographer can make out-going calls
+  - Vibiiographers search for and add experts to a call
+  - 3-way calling allows experts to call in
+  - Call avatars
+  - Experts and Vibiiographers connecting to a call as a 3rd party are referred to as consultants.
+  - Consultants are listed on the vibiio detail page.
+  - Base vibiiographer call window height off of height of screen.
+  
 ## [2.1.0] - 2018-1-5
 ### Added
 - Language to notifications

@@ -1,6 +1,7 @@
 import { Note } from './consumer-note.interface';
 import { Contact } from './contact.interface';
 import { VideoSnapshot } from './video-snapshot.interface';
+import { Consultant } from './consultant.interface';
 
 export interface Vibiio {
     id: number;
@@ -17,4 +18,5 @@ export interface Vibiio {
         first_name: string;
     };
     snapshots: VideoSnapshot[];
+    consultants: Consultant[];
 }

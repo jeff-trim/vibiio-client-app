@@ -24,6 +24,11 @@
               profile-information">
 
     <vib-profile-information [myProfile]="myProfile"></vib-profile-information>
+    
+    <vib-profile-languages [languages]="myProfile.profile.languages"
+                           [availableLanguages]="availableLanguages"
+                           (updateLanguages)="updateLanguages($event)"></vib-profile-languages>
+
   </div>
   <div class="col-xs-12
               col-sm-6
