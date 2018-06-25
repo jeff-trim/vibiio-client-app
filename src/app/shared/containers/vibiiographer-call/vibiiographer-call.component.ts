@@ -236,7 +236,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     expertConnected(streamData: StreamData) {
-        this.subscriber.restrictFrameRate(true);
         this.expertName = streamData.firstName;
         this.chime.play();
     }
@@ -269,7 +268,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     subscribeToStreamDestroyedEvents() {
         this.session.on('streamDestroyed', (data) => {
             const stream = data.stream;
-            this.subscriber.restrictFrameRate(false);
             this.processUnsubscribe(stream);
         });
     }
