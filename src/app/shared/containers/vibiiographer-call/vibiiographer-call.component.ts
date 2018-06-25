@@ -346,6 +346,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.muted = !this.muted;
         if (this.muted) {
             this.publisher.publishAudio(false);
+            this.publisher.audioFallbackEnabled(false);
         } else {
             this.publisher.publishAudio(true);
         }
