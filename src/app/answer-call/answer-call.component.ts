@@ -103,7 +103,6 @@ export class AnswerCallComponent implements OnInit {
 
   private initPublisher() {
     this.publisher = this.videoChatService.initPublisher();
-    this.publisher.audioFallbackEnabled(false);
   }
 
   private hideVideo() {
