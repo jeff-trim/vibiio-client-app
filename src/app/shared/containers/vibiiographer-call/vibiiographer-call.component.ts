@@ -147,9 +147,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     addExpert(expert: User) {
         this.expertFullName = `${expert.first_name} ${expert.last_name}`;
-
         this.addToCall.callUser(expert.id, this.vibiio.id).subscribe( (data) => {
-
             this.consumerName = data.consumer;
             this.expertWaitingToJoin = true;
             this.setNotificationFadeOutTimer();
@@ -190,16 +188,13 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     subscribeToStreamCreatedEvents() {
         this.session.on('streamCreated', (data) => {
-            const stream = data.stream;
-
-            if (this.expertWaitingToJoin) { this.expertConnected(stream); }
-            this.subscriber = this.session.subscribe(stream, 'subscriber-stream', VIDEO_OPTIONS,
-                (stats) => {
-                    this.captureSnapshot();
-                });
-
             this.onVibiio = true;
             this.vibiioConnecting = false;
+            const stream = data.stream;
+
+            if (this.expertWaitingToJoin) {
+                this.expertConnected(stream);
+             }
 
             // multiple archives fix
             if (!this.isAlreadySubscribed(stream)) {
@@ -282,7 +277,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         const streamData: StreamData = this.videoService.parseStreamData(stream);
         this.removeStreamFromArray(streamId);
         this.removeNameDisplay(streamData);
-        this.subscriber.restrictFrameRate(false);
+
         if (this.isLastStream()) {
             this.stopPublishing();
         }
