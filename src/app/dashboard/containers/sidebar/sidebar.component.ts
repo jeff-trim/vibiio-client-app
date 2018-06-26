@@ -119,9 +119,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.appRef.attachView(this.component.hostView);
       const domElem = (this.component.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
       document.body.appendChild(domElem);
-      console.log(this.component.instance.consumerName);
     });
-
   }
 
   consumerNameFix(vibiio: any) {
