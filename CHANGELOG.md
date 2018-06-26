@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Experts and Vibiiographers connecting to a call as a 3rd party are referred to as consultants.
   - Consultants are listed on the vibiio detail page.
   - Base vibiiographer call window height off of height of screen.
+  - Consumer rejects call and notifies vibiiographer
   
 ## [2.1.0] - 2018-1-5
 ### Added
