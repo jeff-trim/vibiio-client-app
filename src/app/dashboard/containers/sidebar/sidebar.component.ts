@@ -108,18 +108,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.videoChatService.calling$
     .takeWhile(() => this.alive)
     .subscribe( (vibiioCall) => {
-      this.vibiio = vibiioCall.vibiio;
       this.component = this.reslover
-                              .resolveComponentFactory<VibiiographerCall>(vibiiographerCallComponent)
-                              .create(this.injector);
+      .resolveComponentFactory<VibiiographerCall>(vibiiographerCallComponent)
+      .create(this.injector);
 
+      this.vibiio = vibiioCall.vibiio;
       this.component.instance.vibiio = vibiioCall.vibiio;
-      this.component.instance.consumerName = this.vibiio.consumer_name;
+      this.component.instance.consumerName = this.consumerNameFix(this.vibiio);
       this.component.instance.outgoingCall = vibiioCall.outgoing;
       this.appRef.attachView(this.component.hostView);
       const domElem = (this.component.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
       document.body.appendChild(domElem);
+      console.log(this.component.instance.consumerName);
     });
+
+  }
+
+  consumerNameFix(vibiio: any) {
+    if (vibiio.user_info) {
+      return vibiio.user_info.first_name;
+    } else {
+      return vibiio.consumer_name;
+    }
   }
 
   subscribeToEndCall() {

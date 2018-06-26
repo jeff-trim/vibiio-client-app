@@ -36,8 +36,8 @@
                           (endCall)="hangUp()"
                           (mute)="toggleMute($event)"></vib-video-controls>
 
-      <vib-expert-added-notification [@visibilityChanged]="expertAdded" *ngIf="expertAdded"
-                                     [expertFullName]="expertFullName"></vib-expert-added-notification>
+      <vib-sm-notification [@visibilityChanged]="showNotification" *ngIf="showNotification"
+                           [message]="message"></vib-sm-notification>
 
       <vib-expert-search [@expandableState]="!closeSearch" *ngIf="!closeSearch" 
                          (closeSearch)="toggleSearch()"
