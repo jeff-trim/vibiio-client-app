@@ -23,7 +23,7 @@ declare var OT: any;
 
 
 @Component({
-    selector: 'app-vibiio', styleUrls: ['./dashboard.component.scss'],
+    selector: 'vib-vibiio', styleUrls: ['./dashboard.component.scss'],
     templateUrl: 'dashboard.component.html'
 })
 
@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
     cable: any;
     readonly jwt: string = this.authService.getToken();
     notificationDrawerVisibility = false;
+    spokenLanguages: string[];
 
     constructor(
         private router: Router,
@@ -56,29 +57,44 @@ export class DashboardComponent implements OnInit {
         );
     }
 
+    ngOnInit() {
+        this.activatedRoute.data.subscribe((data) => {
+            this.vibiio = data.vibiio;
+            this.vibiiographerProfile = data.myProfile;
+            this.spokenLanguages = this.vibiiographerProfile.user.profile.languages;
+        });
+
+        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+        this.toggleActionCable(true);
+    }
+
     receiveNotificationData(data) {
-        switch (data.notification_type) {
-        case 'notification': {
-                this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
-                this.currentNotificationData = data;
-                this.notificationShow = true;
-                break;
-            }
-            case 'error': {
-                this.currentNotificationData = data;
-                break;
-            }
-            case 'success': {
-                this.toggleActionCable(false);
-                this.userAvailability = false;
-                this.router.navigate(['/dashboard/appointment/',
-                                          data.content.appointment_id],
-                                          { queryParams: { startVibiio: true },
-                                            preserveQueryParams: false });
-                break;
+
+        if (this.speaksVibiiographersLanguage(data.content.language)) {
+
+            switch (data.notification_type) {
+                case 'notification': {
+                    this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
+                    this.currentNotificationData = data;
+                    this.notificationShow = true;
+                    break;
+                }
+                case 'error': {
+                    this.currentNotificationData = data;
+                    break;
+                }
+                case 'success': {
+                    this.toggleActionCable(false);
+                    this.userAvailability = false;
+                    this.router.navigate(['/dashboard/appointment/',
+                                            data.content.appointment_id],
+                                            { queryParams: { startVibiio: true },
+                                                preserveQueryParams: false });
+                    break;
+                }
             }
         }
-     }
+    }
 
     receiveData(data: NotificationWrapper) {
         switch (data.type_of) {
@@ -113,6 +129,10 @@ export class DashboardComponent implements OnInit {
                 break;
             }
         }
+    }
+
+    speaksVibiiographersLanguage(language): boolean {
+       return this.spokenLanguages.includes(language);
     }
 
     toggleActionCable(event: boolean) {
@@ -152,15 +172,4 @@ export class DashboardComponent implements OnInit {
     toggleNotificationDrawerVisibility(event) {
         this.notificationDrawerVisibility = !this.notificationDrawerVisibility;
     }
-
-    ngOnInit() {
-        this.activatedRoute.data.subscribe((data) => {
-            this.vibiio = data.vibiio;
-            this.vibiiographerProfile = data.myProfile;
-        });
-
-        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
-        this.toggleActionCable(true);
-    }
-
 }
