@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExpertAddedNotificationComponent } from './expert-added-notification.component';
+import { SmNotificationComponent } from './sm-notification.component';
 
 describe('ExpertAddedNotificationComponent', () => {
-  let component: ExpertAddedNotificationComponent;
-  let fixture: ComponentFixture<ExpertAddedNotificationComponent>;
+  let component: SmNotificationComponent;
+  let fixture: ComponentFixture<SmNotificationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExpertAddedNotificationComponent ]
+      declarations: [ SmNotificationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExpertAddedNotificationComponent);
+    fixture = TestBed.createComponent(SmNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
