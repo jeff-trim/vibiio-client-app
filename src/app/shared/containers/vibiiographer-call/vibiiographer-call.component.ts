@@ -210,7 +210,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
 
     showCallRejectedNotification() {
-        this.message = `${this.vibiio.consumer_name} has rejected your call. Try again later.`;
+        this.message = `${this.consumerName} has rejected your call. Try again later.`;
         this.showNotification = true;
     }
 
