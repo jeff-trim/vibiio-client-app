@@ -193,12 +193,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     subscribeToCallNotifications() {
         const comp = this;
-        console.log(this.consumerName);
-        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+       this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
         this.subscription = this.cable.subscriptions.create({ channel: 'CallChannel', vibiio_id: this.vibiio.id }, {
             received(data) {
                 if (data.call_rejected) {
-                    console.log(data);
                     comp.processCallRejected();
                 }
             }
@@ -206,7 +204,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     processCallRejected() {
-        console.log('processing');
         this.showCallRejectedNotification();
         this.setHangUpTimer();
     }
@@ -218,11 +215,9 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     setHangUpTimer() {
-        console.log('sn:', this.showNotification);
         this.hangUpTimer = Observable.timer(4000);
 
         this.hangUpSubscription = this.hangUpTimer.subscribe(() => {
-                console.log('tick');
                 this.showNotification = false;
                 this.endSession();
             });
@@ -314,7 +309,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     subscribe(stream: any) {
         this.subscriber = this.session
-            .takeWhile(() => this.alive)
             .subscribe(stream, 'subscriber-stream', VIDEO_OPTIONS,
                 (stats) => {
                     if (this.streams.length === 1) {
