@@ -7,7 +7,7 @@ import { User } from '../../../dashboard/models/user.interface';
   styleUrls: ['./expert-search-result.component.scss']
 })
 export class ExpertSearchResultComponent implements OnInit {
-  profession: string;
+  profession?: string;
 
   @Input() result: User; // placeholder
 
