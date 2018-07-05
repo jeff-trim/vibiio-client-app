@@ -5,7 +5,9 @@
       {{ result.first_name }} {{ result.last_name }}
     </div>
     <div class="profession">
-      {{ profession | removeUnderscore | capitalize }}
+      <ng-container *ngIf="profession">
+        {{ profession | removeUnderscore | capitalize }}
+      </ng-container>
     </div>
   </div>
 
