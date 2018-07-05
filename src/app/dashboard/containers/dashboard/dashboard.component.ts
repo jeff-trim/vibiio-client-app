@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 // libaries
 import * as ActionCable from 'action-cable-react-jwt';
-import { OPENTOK_API_KEY } from '../../../../environments/environment';
+import intersection from 'lodash/intersection';
 
 // Models
 import { Vibiio } from '../../models/vibiio.interface';
@@ -14,10 +14,11 @@ import { NotificationWrapper } from '../../models/notification-wrapper.interface
 // Services
 import { MyProfileResolver } from '../../services/my-profile.resolver.service';
 import { AuthService } from '../../../services/auth.service';
+import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
 
 // environment
 import { ACTION_CABLE_URL } from '../../../../environments/environment';
-import { AvailabilitySharedService } from '../../../shared/services/availability-shared.service';
+import { OPENTOK_API_KEY } from '../../../../environments/environment';
 
 declare var OT: any;
 
@@ -41,6 +42,8 @@ export class DashboardComponent implements OnInit {
     readonly jwt: string = this.authService.getToken();
     notificationDrawerVisibility = false;
     spokenLanguages: string[];
+    companyIds: number[];
+    isVibiioAccount: boolean;
 
     constructor(
         private router: Router,
@@ -59,9 +62,14 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
+
             this.vibiio = data.vibiio;
             this.vibiiographerProfile = data.myProfile;
             this.spokenLanguages = this.vibiiographerProfile.user.profile.languages;
+            this.companyIds = this.vibiiographerProfile.user.profile.company_ids;
+            this.isVibiioAccount = ('Vibiio' === this.vibiiographerProfile.user.company);
+            console.log(this.vibiiographerProfile.user.company);
+            console.log(this.isVibiioAccount);
         });
 
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
@@ -69,29 +77,29 @@ export class DashboardComponent implements OnInit {
     }
 
     receiveNotificationData(data) {
-
-        if (this.speaksVibiiographersLanguage(data.content.language)) {
-
-            switch (data.notification_type) {
-                case 'notification': {
+        switch (data.notification_type) {
+            case 'notification': {
+                if (this.filterNotification(data.content)) {
                     this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
                     this.currentNotificationData = data;
                     this.notificationShow = true;
-                    break;
+                } else {
+                    this.notificationShow = false;
                 }
-                case 'error': {
-                    this.currentNotificationData = data;
-                    break;
-                }
-                case 'success': {
-                    this.toggleActionCable(false);
-                    this.userAvailability = false;
-                    this.router.navigate(['/dashboard/appointment/',
-                                            data.content.appointment_id],
-                                            { queryParams: { startVibiio: true },
-                                                preserveQueryParams: false });
-                    break;
-                }
+                break;
+            }
+            case 'error': {
+                this.currentNotificationData = data;
+                break;
+            }
+            case 'success': {
+                this.toggleActionCable(false);
+                this.userAvailability = false;
+                this.router.navigate(['/dashboard/appointment/',
+                                        data.content.appointment_id],
+                                        { queryParams: { startVibiio: true },
+                                            preserveQueryParams: false });
+                break;
             }
         }
     }
@@ -131,10 +139,6 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    speaksVibiiographersLanguage(language): boolean {
-       return this.spokenLanguages.includes(language);
-    }
-
     toggleActionCable(event: boolean) {
         this.userAvailability = event;
         const comp = this;
@@ -172,4 +176,26 @@ export class DashboardComponent implements OnInit {
     toggleNotificationDrawerVisibility(event) {
         this.notificationDrawerVisibility = !this.notificationDrawerVisibility;
     }
+
+    filterNotification(content: any): boolean {
+        if (this.speaksVibiiographersLanguage(content.language) &&
+            this.sameCompany(content.company_ids)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    speaksVibiiographersLanguage(language): boolean {
+        return this.spokenLanguages.includes(language);
+     }
+
+     sameCompany?(companies: number[]) {
+         if (this.isVibiioAccount) {
+             return true;
+         } else {
+             return (intersection(this.companyIds, companies).length > 0);
+         }
+     }
+
 }
