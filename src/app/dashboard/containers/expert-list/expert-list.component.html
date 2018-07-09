@@ -15,7 +15,9 @@
             <span class="pink-underline"></span>
           </div>
         </div>
-        <p class="detail"><span>{{ expert.professions[0] | removeUnderscore | capitalize }}</span><span>{{ expert.city }}, {{ expert.state }}</span></p>
+        <ng-container *ngIf="expert.professions[0]">
+          <p class="detail"><span>{{ expert.professions[0] | removeUnderscore | capitalize }}</span><span>{{ expert.city }}, {{ expert.state }}</span></p>
+        </ng-container>
       </div>
     </div>  
   
