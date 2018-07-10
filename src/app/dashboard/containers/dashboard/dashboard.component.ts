@@ -79,13 +79,9 @@ export class DashboardComponent implements OnInit {
     receiveNotificationData(data) {
         switch (data.notification_type) {
             case 'notification': {
-                if (this.filterNotification(data.content)) {
-                    this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
-                    this.currentNotificationData = data;
-                    this.notificationShow = true;
-                } else {
-                    this.notificationShow = false;
-                }
+                this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
+                this.currentNotificationData = data;
+                this.notificationShow = true;
                 break;
             }
             case 'error': {
