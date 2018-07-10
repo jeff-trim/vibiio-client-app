@@ -178,8 +178,7 @@ export class DashboardComponent implements OnInit {
     }
 
     filterNotification(content: any): boolean {
-        if (this.speaksVibiiographersLanguage(content.language) &&
-            this.sameCompany(content.company_ids)) {
+        if (this.speaksVibiiographersLanguage(content.language)) {
             return true;
         } else {
             return false;
