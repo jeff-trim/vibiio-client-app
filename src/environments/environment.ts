@@ -8,4 +8,4 @@ export const environment = {
 };
 export const API_URL = 'http://localhost:3000';
 export const OPENTOK_API_KEY = '45999522';
-export const ACTION_CABLE_URL = 'ws://localhost:3000/cable';
+export const ACTION_CABLE_URL = 'ws://localhost:3000/available';

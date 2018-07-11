@@ -62,14 +62,13 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
+            console.log(data);
 
             this.vibiio = data.vibiio;
             this.vibiiographerProfile = data.myProfile;
             this.spokenLanguages = this.vibiiographerProfile.user.profile.languages;
             this.companyIds = this.vibiiographerProfile.user.profile.company_ids;
             this.isVibiioAccount = ('Vibiio' === this.vibiiographerProfile.user.company);
-            console.log(this.vibiiographerProfile.user.company);
-            console.log(this.isVibiioAccount);
         });
 
         this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
