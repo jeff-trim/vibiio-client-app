@@ -19,6 +19,7 @@ import { AvailabilitySharedService } from '../../../shared/services/availability
 // environment
 import { ACTION_CABLE_URL } from '../../../../environments/environment';
 import { OPENTOK_API_KEY } from '../../../../environments/environment';
+import { NotificationService } from '../../services/notification.service';
 
 declare var OT: any;
 
@@ -49,7 +50,8 @@ export class DashboardComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private authService: AuthService,
-        private availabilitySharedService: AvailabilitySharedService
+        private availabilitySharedService: AvailabilitySharedService,
+        private notificationService: NotificationService
     ) {
         // subscribes to shared service and listens for changes passed from the
         // my appointment container
@@ -62,8 +64,6 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            console.log(data);
-
             this.vibiio = data.vibiio;
             this.vibiiographerProfile = data.myProfile;
             this.spokenLanguages = this.vibiiographerProfile.user.profile.languages;
@@ -78,9 +78,13 @@ export class DashboardComponent implements OnInit {
     receiveNotificationData(data) {
         switch (data.notification_type) {
             case 'notification': {
+                console.log();
+
+                if (this.filterNotification(data.content)) {
                     this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
                     this.currentNotificationData = data;
                     this.notificationShow = true;
+                }
                 break;
             }
             case 'error': {
@@ -173,7 +177,8 @@ export class DashboardComponent implements OnInit {
     }
 
     filterNotification(content: any): boolean {
-        if (this.speaksVibiiographersLanguage(content.language)) {
+        if (this.speaksVibiiographersLanguage(content.language)
+            && (this.isValidCompany(content.companies) || this.isSameCompany)) {
             return true;
         } else {
             return false;
@@ -184,12 +189,16 @@ export class DashboardComponent implements OnInit {
         return this.spokenLanguages.includes(language);
      }
 
-     sameCompany?(companies: number[]) {
-         if (this.isVibiioAccount) {
-             return true;
-         } else {
-             return (intersection(this.companyIds, companies).length > 0);
-         }
+    isValidCompany(companies: number[]): boolean {
+        if (this.isVibiioAccount) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isSameCompany(companies: number[]): boolean {
+        return (intersection(this.companyIds, companies).length > 0);
      }
 
 }

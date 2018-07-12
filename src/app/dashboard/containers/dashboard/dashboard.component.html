@@ -35,14 +35,14 @@
         </div>
       </div>
 
-      <div class="button-wrap">
+      <div class="button-wrap"
+           (click)='toggleNotificationDrawerVisibility($event)'>
         <span class="button-label" *ngIf="!notificationDrawerVisibility">SHOW</span>
         <span class="button-label" *ngIf="notificationDrawerVisibility">HIDE</span>
 
         <div class="arrow drawer-button"
              [class.down-arrow]='!notificationDrawerVisibility'
-             [class.active-arrow]='notificationDrawerVisibility'
-             (click)='toggleNotificationDrawerVisibility($event)'>
+             [class.active-arrow]='notificationDrawerVisibility'>
         </div>
       </div>
     </div>     
