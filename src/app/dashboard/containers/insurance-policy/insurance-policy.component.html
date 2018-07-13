@@ -4,12 +4,14 @@
     <span *ngIf="insurancePolicies">
         <span *ngFor="let policy of insurancePolicies">
             <vib-policy-detail [policy]="policy"
+                               [insuranceProviderList]="insuranceProviderList"
                                (formChanged)="editingForm($event)"></vib-policy-detail>
         </span>
     </span>
 </div>
 
 <vib-policy-detail-new *ngIf="showNewForm"
+                        [insuranceProviderList]="insuranceProviderList"
                         (newPolicy)="createPolicy($event)"></vib-policy-detail-new>
 
 <div *ngIf="!showNewForm" 

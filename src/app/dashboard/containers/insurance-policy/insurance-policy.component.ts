@@ -25,6 +25,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
 
   @Input() insurancePolicies?: InsurancePolicy[];
   @Input() consumerId: number;
+  @Input() insuranceProviderList: any[];
 
   @Output() editingPolicy: EventEmitter<boolean> = new EventEmitter<boolean>();
 

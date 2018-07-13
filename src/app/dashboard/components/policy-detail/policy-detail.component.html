@@ -1,22 +1,18 @@
   <form [formGroup]="editForm">
-        <div class="info-element
-                    row
-                    between-xs
-                    bottom-xs">
-            <span class="label">Provider</span>
-              <input formControlName="carrier"
-                     name="carrier" 
-                     placeholder="Provider"
-                     type="text" 
-                     class="value end-md" 
-                     id="provider">
-            <span class="pink-underline"></span>
-            <div *ngIf="checkErrors(editForm.get('carrier'))"
-                 class="error-message">
-                <p>Provider is Required</p>
-            </div>
-        </div>
-
+        <div class="dropdown-style">
+                <select (ngModel)="policy.carrier"
+                        formControlName="carrier"
+                        #carrier
+                        jcf>
+                  <option [value]="policy.carrier">{{ policy.carrier }}</option>
+                  <option *ngFor="let provider of insuranceProviderList" [value]="provider.value">{{ provider.label }}</option>
+                </select>
+                <span class="pink-underline"></span>
+              
+                <div *ngIf="editForm.get('carrier').invalid && !editForm.get('carrier').pristine" class="error-message">
+                  <p>Provider is Required</p>
+                </div>
+              </div>
         <div class="info-element
                     row
                     between-xs

@@ -23,6 +23,8 @@ import { ActivityService } from '../../../shared/services/activity.service';
 import { VideoSnapshotService } from '../../../shared/services/video-snapshot.service';
 import { VibiioProfileService } from '../../services/vibiio-profile.service';
 import { Consultant } from '../../models/consultant.interface';
+import { FormSelectMapperService } from '../../../sign-up/services/form-select-mapper.service';
+import { InsuranceProviderList } from '../../models/insurance-provider-list.interface';
 
 @Component({
     selector: 'vib-appointment',
@@ -42,6 +44,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     isUpdatingForms = false;
     isEditingForms = false;
     alive: boolean;
+    insuranceProviderList: any[];
 
     constructor(private activatedRoute: ActivatedRoute,
                 private snapshotService: VideoSnapshotService,
@@ -54,7 +57,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 private videoService: VideoChatService,
                 private formStatusService: AppointmentDetailsFormStatusService,
                 private vibiioProfileService: VibiioProfileService,
-                private location: Location) { }
+                private location: Location,
+                private formSelectMapperService: FormSelectMapperService) { }
 
     ngOnInit() {
         this.alive = true;
@@ -66,6 +70,11 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             this.user = data.appt.appointment.user;
             this.vibiio = data.appt.appointment.vibiio;
             this.snapshots = data.appt.appointment.snapshots;
+            this.formSelectMapperService.mapValues(data.providers.insurance_providers).then(
+                   (mapped_providers) => {
+                       this.insuranceProviderList = mapped_providers;
+                       console.log(this.insuranceProviderList);
+                    });
             this.getStartParams();
         }, (error) => {
             console.log(error);

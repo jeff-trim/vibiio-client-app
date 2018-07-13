@@ -86,6 +86,7 @@ import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 import { VideoArchiveResolver } from './services/video-archive.resolver.service';
 import { VibiioProfileResolver } from './services/vibiio-profile.resolver.service';
+import { InsuranceResolverService } from '../sign-up/services/insurance-resolver.service';
 
 // Directives
 import { AutosizeDirective } from './directives/autosize.directive';
@@ -133,7 +134,8 @@ const dashboardRoutes: Routes = [
           },
           {path: 'appointment/:id', component: AppointmentComponent,
             resolve: {
-               appt: AppointmentResolver
+               appt: AppointmentResolver,
+               providers: InsuranceResolverService
             }
           },
           {
@@ -206,7 +208,7 @@ const dashboardRoutes: Routes = [
     ProfileLanguagesComponent
   ],
   imports: [
-      CommonModule,
+    CommonModule,
       HttpModule,
       JcfModule,
       NouisliderModule,

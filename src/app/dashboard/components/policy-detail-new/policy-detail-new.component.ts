@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import * as jcf from 'jcf';
 
 // Models
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
@@ -14,8 +15,12 @@ export class PolicyDetailNewComponent {
     newPolicyForm: FormGroup;
     policy: InsurancePolicy;
 
+    @Input() insuranceProviderList: any[];
+
     @Output()
     newPolicy: EventEmitter<InsurancePolicy> = new EventEmitter<InsurancePolicy>();
+
+    @ViewChild('carrier') carrier: ElementRef;
 
     constructor() {
         this.newPolicyForm = new FormGroup({
@@ -23,6 +28,8 @@ export class PolicyDetailNewComponent {
             'policy_number': new FormControl('', Validators.required)
         });
      }
+
+
 
     onSubmit() {
         if (this.newPolicyForm.valid) {

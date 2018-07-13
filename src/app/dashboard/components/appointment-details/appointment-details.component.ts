@@ -34,6 +34,7 @@ export class AppointmentDetailsComponent {
     @Input() isEditingForms = false;
     @Input() isUpdatingForms = false;
     @Input() consultants: Consultant[];
+    @Input() insuranceProviderList: any[];
 
     @Output() startVibiio = new EventEmitter<boolean>();
     @Output() claimVibiio = new EventEmitter<boolean>();

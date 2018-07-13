@@ -17,6 +17,7 @@ export class PolicyDetailComponent implements OnInit {
 
     @Input() policy?: InsurancePolicy;
     @Input() onEdit: boolean;
+    @Input() insuranceProviderList: any[];
 
     @Output() formChanged = new EventEmitter<boolean>();
 

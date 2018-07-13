@@ -1,38 +1,29 @@
-<form [formGroup]="newPolicyForm"
-      (ngSubmit)="onSubmit()">
+<form [formGroup]="newPolicyForm" (ngSubmit)="onSubmit()">
 
-        <div class="info-element
+    <div class="dropdown-style">
+      <select (ngModel)="policy.carrier"
+              formControlName="carrier"
+              #carrier
+              jcf>
+        <option value="">Provider</option>
+        <option *ngFor="let provider of insuranceProviderList" [value]="provider.value">{{ provider.label }}</option>
+      </select>
+      <span class="pink-underline"></span>
+    
+      <div *ngIf="newPolicyForm.get('carrier').invalid && !newPolicyForm.get('carrier').pristine" class="error-message">
+        <p>Provider is Required</p>
+      </div>
+    </div>
+
+  <div class="info-element
                     row
                     between-xs
                     bottom-xs">
-                
-                <span class="label">Provider</span>
-                <input
-                   formControlName="carrier" 
-                   placeholder="Provider"
-                   type="text" 
-                   class="value end-md">
-                   <span class="pink-underline"></span>  
-                <div *ngIf="newPolicyForm.get('carrier').invalid && !newPolicyForm.get('carrier').pristine"
-                class="error-message">
-                <p>Provider is Required</p>
-                </div>
-        </div>
-
-        <div class="info-element
-                    row
-                    between-xs
-                    bottom-xs">
-            <span class="label">Policy Number</span>
-            <input (ngModel)="policy.policy_number" 
-                    formControlName="policy_number"
-                    placeholder="Policy Number"
-                    type="text"
-                    class="value end-md">
-            <span class="pink-underline"></span>
-            <div *ngIf="newPolicyForm.get('policy_number').invalid && !newPolicyForm.get('policy_number').pristine"
-                 class="error-message">
-                 <p>Policy Number is Required</p>
-            </div>
-        </div>
+    <span class="label">Policy Number</span>
+    <input (ngModel)="policy.policy_number" formControlName="policy_number" placeholder="Policy Number" type="text" class="value end-md">
+    <span class="pink-underline"></span>
+    <div *ngIf="newPolicyForm.get('policy_number').invalid && !newPolicyForm.get('policy_number').pristine" class="error-message">
+      <p>Policy Number is Required</p>
+    </div>
+  </div>
 </form>
