@@ -30,175 +30,216 @@ declare var OT: any;
 })
 
 export class DashboardComponent implements OnInit {
+    userAvailability: boolean;
     session: any;
     vibiio: Vibiio;
-    subscription: any;
-    notificationShow = false;
     vibiiographerProfile: any;
     waitingConsumers = [];
-    currentNotificationData = {};
-    availabilityParams: boolean;
-    userAvailability: boolean;
-    cable: any;
-    readonly jwt: string = this.authService.getToken();
     notificationDrawerVisibility = false;
-    spokenLanguages: string[];
-    companyIds: number[];
-    isVibiioAccount: boolean;
+    // availabilityParams: boolean;
+    // currentNotificationData = {};
+    // notificationShow = false;
+    // spokenLanguages: string[];
+    // companyIds: number[];
+    // isVibiioAccount: boolean;
+    // readonly jwt: string = this.authService.getToken();
+    // cable: any;
+    // subscription: any;
+    // wrappedNotification: NotificationWrapper;
+    // notification: Notification;
 
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private authService: AuthService,
-        private availabilitySharedService: AvailabilitySharedService,
         private notificationService: NotificationService
+        // private availabilitySharedService: AvailabilitySharedService,
+        // private authService: AuthService,
     ) {
         // subscribes to shared service and listens for changes passed from the
         // my appointment container
-        this.availabilitySharedService.changeEmitted$.subscribe(
-            data => {
-              this.toggleActionCable(data);
-            }
-        );
+        // this.availabilitySharedService.changeEmitted$.subscribe(
+            // data => {
+            //   this.toggleActionCable(data);
+            // }
+            // available => {
+                // if (available) {
+                    // this.subscribeToNotifications();
+                // } else {
+                    // this.unsubscribeFromNotifications();
+                // }
+            // }
+        // );
     }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.vibiio = data.vibiio;
             this.vibiiographerProfile = data.myProfile;
-            this.spokenLanguages = this.vibiiographerProfile.user.profile.languages;
-            this.companyIds = this.vibiiographerProfile.user.profile.company_ids;
-            this.isVibiioAccount = ('Vibiio' === this.vibiiographerProfile.user.company);
+            // this.spokenLanguages = this.vibiiographerProfile.user.profile.languages;
+            // this.companyIds = this.vibiiographerProfile.user.profile.company_ids;
+            // this.isVibiioAccount = ('Vibiio' === this.vibiiographerProfile.user.company);
         });
 
-        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
-        this.toggleActionCable(true);
+        // this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+        // this.toggleActionCable(true);
+        this.subscribeToWaitList();
     }
 
-    receiveNotificationData(data) {
-        switch (data.notification_type) {
-            case 'notification': {
-                console.log();
+    subscribeToWaitList() {
+        console.log('subscribe');
+        // this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+        this.notificationService.subscribeToAvailabilityChannel().subscribe(waitListData => {
+            console.log('datadad');
 
-                if (this.filterNotification(data.content)) {
-                    this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
-                    this.currentNotificationData = data;
-                    this.notificationShow = true;
-                }
-                break;
-            }
-            case 'error': {
-                this.currentNotificationData = data;
-                break;
-            }
-            case 'success': {
-                this.toggleActionCable(false);
-                this.userAvailability = false;
-                this.router.navigate(['/dashboard/appointment/',
-                                        data.content.appointment_id],
-                                        { queryParams: { startVibiio: true },
-                                            preserveQueryParams: false });
-                break;
-            }
-        }
-    }
+            console.log(waitListData);
 
-    receiveData(data: NotificationWrapper) {
-        switch (data.type_of) {
-            case 'waiting_list': {
-                this.fillWaitingList(data);
-                break;
-            }
-            case 'notification': {
-                this.receiveNotificationData(data.content);
-                break;
-            }
-            case 'remove_waiting_consumer': {
-                this.removeNotification(data);
-                break;
-            }
-        }
-    }
-
-    fillWaitingList(data) {
-        for (const notification of data.content){
-            this.receiveNotificationData(notification);
-        }
-    }
-
-    removeNotification(data) {
-        for (const consumer in this.waitingConsumers) {
-            if (this.waitingConsumers[+consumer].consumerData.content.vibiio_id === data.content.vibiio_id) {
-                this.waitingConsumers = [
-                    ...this.waitingConsumers.slice(0, +consumer),
-                    ...this.waitingConsumers.slice(+consumer + 1)
-                ];
-                break;
-            }
-        }
-    }
-
-    toggleActionCable(event: boolean) {
-        this.userAvailability = event;
-        const comp = this;
-
-        if (event) {
-            this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
-                connected(data) {
-                    this.getWaitingList();
-                },
-                received(data) {
-                    comp.receiveData(data);
-                },
-                getWaitingList() {
-                    return this.perform('get_waiting_list');
-                },
-                claimAppointment(message) {
-                    return this.perform('claim_vibiio', message);
-                }
-            });
-        } else {
-            this.notificationShow = false;
-            this.waitingConsumers = [];
-            this.subscription.unsubscribe();
-        }
-    }
-
-    claimAppointment(event) {
-        this.subscription.claimAppointment({
-            vibiiographer_id: this.vibiiographerProfile.user.profile.id,
-            vibiio_id: event.content.vibiio_id,
-            consumer_id: event.content.consumer_id
+            // if (waitListData.appointmentId) {
+            //     this.router.navigate(['/dashboard/appointment/', waitListData.appointmentId],
+            //                          { queryParams: { startVibiio: true },
+            //                          preserveQueryParams: false }
+            //                         );
+            // } else {
+            //     this.waitingConsumers = waitListData.waitingList;
+            // }
         });
     }
+
+    // unsubscribeFromNotifications() {
+    //     this.notificationService.unsubscribeFromAvailabilityChannel();
+    // }
 
     toggleNotificationDrawerVisibility(event) {
         this.notificationDrawerVisibility = !this.notificationDrawerVisibility;
     }
 
-    filterNotification(content: any): boolean {
-        if (this.speaksVibiiographersLanguage(content.language)
-            && (this.isValidCompany(content.companies) || this.isSameCompany)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // receiveWrappedNotification(data: NotificationWrapper) {
+    //     console.log('recieveData data: ', data);
+    //     this.wrappedNotification = data;
+    //     switch (this.wrappedNotification.type_of) {
+    //         case 'waiting_list': {
+    //             this.fillWaitingList(this.wrappedNotification);
+    //             break;
+    //         }
+    //         case 'notification': {
+    //             this.receiveNotificationData(this.wrappedNotification.content);
+    //             break;
+    //         }
+    //         case 'remove_waiting_consumer': {
+    //             this.removeNotification(this.wrappedNotification);
+    //             break;
+    //         }
+    //     }
+    // }
 
-    speaksVibiiographersLanguage(language): boolean {
-        return this.spokenLanguages.includes(language);
-     }
+    // receiveNotificationData(data) {
+    //     console.log('receiveNotificiation data:', data);
 
-    isValidCompany(companies: number[]): boolean {
-        if (this.isVibiioAccount) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     switch (data.notification_type) {
+    //         case 'notification': {
+    //             console.log();
 
-    isSameCompany(companies: number[]): boolean {
-        return (intersection(this.companyIds, companies).length > 0);
-     }
+    //             if (this.filterNotification(data.content)) {
+    //                 this.waitingConsumers = [ { consumerData: data }, ...this.waitingConsumers ];
+    //                 console.log(this.waitingConsumers);
+
+    //                 this.currentNotificationData = data;
+    //                 this.notificationShow = true;
+    //             }
+    //             break;
+    //         }
+    //         case 'error': {
+    //             this.currentNotificationData = data;
+    //             break;
+    //         }
+    //         case 'success': {
+    //             this.toggleActionCable(false);
+    //             this.userAvailability = false;
+    //             this.router.navigate(['/dashboard/appointment/',
+    //                                     data.content.appointment_id],
+    //                                     { queryParams: { startVibiio: true },
+    //                                         preserveQueryParams: false });
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // fillWaitingList(data) {
+    //     for (const notification of data.content){
+    //         this.receiveNotificationData(notification);
+    //     }
+    // }
+
+    // removeNotification(data) {
+    //     for (const consumer in this.waitingConsumers) {
+    //         if (this.waitingConsumers[+consumer].consumerData.content.vibiio_id === data.content.vibiio_id) {
+    //             this.waitingConsumers = [
+    //                 ...this.waitingConsumers.slice(0, +consumer),
+    //                 ...this.waitingConsumers.slice(+consumer + 1)
+    //             ];
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // toggleActionCable(connected: boolean) {
+    //     this.userAvailability = connected;
+    //     const comp = this;
+
+    //     if (this.userAvailability) {
+    //         this.subscription = this.cable.subscriptions.create({channel: 'AvailabilityChannel'}, {
+    //             connected(data) {
+    //                 this.getWaitingList();
+    //             },
+    //             received(data) {
+    //                 comp.receiveWrappedNotification(data);
+    //             },
+    //             getWaitingList() {
+    //                 return this.perform('get_waiting_list');
+    //             },
+    //             claimAppointment(message) {
+    //                 return this.perform('claim_vibiio', message);
+    //             }
+    //         });
+    //         console.log(this.subscription);
+    //     } else {
+    //         this.notificationShow = false;
+    //         this.subscription.unsubscribe();
+    //         this.waitingConsumers = [];
+    //     }
+    // }
+
+    // claimAppointment(event) {
+    //     this.subscription.claimAppointment({
+    //         vibiiographer_id: this.vibiiographerProfile.user.profile.id,
+    //         vibiio_id: event.content.vibiio_id,
+    //         consumer_id: event.content.consumer_id
+    //     });
+    // }
+
+
+    // filterNotification(content: any): boolean {
+    //     if (this.speaksVibiiographersLanguage(content.language)
+    //         && (this.isValidCompany(content.companies) || this.isSameCompany)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    // speaksVibiiographersLanguage(language): boolean {
+    //     return this.spokenLanguages.includes(language);
+    //  }
+
+    // isValidCompany(companies: number[]): boolean {
+    //     if (this.isVibiioAccount) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    // isSameCompany(companies: number[]): boolean {
+    //     return (intersection(this.companyIds, companies).length > 0);
+    //  }
 
 }

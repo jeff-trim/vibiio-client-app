@@ -1,6 +1,5 @@
 <div class="row">
-  <vib-sidebar (emitAvailability)="toggleActionCable($event)"
-               [available]="userAvailability"
+  <vib-sidebar [available]="userAvailability"
                class="col-xs-12
                       col-md-3
                       side-bar-component">
@@ -15,8 +14,7 @@
       <span *ngFor="let consumer of waitingConsumers; let index = index">
           <vib-appointment-notification
               [rowIndex]="index"
-              [notificationData]="consumer['consumerData']"
-              (claimAppointment)="claimAppointment($event)"></vib-appointment-notification>
+              [notificationData]="consumer['consumerData']"></vib-appointment-notification>
       </span>
     </div> 
      

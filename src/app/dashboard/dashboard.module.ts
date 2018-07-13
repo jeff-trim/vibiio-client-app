@@ -72,6 +72,7 @@ import { AddressStatusService } from './services/address-status.service';
 import { AppointmentDetailsFormStatusService } from './services/appointment-details-form-status.service';
 import { ConsumerUpdateService } from './services/consumer-update.service';
 import { InsuranceStatusService } from './services/insurance-status.service';
+import { NotificationService } from './services/notification.service';
 
 // resolvers
 import { DashboardResolver } from './services/dashboard.resolver.service';
@@ -206,7 +207,7 @@ const dashboardRoutes: Routes = [
     ProfileLanguagesComponent
   ],
   imports: [
-      CommonModule,
+    CommonModule,
       HttpModule,
       JcfModule,
       NouisliderModule,
@@ -262,7 +263,8 @@ const dashboardRoutes: Routes = [
     ConsumerUpdateService,
     AppointmentDetailsFormStatusService,
     ExpertsResolverService,
-    VibiiographersResolverService
+    VibiiographersResolverService,
+    NotificationService
   ],
   entryComponents: [
     VibiiographerCallComponent
