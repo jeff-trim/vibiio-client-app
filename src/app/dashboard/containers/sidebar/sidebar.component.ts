@@ -147,7 +147,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     toggleAvailability() {
         this.available = !this.available;
-        console.log('available', this.available);
         this.emitAvailability.emit(this.available);
   }
 
