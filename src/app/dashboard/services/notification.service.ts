@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import intersection from 'lodash/intersection';
+import * as _ from 'lodash';
 import * as ActionCable from 'action-cable-react-jwt';
 
 // Services
@@ -79,8 +80,7 @@ export class NotificationService {
   }
 
   setfilterCriteria(filter: NotificationFilterCriteria) {
-    this.spokenLanguages = filter.languages;
-    console.log(this.spokenLanguages);
+    this.spokenLanguages = _.map(filter.languages, _.method('toLowerCase'));
     this.isVibiioStaff = filter.isVibiioStaff;
     this.companyIds = filter.companyIds;
   }
@@ -97,7 +97,6 @@ export class NotificationService {
 
   private receiveWrappedNotification(data: NotificationWrapper) {
     this.wrappedNotification = data;
-    console.log('receiveWrappedNotification data: ', data);
     switch (data.type_of) {
         case 'waiting_list': {
             return this.fetchWaitingList(data);
