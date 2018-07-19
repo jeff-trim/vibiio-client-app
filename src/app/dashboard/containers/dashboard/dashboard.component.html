@@ -1,6 +1,6 @@
 <div class="row">
-  <vib-sidebar (emitAvailability)="toggleActionCable($event)"
-               [available]="userAvailability"
+  <vib-sidebar [available]="userAvailability"
+               (emitAvailability)="userIsAvailable($event)"
                class="col-xs-12
                       col-md-3
                       side-bar-component">
@@ -15,7 +15,7 @@
       <span *ngFor="let consumer of waitingConsumers; let index = index">
           <vib-appointment-notification
               [rowIndex]="index"
-              [notificationData]="consumer['consumerData']"
+              [notificationData]="consumer['waitListItem']"
               (claimAppointment)="claimAppointment($event)"></vib-appointment-notification>
       </span>
     </div> 
@@ -35,14 +35,14 @@
         </div>
       </div>
 
-      <div class="button-wrap">
+      <div class="button-wrap"
+           (click)='toggleNotificationDrawerVisibility($event)'>
         <span class="button-label" *ngIf="!notificationDrawerVisibility">SHOW</span>
         <span class="button-label" *ngIf="notificationDrawerVisibility">HIDE</span>
 
         <div class="arrow drawer-button"
              [class.down-arrow]='!notificationDrawerVisibility'
-             [class.active-arrow]='notificationDrawerVisibility'
-             (click)='toggleNotificationDrawerVisibility($event)'>
+             [class.active-arrow]='notificationDrawerVisibility'>
         </div>
       </div>
     </div>     
