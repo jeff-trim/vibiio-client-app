@@ -21,7 +21,8 @@
         <vib-call-name-display *ngIf="(expertName?.length > 0)" [name]="expertName"></vib-call-name-display>
       </div>
       
-      <div *ngIf="(onVibiio && !vibiioConnecting)"
+      <div vibToggleFullscreen
+           *ngIf="(onVibiio && !vibiioConnecting)"
            class="fullscreen-button-container"
            [class.full]="vibiioFullscreen"
            (click)="toggleVibiioFullscreen()">

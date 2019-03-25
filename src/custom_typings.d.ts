@@ -1,1 +1,1 @@
-
+declare module 'screenfull';
