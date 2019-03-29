@@ -48,6 +48,10 @@ import { ConsumerProfileSummaryComponent } from './components/consumer-profile-s
 import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
 import { VibiioDescriptionComponent } from './components/vibiio-description/vibiio-description.component';
 import { CustomerNoteComponent } from './components/customer-note/customer-note.component';
+import { VibiiographerCallComponent } from '../shared/containers/vibiiographer-call/vibiiographer-call.component';
+import { VibiiographerListComponent } from './containers/vibiiographer-list/vibiiographer-list.component';
+import { ExpertListComponent } from './containers/expert-list/expert-list.component';
+import { ProfileLanguagesComponent } from './components/profile-languages/profile-languages.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -83,6 +87,8 @@ import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.se
 import { CustomerProfileResolver } from './services/customer-profile.resolver.service';
 import { ConsumerStatusResolver } from './services/consumer-status.resolver.service';
 import { AllConsumersResolver } from './services/all-consumers.resolver.service';
+import { ExpertsResolverService } from '../shared/services/experts-resolver.service';
+import { VibiiographersResolverService } from '../shared/services/vibiiographers-resolver.service';
 import { AppointmentResolver } from './services/appointment.resolver.service';
 import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
 import { VideoArchiveResolver } from './services/video-archive.resolver.service';
@@ -90,87 +96,84 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 
 // Directives
 import { AutosizeDirective } from './directives/autosize.directive';
-import { VibiiographerCallComponent } from '../shared/containers/vibiiographer-call/vibiiographer-call.component';
-import { VibiiographerListComponent } from './containers/vibiiographer-list/vibiiographer-list.component';
-import { ExpertListComponent } from './containers/expert-list/expert-list.component';
-import { ExpertsResolverService } from '../shared/services/experts-resolver.service';
-import { VibiiographersResolverService } from '../shared/services/vibiiographers-resolver.service';
-import { ProfileLanguagesComponent } from './components/profile-languages/profile-languages.component';
 
 // Routes
 const dashboardRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    resolve: { sidebarCustomerStatuses: SidebarCustomerResolver,
-               sidebarMyDay: MyDayResolver,
-               appointments: MyAppointmentsResolver,
-               myProfile: MyProfileResolver,
-               availability: MyAvailabilityResolver
-             },
-      children: [
-          { path: 'my_profile',
-            component: MyProfileComponent,
-            resolve: {
-               myProfile: MyProfileResolver
-            }
-          },
-          {
-            path: 'my-videos',
-            component: MyVibiiosComponent,
-              resolve: {
-                  appointments: MyAppointmentsResolver,
-                  sidebarCustomerStatuses: SidebarCustomerResolver,
-                  sidebarMyDay: MyDayResolver,
-                  myProfile: MyProfileResolver
-            }
-          },
-          {
-            path: 'customer-profile',
-            component: CustomerProfileComponent,
-            resolve: {
-                customerProfile: CustomerProfileResolver
-            }
-          },
-          {path: 'appointment/:id', component: AppointmentComponent,
-            resolve: {
-               appt: AppointmentResolver
-            }
-          },
-          {
-            path: 'consumer-status/:status',
-            component: ConsumerStatusComponent,
-            resolve: {
-              data: AllConsumersResolver
-            }
-          },
-           {
-            path: 'all-consumers/:status',
-            component: ConsumerStatusComponent,
-            resolve: {
-               data: AllConsumersResolver
-            }
-          },
-          {
-            path: 'vibiiographers',
-            component: VibiiographerListComponent,
-            resolve: {
-              vibiiographers: VibiiographersResolverService
-            }
-          },
-          {
-            path: 'experts',
-            component: ExpertListComponent,
-            resolve: {
-              experts: ExpertsResolverService
-            }
-          }
-      ]
+    resolve: {
+      sidebarCustomerStatuses: SidebarCustomerResolver,
+      sidebarMyDay: MyDayResolver,
+      appointments: MyAppointmentsResolver,
+      myProfile: MyProfileResolver,
+      availability: MyAvailabilityResolver
+    },
+    children: [
+      {
+        path: 'my_profile',
+        component: MyProfileComponent,
+        resolve: {
+          myProfile: MyProfileResolver
+        }
+      },
+      {
+        path: 'my-videos',
+        component: MyVibiiosComponent,
+        resolve: {
+          appointments: MyAppointmentsResolver,
+          sidebarCustomerStatuses: SidebarCustomerResolver,
+          sidebarMyDay: MyDayResolver,
+          myProfile: MyProfileResolver
+        }
+      },
+      {
+        path: 'customer-profile',
+        component: CustomerProfileComponent,
+        resolve: {
+          customerProfile: CustomerProfileResolver
+        }
+      },
+      {
+        path: 'appointment/:id', component: AppointmentComponent,
+        resolve: {
+          appt: AppointmentResolver
+        }
+      },
+      {
+        path: 'consumer-status/:status',
+        component: ConsumerStatusComponent,
+        resolve: {
+          data: AllConsumersResolver
+        }
+      },
+      {
+        path: 'all-consumers/:status',
+        component: ConsumerStatusComponent,
+        resolve: {
+          data: AllConsumersResolver
+        }
+      },
+      {
+        path: 'vibiiographers',
+        component: VibiiographerListComponent,
+        resolve: {
+          vibiiographers: VibiiographersResolverService
+        }
+      },
+      {
+        path: 'experts',
+        component: ExpertListComponent,
+        resolve: {
+          experts: ExpertsResolverService
+        }
+      }
+    ]
   }
 ];
 
 @NgModule({
-    declarations: [
+  declarations: [
     DashboardComponent,
     KeyValueComponent,
     SidebarComponent,
@@ -208,17 +211,17 @@ const dashboardRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-      HttpModule,
-      JcfModule,
-      NouisliderModule,
-      MomentModule,
-      InfiniteScrollModule,
-      DynamicFormModule,
-      FormsModule,
-      ReactiveFormsModule,
-      SharedModule,
-      AngularDraggableModule,
-      RouterModule.forChild(dashboardRoutes),
+    HttpModule,
+    JcfModule,
+    NouisliderModule,
+    MomentModule,
+    InfiniteScrollModule,
+    DynamicFormModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    AngularDraggableModule,
+    RouterModule.forChild(dashboardRoutes),
   ],
   exports: [
     DashboardComponent,

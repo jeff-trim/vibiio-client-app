@@ -1,10 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostListener,
-         Input, OnInit, AfterContentInit, OnDestroy, Output, ViewChild } from '@angular/core';
+import {
+    Component, EventEmitter, HostListener,
+    Input, OnInit, OnDestroy, Output, ViewChild
+} from '@angular/core';
 import { Subscription, Observable } from 'rxjs/Rx';
 
 // Libraries
-import * as screenfull from 'screenfull';
 import * as ActionCable from 'action-cable-react-jwt';
 
 // Components
@@ -17,12 +18,8 @@ import { VIDEO_OPTIONS } from '../../../constants/video-options';
 import { StreamData } from '../../models/transfer-objects/stream-data';
 
 // Services
-import { VibiioProfileService } from '../../../dashboard/services/vibiio-profile.service';
 import { ActivityService } from '../../services/activity.service';
 import { AddToCallService } from '../../services/add-to-call.service';
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
 import { VideoChatService } from '../../services/video-chat.service';
 import { VideoSnapshotService } from '../../services/video-snapshot.service';
 import { AuthService } from '../../../services/auth.service';
@@ -74,7 +71,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     expert: any;
     imgData: any;
     streams: StreamData[] = [];
-    showControls= true;
+    showControls = true;
     muted = false;
     alive: boolean;
     enableFullscreen = true;
@@ -100,40 +97,38 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
 
-    constructor(private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-        private videoService: VideoChatService,
-        private statusUpdateService: VibiioUpdateService,
+    constructor(private videoService: VideoChatService,
         private snapshotService: VideoSnapshotService,
         private activityService: ActivityService,
-        private availabilitySharedService: AvailabilitySharedService,
         private addToCall: AddToCallService,
-        private vibiioProfileService: VibiioProfileService,
         private authService: AuthService) { }
 
     @HostListener('document:webkitfullscreenchange', [])
-        chromeFullscreen() {
+    chromeFullscreen() {
         this.vibiioFullscreen = !this.vibiioFullscreen;
     }
 
     @HostListener('document:mozfullscreenchange', [])
-        mozFullscreen() {
+    mozFullscreen() {
         this.vibiioFullscreen = !this.vibiioFullscreen;
     }
 
     @HostListener('document:fullscreenchange', [])
-        safFullscreen() {
+    safFullscreen() {
         this.vibiioFullscreen = !this.vibiioFullscreen;
     }
 
     @HostListener('document:MSfullscreenchange', [])
-        ieFullscreen() {
+    ieFullscreen() {
         this.vibiioFullscreen = !this.vibiioFullscreen;
     }
 
     toggleVibiioFullscreen() {
         const el = document.getElementById('full');
-        if (screenfull.enabled) {
-            screenfull.toggle(el);
+        if (!document.fullscreenElement) {
+            el.requestFullscreen();
+        } else {
+            document.exitFullscreen();
         }
     }
 
@@ -163,7 +158,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.message = `A text message has been sent to ${expert.first_name} ${expert.last_name} inviting them to the call.`;
         this.addToCall.callUser(expert.id, this.vibiio.id)
             .takeWhile(() => this.alive)
-            .subscribe( (data) => {
+            .subscribe((data) => {
                 this.consumerName = data.consumer;
                 this.expertWaitingToJoin = true;
                 this.setNotificationFadeOutTimer();
@@ -179,21 +174,21 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.showNotification = true;
 
         this.fadeSubscription = this.fadeTimer.subscribe(() => {
-                this.showNotification = false;
-            });
-      }
+            this.showNotification = false;
+        });
+    }
 
 
     callConsumer() {
         this.videoService.dialConsumer(this.vibiio.id)
             .takeWhile(() => this.alive)
-            .subscribe((res) => {});
-            this.subscribeToCallNotifications();
-        }
+            .subscribe((res) => { });
+        this.subscribeToCallNotifications();
+    }
 
     subscribeToCallNotifications() {
         const comp = this;
-       this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+        this.cable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
         this.subscription = this.cable.subscriptions.create({ channel: 'CallChannel', vibiio_id: this.vibiio.id }, {
             received(data) {
                 if (data.call_rejected) {
@@ -218,9 +213,9 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.hangUpTimer = Observable.timer(4000);
 
         this.hangUpSubscription = this.hangUpTimer.subscribe(() => {
-                this.showNotification = false;
-                this.endSession();
-            });
+            this.showNotification = false;
+            this.endSession();
+        });
     }
 
     private connectToSession() {
@@ -256,17 +251,17 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     isAlreadySubscribed(stream: any): boolean {
         let isAlreadySubscribed = false;
-            const subscribers = this.session.getSubscribersForStream(stream);
+        const subscribers = this.session.getSubscribersForStream(stream);
 
-            for (const subscriber of subscribers) {
-                if (this.streamExists(subscriber, stream)) {
-                    isAlreadySubscribed = true;
-                }
+        for (const subscriber of subscribers) {
+            if (this.streamExists(subscriber, stream)) {
+                isAlreadySubscribed = true;
             }
+        }
         return isAlreadySubscribed;
     }
 
-    streamExists(subscriber: any, stream: any ): boolean {
+    streamExists(subscriber: any, stream: any): boolean {
         return subscriber.stream.connection.connectionId === stream.connection.connectionId;
     }
 
@@ -314,7 +309,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
                     if (this.streams.length === 1) {
                         setTimeout(() => this.captureSnapshot(), 5000);
                     }
-            });
+                });
     }
 
     subscribeToStreamDestroyedEvents() {
@@ -336,7 +331,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     removeStreamFromArray(streamId: string) {
-        this.streams.forEach( (stream, index) => {
+        this.streams.forEach((stream, index) => {
             if (stream.streamId === streamId) {
                 this.streams.splice(index, 1);
             }
@@ -376,10 +371,10 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     saveSnapshot() {
         this.snapshotService.saveSnapshot(this.vibiio.consumer_id, this.session.id, this.vibiio.id, this.imgData)
             .takeWhile(() => this.alive)
-            .subscribe((data) => {},
+            .subscribe((data) => { },
                 (error) => {
                     console.log('error ', error);
-        });
+                });
     }
 
     endSession() {
@@ -405,7 +400,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     }
 
     private initPublisher() {
-        this.publisher = OT.initPublisher({insertDefaultUI: false}, VIDEO_OPTIONS);
+        this.publisher = OT.initPublisher({ insertDefaultUI: false }, VIDEO_OPTIONS);
     }
 
     private hideVibiiographerVideo() {
@@ -414,9 +409,9 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     private triggerActivity(vibiio_id: number, message: string, name: string) {
         this.activityService.postActivity(vibiio_id,
-                                          message,
-                                          name)
-                                          .takeWhile(() => this.alive)
-                                          .subscribe((data) => {});
+            message,
+            name)
+            .takeWhile(() => this.alive)
+            .subscribe((data) => { });
     }
 }

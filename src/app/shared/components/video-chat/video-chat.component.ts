@@ -35,10 +35,10 @@ import { User } from '../../../dashboard/models/user.interface';
 
 export class VideoChatComponent {
   closeSearch = true;
+  vibiioFullscreen = false;
 
   @Input() vibiioConnecting: boolean;
   @Input() onVibiio = false;
-  @Input() vibiioFullscreen = false;
   @Input() enableFullscreen = true;
   @Input() showControls;
   @Input() vibiio: Vibiio;
@@ -48,7 +48,6 @@ export class VideoChatComponent {
   @Input() showNotification = false;
 
   @Output() updateVibiioStatus = new EventEmitter<any>();
-  @Output() toggleFullscreen = new EventEmitter<boolean>();
   @Output() mute = new EventEmitter<boolean>();
   @Output() endCall = new EventEmitter<boolean>();
   @Output() add = new EventEmitter<User>();
@@ -61,7 +60,7 @@ export class VideoChatComponent {
   }
 
   toggleVibiioFullscreen() {
-    this.toggleFullscreen.emit(true);
+    this.vibiioFullscreen = !this.vibiioFullscreen;
   }
 
   hangUp() {
