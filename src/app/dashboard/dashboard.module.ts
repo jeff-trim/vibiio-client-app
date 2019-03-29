@@ -96,7 +96,6 @@ import { VibiioProfileResolver } from './services/vibiio-profile.resolver.servic
 
 // Directives
 import { AutosizeDirective } from './directives/autosize.directive';
-import { ToggleFullscreenDirective } from './directives/toggle-fullscreen.directive';
 
 // Routes
 const dashboardRoutes: Routes = [
@@ -198,7 +197,6 @@ const dashboardRoutes: Routes = [
     ExistingNoteComponent,
     PolicyDetailComponent,
     AutosizeDirective,
-    ToggleFullscreenDirective,
     PolicyDetailNewComponent,
     InsurancePolicyComponent,
     SortButtonComponent,

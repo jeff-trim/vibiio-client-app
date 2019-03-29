@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import {
-    Component, EventEmitter,
+    Component, EventEmitter, HostListener,
     Input, OnInit, OnDestroy, Output, ViewChild
 } from '@angular/core';
 import { Subscription, Observable } from 'rxjs/Rx';
@@ -63,6 +63,7 @@ declare var OT: any;
 export class VibiiographerCallComponent implements OnInit, OnDestroy {
     vibiioConnecting: boolean;
     onVibiio: boolean;
+    vibiioFullscreen = false;
     token: string;
     publisher: any;
     session: any;
@@ -101,6 +102,35 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         private activityService: ActivityService,
         private addToCall: AddToCallService,
         private authService: AuthService) { }
+
+    @HostListener('document:webkitfullscreenchange', [])
+    chromeFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    @HostListener('document:mozfullscreenchange', [])
+    mozFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    @HostListener('document:fullscreenchange', [])
+    safFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    @HostListener('document:MSfullscreenchange', [])
+    ieFullscreen() {
+        this.vibiioFullscreen = !this.vibiioFullscreen;
+    }
+
+    toggleVibiioFullscreen() {
+        const el = document.getElementById('full');
+        if (!document.fullscreenElement) {
+            el.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
 
     ngOnInit() {
         this.alive = true;
