@@ -44,6 +44,21 @@
     <key-value [key]="'Zip'"
                [value]="appointment.user.address.zip"></key-value>
 
+    <key-value [key]="'New Address'"
+               [value]="appointment.user.relocation_address.address_one"></key-value>
+    <key-value *ngIf="appointment.user.relocation_address.address_two"
+               [key]="'Address Two'"
+               [value]="appointment.user.relocation_address.address_two"></key-value>
+
+    <key-value [key]="'City'"
+               [value]="appointment.user.relocation_address.city"></key-value>
+
+    <key-value [key]="'State'"
+               [value]="appointment.user.relocation_address.state"></key-value>
+
+    <key-value [key]="'Zip'"
+               [value]="appointment.user.relocation_address.zip"></key-value>
+
     <key-value [key]="'Language'"
                [value]="appointment.user.profile.language"></key-value>
 
