@@ -4,41 +4,44 @@
 
   <div class="profile-information">
 
-    <key-value [key]="'Email'"
-               [value]="consumerProfile.user_info.email"></key-value>
+    <key-value [key]="'Email'" [value]="consumerProfile.user_info.email"></key-value>
 
-    <key-value [key]="'Language'"
-               [value]="consumerProfile.language"></key-value>
+    <key-value [key]="'Language'" [value]="consumerProfile.language"></key-value>
 
-    <key-value [key]="'Phone Number'"
-               [value]="consumerProfile.user_info.phone"></key-value>
+    <key-value [key]="'Phone Number'" [value]="consumerProfile.user_info.phone"></key-value>
 
-    <key-value [key]="'Address'"
-               [value]="consumerProfile.address.address_one"></key-value>
+    <key-value [key]="'Address'" [value]="consumerProfile.address.address_one"></key-value>
 
-    <key-value *ngIf="consumerProfile.address.address_two"
-               [key]="'Address 2'"
-               [value]="consumerProfile.address.address_two"></key-value>
+    <key-value *ngIf="consumerProfile.address.address_two" [key]="'Address 2'"
+      [value]="consumerProfile.address.address_two"></key-value>
 
-    <key-value [key]="'City'"
-               [value]="consumerProfile.address.city"></key-value>
-    
-    <key-value [key]="'State'"
-               [value]="consumerProfile.address.state"></key-value>
-    
-    <key-value [key]="'Zip'"
-               [value]="consumerProfile.address.zip"></key-value>
+    <key-value [key]="'City'" [value]="consumerProfile.address.city"></key-value>
 
-    <key-value [key]="'Date'"
-               [value]="parseDate(consumerProfile.appointment_scheduled_datetime)"></key-value>
+    <key-value [key]="'State'" [value]="consumerProfile.address.state"></key-value>
 
-    <key-value [key]="'Start Time'" 
-               [value]="parseTime(consumerProfile.appointment_scheduled_datetime)"></key-value>
+    <key-value [key]="'Zip'" [value]="consumerProfile.address.zip"></key-value>
 
-  
+    <div *ngIf="consumerProfile.relocation_address">
+      <p>Relocation Address</p>
+      <key-value [key]="'Street'" [value]="consumerProfile.relocation_address.address_one"></key-value>
+
+      <key-value *ngIf="consumerProfile.relocation_address.address_two" [key]="'Street 2'"
+        [value]="consumerProfile.relocation_address.address_two"></key-value>
+
+      <key-value [key]="'City'" [value]="consumerProfile.relocation_address.city"></key-value>
+
+      <key-value [key]="'State'" [value]="consumerProfile.relocation_address.state"></key-value>
+
+      <key-value [key]="'Zip'" [value]="consumerProfile.relocation_address.zip"></key-value>
+    </div>
+
+    <key-value [key]="'Date'" [value]="parseDate(consumerProfile.appointment_scheduled_datetime)"></key-value>
+
+    <key-value [key]="'Start Time'" [value]="parseTime(consumerProfile.appointment_scheduled_datetime)"></key-value>
+
+
     <vib-insurance-policy-summary [policies]="policies"></vib-insurance-policy-summary>
- 
-    <key-value [key]="'Status'" 
-               [value]="consumerProfile.status | capitalize | removeUnderscore"></key-value>
+
+    <key-value [key]="'Status'" [value]="consumerProfile.status | capitalize | removeUnderscore"></key-value>
   </div>
 </div>

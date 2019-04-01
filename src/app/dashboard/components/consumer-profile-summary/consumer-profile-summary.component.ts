@@ -17,6 +17,8 @@ export class ConsumerProfileSummaryComponent implements OnInit {
   constructor(private dateFormatService: DateFormatService) {}
 
   ngOnInit() {
+    console.log(this.consumerProfile);
+    
     this.userTimeZone = this.consumerProfile.user_info.time_zone;
     this.policies = this.consumerProfile.insurance_policies;
   }

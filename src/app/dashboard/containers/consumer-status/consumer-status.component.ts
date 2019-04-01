@@ -36,6 +36,7 @@ export class ConsumerStatusComponent implements OnInit {
 
         this.activatedRoute.data.subscribe((res) => {
             this.consumerProfiles = res.data;
+            console.log(res.data);
         });
 
         this.activatedRoute.params.subscribe((params) => {

@@ -12,16 +12,17 @@ export interface ConsumerProfile {
     appointment_scheduled_datetime: number;
     language: string;
     user_info: {
-       id: number
-       first_name: string;
-       last_name: string;
-       email: string;
-       phone: string;
-       provider?: string;
-       policy_number?: number;
-       time_zone: string;
+        id: number
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone: string;
+        provider?: string;
+        policy_number?: number;
+        time_zone: string;
     };
     address?: Address;
+    relocation_address?: Address;
     insurance_policies?: InsurancePolicy[];
     snapshots?: VideoSnapshot[];
     contacts?: Contact[];
