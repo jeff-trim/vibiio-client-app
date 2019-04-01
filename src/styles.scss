@@ -102,11 +102,12 @@ a {
   opacity: 0.4;
 }
 .logo {
-  width: 263px;
-  height: 75px;
+  width: 275px;
+  height: 175px;
   color: red;
-  background: url(./assets/images/logo.svg) no-repeat;
-  background-size: cover;
+  background: url(./assets/images/opening_slide.jpg) no-repeat;
+  background-size: contain;
+  background-position: center;
   margin: 0 auto;
 }
 .holder {
