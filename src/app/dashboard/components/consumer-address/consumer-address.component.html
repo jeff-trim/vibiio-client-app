@@ -1,88 +1,61 @@
 <form [formGroup]="editForm">
-  <div class="info-element
+        <div class="info-element
               row
               between-xs
               bottom-xs">
-      <span class="label">Address</span>
-        <input formControlName="address_one"
-               name="address_one" 
-               placeholder="Address"
-               type="text" 
-               class="value end-md" 
-               id="provider">
-      <span class="pink-underline"></span>
-      <div *ngIf="checkErrors(editForm.get('address_one'))"
-           class="error-message">
-          <p>Address is Required</p>
-      </div>
-  </div>
+                <span class="label">{{label}}</span>
+                <input formControlName="address_one" name="address_one" placeholder="Address" type="text"
+                        class="value end-md" id="provider">
+                <span class="pink-underline"></span>
+                <div *ngIf="checkErrors(editForm.get('address_one'))" class="error-message">
+                        <p>Address is Required</p>
+                </div>
+        </div>
 
-  <div *ngIf="address.address_two"
-        class="info-element
+        <div *ngIf="address.address_two" class="info-element
               row
               between-xs
               bottom-xs">
-      <span class="label">Address Two</span>
-      <input  formControlName="address_two"
-              name="address_two"
-              placeholder="Address Two"
-              type="text"
-              class="value end-md"
-              id="address_two">
-      <span class="pink-underline"></span>
-  </div>
+                <span class="label">Address Two</span>
+                <input formControlName="address_two" name="address_two" placeholder="Address Two" type="text"
+                        class="value end-md" id="address_two">
+                <span class="pink-underline"></span>
+        </div>
 
-  <div class="info-element
+        <div class="info-element
               row
               between-xs
               bottom-xs">
-      <span class="label">City</span>
-      <input  formControlName="city"
-              name="city"
-              placeholder="City"
-              type="text"
-              class="value end-md"
-              id="city">
-      <span class="pink-underline"></span>
-      <div *ngIf="checkErrors(editForm.get('city'))"
-           class="error-message">
-          <p>City is required</p>
-      </div>
-  </div>
+                <span class="label">City</span>
+                <input formControlName="city" name="city" placeholder="City" type="text" class="value end-md" id="city">
+                <span class="pink-underline"></span>
+                <div *ngIf="checkErrors(editForm.get('city'))" class="error-message">
+                        <p>City is required</p>
+                </div>
+        </div>
 
-  <div class="info-element
+        <div class="info-element
               row
               between-xs
               bottom-xs">
-      <span class="label">State</span>
-      <input  formControlName="state"
-              name="state"
-              placeholder="State"
-              type="text"
-              class="value end-md"
-              id="state">
-      <span class="pink-underline"></span>
-      <div *ngIf="checkErrors(editForm.get('state'))"
-           class="error-message">
-          <p>State is required</p>
-      </div>
-  </div>
+                <span class="label">State</span>
+                <input formControlName="state" name="state" placeholder="State" type="text" class="value end-md"
+                        id="state">
+                <span class="pink-underline"></span>
+                <div *ngIf="checkErrors(editForm.get('state'))" class="error-message">
+                        <p>State is required</p>
+                </div>
+        </div>
 
-  <div class="info-element
+        <div class="info-element
               row
               between-xs
               bottom-xs">
-      <span class="label">Zip</span>
-      <input  formControlName="zip"
-              name="zip"
-              placeholder="Zip"
-              type="text"
-              class="value end-md"
-              id="zip">
-      <span class="pink-underline"></span>
-      <div *ngIf="checkErrors(editForm.get('zip'))"
-           class="error-message">
-          <p>Zip is required</p>
-      </div>
-  </div>
+                <span class="label">Zip</span>
+                <input formControlName="zip" name="zip" placeholder="Zip" type="text" class="value end-md" id="zip">
+                <span class="pink-underline"></span>
+                <div *ngIf="checkErrors(editForm.get('zip'))" class="error-message">
+                        <p>Zip is required</p>
+                </div>
+        </div>
 </form>

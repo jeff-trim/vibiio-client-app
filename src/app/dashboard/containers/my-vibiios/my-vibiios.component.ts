@@ -51,8 +51,6 @@ export class MyVibiiosComponent implements OnInit {
         this.activatedRoute.data.subscribe((data) => {
             if (data.appointments.appointments.appointments.length > 0) {
                 this.appointments = data.appointments.appointments.appointments;
-                console.log(this.appointments);
-
             }
             if (data.sidebarMyDay.my_day.length !== undefined) {
                 this.myVibiioCount = data.sidebarMyDay.my_day.length;

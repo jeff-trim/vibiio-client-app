@@ -10,6 +10,7 @@ import { Address } from '../../models/address.interface';
 
 export class ConsumerAddressComponent implements OnInit {
   @Input() address: Address;
+  @Input() label: string;
 
   editForm: FormGroup;
 
@@ -18,6 +19,7 @@ export class ConsumerAddressComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.label = this.label ? this.label : 'Address';
     this.editForm = this.fb.group({
       'address_one': [this.address.address_one, Validators.required],
       'address_two': [this.address.address_two],
@@ -28,7 +30,7 @@ export class ConsumerAddressComponent implements OnInit {
     });
 
     this.editForm.valueChanges.subscribe(data => {
-     this.formChanged.emit(true);
+      this.formChanged.emit(true);
     });
   }
 

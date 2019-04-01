@@ -65,6 +65,10 @@
     <vib-consumer-address [address]="address"
                           (formChanged)="onEdit($event)"></vib-consumer-address>
     
+    <vib-consumer-address [address]="relocationAddress"
+                          [label]="('New Address')"
+                          (formChanged)="onEdit($event)"></vib-consumer-address>
+    
     <key-value [key]="'Date'"
                [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
 
