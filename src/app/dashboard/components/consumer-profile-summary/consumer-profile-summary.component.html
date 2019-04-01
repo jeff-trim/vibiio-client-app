@@ -10,9 +10,11 @@
 
     <key-value [key]="'Phone Number'" [value]="consumerProfile.user_info.phone"></key-value>
 
-    <key-value [key]="'Address'" [value]="consumerProfile.address.address_one"></key-value>
+    <p class="address_title">Current Address:</p>
 
-    <key-value *ngIf="consumerProfile.address.address_two" [key]="'Address 2'"
+    <key-value [key]="'Street'" [value]="consumerProfile.address.address_one"></key-value>
+
+    <key-value *ngIf="consumerProfile.address.address_two" [key]="'Street'"
       [value]="consumerProfile.address.address_two"></key-value>
 
     <key-value [key]="'City'" [value]="consumerProfile.address.city"></key-value>
@@ -22,7 +24,7 @@
     <key-value [key]="'Zip'" [value]="consumerProfile.address.zip"></key-value>
 
     <div *ngIf="consumerProfile.relocation_address">
-      <p>Relocation Address</p>
+      <p class="address_title">Relocation Address:</p>
       <key-value [key]="'Street'" [value]="consumerProfile.relocation_address.address_one"></key-value>
 
       <key-value *ngIf="consumerProfile.relocation_address.address_two" [key]="'Street 2'"
