@@ -110,7 +110,7 @@
       </div>        
     </ng-template>
 
-    <div class="relocation_address" *ngIf="relocationAddress">
+    <div [ngClass]="{'relocation_address': (snapshots?.length > 0)}" *ngIf="relocationAddress">
 
         <p class="address_title">Relocation Address:</p>
         
