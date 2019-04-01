@@ -35,6 +35,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     vibiio: Vibiio;
     appointment: Appointment;
     address: Address;
+    relocationAddress: Address;
     user: User;
     snapshots: VideoSnapshot[];
     userTimeZone: string;
@@ -44,23 +45,25 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     alive: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private snapshotService: VideoSnapshotService,
-                private activityService: ActivityService,
-                private updateAppointmentService: AppointmentService,
-                private vibiioUpdateService: VibiioUpdateService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService,
-                private router: Router,
-                private videoService: VideoChatService,
-                private formStatusService: AppointmentDetailsFormStatusService,
-                private vibiioProfileService: VibiioProfileService,
-                private location: Location) { }
+        private snapshotService: VideoSnapshotService,
+        private activityService: ActivityService,
+        private updateAppointmentService: AppointmentService,
+        private vibiioUpdateService: VibiioUpdateService,
+        private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
+        private availabilitySharedService: AvailabilitySharedService,
+        private router: Router,
+        private videoService: VideoChatService,
+        private formStatusService: AppointmentDetailsFormStatusService,
+        private vibiioProfileService: VibiioProfileService,
+        private location: Location) { }
 
     ngOnInit() {
         this.alive = true;
-        this.activatedRoute.data.subscribe( (data) => {
+        this.activatedRoute.data.subscribe((data) => {
             this.appointment = data.appt.appointment;
+
             this.address = this.appointment.address;
+            this.relocationAddress = this.appointment.relocation_address;
             this.userTimeZone = data.appt.appointment.user.time_zone;
             this.consumer_id = this.appointment.consumer_id;
             this.user = data.appt.appointment.user;
@@ -94,19 +97,19 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     subscribeToEndCall() {
         this.videoService.hangingUp$
-          .takeWhile(() => this.alive)
-          .subscribe( (vibiio) => {
-            this.endCallActions();
-        });
+            .takeWhile(() => this.alive)
+            .subscribe((vibiio) => {
+                this.endCallActions();
+            });
     }
 
     refreshProfile() {
         this.vibiioProfileService
             .getVibiio(this.vibiio.id)
-            .subscribe( (data) => {
+            .subscribe((data) => {
                 this.vibiio = data.vibiio;
                 this.snapshots = data.vibiio.snapshots;
-        });
+            });
     }
 
     answerCall() {
@@ -127,9 +130,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 .subscribe((data) => {
                     return data.vibiio;
                 },
-                (error: any) => {
-                    console.log('error ', error);
-            });
+                    (error: any) => {
+                        console.log('error ', error);
+                    });
         }
         return this.vibiio;
     }
@@ -138,7 +141,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.onVibiio = true;
         this.availabilitySharedService.emitChange(false);
         this.vibiio = await this.claimVibiio();
-        this.updateVibiioStatus({status: 'claim_in_progress'});
+        this.updateVibiioStatus({ status: 'claim_in_progress' });
     }
 
     endCallActions() {
@@ -152,7 +155,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
         this.vibiioUpdateService
             .updateVibiio(options, this.vibiio.id)
-            .subscribe( (data) => {
+            .subscribe((data) => {
                 this.vibiio.status = data.vibiio.status;
                 this.sidebarCustomerStatusSharedService.emitChange(data);
             }, (error: any) => {
@@ -165,9 +168,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             .subscribe((data) => {
                 this.appointment = data.appointment;
             },
-        (error: any) => {
-            console.log('error ', error);
-        });
+                (error: any) => {
+                    console.log('error ', error);
+                });
     }
 
     refreshAddress() {

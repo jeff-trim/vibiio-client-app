@@ -16,6 +16,7 @@ export interface Appointment {
     consumer: Consumer;
     insurance_policies: InsurancePolicy[];
     address: Address;
+    relocation_address: Address;
     customer_notes: Note;
     language: string;
     snapshots: VideoSnapshot[];

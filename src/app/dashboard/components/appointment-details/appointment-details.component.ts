@@ -18,81 +18,83 @@ import { VideoSnapshot } from '../../models/video-snapshot.interface';
 import { Consultant } from '../../models/consultant.interface';
 
 @Component({
-    selector: 'vib-appointment-details',
-    templateUrl: 'appointment-details.component.html',
-    styleUrls: ['appointment-details.component.scss']
+  selector: 'vib-appointment-details',
+  templateUrl: 'appointment-details.component.html',
+  styleUrls: ['appointment-details.component.scss']
 })
 
 export class AppointmentDetailsComponent {
-    @Input() appointment: Appointment;
-    @Input() user: User;
-    @Input() vibiio: Vibiio;
-    @Input() address: Address;
-    @Input() snapshots: VideoSnapshot[];
-    @Input() onVibiio: boolean;
-    @Input() timeZone: string;
-    @Input() isEditingForms = false;
-    @Input() isUpdatingForms = false;
-    @Input() consultants: Consultant[];
+  @Input() appointment: Appointment;
+  @Input() user: User;
+  @Input() vibiio: Vibiio;
+  @Input() address: Address;
+  @Input() relocationAddress: Address;
+  @Input() snapshots: VideoSnapshot[];
+  @Input() onVibiio: boolean;
+  @Input() timeZone: string;
+  @Input() isEditingForms = false;
+  @Input() isUpdatingForms = false;
+  @Input() consultants: Consultant[];
 
-    @Output() startVibiio = new EventEmitter<boolean>();
-    @Output() claimVibiio = new EventEmitter<boolean>();
-    @Output() refreshNotes = new EventEmitter<any>();
-    @Output() updateVibiioStatus = new EventEmitter<any>();
-    @Output() isEditing = new EventEmitter<boolean>();
-    @Output() isUpdating = new EventEmitter<boolean>();
-    @Output() refreshAddress = new EventEmitter<boolean>();
+  @Output() startVibiio = new EventEmitter<boolean>();
+  @Output() claimVibiio = new EventEmitter<boolean>();
+  @Output() refreshNotes = new EventEmitter<any>();
+  @Output() updateVibiioStatus = new EventEmitter<any>();
+  @Output() isEditing = new EventEmitter<boolean>();
+  @Output() isUpdating = new EventEmitter<boolean>();
+  @Output() refreshAddress = new EventEmitter<boolean>();
 
-    @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
+  @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
 
-    constructor(private dateFormatService: DateFormatService,
-                private consumerUpdateService:  ConsumerUpdateService) {}
+  constructor(private dateFormatService: DateFormatService,
+    private consumerUpdateService: ConsumerUpdateService) {
+  }
 
-    updateAddress() {
-      if (this.addressForm.editForm.valid) {
-        const address = this.addressForm.editForm.value;
-        this.consumerUpdateService.updateAddress(address)
-          .subscribe( (data) => {
-            this.address = data.address;
-          });
-      }
-    }
-
-    onCancel() {
-      this.refreshAddress.emit(true);
-      this.consumerUpdateService.refreshAddress(this.address.id)
-        .subscribe( (data) => {
-          this.addressForm.editForm.patchValue(data.address);
-          this.isEditingForms = false;
+  updateAddress() {
+    if (this.addressForm.editForm.valid) {
+      const address = this.addressForm.editForm.value;
+      this.consumerUpdateService.updateAddress(address)
+        .subscribe((data) => {
+          this.address = data.address;
         });
     }
+  }
 
-    updateStatus(status: any) {
-      this.updateVibiioStatus.emit(status);
-    }
+  onCancel() {
+    this.refreshAddress.emit(true);
+    this.consumerUpdateService.refreshAddress(this.address.id)
+      .subscribe((data) => {
+        this.addressForm.editForm.patchValue(data.address);
+        this.isEditingForms = false;
+      });
+  }
 
-    connect() {
-      this.startVibiio.emit(true);
-    }
+  updateStatus(status: any) {
+    this.updateVibiioStatus.emit(status);
+  }
 
-    updateNotes() {
-      this.refreshNotes.emit(event);
-    }
+  connect() {
+    this.startVibiio.emit(true);
+  }
 
-    parseDate(time: number) {
-      return this.dateFormatService.parseDate(time, this.timeZone);
-    }
+  updateNotes() {
+    this.refreshNotes.emit(event);
+  }
 
-    parseTime(time: number) {
-      return this.dateFormatService.parseTime(time, this.timeZone);
-    }
+  parseDate(time: number) {
+    return this.dateFormatService.parseDate(time, this.timeZone);
+  }
 
-    onEdit(formChanged: boolean) {
-      this.isEditing.emit(formChanged);
+  parseTime(time: number) {
+    return this.dateFormatService.parseTime(time, this.timeZone);
+  }
+
+  onEdit(formChanged: boolean) {
+    this.isEditing.emit(formChanged);
   }
 
   onUpdate() {
-      this.isUpdating.emit(true);
-      this.updateAddress();
+    this.isUpdating.emit(true);
+    this.updateAddress();
   }
 }

@@ -12,6 +12,7 @@ export interface User {
     state: string;
     time_zone: string;
     address: Address;
+    relocation_address: Address;
     profile: {
         uuid: string;
         available?: boolean;

@@ -15,41 +15,50 @@
 </div>
 
 
-<div class="flex" >
+<div class="flex">
   <div class="col-xs-12
               col-sm-6
               col-md-5
               col-md-offset-1
               profile-information">
 
-    <key-value [key]="'Email'"
-               [value]="appointment.user.email"></key-value>
+    <key-value [key]="'Email'" [value]="appointment.user.email"></key-value>
 
-    <key-value [key]="'Phone Number'"
-               [value]="appointment.user.phone"></key-value>
-
-    <key-value [key]="'Address'"
-               [value]="appointment.user.address.address_one"></key-value>
-
-    <key-value *ngIf="appointment.user.address.address_two"
-               [key]="'Address Two'"
-               [value]="appointment.user.address.address_two"></key-value>
-
-    <key-value [key]="'City'"
-               [value]="appointment.user.address.city"></key-value>
-
-    <key-value [key]="'State'"
-               [value]="appointment.user.address.state"></key-value>
-
-    <key-value [key]="'Zip'"
-               [value]="appointment.user.address.zip"></key-value>
-
-    <key-value [key]="'Language'"
-               [value]="appointment.user.profile.language"></key-value>
-
-    <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
-                          [consumerId]="appointment.consumer_id"></vib-insurance-policy>
+    <key-value [key]="'Phone Number'" [value]="appointment.user.phone"></key-value>
     
+    <key-value [key]="'Language'" [value]="appointment.user.profile.language"></key-value>
+
+    <p class="address_title">Current Address:</p>
+
+    <key-value [key]="'Street'" [value]="appointment.user.address.address_one"></key-value>
+
+    <key-value *ngIf="appointment.user.address.address_two" [key]="'Street 2'"
+      [value]="appointment.user.address.address_two"></key-value>
+
+    <key-value [key]="'City'" [value]="appointment.user.address.city"></key-value>
+
+    <key-value [key]="'State'" [value]="appointment.user.address.state"></key-value>
+
+    <key-value [key]="'Zip'" [value]="appointment.user.address.zip"></key-value>
+
+    <div *ngIf="appointment.user.relocation_address">
+      <p class="address_title">Relocation Address:</p>
+
+      <key-value [key]="'Street'" [value]="appointment.user.relocation_address.address_one"></key-value>
+      <key-value *ngIf="appointment.user.relocation_address.address_two" [key]="'Street 2'"
+        [value]="appointment.user.relocation_address.address_two"></key-value>
+
+      <key-value [key]="'City'" [value]="appointment.user.relocation_address.city"></key-value>
+
+      <key-value [key]="'State'" [value]="appointment.user.relocation_address.state"></key-value>
+
+      <key-value [key]="'Zip'" [value]="appointment.user.relocation_address.zip"></key-value>
+
+    </div>
+    
+    <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies" [consumerId]="appointment.consumer_id">
+    </vib-insurance-policy>
+
   </div>
   <div class="col-xs-12
               col-sm-6
@@ -57,15 +66,12 @@
               col-md-offset-1
               profile-information">
 
-    <key-value [key]="'Claim ID'"
-               [value]="'12345'"></key-value>
+    <key-value [key]="'Claim ID'" [value]="'12345'"></key-value>
 
-    <key-value [key]="'Video Date'"
-               [value]="parseDate(appointment.scheduled_datetime)"></key-value>
+    <key-value [key]="'Video Date'" [value]="parseDate(appointment.scheduled_datetime)"></key-value>
 
-    <key-value [key]="'Video Start Time'"
-               [value]="parseTime(appointment.scheduled_datetime)"></key-value>
-    
+    <key-value [key]="'Video Start Time'" [value]="parseTime(appointment.scheduled_datetime)"></key-value>
+
     <div class="info-element">
       <span class="label">Video Description</span>
       <span class="pink-underline"></span>
@@ -74,16 +80,16 @@
     <vib-vibiio-description [description]="appointment.vibiio.description"></vib-vibiio-description>
 
     <div class="info-element">
-        <span class="label">Customer Notes</span>
-        <span class="pink-underline"></span>
-      </div>
+      <span class="label">Customer Notes</span>
+      <span class="pink-underline"></span>
+    </div>
     <div *ngIf="(appointment.vibiio.contacts?.length > 0); else noContacts">
-        <div *ngFor="let contact of appointment.vibiio.contacts">
-          <vib-customer-note [note]="contact.message"></vib-customer-note>
-        </div>
+      <div *ngFor="let contact of appointment.vibiio.contacts">
+        <vib-customer-note [note]="contact.message"></vib-customer-note>
       </div>
-      <ng-template #noContacts>
-        <p>No Customer Notes</p>
-      </ng-template>
+    </div>
+    <ng-template #noContacts>
+      <p>No Customer Notes</p>
+    </ng-template>
 
   </div>

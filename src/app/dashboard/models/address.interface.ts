@@ -5,4 +5,5 @@ export interface Address {
     state: string;
     zip: number;
     id: number;
+    relocation?: boolean;
 }
