@@ -6,6 +6,9 @@ import { DateFormatService } from '../../../services/date-format.service';
 // interfaces
 import { Appointment } from '../../models/appointment.interface';
 
+// constants 
+import { timezone } from '../../constants/timezone';
+
 @Component({
     selector: 'customer-profile',
     templateUrl: 'customer-profile.component.html',
@@ -37,6 +40,11 @@ export class CustomerProfileComponent {
 
     parseDate(time: number): string  {
         return this.dateFormatService.parseDate(time, this.timeZone);
+    }
+
+    appointmentTimeZone(): String {
+        const zone = timezone[this.appointment.timezone];
+        return zone ? zone : timezone['America/New_York'];
     }
 
     toggleAppointment(appointment: Appointment) {
