@@ -17,5 +17,6 @@ export interface Appointment {
     address: Address;
     customer_notes: Note;
     language: string;
+    timezone?: string;
 }
 
