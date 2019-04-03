@@ -55,10 +55,6 @@
       <key-value [key]="'Zip'" [value]="appointment.user.relocation_address.zip"></key-value>
 
     </div>
-    
-    <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies" [consumerId]="appointment.consumer_id">
-    </vib-insurance-policy>
-
   </div>
   <div class="col-xs-12
               col-sm-6
@@ -72,18 +68,15 @@
 
     <key-value [key]="'Video Start Time'" [value]="parseTime(appointment.scheduled_datetime)"></key-value>
 
+    <key-value [key]="'Video Timezone'"
+               [value]="appointmentTimeZone()"></key-value>
+
     <div class="info-element">
       <span class="label">Video Description</span>
       <span class="pink-underline"></span>
     </div>
 
     <vib-vibiio-description [description]="appointment.vibiio.description"></vib-vibiio-description>
-
-    <key-value [key]="'Vibiio Start Time'"
-               [value]="parseTime(appointment.scheduled_datetime)"></key-value>
-
-    <key-value [key]="'Vibiio Timezone'"
-               [value]="appointmentTimeZone()"></key-value>
     
     <div class="info-element">
       <span class="label">Customer Notes</span>
