@@ -19,6 +19,7 @@ export interface Appointment {
     relocation_address: Address;
     customer_notes: Note;
     language: string;
+    timezone?: string;
     snapshots: VideoSnapshot[];
 }
 

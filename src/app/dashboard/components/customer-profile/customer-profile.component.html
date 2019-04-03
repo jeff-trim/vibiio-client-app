@@ -79,6 +79,12 @@
 
     <vib-vibiio-description [description]="appointment.vibiio.description"></vib-vibiio-description>
 
+    <key-value [key]="'Vibiio Start Time'"
+               [value]="parseTime(appointment.scheduled_datetime)"></key-value>
+
+    <key-value [key]="'Vibiio Timezone'"
+               [value]="appointmentTimeZone()"></key-value>
+    
     <div class="info-element">
       <span class="label">Customer Notes</span>
       <span class="pink-underline"></span>
