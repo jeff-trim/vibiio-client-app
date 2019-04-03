@@ -24,8 +24,6 @@
                             [vibiiographerId]="vibiiographerId"
                             (appointmentId)="appointment.id"
                             (updateAppointment)="updateAppointment($event)"
-                            *ngIf="appointment.scheduled_datetime >= range[0] &&
-                                          appointment.scheduled_datetime <= range[1]"
                             class="customer-profile"></customer-profile>
         </ng-container>
       </div>
