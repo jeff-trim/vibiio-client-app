@@ -3,5 +3,5 @@ export const environment = {
 };
 
 export const API_URL = 'https://vibiio-api-staging.herokuapp.com';
-export const OPENTOK_API_KEY = '45807082';
-export const ACTION_CABLE_URL = 'wss://vibiio-api-staging.herokuapp.com/available';
+export const OPENTOK_API_KEY = '45999522';
+export const ACTION_CABLE_URL = 'wss://vibiio-api-staging.herokuapp.com/cable';

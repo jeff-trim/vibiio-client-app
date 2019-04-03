@@ -10,6 +10,8 @@ import { LoggedOutGuardService } from './services/guards/logged-out-guard.servic
 import { InsuranceResolverService } from './sign-up/services/insurance-resolver.service';
 import { LanguageResolverService } from './sign-up/services/language-resolver.service';
 import { InsurancePolicyService } from './dashboard/services/insurance-policy.service';
+import { AnswerCallComponent } from './answer-call/answer-call.component';
+import { AnswerCallResolverService } from './answer-call/services/answer-call-resolver.service';
 
 const appRoutes: Routes = [
     { path: 'sign_up', component: ConsumerSignUpComponent, resolve: {
@@ -18,8 +20,14 @@ const appRoutes: Routes = [
        }
     },
     { path: 'sign_in', component: LoginComponent, canActivate: [LoggedOutGuardService]},
-    { path: '', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' },
-    { path: '**', redirectTo: '/dashboard/my-vibiios', pathMatch: 'full' }
+    { path: 'call/:token/:userId',
+      component: AnswerCallComponent,
+      resolve: {
+        callData: AnswerCallResolverService
+      }
+    },
+    { path: '', redirectTo: '/dashboard/my-videos', pathMatch: 'full' },
+    { path: '**', redirectTo: '/dashboard/my-videos', pathMatch: 'full' }
 ];
 
 @NgModule({

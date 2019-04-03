@@ -28,7 +28,7 @@ export class ConsumerAddressComponent implements OnInit {
     });
 
     this.editForm.valueChanges.subscribe(data => {
-     this.formChanged.emit(true);
+      this.formChanged.emit(true);
     });
   }
 

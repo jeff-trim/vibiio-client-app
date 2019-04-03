@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
     <div class="center col-xs-12">
       <div class="logo"></div>
       <div class="welcome">
-        <h1>Welcome to vibiio!</h1>
+        <h1>Welcome to Video!</h1>
       </div>
       <div class="message">
-        <p>👋 Sign in below to view your vibiios.</p>
+        <p>👋 Sign in below to view your videos</p>
       </div>
     </div>
 `
 })
 
-export class LoginGreetingComponent {}
+export class LoginGreetingComponent { }

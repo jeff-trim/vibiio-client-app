@@ -20,10 +20,10 @@ import { SliderConfig } from '../../models/slider-config.interface';
 import { MyVibiios } from '../../models/my-vibiios.interface';
 
 // classes
-import {TimeFormatter } from '../../classes/time-formatter.class';
+import { TimeFormatter } from '../../classes/time-formatter.class';
 
 @Component({
-    selector: 'my-vibiios',
+    selector: 'vib-my-vibiios',
     templateUrl: 'my-vibiios.component.html', styleUrls: ['my-vibiios.component.scss']
 })
 
@@ -39,17 +39,17 @@ export class MyVibiiosComponent implements OnInit {
     vibiiographerName: string;
     sliderVisibility = true;
     downArrow = false;
-    sliderConfig: SliderConfig;
+    sliderConfig: any;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private myDayService: MyDayService,
-                private customerProfileService: CustomerProfileService,
-                private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
-                private myAppointmentsService: MyAppointmentsService) {}
+        private myDayService: MyDayService,
+        private customerProfileService: CustomerProfileService,
+        private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
+        private myAppointmentsService: MyAppointmentsService) { }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
-            if (data.appointments.appointments.appointments.length > 0 ) {
+            if (data.appointments.appointments.appointments.length > 0) {
                 this.appointments = data.appointments.appointments.appointments;
             }
             if (data.sidebarMyDay.my_day.length !== undefined) {
@@ -64,15 +64,31 @@ export class MyVibiiosComponent implements OnInit {
             if (data.appointments.appointments.appointments.length > 0) {
                 this.sliderConfig = {
                     start: this.appointments[0].scheduled_datetime,
+                    behaviour: 'drag',
                     range: {
                         min: this.todaysVibiios.range_min,
                         max: this.todaysVibiios.range_max
                     },
-                    step: 900,
                     tooltips: [new TimeFormatter(this.todaysVibiios.user_time_zone),
-                            new TimeFormatter(this.todaysVibiios.user_time_zone)],
+                    new TimeFormatter(this.todaysVibiios.user_time_zone)],
                     connect: true
                 };
+
+                // this.sliderConfig = {
+                //   behaviour: 'drag',
+                //   connect: true,
+                //   margin: 2,
+                //   limit: 20, // NOTE: overwritten by [limit]="10"
+                //   range: {
+                //     min: 0,
+                //     max: 20
+                //   },
+                //   pips: {
+                //     mode: 'steps',
+                //     density: 5
+                //   }
+                // };
+
                 this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max];
             }
         });
@@ -95,6 +111,7 @@ export class MyVibiiosComponent implements OnInit {
     // it updates the range which in turn removes or
     // adds appointments to the view
     onChange(value) {
+        console.log(value, this.sliderConfig);
         this.range = value;
     }
 
@@ -137,8 +154,8 @@ export class MyVibiiosComponent implements OnInit {
     // the updated data once it returns
     updateAppointment(apt_obj) {
         this.myDayService.updateMyDay(
-                apt_obj.appointment.id,
-                apt_obj.appointment.vibiiographer_id)
+            apt_obj.appointment.id,
+            apt_obj.appointment.vibiiographer_id)
             .subscribe(response => {
                 this.updateMySchedule();
                 Object.assign(this.appointments[apt_obj.index], response.my_day);
@@ -165,6 +182,6 @@ export class MyVibiiosComponent implements OnInit {
     // referenced in the component ngIf
     appointmentRange(appointment) {
         appointment.scheduled_datetime >= this.range[0] &&
-        appointment.scheduled_datetime <= this.range[1]
+            appointment.scheduled_datetime <= this.range[1];
     }
 }

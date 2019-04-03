@@ -1,14 +1,19 @@
 
 <vib-appointment-details [appointment]="appointment"
                          [address]="address"
+                         [relocationAddress]="relocationAddress"
                          [timeZone]="userTimeZone"
                          [user]="user"
                          [vibiio]="vibiio"
-                         [vibiioConnecting]="vibiioConnecting"
                          [onVibiio]="onVibiio"
-                         [neworkDisconnected]="neworkDisconnected"
-                         (startVibiio)="connectToSession()"
-                         (endVibiio)="endSession()"
-                         (claimVibiio)="claimVibiio($event)"
-                         (refreshNotes)="updateNotes(appointment.id)">
+                         [snapshots]="snapshots"
+                         [isEditingForms]="isEditingForms"
+                         [isUpdatingForms]="isUpdatingForms"
+                         [consultants]="vibiio.consultants"
+                         (startVibiio)="callConsumer()"
+                         (refreshNotes)="updateNotes(appointment.id)"
+                         (updateVibiioStatus)="updateVibiioStatus($event)"
+                         (refreshAddress)="refreshAddress()"
+                         (isEditing)="onEdit($event)"
+                         (isUpdating)="onUpdate()">
 </vib-appointment-details>

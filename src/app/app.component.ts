@@ -10,7 +10,7 @@ import { SpinnerService } from './easy-spinner/services/spinner.service';
 })
 
 export class AppComponent implements OnInit {
-  title = 'vibiio';
+  title = 'Your Company Here';
   spinnerShow: boolean;
 
     constructor( public titleService: Title,

@@ -1,0 +1,25 @@
+@import '~assets/css/variables';
+
+.call-name-display-container {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+    .avatar {
+        height: 25px;
+        width: 25px;
+        margin-right: 10px;
+        background-image: url('../../../../assets/images/avatar-icon.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    .name {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 6px;
+        font-family: $copy-font;
+        color: $white;
+        font-weight: 500;
+    }
+}

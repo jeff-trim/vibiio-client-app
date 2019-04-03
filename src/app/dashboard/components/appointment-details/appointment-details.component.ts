@@ -1,142 +1,100 @@
-import { Component, Input, EventEmitter, Output, ViewChild, } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import * as screenfull from 'screenfull';
+import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 
 // Services
-import { AppointmentService } from '../../services/appointment.service';
-import { VibiioUpdateService } from '../../services/vibiio-update.service';
-import { SidebarCustomerStatusSharedService } from '../../services/sidebar-customer-status-shared.service';
-import { AvailabilitySharedService } from '../../services/availability-shared.service';
 import { DateFormatService } from '../../../services/date-format.service';
-import { AppointmentDetailsFormStatusService } from '../../services/appointment-details-form-status.service';
+import { ConsumerUpdateService } from '../../services/consumer-update.service';
 
 // Components
 import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
 
-// Interfaces
+// Models
 import { Appointment } from '../../models/appointment.interface';
 import { User } from '../../models/user.interface';
 import { Vibiio } from '../../models/vibiio.interface';
 import { Note } from '../../models/consumer-note.interface';
-import { ResponseErrorService } from '../../../services/response-error.service';
 import { InsurancePolicy } from '../../models/insurance-policy.interface';
-import { ConsumerUpdateService } from '../../services/consumer-update.service';
 import { Address } from '../../models/address.interface';
+import { VideoSnapshot } from '../../models/video-snapshot.interface';
+import { Consultant } from '../../models/consultant.interface';
 
 @Component({
-    selector: 'vib-appointment-details',
-    templateUrl: 'appointment-details.component.html',
-    styleUrls: ['appointment-details.component.scss']
+  selector: 'vib-appointment-details',
+  templateUrl: 'appointment-details.component.html',
+  styleUrls: ['appointment-details.component.scss']
 })
 
 export class AppointmentDetailsComponent {
-    @Input() vibiioConnecting: boolean;
-    @Input() onVibiio: boolean;
-    @Input() appointment: Appointment;
-    @Input() user: User;
-    @Input() vibiio: Vibiio;
-    @Input() neworkDisconnected: boolean;
-    @Input() timeZone: string;
-    @Input() address: Address;
+  @Input() appointment: Appointment;
+  @Input() user: User;
+  @Input() vibiio: Vibiio;
+  @Input() address: Address;
+  @Input() relocationAddress: Address;
+  @Input() snapshots: VideoSnapshot[];
+  @Input() onVibiio: boolean;
+  @Input() timeZone: string;
+  @Input() isEditingForms = false;
+  @Input() isUpdatingForms = false;
+  @Input() consultants: Consultant[];
 
-    imgData: string;
-    vibiioFullscreen = false;
-    isEditingForms = false;
-    isUpdatingForms = false;
+  @Output() startVibiio = new EventEmitter<boolean>();
+  @Output() claimVibiio = new EventEmitter<boolean>();
+  @Output() refreshNotes = new EventEmitter<any>();
+  @Output() updateVibiioStatus = new EventEmitter<any>();
+  @Output() isEditing = new EventEmitter<boolean>();
+  @Output() isUpdating = new EventEmitter<boolean>();
+  @Output() refreshAddress = new EventEmitter<boolean>();
 
-    @Output() startVibiio = new EventEmitter<boolean>();
-    @Output() endVibiio = new EventEmitter<boolean>();
-    @Output() claimVibiio: EventEmitter<boolean> = new EventEmitter<boolean>();
-    @Output() refreshNotes: EventEmitter<any> = new EventEmitter<any>();
+  @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
 
-    @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
-
-    constructor(private StatusUpdateService: VibiioUpdateService,
-                private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
-                private availabilitySharedService: AvailabilitySharedService,
-                private dateFormatService: DateFormatService,
-                private router: Router,
-                private formStatusService: AppointmentDetailsFormStatusService,
-                private consumerUpdateService:  ConsumerUpdateService) {}
-
-
-    updateStatus(event) {
-      const options = { status: event.status };
-      this.StatusUpdateService
-        .updateVibiio(options, event.vibiioId)
-        .subscribe( (data) => {
-            this.vibiio = data.vibiio;
-            this.sidebarCustomerStatusSharedService.emitChange(data);
-        }, (error: any) => {
-            console.log('error updating claim status');
-        });
-    }
-
-    updateAddress() {
-      if (this.addressForm.editForm.valid) {
-        const address = this.addressForm.editForm.value;
-        this.consumerUpdateService.updateAddress(address)
-          .subscribe( (data) => {
-            this.address = data.address;
-          });
-      }
-    }
-
-    connect() {
-      this.startVibiio.emit(true);
-      this.vibiioConnecting = true;
-      this.onVibiio = true;
-      // check to see if appointment has been claimed and auto assign
-      if (this.appointment.vibiiographer_id == null) {
-        this.claimVibiio.emit(true);
-      }
-    }
-
-    disconnect() {
-      this.endVibiio.emit(true);
-      this.vibiioConnecting = false;
-      this.availabilitySharedService.emitChange(true);
-      this.router.navigateByUrl('/dashboard/vibiio-profile/' + this.vibiio.id);
-    }
-
-    updateNotes() {
-      this.refreshNotes.emit(event);
-    }
-
-    parseDate(time: number) {
-      return this.dateFormatService.parseDate(time, this.timeZone);
-    }
-
-    parseTime(time: number) {
-      return this.dateFormatService.parseTime(time, this.timeZone);
-    }
-
-    onEdit(event) {
-      this.isEditingForms = event;
-      this.formStatusService.onFormEdit();
+  constructor(private dateFormatService: DateFormatService,
+    private consumerUpdateService: ConsumerUpdateService) {
   }
 
-  onUpdate() {
-      this.isUpdatingForms = true;
-      this.formStatusService.onFormUpdate();
-      this.updateAddress();
+  updateAddress() {
+    if (this.addressForm.editForm.valid) {
+      const address = this.addressForm.editForm.value;
+      this.consumerUpdateService.updateAddress(address)
+        .subscribe((data) => {
+          this.address = data.address;
+        });
+    }
   }
 
   onCancel() {
-      this.formStatusService.onCancel();
-      this.consumerUpdateService.refreshAddress(this.address.id)
-        .subscribe( (data) => {
-          this.addressForm.editForm.patchValue(data.address);
-          this.isEditingForms = false;
-        });
+    this.refreshAddress.emit(true);
+    this.consumerUpdateService.refreshAddress(this.address.id)
+      .subscribe((data) => {
+        this.addressForm.editForm.patchValue(data.address);
+        this.isEditingForms = false;
+      });
   }
 
-  toggleVibiioFullscreen() {
-    this.vibiioFullscreen = !this.vibiioFullscreen;
+  updateStatus(status: any) {
+    this.updateVibiioStatus.emit(status);
+  }
 
-    // Toggles fullscreen using screenfull package
-    if (screenfull.enabled) {
-      screenfull.toggle();
-    }
+  connect() {
+    this.startVibiio.emit(true);
+  }
+
+  updateNotes() {
+    this.refreshNotes.emit(event);
+  }
+
+  parseDate(time: number) {
+    return this.dateFormatService.parseDate(time, this.timeZone);
+  }
+
+  parseTime(time: number) {
+    return this.dateFormatService.parseTime(time, this.timeZone);
+  }
+
+  onEdit(formChanged: boolean) {
+    this.isEditing.emit(formChanged);
+  }
+
+  onUpdate() {
+    this.isUpdating.emit(true);
+    this.updateAddress();
   }
 }

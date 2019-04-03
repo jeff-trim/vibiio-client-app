@@ -1,47 +1,49 @@
 <div class="notification-bar" [ngClass]="{'first-bar': rowIndex == 0}" title="{{ description }}">
-  <div class="wrapper">
-    <div class="top-row">
-        <div class="notification">
-            <div class="name">{{ consumerName }}</div>
-            <span class="pink"></span>
+    <div class="wrapper">
+        <div class="top-row" (click)="emitAppointment()">
+            <div class="notification">
+                <div class="name">{{ consumerName }}</div>
+                <span class="pink"></span>
 
-            <div class="timer">
-                Preferred language: {{ language }}
+                <div class="timer">
+                    Preferred language: {{ language }}
+                </div>
+                <div class="timer" *ngIf="minutes === 1 && seconds > 1">
+                    Waiting for {{ minutes }} minute and {{ seconds }} seconds
+                </div>
+                <div class="timer" *ngIf="minutes === 1 && seconds === 0">
+                    Waiting for {{ minutes }} minute
+                </div>
+                <div class="timer" *ngIf="minutes > 1 && seconds > 1">
+                    Waiting for {{ minutes }} minutes and {{ seconds }} seconds
+                </div>
+                <div class="timer" *ngIf="minutes > 1 && seconds === 1">
+                    Waiting for {{ minutes }} minutes and {{ seconds }} second
+                </div>
+                <div class="timer" *ngIf="minutes > 1 && seconds === 0">
+                    Waiting for {{ minutes }} minutes
+                </div>
+                <div class="timer" *ngIf="minutes === 0 && seconds === 1">
+                    Waiting for {{ seconds }} second
+                </div>
+                <div class="timer" *ngIf="minutes === 0 && seconds > 1">
+                    Waiting for {{ seconds }} seconds
+                </div>
             </div>
-            <div class="timer" *ngIf="minutes === 1 && seconds > 1">
-                Waiting for {{ minutes }} minute and {{ seconds }} seconds
-            </div>
-            <div class="timer" *ngIf="minutes === 1 && seconds === 0">
-                Waiting for {{ minutes }} minute
-            </div>
-            <div class="timer" *ngIf="minutes > 1 && seconds > 1">
-                Waiting for {{ minutes }} minutes and {{ seconds }} seconds
-            </div>
-            <div class="timer" *ngIf="minutes > 1 && seconds === 1">
-                Waiting for {{ minutes }} minutes and {{ seconds }} second
-            </div>
-            <div class="timer" *ngIf="minutes > 1 && seconds === 0">
-                Waiting for {{ minutes }} minutes
-            </div>
-            <div class="timer" *ngIf="minutes === 0 && seconds === 1">
-                Waiting for {{ seconds }} second
-            </div>
-            <div class="timer" *ngIf="minutes === 0 && seconds > 1">
-                Waiting for {{ seconds }} seconds
+
+            <div class="button-wrap" *ngIf="displayConnectIcon()">
+                <span class="button-label">Start Video</span>
+                <img class="claim-button" src="assets/images/start.svg" />
             </div>
         </div>
 
-        <div class="button-wrap" *ngIf="displayConnectIcon()">
-            <span class="button-label">Start Vibiio</span>
-            <img class="claim-button"
-                (click)="emitAppointment()"
-                src="assets/images/start.svg" />
+        <div class="bottom-row" (click)="emitAppointment()">
+            <div *ngIf="description">
+                <div [ngClass]="{'description':!fullDescription, 'description-full':fullDescription}">{{ description }}
+                </div>
+                <h4 class="description-button" (click)="fullDescription = !fullDescription">VIEW FULL DESCRIPTION</h4>
+            </div>
         </div>
-    </div>
 
-    <div class="bottom-row">
-        <div class="description" *ngIf="description !== null">{{ description }}</div>
     </div>
-
-  </div>
 </div>

@@ -1,0 +1,33 @@
+<div class="col-xs-offset-1
+            vibiiographer-list-container">
+    <div class="search">
+      <vib-search-box (queryEmitter)="search($event)"></vib-search-box> 
+    </div>
+    
+    <div *ngIf="(experts?.length > 0); else noResults">
+      <div class="info-element-container" *ngFor="let expert of experts">
+        <div class="info-element
+                    row
+                    between-xs
+                    bottom-xs">
+          <div>
+            <span class="label">{{ expert.first_name }} {{ expert.last_name }}</span>
+            <span class="pink-underline"></span>
+          </div>
+        </div>
+        <ng-container *ngIf="expert.professions[0]">
+          <p class="detail"><span>{{ expert.professions[0] | removeUnderscore | capitalize }}</span><span>{{ expert.city }}, {{ expert.state }}</span></p>
+        </ng-container>
+      </div>
+    </div>  
+  
+    <ng-template #noResults>
+      <div class="info-element
+                  row
+                  between-xs
+                  bottom-xs">
+        <span class="label">No Experts match that term</span>
+      </div>
+    </ng-template>
+  </div>
+  

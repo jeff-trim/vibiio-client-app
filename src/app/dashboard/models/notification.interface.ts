@@ -6,5 +6,6 @@ export interface Notification {
         vibiio_id?: number;
         appointment_id?: number;
         language?: string;
+        company_ids: number[];
     };
 }

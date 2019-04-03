@@ -1,0 +1,17 @@
+@import '~assets/css/variables';
+
+.m-expert-added-notification {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  background-color: $white;
+}
+
+.a-expert-added-notification__text {
+  color: $grey;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 700;
+}
+

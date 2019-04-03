@@ -28,6 +28,8 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     isSaving = false;
     addLicensureForm = false;
     isEditing = false;
+    receivingTexts: boolean;
+    availableLanguages = ['english', 'spanish', 'french'];
 
     @ViewChild (ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
@@ -45,6 +47,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.myProfile = data.myProfile.user;
+            this.receivingTexts  = data.myProfile.user.receive_texts;
             this.myLicenses = data.myProfile.user.profile.licenses;
         });
     }
@@ -110,21 +113,23 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
 
     updateMyProfile(form) {
         const id = this.myProfile.id;
-        const addressData = form.value.addressData;
-        const userData = form.value.userData;
 
         const options = {
-            first_name: userData.firstName,
-            last_name: userData.lastName,
-            company: userData.company,
-            phone: userData.phone,
-            address_one: addressData.addressOne,
-            address_two: addressData.addressTwo,
-            city: addressData.city,
-            state: addressData.state,
-            zip: addressData.zip
+            first_name: form.value.firstName,
+            last_name: form.value.lastName,
+            company: form.value.company,
+            phone: form.value.phone,
+            address_one: form.value.addressOne,
+            address_two: form.value.addressTwo,
+            city: form.value.city,
+            state: form.value.state,
+            zip: form.value.zip
         };
 
+        this.sendProfileUpdateData(options);
+    }
+
+    sendProfileUpdateData(options: any) {
         this.myProfileService.updateMyProfile(options)
             .subscribe( (data) => {
                 this.myProfile = data.user;
@@ -132,8 +137,27 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
         });
     }
 
+    updateLanguages(languages: string[]): void {
+        const options = {
+            languages: languages
+        };
+
+        this.sendProfileUpdateData(options);
+    }
+
     toggleLicensureForm() {
         this.addLicensureForm = !this.addLicensureForm;
+    }
+
+    toggleReceiveTexts() {
+        this.receivingTexts = !this.receivingTexts;
+        const isReceiving = this.receivingTexts;
+        const options = {receive_texts: isReceiving};
+
+        this.myProfileService.updateMyProfile(options)
+        .subscribe( (data) => {
+            this.receivingTexts = data.user.receive_texts;
+        });
     }
 
     // My License functions
