@@ -21,15 +21,15 @@ import { FormSelectMapperService } from '../services/form-select-mapper.service'
   selector: 'vib-consumer-sign-up',
   styleUrls: ['consumer-sign-up.component.scss'],
   template: `
-  <div class="holder">
-    <div class="col-xs-12">
-      <div class="logo"></div>
-      <h1>Consumer Sign Up</h1>
-      <vib-dynamic-form id="sign-up-form"
-                        [config]="form?.inputs"
-                        (submitted)="submitForm($event)"></vib-dynamic-form>
-    <div>
-  </div>
+    <div class="holder">
+      <div class="col-xs-12">
+        <div class="logo"></div>
+        <h1>Consumer Sign Up</h1>
+        <vib-dynamic-form id="sign-up-form"
+                          [config]="form?.inputs"
+                          (submitted)="submitForm($event)"></vib-dynamic-form>
+      </div>
+    </div>
   `
 })
 
@@ -64,7 +64,7 @@ export class ConsumerSignUpComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    jcf.refreshAll();
+    jcf.replaceAll();
   }
 
   submitForm(event) {

@@ -8,10 +8,10 @@
                [value]="consumerProfile.user_info.email"></key-value>
 
     <key-value [key]="'Language'"
-               [value]="consumerProfile.user_info.language"></key-value>
+               [value]="consumerProfile.language"></key-value>
 
     <key-value [key]="'Phone Number'"
-               [value]="consumerProfile.user_info.phone_number"></key-value>
+               [value]="consumerProfile.user_info.phone"></key-value>
 
     <vib-consumer-address [address]="address"
                           (formChanged)="onEdit($event)">
@@ -23,12 +23,12 @@
     <key-value [key]="'Start Time'"
                [value]="parseTime(consumerProfile.appointment_scheduled_datetime[0])"></key-value>
 
+    <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
   
     <vib-insurance-policy [insurancePolicies]="consumerProfile.insurance_policies"
                           [consumerId]="consumerProfile.consumer_id"
                           (editingPolicy)="onEdit($event)"></vib-insurance-policy>
 
-    <vib-claim-status (updatedStatus)=updateStatus($event) [vibiio]="vibiio"></vib-claim-status>
   </div>
 </div>
   

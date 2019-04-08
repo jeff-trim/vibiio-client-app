@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { DateFormatService } from '../../../services/date-format.service';
 
 @Component({
-  selector: 'app-sidebar-schedule',
+  selector: 'vib-sidebar-schedule',
   styleUrls: ['sidebar-schedule.component.scss'],
   template: `<div class="sidebar-schedule">
               <div class="appointments-container">

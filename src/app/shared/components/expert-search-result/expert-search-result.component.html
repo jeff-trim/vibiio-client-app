@@ -1,0 +1,20 @@
+<div class="expert-search-result-container"
+     (click)="addExpert(result)">
+  <div class="details-container">
+    <div class="name">
+      {{ result.first_name }} {{ result.last_name }}
+    </div>
+    <div class="profession">
+      <ng-container *ngIf="profession">
+        {{ profession | removeUnderscore | capitalize }}
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="add-container">
+    <div class="text">
+      add
+    </div>
+    <div class="add-icon"></div>
+  </div>
+</div>

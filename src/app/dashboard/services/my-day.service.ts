@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import { Appointment } from '../models/appointment.interface'
 
-const MY_DAY_API: string = `${API_URL}/schedule/my_day/`
+const MY_DAY_API: string = `${API_URL}/schedule/my_day/`;
 
 @Injectable()
 export class MyDayService {

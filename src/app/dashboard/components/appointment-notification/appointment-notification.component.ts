@@ -4,7 +4,7 @@ import { Notification } from '../../models/notification.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
-    selector: 'appointment-notification',
+    selector: 'vib-appointment-notification',
     styleUrls: ['./appointment-notification.component.scss'],
     templateUrl: 'appointment-notification.component.html'
 })
@@ -19,6 +19,7 @@ export class AppointmentNotificationComponent implements OnInit, OnDestroy {
     language: string;
     private timer;
     private sub: Subscription;
+    fullDescription: boolean;
 
     @Input()
     notificationData: Notification;
@@ -33,6 +34,7 @@ export class AppointmentNotificationComponent implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit() {
+        this.fullDescription = false;
         this.consumerName = JSON.parse(this.notificationData.content.message_body).consumer;
         this.description = JSON.parse(this.notificationData.content.message_body).description;
         this.minutes = parseInt(JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '')) || 0;

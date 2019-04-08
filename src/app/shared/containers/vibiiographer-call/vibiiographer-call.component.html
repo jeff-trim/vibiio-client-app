@@ -1,0 +1,18 @@
+<div [@slideUpDown]
+     ngDraggable class="vibiiographer-call-container">
+    <vib-video-chat [vibiio]="vibiio"
+                    [vibiioConnecting]="vibiioConnecting"
+                    [onVibiio]="onVibiio"
+                    [showControls]="showControls"
+                    [consumerName]="consumerName"
+                    [showNotification]="showNotification"
+                    [expertName]="expertName"
+                    [message]="message"
+                    [enableFullscreen]="enableFullscreen"
+                    (toggleFullscreen)="toggleVibiioFullscreen()"
+                    (updateVibiioStatus)="updateStatus($event)"
+                    (add)="addExpert($event)"
+                    (endCall)="endSession()"
+                    (mute)="toggleMute()">
+    </vib-video-chat>
+</div>

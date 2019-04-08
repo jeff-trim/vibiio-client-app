@@ -1,0 +1,59 @@
+@import '../../../../assets/css/_variables.scss';
+
+form {
+  width: 100%;
+  &:focus {
+      outline: none;
+    }
+}
+
+.vibiio-note {
+  background-color: $light-grey;
+}
+
+.notes-container {
+  padding: 2px;
+  caret-color: $azure; 
+  .note-body {
+    width: 100%;
+    -webkit-appearance: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: $greyish-brown;
+    font-family: $base-font;
+    font-size: 1.8rem;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: normal;
+    resize: none;
+    max-height: 150px;
+    &:-webkit-input-placeholder,
+      :-moz-placeholder,
+      :-ms-input-placeholder {
+      color: $placeholder-grey;
+    }
+    &.existing:-webkit-input-placeholder,
+      :-moz-placeholder,
+      :-ms-input-placeholder {
+      color: $greyish-brown;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .author {
+    color: $pink;
+  }
+}
+
+.button-sm {
+  height: 45px;
+  width: 85px;
+  margin: 1% 10px 10px 74%;
+  &:focus {
+      outline: none;
+  }
+}

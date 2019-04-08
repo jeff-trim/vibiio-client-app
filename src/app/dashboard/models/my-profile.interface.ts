@@ -8,7 +8,9 @@ export interface MyProfile {
     company: string;
     phone: string;
     address: Address;
+    receive_texts: boolean;
     profile: {
         licenses: MyProfileLicense[];
+        languages: string[];
     };
 }

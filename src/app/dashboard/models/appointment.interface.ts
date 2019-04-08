@@ -4,6 +4,7 @@ import { User } from './user.interface';
 import { Vibiio } from './vibiio.interface';
 import { Consumer } from './consumer.interface';
 import { Note } from './consumer-note.interface';
+import { VideoSnapshot } from './video-snapshot.interface';
 
 export interface Appointment {
     scheduled_datetime: number;
@@ -15,8 +16,10 @@ export interface Appointment {
     consumer: Consumer;
     insurance_policies: InsurancePolicy[];
     address: Address;
+    relocation_address: Address;
     customer_notes: Note;
     language: string;
     timezone?: string;
+    snapshots: VideoSnapshot[];
 }
 
