@@ -4,14 +4,15 @@
                     [vibiioConnecting]="vibiioConnecting"
                     [onVibiio]="onVibiio"
                     [showControls]="showControls"
-                    (updateVibiioStatus)="updateStatus($event)"
-                    (add)="addExpert($event)"
-                    (endCall)="endSession()"
-                    (mute)="toggleMute()"
                     [consumerName]="consumerName"
                     [showNotification]="showNotification"
                     [expertName]="expertName"
                     [message]="message"
-                    [enableFullscreen]="enableFullscreen">
+                    [enableFullscreen]="enableFullscreen"
+                    (toggleFullscreen)="toggleVibiioFullscreen()"
+                    (updateVibiioStatus)="updateStatus($event)"
+                    (add)="addExpert($event)"
+                    (endCall)="endSession()"
+                    (mute)="toggleMute()">
     </vib-video-chat>
 </div>

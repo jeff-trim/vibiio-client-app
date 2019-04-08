@@ -125,6 +125,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     toggleVibiioFullscreen() {
         const el = document.getElementById('full');
+
         if (!document.fullscreenElement) {
             el.requestFullscreen();
         } else {
