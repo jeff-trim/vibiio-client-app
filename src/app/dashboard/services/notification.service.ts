@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import intersection from 'lodash/intersection';
 import * as _ from 'lodash';
@@ -37,37 +36,37 @@ export class NotificationService {
   readonly jwt: string = this.authService.getToken();
 
   constructor(private authService: AuthService,
-              private availabilitySharedService: AvailabilitySharedService,
-              private router: Router) {
+    private availabilitySharedService: AvailabilitySharedService,
+    private router: Router) {
 
     this.availabilitySharedService.changeEmitted$.subscribe(available => {
       if (available) {
-          this.subscribeToAvailabilityChannel();
+        this.subscribeToAvailabilityChannel();
       } else {
-          this.unsubscribeFromAvailabilityChannel();
+        this.unsubscribeFromAvailabilityChannel();
       }
     });
 
-  this.availibilityChannelCable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
+    this.availibilityChannelCable = ActionCable.createConsumer(`${ACTION_CABLE_URL}`, this.jwt);
 
   }
 
   subscribeToAvailabilityChannel() {
     const comp = this;
 
-    this.availibilityChannelSubscription = this.availibilityChannelCable.subscriptions.create({channel: 'AvailabilityChannel'}, {
-        connected(data) {
-            return this.getWaitingList();
-        },
-        received(data) {
-            return comp.receiveWrappedNotification(data);
-        },
-        getWaitingList() {
-            return this.perform('get_waiting_list');
-        },
-        claimAppointment(message) {
-            return this.perform('claim_vibiio', message);
-        }
+    this.availibilityChannelSubscription = this.availibilityChannelCable.subscriptions.create({ channel: 'AvailabilityChannel' }, {
+      connected(data) {
+        return this.getWaitingList();
+      },
+      received(data) {
+        return comp.receiveWrappedNotification(data);
+      },
+      getWaitingList() {
+        return this.perform('get_waiting_list');
+      },
+      claimAppointment(message) {
+        return this.perform('claim_vibiio', message);
+      }
     });
   }
 
@@ -98,15 +97,15 @@ export class NotificationService {
   private receiveWrappedNotification(data: NotificationWrapper) {
     this.wrappedNotification = data;
     switch (data.type_of) {
-        case 'waiting_list': {
-            return this.fetchWaitingList(data);
-        }
-        case 'notification': {
-           return this.receiveNotificationData(data.content);
-        }
-        case 'remove_waiting_consumer': {
-           return this.removeNotification(data);
-        }
+      case 'waiting_list': {
+        return this.fetchWaitingList(data);
+      }
+      case 'notification': {
+        return this.receiveNotificationData(data.content);
+      }
+      case 'remove_waiting_consumer': {
+        return this.removeNotification(data);
+      }
     }
   }
 
@@ -115,10 +114,8 @@ export class NotificationService {
 
     switch (this.notification.notification_type) {
       case 'notification': {
-        if (this.filterNotification(data.content)) {
-          this.waitingConsumers = [ { waitListItem: this.notification }, ...this.waitingConsumers ];
-          this.updateWaitList(this.waitingConsumers);
-        }
+        this.waitingConsumers = [{ waitListItem: this.notification }, ...this.waitingConsumers];
+        this.updateWaitList(this.waitingConsumers);
         break;
       }
       case 'error': {
@@ -138,8 +135,8 @@ export class NotificationService {
   }
 
   private fetchWaitingList(data) {
-    for (const notification of data.content){
-        return this.receiveNotificationData(notification);
+    for (const notification of data.content) {
+      return this.receiveNotificationData(notification);
     }
   }
 
@@ -147,8 +144,8 @@ export class NotificationService {
     for (const consumer in this.waitingConsumers) {
       if (this.waitingConsumers[+consumer].waitListItem.content.vibiio_id === data.content.vibiio_id) {
         this.waitingConsumers = [
-            ...this.waitingConsumers.slice(0, +consumer),
-            ...this.waitingConsumers.slice(+consumer + 1)
+          ...this.waitingConsumers.slice(0, +consumer),
+          ...this.waitingConsumers.slice(+consumer + 1)
         ];
         this.updateWaitList(this.waitingConsumers);
       }
@@ -160,8 +157,11 @@ export class NotificationService {
   }
 
 
-// Notification filters
+  // no longer filtering based on language or company as the functionality is not needed for the Moving company Beta
+  // Notification filters
   private filterNotification(content: any): boolean {
+    console.log(content);
+
     if (this.speaksVibiiographersLanguage(content.language) && (this.isValidCompany(content.companies))) {
       return true;
     } else {
@@ -175,9 +175,9 @@ export class NotificationService {
 
   private isValidCompany(companies: number[]): boolean {
     if (this.isVibiioStaff) {
-        return true;
+      return true;
     } else {
-        return (intersection(this.companyIds, companies).length > 0);
+      return (intersection(this.companyIds, companies).length > 0);
     }
   }
 }
