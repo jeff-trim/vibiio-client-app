@@ -111,7 +111,6 @@ export class NotificationService {
 
   private receiveNotificationData(data) {
     this.notification = data;
-    console.log(data);
 
     switch (this.notification.notification_type) {
       case 'notification': {
