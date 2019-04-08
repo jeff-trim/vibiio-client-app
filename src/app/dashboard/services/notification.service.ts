@@ -111,6 +111,7 @@ export class NotificationService {
 
   private receiveNotificationData(data) {
     this.notification = data;
+    console.log(data);
 
     switch (this.notification.notification_type) {
       case 'notification': {
@@ -141,15 +142,15 @@ export class NotificationService {
   }
 
   private removeNotification(data) {
-    for (const consumer in this.waitingConsumers) {
-      if (this.waitingConsumers[+consumer].waitListItem.content.vibiio_id === data.content.vibiio_id) {
+    this.waitingConsumers.forEach((consumer, index) => {
+      if (consumer.waitListItem.content.vibiio_id === data.content.vibiio_id) {
         this.waitingConsumers = [
-          ...this.waitingConsumers.slice(0, +consumer),
-          ...this.waitingConsumers.slice(+consumer + 1)
+          ...this.waitingConsumers.slice(0, index),
+          ...this.waitingConsumers.slice(index + 1)
         ];
         this.updateWaitList(this.waitingConsumers);
       }
-    }
+    });
   }
 
   private updateWaitList(list: any[]) {
@@ -160,8 +161,6 @@ export class NotificationService {
   // no longer filtering based on language or company as the functionality is not needed for the Moving company Beta
   // Notification filters
   private filterNotification(content: any): boolean {
-    console.log(content);
-
     if (this.speaksVibiiographersLanguage(content.language) && (this.isValidCompany(content.companies))) {
       return true;
     } else {
