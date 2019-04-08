@@ -9,22 +9,22 @@ import { User } from '../../../dashboard/models/user.interface';
   styleUrls: ['./video-chat.component.scss'],
   animations: [
     trigger('expandableState', [
-        transition(':enter', [
-            style({ transform: 'translateY(100%)', height: '0%' }),
-            animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
-                style({ transform: 'translateY(0%)', height: '*' })),
-        ]),
-        transition(':leave', [
-            style({ transform: 'translateY(0%)', height: '*' }),
-            animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
-                style({ transform: 'translateY(100%)', height: '0%' })),
-        ]),
+      transition(':enter', [
+        style({ transform: 'translateY(100%)', height: '0%' }),
+        animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
+          style({ transform: 'translateY(0%)', height: '*' })),
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateY(0%)', height: '*' }),
+        animate('600ms cubic-bezier(0.64, 0.04, 0.35, 1)',
+          style({ transform: 'translateY(100%)', height: '0%' })),
+      ]),
     ]),
     trigger('visibilityChanged', [
       transition(':enter', [
         style({ opacity: 0 }),
         animate('300ms', style({ opacity: 1 }))
-    ]),
+      ]),
       transition(':leave', [
         style({ opacity: 1 }),
         animate('300ms', style({ opacity: 0 }))
@@ -47,6 +47,7 @@ export class VideoChatComponent {
   @Input() message: string;
   @Input() showNotification = false;
 
+  @Output() toggleFullscreen = new EventEmitter<boolean>();
   @Output() updateVibiioStatus = new EventEmitter<any>();
   @Output() mute = new EventEmitter<boolean>();
   @Output() endCall = new EventEmitter<boolean>();
@@ -61,6 +62,7 @@ export class VideoChatComponent {
 
   toggleVibiioFullscreen() {
     this.vibiioFullscreen = !this.vibiioFullscreen;
+    this.toggleFullscreen.emit(this.vibiioFullscreen);
   }
 
   hangUp() {
@@ -78,9 +80,9 @@ export class VideoChatComponent {
   toggleSearch() {
     this.closeSearch = !this.closeSearch;
     if (!this.closeSearch && !this.vibiioFullscreen) {
-        this.showControls = false;
+      this.showControls = false;
     } else {
-        this.showControls = true;
+      this.showControls = true;
     }
   }
 }
