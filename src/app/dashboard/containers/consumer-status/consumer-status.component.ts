@@ -1,20 +1,13 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy  } from '@angular/core';
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 // Services
-import { ConsumerStatusService } from '../../services/consumer-status.service';
 import { ConsumerSortService } from '../../services/consumer-sort.service';
 import { AllConsumersService } from '../../services/all-consumers.service';
 
 // Interfaces
 import { ConsumerProfile } from '../../models/consumer-profile.interface';
-import { VideoSnapshot } from '../../models/video-snapshot.interface';
-import { Vibiio } from '../../models/vibiio.interface';
 import { SortType } from '../../models/sort-type.interface';
-
-// Pipes
-import { OrderByPipe } from '../../../shared/pipes/order-by.pipe';
-import { RemoveUnderscorePipe } from '../../../shared/pipes/remove-underscore.pipe';
 
 @Component({
     selector: 'vib-consumer-status',
@@ -31,11 +24,11 @@ export class ConsumerStatusComponent implements OnInit {
     property = 'appointment_scheduled_datetime';
 
     constructor(private activatedRoute: ActivatedRoute,
-                private sortService: ConsumerSortService,
-                private consumersService: AllConsumersService) {
+        private sortService: ConsumerSortService,
+        private consumersService: AllConsumersService) {
 
         this.activatedRoute.data.subscribe((res) => {
-            this.consumerProfiles = res.data;
+            this.consumerProfiles = res.data.vibiios;
         });
 
         this.activatedRoute.params.subscribe((params) => {
@@ -63,11 +56,11 @@ export class ConsumerStatusComponent implements OnInit {
         if (this.consumerStatus) {
             this.consumersService
                 .byStatus(this.consumerStatus, query)
-                .subscribe( res => this.consumerProfiles = res);
+                .subscribe(res => this.consumerProfiles = res);
         } else {
             this.consumersService
                 .index(query)
-                .subscribe( res => this.consumerProfiles = res);
+                .subscribe(res => this.consumerProfiles = res);
         }
-      }
+    }
 }
