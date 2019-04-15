@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
         <h1>Welcome to Video!</h1>
       </div>
       <div class="message">
-        <p>👋 Sign in below to view your videos</p>
+        <p>👋 Sign in below to receive video calls</p>
       </div>
     </div>
 `

@@ -7,7 +7,7 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
 })
 export class VideoControlsComponent {
   @Input() muted = false;
-  @Input() enableAddExpert = true;
+  @Input() enableAddExpert = false;
 
   @Output() mute = new EventEmitter<boolean>();
   @Output() endCall = new EventEmitter<boolean>();
