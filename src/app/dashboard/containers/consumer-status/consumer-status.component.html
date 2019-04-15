@@ -3,18 +3,17 @@
             col-md-offset-1">
 
   <h1 class="col-xs pink">{{ this.displayStatus | removeUnderscore }} </h1>
-  
+
   <div class="flex">
     <div class="search-and-sort">
       <vib-search-box (queryEmitter)="search($event)"></vib-search-box>
-        <ng-template #noResults>
-          <p class="col-md-3
-          welcomeText"> No Consumers match that status.</p>
-        </ng-template>
-        
-        <vib-sort-button [sortTypes]="sortTypes"
-                         (sortConsumers)="sortConsumers($event)">
-        </vib-sort-button>
+      <ng-template #noResults>
+        <p class="col-md-3
+          welcomeText"> No Customers match that status.</p>
+      </ng-template>
+
+      <vib-sort-button [sortTypes]="sortTypes" (sortConsumers)="sortConsumers($event)">
+      </vib-sort-button>
     </div>
   </div>
 
@@ -24,18 +23,18 @@
     <div *ngFor="let consumerProfile of consumerProfiles |
          orderBy: {property: property, direction: direction}">
       <div class="flex">
-        
+
         <vib-consumer-profile-title [consumerProfile]="consumerProfile"></vib-consumer-profile-title>
-        
-          <div class="consumer-profile-container">
-            <div class="col-md-6
+
+        <div class="consumer-profile-container">
+          <div class="col-md-6
                  consumer-profile-detail">
-              
-              <vib-consumer-profile-summary [consumerProfile]="consumerProfile"></vib-consumer-profile-summary>
-              
-            </div>
-            
-            <div class="col-md-7
+
+            <vib-consumer-profile-summary [consumerProfile]="consumerProfile"></vib-consumer-profile-summary>
+
+          </div>
+
+          <div class="col-md-7
                  col-md-offset-1">
             <video-archive [snapshots]="consumerProfile.snapshots"></video-archive>
           </div>
