@@ -1,22 +1,17 @@
-<form (ngSubmit)="onSubmit(vibiio.status)"
-      #claimStatusForm="ngForm">
+<form (ngSubmit)="onSubmit(vibiio.status)" #claimStatusForm="ngForm">
 
     <div class="info-element
                 row
                 between-xs
                 bottom-xs">
-  
-        <div class="claim-status-style">   
-            <select [(ngModel)]="vibiio.status" 
-                    id="status"
-                    name="status"
-                    (change)=onSubmit(vibiio.status)
-                    jcf>
-                    <option value="">Status</option>
-                    <option value="scheduled">Scheduled</option>
-                    <option value="claim_in_progress">Current Videos</option>
-                    <option value="completed">Completed</option>
-                    <option value="unanswered">Unanswered</option>
+
+        <div class="claim-status-style">
+            <select [(ngModel)]="vibiio.status" id="status" name="status" (change)=onSubmit(vibiio.status) jcf>
+                <option value="">Status</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="current">Current Videos</option>
+                <option value="completed">Completed</option>
+                <option value="unanswered">Unanswered</option>
             </select>
             <span class="pink-underline"></span>
         </div>
