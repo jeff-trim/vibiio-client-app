@@ -19,7 +19,7 @@ export class AllConsumersService {
     }
     return this.http
       .get(url)
-      .map((response: any) => response.json())
+      .map((response: any) => response.json().vibiios)
       .catch(error => {
         console.error('An error occurred:', error.error.json());
         return error.error.json();
@@ -29,7 +29,7 @@ export class AllConsumersService {
   byStatus(status?: string, query?: string): Observable<ConsumerProfile[]> {
     return this.http
       .get(this.constructUrl(status, query))
-      .map((response: any) => (response.json()))
+      .map((response: any) => response.json().vibiios)
       .catch(error => {
         console.error('An error occurred:', error.error.json());
         return error.error.json();

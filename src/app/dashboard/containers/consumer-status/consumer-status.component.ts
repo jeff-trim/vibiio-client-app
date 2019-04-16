@@ -28,7 +28,7 @@ export class ConsumerStatusComponent implements OnInit {
         private consumersService: AllConsumersService) {
 
         this.activatedRoute.data.subscribe((res) => {
-            this.consumerProfiles = res.data.vibiios;
+            this.consumerProfiles = res.data;
         });
 
         this.activatedRoute.params.subscribe((params) => {

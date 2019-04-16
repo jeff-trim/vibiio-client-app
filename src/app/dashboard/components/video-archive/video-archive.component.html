@@ -1,42 +1,29 @@
- <div ng-if="snapshots">    
-    <div *ngIf="showArchive"
-        class="col-md-6
-               vibiio-archive-container">    
-        <div *ngFor='let snapshot of snapshots'
-            class="col-md-3 vibiio-snapshot-container">
-            <div class="vibiio-snapshot-container"> 
-                <div class="vibiio-snapshot"
-                    (click)="playArchive(snapshot.session_id)">
+<div ng-if="snapshots">
+    <div *ngIf="showArchive" class="col-md-6
+               vibiio-archive-container">
+        <div *ngFor='let snapshot of snapshots' class="col-md-3 vibiio-snapshot-container">
+            <div class="vibiio-snapshot-container">
+                <div class="vibiio-snapshot" (click)="playArchive(snapshot.session_id)">
                     <img [src]="snapshot.image_url">
                 </div>
-            </div> 
+            </div>
             <div class="snapshot-label-container">
-                <p class="snapshot-label"
-                (click)="playArchive(snapshot.session_id)"># {{ snapshot.id }}</p>
+                <p class="snapshot-label" (click)="playArchive(snapshot.session_id)"># {{ snapshot.id }}</p>
             </div>
         </div>
     </div>
-    
-    <div *ngIf="(showVideo)"
-        class="col-md-3 vibiio-archive-container on-playback">
+
+    <div *ngIf="(showVideo)" class="col-md-3 vibiio-archive-container on-playback">
         <div class="close" (click)="toggleVideo()"></div>
-        <video preload="auto"
-                height="461"
-                width="405"
-                autoplay
-                controls
-                controlslist="nodownload"
-                >
-            <source [src]="video_url" 
-                    type="video/ogg">
+        <video preload="auto" height="461" width="405" autoplay controls controlslist="nodownload">
+            <source [src]="video_url" type="video/ogg">
         </video>
     </div>
-</div> 
+</div>
 
-<div *ngIf="(snapshots == undefined)" 
-    class="col-xs-12
+<div *ngIf="(snapshots == undefined)" class="col-xs-12
               pink
               centered
               no-archives-text">
-    <p class="centered">No archived vibiios yet!</p>
+    <p class="centered">No archived videos yet!</p>
 </div>
