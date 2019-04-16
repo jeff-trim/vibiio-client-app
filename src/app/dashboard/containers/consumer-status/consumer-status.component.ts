@@ -37,7 +37,7 @@ export class ConsumerStatusComponent implements OnInit {
                 this.displayStatus = this.consumerStatus.charAt(0).toUpperCase()
                     + params['status'].slice(1);
             } else {
-                this.displayStatus = 'All Consumers';
+                this.displayStatus = 'All Customers';
             }
         });
     }
