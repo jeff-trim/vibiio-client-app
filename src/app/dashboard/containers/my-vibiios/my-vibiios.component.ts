@@ -42,7 +42,7 @@ export class MyVibiiosComponent implements OnInit {
         this.activatedRoute.data.subscribe((data) => {
             if (data.appointments.appointments.appointments.length > 0) {
                 this.appointments = data.appointments.appointments.appointments;
-                this.myVibiioCount = data.appointments.appointments.appointments.length
+                this.myVibiioCount = this.appointments.length
             }
             this.todaysVibiios = data.appointments.appointments;
             this.vibiiographerId = this.todaysVibiios.vibiiographer_id;
