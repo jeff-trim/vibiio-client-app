@@ -1,22 +1,14 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
-import * as moment from 'moment';
-
-// components
-import { CustomerProfileComponent } from '../../components/customer-profile/customer-profile.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 // Services
-import { CustomerProfileService } from '../../services/customer-profile.service';
-import { TodaysVibiiosService } from '../../services/todays-vibiios.service';
 import { MyDayService } from '../../services/my-day.service';
 import { MyAppointmentsService } from '../../services/my-appointments.service';
 import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service';
 
 // Interfaces
 import { Appointment } from '../../models/appointment.interface';
-import { CustomerProfile } from '../../models/customer-profile.interface';
 import { TodaysVibiios } from '../../models/todays-vibiios.interface';
-import { SliderConfig } from '../../models/slider-config.interface';
 import { MyVibiios } from '../../models/my-vibiios.interface';
 
 // classes
@@ -33,7 +25,7 @@ export class MyVibiiosComponent implements OnInit {
     range: any;
     rangeMin: number;
     rangeMax: number;
-    myVibiioCount: number;
+    myVibiioCount: number = 0;
     currentPage = 1;
     vibiiographerId: number;
     vibiiographerName: string;
@@ -43,7 +35,6 @@ export class MyVibiiosComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
         private myDayService: MyDayService,
-        private customerProfileService: CustomerProfileService,
         private sidebarMyVibiioSharedService: SidebarMyVibiioSharedService,
         private myAppointmentsService: MyAppointmentsService) { }
 
@@ -51,9 +42,7 @@ export class MyVibiiosComponent implements OnInit {
         this.activatedRoute.data.subscribe((data) => {
             if (data.appointments.appointments.appointments.length > 0) {
                 this.appointments = data.appointments.appointments.appointments;
-            }
-            if (data.sidebarMyDay.my_day.length !== undefined) {
-                this.myVibiioCount = data.sidebarMyDay.my_day.length;
+                this.myVibiioCount = this.appointments.length
             }
             this.todaysVibiios = data.appointments.appointments;
             this.vibiiographerId = this.todaysVibiios.vibiiographer_id;
@@ -73,21 +62,6 @@ export class MyVibiiosComponent implements OnInit {
                     new TimeFormatter(this.todaysVibiios.user_time_zone)],
                     connect: true
                 };
-
-                // this.sliderConfig = {
-                //   behaviour: 'drag',
-                //   connect: true,
-                //   margin: 2,
-                //   limit: 20, // NOTE: overwritten by [limit]="10"
-                //   range: {
-                //     min: 0,
-                //     max: 20
-                //   },
-                //   pips: {
-                //     mode: 'steps',
-                //     density: 5
-                //   }
-                // };
 
                 this.range = [this.sliderConfig.range.min, this.sliderConfig.range.max];
             }
