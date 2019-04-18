@@ -33,7 +33,7 @@ export class MyVibiiosComponent implements OnInit {
     range: any;
     rangeMin: number;
     rangeMax: number;
-    myVibiioCount: number;
+    myVibiioCount: number = 0;
     currentPage = 1;
     vibiiographerId: number;
     vibiiographerName: string;
@@ -49,11 +49,14 @@ export class MyVibiiosComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
+            console.log('==============================');
+            console.log('data', data);
+            console.log('==============================');
+
+
             if (data.appointments.appointments.appointments.length > 0) {
                 this.appointments = data.appointments.appointments.appointments;
-            }
-            if (data.sidebarMyDay.my_day.length !== undefined) {
-                this.myVibiioCount = data.sidebarMyDay.my_day.length;
+                this.myVibiioCount = data.appointments.appointments.appointments.length
             }
             this.todaysVibiios = data.appointments.appointments;
             this.vibiiographerId = this.todaysVibiios.vibiiographer_id;
