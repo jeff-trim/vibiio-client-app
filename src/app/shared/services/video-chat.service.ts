@@ -93,4 +93,17 @@ export class VideoChatService {
   private getProfileType(metaData: string): string {
     return metaData.split(/profile=/)[1];
   }
+
+  endOfCall(vibiio_id: number): Observable<any> {
+    const url = `${API_URL}/video_chat/end_of_call`;
+    const payload = {
+      end_of_call: {
+        vibiio_id: vibiio_id
+      }
+    };
+
+    return this.http.post(url, payload)
+                    .map( (response: Response) => response.json())
+                    .catch( (error: any) => Observable.throw(error));
+  }
 }

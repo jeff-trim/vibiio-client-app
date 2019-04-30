@@ -385,6 +385,16 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
             'Vibiiographer manually ended video session',
             'Video session ended'
         );
+
+        if (this.onVibiio) {
+            this.notifiyAPIEndOFCall();
+        }
+    }
+
+    notifiyAPIEndOFCall() {
+        this.videoService.endOfCall(this.vibiio.id)
+                         .subscribe((data) => { console.log('api updated'); },
+                                    (error) => {console.log('error ', error); });
     }
 
     updateStatus(status: any) {
