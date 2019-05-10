@@ -1,5 +1,5 @@
 @import '~assets/css/_variables.scss';
-.call-container{
+.call-container {
     position: relative;
     display: flex;
     height: 100%;
@@ -7,6 +7,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    .exit-button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        height: 20px;
+        width: 20px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        background-image: url(~assets/images/close.png);
+    }
 }
 .subscriber-holder {
     height: 100%;
