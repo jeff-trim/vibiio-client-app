@@ -1,50 +1,38 @@
 <div class="call-container">
-  
+  <div (click)="hangUp()" class="exit-button"></div>
   <div class="house-container" *ngIf="vibiioConnecting">
     <div class="waiting-house"></div>
     <div class="waiting-text">Connecting...</div>
   </div>
 
-  <div  [class.on-fullscreen]="vibiioFullscreen"
-        [class.subscriber-holder]="(onVibiio && !vibiioFullscreen)"
-        #fullSubscriberStream
-        id="full">
+  <div [class.on-fullscreen]="vibiioFullscreen" [class.subscriber-holder]="(onVibiio && !vibiioFullscreen)"
+    #fullSubscriberStream id="full">
 
-    <div id="subscriber-stream" 
-          [class.subscriber-stream]="(onVibiio && !vibiioFullscreen)"
-          [class.on-fullscreen]="vibiioFullscreen">
-      
-      <div *ngIf="((consumerName || expertName) && onVibiio)"
-            class="name-container"
-            [class.fullscreen-name-container]="vibiioFullscreen">
+    <div id="subscriber-stream" [class.subscriber-stream]="(onVibiio && !vibiioFullscreen)"
+      [class.on-fullscreen]="vibiioFullscreen">
+
+      <div *ngIf="((consumerName || expertName) && onVibiio)" class="name-container"
+        [class.fullscreen-name-container]="vibiioFullscreen">
         <vib-call-name-display *ngIf="(consumerName?.length > 0)" [name]="consumerName"></vib-call-name-display>
         <vib-call-name-display *ngIf="(expertName?.length > 0)" [name]="expertName"></vib-call-name-display>
       </div>
-      
-      <div vibToggleFullscreen
-           *ngIf="(onVibiio && !vibiioConnecting)"
-           class="fullscreen-button-container"
-           [class.full]="vibiioFullscreen"
-           (click)="toggleVibiioFullscreen()">
+
+      <div vibToggleFullscreen *ngIf="(onVibiio && !vibiioConnecting)" class="fullscreen-button-container"
+        [class.full]="vibiioFullscreen" (click)="toggleVibiioFullscreen()">
 
         <div class="fullscreen-button exit" *ngIf="(vibiioFullscreen)"></div>
         <div class="fullscreen-button full" *ngIf="(!vibiioFullscreen)"></div>
       </div>
 
-      <vib-video-controls *ngIf="showControls"
-                          [class.fullscreen-controls]="vibiioFullscreen"
-                          (add)="toggleSearch()"
-                          (endCall)="hangUp()"
-                          (mute)="toggleMute($event)"></vib-video-controls>
+      <vib-video-controls *ngIf="showControls" [class.fullscreen-controls]="vibiioFullscreen" (add)="toggleSearch()"
+        (endCall)="hangUp()" (mute)="toggleMute($event)"></vib-video-controls>
 
-      <vib-sm-notification [@visibilityChanged]="showNotification" *ngIf="showNotification"
-                           [message]="message"></vib-sm-notification>
+      <vib-sm-notification [@visibilityChanged]="showNotification" *ngIf="showNotification" [message]="message">
+      </vib-sm-notification>
 
-      <vib-expert-search [@expandableState]="!closeSearch" *ngIf="!closeSearch" 
-                         (closeSearch)="toggleSearch()"
-                         (selectedResult)="addExpert($event)"></vib-expert-search>
-                          
+      <vib-expert-search [@expandableState]="!closeSearch" *ngIf="!closeSearch" (closeSearch)="toggleSearch()"
+        (selectedResult)="addExpert($event)"></vib-expert-search>
+
     </div>
   </div>
 </div>
-
