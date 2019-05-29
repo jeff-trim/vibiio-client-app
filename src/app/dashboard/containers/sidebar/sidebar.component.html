@@ -2,10 +2,9 @@
   <div class="row
               between-xs">
     <a [routerLink]="['/dashboard/my-videos']">
-      <div class="logo-container">Home</div>
+      <div class="logo-container">aiVidIO Home</div>
     </a>
-    <div class="hamburger" 
-         (click)="toggleSidebar()">
+    <div class="hamburger" (click)="toggleSidebar()">
       <span></span>
       <span></span>
       <span></span>
@@ -13,19 +12,16 @@
   </div>
 
   <div class="row
-              betweeen-xs" 
-       (click)=toggleAvailability()>
+              betweeen-xs" (click)=toggleAvailability()>
 
-    <div class="availability-container"
-         *ngIf=(available)>
+    <div class="availability-container" *ngIf=(available)>
       <div class="availability-icon-on"></div>
       <div class="availability-message">
         <span class="icon">👋</span> I’m available!
       </div>
     </div>
 
-    <div class="availability-container"
-         *ngIf=(!available)>
+    <div class="availability-container" *ngIf=(!available)>
       <div class="availability-icon-off"></div>
       <div class="availability-message">
         <span class="icon">️️️✌️</span> I’m outta here
@@ -34,83 +30,64 @@
   </div>
 
   <span [ngClass]="{'hidden':!sidebarVisibility}">
-    <div class="title-row"
-         routerLink="my-videos"
-         (click)='toggleScheduledVibiios($event)'>
+    <div class="title-row" routerLink="my-videos" (click)='toggleScheduledVibiios($event)'>
       <a routerLinkActive="active">
         <div class="title">
           My Scheduled Sessions
         </div>
       </a>
-      <div class="arrow left-arrow"
-           [class.active-arrow]='scheduledVibiiosActive'>
+      <div class="arrow left-arrow" [class.active-arrow]='scheduledVibiiosActive'>
       </div>
     </div>
-    <vib-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios"
-                          [timeZone]="userTimeZone"
-                          [vibiio]="vibiio"
-                          [hidden]="!scheduledVibiiosActive"></vib-sidebar-schedule>
-    <div class="title-row"
-         (click)='toggleCustomerCategories()'
-         [routerLink]="['./all-consumers', '']">
+    <vib-sidebar-schedule *ngFor="let vibiio of myScheduledVibiios" [timeZone]="userTimeZone" [vibiio]="vibiio"
+      [hidden]="!scheduledVibiiosActive"></vib-sidebar-schedule>
+    <div class="title-row" (click)='toggleCustomerCategories()' [routerLink]="['./all-consumers', '']">
       <div class="title clickable">
         All Customers
       </div>
-      <div class="arrow left-arrow"
-           [class.active-arrow]='customerCategoriesActive'>
+      <div class="arrow left-arrow" [class.active-arrow]='customerCategoriesActive'>
       </div>
     </div>
 
-    <vib-sidebar-customer *ngFor="let customersCategory of customersCategories;"
-                          [category]=customersCategory
-                          [hidden]='!customerCategoriesActive'>
+    <vib-sidebar-customer *ngFor="let customersCategory of customersCategories;" [category]=customersCategory
+      [hidden]='!customerCategoriesActive'>
     </vib-sidebar-customer>
 
-    <div class="title-row"
-         (click)="toggleProfile()"
-         routerLink="my_profile">
+    <div class="title-row" (click)="toggleProfile()" routerLink="my_profile">
       <div class="title">
         <a routerLinkActive="active">
           My Profile
         </a>
       </div>
-      <div class='arrow left-arrow'
-           [class.active-arrow]='profileActive'>
+      <div class='arrow left-arrow' [class.active-arrow]='profileActive'>
       </div>
     </div>
 
-    <div class="title-row"
-         (click)="toggleExperts()"
-         routerLink="experts">
+    <div class="title-row" (click)="toggleExperts()" routerLink="experts">
       <div class="title">
         <a routerLinkActive="active">
           Experts
         </a>
       </div>
 
-      <div class='arrow left-arrow'
-           [class.active-arrow]='expertsActive'>
+      <div class='arrow left-arrow' [class.active-arrow]='expertsActive'>
       </div>
     </div>
 
-    <div class="title-row"
-         (click)="toggleVibiiographers()"
-         routerLink="vibiiographers">
+    <div class="title-row" (click)="toggleVibiiographers()" routerLink="vibiiographers">
       <div class="title">
         <a routerLinkActive="active">
           Videographers
         </a>
       </div>
 
-      <div class='arrow left-arrow'
-           [class.active-arrow]='vibiiographersActive'>
+      <div class='arrow left-arrow' [class.active-arrow]='vibiiographersActive'>
       </div>
     </div>
 
   </span>
   <div class="title-row">
-    <div class="title clickable"
-         (click)="logout()">
+    <div class="title clickable" (click)="logout()">
       Sign out
     </div>
   </div>
