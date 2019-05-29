@@ -21,6 +21,7 @@ export interface ConsumerProfile {
         policy_number?: number;
         time_zone: string;
     };
+    company_name: string;
     address?: Address;
     relocation_address?: Address;
     insurance_policies?: InsurancePolicy[];

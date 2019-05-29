@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
     notificationFilterCriteria: NotificationFilterCriteria;
 
     constructor(private router: Router,
-                private activatedRoute: ActivatedRoute,
-                private notificationService: NotificationService,
-                private availabilitySharedService: AvailabilitySharedService) {}
+        private activatedRoute: ActivatedRoute,
+        private notificationService: NotificationService,
+        private availabilitySharedService: AvailabilitySharedService) { }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
         this.notificationFilterCriteria = {
             languages: this.vibiiographerProfile.user.profile.languages,
             companyIds: this.vibiiographerProfile.user.profile.company_ids,
-            isVibiioStaff: ('Vibiio' === this.vibiiographerProfile.user.company)
+            isVibiioStaff: ('Ascente' === this.vibiiographerProfile.user.company)
         };
         this.notificationService.setfilterCriteria(this.notificationFilterCriteria);
     }
@@ -77,8 +77,10 @@ export class DashboardComponent implements OnInit {
 
     navigateToAppointment(appointmentId: number) {
         this.router.navigate(['dashboard/appointment/', appointmentId],
-          { queryParams: { startVibiio: true },
-              preserveQueryParams: false });
+            {
+                queryParams: { startVibiio: true },
+                preserveQueryParams: false
+            });
     }
 
     userIsAvailable(available: boolean) {
