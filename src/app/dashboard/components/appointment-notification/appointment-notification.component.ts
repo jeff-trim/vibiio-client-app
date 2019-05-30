@@ -46,8 +46,6 @@ export class AppointmentNotificationComponent implements OnInit, OnDestroy {
         this.timer = Observable.timer(0, 1000);
         this.sub = this.timer.subscribe(t => this.tickerFunc());
         this.language = this.notificationData.content.language;
-        console.log(JSON.parse(this.notificationData.content.message_body));
-
     }
 
     ngOnDestroy() {
