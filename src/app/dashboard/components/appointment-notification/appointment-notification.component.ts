@@ -9,13 +9,15 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
     templateUrl: 'appointment-notification.component.html'
 })
 
- // There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
+// There is a point in the lifecycle where it freezes up on receiving a new notification, because it is still null
 export class AppointmentNotificationComponent implements OnInit, OnDestroy {
     consumerName: string;
     waitingTime: string;
     minutes: number;
     seconds: number;
     description: string;
+    company: string;
+    industry: string;
     language: string;
     private timer;
     private sub: Subscription;
@@ -31,11 +33,13 @@ export class AppointmentNotificationComponent implements OnInit, OnDestroy {
     claimAppointment: EventEmitter<any> = new EventEmitter<any>();
     messageBody: string;
 
-    constructor() {}
+    constructor() { }
 
     ngOnInit() {
         this.fullDescription = false;
         this.consumerName = JSON.parse(this.notificationData.content.message_body).consumer;
+        this.company = JSON.parse(this.notificationData.content.message_body).company;
+        this.industry = JSON.parse(this.notificationData.content.message_body).industry;
         this.description = JSON.parse(this.notificationData.content.message_body).description;
         this.minutes = parseInt(JSON.parse(this.notificationData.content.message_body).minutes.replace(/^0+/, '')) || 0;
         this.seconds = parseInt(JSON.parse(this.notificationData.content.message_body).seconds.replace(/^0+/, '')) || 0;

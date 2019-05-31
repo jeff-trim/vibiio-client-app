@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Consultants are listed on the vibiio detail page.
   - Base vibiiographer call window height off of height of screen.
   - Consumer rejects call and notifies vibiiographer
+  - Displays customer company, Admin ID and Industry in customer details and notifications
+  - Adds aiVidIO name
   
 ## [2.1.0] - 2018-1-5
 ### Added

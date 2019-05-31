@@ -5,79 +5,65 @@
               info-element
               between-xs
               bottom-xs">
-    <h1 class ="col-xs
+    <h1 class="col-xs
               col-md-offset-1
               appointment-title
-              pink" >{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h1>
+              pink">{{ appointment.user.first_name}} {{ appointment.user.last_name}}</h1>
 
     <div class="col-xs
           col-xs-offset-1
           col-md-2
           start-vibiio
-          link"
-          [class.disabled]="onVibiio"
-          (click)="connect()">
-          call {{ appointment.user.first_name}}
+          link" [class.disabled]="onVibiio" (click)="connect()">
+      call {{ appointment.user.first_name}}
     </div>
 
- 
-    <div class="col-xs link"
-         [class.disabled]="onVibiio"
-         (click)="connect()">
-      <img  src="../../../../assets/images/call-controls.svg">
+
+    <div class="col-xs link" [class.disabled]="onVibiio" (click)="connect()">
+      <img src="../../../../assets/images/call-controls.svg">
     </div>
   </div>
   <div class="row edit-button-row">
 
-    <h4 *ngIf="isEditingForms"
-        class="col-md-offset-4
-               save-text"
-        [ngClass]="{ 'save-after-element': isUpdatingForms }"
-        (click)=onUpdate()>SAVE</h4>
+    <h4 *ngIf="isEditingForms" class="col-md-offset-4
+               save-text" [ngClass]="{ 'save-after-element': isUpdatingForms }" (click)=onUpdate()>SAVE</h4>
 
-    <h4 *ngIf="isEditingForms"
-        class="cancel-text"
-        (click)="onCancel()">CANCEL</h4>
+    <h4 *ngIf="isEditingForms" class="cancel-text" (click)="onCancel()">CANCEL</h4>
   </div>
 </div>
 
-<div class="flex" >
+<div class="flex">
   <div class="col-xs-12
               col-sm-6
               col-md-5
               col-md-offset-1
-              appointment-information" >
+              appointment-information">
 
     <div class="info-element sub-heading">
       <h2>profile</h2>
-      <div class="long-pink-underline" ></div>
+      <div class="long-pink-underline"></div>
     </div>
 
-    <key-value [key]="'Email'"
-               [value]="appointment.user?.email"></key-value>
+    <key-value [key]="'Company'" [value]="appointment.user?.company.name"></key-value>
 
-    <key-value [key]="'Language'"
-               [value]="appointment.language"></key-value>
+    <key-value [key]="'Email'" [value]="appointment.user?.email"></key-value>
 
-    <key-value [key]="'Phone Number'"
-               [value]="appointment.user?.phone"></key-value>
-   
-    <key-value [key]="'Date'"
-               [value]="parseDate(appointment.scheduled_datetime)"></key-value>           
+    <key-value [key]="'Language'" [value]="appointment.language"></key-value>
 
-    <key-value [key]="'Start Time'"
-               [value]="parseTime(appointment.scheduled_datetime)"></key-value>
-    
+    <key-value [key]="'Phone Number'" [value]="appointment.user?.phone"></key-value>
+
+    <key-value [key]="'Date'" [value]="parseDate(appointment.scheduled_datetime)"></key-value>
+
+    <key-value [key]="'Start Time'" [value]="parseTime(appointment.scheduled_datetime)"></key-value>
+
     <vib-claim-status (updatedStatus)="updateStatus($event)" [vibiio]="vibiio"></vib-claim-status>
 
     <p class="address_title">Current Address:</p>
 
-    <vib-consumer-address [address]="address"
-                          (formChanged)="onEdit($event)"></vib-consumer-address>
-    
-    <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies"
-                          [consumerId]="appointment.consumer_id"
-                          (editingPolicy)="onEdit($event)">
+    <vib-consumer-address [address]="address" (formChanged)="onEdit($event)"></vib-consumer-address>
+
+    <vib-insurance-policy [insurancePolicies]="appointment.insurance_policies" [consumerId]="appointment.consumer_id"
+      (editingPolicy)="onEdit($event)">
     </vib-insurance-policy>
 
   </div>
@@ -86,55 +72,51 @@
             col-sm-6
             col-md-5
             col-md-offset-1
-            appointment-information" >
+            appointment-information">
 
     <div class="info-element sub-heading">
       <h2>video</h2>
-      <div class="long-pink-underline" ></div>
+      <div class="long-pink-underline"></div>
     </div>
 
-    <video-archive *ngIf="(snapshots?.length > 0); else noArchives"
-                   [snapshots]="snapshots"></video-archive>
+    <video-archive *ngIf="(snapshots?.length > 0); else noArchives" [snapshots]="snapshots"></video-archive>
 
     <ng-template #noArchives>
       <div class="video-container">
-        <div class="vibiio-message"
-            [class.disabled]="onVibiio">
+        <div class="vibiio-message" [class.disabled]="onVibiio">
           <p class="first-vibiio">🤙</p>
           <p class="first-vibiio-text">This is {{ appointment.user.first_name }}'s first video!</p>
           <p class="first-vibiio-text"> Once they have, they will be saved and appear here.</p>
           <p class="first-vibiio-text">Ready to introduce yourself?</p>
-          <p class="first-vibiio-text pink link"
-             (click)="connect()">Call {{ appointment.user.first_name }} now.</p>
+          <p class="first-vibiio-text pink link" (click)="connect()">Call {{ appointment.user.first_name }} now.</p>
         </div>
-      </div>        
+      </div>
     </ng-template>
 
     <div [ngClass]="{'relocation_address': (snapshots?.length > 0)}" *ngIf="relocationAddress">
 
-        <p class="address_title">Relocation Address:</p>
-        
-        <vib-consumer-address [address]="relocationAddress"
-                              (formChanged)="onEdit($event)"></vib-consumer-address>
+      <p class="address_title">Relocation Address:</p>
+
+      <vib-consumer-address [address]="relocationAddress" (formChanged)="onEdit($event)"></vib-consumer-address>
     </div>
-    
-  </div> 
+
+  </div>
 </div>
 
 <div class="row flex">
   <div class="col-xs-10
               col-md-offset-1
               appointment-information
-              appointment-notes">  
-      
+              appointment-notes">
+
     <div class="notes-row">
-      
+
       <div class="note-row col-md-6">
         <div class="info-element">
           <span class="label">video description</span>
           <span class="pink-underline"></span>
         </div>
-        
+
         <vib-vibiio-description [description]="appointment.vibiio.description"></vib-vibiio-description>
 
         <div class="info-element">
@@ -158,8 +140,7 @@
 
         <div *ngIf="(consultants?.length > 0); else noConsults">
           <div *ngFor="let consultant of consultants">
-            <key-value [key]="consultant.full_name"
-            [value]="consultant.profession"></key-value>
+            <key-value [key]="consultant.full_name" [value]="consultant.profession"></key-value>
           </div>
         </div>
         <ng-template #noConsults>
@@ -168,18 +149,16 @@
 
 
       </div>
-      
+
       <div class="col-md-1">
       </div>
-      
+
       <div class="note-row col-md-6">
         <div class="info-element">
           <span class="label">notes</span>
           <span class="pink-underline"></span>
         </div>
-        <vib-vibiio-notes 
-            [vibiioId]="appointment.vibiio.id" 
-            [notes]="appointment.customer_notes">
+        <vib-vibiio-notes [vibiioId]="appointment.vibiio.id" [notes]="appointment.customer_notes">
         </vib-vibiio-notes>
       </div>
     </div>

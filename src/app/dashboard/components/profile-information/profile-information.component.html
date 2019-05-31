@@ -1,173 +1,113 @@
 <div class="info-element">
   <h2>information</h2>
-  <div class="long-pink-underline" ></div>
+  <div class="long-pink-underline"></div>
 </div>
 
-<form [formGroup]="myProfileForm"
-      ngSubmit="onSubmit()">
+<form [formGroup]="myProfileForm" ngSubmit="onSubmit()">
 
-    <div *ngIf="checkErrors(myProfileForm.get('firstName'))"
-          class="error-message">
-      <p>First Name is Required</p>
-    </div>
+  <div *ngIf="checkErrors(myProfileForm.get('firstName'))" class="error-message">
+    <p>First Name is Required</p>
+  </div>
 
-    <div class="info-element
+  <div class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label">First Name</span>
-      <input formControlName="firstName" 
-             placeholder="First Name"
-             type="text" 
-             class="value end-md" 
-             id="firstName">
-      <span class="pink-underline"></span>
-    </div>
-   
-    <div *ngIf="checkErrors(myProfileForm.get('lastName'))"
-          class="error-message">
-      <p>Last Name is Required</p>
-    </div>
+    <span class="label">First Name</span>
+    <input formControlName="firstName" placeholder="First Name" type="text" class="value end-md" id="firstName">
+    <span class="pink-underline"></span>
+  </div>
 
-    <div class="info-element
+  <div *ngIf="checkErrors(myProfileForm.get('lastName'))" class="error-message">
+    <p>Last Name is Required</p>
+  </div>
+
+  <div class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label">Last Name</span>
-      <input formControlName="lastName" 
-             placeholder="Last Name"
-             type="text" 
-             class="value end-md" 
-             id="lastName">
-      <span class="pink-underline"></span>  
-    </div>
-    
-    <div *ngIf="checkErrors(myProfileForm.get('company'))"
-          class="error-message">
-      <p>Company is Required</p>
-    </div>
-  
-    <div class="info-element
+    <span class="label">Last Name</span>
+    <input formControlName="lastName" placeholder="Last Name" type="text" class="value end-md" id="lastName">
+    <span class="pink-underline"></span>
+  </div>
+
+  <div *ngIf="checkErrors(myProfileForm.get('phone'))" class="error-message">
+    <p>Cell Phone is Required</p>
+  </div>
+
+  <div class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label">Company</span>
-      <input formControlName="company" 
-             placeholder="Company"
-             type="text" 
-             class="value end-md" 
-             id="company">
-      <span class="pink-underline"></span>  
-    </div>
-    
-    <div *ngIf="checkErrors(myProfileForm.get('phone'))"
-          class="error-message">
-      <p>Cell Phone is Required</p>
-    </div>
-    
-    <div class="info-element
+    <span class="label">Cell Phone</span>
+    <input formControlName="phone" placeholder="Cell Phone" type="text" class="value end-md" id="cellPhone">
+    <span class="pink-underline"></span>
+  </div>
+
+  <div *ngIf="checkErrors(myProfileForm.get('addressOne'))" class="error-message">
+    <p>Address is Required</p>
+  </div>
+
+  <div class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label">Cell Phone</span>
-      <input formControlName="phone" 
-             placeholder="Cell Phone"
-             type="text" 
-             class="value end-md" 
-             id="cellPhone">
-      <span class="pink-underline"></span>  
-    </div>
+    <span class="label">Address</span>
+    <input formControlName="addressOne" placeholder="Address" type="text" class="value end-md" id="line_one">
+    <span class="pink-underline"></span>
+  </div>
 
-    <div *ngIf="checkErrors(myProfileForm.get('addressOne'))"
-          class="error-message">
-      <p>Address is Required</p>
-    </div>
-
-    <div class="info-element
+  <div *ngIf="myProfile.address.address_two" class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label">Address</span>
-      <input formControlName="addressOne" 
-             placeholder="Address"
-             type="text" 
-             class="value end-md" 
-             id="line_one">
-      <span class="pink-underline"></span>  
-    </div>
+    <span class="label">Address 2</span>
+    <input formControlName="addressTwo" placeholder="Address 2" type="text" class="value end-md" id="line_two">
+    <span class="pink-underline"></span>
+  </div>
 
-    <div *ngIf="myProfile.address.address_two" 
-      class="info-element
+  <div *ngIf="checkErrors(myProfileForm.get('city'))" class="error-message">
+    <p>City is Required</p>
+  </div>
+
+  <div class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label">Address 2</span>
-      <input formControlName="addressTwo" 
-             placeholder="Address 2"
-             type="text" 
-             class="value end-md" 
-             id="line_two">
-      <span class="pink-underline"></span>  
-    </div>
+    <span class="label">City</span>
+    <input formControlName="city" placeholder="City" type="text" class="value end-md" id="city">
+    <span class="pink-underline"></span>
+  </div>
 
-    <div *ngIf="checkErrors(myProfileForm.get('city'))"
-          class="error-message">
-      <p>City is Required</p>
-    </div>
+  <div *ngIf="checkErrors(myProfileForm.get('state'))" class="error-message">
+    <p> State is Required</p>
+  </div>
 
-    <div class="info-element
+  <div class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label">City</span>
-      <input formControlName="city" 
-             placeholder="City"
-             type="text" 
-             class="value end-md" 
-             id="city">
-      <span class="pink-underline"></span>  
-    </div>
+    <span class="label" id="state-label">State</span>
+    <select formControlName="state" class="value end-md select profile-select" id="state" jcf #stateselect>
+      <option value="">Select a state</option>
+      <option *ngFor="let state of states" value="{{ state }}">{{ state }}
+      </option>
+    </select>
+    <span class="pink-underline"></span>
+  </div>
 
-    <div *ngIf="checkErrors(myProfileForm.get('state'))"
-          class="error-message">
-      <p> State is Required</p>
-    </div>
 
-    <div class="info-element
+  <div *ngIf="checkErrors(myProfileForm.get('zip'))" class="error-message">
+    <p> Zip Code is Required</p>
+  </div>
+
+  <div class="info-element
       row
       between-xs
       bottom-xs">
-      <span class="label" id="state-label">State</span>
-      <select formControlName="state" 
-              class="value end-md select profile-select" 
-              id="state"
-              jcf
-              #stateselect>
-        <option value="">Select a state</option>
-        <option *ngFor="let state of states" 
-                value="{{ state }}">{{ state }}
-        </option>
-      </select>
-      <span class="pink-underline"></span>  
-    </div>
-
-
-    <div *ngIf="checkErrors(myProfileForm.get('zip'))"
-          class="error-message">
-      <p> Zip Code is Required</p>
-    </div>
-
-    <div class="info-element
-      row
-      between-xs
-      bottom-xs">
-      <span class="label">Zip</span>
-      <input formControlName="zip" 
-             placeholder="Zip Code"
-             type="text" 
-             class="value end-md" 
-             id="zip">
-      <span class="pink-underline"></span>  
+    <span class="label">Zip</span>
+    <input formControlName="zip" placeholder="Zip Code" type="text" class="value end-md" id="zip">
+    <span class="pink-underline"></span>
   </div>
 
 </form>

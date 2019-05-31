@@ -61,7 +61,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.alive = true;
         this.activatedRoute.data.subscribe((data) => {
             this.appointment = data.appt.appointment;
-
             this.address = this.appointment.address;
             this.relocationAddress = this.appointment.relocation_address;
             this.userTimeZone = data.appt.appointment.user.time_zone;
