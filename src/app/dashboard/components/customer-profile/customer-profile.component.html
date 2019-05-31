@@ -25,7 +25,7 @@
     <key-value [key]="'Email'" [value]="appointment.user.email"></key-value>
 
     <key-value [key]="'Phone Number'" [value]="appointment.user.phone"></key-value>
-    
+
     <key-value [key]="'Language'" [value]="appointment.user.profile.language"></key-value>
 
     <p class="address_title">Current Address:</p>
@@ -62,14 +62,15 @@
               col-md-offset-1
               profile-information">
 
-    <key-value [key]="'Claim ID'" [value]="'12345'"></key-value>
+    <key-value [key]="'Company'" [value]="appointment.user.company.name"></key-value>
+
+    <key-value [key]="'Consumer Id'" [value]="appointment.consumer.admin_app_id.toString()"></key-value>
 
     <key-value [key]="'Video Date'" [value]="parseDate(appointment.scheduled_datetime)"></key-value>
 
     <key-value [key]="'Video Start Time'" [value]="parseTime(appointment.scheduled_datetime)"></key-value>
 
-    <key-value [key]="'Video Timezone'"
-               [value]="appointmentTimeZone()"></key-value>
+    <key-value [key]="'Video Timezone'" [value]="appointmentTimeZone()"></key-value>
 
     <div class="info-element">
       <span class="label">Video Description</span>
@@ -77,7 +78,7 @@
     </div>
 
     <vib-vibiio-description [description]="appointment.vibiio.description"></vib-vibiio-description>
-    
+
     <div class="info-element">
       <span class="label">Customer Notes</span>
       <span class="pink-underline"></span>

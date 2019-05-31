@@ -1,3 +1,4 @@
+import { Company } from './company.interface';
 import { Address } from './address.interface';
 
 export interface User {
@@ -5,7 +6,7 @@ export interface User {
     email: string;
     first_name: string;
     last_name: string;
-    company: string;
+    company: Company;
     phone: string;
     professions: string[];
     city: string;

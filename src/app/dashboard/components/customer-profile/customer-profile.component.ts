@@ -34,11 +34,11 @@ export class CustomerProfileComponent {
     constructor(private dateFormatService: DateFormatService) { }
 
     // parses unix time and displays time in relation to timezone
-    parseTime(time: number): string  {
+    parseTime(time: number): string {
         return this.dateFormatService.parseTime(time, this.timeZone);
     }
 
-    parseDate(time: number): string  {
+    parseDate(time: number): string {
         return this.dateFormatService.parseDate(time, this.timeZone);
     }
 
@@ -50,7 +50,7 @@ export class CustomerProfileComponent {
     toggleAppointment(appointment: Appointment) {
         if (this.appointment.vibiiographer_id === null) {
             this.appointment.vibiiographer_id = this.vibiiographerId;
-            this.updateAppointment.emit({appointment: this.appointment, index: this.index });
+            this.updateAppointment.emit({ appointment: this.appointment, index: this.index });
         } else {
 
             // sets current user to null so when the record
@@ -58,7 +58,7 @@ export class CustomerProfileComponent {
             // this in essence acts as deleting the vibiiographer
             // from the current appointment
             appointment.vibiiographer_id = null;
-            this.updateAppointment.emit({appointment: appointment, index: this.index });
+            this.updateAppointment.emit({ appointment: appointment, index: this.index });
         }
     }
 }

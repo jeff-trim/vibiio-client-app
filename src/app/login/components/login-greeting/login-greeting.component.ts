@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     <div class="center col-xs-12">
       <div class="logo"></div>
       <div class="welcome">
-        <h1>Welcome to Video!</h1>
+        <h1>Welcome to aiVidIO!</h1>
       </div>
       <div class="message">
         <p>👋 Sign in below to receive video calls</p>

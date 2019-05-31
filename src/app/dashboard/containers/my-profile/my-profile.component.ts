@@ -18,9 +18,10 @@ import { MyLicenseService } from '../../services/my-license.service';
 import { MyProfile } from '../../models/my-profile.interface';
 
 @Component({
-  selector: 'vib-my-profile',
-  styleUrls: ['my-profile.component.scss'],
-  templateUrl: 'my-profile.component.html'})
+    selector: 'vib-my-profile',
+    styleUrls: ['my-profile.component.scss'],
+    templateUrl: 'my-profile.component.html'
+})
 
 export class MyProfileComponent implements OnInit, AfterViewChecked {
     myProfile: MyProfile;
@@ -31,38 +32,38 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     receivingTexts: boolean;
     availableLanguages = ['english', 'spanish', 'french'];
 
-    @ViewChild (ProfileInformationComponent)
+    @ViewChild(ProfileInformationComponent)
     private profileInformationChild: ProfileInformationComponent;
 
-    @ViewChild (ProfileNewLicensureComponent)
+    @ViewChild(ProfileNewLicensureComponent)
     private profileNewLicensureChild: ProfileNewLicensureComponent;
 
     @ViewChildren(ProfileLicensureComponent)
     private profileLicenesesChildren: QueryList<ProfileLicensureComponent>;
 
     constructor(private myProfileService: MyProfileService,
-                private myLicenseService: MyLicenseService,
-                private activatedRoute: ActivatedRoute) { }
+        private myLicenseService: MyLicenseService,
+        private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.activatedRoute.data.subscribe((data) => {
             this.myProfile = data.myProfile.user;
-            this.receivingTexts  = data.myProfile.user.receive_texts;
+            this.receivingTexts = data.myProfile.user.receive_texts;
             this.myLicenses = data.myProfile.user.profile.licenses;
         });
     }
 
     ngAfterViewChecked() {
         this.profileInformationChild.myProfileForm.valueChanges
-        .subscribe(data => {
-            this.isEditing = true;
-        });
-
-        this.profileLicenesesChildren.forEach(license => {
-            license.editForm.valueChanges
             .subscribe(data => {
                 this.isEditing = true;
             });
+
+        this.profileLicenesesChildren.forEach(license => {
+            license.editForm.valueChanges
+                .subscribe(data => {
+                    this.isEditing = true;
+                });
         });
     }
 
@@ -78,10 +79,10 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
         this.profileLicenesesChildren.forEach(license => {
             if (license.editForm.dirty && license.editForm.valid) {
                 this.myLicenseService.updateMyLicense(license.editForm.value)
-                .subscribe( (data) => {
-                    license.license = data.license;
-                    this.isEditing = false;
-                });
+                    .subscribe((data) => {
+                        license.license = data.license;
+                        this.isEditing = false;
+                    });
             }
         });
     }
@@ -94,16 +95,16 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
 
     refreshProfile() {
         this.myProfileService.getMyProfile()
-        .subscribe( (data) => {
-            this.profileInformationChild.myProfileForm.patchValue(data.user);
-            this.isEditing = false;
-        });
+            .subscribe((data) => {
+                this.profileInformationChild.myProfileForm.patchValue(data.user);
+                this.isEditing = false;
+            });
     }
 
     refreshLicenses() {
         this.myLicenseService.getMyLicenses()
-            .subscribe( (data) => {
-                this.myLicenses =  data.licenses;
+            .subscribe((data) => {
+                this.myLicenses = data.licenses;
                 this.isEditing = false;
             });
         this.profileLicenesesChildren.forEach(licenseForm => {
@@ -117,7 +118,6 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
         const options = {
             first_name: form.value.firstName,
             last_name: form.value.lastName,
-            company: form.value.company,
             phone: form.value.phone,
             address_one: form.value.addressOne,
             address_two: form.value.addressTwo,
@@ -131,10 +131,10 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
 
     sendProfileUpdateData(options: any) {
         this.myProfileService.updateMyProfile(options)
-            .subscribe( (data) => {
+            .subscribe((data) => {
                 this.myProfile = data.user;
                 this.isEditing = false;
-        });
+            });
     }
 
     updateLanguages(languages: string[]): void {
@@ -152,12 +152,12 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     toggleReceiveTexts() {
         this.receivingTexts = !this.receivingTexts;
         const isReceiving = this.receivingTexts;
-        const options = {receive_texts: isReceiving};
+        const options = { receive_texts: isReceiving };
 
         this.myProfileService.updateMyProfile(options)
-        .subscribe( (data) => {
-            this.receivingTexts = data.user.receive_texts;
-        });
+            .subscribe((data) => {
+                this.receivingTexts = data.user.receive_texts;
+            });
     }
 
     // My License functions
@@ -169,7 +169,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
         };
 
         this.myLicenseService.createLicense(options)
-            .subscribe( (data) => {
+            .subscribe((data) => {
                 this.refreshLicenses();
                 this.profileNewLicensureChild.myLicenseForm.reset();
                 this.addLicensureForm = false;
@@ -177,6 +177,6 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     }
 
     closeForm(event) {
-      this.addLicensureForm = event;
+        this.addLicensureForm = event;
     }
 }
