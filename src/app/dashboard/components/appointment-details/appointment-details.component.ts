@@ -1,28 +1,33 @@
-import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  ViewChild
+} from "@angular/core";
 
 // Services
-import { DateFormatService } from '../../../services/date-format.service';
-import { ConsumerUpdateService } from '../../services/consumer-update.service';
+import { DateFormatService } from "../../../services/date-format.service";
+import { ConsumerUpdateService } from "../../services/consumer-update.service";
 
 // Components
-import { ConsumerAddressComponent } from '../consumer-address/consumer-address.component';
+import { ConsumerAddressComponent } from "../consumer-address/consumer-address.component";
 
 // Models
-import { Appointment } from '../../models/appointment.interface';
-import { User } from '../../models/user.interface';
-import { Vibiio } from '../../models/vibiio.interface';
-import { Note } from '../../models/consumer-note.interface';
-import { InsurancePolicy } from '../../models/insurance-policy.interface';
-import { Address } from '../../models/address.interface';
-import { VideoSnapshot } from '../../models/video-snapshot.interface';
-import { Consultant } from '../../models/consultant.interface';
+import { Appointment } from "../../models/appointment.interface";
+import { User } from "../../models/user.interface";
+import { Vibiio } from "../../models/vibiio.interface";
+import { Note } from "../../models/consumer-note.interface";
+import { InsurancePolicy } from "../../models/insurance-policy.interface";
+import { Address } from "../../models/address.interface";
+import { VideoSnapshot } from "../../models/video-snapshot.interface";
+import { Consultant } from "../../models/consultant.interface";
 
 @Component({
-  selector: 'vib-appointment-details',
-  templateUrl: 'appointment-details.component.html',
-  styleUrls: ['appointment-details.component.scss']
+  selector: "vib-appointment-details",
+  templateUrl: "appointment-details.component.html",
+  styleUrls: ["appointment-details.component.scss"]
 })
-
 export class AppointmentDetailsComponent {
   @Input() appointment: Appointment;
   @Input() user: User;
@@ -46,24 +51,26 @@ export class AppointmentDetailsComponent {
 
   @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
 
-  constructor(private dateFormatService: DateFormatService,
-    private consumerUpdateService: ConsumerUpdateService) {
-  }
+  constructor(
+    private dateFormatService: DateFormatService,
+    private consumerUpdateService: ConsumerUpdateService
+  ) {}
 
   updateAddress() {
     if (this.addressForm.editForm.valid) {
       const address = this.addressForm.editForm.value;
-      this.consumerUpdateService.updateAddress(address)
-        .subscribe((data) => {
-          this.address = data.address;
-        });
+      this.consumerUpdateService.updateAddress(address).subscribe(data => {
+        this.address = data.address;
+        this.isEditingForms = false;
+      });
     }
   }
 
   onCancel() {
     this.refreshAddress.emit(true);
-    this.consumerUpdateService.refreshAddress(this.address.id)
-      .subscribe((data) => {
+    this.consumerUpdateService
+      .refreshAddress(this.address.id)
+      .subscribe(data => {
         this.addressForm.editForm.patchValue(data.address);
         this.isEditingForms = false;
       });
