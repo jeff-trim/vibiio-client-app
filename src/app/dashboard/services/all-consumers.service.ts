@@ -21,8 +21,8 @@ export class AllConsumersService {
       .get(url)
       .map((response: any) => response.json().vibiios)
       .catch(error => {
-        console.error('An error occurred:', error.error.json());
-        return error.error.json();
+        console.error('An error occurred:', error.json());
+        return error.json();
       });
   }
 
