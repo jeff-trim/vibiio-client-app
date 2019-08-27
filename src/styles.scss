@@ -1,41 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 
-@import 'assets/css/variables';
+@import "assets/css/variables";
 @import "~nouislider/distribute/nouislider.min.css";
 @import "assets/css/jcf-overrides";
 @import "assets/css/include-media";
 
 // for media queries
 $breakpoints: (
-	'xs-phone': 320px,
-	'phone': 480px,
-	'tablet': 768px,
-	'desktop': 1024px,
-	'widescreen': 1200px
+  "xs-phone": 320px,
+  "phone": 480px,
+  "tablet": 768px,
+  "desktop": 1024px,
+  "widescreen": 1200px
 );
 
 // keywords
 $media-expressions: (
-	'screen': 'screen',
-	'print': 'print',
-	'handheld': 'handheld',
-	'landscape': '(orientation: landscape)',
-	'portrait': '(orientation: portrait)',
-	'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
-	'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)'
+  "screen": "screen",
+  "print": "print",
+  "handheld": "handheld",
+  "landscape": "(orientation: landscape)",
+  "portrait": "(orientation: portrait)",
+  "retina2x": "(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)",
+  "retina3x": "(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)"
 );
 
 html {
-    font-size: 62.5%;
-    margin: 0;
+  font-size: 62.5%;
+  margin: 0;
 }
 body {
-    font-family: $base-font;
-    margin: 0;
-    overflow: hidden;
+  font-family: $base-font;
+  margin: 0;
+  overflow: hidden;
 }
 p {
   font-family: $copy-font;
@@ -69,14 +69,14 @@ a {
   min-width: 85px;
   margin: 1% 10px 10px 74%;
   &:focus {
-      outline: none;
+    outline: none;
   }
   &:hover {
     box-shadow: 0px 5px 10px #bbbbbb;
   }
 }
 
-@include media('<450px') {
+@include media("<450px") {
   .button {
     width: 100%;
   }
@@ -117,9 +117,9 @@ a {
   width: 100%;
 }
 .welcome {
-  margin: 75px 0 30px 0;
+  margin: 15px 0;
   h1 {
-    font-size: 5.0rem;
+    font-size: 5rem;
     line-height: 1.22;
     letter-spacing: -2px;
     text-align: center;
@@ -137,7 +137,7 @@ a {
   }
 }
 .pink {
-    color: $pink;
+  color: $pink;
 }
 
 .m-top-md {
