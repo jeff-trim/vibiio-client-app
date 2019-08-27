@@ -14,7 +14,7 @@ import { SpinnerService } from "./easy-spinner/services/spinner.service";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  title = "aiVidIO";
+  title = "UQvideo";
   spinnerShow: boolean;
 
   constructor(
