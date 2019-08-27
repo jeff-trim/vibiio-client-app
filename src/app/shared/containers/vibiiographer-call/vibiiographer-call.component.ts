@@ -422,8 +422,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
       "Videographer manually ended video session",
       "Video session ended"
     );
-
-    this.notifiyAPIEndOFCall();
   }
 
   notifiyAPIEndOFCall() {
