@@ -248,7 +248,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
     this.triggerActivity(
       this.vibiio.id,
-      "Vibiiograher manually started video",
+      "Videograher manually started video",
       "Video session started"
     );
   }
@@ -419,7 +419,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     this.stopPublishing();
     this.triggerActivity(
       this.vibiio.id,
-      "Vibiiographer manually ended video session",
+      "Videographer manually ended video session",
       "Video session ended"
     );
 
