@@ -18,7 +18,7 @@ export class VibiiographerListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(data => {
+    this.activatedRoute.data.subscribe((data: any) => {
       this.vibiiographers = data.vibiiographers;
     });
   }

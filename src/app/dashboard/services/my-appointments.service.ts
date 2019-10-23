@@ -4,7 +4,7 @@ import {
   Response,
   RequestOptions,
   URLSearchParams
-} from "@angular/http";
+} from "@angular/common/http";
 import { API_URL } from "../../../environments/environment";
 import { Observable } from "rxjs";
 import "rxjs/add/operator/map";

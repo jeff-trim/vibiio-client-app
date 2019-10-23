@@ -1,10 +1,11 @@
-import { throwError as observableThrowError, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { HttpClient, Response } from "@angular/http";
-import { API_URL } from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
+
+import { API_URL } from "../../../environments/environment";
 
 // Interfaces
 import { Credentials } from "../models/credentials.interface";
@@ -16,10 +17,7 @@ export class PasswordResetService {
   resetPassword(data: Credentials): Observable<any> {
     const body = { password_reset: data };
 
-    return this.http
-      .post(`${API_URL}/password_reset`, body)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.post(`${API_URL}/password_reset`, body);
   }
 
   submitNewPassword(password, jwt: string): Observable<any> {
@@ -30,9 +28,6 @@ export class PasswordResetService {
       }
     };
 
-    return this.http
-      .patch(`${API_URL}/passwords`, body)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.patch(`${API_URL}/passwords`, body);
   }
 }

@@ -1,6 +1,6 @@
-import { throwError as observableThrowError, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { HttpClient, Response } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { API_URL } from "../../../environments/environment";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -13,37 +13,25 @@ export class NoteService {
     const url = `${API_URL}/notes/`;
     const body = { note: data };
 
-    return this.http
-      .post(url, body)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.post(url, body);
   }
 
   updateNote(data: any, id: number): Observable<any> {
     const url = `${API_URL}/notes/${id}`;
     const body = { note: data };
 
-    return this.http
-      .patch(url, body)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.patch(url, body);
   }
 
   getNote(id: number) {
     const url = `${API_URL}/notes/${id}`;
 
-    return this.http
-      .get(url)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.get(url);
   }
 
   getAllNotes(vibiioId: number) {
     const url = `${API_URL}/vibiios_notes/${vibiioId}`;
 
-    return this.http
-      .get(url)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.get(url);
   }
 }

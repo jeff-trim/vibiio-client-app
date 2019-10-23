@@ -1,8 +1,8 @@
 import { TestBed, async, inject } from "@angular/core/testing";
 import { RetrieveLanguageService } from "./retrieve-language.service";
 import { LANGUAGES } from "../../../../testing/mock-languages";
-import { MockBackend } from "@angular/http/testing";
-import { XHRBackend, Response, ResponseOptions } from "@angular/http";
+import { MockBackend } from "@angular/common/http/testing";
+import { XHRBackend, Response, ResponseOptions } from "@angular/common/http";
 import { HttpClientModule } from "@angular/common/http";
 
 describe("RetrieveLanguageService", () => {

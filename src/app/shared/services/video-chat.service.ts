@@ -1,7 +1,7 @@
 import { throwError as observableThrowError, Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { OPENTOK_API_KEY } from "../../../environments/environment.staging";
-import { HttpClient, Response } from "@angular/http";
+import { HttpClient, Response } from "@angular/common/http";
 import { API_URL } from "../../../environments/environment";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";

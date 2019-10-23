@@ -1,6 +1,6 @@
 import { async, inject, TestBed } from "@angular/core/testing";
-import { MockBackend } from "@angular/http/testing";
-import { XHRBackend, Response, ResponseOptions } from "@angular/http";
+import { MockBackend } from "@angular/common/http/testing";
+import { XHRBackend, Response, ResponseOptions } from "@angular/common/http";
 import { HttpClientModule } from "@angular/common/http";
 
 import "rxjs/add/operator/map";

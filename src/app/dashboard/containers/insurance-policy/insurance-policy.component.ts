@@ -59,7 +59,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
       });
     this.insuranceStatusService.onUpdate$
       .takeWhile(() => this.alive)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         if (data) {
           this.updatePolicyChild.forEach(policyInstance => {
             if (policyInstance.editForm.dirty) {
@@ -84,7 +84,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
     });
 
     this.policyService.newPolicy(insurancePolicy).subscribe(
-      data => {
+      (data: any) => {
         this.showNewForm = false;
         this.isSaving = false;
         this.insurancePolicies = [
@@ -119,7 +119,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
 
   resetUpdateForm() {
     this.policyService.getPolicies(this.consumerId).subscribe(
-      data => {
+      (data: any) => {
         this.insurancePolicies = Object.assign(
           [],
           this.insurancePolicies,
@@ -134,7 +134,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
 
   updatePolicy(formValue: InsurancePolicy): any {
     this.policyService.updatePolicy(formValue).subscribe(
-      data => {
+      (data: any) => {
         this.insuranceStatusService.updateStatus(false);
         this.insuranceStatusService.editStatus(false);
         return data.policy;

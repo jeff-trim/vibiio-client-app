@@ -1,12 +1,12 @@
-import { throwError as observableThrowError, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { HttpClient, Response } from "@angular/http";
-import { API_URL } from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
 
+import { API_URL } from "../../../environments/environment";
 const ADD_TO_CALL_API = `${API_URL}/invite_text`;
 
 @Injectable()
@@ -21,9 +21,6 @@ export class AddToCallService {
       }
     };
 
-    return this.http
-      .post(ADD_TO_CALL_API, options)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.post(ADD_TO_CALL_API, options);
   }
 }

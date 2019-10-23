@@ -19,7 +19,7 @@ export class ExpertListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(data => {
+    this.activatedRoute.data.subscribe((data: any) => {
       this.experts = data.experts;
     });
   }

@@ -1,6 +1,6 @@
-import { throwError as observableThrowError, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { HttpClient, Response } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
+
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
@@ -25,9 +25,6 @@ export class ConsumerSignUpService {
   registerConsumer(data: ConsumerSignUp) {
     const consumer = { user: this.addProfileType(data) };
 
-    return this.http
-      .post(`${API_URL}/users`, consumer)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.post(`${API_URL}/users`, consumer);
   }
 }

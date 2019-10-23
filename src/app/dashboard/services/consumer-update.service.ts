@@ -1,6 +1,6 @@
-import { throwError as observableThrowError, Observable } from "rxjs";
+import { throwError as observableThrowError } from "rxjs";
 import { Injectable } from "@angular/core";
-import { HttpClient, Response } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
@@ -20,16 +20,10 @@ export class ConsumerUpdateService {
   updateAddress(data: Address) {
     const address = { address: data };
 
-    return this.http
-      .patch(`${API_URL}/addresses/${data.id}`, address)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.patch(`${API_URL}/addresses/${data.id}`, address);
   }
 
   refreshAddress(id: number) {
-    return this.http
-      .get(`${API_URL}/addresses/${id}`)
-      .map((response: any) => response)
-      .catch((error: any) => observableThrowError(error));
+    return this.http.get(`${API_URL}/addresses/${id}`);
   }
 }

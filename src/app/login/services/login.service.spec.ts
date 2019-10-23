@@ -1,7 +1,7 @@
 import { TestBed, async, inject } from "@angular/core/testing";
 import { LoginService } from "./login.service";
-import { MockBackend } from "@angular/http/testing";
-import { XHRBackend, Response, ResponseOptions } from "@angular/http";
+import { MockBackend } from "@angular/common/http/testing";
+import { XHRBackend, Response, ResponseOptions } from "@angular/common/http";
 import { HttpClientModule } from "@angular/common/http";
 describe("LoginService", () => {
   let mockbackend, service;
