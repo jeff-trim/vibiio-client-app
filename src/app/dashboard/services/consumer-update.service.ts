@@ -22,14 +22,14 @@ export class ConsumerUpdateService {
 
     return this.http
       .patch(`${API_URL}/addresses/${data.id}`, address)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
   refreshAddress(id: number) {
     return this.http
       .get(`${API_URL}/addresses/${id}`)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

@@ -14,7 +14,7 @@ export class ConsumerStatusService {
   getByStatus(status: string): Observable<any> {
     return this.http
       .get(`${CUSTOMER_STATUS_API}${status}`)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

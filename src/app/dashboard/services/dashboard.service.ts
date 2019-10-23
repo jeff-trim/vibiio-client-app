@@ -15,7 +15,7 @@ export class DashboardService {
 
     return this.http
       .get(url)
-      .map((response: Response) => response.vibiio)
+      .map((response: any) => response.vibiio)
       .catch((error: any) => Observable.throw(error));
   }
 }

@@ -14,8 +14,6 @@ export class CustomerProfileService {
   constructor(private http: Http) {}
 
   getCustomerProfiles(): Observable<Appointment[]> {
-    return this.http
-      .get(CUSTOMER_PROFILE_API)
-      .map((response: Response) => response);
+    return this.http.get(CUSTOMER_PROFILE_API).map((response: any) => response);
   }
 }

@@ -12,6 +12,6 @@ export class RetrieveInsuranceService {
   getInsuranceProviders() {
     return this.http
       .get(`${API_URL}/insurance_providers`)
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 }

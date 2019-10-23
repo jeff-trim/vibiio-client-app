@@ -16,14 +16,14 @@ export class MyLicenseService {
 
     return this.http
       .post(LICENSE_API, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
   getMyLicenses(): Observable<any> {
     return this.http
       .get(LICENSE_API)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -33,7 +33,7 @@ export class MyLicenseService {
 
     return this.http
       .put(UPDATE_LICENSE_API, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

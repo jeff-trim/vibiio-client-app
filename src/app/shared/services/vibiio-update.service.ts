@@ -18,7 +18,7 @@ export class VibiioUpdateService {
 
     return this.http
       .patch(url, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

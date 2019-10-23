@@ -1,14 +1,14 @@
-import { Observable } from 'rxjs/Observable';
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Observable } from "rxjs/Observable";
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class SidebarCustomerStatusSharedService {
-    private emitChangeSource = new Subject<any>();
+  private emitChangeSource = new Subject<any>();
 
-    changeEmitted$ = this.emitChangeSource.asObservable();
+  changeEmitted$ = this.emitChangeSource.asObservable();
 
-    emitChange(response: Response) {
-        this.emitChangeSource.next(response);
-    }
+  emitChange(response: any) {
+    this.emitChangeSource.next(response);
+  }
 }

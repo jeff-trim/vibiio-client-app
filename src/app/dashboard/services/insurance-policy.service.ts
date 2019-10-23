@@ -22,7 +22,7 @@ export class InsurancePolicyService {
 
     return this.http
       .patch(url, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -32,7 +32,7 @@ export class InsurancePolicyService {
 
     return this.http
       .post(url, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -45,7 +45,7 @@ export class InsurancePolicyService {
 
     return this.http
       .get(url, options)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

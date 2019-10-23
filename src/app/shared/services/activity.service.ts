@@ -21,7 +21,7 @@ export class ActivityService {
 
     return this.http
       .post(url, body)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

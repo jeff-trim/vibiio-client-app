@@ -15,7 +15,7 @@ export class NoteService {
 
     return this.http
       .post(url, body)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -25,7 +25,7 @@ export class NoteService {
 
     return this.http
       .patch(url, body)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -34,7 +34,7 @@ export class NoteService {
 
     return this.http
       .get(url)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -43,7 +43,7 @@ export class NoteService {
 
     return this.http
       .get(url)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

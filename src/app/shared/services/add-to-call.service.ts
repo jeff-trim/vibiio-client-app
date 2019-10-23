@@ -23,7 +23,7 @@ export class AddToCallService {
 
     return this.http
       .post(ADD_TO_CALL_API, options)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

@@ -34,6 +34,6 @@ export class MyAppointmentsService {
 
     return this.http
       .get(MY_APPOINTMENTS_API, options)
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 }

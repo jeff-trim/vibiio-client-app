@@ -14,8 +14,6 @@ export class TodaysVibiiosService {
   constructor(private http: Http) {}
 
   getTodaysVibiios(): Observable<TodaysVibiios[]> {
-    return this.http
-      .get(TODAYS_VIBIIOS_API)
-      .map((response: Response) => response);
+    return this.http.get(TODAYS_VIBIIOS_API).map((response: any) => response);
   }
 }

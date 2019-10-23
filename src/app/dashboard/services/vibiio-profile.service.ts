@@ -17,6 +17,6 @@ export class VibiioProfileService {
   getVibiio(id: number): Observable<any> {
     return this.http
       .get(VIBIIO_PROFILE_API + id)
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 }

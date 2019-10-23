@@ -15,7 +15,7 @@ export class AppointmentService {
   getAppointmentDetails(appointment_id: number) {
     return this.http
       .get(APPOINTMENT_DETAILS_API + appointment_id)
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 
   updateVibiiographer(appointment: number) {
@@ -26,7 +26,7 @@ export class AppointmentService {
     };
     return this.http
       .put(APPOINTMENT_DETAILS_API + appointment, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

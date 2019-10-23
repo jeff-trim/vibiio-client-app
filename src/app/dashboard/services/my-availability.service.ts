@@ -17,13 +17,11 @@ export class MyAvailabilityService {
   toggleAvailability(availability: boolean): Observable<any> {
     return this.http
       .patch(`${MY_AVAIALBILITY_API}`, { me: { available: availability } })
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
   getMyAvailability(): Observable<any> {
-    return this.http
-      .get(MY_AVAIALBILITY_API)
-      .map((response: Response) => response);
+    return this.http.get(MY_AVAIALBILITY_API).map((response: any) => response);
   }
 }

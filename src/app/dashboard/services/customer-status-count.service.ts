@@ -14,8 +14,6 @@ export class CustomerStatusCountService {
   constructor(private http: Http) {}
 
   getCustomerStatus(): Observable<CustomerStatusCount[]> {
-    return this.http
-      .get(CUSTOMER_STATUES_API)
-      .map((response: Response) => response);
+    return this.http.get(CUSTOMER_STATUES_API).map((response: any) => response);
   }
 }

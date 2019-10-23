@@ -11,6 +11,6 @@ export class RetrieveLanguageService {
   getLanguageOptions() {
     return this.http
       .get(`${API_URL}/language_options`)
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 }

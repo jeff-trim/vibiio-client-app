@@ -19,7 +19,7 @@ export class LoginService {
 
     return this.http
       .post(`${API_URL}/user_token`, auth)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

@@ -27,7 +27,7 @@ export class ConsumerSignUpService {
 
     return this.http
       .post(`${API_URL}/users`, consumer)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

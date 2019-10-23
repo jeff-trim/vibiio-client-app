@@ -32,7 +32,7 @@ export class VideoSnapshotService {
 
     return this.http
       .post(url, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

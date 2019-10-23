@@ -14,6 +14,6 @@ export class VideoArchiveService {
   getArchive(session_id: string) {
     return this.http
       .get(VIDEO_ARCHIVE_API + session_id)
-      .map((response: Response) => response);
+      .map((response: any) => response);
   }
 }

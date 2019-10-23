@@ -14,7 +14,7 @@ export class MyProfileService {
   constructor(private http: Http) {}
 
   getMyProfile(): Observable<any> {
-    return this.http.get(MY_PROFILE_API).map((response: Response) => response);
+    return this.http.get(MY_PROFILE_API).map((response: any) => response);
   }
 
   updateMyProfile(data: any): Observable<any> {
@@ -22,7 +22,7 @@ export class MyProfileService {
 
     return this.http
       .patch(MY_PROFILE_API, payload)
-      .map((response: Response) => response)
+      .map((response: any) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }
