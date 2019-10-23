@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, Response } from "@angular/common/http";
-import { Observable } from "rxjs";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
+import { HttpClient } from "@angular/common/http";
+
 import { API_URL } from "../../../environments/environment";
 
 const VIDEO_ARCHIVE_API = `${API_URL}/video_chat/archives/`;
@@ -12,8 +10,6 @@ export class VideoArchiveService {
   constructor(private http: HttpClient) {}
 
   getArchive(session_id: string) {
-    return this.http
-      .get(VIDEO_ARCHIVE_API + session_id)
-      .map((response: any) => response);
+    return this.http.get(VIDEO_ARCHIVE_API + session_id);
   }
 }

@@ -3,8 +3,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { API_URL } from "../../../environments/environment";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
 
 const CUSTOMER_STATUS_API = `${API_URL}/consumer_status?status=`;
 

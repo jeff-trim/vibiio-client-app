@@ -3,9 +3,6 @@ import { MockBackend } from "@angular/common/http/testing";
 import { XHRBackend, Response, ResponseOptions } from "@angular/common/http";
 import { HttpClientModule } from "@angular/common/http";
 
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
-
 import { PasswordResetService } from "./password-reset.service";
 
 const credentials = { email: "faker@fake.com" };

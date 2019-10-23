@@ -1,11 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
 
 // Interfaces & Models
-import { User } from "../../dashboard/models/user.interface";
 import { API_URL } from "../../../environments/environment";
 
 @Injectable()
@@ -24,19 +20,11 @@ export class UsersService {
     }
   }
 
-  index(role = "", query = ""): Observable<User[]> {
-    return this.http
-      .get(`${this.searchUrl(role, query)}`)
-      .map((response: any) => response)
-      .catch(err => {
-        console.error("An error occurred:", err.error);
-        return err.error;
-      });
+  index(role = "", query = "") {
+    return this.http.get(`${this.searchUrl(role, query)}`);
   }
 
   show(id: number) {
-    return this.http
-      .get(`${API_URL}/users/${id}`)
-      .map((response: any) => response.user);
+    return this.http.get(`${API_URL}/users/${id}`);
   }
 }

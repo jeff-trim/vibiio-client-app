@@ -8,15 +8,15 @@ import {
   EventEmitter,
   OnInit
 } from "@angular/core";
-import { InsurancePolicy } from "../../models/insurance-policy.interface";
-import { InsurancePolicyService } from "../../services/insurance-policy.service";
-import { PolicyDetailNewComponent } from "../../components/policy-detail-new/policy-detail-new.component";
-import { PolicyDetailComponent } from "../../components/policy-detail/policy-detail.component";
-import { InsuranceStatusService } from "../../services/insurance-status.service";
-import { Observable } from "rxjs";
 import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
 
-import { FormGroup } from "@angular/forms";
+import { InsurancePolicyService } from "../../services/insurance-policy.service";
+import { InsuranceStatusService } from "../../services/insurance-status.service";
+
+import { PolicyDetailNewComponent } from "../../components/policy-detail-new/policy-detail-new.component";
+import { PolicyDetailComponent } from "../../components/policy-detail/policy-detail.component";
+
+import { InsurancePolicy } from "../../models/insurance-policy.interface";
 
 @Component({
   selector: "vib-insurance-policy",
@@ -47,32 +47,27 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.alive = true;
-
-    this.insuranceStatusService.onCancel$
-      .takeWhile(() => this.alive)
-      .subscribe((data: any) => {
-        if (data) {
-          this.resetUpdateForm();
-          this.onEdit = false;
-        }
-      });
-    this.insuranceStatusService.onUpdate$
-      .takeWhile(() => this.alive)
-      .subscribe((data: any) => {
-        if (data) {
-          this.updatePolicyChild.forEach(policyInstance => {
-            if (policyInstance.editForm.dirty) {
-              policyInstance.policy = this.updatePolicy(
-                policyInstance.editForm.value
-              );
-            }
-          });
-        }
-      });
+    this.insuranceStatusService.onCancel$.subscribe((data: any) => {
+      if (data) {
+        this.resetUpdateForm();
+        this.onEdit = false;
+      }
+    });
+    this.insuranceStatusService.onUpdate$.subscribe((data: any) => {
+      if (data) {
+        this.updatePolicyChild.forEach(policyInstance => {
+          if (policyInstance.editForm.dirty) {
+            policyInstance.policy = this.updatePolicy(
+              policyInstance.editForm.value
+            );
+          }
+        });
+      }
+    });
   }
 
   ngOnDestroy() {
+    // unsubscribe
     this.alive = false;
   }
 

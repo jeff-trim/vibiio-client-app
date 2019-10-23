@@ -1,7 +1,6 @@
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import "rxjs/add/operator/map";
 
 import { API_URL } from "../../../environments/environment";
 const MY_PROFILE_API = `${API_URL}/me`;

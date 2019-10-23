@@ -3,8 +3,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 
 import { API_URL } from "../../../environments/environment";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
 
 // Models
 import { InsurancePolicy } from "../models/insurance-policy.interface";

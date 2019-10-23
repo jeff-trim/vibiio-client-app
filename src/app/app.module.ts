@@ -16,8 +16,7 @@ import { ResponseInterceptor } from "./services/interceptors/response.intercepto
 import { AuthInterceptor } from "./services/interceptors/auth-request.interceptor";
 
 // libraries
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { JcfModule } from "../../node_modules/angular2-jcf-directive/jcfModule/jcf.module";
+import { JcfModule } from "../../node_modules/angular2-jcf-directive/jcfModule";
 import { MomentModule } from "ngx-moment";
 import { NouisliderModule } from "ng2-nouislider";
 
@@ -43,7 +42,6 @@ import { AnswerCallModule } from "./answer-call/answer-call.module";
     // Custom Modules
     DashboardModule,
     HttpClientModule,
-    InfiniteScrollModule,
     JcfModule,
     LoginModule,
     MomentModule,

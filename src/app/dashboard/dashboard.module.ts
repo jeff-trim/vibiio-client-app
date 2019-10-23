@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Routes, RouterModule, RouterLink } from "@angular/router";
+import { Routes, RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
-import { JcfModule } from "../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module";
+import { JcfModule } from "../../../node_modules/angular2-jcf-directive/jcfModule";
 import { MomentModule } from "ngx-moment";
 import { NouisliderModule } from "ng2-nouislider";
 import { DynamicFormModule } from "../dynamic-form/dynamic-form.module";
@@ -21,7 +21,6 @@ import { ConsumerStatusComponent } from "./containers/consumer-status/consumer-s
 import { NotesComponent } from "./containers/notes/notes.component";
 
 // libraries
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { AngularDraggableModule } from "angular2-draggable";
 
 // Components
@@ -92,7 +91,6 @@ import { VibiiographersResolverService } from "../shared/services/vibiiographers
 import { AppointmentResolver } from "./services/appointment.resolver.service";
 import { MyAvailabilityResolver } from "./services/my-availability.resolver.service";
 import { VideoArchiveResolver } from "./services/video-archive.resolver.service";
-import { VibiioProfileResolver } from "./services/vibiio-profile.resolver.service";
 
 // Directives
 import { AutosizeDirective } from "./directives/autosize.directive";
@@ -216,7 +214,6 @@ const dashboardRoutes: Routes = [
     JcfModule,
     NouisliderModule,
     MomentModule,
-    InfiniteScrollModule,
     DynamicFormModule,
     FormsModule,
     ReactiveFormsModule,

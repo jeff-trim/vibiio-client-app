@@ -1,7 +1,5 @@
-import { Component, Output, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { async } from "@angular/core/testing";
-import { Observable } from "rxjs";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 // Models
@@ -12,17 +10,13 @@ import { Address } from "../../models/address.interface";
 import { VideoSnapshot } from "../../models/video-snapshot.interface";
 
 // Services
-import { AppointmentResolver } from "../../services/appointment.resolver.service";
 import { AppointmentDetailsFormStatusService } from "../../services/appointment-details-form-status.service";
 import { VideoChatService } from "../../../shared/services/video-chat.service";
 import { AvailabilitySharedService } from "../../../shared/services/availability-shared.service";
 import { SidebarCustomerStatusSharedService } from "../../../shared/services/sidebar-customer-status-shared.service";
 import { VibiioUpdateService } from "../../../shared/services/vibiio-update.service";
 import { AppointmentService } from "../../services/appointment.service";
-import { ActivityService } from "../../../shared/services/activity.service";
-import { VideoSnapshotService } from "../../../shared/services/video-snapshot.service";
 import { VibiioProfileService } from "../../services/vibiio-profile.service";
-import { Consultant } from "../../models/consultant.interface";
 
 @Component({
   selector: "vib-appointment",
@@ -45,13 +39,10 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private snapshotService: VideoSnapshotService,
-    private activityService: ActivityService,
     private updateAppointmentService: AppointmentService,
     private vibiioUpdateService: VibiioUpdateService,
     private sidebarCustomerStatusSharedService: SidebarCustomerStatusSharedService,
     private availabilitySharedService: AvailabilitySharedService,
-    private router: Router,
     private videoService: VideoChatService,
     private formStatusService: AppointmentDetailsFormStatusService,
     private vibiioProfileService: VibiioProfileService,
@@ -99,11 +90,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   }
 
   subscribeToEndCall() {
-    this.videoService.hangingUp$
-      .takeWhile(() => this.alive)
-      .subscribe(vibiio => {
-        this.endCallActions();
-      });
+    this.videoService.hangingUp$.subscribe(vibiio => {
+      this.endCallActions();
+    });
   }
 
   refreshProfile() {
