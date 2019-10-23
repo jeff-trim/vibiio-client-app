@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule, RouterLink } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { JcfModule } from "../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module";
-import { MomentModule } from "angular2-moment";
+import { MomentModule } from "ngx-moment";
 import { NouisliderModule } from "ng2-nouislider";
 import { DynamicFormModule } from "../dynamic-form/dynamic-form.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";

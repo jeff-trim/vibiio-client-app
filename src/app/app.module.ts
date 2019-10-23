@@ -23,7 +23,7 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { AppRoutingModule } from "./app-routing.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { LoginModule } from "./login/login.module";
-import { MomentModule } from "angular2-moment";
+import { MomentModule } from "ngx-moment";
 import { NouisliderModule } from "ng2-nouislider";
 import { PasswordResetModule } from "./password-reset/password-reset.module";
 import { JcfModule } from "../../node_modules/angular2-jcf-directive/jcfModule/jcf.module";
