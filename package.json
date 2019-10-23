@@ -12,13 +12,13 @@
     "start": "node server.js"
   },
   "engines": {
-    "node": "8.9.4",
+    "node": "11.15.0",
     "npm": "5.6.0"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^5.0.0",
-    "@angular/cli": "1.7.4",
+    "@angular/cli": "^8.3.13",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
     "@angular/compiler-cli": "^5.0.0",
