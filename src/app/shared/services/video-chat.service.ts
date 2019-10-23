@@ -51,7 +51,7 @@ export class VideoChatService {
 
     return this.http
       .get(url)
-      .map((response: Response) => response.json())
+      .map((response: Response) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -74,7 +74,7 @@ export class VideoChatService {
 
     return this.http
       .post(url, payload)
-      .map((response: Response) => response.json())
+      .map((response: Response) => response)
       .catch((error: any) => Observable.throw(error));
   }
 
@@ -108,7 +108,7 @@ export class VideoChatService {
 
     return this.http
       .post(url, payload)
-      .map((response: Response) => response.json())
+      .map((response: Response) => response)
       .catch((error: any) => Observable.throw(error));
   }
 }

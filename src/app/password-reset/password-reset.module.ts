@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
 
 // Containers
-import { PasswordResetComponent } from './containers/password-reset.component';
+import { PasswordResetComponent } from "./containers/password-reset.component";
 
 // Components
-import { PasswordResetInstructionsComponent } from './components/password-reset-instructions/password-reset-instructions.component';
-import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
+import { PasswordResetInstructionsComponent } from "./components/password-reset-instructions/password-reset-instructions.component";
+import { PasswordResetFormComponent } from "./components/password-reset-form/password-reset-form.component";
 
 // Routes
 const passwordResetRoutes: Routes = [
   {
-    path: 'password-reset',
+    path: "password-reset",
     component: PasswordResetComponent
   }
 ];
@@ -27,14 +28,11 @@ const passwordResetRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forChild(passwordResetRoutes)
   ],
-  exports: [
-    PasswordResetComponent
-  ],
+  exports: [PasswordResetComponent],
   providers: []
 })
-
 export class PasswordResetModule {}

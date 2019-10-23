@@ -1,37 +1,45 @@
-import { TestBed, async, inject } from '@angular/core/testing';
-import { RetrieveInsuranceService } from './retrieve-insurance.service';
-import { INSURANCE } from '../../../../testing/mock-insurance';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Http, HttpModule, XHRBackend, Response, ResponseOptions } from '@angular/http';
+import { TestBed, async, inject } from "@angular/core/testing";
+import { RetrieveInsuranceService } from "./retrieve-insurance.service";
+import { INSURANCE } from "../../../../testing/mock-insurance";
+import { MockBackend } from "@angular/http/testing";
+import { XHRBackend, Response, ResponseOptions } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 
-describe('RetrieveInsuranceService', () => {
+describe("RetrieveInsuranceService", () => {
   let mockbackend, service;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
+      imports: [HttpClientModule],
       providers: [
         RetrieveInsuranceService,
         { provide: XHRBackend, useClass: MockBackend }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
-  beforeEach(inject([RetrieveInsuranceService, XHRBackend], (_service, _mockbackend) => {
-    service = _service;
-    mockbackend = _mockbackend;
-  }));
+  beforeEach(inject(
+    [RetrieveInsuranceService, XHRBackend],
+    (_service, _mockbackend) => {
+      service = _service;
+      mockbackend = _mockbackend;
+    }
+  ));
 
-  it('can instantiate service', () => {
+  it("can instantiate service", () => {
     expect(service instanceof RetrieveInsuranceService).toBe(true);
   });
 
-  it('should get a list of insurance providers from API', () => {
-    mockbackend.connections.subscribe( connection => {
-      connection.mockRespond( new Response(new ResponseOptions( { status: 200,
-                                                                  body: JSON.stringify(INSURANCE) } )));
+  it("should get a list of insurance providers from API", () => {
+    mockbackend.connections.subscribe(connection => {
+      connection.mockRespond(
+        new Response(
+          new ResponseOptions({ status: 200, body: JSON.stringify(INSURANCE) })
+        )
+      );
     });
-    service.getInsuranceProviders().subscribe( data => expect(data).toEqual(INSURANCE) );
+    service
+      .getInsuranceProviders()
+      .subscribe(data => expect(data).toEqual(INSURANCE));
   });
 });
