@@ -40,6 +40,6 @@ describe("RetrieveLanguageService", () => {
     });
     service
       .getLanguageOptions()
-      .subscribe(data => expect(data).toEqual(LANGUAGES));
+      .subscribe((data: any) => expect(data).toEqual(LANGUAGES));
   });
 });

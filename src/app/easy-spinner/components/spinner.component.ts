@@ -1,32 +1,30 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
 
-import { SpinnerService } from '../services/spinner.service';
+import { SpinnerService } from "../services/spinner.service";
 
 @Component({
-    selector: 'vib-spinner',
-    styleUrls: ['spinner.scss'],
-    templateUrl: 'spinner.component.html'
+  selector: "vib-spinner",
+  styleUrls: ["spinner.scss"],
+  templateUrl: "spinner.component.html"
 })
-
 export class SpinnerComponent implements OnInit {
-    spinnerShow = false;
-    dashboardSpinner: boolean;
+  spinnerShow = false;
+  dashboardSpinner: boolean;
 
-    constructor(private spinnerService: SpinnerService) { }
+  constructor(private spinnerService: SpinnerService) {}
 
-    ngOnInit() {
-        this.spinnerService.spinnerControl.subscribe(data => {
-          this.setSpinner(window.location.href);
-          this.spinnerShow = data;
-        });
-     }
+  ngOnInit() {
+    this.spinnerService.spinnerControl.subscribe((data: any) => {
+      this.setSpinner(window.location.href);
+      this.spinnerShow = data;
+    });
+  }
 
-     setSpinner(href) {
-         if (href.includes('/dashboard/') ) {
-             this.dashboardSpinner = true;
-        } else {
-            this.dashboardSpinner = false;
-         }
-     }
-
+  setSpinner(href) {
+    if (href.includes("/dashboard/")) {
+      this.dashboardSpinner = true;
+    } else {
+      this.dashboardSpinner = false;
+    }
+  }
 }

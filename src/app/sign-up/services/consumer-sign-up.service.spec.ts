@@ -42,6 +42,6 @@ describe("ConsumerSignUpService", () => {
     });
     service
       .registerConsumer()
-      .subscribe(data => expect(data).toEqual(apiResponse));
+      .subscribe((data: any) => expect(data).toEqual(apiResponse));
   });
 });

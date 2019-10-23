@@ -61,7 +61,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.alive = true;
     this.activatedRoute.data.subscribe(
-      data => {
+      (data: any) => {
         this.appointment = data.appt.appointment;
         this.address = this.appointment.address;
         this.relocationAddress = this.appointment.relocation_address;
@@ -107,10 +107,12 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   }
 
   refreshProfile() {
-    this.vibiioProfileService.getVibiio(this.vibiio.id).subscribe(data => {
-      this.vibiio = data.vibiio;
-      this.snapshots = data.vibiio.snapshots;
-    });
+    this.vibiioProfileService
+      .getVibiio(this.vibiio.id)
+      .subscribe((data: any) => {
+        this.vibiio = data.vibiio;
+        this.snapshots = data.vibiio.snapshots;
+      });
   }
 
   answerCall() {
@@ -129,7 +131,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
       this.updateAppointmentService
         .updateVibiiographer(this.appointment.id)
         .subscribe(
-          data => {
+          (data: any) => {
             return data.vibiio;
           },
           (error: any) => {
@@ -157,7 +159,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     const options = { status: event.status };
 
     this.vibiioUpdateService.updateVibiio(options, this.vibiio.id).subscribe(
-      data => {
+      (data: any) => {
         this.vibiio.status = data.vibiio.status;
         this.sidebarCustomerStatusSharedService.emitChange(data);
       },

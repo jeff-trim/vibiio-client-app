@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(data => {
+    this.activatedRoute.data.subscribe((data: any) => {
       this.vibiio = data.vibiio;
       this.vibiiographerProfile = data.myProfile;
       this.setNotificationFilterCriteria();

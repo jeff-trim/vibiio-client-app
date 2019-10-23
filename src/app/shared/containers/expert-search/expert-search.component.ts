@@ -1,15 +1,21 @@
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Output,
+  EventEmitter
+} from "@angular/core";
 
-import { UsersService } from '../../services/users.service';
-import { SearchBoxComponent } from '../../components/search-box/search-box.component';
-import { User } from '../../../dashboard/models/user.interface';
+import { UsersService } from "../../services/users.service";
+import { SearchBoxComponent } from "../../components/search-box/search-box.component";
+import { User } from "../../../dashboard/models/user.interface";
 
 @Component({
-  selector: 'vib-expert-search',
-  templateUrl: './expert-search.component.html',
-  styleUrls: ['./expert-search.component.scss']
+  selector: "vib-expert-search",
+  templateUrl: "./expert-search.component.html",
+  styleUrls: ["./expert-search.component.scss"]
 })
-
 export class ExpertSearchComponent implements OnInit {
   filter: string;
   query: string;
@@ -18,18 +24,15 @@ export class ExpertSearchComponent implements OnInit {
   @Output() closeSearch = new EventEmitter<boolean>();
   @Output() selectedResult = new EventEmitter<User>();
 
-  filters = [
-    'Videographer',
-    'Expert'
-  ];
+  filters = ["Videographer", "Expert"];
 
   @ViewChild(SearchBoxComponent) searchBoxChild: SearchBoxComponent;
 
-  constructor(private userService: UsersService) { }
+  constructor(private userService: UsersService) {}
 
   ngOnInit() {
     this.filter = null;
-    this.userService.index().subscribe( data => {
+    this.userService.index().subscribe((data: any) => {
       this.results = data;
     });
   }
@@ -38,9 +41,8 @@ export class ExpertSearchComponent implements OnInit {
     this.filter = this.nomenclatureFix(term);
 
     const query = this.searchBoxChild.query.nativeElement.value;
-    this.userService.index(this.filter, query).subscribe( data => {
+    this.userService.index(this.filter, query).subscribe((data: any) => {
       this.results = data;
-
     });
   }
 
@@ -52,7 +54,7 @@ export class ExpertSearchComponent implements OnInit {
     const filter = this.nomenclatureFix(this.filter);
     this.query = this.nomenclatureFix(query);
 
-    this.userService.index(filter, query).subscribe( data => {
+    this.userService.index(filter, query).subscribe((data: any) => {
       this.results = data;
     });
   }
@@ -63,11 +65,10 @@ export class ExpertSearchComponent implements OnInit {
 
   // temp fix to Remove vibiiographer language for demo;
   nomenclatureFix(term: string): string {
-    if (term === 'Videographer') {
-      return 'Vibiiographer';
+    if (term === "Videographer") {
+      return "Vibiiographer";
     } else {
       return term;
     }
   }
-
 }

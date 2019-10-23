@@ -40,6 +40,6 @@ describe("RetrieveInsuranceService", () => {
     });
     service
       .getInsuranceProviders()
-      .subscribe(data => expect(data).toEqual(INSURANCE));
+      .subscribe((data: any) => expect(data).toEqual(INSURANCE));
   });
 });

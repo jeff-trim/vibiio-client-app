@@ -161,7 +161,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     this.videoService
       .getConnectionData(this.vibiio.id, undefined, undefined)
       .takeWhile(() => this.alive)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         this.token = data.connection_data.token_data.token;
         this.connectToSession();
       });
@@ -172,7 +172,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     this.addToCall
       .callUser(expert.id, this.vibiio.id)
       .takeWhile(() => this.alive)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         this.consumerName = data.consumer;
         this.expertWaitingToJoin = true;
         this.setNotificationFadeOutTimer();
@@ -254,7 +254,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   }
 
   subscribeToStreamCreatedEvents() {
-    this.session.on("streamCreated", data => {
+    this.session.on("streamCreated", (data: any) => {
       this.onVibiio = true;
       this.vibiioConnecting = false;
       const stream = data.stream;
@@ -342,7 +342,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   }
 
   subscribeToStreamDestroyedEvents() {
-    this.session.on("streamDestroyed", data => {
+    this.session.on("streamDestroyed", (data: any) => {
       const stream = data.stream;
       this.processUnsubscribe(stream);
     });
@@ -408,7 +408,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
       )
       .takeWhile(() => this.alive)
       .subscribe(
-        data => {},
+        (data: any) => {},
         error => {
           console.log("error ", error);
         }
@@ -465,6 +465,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     this.activityService
       .postActivity(vibiio_id, message, name)
       .takeWhile(() => this.alive)
-      .subscribe(data => {});
+      .subscribe((data: any) => {});
   }
 }

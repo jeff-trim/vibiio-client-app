@@ -50,7 +50,7 @@ describe("PasswordResetService", () => {
 
     service
       .resetPassword(credentials)
-      .subscribe(data => expect(data.status).toEqual(200));
+      .subscribe((data: any) => expect(data.status).toEqual(200));
   });
 
   it("resetPassword should throw an error", () => {
@@ -60,7 +60,10 @@ describe("PasswordResetService", () => {
 
     service
       .resetPassword(credentials)
-      .subscribe(data => data, error => expect(error.status).toEqual(404));
+      .subscribe(
+        (data: any) => data,
+        error => expect(error.status).toEqual(404)
+      );
   });
 
   it("should submit a new password", () => {
@@ -74,7 +77,7 @@ describe("PasswordResetService", () => {
 
     service
       .submitNewPassword(password, token)
-      .subscribe(data => expect(data.status).toEqual(204));
+      .subscribe((data: any) => expect(data.status).toEqual(204));
   });
 
   it("submitPassword should throw an error", () => {
@@ -85,6 +88,9 @@ describe("PasswordResetService", () => {
 
     service
       .submitNewPassword(credentials, token)
-      .subscribe(data => data, error => expect(error.status).toEqual(404));
+      .subscribe(
+        (data: any) => data,
+        error => expect(error.status).toEqual(404)
+      );
   });
 });

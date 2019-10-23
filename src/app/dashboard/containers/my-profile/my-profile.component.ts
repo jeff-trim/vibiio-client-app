@@ -55,7 +55,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(data => {
+    this.activatedRoute.data.subscribe((data: any) => {
       this.myProfile = data.myProfile.user;
       this.receivingTexts = data.myProfile.user.receive_texts;
       this.myLicenses = data.myProfile.user.profile.licenses;
@@ -63,12 +63,14 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.profileInformationChild.myProfileForm.valueChanges.subscribe(data => {
-      this.isEditing = true;
-    });
+    this.profileInformationChild.myProfileForm.valueChanges.subscribe(
+      (data: any) => {
+        this.isEditing = true;
+      }
+    );
 
     this.profileLicenesesChildren.forEach(license => {
-      license.editForm.valueChanges.subscribe(data => {
+      license.editForm.valueChanges.subscribe((data: any) => {
         this.isEditing = true;
       });
     });
@@ -87,7 +89,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
       if (license.editForm.dirty && license.editForm.valid) {
         this.myLicenseService
           .updateMyLicense(license.editForm.value)
-          .subscribe(data => {
+          .subscribe((data: any) => {
             license.license = data.license;
             this.isEditing = false;
           });
@@ -102,14 +104,14 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
   }
 
   refreshProfile() {
-    this.myProfileService.getMyProfile().subscribe(data => {
+    this.myProfileService.getMyProfile().subscribe((data: any) => {
       this.profileInformationChild.myProfileForm.patchValue(data.user);
       this.isEditing = false;
     });
   }
 
   refreshLicenses() {
-    this.myLicenseService.getMyLicenses().subscribe(data => {
+    this.myLicenseService.getMyLicenses().subscribe((data: any) => {
       this.myLicenses = data.licenses;
       this.isEditing = false;
     });
@@ -136,7 +138,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
   }
 
   sendProfileUpdateData(options: any) {
-    this.myProfileService.updateMyProfile(options).subscribe(data => {
+    this.myProfileService.updateMyProfile(options).subscribe((data: any) => {
       this.myProfile = data.user;
       this.isEditing = false;
     });
@@ -159,7 +161,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
     const isReceiving = this.receivingTexts;
     const options = { receive_texts: isReceiving };
 
-    this.myProfileService.updateMyProfile(options).subscribe(data => {
+    this.myProfileService.updateMyProfile(options).subscribe((data: any) => {
       this.receivingTexts = data.user.receive_texts;
     });
   }
@@ -172,7 +174,7 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
       vibiiographer_id: this.myProfile.id
     };
 
-    this.myLicenseService.createLicense(options).subscribe(data => {
+    this.myLicenseService.createLicense(options).subscribe((data: any) => {
       this.refreshLicenses();
       this.profileNewLicensureChild.myLicenseForm.reset();
       this.addLicensureForm = false;
