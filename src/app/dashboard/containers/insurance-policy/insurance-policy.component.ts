@@ -4,9 +4,9 @@ import { InsurancePolicyService } from '../../services/insurance-policy.service'
 import { PolicyDetailNewComponent } from '../../components/policy-detail-new/policy-detail-new.component';
 import { PolicyDetailComponent } from '../../components/policy-detail/policy-detail.component';
 import { InsuranceStatusService } from '../../services/insurance-status.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import 'rxjs/add/operator/takeWhile';
+
 
 import { FormGroup } from '@angular/forms';
 

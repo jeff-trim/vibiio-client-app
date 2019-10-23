@@ -1,13 +1,12 @@
+import { throwError as observableThrowError, Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { OPENTOK_API_KEY } from "../../../environments/environment.staging";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { HttpClient, Response } from "@angular/http";
 import { API_URL } from "../../../environments/environment";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
 import { VIDEO_OPTIONS } from "../../constants/video-options";
-import { Subject } from "rxjs/Subject";
 import { VideoCall } from "../models/video-call.interface";
 import { Vibiio } from "../../dashboard/models/vibiio.interface";
 import { ConnectionData } from "../models/transfer-objects/connection-data";
@@ -23,7 +22,7 @@ export class VideoChatService {
   calling$ = this.callingConsumer.asObservable();
   hangingUp$ = this.endingCall.asObservable();
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   // event emitters
   call(vibiio: Vibiio, outgoing: boolean) {
@@ -52,7 +51,7 @@ export class VideoChatService {
     return this.http
       .get(url)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 
   initSession(video_session_id: string) {
@@ -75,7 +74,7 @@ export class VideoChatService {
     return this.http
       .post(url, payload)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 
   parseStreamData(stream: any): StreamData {
@@ -109,6 +108,6 @@ export class VideoChatService {
     return this.http
       .post(url, payload)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 }

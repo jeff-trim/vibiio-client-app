@@ -3,7 +3,7 @@ import { Router,
          Resolve,
          RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 // services
 import { MyAvailabilityService } from '../services/my-availability.service';

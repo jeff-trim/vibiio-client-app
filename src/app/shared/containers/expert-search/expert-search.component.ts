@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { filter } from 'rxjs/operator/filter';
+
 import { UsersService } from '../../services/users.service';
 import { SearchBoxComponent } from '../../components/search-box/search-box.component';
 import { User } from '../../../dashboard/models/user.interface';

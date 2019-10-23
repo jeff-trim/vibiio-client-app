@@ -1,7 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Http, Response, RequestOptions, URLSearchParams } from "@angular/http";
+import {
+  HttpClient,
+  Response,
+  RequestOptions,
+  URLSearchParams
+} from "@angular/http";
 import { API_URL } from "../../../environments/environment";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import "rxjs/add/operator/map";
 
 import { MyVibiios } from "../models/my-vibiios.interface";
@@ -10,7 +15,7 @@ const MY_APPOINTMENTS_API: string = `${API_URL}/schedule/range`;
 
 @Injectable()
 export class MyAppointmentsService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getMyAppointments(
     page?: number,

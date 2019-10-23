@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/http";
 import { API_URL } from "../../../environments/environment";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import { ConsumerProfile } from "../models/consumer-profile.interface";
@@ -10,7 +10,7 @@ const ALL_CONSUMERS_API = `${API_URL}/all_consumers/`;
 
 @Injectable()
 export class AllConsumersService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   index(query?: string): Observable<ConsumerProfile[]> {
     let url = ALL_CONSUMERS_API;

@@ -1,6 +1,6 @@
+import { throwError as observableThrowError, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { HttpClient, Response } from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
@@ -15,7 +15,7 @@ import { API_URL } from "../../../environments/environment";
 export class ConsumerSignUpService {
   userData: ConsumerSignUp;
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   addProfileType(userData) {
     this.userData = userData;
@@ -28,6 +28,6 @@ export class ConsumerSignUpService {
     return this.http
       .post(`${API_URL}/users`, consumer)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 }

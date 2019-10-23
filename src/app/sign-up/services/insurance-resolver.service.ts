@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { RetrieveInsuranceService } from './retrieve-insurance.service';
 import { InsuranceProviderList } from '../../dashboard/models/insurance-provider-list.interface';

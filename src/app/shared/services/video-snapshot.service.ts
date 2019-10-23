@@ -1,6 +1,6 @@
+import { throwError as observableThrowError, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { HttpClient, Response } from "@angular/http";
 import { API_URL } from "../../../environments/environment";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -13,7 +13,7 @@ const url = `${API_URL}/video_chat/snapshots`;
 
 @Injectable()
 export class VideoSnapshotService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   saveSnapshot(
     consumer_id: number,
@@ -33,6 +33,6 @@ export class VideoSnapshotService {
     return this.http
       .post(url, payload)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 }

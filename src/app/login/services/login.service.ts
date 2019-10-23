@@ -1,6 +1,6 @@
+import { throwError as observableThrowError, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { HttpClient, Response } from "@angular/http";
 import { API_URL } from "../../../environments/environment";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -12,7 +12,7 @@ import { Credentials } from "../models/credentials.interface";
 
 @Injectable()
 export class LoginService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   login(data: Credentials): Observable<Jwt> {
     const auth = { auth: data };
@@ -20,6 +20,6 @@ export class LoginService {
     return this.http
       .post(`${API_URL}/user_token`, auth)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 }

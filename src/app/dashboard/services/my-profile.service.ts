@@ -1,8 +1,7 @@
+import { throwError as observableThrowError, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { HttpClient, Response } from "@angular/http";
 import { API_URL } from "../../../environments/environment";
-
-import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
 import { Appointment } from "../models/appointment.interface";
@@ -11,7 +10,7 @@ const MY_PROFILE_API = `${API_URL}/me`;
 
 @Injectable()
 export class MyProfileService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getMyProfile(): Observable<any> {
     return this.http.get(MY_PROFILE_API).map((response: any) => response);
@@ -23,6 +22,6 @@ export class MyProfileService {
     return this.http
       .patch(MY_PROFILE_API, payload)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 }

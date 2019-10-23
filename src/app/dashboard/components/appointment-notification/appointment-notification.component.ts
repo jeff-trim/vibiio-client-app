@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs';
 import { Notification } from '../../models/notification.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 

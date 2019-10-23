@@ -1,7 +1,7 @@
+import { throwError as observableThrowError, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { HttpClient, Response } from "@angular/http";
 import { API_URL } from "../../../environments/environment";
-import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
@@ -12,13 +12,13 @@ const MY_AVAIALBILITY_API: string = `${API_URL}/me/`;
 
 @Injectable()
 export class MyAvailabilityService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   toggleAvailability(availability: boolean): Observable<any> {
     return this.http
       .patch(`${MY_AVAIALBILITY_API}`, { me: { available: availability } })
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 
   getMyAvailability(): Observable<any> {

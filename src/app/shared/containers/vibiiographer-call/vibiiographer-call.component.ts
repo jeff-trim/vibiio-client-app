@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild
 } from "@angular/core";
-import { Subscription, Observable } from "rxjs/Rx";
+import { Subscription, Observable } from "rxjs";
 
 // Libraries
 import * as ActionCable from "action-cable-react-jwt";

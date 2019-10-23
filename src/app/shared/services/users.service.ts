@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Rx";
-import { Http } from "@angular/http";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
@@ -10,7 +10,7 @@ import { API_URL } from "../../../environments/environment";
 
 @Injectable()
 export class UsersService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   private searchUrl(role = "", query = ""): string {
     if (query && role) {

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { HttpClient, Response } from "@angular/http";
+import { Observable } from "rxjs";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 
@@ -12,7 +12,7 @@ const VIBIIO_PROFILE_API = `${API_URL}/consumer_status/`;
 
 @Injectable()
 export class VibiioProfileService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getVibiio(id: number): Observable<any> {
     return this.http

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { filter } from 'rxjs/operator/filter';
+
 
 @Component({
   selector: 'vib-search-filters',

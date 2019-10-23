@@ -1,19 +1,18 @@
+import { throwError as observableThrowError, Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import { Observable } from "rxjs/Rx";
+import { HttpClient } from "@angular/http";
 
 import { API_URL } from "../../../environments/environment";
 import { Vibiio } from "../../dashboard/models/vibiio.interface";
-import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class VibiiosService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   show(id: number): Observable<any> {
     return this.http
       .get(`${API_URL}/vibiios/${id}`)
       .map((response: any) => response)
-      .catch((error: any) => Observable.throw(error));
+      .catch((error: any) => observableThrowError(error));
   }
 }

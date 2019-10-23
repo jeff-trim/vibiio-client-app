@@ -26,7 +26,7 @@ import { SidebarCustomerStatusSharedService } from '../../../shared/services/sid
 // Interfaces
 import { CustomerStatusCount } from '../../models/customer-status-count.interface';
 import { Appointment} from '../../models/appointment.interface';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { Vibiio } from '../../models/vibiio.interface';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { VideoChatService } from '../../../shared/services/video-chat.service';
