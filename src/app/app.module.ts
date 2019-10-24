@@ -40,18 +40,18 @@ import { AnswerCallModule } from "./answer-call/answer-call.module";
     BrowserAnimationsModule,
 
     // Custom Modules
+    AnswerCallModule,
     DashboardModule,
+    DynamicFormModule,
     HttpClientModule,
     JcfModule,
     LoginModule,
     MomentModule,
     NouisliderModule,
     PasswordResetModule,
-    DynamicFormModule,
     SpinnerModule,
     SignUpModule,
     SharedModule,
-    AnswerCallModule,
     AppRoutingModule
   ],
   providers: [

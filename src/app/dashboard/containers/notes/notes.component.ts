@@ -43,7 +43,7 @@ export class NotesComponent {
   @Output()
   note: Note;
 
-  @ViewChild(NewNoteComponent)
+  @ViewChild(NewNoteComponent, {static: false})
   private child: NewNoteComponent;
 
   constructor(private router: Router, private noteService: NoteService) {

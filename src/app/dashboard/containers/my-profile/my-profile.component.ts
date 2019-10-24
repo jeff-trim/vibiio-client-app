@@ -39,10 +39,10 @@ export class MyProfileComponent implements OnInit, AfterViewChecked {
   receivingTexts: boolean;
   availableLanguages = ["english", "spanish", "french"];
 
-  @ViewChild(ProfileInformationComponent)
+  @ViewChild(ProfileInformationComponent, { static: false })
   private profileInformationChild: ProfileInformationComponent;
 
-  @ViewChild(ProfileNewLicensureComponent)
+  @ViewChild(ProfileNewLicensureComponent, { static: false })
   private profileNewLicensureChild: ProfileNewLicensureComponent;
 
   @ViewChildren(ProfileLicensureComponent)

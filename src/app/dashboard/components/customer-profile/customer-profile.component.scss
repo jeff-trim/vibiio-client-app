@@ -1,19 +1,17 @@
-@import '../../../../assets/css/_variables.scss';
+@import "../../../../assets/css/_variables.scss";
 
 .flex {
-    display: flex;
-    flex-direction: column;
-    @media(min-width: $small){
-        flex-direction: row;
-    }
+  display: flex;
+  flex-direction: column;
+  @media (min-width: $small) {
+    flex-direction: row;
+  }
 }
 
 .customer-profile-container {
   margin-right: 1.1rem;
   margin-left: 1.1rem;
 }
-
-
 
 h2 {
   color: $blue;
@@ -28,7 +26,7 @@ h2 {
   margin-top: 25px;
 }
 
-.appointment-toggle-wrapper{
+.appointment-toggle-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -52,7 +50,7 @@ h2 {
   }
 }
 
-/deep/ .info-element {
+::ng-deep .info-element {
   padding-bottom: 11px;
   position: relative;
   margin: 6.5px 0 18px 0;
@@ -82,7 +80,7 @@ h2 {
   }
 }
 
-/deep/ .pink-underline {
+::ng-deep .pink-underline {
   width: 9%;
   border-bottom: 3px solid $pink;
   bottom: 0;
@@ -90,7 +88,7 @@ h2 {
   position: absolute;
 }
 
-/deep/ .notes-element {
+::ng-deep .notes-element {
   background-color: $light-grey;
   padding: 5px;
 

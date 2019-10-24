@@ -104,7 +104,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
   @Output() updateVibiioStatus = new EventEmitter<any>();
 
-  @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
+  @ViewChild(VideoChatComponent, {static: false}) videoChatComponent: VideoChatComponent;
 
   constructor(
     private videoService: VideoChatService,

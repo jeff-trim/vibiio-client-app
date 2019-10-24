@@ -1,5 +1,4 @@
-@import '../../../../assets/css/_variables.scss';
-
+@import "../../../../assets/css/_variables.scss";
 
 .profile-information-container {
   max-width: none;
@@ -7,8 +6,8 @@
 }
 
 .profile-information {
-    padding-left: 0;
-    margin-bottom: 40px;
+  padding-left: 0;
+  margin-bottom: 40px;
 }
 
 h2 {
@@ -22,7 +21,7 @@ h2 {
   display: inline;
 }
 
-/deep/ .info-element {
+::ng-deep .info-element {
   padding-bottom: 11px;
   position: relative;
   margin: 6.5px 0 18px 0;
@@ -52,7 +51,7 @@ h2 {
   }
 }
 
-/deep/ .pink-underline {
+::ng-deep .pink-underline {
   width: 9%;
   border-bottom: 3px solid $pink;
   bottom: 0;

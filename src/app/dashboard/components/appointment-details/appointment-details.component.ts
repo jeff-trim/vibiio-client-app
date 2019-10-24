@@ -49,7 +49,8 @@ export class AppointmentDetailsComponent {
   @Output() isUpdating = new EventEmitter<boolean>();
   @Output() refreshAddress = new EventEmitter<boolean>();
 
-  @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
+  @ViewChild(ConsumerAddressComponent, { static: false })
+  addressForm: ConsumerAddressComponent;
 
   constructor(
     private dateFormatService: DateFormatService,

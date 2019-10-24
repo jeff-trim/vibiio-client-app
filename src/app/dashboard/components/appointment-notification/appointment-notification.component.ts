@@ -1,7 +1,13 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+  OnInit
+} from "@angular/core";
 import { Subscription, timer } from "rxjs";
 import { Notification } from "../../models/notification.interface";
-import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
 
 @Component({
   selector: "vib-appointment-notification",

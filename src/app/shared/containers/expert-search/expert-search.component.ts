@@ -26,7 +26,7 @@ export class ExpertSearchComponent implements OnInit {
 
   filters = ["Videographer", "Expert"];
 
-  @ViewChild(SearchBoxComponent) searchBoxChild: SearchBoxComponent;
+  @ViewChild(SearchBoxComponent, {static: false}) searchBoxChild: SearchBoxComponent;
 
   constructor(private userService: UsersService) {}
 

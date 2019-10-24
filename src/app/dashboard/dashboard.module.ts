@@ -7,6 +7,7 @@ import { MomentModule } from "ngx-moment";
 import { NouisliderModule } from "ng2-nouislider";
 import { DynamicFormModule } from "../dynamic-form/dynamic-form.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 // Custom Modules
 import { SharedModule } from "../shared/shared.module";
@@ -211,6 +212,7 @@ const dashboardRoutes: Routes = [
   imports: [
     CommonModule,
     HttpClientModule,
+    InfiniteScrollModule,
     JcfModule,
     NouisliderModule,
     MomentModule,

@@ -6,9 +6,9 @@ import {
   ViewChild,
   Output,
   EventEmitter,
-  OnInit
+  OnInit,
+  OnDestroy
 } from "@angular/core";
-import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
 
 import { InsurancePolicyService } from "../../services/insurance-policy.service";
 import { InsuranceStatusService } from "../../services/insurance-status.service";
@@ -35,7 +35,7 @@ export class InsurancePolicyComponent implements OnInit, OnDestroy {
 
   @Output() editingPolicy: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @ViewChild(PolicyDetailNewComponent)
+  @ViewChild(PolicyDetailNewComponent, { static: false })
   newPolicyChild: PolicyDetailNewComponent;
 
   @ViewChildren(PolicyDetailComponent)

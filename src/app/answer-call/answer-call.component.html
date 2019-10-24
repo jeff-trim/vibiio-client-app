@@ -1,26 +1,29 @@
 <div class="answer-call-container">
-
-  <div *ngIf="!callEnded"
-       id="video-stream" 
-       class="video-stream on-fullscreen">
-    <vib-video-controls *ngIf="!callEnded"
-                        (endCall)="hangUp()"
-                        (mute)="toggleMute($event)"
-                        [muted]="muted"
-                        [enableAddExpert]="enableAddExpert"></vib-video-controls>
-      <div class="name-container">
-          <vib-call-name-display *ngIf="(consumerName?.length > 0)" [name]="consumerName"></vib-call-name-display>
-          <vib-call-name-display *ngIf="(vibiiographerName?.length > 0)" [name]="vibiiographerName"></vib-call-name-display>
-      </div>
+  <div *ngIf="!callEnded" id="video-stream" class="video-stream on-fullscreen">
+    <vib-video-controls
+      *ngIf="!callEnded"
+      (endCall)="hangUp()"
+      (mute)="toggleMute()"
+      [muted]="muted"
+      [enableAddExpert]="enableAddExpert"
+    ></vib-video-controls>
+    <div class="name-container">
+      <vib-call-name-display
+        *ngIf="consumerName?.length > 0"
+        [name]="consumerName"
+      ></vib-call-name-display>
+      <vib-call-name-display
+        *ngIf="vibiiographerName?.length > 0"
+        [name]="vibiiographerName"
+      ></vib-call-name-display>
+    </div>
   </div>
 
-  <div *ngIf="callEnded"
-       class="vibiio-message">
+  <div *ngIf="callEnded" class="vibiio-message">
     <p class="first-vibiio-text pink">
       The call is over
-      <br><br>
-        Thank you for participating
+      <br /><br />
+      Thank you for participating
     </p>
   </div>
 </div>
-

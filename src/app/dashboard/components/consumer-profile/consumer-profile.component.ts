@@ -38,7 +38,8 @@ export class ConsumerProfileComponent {
   @Output() editingForm = new EventEmitter<boolean>();
   @Output() updateVibiioStatus = new EventEmitter<any>();
 
-  @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
+  @ViewChild(ConsumerAddressComponent, { static: false })
+  addressForm: ConsumerAddressComponent;
 
   constructor(
     private statusUpdateService: VibiioUpdateService,

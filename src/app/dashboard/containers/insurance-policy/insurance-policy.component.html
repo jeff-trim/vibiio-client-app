@@ -1,32 +1,32 @@
-<div class="existing-policy-container"
-     id="scrollbar">
-
-    <span *ngIf="insurancePolicies">
-        <span *ngFor="let policy of insurancePolicies">
-            <vib-policy-detail [policy]="policy"
-                               (formChanged)="editingForm($event)"></vib-policy-detail>
-        </span>
+<div class="existing-policy-container" id="scrollbar">
+  <span *ngIf="insurancePolicies">
+    <span *ngFor="let policy of insurancePolicies">
+      <vib-policy-detail
+        [policy]="policy"
+        (formChanged)="editingForm()"
+      ></vib-policy-detail>
     </span>
+  </span>
 </div>
 
-<vib-policy-detail-new *ngIf="showNewForm"
-                        (newPolicy)="createPolicy($event)"></vib-policy-detail-new>
+<vib-policy-detail-new
+  *ngIf="showNewForm"
+  (newPolicy)="createPolicy($event)"
+></vib-policy-detail-new>
 
-<div *ngIf="!showNewForm" 
-    class="add-policy"
-    (click)="showForm()">
-    <img src="../../../../assets/images/add.svg"
-        class="add">
-    <span class="add-text">ADD POLICY</span>
-    
+<div *ngIf="!showNewForm" class="add-policy" (click)="showForm()">
+  <img src="../../../../assets/images/add.svg" class="add" />
+  <span class="add-text">ADD POLICY</span>
 </div>
 
-<div *ngIf="showNewForm"
-    class="flex">
-    <h4 class="cancel-text col-md-offset-4"
-    (click)="resetForm()">CANCEL</h4>
-    
-    <h4 class="save-text"
-        [ngClass]="{ 'save-after-element': isSaving }"
-        (click)="submitForm()">SAVE</h4>
+<div *ngIf="showNewForm" class="flex">
+  <h4 class="cancel-text col-md-offset-4" (click)="resetForm()">CANCEL</h4>
+
+  <h4
+    class="save-text"
+    [ngClass]="{ 'save-after-element': isSaving }"
+    (click)="submitForm()"
+  >
+    SAVE
+  </h4>
 </div>
