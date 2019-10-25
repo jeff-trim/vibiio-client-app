@@ -1,33 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
-import { API_URL } from '../../../environments/environment';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { API_URL } from "../../../environments/environment";
+import { Observable } from "rxjs";
 
-import { MyVibiios } from '../models/my-vibiios.interface';
+import { MyVibiios } from "../models/my-vibiios.interface";
 
-const MY_APPOINTMENTS_API: string = `${API_URL}/schedule/range`;
+const MY_APPOINTMENTS_API = `${API_URL}/schedule/range`;
 
 @Injectable()
 export class MyAppointmentsService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-    getMyAppointments(page?: number, start_time?: number, end_time?: number): Observable<MyVibiios> {
+  getMyAppointments(page?: number, start_time?: number, end_time?: number) {
+    const params = new HttpParams().set("page", String(page));
 
-        // sets query params
-        let params = new URLSearchParams();
-        params.append('page', String(page));
+    if (
+      String(start_time) !== "undefined" &&
+      String(end_time) !== "undefined"
+    ) {
+      params.append("start", String(start_time));
+      params.append("stop", String(end_time));
+    }
 
-        if (String(start_time) !== 'undefined' && String(end_time) !== 'undefined') {
-            params.append('start', String(start_time));
-            params.append('stop', String(end_time));
-        }
-
-        // merges params into an options object
-        const options = new RequestOptions({params: params});
-
-        return this.http
-            .get(MY_APPOINTMENTS_API, options)
-            .map((response: Response) => response.json());
+    return this.http.get(MY_APPOINTMENTS_API, { params });
   }
 }

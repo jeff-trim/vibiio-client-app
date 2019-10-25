@@ -1,106 +1,105 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule, RouterLink } from '@angular/router';
-import { HttpModule } from '@angular/http';
-import { JcfModule } from '../../../node_modules/angular2-jcf-directive/jcfModule/jcf.module';
-import { MomentModule } from 'angular2-moment';
-import { NouisliderModule } from 'ng2-nouislider';
-import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Routes, RouterModule } from "@angular/router";
+import { HttpClientModule } from "@angular/common/http";
+import { JcfModule } from "../../../node_modules/angular2-jcf-directive/jcfModule";
+import { MomentModule } from "ngx-moment";
+import { NouisliderModule } from "ng2-nouislider";
+import { DynamicFormModule } from "../dynamic-form/dynamic-form.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 // Custom Modules
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from "../shared/shared.module";
 
 // Containers
-import { DashboardComponent } from './containers/dashboard/dashboard.component';
-import { MyProfileComponent } from './containers/my-profile/my-profile.component';
-import { MyVibiiosComponent } from './containers/my-vibiios/my-vibiios.component';
-import { SidebarComponent } from './containers/sidebar/sidebar.component';
-import { AppointmentComponent } from './containers/appointment/appointment.component';
-import { ConsumerStatusComponent } from './containers/consumer-status/consumer-status.component';
-import { NotesComponent } from './containers/notes/notes.component';
+import { DashboardComponent } from "./containers/dashboard/dashboard.component";
+import { MyProfileComponent } from "./containers/my-profile/my-profile.component";
+import { MyVibiiosComponent } from "./containers/my-vibiios/my-vibiios.component";
+import { SidebarComponent } from "./containers/sidebar/sidebar.component";
+import { AppointmentComponent } from "./containers/appointment/appointment.component";
+import { ConsumerStatusComponent } from "./containers/consumer-status/consumer-status.component";
+import { NotesComponent } from "./containers/notes/notes.component";
 
 // libraries
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { AngularDraggableModule } from 'angular2-draggable';
+import { AngularDraggableModule } from "angular2-draggable";
 
 // Components
-import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
-import { ConsumerProfileComponent } from './components/consumer-profile/consumer-profile.component';
-import { ConsumerProfileTitleComponent } from './components/consumer-profile-title/consumer-profile-title.component';
-import { AppointmentDetailsComponent } from './components/appointment-details/appointment-details.component';
-import { KeyValueComponent } from './components/key-value/key-value.component';
-import { ProfileLicensureComponent } from './components/profile-licensure/profile-licensure.component';
-import { ProfileNewLicensureComponent } from './components/profile-licensure/profile-new-licensure.component';
-import { ProfileInformationComponent } from './components/profile-information/profile-information.component';
-import { SidebarCustomerComponent } from './components/sidebar-customer/sidebar-customer.component';
-import { SidebarScheduleComponent } from './components/sidebar-schedule/sidebar-schedule.component';
-import { AppointmentNotificationComponent } from './components/appointment-notification/appointment-notification.component';
-import { NewNoteComponent } from './components/note/new-note.component';
-import { ExistingNoteComponent } from './components/note/existing-note.component';
-import { PolicyDetailComponent } from './components/policy-detail/policy-detail.component';
-import { VideoArchiveComponent } from './components/video-archive/video-archive.component';
-import { InsurancePolicyComponent } from './containers/insurance-policy/insurance-policy.component';
-import { SortButtonComponent } from './components/sort-button/sort-button.component';
-import { PolicyDetailNewComponent } from './components/policy-detail-new/policy-detail-new.component';
-import { ConsumerAddressComponent } from './components/consumer-address/consumer-address.component';
-import { ConsumerProfileSummaryComponent } from './components/consumer-profile-summary/consumer-profile-summary.component';
-import { InsurancePolicySummaryComponent } from './components/insurance-policy-summary/insurance-policy-summary.component';
-import { VibiioDescriptionComponent } from './components/vibiio-description/vibiio-description.component';
-import { CustomerNoteComponent } from './components/customer-note/customer-note.component';
-import { VibiiographerCallComponent } from '../shared/containers/vibiiographer-call/vibiiographer-call.component';
-import { VibiiographerListComponent } from './containers/vibiiographer-list/vibiiographer-list.component';
-import { ExpertListComponent } from './containers/expert-list/expert-list.component';
-import { ProfileLanguagesComponent } from './components/profile-languages/profile-languages.component';
+import { CustomerProfileComponent } from "./components/customer-profile/customer-profile.component";
+import { ConsumerProfileComponent } from "./components/consumer-profile/consumer-profile.component";
+import { ConsumerProfileTitleComponent } from "./components/consumer-profile-title/consumer-profile-title.component";
+import { AppointmentDetailsComponent } from "./components/appointment-details/appointment-details.component";
+import { KeyValueComponent } from "./components/key-value/key-value.component";
+import { ProfileLicensureComponent } from "./components/profile-licensure/profile-licensure.component";
+import { ProfileNewLicensureComponent } from "./components/profile-licensure/profile-new-licensure.component";
+import { ProfileInformationComponent } from "./components/profile-information/profile-information.component";
+import { SidebarCustomerComponent } from "./components/sidebar-customer/sidebar-customer.component";
+import { SidebarScheduleComponent } from "./components/sidebar-schedule/sidebar-schedule.component";
+import { AppointmentNotificationComponent } from "./components/appointment-notification/appointment-notification.component";
+import { NewNoteComponent } from "./components/note/new-note.component";
+import { ExistingNoteComponent } from "./components/note/existing-note.component";
+import { PolicyDetailComponent } from "./components/policy-detail/policy-detail.component";
+import { VideoArchiveComponent } from "./components/video-archive/video-archive.component";
+import { InsurancePolicyComponent } from "./containers/insurance-policy/insurance-policy.component";
+import { SortButtonComponent } from "./components/sort-button/sort-button.component";
+import { PolicyDetailNewComponent } from "./components/policy-detail-new/policy-detail-new.component";
+import { ConsumerAddressComponent } from "./components/consumer-address/consumer-address.component";
+import { ConsumerProfileSummaryComponent } from "./components/consumer-profile-summary/consumer-profile-summary.component";
+import { InsurancePolicySummaryComponent } from "./components/insurance-policy-summary/insurance-policy-summary.component";
+import { VibiioDescriptionComponent } from "./components/vibiio-description/vibiio-description.component";
+import { CustomerNoteComponent } from "./components/customer-note/customer-note.component";
+import { VibiiographerCallComponent } from "../shared/containers/vibiiographer-call/vibiiographer-call.component";
+import { VibiiographerListComponent } from "./containers/vibiiographer-list/vibiiographer-list.component";
+import { ExpertListComponent } from "./containers/expert-list/expert-list.component";
+import { ProfileLanguagesComponent } from "./components/profile-languages/profile-languages.component";
 
 // Services
-import { CustomerProfileService } from './services/customer-profile.service';
-import { AppointmentService } from './services/appointment.service';
-import { CustomerStatusCountService } from './services/customer-status-count.service';
-import { ConsumerStatusService } from './services/consumer-status.service';
-import { AllConsumersService } from './services/all-consumers.service';
-import { DashboardService } from './services/dashboard.service';
-import { MyAppointmentsService } from './services/my-appointments.service';
-import { MyProfileService } from './services/my-profile.service';
-import { MyDayService } from './services/my-day.service';
-import { SidebarMyVibiioSharedService } from './services/sidebar-my-vibiio-shared.service';
-import { TodaysVibiiosService } from './services/todays-vibiios.service';
-import { MyAvailabilityService } from './services/my-availability.service';
-import { NoteService } from './services/note.service';
-import { InsurancePolicyService } from './services/insurance-policy.service';
-import { VideoArchiveService } from './services/video-archive.service';
-import { VibiioProfileService } from './services/vibiio-profile.service';
-import { MyLicenseService } from './services/my-license.service';
-import { ConsumerSortService } from './services/consumer-sort.service';
-import { AddressStatusService } from './services/address-status.service';
-import { AppointmentDetailsFormStatusService } from './services/appointment-details-form-status.service';
-import { ConsumerUpdateService } from './services/consumer-update.service';
-import { InsuranceStatusService } from './services/insurance-status.service';
-import { NotificationService } from './services/notification.service';
+import { CustomerProfileService } from "./services/customer-profile.service";
+import { AppointmentService } from "./services/appointment.service";
+import { CustomerStatusCountService } from "./services/customer-status-count.service";
+import { ConsumerStatusService } from "./services/consumer-status.service";
+import { AllConsumersService } from "./services/all-consumers.service";
+import { DashboardService } from "./services/dashboard.service";
+import { MyAppointmentsService } from "./services/my-appointments.service";
+import { MyProfileService } from "./services/my-profile.service";
+import { MyDayService } from "./services/my-day.service";
+import { SidebarMyVibiioSharedService } from "./services/sidebar-my-vibiio-shared.service";
+import { TodaysVibiiosService } from "./services/todays-vibiios.service";
+import { MyAvailabilityService } from "./services/my-availability.service";
+import { NoteService } from "./services/note.service";
+import { InsurancePolicyService } from "./services/insurance-policy.service";
+import { VideoArchiveService } from "./services/video-archive.service";
+import { VibiioProfileService } from "./services/vibiio-profile.service";
+import { MyLicenseService } from "./services/my-license.service";
+import { ConsumerSortService } from "./services/consumer-sort.service";
+import { AddressStatusService } from "./services/address-status.service";
+import { AppointmentDetailsFormStatusService } from "./services/appointment-details-form-status.service";
+import { ConsumerUpdateService } from "./services/consumer-update.service";
+import { InsuranceStatusService } from "./services/insurance-status.service";
+import { NotificationService } from "./services/notification.service";
 
 // resolvers
-import { DashboardResolver } from './services/dashboard.resolver.service';
-import { MyAppointmentsResolver } from './services/my-appointments.resolver.service';
-import { MyDayResolver } from './services/my-day.resolver.service';
-import { MyProfileResolver } from './services/my-profile.resolver.service';
-import { SidebarCustomerResolver } from './services/sidebar-customer.resolver.service';
-import { CustomerProfileResolver } from './services/customer-profile.resolver.service';
-import { ConsumerStatusResolver } from './services/consumer-status.resolver.service';
-import { AllConsumersResolver } from './services/all-consumers.resolver.service';
-import { ExpertsResolverService } from '../shared/services/experts-resolver.service';
-import { VibiiographersResolverService } from '../shared/services/vibiiographers-resolver.service';
-import { AppointmentResolver } from './services/appointment.resolver.service';
-import { MyAvailabilityResolver } from './services/my-availability.resolver.service';
-import { VideoArchiveResolver } from './services/video-archive.resolver.service';
-import { VibiioProfileResolver } from './services/vibiio-profile.resolver.service';
+import { DashboardResolver } from "./services/dashboard.resolver.service";
+import { MyAppointmentsResolver } from "./services/my-appointments.resolver.service";
+import { MyDayResolver } from "./services/my-day.resolver.service";
+import { MyProfileResolver } from "./services/my-profile.resolver.service";
+import { SidebarCustomerResolver } from "./services/sidebar-customer.resolver.service";
+import { CustomerProfileResolver } from "./services/customer-profile.resolver.service";
+import { ConsumerStatusResolver } from "./services/consumer-status.resolver.service";
+import { AllConsumersResolver } from "./services/all-consumers.resolver.service";
+import { ExpertsResolverService } from "../shared/services/experts-resolver.service";
+import { VibiiographersResolverService } from "../shared/services/vibiiographers-resolver.service";
+import { AppointmentResolver } from "./services/appointment.resolver.service";
+import { MyAvailabilityResolver } from "./services/my-availability.resolver.service";
+import { VideoArchiveResolver } from "./services/video-archive.resolver.service";
 
 // Directives
-import { AutosizeDirective } from './directives/autosize.directive';
+import { AutosizeDirective } from "./directives/autosize.directive";
 
 // Routes
 const dashboardRoutes: Routes = [
   {
-    path: 'dashboard',
+    path: "dashboard",
     component: DashboardComponent,
     resolve: {
       sidebarCustomerStatuses: SidebarCustomerResolver,
@@ -111,14 +110,14 @@ const dashboardRoutes: Routes = [
     },
     children: [
       {
-        path: 'my_profile',
+        path: "my_profile",
         component: MyProfileComponent,
         resolve: {
           myProfile: MyProfileResolver
         }
       },
       {
-        path: 'my-videos',
+        path: "my-videos",
         component: MyVibiiosComponent,
         resolve: {
           appointments: MyAppointmentsResolver,
@@ -128,41 +127,42 @@ const dashboardRoutes: Routes = [
         }
       },
       {
-        path: 'customer-profile',
+        path: "customer-profile",
         component: CustomerProfileComponent,
         resolve: {
           customerProfile: CustomerProfileResolver
         }
       },
       {
-        path: 'appointment/:id', component: AppointmentComponent,
+        path: "appointment/:id",
+        component: AppointmentComponent,
         resolve: {
           appt: AppointmentResolver
         }
       },
       {
-        path: 'consumer-status/:status',
+        path: "consumer-status/:status",
         component: ConsumerStatusComponent,
         resolve: {
           data: AllConsumersResolver
         }
       },
       {
-        path: 'all-consumers/:status',
+        path: "all-consumers/:status",
         component: ConsumerStatusComponent,
         resolve: {
           data: AllConsumersResolver
         }
       },
       {
-        path: 'vibiiographers',
+        path: "vibiiographers",
         component: VibiiographerListComponent,
         resolve: {
           vibiiographers: VibiiographersResolverService
         }
       },
       {
-        path: 'experts',
+        path: "experts",
         component: ExpertListComponent,
         resolve: {
           experts: ExpertsResolverService
@@ -211,17 +211,17 @@ const dashboardRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-    HttpModule,
+    HttpClientModule,
+    InfiniteScrollModule,
     JcfModule,
     NouisliderModule,
     MomentModule,
-    InfiniteScrollModule,
     DynamicFormModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
     AngularDraggableModule,
-    RouterModule.forChild(dashboardRoutes),
+    RouterModule.forChild(dashboardRoutes)
   ],
   exports: [
     DashboardComponent,
@@ -269,9 +269,6 @@ const dashboardRoutes: Routes = [
     VibiiographersResolverService,
     NotificationService
   ],
-  entryComponents: [
-    VibiiographerCallComponent
-  ]
+  entryComponents: [VibiiographerCallComponent]
 })
-
-export class DashboardModule { }
+export class DashboardModule {}

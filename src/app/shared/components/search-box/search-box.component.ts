@@ -7,7 +7,7 @@ import { Component, OnInit, Output, ViewChild, ElementRef, EventEmitter } from '
 })
 export class SearchBoxComponent {
   @Output() queryEmitter = new EventEmitter<string>();
-  @ViewChild('query') query: ElementRef;
+  @ViewChild('query', {static: false}) query: ElementRef;
 
   search() {
     this.queryEmitter.emit(this.query.nativeElement.value);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InsuranceStatusService } from './insurance-status.service';
 import { AddressStatusService } from './address-status.service';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class AppointmentDetailsFormStatusService {

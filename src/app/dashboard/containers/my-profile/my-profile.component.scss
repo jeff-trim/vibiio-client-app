@@ -1,256 +1,256 @@
-@import '../../../../assets/css/_variables.scss';
+@import "../../../../assets/css/_variables.scss";
 
 .flex {
-    display: flex;
-    flex-direction: column;
-    @media(min-width: $small){
-        flex-direction: row;
-    }
-    &.flex-bottom {
-        align-items: baseline;
-    }
+  display: flex;
+  flex-direction: column;
+  @media (min-width: $small) {
+    flex-direction: row;
+  }
+  &.flex-bottom {
+    align-items: baseline;
+  }
 }
 
-/deep/ .pink {
-   color: $pink;
+::ng-deep .pink {
+  color: $pink;
 }
 
 .center {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .profile-title {
-    font-family: $base-font;
-    font-size: 5.025rem;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1;
-    letter-spacing: -2px;
-    margin-bottom: 0;
-    @media (min-width: $small){
-        padding-left: 25px;
-    }
+  font-family: $base-font;
+  font-size: 5.025rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 0;
+  @media (min-width: $small) {
+    padding-left: 25px;
+  }
 }
 
-/deep/ .profile-information h2,
-/deep/ .profile-licensure h2 {
-	  font-family: Montserrat;
-	  font-size: 2.75rem;
-	  font-weight: 700;
-	  letter-spacing: normal;
-	  color: $azure;
-      line-height: 1.55;
+::ng-deep .profile-information h2,
+::ng-deep .profile-licensure h2 {
+  font-family: Montserrat;
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: normal;
+  color: $azure;
+  line-height: 1.55;
 }
 
-/deep/ .profile-information {
-    @media (min-width: $small) {
-       padding-left: 25px;
-       padding-right: 60px;
-       padding-bottom: 60px;
-       margin-bottom: 60px;
-   }
+::ng-deep .profile-information {
+  @media (min-width: $small) {
+    padding-left: 25px;
+    padding-right: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 60px;
+  }
 }
 
-/deep/ .profile-licensure {
-    @media(min-width: $small){
-        padding-right: 25px;
-    }
+::ng-deep .profile-licensure {
+  @media (min-width: $small) {
+    padding-right: 25px;
+  }
 }
 
-/deep/ h2 {
-    height: 3.375rem;
-    font-family: $base-font;
-    font-size: 2rem;
-    font-weight: 700; color: $blue;
-    line-height: 1.3;
+::ng-deep h2 {
+  height: 3.375rem;
+  font-family: $base-font;
+  font-size: 2rem;
+  font-weight: 700;
+  color: $blue;
+  line-height: 1.3;
 }
 
-/deep/ h3 {
-    text-align: left;
-    opacity: 0.75;
-    font-family: $base-font;
-    font-size: 1.375px;
-    font-weight: 600;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: normal;
+::ng-deep h3 {
+  text-align: left;
+  opacity: 0.75;
+  font-family: $base-font;
+  font-size: 1.375px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
 }
 
-/deep/ h4 {
-    height: 18px;
-	font-family: $copy-font;
-	font-size: 13px;
-	font-weight: 800;
-	letter-spacing: 1px;
-    text-align: right;
-    cursor: pointer;
-    &.save-text{
-        color: $blue;
-        overflow-y: hidden;
-        text-align: start;
-        width: 100px;
-    }
-    &.cancel-text{
-        color: $pink;
-        margin-left: 26px;
-    }
-    &.edit-text{
-        color: $pink;
-    }
+::ng-deep h4 {
+  height: 18px;
+  font-family: $copy-font;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: right;
+  cursor: pointer;
+  &.save-text {
+    color: $blue;
+    overflow-y: hidden;
+    text-align: start;
+    width: 100px;
+  }
+  &.cancel-text {
+    color: $pink;
+    margin-left: 26px;
+  }
+  &.edit-text {
+    color: $pink;
+  }
 }
 
 .save-after-element::after {
-    animation: ellipsis .01s steps(1) 2s;
-    content: "D";
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
-    animation-duration: 4s;
+  animation: ellipsis 0.01s steps(1) 2s;
+  content: "D";
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  animation-duration: 4s;
+}
+@keyframes ellipsis {
+  0% {
+    width: 2ch;
   }
-  @keyframes ellipsis {
-    0% { width: 2ch; }
-  }
+}
 
 .pink-underline {
-    width: 7%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-bottom: 3px solid $pink;
+  width: 7%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom: 3px solid $pink;
 }
 
-/deep/ .long-pink-underline {
-    width: 22%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-bottom: 3px solid $pink;
+::ng-deep .long-pink-underline {
+  width: 22%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom: 3px solid $pink;
 }
 
-/deep/ .download {
-    font-family: $base-font;
-    font-size: 1.7rem;
-    font-weight: 700;
+::ng-deep .download {
+  font-family: $base-font;
+  font-size: 1.7rem;
+  font-weight: 700;
 
-    .arrow {
-        width: 3rem;
-        height: 3rem;
-        line-height: 2;
-        float: right;
-    }
+  .arrow {
+    width: 3rem;
+    height: 3rem;
+    line-height: 2;
+    float: right;
+  }
 }
 
 .add-license {
-    display: flex;
-    align-items: center;
-    margin-top: 25px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  cursor: pointer;
 }
 
 .add-text {
-    margin-left: 8px;
-    width: 118px;
-    height: 18px;
-    font-family: $copy-font;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: $pink;
-    text-transform: uppercase;
+  margin-left: 8px;
+  width: 118px;
+  height: 18px;
+  font-family: $copy-font;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: $pink;
+  text-transform: uppercase;
 }
 
 .info-element {
-    margin: 0px 0 20px 0;
-    position: relative;
-    padding-bottom: 10px;
+  margin: 0px 0 20px 0;
+  position: relative;
+  padding-bottom: 10px;
 }
 .restrict-height {
-    max-height: 250px;
-    overflow-y: auto;
-    overflow-x: hidden;
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-#scrollbar::-webkit-scrollbar-track
-{
-    background: rgba(236, 0, 140, 0.25);
-    border-radius: 10px;
+#scrollbar::-webkit-scrollbar-track {
+  background: rgba(236, 0, 140, 0.25);
+  border-radius: 10px;
 }
 
-#scrollbar::-webkit-scrollbar
-{
-	width: 10px;
+#scrollbar::-webkit-scrollbar {
+  width: 10px;
 }
 
-#scrollbar::-webkit-scrollbar-thumb
-{
-    border-radius: 10px;
-    background-color: $pink;
+#scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $pink;
 }
 
 .my-profile-header {
-    position: relative;
+  position: relative;
 }
 
 .save-cancel-container {
-    display: flex;
-    position: absolute;
-    top: 70%;
-    right: 11%;
-    @media(max-width: $medium) {
-      top: 90%;
-      right: unset;
-      left: 4%;
-    }
-    @media(max-width: $xsmall) {
-      top: 90%;
-      right: unset;
-      left: 2%;
-    }
+  display: flex;
+  position: absolute;
+  top: 70%;
+  right: 11%;
+  @media (max-width: $medium) {
+    top: 90%;
+    right: unset;
+    left: 4%;
+  }
+  @media (max-width: $xsmall) {
+    top: 90%;
+    right: unset;
+    left: 2%;
+  }
 }
 
 .availability-container {
-    display: flex;
-    .availability-icon-on {
-        height: 27px;
-        width: 37px;
-        background-image: url(../../../../assets/images/switch-on-blue.svg);
-        background-repeat: no-repeat;
-        cursor: pointer;
-        -webkit-transition: all ease 200ms;
-        transition: all ease 200ms;
-    }
-    .availability-icon-off {
-        height: 27px;
-        width: 37px;
-        background-image: url(../../../../assets/images/switch-off.svg);
-        background-repeat: no-repeat;
-        cursor: pointer;
-        -webkit-transition: all ease 200ms;
-        transition: all ease 200ms;
-    }
-    .availability-message {
-        font-family: $copy-font;
-        text-transform: uppercase;
-        font-size: 15px;
-        font-weight: 600;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: 1px;
-        margin-left: 10px;
-        color: $blue;
-        -webkit-transition: all ease 200ms;
-        transition: all ease 200ms;
-    }
+  display: flex;
+  .availability-icon-on {
+    height: 27px;
+    width: 37px;
+    background-image: url(../../../../assets/images/switch-on-blue.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    -webkit-transition: all ease 200ms;
+    transition: all ease 200ms;
+  }
+  .availability-icon-off {
+    height: 27px;
+    width: 37px;
+    background-image: url(../../../../assets/images/switch-off.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    -webkit-transition: all ease 200ms;
+    transition: all ease 200ms;
+  }
+  .availability-message {
+    font-family: $copy-font;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1px;
+    margin-left: 10px;
+    color: $blue;
+    -webkit-transition: all ease 200ms;
+    transition: all ease 200ms;
+  }
 }
 
 .label {
-    font-family: $base-font;
-    font-size: 1.65rem;
-    font-weight: 700;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: normal;
-    color: $greyish-brown;
-  }
+  font-family: $base-font;
+  font-size: 1.65rem;
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  color: $greyish-brown;
+}

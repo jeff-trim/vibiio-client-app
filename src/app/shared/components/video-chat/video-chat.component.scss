@@ -1,129 +1,128 @@
-@import '~assets/css/_variables.scss';
-.call-container{
-    position: relative;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+@import "~assets/css/_variables.scss";
+.call-container {
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 .subscriber-holder {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 .on-fullscreen {
-    z-index: 3; 
-    width: 100%; 
-    height: 100%; 
-    position: fixed; 
-    top: 0; 
-    left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .subscriber-stream {
-    position: relative;
-    margin: auto;
-    height: 100%;
+  position: relative;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  .name-container {
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  vib-video-controls {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    z-index: 4;
     width: 100%;
-    .name-container {
-        position: absolute;
-        top: 25px;
-        left: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
-    vib-video-controls {
-        position: absolute;
-        bottom: 15px;
-        left: 0;
-        z-index: 4;
-        width: 100%;
-    }
+  }
 }
 
 .fullscreen-button-container {
-    position: absolute;
-    z-index: 1;
-    top: 25px;
-    right: 0;
-    height: 40px;
-    width: 40px;
-    &.full {
-        top: 0;
-        right: 23%;
-    }
-    .fullscreen-button {
-        margin-top: 10px;
-        height: 20px;
-        width: 20px;
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        cursor: pointer;
-        
-        &.exit {
-            background-image: url(~assets/images/fullscreen-exit-pink@3x.png);
-        }
+  position: absolute;
+  z-index: 1;
+  top: 25px;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  &.full {
+    top: 0;
+    right: 23%;
+  }
+  .fullscreen-button {
+    margin-top: 10px;
+    height: 20px;
+    width: 20px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
 
-        &.full {
-            background-image: url(~assets/images/fullscreen-enter-pink.svg);
-        }
+    &.exit {
+      background-image: url("../../../../assets/images/fullscreen-exit-pink@3x.png");
     }
+
+    &.full {
+      background-image: url("../../../../assets/images/fullscreen-enter-pink.svg");
+    }
+  }
 }
 
 .waiting-text {
-    max-height: 20px;
-    align-self: flex-start;
-    text-align: center;
-    color: $pink;
-    font-family: $base-font;
-    font-size: 1.8em;
-    font-weight: bold;
-    line-height: 1.16;
+  max-height: 20px;
+  align-self: flex-start;
+  text-align: center;
+  color: $pink;
+  font-family: $base-font;
+  font-size: 1.8em;
+  font-weight: bold;
+  line-height: 1.16;
 }
 .waiting-house {
-    height: 175px;
-    width: 200px;
-    margin: 35px auto;
-    background-image: url(~assets/images/opening_slide.jpg);
-    background-size: contain;
-    background-repeat: no-repeat;
+  height: 175px;
+  width: 200px;
+  margin: 35px auto;
+  background-image: url("../../../../assets/images/opening_slide.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 vib-video-controls.fullscreen-controls {
-    position: absolute;
-    z-index: 1;
-    bottom: 30px;
-    left: 45%;
+  position: absolute;
+  z-index: 1;
+  bottom: 30px;
+  left: 45%;
 }
 
 .name-container {
-    &.fullscreen-name-container {
-        position: absolute;
-        top: 0;
-        left: 25%;
-    }
+  &.fullscreen-name-container {
+    position: absolute;
+    top: 0;
+    left: 25%;
+  }
 }
 
 vib-expert-search {
-    width: 100%;
-    max-width: 400px;
-    height: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 9;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
 }
 
 vib-sm-notification {
-    position: absolute;
-    width: 100%;
-    max-width: 400px;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    border-bottom: 1px solid $placeholder-grey;
+  position: absolute;
+  width: 100%;
+  max-width: 400px;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  border-bottom: 1px solid $placeholder-grey;
 }
-

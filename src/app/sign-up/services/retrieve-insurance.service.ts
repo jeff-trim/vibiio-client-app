@@ -1,18 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { API_URL } from '../../../environments/environment';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { API_URL } from "../../../environments/environment";
 
 @Injectable()
 export class RetrieveInsuranceService {
-
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getInsuranceProviders() {
-    return this.http
-               .get(`${API_URL}/insurance_providers`)
-               .map((response: Response) => response.json() );
+    return this.http.get(`${API_URL}/insurance_providers`);
   }
 }

@@ -1,21 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { API_URL } from '../../../environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { API_URL } from "../../../environments/environment";
 
-import { Appointment } from '../models/appointment.interface';
-
-const CUSTOMER_PROFILE_API: string = `${API_URL}/schedule/range`;
+const CUSTOMER_PROFILE_API = `${API_URL}/schedule/range`;
 
 @Injectable()
 export class CustomerProfileService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  getCustomerProfiles(): Observable<Appointment[]> {
-    return this.http
-        .get(CUSTOMER_PROFILE_API)
-        .map((response: Response) => response.json());
+  getCustomerProfiles() {
+    return this.http.get(CUSTOMER_PROFILE_API);
   }
 }

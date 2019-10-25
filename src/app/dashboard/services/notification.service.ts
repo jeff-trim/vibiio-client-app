@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import intersection from 'lodash/intersection';
 import * as _ from 'lodash';
 import * as ActionCable from 'action-cable-react-jwt';

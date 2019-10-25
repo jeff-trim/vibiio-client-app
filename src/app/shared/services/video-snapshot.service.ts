@@ -1,21 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { API_URL } from '../../../environments/environment';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-
-// Models
-import { VideoSnapshot } from '../../dashboard/models/video-snapshot.interface';
+import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { API_URL } from "../../../environments/environment";
 
 const url = `${API_URL}/video_chat/snapshots`;
 
 @Injectable()
 export class VideoSnapshotService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  saveSnapshot(consumer_id: number, session_id: string, vibiio_id: number, snapshot: any): Observable<any> {
+  saveSnapshot(
+    consumer_id: number,
+    session_id: string,
+    vibiio_id: number,
+    snapshot: any
+  ): Observable<any> {
     const payload = {
       video_session: {
         consumer_id: consumer_id,
@@ -25,9 +24,6 @@ export class VideoSnapshotService {
       }
     };
 
-    return this.http
-               .post(url, payload)
-               .map( (response: Response) => response.json() )
-               .catch( (error: any) => Observable.throw(error));
+    return this.http.post(url, payload);
   }
 }

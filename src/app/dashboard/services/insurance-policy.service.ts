@@ -1,51 +1,38 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { API_URL } from '../../../environments/environment';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+
+import { API_URL } from "../../../environments/environment";
 
 // Models
-import { InsurancePolicy } from '../models/insurance-policy.interface';
+import { InsurancePolicy } from "../models/insurance-policy.interface";
 
 const POLICY_URL = `${API_URL}/insurance_policies/`;
 
 @Injectable()
 export class InsurancePolicyService {
-    constructor(private http: Http) { }
+  constructor(private http: HttpClient) {}
 
-    updatePolicy(policy: InsurancePolicy): Observable <any> {
-        const id = policy.id;
-        const url = `${POLICY_URL}${id}`;
-        const payload = { insurance_policy: policy };
+  updatePolicy(policy: InsurancePolicy): Observable<any> {
+    const id = policy.id;
+    const url = `${POLICY_URL}${id}`;
+    const payload = { insurance_policy: policy };
 
-    return this.http
-            .patch(url, payload)
-               .map( (response: Response) => response.json() )
-               .catch( (error: any) => Observable.throw(error));
-    }
+    return this.http.patch(url, payload);
+  }
 
-    newPolicy(policy: InsurancePolicy): Observable <any> {
-        const url = `${POLICY_URL}`;
-        const payload = { insurance_policy: policy };
+  newPolicy(policy: InsurancePolicy): Observable<any> {
+    const url = `${POLICY_URL}`;
+    const payload = { insurance_policy: policy };
 
-    return this.http
-            .post(url, payload)
-               .map( (response: Response) => response.json() )
-               .catch( (error: any) => Observable.throw(error));
-    }
+    return this.http.post(url, payload);
+  }
 
-    getPolicies(consumerId: number): Observable <any> {
-        const url = `${POLICY_URL}`;
+  getPolicies(consumerId: number): Observable<any> {
+    const url = `${POLICY_URL}`;
 
-        const options = new RequestOptions({
-            params: { consumer_id: consumerId }
-        });
+    const params = new HttpParams().set("consumerId", `${consumerId}`);
 
-    return this.http
-            .get(url, options)
-               .map( (response: Response) => response.json() )
-               .catch( (error: any) => Observable.throw(error));
-    }
+    return this.http.get(url, { params });
+  }
 }

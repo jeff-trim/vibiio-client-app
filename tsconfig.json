@@ -1,16 +1,28 @@
 {
   "compileOnSave": false,
+  "include": [
+    "./node_modules/angular2-jcf-directive/jcfModule/index.ts",
+    "./node_modules/angular2-jcf-directive/jcfModule/jcf.directive.ts",
+    "./src/polyfills.ts",
+    "./src/main.ts"
+  ],
   "compilerOptions": {
+    "downlevelIteration": true,
+    "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "lib": [
-      "es2016",
-      "dom"
-    ]
+    "target": "es2015",
+    "lib": ["es2016", "dom"],
+    "module": "esnext",
+    "baseUrl": "./",
+    "typeRoots": ["node_modules/@types"]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }

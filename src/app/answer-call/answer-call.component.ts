@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { consumerSignUp } from '../sign-up/services/form-config';
 import { VideoChatService } from '../shared/services/video-chat.service';

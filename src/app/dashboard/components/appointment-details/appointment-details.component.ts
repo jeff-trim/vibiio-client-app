@@ -49,7 +49,8 @@ export class AppointmentDetailsComponent {
   @Output() isUpdating = new EventEmitter<boolean>();
   @Output() refreshAddress = new EventEmitter<boolean>();
 
-  @ViewChild(ConsumerAddressComponent) addressForm: ConsumerAddressComponent;
+  @ViewChild(ConsumerAddressComponent, { static: false })
+  addressForm: ConsumerAddressComponent;
 
   constructor(
     private dateFormatService: DateFormatService,
@@ -59,10 +60,12 @@ export class AppointmentDetailsComponent {
   updateAddress() {
     if (this.addressForm.editForm.valid) {
       const address = this.addressForm.editForm.value;
-      this.consumerUpdateService.updateAddress(address).subscribe(data => {
-        this.address = data.address;
-        this.isEditingForms = false;
-      });
+      this.consumerUpdateService
+        .updateAddress(address)
+        .subscribe((data: any) => {
+          this.address = data.address;
+          this.isEditingForms = false;
+        });
     }
   }
 
@@ -70,7 +73,7 @@ export class AppointmentDetailsComponent {
     this.refreshAddress.emit(true);
     this.consumerUpdateService
       .refreshAddress(this.address.id)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         this.addressForm.editForm.patchValue(data.address);
         this.isEditingForms = false;
       });

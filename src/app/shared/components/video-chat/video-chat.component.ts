@@ -54,7 +54,7 @@ export class VideoChatComponent {
   @Output() add = new EventEmitter<User>();
   @Output() exitSearch = new EventEmitter<boolean>();
 
-  @ViewChild('fullSubscriberScreen') fullSubscriberStream: ElementRef;
+  @ViewChild('fullSubscriberScreen', {static: false}) fullSubscriberStream: ElementRef;
 
   updateStatus(status: any) {
     this.updateVibiioStatus.emit(status);

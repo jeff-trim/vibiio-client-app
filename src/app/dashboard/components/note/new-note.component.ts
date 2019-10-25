@@ -6,7 +6,7 @@ import { NoteService } from '../../services/note.service';
 
 // Models
 import { Note } from '../../models/consumer-note.interface';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'vib-new-vibiio-note',

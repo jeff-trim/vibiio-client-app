@@ -1,20 +1,23 @@
-import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from "@angular/core";
+import {
+  ActivatedRouteSnapshot,
+  Resolve,
+  Router,
+  RouterStateSnapshot
+} from "@angular/router";
+import { Observable } from "rxjs";
 
 // Services
-import { UsersService } from './users.service';
+import { UsersService } from "./users.service";
 
 // Interface
-import { User } from '../../dashboard/models/user.interface';
+import { User } from "../../dashboard/models/user.interface";
 
 @Injectable()
 export class VibiiographersResolverService implements Resolve<any> {
+  constructor(private router: Router, private usersService: UsersService) {}
 
-  constructor(private router: Router,
-              private usersService: UsersService) {}
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User[]> {
-    return this.usersService.index('Vibiiographer');
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.usersService.index("Vibiiographer");
   }
 }

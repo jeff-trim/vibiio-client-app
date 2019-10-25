@@ -1,40 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { API_URL } from '../../../environments/environment';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+
+import { API_URL } from "../../../environments/environment";
 
 // Interfaces
-import { Credentials } from '../models/credentials.interface';
+import { Credentials } from "../models/credentials.interface";
 
 @Injectable()
 export class PasswordResetService {
+  constructor(private http: HttpClient) {}
 
-    constructor(private http: Http){}
+  resetPassword(data: Credentials): Observable<any> {
+    const body = { password_reset: data };
 
-    resetPassword(data: Credentials): Observable<any> {
+    return this.http.post(`${API_URL}/password_reset`, body);
+  }
 
-        const body = { password_reset: data };
+  submitNewPassword(password, jwt: string): Observable<any> {
+    const body = {
+      password: {
+        token: jwt,
+        new_password: password.pw
+      }
+    };
 
-        return this.http
-            .post(`${API_URL}/password_reset`, body)
-            .map((response: Response) => response)
-            .catch((error: any) => Observable.throw(error));
-    }
-
-    submitNewPassword(password, jwt: string): Observable<any> {
-        const body = {
-            password: {
-                token: jwt,
-                new_password: password.pw
-            }
-        }
-
-        return this.http
-            .patch(`${API_URL}/passwords`, body)
-            .map((response: any) => response)
-            .catch((error: any) => Observable.throw(error));
-    }
+    return this.http.patch(`${API_URL}/passwords`, body);
+  }
 }

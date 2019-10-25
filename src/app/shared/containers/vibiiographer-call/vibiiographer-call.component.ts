@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild
 } from "@angular/core";
-import { Subscription, Observable } from "rxjs/Rx";
+import { Subscription, Observable, timer } from "rxjs";
 
 // Libraries
 import * as ActionCable from "action-cable-react-jwt";
@@ -104,7 +104,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
 
   @Output() updateVibiioStatus = new EventEmitter<any>();
 
-  @ViewChild(VideoChatComponent) videoChatComponent: VideoChatComponent;
+  @ViewChild(VideoChatComponent, {static: false}) videoChatComponent: VideoChatComponent;
 
   constructor(
     private videoService: VideoChatService,
@@ -160,8 +160,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   getConnectionData() {
     this.videoService
       .getConnectionData(this.vibiio.id, undefined, undefined)
-      .takeWhile(() => this.alive)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         this.token = data.connection_data.token_data.token;
         this.connectToSession();
       });
@@ -171,8 +170,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
     this.message = `A text message has been sent to ${expert.first_name} ${expert.last_name} inviting them to the call.`;
     this.addToCall
       .callUser(expert.id, this.vibiio.id)
-      .takeWhile(() => this.alive)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         this.consumerName = data.consumer;
         this.expertWaitingToJoin = true;
         this.setNotificationFadeOutTimer();
@@ -184,7 +182,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
       this.fadeSubscription.unsubscribe();
     }
 
-    this.fadeTimer = Observable.timer(3000);
+    this.fadeTimer = timer(3000);
     this.showNotification = true;
 
     this.fadeSubscription = this.fadeTimer.subscribe(() => {
@@ -193,10 +191,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   }
 
   callConsumer() {
-    this.videoService
-      .dialConsumer(this.vibiio.id)
-      .takeWhile(() => this.alive)
-      .subscribe(res => {});
+    this.videoService.dialConsumer(this.vibiio.id).subscribe(res => {});
     this.subscribeToCallNotifications();
   }
 
@@ -226,7 +221,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   }
 
   setHangUpTimer() {
-    this.hangUpTimer = Observable.timer(4000);
+    this.hangUpTimer = timer(4000);
 
     this.hangUpSubscription = this.hangUpTimer.subscribe(() => {
       this.showNotification = false;
@@ -254,7 +249,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   }
 
   subscribeToStreamCreatedEvents() {
-    this.session.on("streamCreated", data => {
+    this.session.on("streamCreated", (data: any) => {
       this.onVibiio = true;
       this.vibiioConnecting = false;
       const stream = data.stream;
@@ -342,7 +337,7 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   }
 
   subscribeToStreamDestroyedEvents() {
-    this.session.on("streamDestroyed", data => {
+    this.session.on("streamDestroyed", (data: any) => {
       const stream = data.stream;
       this.processUnsubscribe(stream);
     });
@@ -406,9 +401,8 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
         this.vibiio.id,
         this.imgData
       )
-      .takeWhile(() => this.alive)
       .subscribe(
-        data => {},
+        (data: any) => {},
         error => {
           console.log("error ", error);
         }
@@ -464,7 +458,6 @@ export class VibiiographerCallComponent implements OnInit, OnDestroy {
   private triggerActivity(vibiio_id: number, message: string, name: string) {
     this.activityService
       .postActivity(vibiio_id, message, name)
-      .takeWhile(() => this.alive)
-      .subscribe(data => {});
+      .subscribe((data: any) => {});
   }
 }
