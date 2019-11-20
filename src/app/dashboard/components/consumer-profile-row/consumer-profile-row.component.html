@@ -1,0 +1,19 @@
+<div class="row profile-row">
+    <a class="col-md-3 profile-text fullname" (click)="viewDetails()">
+        {{ consumerProfile.user_info.first_name}} {{ consumerProfile.user_info.last_name}}
+    </a>
+    <div class="col-md-4 profile-text">
+        {{ consumerProfile.user_info.email}}
+    </div>
+    <div class="col-md-3 profile-text">
+        {{ consumerProfile.user_info.phone}}
+    </div>
+    <div class="col-md-1" (click)="connect()">
+        <img src="assets/images/call-controls.svg" class="phone">
+    </div>
+    <a class="col-md-1" (click)="viewDetails()">
+        <img src="assets/images/right-arrow.svg" class="view-details-arrow">
+    </a>
+
+    <div class="line"></div>
+</div>

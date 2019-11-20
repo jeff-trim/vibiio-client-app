@@ -52,6 +52,7 @@ import { VibiiographerCallComponent } from '../shared/containers/vibiiographer-c
 import { VibiiographerListComponent } from './containers/vibiiographer-list/vibiiographer-list.component';
 import { ExpertListComponent } from './containers/expert-list/expert-list.component';
 import { ProfileLanguagesComponent } from './components/profile-languages/profile-languages.component';
+import { ConsumerProfileRowComponent } from './components/consumer-profile-row/consumer-profile-row.component';
 
 // Services
 import { CustomerProfileService } from './services/customer-profile.service';
@@ -207,7 +208,8 @@ const dashboardRoutes: Routes = [
     CustomerNoteComponent,
     VibiiographerListComponent,
     ExpertListComponent,
-    ProfileLanguagesComponent
+    ProfileLanguagesComponent,
+    ConsumerProfileRowComponent
   ],
   imports: [
     CommonModule,
