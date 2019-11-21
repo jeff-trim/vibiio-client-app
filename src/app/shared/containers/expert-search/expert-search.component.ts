@@ -37,7 +37,7 @@ export class ExpertSearchComponent implements OnInit {
   filterResults(term?: string) {
     this.filter = this.nomenclatureFix(term);
 
-    const query = this.searchBoxChild.query.nativeElement.value;
+    const query = this.searchBoxChild.searchValue;
     this.userService.index(this.filter, query).subscribe( data => {
       this.results = data;
 

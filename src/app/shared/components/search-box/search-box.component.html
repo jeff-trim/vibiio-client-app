@@ -1,11 +1,8 @@
 <div id="user-search" class="user-row search-row">
-    <input class="value no-border inoput-element"
-           type="text"
-           placeholder="Search"
-           value=""
-           #query
-           (keydown.enter)="search()">
-    <button class="btn-sm m-sm search-icon"
-            type="submit"
-            (click)="search()"></button>
+    <input class="value no-border input-element" type="text" placeholder="Search" [(ngModel)]="searchValue" (keydown.enter)="search()">
+
+    <button class="btn-sm m-sm search-icon" type="submit" *ngIf="!didSeaarch" (click)="search()">
+    </button>
+    <button class="btn-sm m-sm cancel-icon" type="submit" *ngIf="didSeaarch" (click)="clear()">
+    </button>
 </div>

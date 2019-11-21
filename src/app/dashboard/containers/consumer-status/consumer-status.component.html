@@ -2,44 +2,35 @@
             my-vibiio-container
             col-md-offset-1">
 
-  <h1 class="col-xs pink">{{ this.displayStatus | removeUnderscore }} </h1>
+  <vib-consumer-profiles-filters [displayStatus]="displayStatus"></vib-consumer-profiles-filters>
 
   <div class="flex">
-    <div class="search-and-sort">
-      <vib-search-box (queryEmitter)="search($event)"></vib-search-box>
-      <ng-template #noResults>
-        <p class="col-md-3
-          welcomeText"> No Customers match that status.</p>
-      </ng-template>
-
-      <vib-sort-button [sortTypes]="sortTypes" (sortConsumers)="sortConsumers($event)">
-      </vib-sort-button>
+    <div class="search-and-sort row">
+      <div class="col-md-9">
+        <vib-search-box (queryEmitter)="search($event)"></vib-search-box>
+      </div>
+      <div class="col-md-3">
+        <vib-sort-button class="sort-button" [sortTypes]="sortTypes" (sortConsumers)="sortConsumers($event)">
+        </vib-sort-button>
+      </div>
     </div>
   </div>
 
-  <div *ngIf="(consumerProfiles?.length > 0); else noResults">
-
+  <div *ngIf="(consumerProfiles?.length > 0); else noResults" class="consumer-profiles-container">
 
     <div *ngFor="let consumerProfile of consumerProfiles |
          orderBy: {property: property, direction: direction}">
       <div class="flex">
 
-        <vib-consumer-profile-title [consumerProfile]="consumerProfile"></vib-consumer-profile-title>
+        <vib-consumer-profile-row 
+          [consumerProfile]="consumerProfile">
+        </vib-consumer-profile-row>
 
-        <div class="consumer-profile-container">
-          <div class="col-md-6
-                 consumer-profile-detail">
-
-            <vib-consumer-profile-summary [consumerProfile]="consumerProfile"></vib-consumer-profile-summary>
-
-          </div>
-
-          <div class="col-md-7
-                 col-md-offset-1">
-            <video-archive [snapshots]="consumerProfile.snapshots"></video-archive>
-          </div>
-        </div>
       </div>
     </div>
   </div>
+  <ng-template #noResults>
+    <h3 class="welcomeText"> No Customers match that status.</h3>
+  </ng-template>
+
 </div>

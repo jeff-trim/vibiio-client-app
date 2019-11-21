@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CustomerStatusCount } from '../../models/customer-status-count.interface';
+import { Component, Input, OnInit } from "@angular/core";
+import { CustomerStatusCount } from "../../models/customer-status-count.interface";
 
 @Component({
-  selector: 'vib-sidebar-customer',
-  styleUrls: ['sidebar-customer.component.scss'],
+  selector: "vib-sidebar-customer",
+  styleUrls: ["sidebar-customer.component.scss"],
   template: `
             <div class="sidebar-customer">
               <div class="categories-container">
@@ -26,6 +26,6 @@ export class SidebarCustomerComponent implements OnInit {
   @Input() category: CustomerStatusCount;
 
   ngOnInit() {
-    this.categoryParam = this.category.status.replace(/\s/g, '_').toLowerCase();
+    this.categoryParam = this.category.status.replace(/\s/g, "_").toLowerCase();
   }
 }

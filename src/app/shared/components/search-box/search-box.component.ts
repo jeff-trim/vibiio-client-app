@@ -1,21 +1,28 @@
-import { Component, OnInit, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'vib-search-box',
-  templateUrl: './search-box.component.html',
-  styleUrls: ['./search-box.component.scss']
+  selector: "vib-search-box",
+  templateUrl: "./search-box.component.html",
+  styleUrls: ["./search-box.component.scss"]
 })
 export class SearchBoxComponent {
   @Output() queryEmitter = new EventEmitter<string>();
-  @ViewChild('query') query: ElementRef;
+
+  didSeaarch = false;
+  searchValue = "";
 
   search() {
-    this.queryEmitter.emit(this.query.nativeElement.value);
-    this.clearTerm();
+    this.searchValue = this.searchValue.trim();
+    this.queryEmitter.emit(this.searchValue);
+    if (this.searchValue.length > 0) {
+      this.didSeaarch = true;
+    }
   }
 
-  clearTerm() {
-    this.query.nativeElement.value = '';
+  clear() {
+    this.searchValue = "";
+    this.queryEmitter.emit(this.searchValue);
+    this.didSeaarch = false;
   }
 
 }

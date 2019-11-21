@@ -87,6 +87,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 if (this.startVibiioParams && this.isCorrectAppointment()) {
                     this.answerCall();
                 }
+                if (params["startCall"]) {
+                    this.callConsumer();
+                }
             });
     }
 
