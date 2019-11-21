@@ -1,0 +1,46 @@
+@import '../../../../assets/css/_variables.scss';
+
+.profiles-filters-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: -11px;
+    
+    .a-container {
+        margin-right: auto;
+        margin-left: auto;
+        width: fit-content;
+
+        a.category {
+            opacity: 0.75;
+            font-family: $copy-font;
+            font-size: 13px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: 1px;
+            color: $greyish-brown;
+            
+            .underline {
+                display: none;
+            }
+        }
+        
+        a.category.active {
+            opacity: 1;
+            font-weight: 800;
+            
+            .underline {
+                display: block;
+                margin-top: 2px;
+                width: 100%;
+                height: 2px;
+                background-color: #ec008c;
+            }
+        }
+    }
+}
+
+.text-center {
+    text-align: center;
+}

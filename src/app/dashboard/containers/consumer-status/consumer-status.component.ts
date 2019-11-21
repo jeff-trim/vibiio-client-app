@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 // Services
-import { ConsumerSortService } from '../../services/consumer-sort.service';
-import { AllConsumersService } from '../../services/all-consumers.service';
+import { ConsumerSortService } from "../../services/consumer-sort.service";
+import { AllConsumersService } from "../../services/all-consumers.service";
 
 // Interfaces
-import { ConsumerProfile } from '../../models/consumer-profile.interface';
-import { SortType } from '../../models/sort-type.interface';
+import { ConsumerProfile } from "../../models/consumer-profile.interface";
+import { SortType } from "../../models/sort-type.interface";
 
 @Component({
-    selector: 'vib-consumer-status',
-    templateUrl: 'consumer-status.component.html',
-    styleUrls: ['consumer-status.component.scss']
+    selector: "vib-consumer-status",
+    templateUrl: "consumer-status.component.html",
+    styleUrls: ["consumer-status.component.scss"]
 })
 
 export class ConsumerStatusComponent implements OnInit {
@@ -21,7 +21,7 @@ export class ConsumerStatusComponent implements OnInit {
     displayStatus: string;
     sortTypes: SortType[];
     direction = 1;
-    property = 'appointment_scheduled_datetime';
+    property = "appointment_scheduled_datetime";
 
     constructor(private activatedRoute: ActivatedRoute,
         private sortService: ConsumerSortService,
@@ -32,13 +32,7 @@ export class ConsumerStatusComponent implements OnInit {
         });
 
         this.activatedRoute.params.subscribe((params) => {
-            if (params['status'] !== '') {
-                this.consumerStatus = params['status'];
-                this.displayStatus = this.consumerStatus.charAt(0).toUpperCase()
-                    + params['status'].slice(1);
-            } else {
-                this.displayStatus = 'All Customers';
-            }
+            this.displayStatus = params["status"];
         });
     }
 

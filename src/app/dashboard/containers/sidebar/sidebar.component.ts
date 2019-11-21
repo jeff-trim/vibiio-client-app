@@ -9,35 +9,35 @@ import { Component,
          ViewContainerRef,
          ApplicationRef,
          Injector,
-         EmbeddedViewRef} from '@angular/core';
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { SidebarScheduleComponent } from '../../components/sidebar-schedule/sidebar-schedule.component';
-import { SidebarCustomerComponent } from '../../components/sidebar-customer/sidebar-customer.component';
-import { VibiiographerCallComponent } from '../../../shared/containers/vibiiographer-call/vibiiographer-call.component';
+         EmbeddedViewRef} from "@angular/core";
+import { Routes, RouterModule, Router, ActivatedRoute } from "@angular/router";
+import { SidebarScheduleComponent } from "../../components/sidebar-schedule/sidebar-schedule.component";
+import { SidebarCustomerComponent } from "../../components/sidebar-customer/sidebar-customer.component";
+import { VibiiographerCallComponent } from "../../../shared/containers/vibiiographer-call/vibiiographer-call.component";
 
 // Services
-import { MyAppointmentsService } from '../../services/my-appointments.service';
-import { CustomerStatusCountService } from '../../services/customer-status-count.service';
-import { SidebarMyVibiioSharedService } from '../../services/sidebar-my-vibiio-shared.service';
-import { MyAvailabilityService } from '../../services/my-availability.service';
-import { AuthService } from '../../../services/auth.service';
-import { SidebarCustomerStatusSharedService } from '../../../shared/services/sidebar-customer-status-shared.service';
+import { MyAppointmentsService } from "../../services/my-appointments.service";
+import { CustomerStatusCountService } from "../../services/customer-status-count.service";
+import { SidebarMyVibiioSharedService } from "../../services/sidebar-my-vibiio-shared.service";
+import { MyAvailabilityService } from "../../services/my-availability.service";
+import { AuthService } from "../../../services/auth.service";
+import { SidebarCustomerStatusSharedService } from "../../../shared/services/sidebar-customer-status-shared.service";
 
 // Interfaces
-import { CustomerStatusCount } from '../../models/customer-status-count.interface';
-import { Appointment} from '../../models/appointment.interface';
-import { Observable } from 'rxjs/Rx';
-import { Vibiio } from '../../models/vibiio.interface';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { VideoChatService } from '../../../shared/services/video-chat.service';
+import { CustomerStatusCount } from "../../models/customer-status-count.interface";
+import { Appointment} from "../../models/appointment.interface";
+import { Observable } from "rxjs/Rx";
+import { Vibiio } from "../../models/vibiio.interface";
+import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
+import { VideoChatService } from "../../../shared/services/video-chat.service";
 
 const vibiiographerCallComponent = VibiiographerCallComponent;
 type VibiiographerCall = VibiiographerCallComponent;
 
 @Component({
-    selector: 'vib-sidebar',
-    templateUrl: 'sidebar.component.html',
-    styleUrls: ['sidebar.component.scss']
+    selector: "vib-sidebar",
+    templateUrl: "sidebar.component.html",
+    styleUrls: ["sidebar.component.scss"]
 })
 
 export class SidebarComponent implements OnInit, OnDestroy {
@@ -206,6 +206,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl('/sign_in');
+    this.router.navigateByUrl("/sign_in");
   }
 }

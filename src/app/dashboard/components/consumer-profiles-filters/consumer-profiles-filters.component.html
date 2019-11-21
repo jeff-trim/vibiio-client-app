@@ -1,0 +1,22 @@
+<div class="row profiles-filters-container">
+    <div class="col-md-2">
+        <div class="a-container">
+            <a [routerLink]="['/dashboard/all-consumers', '']" 
+                routerLinkActive="active"
+                class="category">
+                ALL CUSTOMERS
+                <div class="underline"></div>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-2 text-center" *ngFor="let category of customersCategories">
+        <div class="a-container">
+            <a  [routerLink]="['/dashboard/consumer-status', getCategoryParam(category.status)]"
+                routerLinkActive="active"
+                class="category">
+                {{ category.status | removeUnderscore | uppercase }}
+                <div class="underline"></div>
+            </a>
+        </div>
+    </div>
+</div>
