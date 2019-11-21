@@ -16,20 +16,24 @@ export class ConsumerProfileRowComponent {
     constructor(private router: Router) { }
 
     viewDetails() {
-        this.router.navigateByUrl(`/dashboard/appointment/${this.consumerProfile.appointment_id}`);
+        if (this.consumerProfile.appointment_id) {
+            this.router.navigateByUrl(`/dashboard/appointment/${this.consumerProfile.appointment_id}`);
+        }
     }
 
     connect() {
-        this.router.navigate(
-            [
-                "/dashboard",
-                "appointment",
-                this.consumerProfile.appointment_id
-            ],
-            {
-                queryParams: { startCall: true },
-                preserveQueryParams: false
-            }
-        );
+        if (this.consumerProfile.appointment_id) {
+            this.router.navigate(
+                [
+                    "/dashboard",
+                    "appointment",
+                    this.consumerProfile.appointment_id
+                ],
+                {
+                    queryParams: { startCall: true },
+                    preserveQueryParams: false
+                }
+            );
+        }
     }
 }

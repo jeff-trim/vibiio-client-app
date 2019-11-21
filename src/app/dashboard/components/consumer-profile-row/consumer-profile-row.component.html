@@ -8,14 +8,17 @@
     <div class="col-md-3 profile-text">
         {{ consumerProfile.user_info.phone}}
     </div>
-    <div class="col-md-1" (click)="connect()">
-        <img src="assets/images/call-controls.svg" class="phone">
-    </div>
-    <div class="col-md-1">
-        <a (click)="viewDetails()">
-            <img src="assets/images/right-arrow.svg" class="view-details-arrow">
-        </a>
-    </div>
+
+    <ng-container *ngIf="consumerProfile.appointment_id">
+        <div class="col-md-1" (click)="connect()">
+            <img src="assets/images/call-controls.svg" class="phone">
+        </div>
+        <div class="col-md-1">
+            <a (click)="viewDetails()">
+                <img src="assets/images/right-arrow.svg" class="view-details-arrow">
+            </a>
+        </div>
+    </ng-container>
 
     <div class="line"></div>
 </div>
