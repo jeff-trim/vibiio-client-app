@@ -1,25 +1,5 @@
 @import '../../../../assets/css/_variables.scss';
 
-h2 {
-  color: $blue;
-  font-family: $base-font;
-  font-size: 3.2rem;
-  font-weight: 500;
-  line-height: 1.16;
-  margin: 0;
-  text-transform: capitalize;
-  display: inline;
-  cursor: pointer;
-}
-
-.long-pink-underline { 
-    width: 80px; 
-    border-bottom: 3px solid $pink; 
-    bottom: 0; 
-    left: 0; 
-    position: absolute;
-}
-
 .details-text {
     font-family: $copy-font;
     font-size: 13px;
@@ -51,7 +31,7 @@ h2 {
     
     .profile-text {
         object-fit: contain;
-        font-family: Montserrat;
+        font-family: $base-font;
         font-size: 14px;
         font-weight: bold;
         font-stretch: normal;
