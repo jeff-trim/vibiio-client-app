@@ -5,20 +5,18 @@
   <vib-consumer-profiles-filters [displayStatus]="displayStatus"></vib-consumer-profiles-filters>
 
   <div class="flex">
-    <div class="search-and-sort">
-      <vib-search-box (queryEmitter)="search($event)"></vib-search-box>
-      <ng-template #noResults>
-        <p class="col-md-3
-          welcomeText"> No Customers match that status.</p>
-      </ng-template>
-
-      <vib-sort-button [sortTypes]="sortTypes" (sortConsumers)="sortConsumers($event)">
-      </vib-sort-button>
+    <div class="search-and-sort row">
+      <div class="col-md-9">
+        <vib-search-box (queryEmitter)="search($event)"></vib-search-box>
+      </div>
+      <div class="col-md-3">
+        <vib-sort-button class="sort-button" [sortTypes]="sortTypes" (sortConsumers)="sortConsumers($event)">
+        </vib-sort-button>
+      </div>
     </div>
   </div>
 
   <div *ngIf="(consumerProfiles?.length > 0); else noResults" class="consumer-profiles-container">
-
 
     <div *ngFor="let consumerProfile of consumerProfiles |
          orderBy: {property: property, direction: direction}">
@@ -31,4 +29,8 @@
       </div>
     </div>
   </div>
+  <ng-template #noResults>
+    <h3 class="welcomeText"> No Customers match that status.</h3>
+  </ng-template>
+
 </div>
