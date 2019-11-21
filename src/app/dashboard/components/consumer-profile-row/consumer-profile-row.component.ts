@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 
 // Models
 import { ConsumerProfile } from "../../models/consumer-profile.interface";
@@ -12,7 +12,6 @@ import { ConsumerProfile } from "../../models/consumer-profile.interface";
 
 export class ConsumerProfileRowComponent {
     @Input() consumerProfile: ConsumerProfile;
-    @Output() startVibiio = new EventEmitter<boolean>();
 
     constructor(private router: Router) { }
 
@@ -21,6 +20,16 @@ export class ConsumerProfileRowComponent {
     }
 
     connect() {
-        this.startVibiio.emit(true);
+        this.router.navigate(
+            [
+                "/dashboard",
+                "appointment",
+                this.consumerProfile.appointment_id
+            ],
+            {
+                queryParams: { startCall: true },
+                preserveQueryParams: false
+            }
+        );
     }
 }
